@@ -1,0 +1,2 @@
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache

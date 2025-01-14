@@ -1,0 +1,6 @@
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\bin\Debug\ProyectoLavacar.AccesoADatos.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\bin\Debug\ProyectoLavacar.AccesoADatos.pdb
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\obj\Debug\ProyectoLavacar.AccesoADatos.csproj.AssemblyReference.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\obj\Debug\ProyectoLavacar.AccesoADatos.csproj.CoreCompileInputs.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\obj\Debug\ProyectoLavacar.AccesoADatos.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.AccesoADatos\obj\Debug\ProyectoLavacar.AccesoADatos.pdb
