@@ -8,5 +8,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha
 {
     public interface IFecha
     {
+        DateTime ObtenerFecha();
     }
 }

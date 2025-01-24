@@ -60,12 +60,22 @@
     <Compile Include="ModuloReseñas\Editar\EditarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaLN.cs" />
+    <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Listar\ListarUsuarioLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ProyectoLavacar.Abstraciones\ProyectoLavacar.Abstraciones.csproj">
+      <Project>{49DC08DC-91A6-47B3-9438-ADF608F80BCD}</Project>
+      <Name>ProyectoLavacar.Abstraciones</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProyectoLavacar.AccesoADatos\ProyectoLavacar.AccesoADatos.csproj">
+      <Project>{BDAB7F38-AC05-4E30-8E0F-EA1D8AF1F6B6}</Project>
+      <Name>ProyectoLavacar.AccesoADatos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
