@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,6 +56,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Editar\IEditarReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Listar\IListarReseniaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloServicios\Listar\IListarServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Crear\ICrearUsuarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Editar\IEditarUsuarioAD.cs" />
@@ -78,14 +80,18 @@
     <Compile Include="LN\interfaces\ModuloReseñas\Editar\IEditarReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\Listar\IListarReseniaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloServicios\Listar\IListarServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
-    <Compile Include="ModelosDeBaseDeDatos\Class1.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
+    <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloEmpleados\Class1.cs" />
-    <Compile Include="Modelos\ModuloReservas\Class1.cs" />
-    <Compile Include="Modelos\ModuloReseñas\Class1.cs" />
+    <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />
+    <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />
     <Compile Include="Modelos\ModuloUsuarios\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptBaseDeDatos\Class1.cs" />
