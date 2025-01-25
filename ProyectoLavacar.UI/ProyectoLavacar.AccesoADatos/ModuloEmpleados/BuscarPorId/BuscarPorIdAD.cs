@@ -8,7 +8,18 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.BuscarPorId
 {
-    public class BuscarPorIdAD
-    { }
-    
+    public class BuscarPorIdAD : IBuscarPorIdAD
+    {
+        Contexto _elContexto;
+
+        public BuscarPorIdAD()
+        {
+            _elContexto = new Contexto();
+        }
+        public EmpleadosTabla Detalle(int idEmpleado)
+        {
+            EmpleadosTabla elEmpleadoEnBaseDeDatos = _elContexto.EmpleadosTabla.Where(elUsuario => elUsuario.idEmpleado == idEmpleado).FirstOrDefault();
+            return elEmpleadoEnBaseDeDatos;
+        }
+    }
 }

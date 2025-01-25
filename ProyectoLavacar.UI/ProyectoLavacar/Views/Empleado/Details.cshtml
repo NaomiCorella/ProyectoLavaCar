@@ -1,0 +1,106 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados.EmpleadosDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmpleadosDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idEmpleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idEmpleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.primer_apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.primer_apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.segundo_apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.segundo_apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.turno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.turno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroCuenta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.idEmpleado }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
