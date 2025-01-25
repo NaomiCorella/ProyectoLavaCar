@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.C
 {
     public interface ICrearEmpleadoAD
     {
+        Task<int> RegistrarEmpleados(EmpleadosTabla elEmpleadoARegistrar);
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Editar
 {
     public interface IEditarEmpleadoLN
     {
+        Task<int> EditarEmpleados(EmpleadosDto elEmpleadoEnVista);
     }
 }
