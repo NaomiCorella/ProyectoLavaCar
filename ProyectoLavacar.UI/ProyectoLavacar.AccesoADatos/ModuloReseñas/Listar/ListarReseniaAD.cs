@@ -26,7 +26,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReseñas.Listar
                                                         idResenia = laResenia.idResenia,
                                                         idCliente = laResenia.idCliente,
                                                         idServicio = laResenia.idServicio, 
-                                                        fecha = laResenia.fecha,
+                                                        fecha = laResenia.fecha.ToString(),
                                                         calificacion = laResenia.calificacion,
                                                         comentarios = laResenia.comentarios,
                                                         estado = laResenia.estado

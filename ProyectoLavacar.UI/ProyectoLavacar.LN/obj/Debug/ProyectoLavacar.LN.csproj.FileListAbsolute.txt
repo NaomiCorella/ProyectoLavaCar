@@ -4,3 +4,17 @@ E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCa
 E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.csproj.CoreCompileInputs.cache
 E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.dll
 E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.pdb
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.LN.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.LN.pdb
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.Abstraciones.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.AccesoADatos.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\EntityFramework.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.Abstraciones.pdb
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.AccesoADatos.pdb
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\ProyectoLavacar.AccesoADatos.dll.config
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\bin\Debug\EntityFramework.xml
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.csproj.AssemblyReference.cache
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.csproj.CoreCompileInputs.cache
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\Proyecto.212EA45B.Up2Date
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.LN\obj\Debug\ProyectoLavacar.LN.pdb

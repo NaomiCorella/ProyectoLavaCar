@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloUsuarios.Cr
 {
     public interface ICrearUsuarioAD
     {
+        Task<int> RegistrarUsuarios(UsuariosTabla elClienteaARegistrar);
+
     }
 }

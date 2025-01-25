@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId
 {
     public interface IBuscarPorIdLN
     {
+        UsuariosDto Detalle(int idcliente);
+
     }
 }

@@ -1,2 +1,8 @@
 E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
 E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.pdb
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
+C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
