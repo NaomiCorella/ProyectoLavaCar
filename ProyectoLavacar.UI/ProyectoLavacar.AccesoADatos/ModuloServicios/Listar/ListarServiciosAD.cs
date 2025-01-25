@@ -30,7 +30,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloServicios.Listar
                                                         tiempoDuracion = elServicio.tiempoDuracion,
                                                         estado = elServicio .estado
                                                               
-                                                           }).ToList();
+                                                      }).ToList();
             return lalistadeServicios;
         }
     }
