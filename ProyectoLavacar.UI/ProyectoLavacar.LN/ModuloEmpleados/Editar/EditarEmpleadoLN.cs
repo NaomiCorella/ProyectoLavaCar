@@ -1,8 +1,12 @@
 ﻿
+using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Editar;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
+using ProyectoLavacar.AccesoADatos.ModuloEmpleados.Editar;
 using ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar;
+using ProyectoLavacar.LN.General.Conversiones.ModuloEmpleados;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +20,15 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Editar
         IEditarEmpleadoAD _editarEmpleadosAD;
         IConvertirEmpleadosDtoAEmpleadosTabla _convertirObjeto;
 
-        public EditarUsuarioLN()
+        public EditarEmpleadoLN()
         {
-            _editarEmpleadosAD = new EditarEmpleadosAD();
+            _editarEmpleadosAD = new EditarEmpleadoAD();
             _convertirObjeto = new ConvertirEmpleadosDtoAEmpleadosTabla();
         }
 
         public async Task<int> EditarEmpleados(EmpleadosDto elEmpleadoEnVista)
         {
-            int cantidadDeDatosEditados = await _editarEmpleadosAD.EditarEmpleados(_convertirObjeto.ConvertirEmpleados(elEmpleadoEnVista));
+            int cantidadDeDatosEditados = await _editarEmpleadosAD.EditarEmpleado(_convertirObjeto.ConvertirEmpleados(elEmpleadoEnVista));
             return cantidadDeDatosEditados;
         }
     }
