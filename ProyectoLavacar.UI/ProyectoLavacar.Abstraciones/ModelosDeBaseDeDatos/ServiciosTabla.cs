@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
     [Table("Servicios")]
     public class ServiciosTabla
     {
+        [Key]
         public int idServicio { get; set; }
         public decimal costo { get; set; }
         public string nombre { get; set; }

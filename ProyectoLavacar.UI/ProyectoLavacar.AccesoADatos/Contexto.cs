@@ -16,10 +16,16 @@ namespace ProyectoLavacar.AccesoADatos
         {
             modelBuilder.Entity<ReservasTabla>().ToTable("Reservas");
             modelBuilder.Entity<ReseniasTabla>().ToTable("Resenia");
+            modelBuilder.Entity<UsuariosTabla>().ToTable("Cliente");
+            modelBuilder.Entity<ServiciosTabla>().ToTable("Servicios");
 
 
         }
         public DbSet<ReservasTabla> ReservasTabla { get; set; }
         public DbSet<ReseniasTabla> ReseniasTabla { get; set; }
+        public DbSet<UsuariosTabla> UsuariosTabla { get; set; }
+        public DbSet<ServiciosTabla> ServiciosTabla { get; set; }
+
+
     }
 }

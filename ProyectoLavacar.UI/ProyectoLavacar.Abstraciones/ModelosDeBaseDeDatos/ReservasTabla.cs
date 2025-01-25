@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
     [Table("Reservas")]
     public class ReservasTabla
     {
+        [Key]
         public int idReserva { get; set; }
         public int idCliente { get; set; }
         public int idEmpleado { get; set; }

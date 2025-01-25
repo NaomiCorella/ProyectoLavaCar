@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -44,7 +44,7 @@
     <Compile Include="General\Conversiones\ModuloEmpleados\Class1.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\Class1.cs" />
     <Compile Include="General\Conversiones\ModuloReseñas\Class1.cs" />
-    <Compile Include="General\Conversiones\ModuloUsuarios\Class1.cs" />
+    <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdLN.cs" />
