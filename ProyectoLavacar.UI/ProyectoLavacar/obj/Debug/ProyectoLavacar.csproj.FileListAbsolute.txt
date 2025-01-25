@@ -1,0 +1,236 @@
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.dll.config
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.pdb
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.exe
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.exe.config
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.rsp
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.exe
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.exe.config
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.rsp
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Managed.Core.targets
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.AppContext.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Collections.Immutable.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Console.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Globalization.Calendars.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.Compression.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.Compression.ZipFile.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.FileSystem.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Net.Http.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Net.Sockets.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Reflection.Metadata.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Threading.Tasks.Extensions.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.ValueTuple.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XmlDocument.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XPath.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.exe
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.exe.config
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.rsp
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\VBCSCompiler.exe
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\VBCSCompiler.exe.config
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Antlr3.Runtime.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.SqlServer.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Core.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Cookies.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Facebook.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Google.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.OAuth.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Twitter.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Web.Infrastructure.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Newtonsoft.Json.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Owin.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Helpers.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Mvc.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Optimization.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Razor.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Deployment.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Razor.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\WebGrease.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Helpers.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Mvc.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Optimization.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Razor.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Deployment.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Razor.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Newtonsoft.Json.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Antlr3.Runtime.pdb
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.SqlServer.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Core.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Facebook.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Cookies.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Google.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Twitter.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.OAuth.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Helpers.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Mvc.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Optimization.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Razor.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.Deployment.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.Razor.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.csproj.AssemblyReference.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.csproj.CoreCompileInputs.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\Proyecto.4CB156C8.Up2Date
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\NaomiCorella\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.pdb
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.dll.config
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.pdb
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.exe
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.exe.config
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csc.rsp
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.exe
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.exe.config
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\csi.rsp
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.AppContext.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Console.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.Compression.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Net.Http.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Net.Sockets.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.ValueTuple.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XPath.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.exe
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.exe.config
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\vbc.rsp
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\VBCSCompiler.exe
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Antlr3.Runtime.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.SqlServer.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Newtonsoft.Json.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Owin.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Helpers.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Mvc.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Optimization.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Razor.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Razor.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\WebGrease.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Helpers.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Mvc.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Optimization.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.Razor.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\System.Web.WebPages.Razor.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Newtonsoft.Json.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Antlr3.Runtime.pdb
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\EntityFramework.SqlServer.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Helpers.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Mvc.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Optimization.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.Razor.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.csproj.AssemblyReference.cache
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.csproj.CoreCompileInputs.cache
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\Proyecto.4CB156C8.Up2Date
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.dll
+C:\Users\ncore\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.pdb

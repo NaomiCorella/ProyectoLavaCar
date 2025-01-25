@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49DC08DC-91A6-47B3-9438-ADF608F80BCD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProyectoLavacar.Abstraciones</RootNamespace>
+    <AssemblyName>ProyectoLavacar.Abstraciones</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\BuscarPorEvaluacionYDesempeño\IBuscarPorEvaluacionYDesempenioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\BuscarPorId\IBuscarPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\CrearEvaluacioYDesempeño\ICrearEvaluacioYDesempenioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Crear\ICrearEmpleadoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Editar\IEditarEmpleadoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Editar\IEditarReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarEncargos\IListarEncargoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarTodo\IListarTodoReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Crear\ICrearReseniaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Editar\IEditarReseniaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Listar\IListarReseniaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloServicios\Listar\IListarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Crear\ICrearUsuarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Editar\IEditarUsuarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Listar\IListarUsuarioAD.cs" />
+    <Compile Include="LN\interfaces\General\Fecha\IFecha.cs" />
+    <Compile Include="LN\interfaces\General\ModuloEmpleados\Class1.cs" />
+    <Compile Include="LN\interfaces\General\ModuloReservas\Class1.cs" />
+    <Compile Include="LN\interfaces\General\ModuloReseñas\Class1.cs" />
+    <Compile Include="LN\interfaces\General\ModuloUsuarios\Class1.cs" />
+    <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorEvaluacionYDesempeño\IBuscarPorEvaluacionYDesempenioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorId\IBuscarPorIdLN.cs" />
+    <Compile Include="LN\interfaces\ModuloEmpleados\CrearEvaluacioYDesempeño\ICrearEvaluacioYDesempenioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloEmpleados\Crear\ICrearEmpleadoLN.cs" />
+    <Compile Include="LN\interfaces\ModuloEmpleados\Editar\IEditarEmpleadoLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\Editar\IEditarReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\ListarEncargo\IListarEncargoLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\ListarTodo\IListarTodoReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReseñas\Crear\ICrearReseniaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReseñas\Editar\IEditarReseniaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReseñas\Listar\IListarReseniaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloServicios\Listar\IListarServiciosLN.cs" />
+    <Compile Include="LN\interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdLN.cs" />
+    <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
+    <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
+    <Compile Include="Modelos\ModuloEmpleados\Class1.cs" />
+    <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />
+    <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />
+    <Compile Include="Modelos\ModuloUsuarios\Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptBaseDeDatos\Class1.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
