@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="General\Conversiones\ModuloEmpleados\Class1.cs" />
+    <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\Class1.cs" />
     <Compile Include="General\Conversiones\ModuloReseñas\Class1.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
@@ -51,6 +51,7 @@
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\Crear\CrearEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoLN.cs" />
+    <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\Editar\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesLN.cs" />

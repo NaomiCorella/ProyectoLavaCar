@@ -30,11 +30,11 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.Listar
             List<UsuariosDto> laListaDeUsuarios = new List<UsuariosDto>();
             foreach (UsuariosTabla elUsuario in laListasDePersonas)
             {
-                laListaDeUsuarios.Add(ConvertirObjetoPersonasDto(elUsuario));
+                laListaDeUsuarios.Add(ConvertirObjetoUsuariosDto(elUsuario));
             }
             return laListaDeUsuarios;
         }
-        private UsuariosDto ConvertirObjetoPersonasDto(UsuariosTabla elCliente)
+        private UsuariosDto ConvertirObjetoUsuariosDto(UsuariosTabla elCliente)
         {
             if (elCliente == null)
             {

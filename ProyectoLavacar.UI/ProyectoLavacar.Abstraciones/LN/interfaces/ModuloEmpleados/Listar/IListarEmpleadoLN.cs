@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Crear
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar
 {
-    public interface ICrearEmpleadoLN
+    public interface IListarEmpleadoLN
     {
-        Task<int> RegistrarEmpleado(EmpleadosDto modelo);
+        List<EmpleadosDto> ListarEmpleados();
     }
 }
