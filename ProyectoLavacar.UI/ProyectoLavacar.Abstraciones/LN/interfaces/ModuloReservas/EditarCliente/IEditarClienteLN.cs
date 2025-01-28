@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarEncargo
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.EditarCliente
 {
-    public interface IListarEncargoLN
+    public interface IEditarClienteLN
     {
-        List<ReservasDto> Listar(int idEmpleado);
+        Task<int> EditarPersonas(ReservasDto laReserva);
     }
 }

@@ -60,7 +60,8 @@
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoAD.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoAD.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaAD.cs" />
-    <Compile Include="ModuloReservas\Editar\EditarReservaAD.cs" />
+    <Compile Include="ModuloReservas\EditarAdmin\EditarReservaAD.cs" />
+    <Compile Include="ModuloReservas\EditarCliente\EditarClienteAD.cs" />
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesAD.cs" />
     <Compile Include="ModuloReservas\ListarEncargos\ListarEncargoAD.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaAD.cs" />

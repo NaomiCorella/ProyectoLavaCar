@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\Class1.cs" />
-    <Compile Include="General\Conversiones\ModuloReseñas\Class1.cs" />
+    <Compile Include="General\Conversiones\ModuloReseñas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
@@ -53,7 +53,8 @@
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
-    <Compile Include="ModuloReservas\Editar\EditarReservaLN.cs" />
+    <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
+    <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesLN.cs" />
     <Compile Include="ModuloReservas\ListarEncargo\ListarEncargoLN.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaLN.cs" />
@@ -77,6 +78,9 @@
       <Project>{BDAB7F38-AC05-4E30-8E0F-EA1D8AF1F6B6}</Project>
       <Name>ProyectoLavacar.AccesoADatos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ModuloReservas\Detalle\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

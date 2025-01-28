@@ -1,5 +1,6 @@
 ﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.Listar;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Listar;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.LN.ModuloReseñas.Listar
 {
-    public class ListarReseniaLN
+    public class ListarReseniaLN : IListarReseniaLN
     {
         IListarReseniaAD _listarReseniaAD;
         public ListarReseniaLN()
@@ -21,7 +22,7 @@ namespace ProyectoLavacar.LN.ModuloReseñas.Listar
             _listarReseniaAD = new ListarReseniaAD();
         }
 
-        public List<ReseniaDto> ListarReservasTodo()
+        public List<ReseniaDto> ListarResenia()
         {
             List<ReseniaDto> laListadeServicios = _listarReseniaAD.ListarResenias();
 
