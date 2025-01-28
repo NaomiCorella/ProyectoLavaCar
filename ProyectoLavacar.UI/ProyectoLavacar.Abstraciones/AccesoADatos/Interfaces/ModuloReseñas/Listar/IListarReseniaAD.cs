@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.Li
 {
     public interface IListarReseniaAD
     {
+        List<ReseniaDto> ListarResenias();
     }
 }
