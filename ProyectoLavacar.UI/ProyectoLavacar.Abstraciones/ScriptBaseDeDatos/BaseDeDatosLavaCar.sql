@@ -353,4 +353,33 @@ INSERT INTO Empleados (nombre, primer_apellido, segundo_apellido, telefono, corr
 VALUES ('Naomi', 'Pérez', 'Gómez', '555-1234', 'juan.perez@empresa.com', '1234567890', 'Desarrollador', 'Mañana', 1, '001122334455');
 
 
-select * from AspNetUsers
+INSERT INTO Servicios (costo, nombre, descripcion, tiempoDuracion, estado)  
+VALUES  
+(5000.00, 'Lavado Básico', 'Lavado exterior con espuma y enjuague a presión', '30 minutos', 1),  
+(8000.00, 'Lavado Completo', 'Lavado exterior e interior con aspirado y encerado', '60 minutos', 1),  
+(12000.00, 'Lavado Premium', 'Lavado completo con pulido y tratamiento de pintura', '90 minutos', 1),  
+(15000.00, 'Lavado y Desinfección', 'Lavado completo más sanitización con ozono', '75 minutos', 1),  
+(10000.00, 'Lavado de Motor', 'Limpieza profunda del motor con desengrasante', '45 minutos', 1);  
+
+INSERT INTO [dbo].[AspNetUsers] (Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, nombre, primer_apellido, segundo_apellido, UserName, estado)  
+VALUES  
+('1A2B3C4D5E6F', 'juan.perez@example.com', 1, 'hashed_password_1', 'security_stamp_1', '555-1234', 'Juan', 'Pérez', 'Gómez', 'juanperez', 1),  
+('7G8H9I0J1K2L', 'maria.lopez@example.com', 1, 'hashed_password_2', 'security_stamp_2', '555-5678', 'María', 'López', 'Rodríguez', 'marialopez', 1),  
+('3M4N5O6P7Q8R', 'carlos.martinez@example.com', 0, 'hashed_password_3', 'security_stamp_3', '555-9012', 'Carlos', 'Martínez', 'Fernández', 'carlosmartinez', 1),  
+('9S0T1U2V3W4X', 'ana.garcia@example.com', 1, 'hashed_password_4', 'security_stamp_4', '555-3456', 'Ana', 'García', 'Hernández', 'anagarcia', 1),  
+('5Y6Z7A8B9C0D', 'pedro.sanchez@example.com', 0, 'hashed_password_5', 'security_stamp_5', '555-7890', 'Pedro', 'Sánchez', 'Ramírez', 'pedrosanchez', 1);  
+
+INSERT INTO Resenias (idServicio, idCliente, calificacion, comentarios, fecha, estado)  
+VALUES  
+(1, '1A2B3C4D5E6F', 5, 'Excelente servicio, el auto quedó impecable.', '2024-08-20', 1),  
+(2, '7G8H9I0J1K2L', 4, 'Muy buen trabajo, pero tardaron un poco más de lo esperado.', '2024-08-21', 1),  
+(3, '3M4N5O6P7Q8R', 5, 'El mejor lavado que he recibido, volveré pronto.', '2024-08-22', 1),  
+(4, '9S0T1U2V3W4X', 3, 'Buen servicio, pero podrían mejorar la atención al cliente.', '2024-08-23', 1),  
+(5, '5Y6Z7A8B9C0D', 4, 'Lavado de motor excelente, quedé muy satisfecho.', '2024-08-24', 1);  
+
+INSERT INTO Reservas (idCliente, idEmpleado, idServicio, fecha, hora, estado) 
+VALUES 
+('1A2B3C4D5E6F', 1, 2, '2024-08-27', '10:30:00', 1),
+('7G8H9I0J1K2L', 1, 3, '2024-08-28', '14:00:00', 1),
+('3M4N5O6P7Q8R', 1, 1, '2024-08-29', '09:15:00', 0);
+select * from Servicios

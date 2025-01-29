@@ -16,7 +16,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReservas
         public string fecha { get; set; }
 
         public string hora { get; set; }
-        public bool estado { get; set; } = true;
+        public bool estado { get; set; } 
 
     }
 }

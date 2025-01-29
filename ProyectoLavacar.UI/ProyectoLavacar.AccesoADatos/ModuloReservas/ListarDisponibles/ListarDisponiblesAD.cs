@@ -30,7 +30,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarDisponibles
                                                         idServicio = reserva.idServicio,
                                                         fecha = reserva.fecha.ToString(),
                                                         hora = reserva.hora.ToString(),
-
+                                                        estado = reserva.estado
                                                     }).ToList();
             return lalistadeServicios;
         }

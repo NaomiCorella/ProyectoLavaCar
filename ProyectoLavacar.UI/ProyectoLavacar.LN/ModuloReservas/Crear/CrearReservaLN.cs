@@ -40,7 +40,7 @@ namespace ProyectoLavacar.LN.ModuloReservas.Crear
                 idEmpleado = reserva.idEmpleado,
                 idServicio = reserva.idServicio,
                 fecha = _fecha.ObtenerFecha(),
-                hora = _fecha.ObtenerFecha(),
+                hora = TimeSpan.Parse(reserva.hora),
             estado = reserva.estado
 
             };
