@@ -50,6 +50,7 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarTodo
                 idServicio = reserva.idServicio,
                 fecha = reserva.fecha.ToString(),
                 hora = reserva.hora.ToString(),
+                estado = reserva.estado
 
             };
         }

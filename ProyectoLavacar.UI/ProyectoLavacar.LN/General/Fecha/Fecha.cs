@@ -13,5 +13,7 @@ namespace ProyectoLavacar.LN.General.Fecha
         {
             return DateTime.Now;
         }
+
+
     }
 }

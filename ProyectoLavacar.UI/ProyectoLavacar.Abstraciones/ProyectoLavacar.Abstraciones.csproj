@@ -102,8 +102,9 @@
     <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />
     <Compile Include="Modelos\ModuloUsuarios\UsuariosDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptBaseDeDatos\Class1.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ScriptBaseDeDatos\BaseDeDatosLavaCar.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

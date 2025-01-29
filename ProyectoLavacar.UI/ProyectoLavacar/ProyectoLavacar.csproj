@@ -366,13 +366,14 @@
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Create.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
-    <Content Include="Views\Reservas\Reservas.cshtml" />
     <Content Include="Views\Resenias\Index.cshtml" />
     <Content Include="Views\Resenias\Create.cshtml" />
     <Content Include="Views\Reservas\MisReservas.cshtml" />
     <Content Include="Views\Reservas\Create.cshtml" />
     <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
     <Content Include="Views\Reservas\Index.cshtml" />
+    <Content Include="Views\Reservas\Edit.cshtml" />
+    <Content Include="Views\Reservas\Reservas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -410,6 +411,10 @@
     <ProjectReference Include="..\ProyectoLavacar.Abstraciones\ProyectoLavacar.Abstraciones.csproj">
       <Project>{49DC08DC-91A6-47B3-9438-ADF608F80BCD}</Project>
       <Name>ProyectoLavacar.Abstraciones</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProyectoLavacar.AccesoADatos\ProyectoLavacar.AccesoADatos.csproj">
+      <Project>{BDAB7F38-AC05-4E30-8E0F-EA1D8AF1F6B6}</Project>
+      <Name>ProyectoLavacar.AccesoADatos</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProyectoLavacar.LN\ProyectoLavacar.LN.csproj">
       <Project>{BF95E8EA-635F-4A6A-B27A-F7510BECEDED}</Project>

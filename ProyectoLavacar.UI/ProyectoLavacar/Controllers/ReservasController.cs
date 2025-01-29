@@ -11,6 +11,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
+using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloReservas.Crear;
 using ProyectoLavacar.LN.ModuloReservas.Editar;
 using ProyectoLavacar.LN.ModuloReservas.EditarCliente;
@@ -41,6 +42,7 @@ namespace ProyectoLavacar.Controllers
         IListarTodoReservaLN _listarReservasAdmin;
         IObtenerPorIdReservaLN _detallesReserva; 
         IListarServiciosLN _listarServicios;
+        Contexto _context;
         public ReservasController()
         {
             _crearReserva = new CrearReservaLN();
@@ -51,6 +53,7 @@ namespace ProyectoLavacar.Controllers
             _listarReservasAdmin = new ListarTodoReservaLN();
             _detallesReserva = new ObtenerPorIdReservaLN();
             _listarServicios = new ListarServiciosLN();
+            _context = new Contexto();
         }
 
         //Listar Servicios
@@ -114,17 +117,18 @@ namespace ProyectoLavacar.Controllers
         // GET: Reservas/Edit/5
         public ActionResult Edit(int idReserva)
         {
-            ReservasDto laPersona = _detallesReserva.Detalle(idReserva);
-            return View();
+            ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
+            return View(modeloReserva);
         }
 
         // POST: Reservas/Edit/5
         [HttpPost]
-        public async Task<ActionResult> EditarReserva(ReservasDto modeloReserva)
+        public async Task<ActionResult> Edit(ReservasDto modeloReserva)
         {
             try
             {
-                int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
+        
+        int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
 
                 return RedirectToAction("Index");
             }
@@ -135,31 +139,7 @@ namespace ProyectoLavacar.Controllers
         }
         /// ////////////////  //////////////////
 
-        /// //////////////// Cliente //////////////////
-
-        public ActionResult Editar(int idReserva)
-        {
-            ReservasDto laPersona = _detallesReserva.Detalle(idReserva);
-            return View();
-        }
-
-
-        // POST: Reservas/Edit/5
-        [HttpPost]
-        public async Task<ActionResult> EditarMiReserva(ReservasDto modeloReserva)
-        {
-            try
-            {
-                int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        /// ////////////////  //////////////////
+     
         // GET: Reservas/Delete/5
         public ActionResult Delete(int id)
         {
@@ -179,6 +159,24 @@ namespace ProyectoLavacar.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult CambiarEstado(int id)
+        {
+
+            try
+            {
+                var reserva = _context.ReservasTabla.Find(id);
+                reserva.estado = !reserva.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Reservas/Reservas");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
             }
         }
     }
