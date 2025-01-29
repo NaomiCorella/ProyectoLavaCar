@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
 {
-    [Table("Cliente")]
+    [Table("[AspNetUsers]")]
     public class UsuariosTabla
     {
         [Key]
-        public int idCliente { get; set; }
+        public string Id { get; set; }
         public string nombre { get; set; }
         public string primer_apellido { get; set; }
         public string segundo_apellido { get; set; }

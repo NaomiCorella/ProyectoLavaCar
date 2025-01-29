@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarDisponibles
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ObtenerPorId
 {
-    public interface IListarDisponiblesLN
+    public interface IObtenerPorIdReservaLN
     {
-        List<ReservasDto> Listar(string idCliente);
+        ReservasDto Detalle(int idReserva);
     }
 }

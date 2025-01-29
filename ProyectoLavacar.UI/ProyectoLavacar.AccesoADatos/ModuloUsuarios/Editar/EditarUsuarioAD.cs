@@ -20,7 +20,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar
 
         public async Task<int> EditarUsuarios(UsuariosTabla elClienteParaEditar)
         {
-            UsuariosTabla laPersonaEnBaseDeDatos = _elcontexto.UsuariosTabla.Where(elCliente => elCliente.idCliente == elClienteParaEditar.idCliente).FirstOrDefault();
+            UsuariosTabla laPersonaEnBaseDeDatos = _elcontexto.UsuariosTabla.Where(elCliente => elCliente.Id == elClienteParaEditar.Id).FirstOrDefault();
             laPersonaEnBaseDeDatos.nombre = elClienteParaEditar.nombre;
             laPersonaEnBaseDeDatos.primer_apellido = elClienteParaEditar.primer_apellido;
             laPersonaEnBaseDeDatos.segundo_apellido = elClienteParaEditar.segundo_apellido;

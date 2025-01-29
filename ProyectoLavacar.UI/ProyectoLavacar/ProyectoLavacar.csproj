@@ -366,11 +366,17 @@
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Create.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
+    <Content Include="Views\Reservas\Reservas.cshtml" />
+    <Content Include="Views\Resenias\Index.cshtml" />
+    <Content Include="Views\Resenias\Create.cshtml" />
+    <Content Include="Views\Reservas\MisReservas.cshtml" />
+    <Content Include="Views\Reservas\Create.cshtml" />
+    <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
+    <Content Include="Views\Reservas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Reservas\" />
     <Folder Include="Views\Reseñas\" />
   </ItemGroup>
   <ItemGroup>

@@ -15,8 +15,8 @@ namespace ProyectoLavacar.AccesoADatos
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReservasTabla>().ToTable("Reservas");
-            modelBuilder.Entity<ReseniasTabla>().ToTable("Resenia");
-            modelBuilder.Entity<UsuariosTabla>().ToTable("Cliente");
+            modelBuilder.Entity<ReseniasTabla>().ToTable("Resenias");
+            modelBuilder.Entity<UsuariosTabla>().ToTable("[AspNetUsers]");
             modelBuilder.Entity<EmpleadosTabla>().ToTable("Empleados");
             modelBuilder.Entity<ServiciosTabla>().ToTable("Servicios");
 
