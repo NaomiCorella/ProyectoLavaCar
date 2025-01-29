@@ -16,7 +16,7 @@ namespace ProyectoLavacar.AccesoADatos
         {
             modelBuilder.Entity<ReservasTabla>().ToTable("Reservas");
             modelBuilder.Entity<ReseniasTabla>().ToTable("Resenias");
-            modelBuilder.Entity<UsuariosTabla>().ToTable("Cliente");
+            modelBuilder.Entity<UsuariosTabla>().ToTable("[AspNetUsers]");
             modelBuilder.Entity<EmpleadosTabla>().ToTable("Empleados");
             modelBuilder.Entity<ServiciosTabla>().ToTable("Servicios");
 
