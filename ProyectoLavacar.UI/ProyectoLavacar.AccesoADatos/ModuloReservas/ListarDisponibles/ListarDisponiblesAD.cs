@@ -17,10 +17,10 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarDisponibles
             _elContexto = new Contexto();
         }
 
-        public List<ReservasDto> ListarReservasCliente(int idCliente)
+        public List<ReservasDto> ListarReservasCliente(string idCliente)
         {
             List<ReservasDto> lalistadeServicios = (from reserva in _elContexto.ReservasTabla
-                                                    join cliente in _elContexto.UsuariosTabla on reserva.idCliente equals cliente.idCliente
+                                                    join cliente in _elContexto.UsuariosTabla on reserva.idCliente equals cliente.Id
                                                     where reserva.idCliente == idCliente
                                                     select new ReservasDto
                                                     {

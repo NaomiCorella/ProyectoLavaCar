@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
     public class ReseniaDto
     {
         public int idResenia { get; set; }
-        public int idCliente { get; set; }
+        public string idCliente { get; set; }
         public int idServicio { get; set; }
         public string fecha { get; set; }
         public int calificacion { get; set; }

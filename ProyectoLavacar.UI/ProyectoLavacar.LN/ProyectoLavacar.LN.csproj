@@ -58,6 +58,7 @@
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesLN.cs" />
     <Compile Include="ModuloReservas\ListarEncargo\ListarEncargoLN.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaLN.cs" />
+    <Compile Include="ModuloReservas\ObtenerPorId\ObtenerPorIdReservaLN.cs" />
     <Compile Include="ModuloReseñas\Crear\CrearReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Editar\EditarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
@@ -79,8 +80,6 @@
       <Name>ProyectoLavacar.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModuloReservas\Detalle\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

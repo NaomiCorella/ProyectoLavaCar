@@ -21,7 +21,7 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarDisponibles
             _listarDisponiblesReservasAD = new ListarDisponiblesAD();
         }
 
-        public List<ReservasDto> Listar(int idCliente)
+        public List<ReservasDto> Listar(string idCliente)
         {
             List<ReservasDto> laListaDeActividadesPersona = _listarDisponiblesReservasAD.ListarReservasCliente(idCliente);
 
@@ -34,8 +34,8 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarDisponibles
 
 
             var joinLista = from reserva in lalistadeReservas
-                            join clientes in lalistadeClientes on reserva.idCliente equals clientes.idCliente
-                            where reserva.idEmpleado == clientes.idCliente
+                            join clientes in lalistadeClientes on reserva.idCliente equals clientes.Id
+                            where reserva.idCliente == clientes.Id
                             select new { reserva, clientes };
 
             foreach (var item in joinLista)
@@ -52,7 +52,7 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarDisponibles
             return new ReservasDto
             {
                 idReserva = reserva.idReserva,
-                idCliente = clientes.idCliente,
+                idCliente = clientes.Id,
                 idEmpleado = reserva.idEmpleado,
                 idServicio = reserva.idServicio,
                 fecha = reserva.fecha.ToString(),

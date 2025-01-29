@@ -41,7 +41,7 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Usuario/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
            
 
@@ -73,7 +73,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Usuario/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             UsuariosDto laFinanza = _buscarPorId.Detalle(id);
 

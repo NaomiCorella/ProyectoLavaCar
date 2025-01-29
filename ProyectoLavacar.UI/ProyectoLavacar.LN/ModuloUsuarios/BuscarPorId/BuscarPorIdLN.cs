@@ -19,7 +19,7 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId
         {
             _obtenerPorIdAD = new BuscarPorIdAD();
         }
-        public UsuariosDto Detalle (int idCliente)
+        public UsuariosDto Detalle (string idCliente)
         {
             UsuariosTabla clientesEnBaseDeDatos = _obtenerPorIdAD.Detalle(idCliente);
             UsuariosDto elClienetAMostrar = ConvertirAPersonaAMostrar(clientesEnBaseDeDatos);
@@ -37,7 +37,7 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId
                 correoElectronico = elCliente.correoElectronico,
                 direccion = elCliente.direccion,
                 estado = elCliente.estado,
-                idCliente = elCliente.idCliente,
+                idCliente = elCliente.Id,
                 contraseña = elCliente.contraseña
             };
         }

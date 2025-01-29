@@ -16,9 +16,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.BuscarPorId
         {
             _elContexto = new Contexto();
         }
-        public UsuariosTabla Detalle(int idCliente)
+        public UsuariosTabla Detalle(string idCliente)
         {
-            UsuariosTabla elClienteEnBaseDeDatos = _elContexto.UsuariosTabla.Where(elUsuario => elUsuario.idCliente == idCliente).FirstOrDefault();
+            UsuariosTabla elClienteEnBaseDeDatos = _elContexto.UsuariosTabla.Where(elUsuario => elUsuario.Id == idCliente).FirstOrDefault();
             return elClienteEnBaseDeDatos;
         }
     }

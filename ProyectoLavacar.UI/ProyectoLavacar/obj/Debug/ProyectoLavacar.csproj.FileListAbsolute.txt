@@ -359,3 +359,10 @@ C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\Proyecto.4CB156C8.Up2Date
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.dll
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar\obj\Debug\ProyectoLavacar.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.Abstraciones.dll
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.LN.dll
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.AccesoADatos.dll
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.Abstraciones.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.LN.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.AccesoADatos.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.AccesoADatos.dll.config
