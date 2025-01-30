@@ -79,6 +79,77 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Primer apellido")]
+        public string PrimerApellido { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Segundo apellido")]
+        public string SegundoApellido { get; set; }
+
+        [Required]
+        [MaxLength(256)]
+        [Display(Name = "Nombre de usuario")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Estado")]
+        public bool Estado { get; set; }
+    }
+    public class RegisterEmployeeViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar contraseña")]
+        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Primer apellido")]
+        public string PrimerApellido { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Display(Name = "Segundo apellido")]
+        public string SegundoApellido { get; set; }
+
+        [Required]
+        [MaxLength(256)]
+        [Display(Name = "Nombre de usuario")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Estado")]
+        public bool Estado { get; set; }
+
+        public int cedula { get; set; }
+        public string numeroCuenta { get; set; }
+        public string turno { get; set; }
+        public string puesto { get; set; }
     }
 
     public class ResetPasswordViewModel

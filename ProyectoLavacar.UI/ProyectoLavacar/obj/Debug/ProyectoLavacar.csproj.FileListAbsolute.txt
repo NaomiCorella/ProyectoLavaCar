@@ -366,3 +366,4 @@ C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\b
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.LN.pdb
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.AccesoADatos.pdb
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.AccesoADatos.dll.config
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar\bin\ProyectoLavacar.LN.dll.config
