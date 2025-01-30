@@ -24,10 +24,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar
             laPersonaEnBaseDeDatos.nombre = elClienteParaEditar.nombre;
             laPersonaEnBaseDeDatos.primer_apellido = elClienteParaEditar.primer_apellido;
             laPersonaEnBaseDeDatos.segundo_apellido = elClienteParaEditar.segundo_apellido;
-            laPersonaEnBaseDeDatos.telefono = elClienteParaEditar.telefono;
-            laPersonaEnBaseDeDatos.correoElectronico = elClienteParaEditar.correoElectronico;
-            laPersonaEnBaseDeDatos.direccion = elClienteParaEditar.direccion;
-            laPersonaEnBaseDeDatos.contraseña = elClienteParaEditar.contraseña;
+            laPersonaEnBaseDeDatos.PhoneNumber = elClienteParaEditar.PhoneNumber;
+            laPersonaEnBaseDeDatos.Email = elClienteParaEditar.Email;
+          
             EntityState estado = _elcontexto.Entry(laPersonaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
             return cantidadDeDatosAlmacenados;

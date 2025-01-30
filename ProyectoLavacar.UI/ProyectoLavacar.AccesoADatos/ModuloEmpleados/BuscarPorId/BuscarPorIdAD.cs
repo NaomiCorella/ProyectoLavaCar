@@ -16,9 +16,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.BuscarPorId
         {
             _elContexto = new Contexto();
         }
-        public EmpleadosTabla Detalle(int idEmpleado)
+        public UsuariosTabla Detalle(string idEmpleado)
         {
-            EmpleadosTabla elEmpleadoEnBaseDeDatos = _elContexto.EmpleadosTabla.Where(elUsuario => elUsuario.idEmpleado == idEmpleado).FirstOrDefault();
+            UsuariosTabla elEmpleadoEnBaseDeDatos = _elContexto.UsuariosTabla.Where(elUsuario => elUsuario.Id == idEmpleado).FirstOrDefault();
             return elEmpleadoEnBaseDeDatos;
         }
     }

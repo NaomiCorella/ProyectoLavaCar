@@ -151,12 +151,31 @@ namespace ProyectoLavacar.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    nombre = model.Nombre,
+                    primer_apellido = model.PrimerApellido,
+                    segundo_apellido = model.SegundoApellido,
+                    estado = model.Estado
+               
+
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+             
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    // Asignar el rol al usuario
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Usuario");
+
+                    if (resultRole.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar un correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -171,7 +190,52 @@ namespace ProyectoLavacar.Controllers
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             return View(model);
         }
+        // POST: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegisterEmployee()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    nombre = model.Nombre,
+                    primer_apellido = model.PrimerApellido,
+                    segundo_apellido = model.SegundoApellido,
+                    estado = model.Estado,
+                    cedula = model.cedula,
+                    numeroCuenta = model.numeroCuenta,
+                    turno = model.turno,
+                    puesto = model.puesto
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                
+                if (result.Succeeded)
+                {
+                    // Asignar el rol al usuario
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Empleado");
+
+                    if (resultRole.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                AddErrors(result);
+            }
+
+            return View(model);
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

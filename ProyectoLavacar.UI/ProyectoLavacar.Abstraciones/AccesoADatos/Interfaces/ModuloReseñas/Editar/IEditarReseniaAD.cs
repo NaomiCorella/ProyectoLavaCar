@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.Ed
 {
     public interface IEditarReseniaAD
     {
+        Task<int> EditarResenia(ReseniasTabla lareseniaParaEditar);
     }
 }

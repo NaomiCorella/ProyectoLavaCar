@@ -16,10 +16,14 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public string nombre { get; set; }
         public string primer_apellido { get; set; }
         public string segundo_apellido { get; set; }
-        public string correoElectronico { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public string contraseña { get; set; }
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+    
         public bool estado { get; set; }
+        public int cedula { get; set; }
+        public string numeroCuenta { get; set; }
+        public string turno { get; set; }
+        public string puesto { get; set; }
     }
 }

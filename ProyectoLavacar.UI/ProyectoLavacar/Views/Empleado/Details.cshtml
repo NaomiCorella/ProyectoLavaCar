@@ -1,4 +1,4 @@
-﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados.EmpleadosDto
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.UsuariosDto
 
 @{
     ViewBag.Title = "Details";
@@ -7,17 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>EmpleadosDto</h4>
+    <h4>UsuariosDto</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.idEmpleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idEmpleado)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
@@ -43,19 +35,31 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefono)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.telefono)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
+        
+
         <dt>
-            @Html.DisplayNameFor(model => model.correo)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.correo)
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
         </dd>
 
         <dt>
@@ -67,11 +71,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.puesto)
+            @Html.DisplayNameFor(model => model.numeroCuenta)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.puesto)
+            @Html.DisplayFor(model => model.numeroCuenta)
         </dd>
 
         <dt>
@@ -83,24 +87,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.puesto)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.numeroCuenta)
+            @Html.DisplayFor(model => model.puesto)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.idEmpleado }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

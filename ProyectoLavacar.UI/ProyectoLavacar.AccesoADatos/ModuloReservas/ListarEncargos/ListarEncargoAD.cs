@@ -17,9 +17,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarEncargos
             _elContexto = new Contexto();
         }
 
-        public List<ReservasDto> ListarReservasEmpleado(int idEmpleado)
+        public List<ReservasDto> ListarReservasEmpleado(string idEmpleado)
         {
-            List<ReservasDto> lalistadeServicios = (from reserva in _elContexto.ReservasTabla join empleados in _elContexto.EmpleadosTabla   on reserva.idEmpleado equals empleados.idEmpleado where reserva.idEmpleado == idEmpleado
+            List<ReservasDto> lalistadeServicios = (from reserva in _elContexto.ReservasTabla join empleados in _elContexto.UsuariosTabla   on reserva.idEmpleado equals empleados.Id where reserva.idEmpleado == idEmpleado
                                                     select new ReservasDto
                                                     {
                                                         idReserva = reserva.idReserva,

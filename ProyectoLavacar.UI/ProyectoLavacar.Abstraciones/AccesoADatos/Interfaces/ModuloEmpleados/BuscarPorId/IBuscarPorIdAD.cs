@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.B
 {
     public interface IBuscarPorIdAD
     {
-        EmpleadosTabla Detalle(int idEmpleado);
+        UsuariosTabla Detalle(string idEmpleado);
     }
 }

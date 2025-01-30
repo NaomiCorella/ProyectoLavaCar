@@ -46,12 +46,12 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.Listar
                 nombre = elCliente.nombre,
                 primer_apellido = elCliente.primer_apellido,
                 segundo_apellido = elCliente.segundo_apellido,
-                telefono = elCliente.telefono,
-                correoElectronico = elCliente.correoElectronico,
-                direccion = elCliente.direccion,
+                PhoneNumber = elCliente.PhoneNumber,
+                Email = elCliente.Email,
+            
                 estado = elCliente.estado,
-                idCliente = elCliente.Id,
-                contraseña = elCliente.contraseña
+                Id = elCliente.Id,
+            
             };
         }
     }

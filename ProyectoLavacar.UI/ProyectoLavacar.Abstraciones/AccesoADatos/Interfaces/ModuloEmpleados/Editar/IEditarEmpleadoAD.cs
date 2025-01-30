@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.E
 {
     public interface IEditarEmpleadoAD
     {
-        Task<int> EditarEmpleado(EmpleadosTabla elEmpleadoParaEditar);
+        Task<int> EditarEmpleado(UsuariosTabla elEmpleadoParaEditar);
     }
 }

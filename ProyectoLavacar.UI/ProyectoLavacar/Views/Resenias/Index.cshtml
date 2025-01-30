@@ -56,12 +56,31 @@
             @Html.DisplayFor(modelItem => item.comentarios)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+            @if (item.estado)
+            {
+                <span class="badge bg-success">Activo</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">Inactivo</span>
+            }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.idResenia }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @if (item.estado)
+            {
+                @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.idResenia }, new { @class = "btn btn-sm btn-outline-warning" })
+            }
+            else
+            {
+                @Html.ActionLink("Activar", "CambiarEstado", new { id = item.idResenia }, new { @class = "btn btn-sm btn-outline-success" })
+            }
+            @if (item.estado == true)
+            {
+
+            }
         </td>
     </tr>
 }

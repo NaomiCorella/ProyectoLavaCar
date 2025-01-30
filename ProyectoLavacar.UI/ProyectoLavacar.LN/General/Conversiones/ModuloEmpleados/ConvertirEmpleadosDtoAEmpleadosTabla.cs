@@ -1,5 +1,6 @@
 ﻿using ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,18 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloEmpleados
     public class ConvertirEmpleadosDtoAEmpleadosTabla : IConvertirEmpleadosDtoAEmpleadosTabla
     {
 
-        public EmpleadosTabla ConvertirEmpleados(EmpleadosDto elEmpleado)
+        public UsuariosTabla ConvertirEmpleados(UsuariosDto elEmpleado)
         {
-            return new EmpleadosTabla
+            return new UsuariosTabla
             {
                 nombre = elEmpleado.nombre,
                 primer_apellido = elEmpleado.primer_apellido,
                 segundo_apellido = elEmpleado.segundo_apellido,
-                telefono = elEmpleado.telefono,
-                correo = elEmpleado.correo,
+                PhoneNumber = elEmpleado.PhoneNumber,
+                Email = elEmpleado.Email,
                 cedula = elEmpleado.cedula,
                 estado = elEmpleado.estado,
-                idEmpleado = elEmpleado.idEmpleado,
+                Id = elEmpleado.Id,
                 puesto = elEmpleado.puesto,
                 turno = elEmpleado.turno,
                 numeroCuenta = elEmpleado.numeroCuenta
