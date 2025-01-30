@@ -333,6 +333,8 @@ CREATE TABLE Resenias (
 );
 GO
 
+select * from AspNetUsers
+
 -- Tabla Evaluaciones
 CREATE TABLE Evaluaciones (
     idEvaluacion INT IDENTITY PRIMARY KEY NOT NULL,
@@ -383,3 +385,11 @@ VALUES
 ('7G8H9I0J1K2L', 1, 3, '2024-08-28', '14:00:00', 1),
 ('3M4N5O6P7Q8R', 1, 1, '2024-08-29', '09:15:00', 0);
 select * from Reservas
+
+
+CREATE DATABASE LavacarBD
+ON (FILENAME = 'C:\Ruta\Del\Archivo\LavacarBD.mdf')
+FOR ATTACH;
+SELECT * 
+FROM sys.servers
+WHERE is_linked = 0;
