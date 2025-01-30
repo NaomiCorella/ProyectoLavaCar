@@ -118,11 +118,11 @@ namespace ProyectoLavacar.Controllers
 
             try
             {
-                var reserva = _context.ReservasTabla.Find(id);
-                reserva.estado = !reserva.estado;
+                var resenia = _context.ReseniasTabla.Find(id);
+                resenia.estado = !resenia.estado;
                 _context.SaveChanges();
 
-                return RedirectToAction("Reservas/Reservas");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
