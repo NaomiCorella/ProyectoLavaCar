@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloUsuarios.Bu
 {
     public interface IBuscarPorIdAD
     {
-        UsuariosTabla Detalle(int idCliente);
+        UsuariosTabla Detalle(string idCliente);
     }
 }

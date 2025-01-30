@@ -29,7 +29,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Listar
                                                       correoElectronico = elCliente.correoElectronico,
                                                       direccion = elCliente.direccion,
                                                       estado = elCliente.estado,
-                                                      idCliente = elCliente.idCliente,
+                                                      idCliente = elCliente.Id,
                                                       contraseña = elCliente.contraseña
                                                   }).ToList();
             return laListaDeclientes;

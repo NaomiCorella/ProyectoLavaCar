@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarDispon
 {
     public interface IListarDisponiblesLN
     {
+        List<ReservasDto> Listar(string idCliente);
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
 {
-    [Table("Resenia")]
+    [Table("Resenias")]
     public class ReseniasTabla
     {
         [Key]
         public int idResenia { get; set; }
-        public int idCliente { get; set; }
+        public string idCliente { get; set; }
         public int idServicio { get; set; }
         public DateTime fecha { get; set; }
         public int calificacion { get; set; }

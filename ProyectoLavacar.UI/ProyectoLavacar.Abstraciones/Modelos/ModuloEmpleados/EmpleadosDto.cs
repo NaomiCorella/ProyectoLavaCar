@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados
     public class EmpleadosDto
     {
         public int idEmpleado { get; set; }
-        public int nombre { get; set; }
+        public string nombre { get; set; }
         public string primer_apellido { get; set; }
         public string segundo_apellido { get; set; }
         public string telefono { get; set; }

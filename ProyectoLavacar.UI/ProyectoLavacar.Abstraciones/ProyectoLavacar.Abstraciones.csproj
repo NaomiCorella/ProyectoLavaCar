@@ -49,10 +49,12 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Editar\IEditarEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Listar\IListarEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Editar\IEditarReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarAdmin\IEditarReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarCliente\IEditarClienteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarEncargos\IListarEncargoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarTodo\IListarTodoReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ObtenerPorId\IObtenerPorIdReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Crear\ICrearReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Editar\IEditarReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaAD.cs" />
@@ -64,7 +66,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Listar\IListarUsuarioAD.cs" />
     <Compile Include="LN\interfaces\General\Fecha\IFecha.cs" />
     <Compile Include="LN\interfaces\General\ModuloEmpleados\IConvertirEmpleadosDtoAEmpleadosTabla.cs" />
-    <Compile Include="LN\interfaces\General\ModuloReservas\Class1.cs" />
+    <Compile Include="LN\interfaces\General\ModuloReservas\IConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReseñas\Class1.cs" />
     <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorEvaluacionYDesempeño\IBuscarPorEvaluacionYDesempenioLN.cs" />
@@ -74,10 +76,12 @@
     <Compile Include="LN\interfaces\ModuloEmpleados\Editar\IEditarEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\Listar\IListarEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
-    <Compile Include="LN\interfaces\ModuloReservas\Editar\IEditarReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\EditarAdmin\IEditarReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\EditarCliente\IEditarClienteLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ListarEncargo\IListarEncargoLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ListarTodo\IListarTodoReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\ObtenerPorId\IObtenerPorIdReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\Crear\ICrearReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\Editar\IEditarReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaLN.cs" />
@@ -98,8 +102,9 @@
     <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />
     <Compile Include="Modelos\ModuloUsuarios\UsuariosDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptBaseDeDatos\Class1.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ScriptBaseDeDatos\BaseDeDatosLavaCar.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

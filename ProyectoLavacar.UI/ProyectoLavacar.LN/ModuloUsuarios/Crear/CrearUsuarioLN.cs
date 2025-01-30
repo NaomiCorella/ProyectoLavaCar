@@ -39,7 +39,7 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.Crear
                 correoElectronico = elCliente.correoElectronico,
                 direccion = elCliente.direccion,
                 estado = elCliente.estado,
-                idCliente = elCliente.idCliente,
+                Id = elCliente.idCliente,
                 contraseña = elCliente.contraseña
             };
         }

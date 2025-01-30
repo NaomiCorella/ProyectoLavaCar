@@ -27,8 +27,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.Editar
             elEmpleadoEnBaseDeDatos.correo = elEmpleadoParaEditar.correo;
             elEmpleadoEnBaseDeDatos.cedula = elEmpleadoParaEditar.cedula;
             elEmpleadoEnBaseDeDatos.turno = elEmpleadoParaEditar.turno;
-            elEmpleadoEnBaseDeDatos.puesto = elEmpleadoEnBaseDeDatos.puesto;
-            elEmpleadoEnBaseDeDatos.numeroCuenta = elEmpleadoEnBaseDeDatos.numeroCuenta;
+            elEmpleadoEnBaseDeDatos.puesto = elEmpleadoParaEditar.puesto;
+            elEmpleadoEnBaseDeDatos.numeroCuenta = elEmpleadoParaEditar.numeroCuenta;
             EntityState estado = _elcontexto.Entry(elEmpleadoEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
             return cantidadDeDatosAlmacenados;
