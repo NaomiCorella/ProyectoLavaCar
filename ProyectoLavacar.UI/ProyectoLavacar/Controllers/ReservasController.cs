@@ -1,4 +1,6 @@
 ﻿using Antlr.Runtime.Tree;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Editar;
@@ -20,9 +22,11 @@ using ProyectoLavacar.LN.ModuloReservas.ListarEncargo;
 using ProyectoLavacar.LN.ModuloReservas.ListarTodo;
 using ProyectoLavacar.LN.ModuloReservas.ObtenerPorId;
 using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
+using ProyectoLavacar.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -43,8 +47,11 @@ namespace ProyectoLavacar.Controllers
         IObtenerPorIdReservaLN _detallesReserva; 
         IListarServiciosLN _listarServicios;
         Contexto _context;
+   
+
         public ReservasController()
         {
+    
             _crearReserva = new CrearReservaLN();
             _editarReservaAdmin = new EditarReservaLN();
             _editarReservaCliente = new EditarClienteLN();
@@ -68,18 +75,22 @@ namespace ProyectoLavacar.Controllers
             List<ReservasDto> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);
         }
-
-        public ActionResult MisReservas(string idCliente) //ReservasCliente
+        // GET: Reservas
+        public ActionResult MisReservas() //ReservasCliente
         {
-            string id = "e4199e01-39e1-415b-a8ed-eff4f9e12b70";
-            List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(id);
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+           
+            List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
             return View(lalistaDeReservas);
         }
 
-        public ActionResult ReservasEncargadas(string id = "e4199e01-39e1-415b-a8ed-eff4f9e12b70") //ReservasEmpleado
+        public ActionResult ReservasEncargadas() //ReservasEmpleado
         {
-           
-            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(id);
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado);
             return View(lalistaDeReservas);
         }
 
@@ -99,11 +110,24 @@ namespace ProyectoLavacar.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(ReservasDto modeloDeReserva)
         {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             try
             {
-                int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(modeloDeReserva);
+                ReservasDto reserva = new ReservasDto()
+                {
+                    idReserva=1,
+                    idCliente = idCliente,
+                    idServicio =modeloDeReserva.idServicio,
+                    idEmpleado= "c2d2b03b-96f7-45a3-b2e1-f9107234dbf3",
+                    fecha= modeloDeReserva.fecha,
+                    hora = modeloDeReserva.hora,
+                    estado = modeloDeReserva.estado
+                    
+                };
+                int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
 
-                return RedirectToAction("Reservas/MisReservas");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
