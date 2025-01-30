@@ -85,7 +85,16 @@ CREATE TABLE [dbo].[AspNetUsers](
     primer_apellido NVARCHAR(50) NOT NULL,
     segundo_apellido NVARCHAR(50) NOT NULL,
 	[UserName] [nvarchar](256) NOT NULL,
-	 estado BIT NOT NULL
+	 estado BIT NOT NULL,	
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEndDateUtc] [datetime] NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+	cedula int , 
+	numeroCuenta  nvarchar(30),
+	turno nvarchar(30),
+	puesto nvarchar(50)
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -119,104 +128,8 @@ GO
 
 -----------------------------------------------------------------------------------------------------------------------------
 
---------------------------------------Secuencia del IDEMPLEADO-------------------------------------------------------------------
-CREATE SEQUENCE Empleados_Seq
-AS INT
-START WITH 1  
-INCREMENT BY 1;
---------------------------------------------------------------------------------------------------------------------------------
-
--- Tabla Empleados
-CREATE TABLE Empleados (
-    idEmpleado  int  PRIMARY KEY NOT NULL,
-    nombre NVARCHAR(50) NOT NULL,
-    primer_apellido NVARCHAR(50) NOT NULL,
-    segundo_apellido NVARCHAR(50),
-    telefono NVARCHAR(15),
-    correo NVARCHAR(100),
-    cedula NVARCHAR(20),
-    puesto NVARCHAR(50),
-    turno NVARCHAR(20),
-    estado BIT NOT NULL,
-    numeroCuenta NVARCHAR(20)
-);
-GO
-----------------------------------------------------------Triggger de id de Empleado-------------------------------------
-CREATE TRIGGER trg_InsteadOfInsertEmpleados
-ON Empleados
-INSTEAD OF INSERT
-AS
-BEGIN
-    DECLARE @idEmpleado INT,
-            @nombre NVARCHAR(50),
-            @primer_apellido NVARCHAR(50),
-            @segundo_apellido NVARCHAR(50),
-            @telefono NVARCHAR(15),
-            @correo NVARCHAR(100),
-            @cedula NVARCHAR(20),
-            @puesto NVARCHAR(50),
-            @turno NVARCHAR(20),
-            @estado BIT,
-            @numeroCuenta NVARCHAR(20);
-
-  
-    SELECT @nombre = nombre,
-           @primer_apellido = primer_apellido,
-           @segundo_apellido = segundo_apellido,
-           @telefono = telefono,
-           @correo = correo,
-           @cedula = cedula,
-           @puesto = puesto,
-           @turno = turno,
-           @estado = estado,
-           @numeroCuenta = numeroCuenta
-    FROM INSERTED;
-
- 
-    SELECT @idEmpleado = NEXT VALUE FOR Empleados_Seq;
 
 
-    INSERT INTO Empleados (idEmpleado, nombre, primer_apellido, segundo_apellido, telefono, correo, cedula, puesto, turno, estado, numeroCuenta)
-    VALUES (@idEmpleado, @nombre, @primer_apellido, @segundo_apellido, @telefono, @correo, @cedula, @puesto, @turno, @estado, @numeroCuenta);
-END;
-GO
-
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-------------------------Trigger de creacion de usuarios(empleados en la tabla de aspnertuser)------------------------------------------------------
-CREATE TRIGGER trg_InsertEmpleados
-ON Empleados
-AFTER INSERT
-AS
-BEGIN
-    DECLARE @idEmpleado INT,
-            @nombre NVARCHAR(50),
-            @primer_apellido NVARCHAR(50),
-            @segundo_apellido NVARCHAR(50),
-            @correo NVARCHAR(100),
-            @estado BIT;
-
- 
-    SELECT @idEmpleado = idEmpleado,
-           @nombre = nombre,
-           @primer_apellido = primer_apellido,
-           @segundo_apellido = segundo_apellido,
-           @correo = correo,
-           @estado = estado
-    FROM INSERTED;
-
-
-    INSERT INTO AspNetUsers (Id, Email, EmailConfirmed, UserName, nombre, primer_apellido, segundo_apellido, estado)
-    VALUES (CAST(@idEmpleado AS NVARCHAR(128)), 
-            @correo, 
-            0,  
-            @correo,  
-            @nombre,
-            @primer_apellido,
-            @segundo_apellido,
-            @estado);
-END;
-GO
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Tabla Servicios
@@ -233,15 +146,13 @@ GO
 -- Tabla Reservas
 CREATE TABLE Reservas (
     idReserva INT IDENTITY PRIMARY KEY NOT NULL,
-    idCliente [nvarchar](128) NOT NULL,
-    idEmpleado INT NOT NULL,
+    idUsuario [nvarchar](128) NOT NULL,
     idServicio INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
-    FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado),
-    FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio)
+    FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id)
+    
 );
 GO
 
@@ -333,8 +244,6 @@ CREATE TABLE Resenias (
 );
 GO
 
-select * from AspNetUsers
-
 -- Tabla Evaluaciones
 CREATE TABLE Evaluaciones (
     idEvaluacion INT IDENTITY PRIMARY KEY NOT NULL,
@@ -384,12 +293,9 @@ VALUES
 ('1A2B3C4D5E6F', 1, 2, '2024-08-27', '10:30:00', 1),
 ('7G8H9I0J1K2L', 1, 3, '2024-08-28', '14:00:00', 1),
 ('3M4N5O6P7Q8R', 1, 1, '2024-08-29', '09:15:00', 0);
-select * from Reservas
+select * from AspNetUsers
 
-
-CREATE DATABASE LavacarBD
-ON (FILENAME = 'C:\Ruta\Del\Archivo\LavacarBD.mdf')
-FOR ATTACH;
-SELECT * 
-FROM sys.servers
-WHERE is_linked = 0;
+INSERT INTO Empleados 
+(idEmpleado, nombre, primer_apellido, segundo_apellido, telefono, correo, cedula, puesto, turno, estado, contraseña, numeroCuenta)
+VALUES 
+(1, 'Juan', 'Pérez', 'Gómez', '123-456-7890', 'juan.perez@example.com', '123456789', 'Gerente', 'Mañana', 1, 'contraseñaSegura123', '1234567890');
