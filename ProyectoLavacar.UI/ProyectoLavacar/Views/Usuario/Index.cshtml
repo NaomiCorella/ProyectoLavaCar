@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.idCliente)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
@@ -24,17 +24,10 @@
             @Html.DisplayNameFor(model => model.segundo_apellido)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.correoElectronico)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.contraseña)
-        </th>
+       
+      
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
@@ -44,7 +37,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.idCliente)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.nombre)
@@ -56,23 +49,34 @@
             @Html.DisplayFor(modelItem => item.segundo_apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.correoElectronico)
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+       
+        <td>
+            @if (item.estado)
+            {
+                <span class="badge bg-success">Activo</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">Inactivo</span>
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.contraseña)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id =item.idCliente }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idCliente }) 
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+            @if (item.estado)
+            {
+                @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-warning" })
+            }
+            else
+            {
+                @Html.ActionLink("Activar", "CambiarEstado", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
+            }
+            @if (item.estado == true)
+            {
+
+            }
         </td>
     </tr>
 }

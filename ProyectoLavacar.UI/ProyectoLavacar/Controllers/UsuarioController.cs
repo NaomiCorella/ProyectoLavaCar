@@ -9,6 +9,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
+using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.LN.ModuloUsuarios.Crear;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
@@ -18,17 +19,19 @@ namespace ProyectoLavacar.Controllers
 {
     public class UsuarioController : Controller
     {
-        ICrearUsuarioLN _crearUsuario;
+    
         IListarUsuarioLN _listarUsuario;
         IEditarUsuarioLN _editarUsuario;
         IBuscarPorIdLN _buscarPorId;
+        Contexto _context;
 
         public UsuarioController()
         {
-            _crearUsuario = new CrearUsuarioLN();
+     
             _listarUsuario = new ListarUsuarioLN();
             _editarUsuario = new EditarUsuarioLN();
             _buscarPorId = new BuscarPorIdLN();
+            _context = new Contexto();
         }
     
         // GET: Usuario
@@ -62,7 +65,7 @@ namespace ProyectoLavacar.Controllers
             try
             {
                 // TODO: Add insert logic here
-                int cantidadDeDatosGuardados = await _crearUsuario.RegistrarUsuarios(modeloDeUsuarios);
+             
                 return RedirectToAction("Index");
                 
             }
@@ -115,6 +118,24 @@ namespace ProyectoLavacar.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult CambiarEstado(string id)
+        {
+
+            try
+            {
+                var Usuario = _context.UsuariosTabla.Find(id);
+                Usuario.estado = !Usuario.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
             }
         }
     }

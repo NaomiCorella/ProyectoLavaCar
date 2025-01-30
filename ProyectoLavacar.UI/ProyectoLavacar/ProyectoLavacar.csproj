@@ -359,12 +359,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Empleado\Index.cshtml" />
-    <Content Include="Views\Empleado\Details.cshtml" />
-    <Content Include="Views\Empleado\Create.cshtml" />
-    <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Resenias\Index.cshtml" />
     <Content Include="Views\Resenias\Create.cshtml" />
     <Content Include="Views\Reservas\MisReservas.cshtml" />
@@ -376,6 +371,9 @@
     <Content Include="Views\Resenias\Edit.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\RegisterEmployee.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Empleado\Details.cshtml" />
+    <Content Include="Views\Empleado\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,25 +19,25 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.BuscarPorId
         {
             _obtenerPorIdAD = new BuscarPorIdAD();
         }
-        public EmpleadosDto Detalle(int idEmpleado)
+        public UsuariosDto Detalle(string idEmpleado)
         {
-            EmpleadosTabla EmpleadosEnBaseDeDatos = _obtenerPorIdAD.Detalle(idEmpleado);
-            EmpleadosDto elempleadoAMostrar = ConvertirAPersonaAMostrar(EmpleadosEnBaseDeDatos);
+            UsuariosTabla EmpleadosEnBaseDeDatos = _obtenerPorIdAD.Detalle(idEmpleado);
+            UsuariosDto elempleadoAMostrar = ConvertirAPersonaAMostrar(EmpleadosEnBaseDeDatos);
             return elempleadoAMostrar;
         }
-        private EmpleadosDto ConvertirAPersonaAMostrar(EmpleadosTabla elEmpleado)
+        private UsuariosDto ConvertirAPersonaAMostrar(UsuariosTabla elEmpleado)
         {
 
-            return new EmpleadosDto
+            return new UsuariosDto
             {
                 nombre = elEmpleado.nombre,
                 primer_apellido = elEmpleado.primer_apellido,
                 segundo_apellido = elEmpleado.segundo_apellido,
-                telefono = elEmpleado.telefono,
-                correo = elEmpleado.correo,
+                PhoneNumber = elEmpleado.PhoneNumber,
+                Email = elEmpleado.Email,
                 cedula = elEmpleado.cedula,
                 estado = elEmpleado.estado,
-                idEmpleado = elEmpleado.idEmpleado,
+                Id = elEmpleado.Id,
                 puesto = elEmpleado.puesto,
                 turno = elEmpleado.turno,
                 numeroCuenta = elEmpleado.numeroCuenta

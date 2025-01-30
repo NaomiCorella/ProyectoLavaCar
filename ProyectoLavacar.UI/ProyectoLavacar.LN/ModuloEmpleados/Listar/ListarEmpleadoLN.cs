@@ -1,6 +1,7 @@
 ﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos.ModuloEmpleados.Listar;
 using System;
@@ -19,39 +20,39 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Listar
             _listarEmpleadoAD = new ListarEmpleadoAD();
         }
 
-        public List<EmpleadosDto> ListarEmpleados()
+        public List<UsuariosDto> ListarEmpleados()
         {
-            List<EmpleadosDto> laListasDeEmpleados = _listarEmpleadoAD.ListarEmpleado();
+            List<UsuariosDto> laListasDeEmpleados = _listarEmpleadoAD.ListarEmpleado();
             return laListasDeEmpleados;
         }
 
-        private List<EmpleadosDto> ObtenerLaListaConvertida(List<EmpleadosTabla> laListasDeEmpleados)
+        private List<UsuariosDto> ObtenerLaListaConvertida(List<UsuariosTabla> laListasDeEmpleados)
         {
-            List<EmpleadosDto> laListaDeEmpleados = new List<EmpleadosDto>();
-            foreach (EmpleadosTabla elEmpleado in laListasDeEmpleados)
+            List<UsuariosDto> laListaDeEmpleados = new List<UsuariosDto>();
+            foreach (UsuariosTabla elEmpleado in laListasDeEmpleados)
             {
                 laListaDeEmpleados.Add(ConvertirObjetoEmpleadoDto(elEmpleado));
             }
             return laListaDeEmpleados;
 
         }
-        private EmpleadosDto ConvertirObjetoEmpleadoDto(EmpleadosTabla elEmpleado)
+        private UsuariosDto ConvertirObjetoEmpleadoDto(UsuariosTabla elEmpleado)
         {
             if (elEmpleado == null)
             {
 
                 throw new ArgumentNullException(nameof(elEmpleado), "El objeto  no puede ser null.");
             }
-            return new EmpleadosDto
+            return new UsuariosDto
             {
                 nombre = elEmpleado.nombre,
                 primer_apellido = elEmpleado.primer_apellido,
                 segundo_apellido = elEmpleado.segundo_apellido,
-                telefono = elEmpleado.telefono,
-                correo = elEmpleado.correo,
+                PhoneNumber = elEmpleado.PhoneNumber,
+                Email = elEmpleado.Email,
                 cedula = elEmpleado.cedula,
                 estado = elEmpleado.estado,
-                idEmpleado = elEmpleado.idEmpleado,
+                Id = elEmpleado.Id,
                 puesto = elEmpleado.puesto,
                 turno = elEmpleado.turno,
                 numeroCuenta = elEmpleado.numeroCuenta

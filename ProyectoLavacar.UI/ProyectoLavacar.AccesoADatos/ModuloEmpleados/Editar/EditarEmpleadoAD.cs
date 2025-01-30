@@ -17,14 +17,14 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.Editar
         {
             _elcontexto = new Contexto();
         }
-        public async Task<int> EditarEmpleado(EmpleadosTabla elEmpleadoParaEditar)
+        public async Task<int> EditarEmpleado(UsuariosTabla elEmpleadoParaEditar)
         {
-            EmpleadosTabla elEmpleadoEnBaseDeDatos = _elcontexto.EmpleadosTabla.Where(elEmpleado => elEmpleado.idEmpleado == elEmpleadoParaEditar.idEmpleado).FirstOrDefault();
+            UsuariosTabla elEmpleadoEnBaseDeDatos = _elcontexto.UsuariosTabla.Where(elEmpleado => elEmpleado.Id == elEmpleadoParaEditar.Id).FirstOrDefault();
             elEmpleadoEnBaseDeDatos.nombre = elEmpleadoParaEditar.nombre;
             elEmpleadoEnBaseDeDatos.primer_apellido = elEmpleadoParaEditar.primer_apellido;
             elEmpleadoEnBaseDeDatos.segundo_apellido = elEmpleadoParaEditar.segundo_apellido;
-            elEmpleadoEnBaseDeDatos.telefono = elEmpleadoParaEditar.telefono;
-            elEmpleadoEnBaseDeDatos.correo = elEmpleadoParaEditar.correo;
+            elEmpleadoEnBaseDeDatos.PhoneNumber = elEmpleadoParaEditar.PhoneNumber;
+            elEmpleadoEnBaseDeDatos.Email = elEmpleadoParaEditar.Email;
             elEmpleadoEnBaseDeDatos.cedula = elEmpleadoParaEditar.cedula;
             elEmpleadoEnBaseDeDatos.turno = elEmpleadoParaEditar.turno;
             elEmpleadoEnBaseDeDatos.puesto = elEmpleadoParaEditar.puesto;

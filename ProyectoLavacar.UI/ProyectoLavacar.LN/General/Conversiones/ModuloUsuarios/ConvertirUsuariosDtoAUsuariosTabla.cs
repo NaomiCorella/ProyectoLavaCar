@@ -19,12 +19,12 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloUsuarios
                 nombre = elCliente.nombre,
                 primer_apellido = elCliente.primer_apellido,
                 segundo_apellido = elCliente.segundo_apellido,
-                telefono = elCliente.telefono,
-                correoElectronico = elCliente.correoElectronico,
-                direccion = elCliente.direccion,
+                PhoneNumber = elCliente.PhoneNumber,
+                Email = elCliente.Email,
+              
                 estado = elCliente.estado,
-                Id = elCliente.idCliente,
-                contraseña = elCliente.contraseña
+                Id = elCliente.Id,
+             
             };
         }
     }

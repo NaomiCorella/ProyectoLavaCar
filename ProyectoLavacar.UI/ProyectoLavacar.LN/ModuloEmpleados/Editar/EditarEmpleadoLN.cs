@@ -26,7 +26,7 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Editar
             _convertirObjeto = new ConvertirEmpleadosDtoAEmpleadosTabla();
         }
 
-        public async Task<int> EditarEmpleados(EmpleadosDto elEmpleadoEnVista)
+        public async Task<int> EditarEmpleados(UsuariosDto elEmpleadoEnVista)
         {
             int cantidadDeDatosEditados = await _editarEmpleadosAD.EditarEmpleado(_convertirObjeto.ConvertirEmpleados(elEmpleadoEnVista));
             return cantidadDeDatosEditados;
