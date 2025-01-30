@@ -71,15 +71,15 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult MisReservas(string idCliente) //ReservasCliente
         {
-            string id = "1A2B3C4D5E6F";
+            string id = "e4199e01-39e1-415b-a8ed-eff4f9e12b70";
             List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(id);
             return View(lalistaDeReservas);
         }
 
-        public ActionResult ReservasEncargadas(int idEmpleado = 1) //ReservasEmpleado
+        public ActionResult ReservasEncargadas(string id = "e4199e01-39e1-415b-a8ed-eff4f9e12b70") //ReservasEmpleado
         {
            
-            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado);
+            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(id);
             return View(lalistaDeReservas);
         }
 

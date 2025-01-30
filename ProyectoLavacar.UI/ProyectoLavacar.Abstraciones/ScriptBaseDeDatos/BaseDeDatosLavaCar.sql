@@ -146,12 +146,12 @@ GO
 -- Tabla Reservas
 CREATE TABLE Reservas (
     idReserva INT IDENTITY PRIMARY KEY NOT NULL,
-    idUsuario [nvarchar](128) NOT NULL,
+    idCliente [nvarchar](128) NOT NULL,
     idServicio INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id)
+    FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id)
     
 );
 GO

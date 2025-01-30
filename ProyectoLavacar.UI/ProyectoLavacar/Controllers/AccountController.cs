@@ -159,13 +159,23 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = model.Estado
+               
+
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+             
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    // Asignar el rol al usuario
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Usuario");
+
+                    if (resultRole.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar un correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -209,10 +219,17 @@ namespace ProyectoLavacar.Controllers
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Home");
+                    // Asignar el rol al usuario
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Empleado");
+
+                    if (resultRole.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 AddErrors(result);
             }

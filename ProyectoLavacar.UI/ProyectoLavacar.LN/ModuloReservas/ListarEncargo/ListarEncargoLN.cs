@@ -21,21 +21,21 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarEncargo
             _listarEncargoReservasAD = new ListarEncargoAD();
         }
 
-        public List<ReservasDto> Listar(int idEmpleado)
+        public List<ReservasDto> Listar(string idEmpleado)
         {
             List<ReservasDto> laListaDeActividadesPersona = _listarEncargoReservasAD.ListarReservasEmpleado(idEmpleado);
 
             return laListaDeActividadesPersona;
         }
 
-        private List<ReservasDto> ObtenerLaListaConvertida(List<ReservasTabla> lalistadeReservas, List<EmpleadosTabla> listadeEmpleados)
+        private List<ReservasDto> ObtenerLaListaConvertida(List<ReservasTabla> lalistadeReservas, List<UsuariosTabla> listadeEmpleados)
         {
             List<ReservasDto> laListaDeActividades = new List<ReservasDto>();
 
 
             var joinLista = from reserva in lalistadeReservas
-                            join empleados in listadeEmpleados on reserva.idEmpleado equals empleados.idEmpleado
-                            where reserva.idEmpleado == empleados.idEmpleado
+                            join empleados in listadeEmpleados on reserva.idEmpleado equals empleados.Id
+                            where reserva.idEmpleado == empleados.Id
                             select new { reserva, empleados };
 
             foreach (var item in joinLista)
@@ -46,14 +46,14 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarEncargo
             return laListaDeActividades;
         }
 
-        private ReservasDto ConvertirObjetoServiciosDto(ReservasTabla reserva, EmpleadosTabla empleados)
+        private ReservasDto ConvertirObjetoServiciosDto(ReservasTabla reserva, UsuariosTabla empleados)
         {
 
             return new ReservasDto
             {
                 idReserva = reserva.idReserva,
                 idCliente = reserva.idCliente,
-                idEmpleado = empleados.idEmpleado,
+                idEmpleado = empleados.Id,
                 idServicio = reserva.idServicio,
                 fecha = reserva.fecha.ToString(),
                 hora = reserva.hora.ToString(),

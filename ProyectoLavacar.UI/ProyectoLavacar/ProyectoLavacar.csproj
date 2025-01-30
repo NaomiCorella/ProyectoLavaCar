@@ -369,11 +369,11 @@
     <Content Include="Views\Reservas\Edit.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
     <Content Include="Views\Resenias\Edit.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\RegisterEmployee.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
+    <Content Include="Views\Account\RegisterEmployee.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -103,6 +103,9 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
+        [Required]
+        [Display(Name = "Rol")]
+        public string Role { get; set; }
     }
     public class RegisterEmployeeViewModel
     {
@@ -150,6 +153,9 @@ namespace ProyectoLavacar.Models
         public string numeroCuenta { get; set; }
         public string turno { get; set; }
         public string puesto { get; set; }
+        [Required]
+        [Display(Name = "Rol")]
+        public string Role { get; set; }
     }
 
     public class ResetPasswordViewModel
