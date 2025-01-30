@@ -146,12 +146,14 @@ GO
 -- Tabla Reservas
 CREATE TABLE Reservas (
     idReserva INT IDENTITY PRIMARY KEY NOT NULL,
-    idCliente [nvarchar](128) NOT NULL,
+    idUsuario [nvarchar](128) NOT NULL,
+ idEmpleado [nvarchar](128) NOT NULL,
     idServicio INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id)
+    FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
+	 FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
     
 );
 GO
@@ -159,7 +161,7 @@ GO
 -- Tabla Nomina
 CREATE TABLE Nomina (
     idNomina INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado INT NOT NULL,
+    idEmpleado nvarchar(128) NOT NULL,
     salarioNeto DECIMAL(10,2) NOT NULL,
     salarioBruto DECIMAL(10,2),
     fechaDePago DATE NOT NULL,
@@ -173,7 +175,7 @@ CREATE TABLE Nomina (
     incapacidad DECIMAL(10,2) NOT NULL,
     tipoDeContrato NVARCHAR(50) NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado)
+ FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
 
@@ -197,16 +199,16 @@ CREATE TABLE Inventario (
 );
 GO
 
--- Tabla Linea
+-- Tabla Linea --ver si se borra
 CREATE TABLE Linea (
     idLinea INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado INT NOT NULL,
+    idEmpleado nvarchar(128) NOT NULL,
     idInventario INT NOT NULL,
     idProducto INT NOT NULL,
     cantidad INT NOT NULL,
     totalLinea DECIMAL(10,2) NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado),
+    FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
     FOREIGN KEY (idInventario) REFERENCES Inventario(idInventario),
     FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
 );
@@ -215,16 +217,16 @@ GO
 -- Tabla Compra
 CREATE TABLE Compra (
     idCompra INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado INT NOT NULL,
-    idCliente [nvarchar](128) NOT NULL,
+    idUsuario nvarchar(128) NOT NULL,
+   
     idServicio INT NOT NULL,
     idReserva INT NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     fecha DATE NOT NULL,
     descripcionServicio NVARCHAR(200) NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado),
-   FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
+FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
+  
     FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio),
     FOREIGN KEY (idReserva) REFERENCES Reservas(idReserva)
 );
@@ -247,16 +249,39 @@ GO
 -- Tabla Evaluaciones
 CREATE TABLE Evaluaciones (
     idEvaluacion INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado INT NOT NULL,
+    idEmpleado nvarchar(128) NOT NULL,
     fechaEvaluacion DATE NOT NULL DEFAULT GETDATE() ,
     calificacion INT CHECK (calificacion BETWEEN 1 AND 10),
     comentarios NVARCHAR(MAX)  NOT NULL,
     areaMejora NVARCHAR(MAX)  NOT NULL,
     recomendaciones NVARCHAR(MAX) NOT NULL,
-    FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado)
+FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
  
+ CREATE TRIGGER trg_InsertReserva
+ON Reservas
+AFTER INSERT
+AS
+BEGIN
+    -- Variables para almacenar el ID del empleado aleatorio
+    DECLARE @idEmpleado NVARCHAR(128);
+
+    -- Seleccionar un empleado aleatorio con el rol "Empleado"
+    SELECT TOP 1 @idEmpleado = u.Id
+    FROM [dbo].[AspNetUsers] u
+    JOIN [dbo].[AspNetUserRoles] ur ON u.Id = ur.UserId
+    JOIN [dbo].[AspNetRoles] r ON ur.RoleId = r.Id
+    WHERE r.Name = 'Empleado' -- Filtramos por el rol "Empleado"
+    ORDER BY NEWID(); -- Aleatorio
+
+    -- Actualizamos la fila insertada en la tabla Reservas para asignar el idEmpleado
+    UPDATE Reservas
+    SET idEmpleado = @idEmpleado
+    FROM Reservas r
+    INNER JOIN inserted i ON r.idReserva = i.idReserva;
+END;
+GO
 
 
 -----Ejemplo de funcionamiento del trigger
@@ -293,9 +318,17 @@ VALUES
 ('1A2B3C4D5E6F', 1, 2, '2024-08-27', '10:30:00', 1),
 ('7G8H9I0J1K2L', 1, 3, '2024-08-28', '14:00:00', 1),
 ('3M4N5O6P7Q8R', 1, 1, '2024-08-29', '09:15:00', 0);
-select * from AspNetUsers
+select * from Reservas
 
-INSERT INTO Empleados 
+INSERT INTO Reservas 
 (idEmpleado, nombre, primer_apellido, segundo_apellido, telefono, correo, cedula, puesto, turno, estado, contraseña, numeroCuenta)
 VALUES 
 (1, 'Juan', 'Pérez', 'Gómez', '123-456-7890', 'juan.perez@example.com', '123456789', 'Gerente', 'Mañana', 1, 'contraseñaSegura123', '1234567890');
+SELECT TOP 1 u.Id
+FROM [dbo].[AspNetUsers] u
+JOIN [dbo].[AspNetUserRoles] ur ON u.Id = ur.UserId
+JOIN [dbo].[AspNetRoles] r ON ur.RoleId = r.Id
+WHERE r.Name = 'Empleado'  -- Asumiendo que el rol se llama 'Empleado'
+ORDER BY NEWID();  -- Esto selecciona un registro aleatorio
+
+
