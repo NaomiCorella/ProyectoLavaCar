@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.Editar
+namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.ObtenerPorId
 {
-    public interface IEditarReseniaAD
+    public interface IObtenerPorIdAD
     {
-        Task<int> EditarResenia(ReseniasTabla lareseniaParaEditar);
+        ReseniasTabla Detalle(int idReserva);
     }
 }

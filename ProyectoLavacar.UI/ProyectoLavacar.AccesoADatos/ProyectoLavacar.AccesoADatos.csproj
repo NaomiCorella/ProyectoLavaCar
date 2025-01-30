@@ -70,6 +70,7 @@
     <Compile Include="ModuloReseñas\Editar\EditarReseniaAD.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaAD.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaAD.cs" />
+    <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloServicios\Listar\ListarServiciosAD.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdAD.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioAD.cs" />

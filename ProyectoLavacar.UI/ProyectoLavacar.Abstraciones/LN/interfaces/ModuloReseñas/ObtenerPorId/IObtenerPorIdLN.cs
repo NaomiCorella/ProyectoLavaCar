@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Editar
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.ObtenerPorId
 {
-    public interface IEditarReseniaLN
+    public interface IObtenerPorIdLN
     {
-        Task<int> EditarPersonas(ReseniaDto laReserva);
+        ReseniaDto Detalle(int idReserva);
     }
 }

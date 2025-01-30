@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloResenias\ConvertirResenia.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="ModuloReseñas\Editar\EditarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaLN.cs" />
+    <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioLN.cs" />
@@ -79,8 +81,6 @@
       <Name>ProyectoLavacar.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="General\Conversiones\ModuloReseñas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
