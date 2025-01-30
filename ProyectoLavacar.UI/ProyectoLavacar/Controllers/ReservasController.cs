@@ -108,7 +108,7 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Reservas/Create
         [HttpPost]
-        public async Task<ActionResult> Create(ReservasDto modeloDeReserva)
+        public async Task<ActionResult> Create(ReservasDto modeloDeReserva, int id)
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -118,7 +118,7 @@ namespace ProyectoLavacar.Controllers
                 {
                     idReserva=1,
                     idCliente = idCliente,
-                    idServicio =modeloDeReserva.idServicio,
+                    idServicio = id,
                     idEmpleado= "c2d2b03b-96f7-45a3-b2e1-f9107234dbf3",
                     fecha= modeloDeReserva.fecha,
                     hora = modeloDeReserva.hora,
@@ -161,9 +161,35 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
+        /// ////////////////  //////////////////
+        /// //////////////// Admin //////////////////
+
+        // GET: Reservas/Edit/5
+        public ActionResult EditarMiReserva(int idReserva)
+        {
+            ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
+            return View(modeloReserva);
+        }
+
+        // POST: Reservas/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> EditarMiReserva(ReservasDto modeloReserva)
+        {
+            try
+            {
+
+                int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         /// ////////////////  //////////////////
 
-     
         // GET: Reservas/Delete/5
         public ActionResult Delete(int id)
         {

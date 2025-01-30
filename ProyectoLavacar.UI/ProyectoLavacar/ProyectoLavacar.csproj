@@ -511,6 +511,7 @@
     <Content Include="Views\Reservas\MisReservas.cshtml" />
     <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
+    <Content Include="Views\Reservas\EditarMiReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

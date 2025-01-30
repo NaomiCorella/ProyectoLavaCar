@@ -58,7 +58,20 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                int cantidadDeDatosGuardados = await _crearResenia.CrearResenia(modeloDeResenia);
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                ReseniaDto resenia = new ReseniaDto()
+                {
+                    idResenia= modeloDeResenia.idResenia,
+                    idCliente= idCliente,
+                    idServicio = modeloDeResenia.idServicio,
+                    calificacion = modeloDeResenia.calificacion,
+                    comentarios = modeloDeResenia.comentarios,
+                    fecha = modeloDeResenia.fecha,
+                    estado = modeloDeResenia.estado
+                };
+
+                int cantidadDeDatosGuardados = await _crearResenia.CrearResenia(resenia);
 
                 return RedirectToAction("Index");
             }
