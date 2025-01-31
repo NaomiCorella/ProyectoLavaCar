@@ -11,7 +11,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReservas
     {
         public int idReserva { get; set; }
         public string idCliente { get; set; }
-        public int idEmpleado { get; set; }
+        public string idEmpleado { get; set; }
         public int idServicio { get; set; }
         public string fecha { get; set; }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados.EmpleadosDto>
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.UsuariosDto>
 
 @{
     ViewBag.Title = "Index";
@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.idEmpleado)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
@@ -24,34 +21,33 @@
             @Html.DisplayNameFor(model => model.segundo_apellido)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.telefono)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
+    
         <th>
-            @Html.DisplayNameFor(model => model.correo)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+    
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.cedula)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.puesto)
+            @Html.DisplayNameFor(model => model.numeroCuenta)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.turno)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
+            @Html.DisplayNameFor(model => model.puesto)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idEmpleado)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
@@ -62,30 +58,32 @@
             @Html.DisplayFor(modelItem => item.segundo_apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.telefono)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
+  
         <td>
-            @Html.DisplayFor(modelItem => item.correo)
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.cedula)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.puesto)
+            @Html.DisplayFor(modelItem => item.numeroCuenta)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.turno)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+            @Html.DisplayFor(modelItem => item.puesto)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.numeroCuenta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.idEmpleado  }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idEmpleado }) |
-            
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

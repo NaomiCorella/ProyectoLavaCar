@@ -17,20 +17,20 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.Listar
         {
             _elContexto = new Contexto();
         }
-        public List<EmpleadosDto> ListarEmpleado()
+        public List<UsuariosDto> ListarEmpleado()
         {
-            List<EmpleadosDto> laListaDeEmpleados = (from elEmpleado in _elContexto.EmpleadosTabla
+            List<UsuariosDto> laListaDeEmpleados = (from elEmpleado in _elContexto.UsuariosTabla
 
-                                                   select new EmpleadosDto
+                                                   select new UsuariosDto
                                                    {
                                                        nombre = elEmpleado.nombre,
                                                        primer_apellido = elEmpleado.primer_apellido,
                                                        segundo_apellido = elEmpleado.segundo_apellido,
-                                                       telefono = elEmpleado.telefono,
-                                                       correo = elEmpleado.correo,
+                                                       PhoneNumber = elEmpleado.PhoneNumber,
+                                                       Email = elEmpleado.Email,
                                                        cedula = elEmpleado.cedula,
                                                        estado = elEmpleado.estado,
-                                                       idEmpleado = elEmpleado.idEmpleado,
+                                                       Id = elEmpleado.Id,
                                                        puesto = elEmpleado.puesto,
                                                        turno = elEmpleado.turno,
                                                        numeroCuenta = elEmpleado.numeroCuenta,

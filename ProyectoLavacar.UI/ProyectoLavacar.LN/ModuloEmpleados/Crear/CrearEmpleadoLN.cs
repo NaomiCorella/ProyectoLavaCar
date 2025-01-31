@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Crear;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
@@ -7,6 +9,7 @@ using ProyectoLavacar.AccesoADatos.ModuloEmpleados.Crear;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +32,8 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Crear
         }
         private EmpleadosTabla ConvertirObjetoEmpleadosTabla(EmpleadosDto elEmpleado)
         {
+       
+        
             return new EmpleadosTabla()
             {
 

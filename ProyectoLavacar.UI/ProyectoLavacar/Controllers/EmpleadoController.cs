@@ -22,14 +22,14 @@ namespace ProyectoLavacar.Controllers
     {
 
         
-            ICrearEmpleadoLN _crearEmpleado;
+        
             IListarEmpleadoLN _listarEmpleado;
             IEditarEmpleadoLN _editarEmpleado;
             IBuscarPorIdLN _buscarPorId;
 
             public EmpleadoController()
             {
-                _crearEmpleado = new CrearEmpleadoLN();
+
                 _listarEmpleado = new ListarEmpleadoLN();
                 _editarEmpleado = new EditarEmpleadoLN();
                 _buscarPorId = new BuscarPorIdLN();
@@ -39,14 +39,14 @@ namespace ProyectoLavacar.Controllers
             public ActionResult Index()
             {
                 ViewBag.Title = "La Listas de Empleados";
-                List<EmpleadosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados();
+                List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados();
                 return View(laListaDeFinanzas);
             }
 
             // GET: Empleado/Details/5
-            public ActionResult Details(int id)
+            public ActionResult Details(string id)
             {
-                EmpleadosDto Finanzas = _buscarPorId.Detalle(id);
+                UsuariosDto Finanzas = _buscarPorId.Detalle(id);
                 return View(Finanzas);
             }
 
@@ -58,12 +58,11 @@ namespace ProyectoLavacar.Controllers
 
             // POST: Empleado/Create
             [HttpPost]
-            public async Task<ActionResult> Create(EmpleadosDto modeloDeEmpleado)
+            public async Task<ActionResult> Create(UsuariosDto modeloDeEmpleado)
             {
                 try
                 {
-                    // TODO: Add insert logic here
-                    int cantidadDeDatosGuardados = await _crearEmpleado.RegistrarEmpleado(modeloDeEmpleado);
+        
                     return RedirectToAction("Index");
 
                 }
@@ -74,16 +73,16 @@ namespace ProyectoLavacar.Controllers
             }
 
             // GET: Empleado/Edit/5
-            public ActionResult Edit(int id)
+            public ActionResult Edit(string id)
             {
-                EmpleadosDto laFinanza = _buscarPorId.Detalle(id);
+                UsuariosDto laFinanza = _buscarPorId.Detalle(id);
 
                 return View(laFinanza);
             }
 
             // POST: Empleado/Edit/5
             [HttpPost]
-            public async Task<ActionResult> Edit(EmpleadosDto elEmpleado)
+            public async Task<ActionResult> Edit(UsuariosDto elEmpleado)
             {
                 try
                 {

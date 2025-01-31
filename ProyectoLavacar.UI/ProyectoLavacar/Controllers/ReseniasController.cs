@@ -1,8 +1,13 @@
 ﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Crear;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Listar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
+using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloReseñas.Crear;
+using ProyectoLavacar.LN.ModuloReseñas.Editar;
 using ProyectoLavacar.LN.ModuloReseñas.Listar;
+using ProyectoLavacar.LN.ModuloReseñas.ObtenerPorId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +22,16 @@ namespace ProyectoLavacar.Controllers
 
         ICrearReseniaLN _crearResenia;
          IListarReseniaLN _listarResenia;
+        Contexto _context;
+        IEditarReseniaLN _editarResenia;
+        IObtenerPorIdLN _obtenerPorId;
         public ReseniasController()
         {
             _crearResenia = new CrearReseniaLN();
             _listarResenia = new ListarReseniaLN();
+            _context = new Contexto();
+            _obtenerPorId = new ObtenerPorIdLN();
+            _editarResenia = new EditarReseniaLN();
         }
         // GET: Reseñas
         public ActionResult Index()
@@ -47,7 +58,20 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                int cantidadDeDatosGuardados = await _crearResenia.CrearResenia(modeloDeResenia);
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                ReseniaDto resenia = new ReseniaDto()
+                {
+                    idResenia= modeloDeResenia.idResenia,
+                    idCliente= idCliente,
+                    idServicio = modeloDeResenia.idServicio,
+                    calificacion = modeloDeResenia.calificacion,
+                    comentarios = modeloDeResenia.comentarios,
+                    fecha = modeloDeResenia.fecha,
+                    estado = modeloDeResenia.estado
+                };
+
+                int cantidadDeDatosGuardados = await _crearResenia.CrearResenia(resenia);
 
                 return RedirectToAction("Index");
             }
@@ -60,16 +84,17 @@ namespace ProyectoLavacar.Controllers
         // GET: Reseñas/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ReseniaDto reseña =_obtenerPorId.Detalle(id);
+            return View(reseña);
         }
 
         // POST: Reseñas/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(ReseniaDto modeloResenia)
         {
             try
             {
-                // TODO: Add update logic here
+                int cantidadDeDatosEditados = await _editarResenia.EditarPersonas(modeloResenia);
 
                 return RedirectToAction("Index");
             }
@@ -98,6 +123,24 @@ namespace ProyectoLavacar.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult CambiarEstado(int id)
+        {
+
+            try
+            {
+                var resenia = _context.ReseniasTabla.Find(id);
+                resenia.estado = !resenia.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
             }
         }
     }

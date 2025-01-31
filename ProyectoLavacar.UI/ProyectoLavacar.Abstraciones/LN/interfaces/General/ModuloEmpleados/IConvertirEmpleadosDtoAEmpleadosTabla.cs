@@ -1,4 +1,5 @@
 ﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloEmpleados
 {
     public interface IConvertirEmpleadosDtoAEmpleadosTabla
     {
-        EmpleadosTabla ConvertirEmpleados(EmpleadosDto elEmpleado);
+        UsuariosTabla ConvertirEmpleados(UsuariosDto elEmpleado);
     }
 }

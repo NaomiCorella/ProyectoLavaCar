@@ -1,4 +1,5 @@
 ﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.L
 {
     public interface IListarEmpleadoAD
     {
-        List<EmpleadosDto> ListarEmpleado();
+        List<UsuariosDto> ListarEmpleado();
     }
 }
