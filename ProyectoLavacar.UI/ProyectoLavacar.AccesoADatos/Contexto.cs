@@ -19,6 +19,8 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<UsuariosTabla>().ToTable("[AspNetUsers]");
             modelBuilder.Entity<EmpleadosTabla>().ToTable("Empleados");
             modelBuilder.Entity<ServiciosTabla>().ToTable("Servicios");
+            modelBuilder.Entity<AspNetUserRolesTabla>().HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<RolesTabla>().ToTable("AspNetRoles");
 
 
         }
@@ -27,6 +29,9 @@ namespace ProyectoLavacar.AccesoADatos
         public DbSet<UsuariosTabla> UsuariosTabla { get; set; }
         public DbSet<ServiciosTabla> ServiciosTabla { get; set; }
         public DbSet<EmpleadosTabla> EmpleadosTabla { get; set; }
+
+        public DbSet<AspNetUserRolesTabla> AspNetUserRolesTabla { get; set; }
+        public DbSet<RolesTabla> RolesTabla { get; set; }
 
 
     }

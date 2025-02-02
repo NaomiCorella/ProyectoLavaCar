@@ -19,8 +19,13 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Listar
         public List<UsuariosDto> ListarUsuarios()
         {
             List<UsuariosDto> laListaDeclientes = (from elCliente in _elContexto.UsuariosTabla
+                                                   join usuarioRol in _elContexto.AspNetUserRolesTabla
+                                                       on elCliente.Id equals usuarioRol.UserId
+                                                   join elRol in _elContexto.RolesTabla
+                                                       on usuarioRol.RoleId equals elRol.Id
+                                                   where elRol.Name == "Usuario"
 
-                                                  select new UsuariosDto
+                                                   select new UsuariosDto
                                                   {
                                                       nombre = elCliente.nombre,
                                                       primer_apellido = elCliente.primer_apellido,
