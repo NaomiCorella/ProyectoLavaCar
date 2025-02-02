@@ -93,9 +93,11 @@
     <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\AspNetUserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EmpleadosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />

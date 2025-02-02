@@ -131,6 +131,22 @@ GO
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
+--Tabla de Incapacidades y Vacaciones 
+CREATE TABLE Tramites (
+idTramite int identity primary key not null, 
+idEmpleado nvarchar(128) not null, 
+fechaInicio datetime not null, 
+fechaFin datetime not null, 
+Razon nvarchar(300) not null,
+foreign key(idEmpleado) references AspnetUsers(Id));
+
+--Tabla de bonificaciones y deducciones
+ CREATE TABLE AjustesSalariales( 
+ idAjusteSalariale int identity primary key not null, 
+ monto decimal not null, 
+ razon nvarchar(300) not null, 
+ idEmpleado nvarchar(128) not null, 
+ foreign key (idEmpleado) references AspNetUsers(Id)); 
 
 -- Tabla Servicios
 CREATE TABLE Servicios (
@@ -157,7 +173,6 @@ CREATE TABLE Reservas (
     
 );
 GO
-
 -- Tabla Nomina
 CREATE TABLE Nomina (
     idNomina INT IDENTITY PRIMARY KEY NOT NULL,
@@ -165,54 +180,42 @@ CREATE TABLE Nomina (
     salarioNeto DECIMAL(10,2) NOT NULL,
     salarioBruto DECIMAL(10,2),
     fechaDePago DATE NOT NULL,
-    periodoDePago NVARCHAR(50)  NOT NULL,
-    horasOrdinarias INT  NOT NULL,
-    horasExtras INT  NOT NULL,
-    horasDobles INT  NOT NULL,
-    bonos DECIMAL(10,2) NOT NULL,
-    deducciones DECIMAL(10,2) NOT NULL,
-    vacaciones DECIMAL(10,2) NOT NULL,
-    incapacidad DECIMAL(10,2) NOT NULL,
-    tipoDeContrato NVARCHAR(50) NOT NULL,
+    periodoDePago NVARCHAR(50),
+    horasOrdinarias INT,
+    horasExtras INT,
+    horasDobles INT,
+    diasDispoVacaciones int not null,
+	diasUtiliVacaciones int not null,
+    incapacidad DECIMAL(10,2),
+    tipoDeContrato NVARCHAR(50),
     estado BIT NOT NULL,
- FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
+    FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
+
 
 -- Tabla Producto
 CREATE TABLE Producto (
     idProducto INT IDENTITY PRIMARY KEY NOT NULL,
     nombre NVARCHAR(100) NOT NULL,
     categoria NVARCHAR(50) NOT NULL,
-    marca NVARCHAR(50) NOT NULL,
     precioUnitario DECIMAL(10,2) NOT NULL,
     cantidadDisponible INT NOT NULL,
     estado BIT NOT NULL
 );
 GO
 
--- Tabla Inventario
-CREATE TABLE Inventario (
-    idInventario INT IDENTITY PRIMARY KEY NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
-    estado BIT NOT NULL
-);
-GO
+Create Table Movimiento(
+idMovimiento int identity primary key not null, 
+idProducto int not null, 
+nombre nvarchar(20) not null, 
+cantidad int not null,
+foreign key (idProducto) references Producto(idProducto)
 
--- Tabla Linea --ver si se borra
-CREATE TABLE Linea (
-    idLinea INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado nvarchar(128) NOT NULL,
-    idInventario INT NOT NULL,
-    idProducto INT NOT NULL,
-    cantidad INT NOT NULL,
-    totalLinea DECIMAL(10,2) NOT NULL,
-    estado BIT NOT NULL,
-    FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
-    FOREIGN KEY (idInventario) REFERENCES Inventario(idInventario),
-    FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
 );
-GO
+
+
+
 
 -- Tabla Compra
 CREATE TABLE Compra (
@@ -284,46 +287,6 @@ END;
 GO
 
 
------Ejemplo de funcionamiento del trigger
-INSERT INTO Empleados (nombre, primer_apellido, segundo_apellido, telefono, correo, cedula, puesto, turno, estado, numeroCuenta)
-VALUES ('Naomi', 'Pérez', 'Gómez', '555-1234', 'juan.perez@empresa.com', '1234567890', 'Desarrollador', 'Mañana', 1, '001122334455');
-
-
-INSERT INTO Servicios (costo, nombre, descripcion, tiempoDuracion, estado)  
-VALUES  
-(5000.00, 'Lavado Básico', 'Lavado exterior con espuma y enjuague a presión', '30 minutos', 1),  
-(8000.00, 'Lavado Completo', 'Lavado exterior e interior con aspirado y encerado', '60 minutos', 1),  
-(12000.00, 'Lavado Premium', 'Lavado completo con pulido y tratamiento de pintura', '90 minutos', 1),  
-(15000.00, 'Lavado y Desinfección', 'Lavado completo más sanitización con ozono', '75 minutos', 1),  
-(10000.00, 'Lavado de Motor', 'Limpieza profunda del motor con desengrasante', '45 minutos', 1);  
-
-INSERT INTO [dbo].[AspNetUsers] (Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, nombre, primer_apellido, segundo_apellido, UserName, estado)  
-VALUES  
-('1A2B3C4D5E6F', 'juan.perez@example.com', 1, 'hashed_password_1', 'security_stamp_1', '555-1234', 'Juan', 'Pérez', 'Gómez', 'juanperez', 1),  
-('7G8H9I0J1K2L', 'maria.lopez@example.com', 1, 'hashed_password_2', 'security_stamp_2', '555-5678', 'María', 'López', 'Rodríguez', 'marialopez', 1),  
-('3M4N5O6P7Q8R', 'carlos.martinez@example.com', 0, 'hashed_password_3', 'security_stamp_3', '555-9012', 'Carlos', 'Martínez', 'Fernández', 'carlosmartinez', 1),  
-('9S0T1U2V3W4X', 'ana.garcia@example.com', 1, 'hashed_password_4', 'security_stamp_4', '555-3456', 'Ana', 'García', 'Hernández', 'anagarcia', 1),  
-('5Y6Z7A8B9C0D', 'pedro.sanchez@example.com', 0, 'hashed_password_5', 'security_stamp_5', '555-7890', 'Pedro', 'Sánchez', 'Ramírez', 'pedrosanchez', 1);  
-
-INSERT INTO Resenias (idServicio, idCliente, calificacion, comentarios, fecha, estado)  
-VALUES  
-(1, '1A2B3C4D5E6F', 5, 'Excelente servicio, el auto quedó impecable.', '2024-08-20', 1),  
-(2, '7G8H9I0J1K2L', 4, 'Muy buen trabajo, pero tardaron un poco más de lo esperado.', '2024-08-21', 1),  
-(3, '3M4N5O6P7Q8R', 5, 'El mejor lavado que he recibido, volveré pronto.', '2024-08-22', 1),  
-(4, '9S0T1U2V3W4X', 3, 'Buen servicio, pero podrían mejorar la atención al cliente.', '2024-08-23', 1),  
-(5, '5Y6Z7A8B9C0D', 4, 'Lavado de motor excelente, quedé muy satisfecho.', '2024-08-24', 1);  
-
-INSERT INTO Reservas (idCliente, idEmpleado, idServicio, fecha, hora, estado) 
-VALUES 
-('1A2B3C4D5E6F', 1, 2, '2024-08-27', '10:30:00', 1),
-('7G8H9I0J1K2L', 1, 3, '2024-08-28', '14:00:00', 1),
-('3M4N5O6P7Q8R', 1, 1, '2024-08-29', '09:15:00', 0);
-select * from Reservas
-
-INSERT INTO Reservas 
-(idEmpleado, nombre, primer_apellido, segundo_apellido, telefono, correo, cedula, puesto, turno, estado, contraseña, numeroCuenta)
-VALUES 
-(1, 'Juan', 'Pérez', 'Gómez', '123-456-7890', 'juan.perez@example.com', '123456789', 'Gerente', 'Mañana', 1, 'contraseñaSegura123', '1234567890');
 SELECT TOP 1 u.Id
 FROM [dbo].[AspNetUsers] u
 JOIN [dbo].[AspNetUserRoles] ur ON u.Id = ur.UserId
@@ -332,3 +295,6 @@ WHERE r.Name = 'Empleado'  -- Asumiendo que el rol se llama 'Empleado'
 ORDER BY NEWID();  -- Esto selecciona un registro aleatorio
 
 
+Insert into AspNetRoles (Id, Name) values (NEWID(),'Usuario')
+Insert into AspNetRoles (Id, Name) values (NEWID(),'Empleado')
+Insert into AspNetRoles (Id, Name) values (NEWID(),'Administrador')
