@@ -48,6 +48,10 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Crear\ICrearEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Editar\IEditarEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Listar\IListarEmpleadoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Crear\ICrearInventarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Editar\IEditarInventarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Listar\IListarInventarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarAdmin\IEditarReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarCliente\IEditarClienteAD.cs" />
@@ -66,6 +70,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Editar\IEditarUsuarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Listar\IListarUsuarioAD.cs" />
     <Compile Include="LN\interfaces\General\Fecha\IFecha.cs" />
+    <Compile Include="LN\interfaces\General\ModulaInventario\IConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloEmpleados\IConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReservas\IConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReseñas\IConvertirResenia.cs" />
@@ -76,6 +81,10 @@
     <Compile Include="LN\interfaces\ModuloEmpleados\Crear\ICrearEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\Editar\IEditarEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\Listar\IListarEmpleadoLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\Crear\ICrearInventarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\Editar\IEditarInventarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\Listar\IListarInventarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarAdmin\IEditarReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarCliente\IEditarClienteLN.cs" />
@@ -95,11 +104,13 @@
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AspNetUserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EmpleadosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\InventarioTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
+    <Compile Include="Modelos\ModeloInventario\InventarioDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
     <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />

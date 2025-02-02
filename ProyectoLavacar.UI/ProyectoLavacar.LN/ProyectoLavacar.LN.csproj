@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="General\Conversiones\ModuloResenias\ConvertirResenia.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
@@ -111,6 +112,10 @@
     <Compile Include="ModuloEmpleados\Crear\CrearEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
+    <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioLN.cs" />
+    <Compile Include="ModuloInventario\Crear\CrearInventarioLN.cs" />
+    <Compile Include="ModuloInventario\Editar\EditarInventarioLN.cs" />
+    <Compile Include="ModuloInventario\Listar\ListarInventarioLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />

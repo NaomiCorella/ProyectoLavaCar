@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idInventario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idInventario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precioUnitario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidadDisponible)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idInventario }, null) |
+            @Html.ActionLink("Details", "Details", new { id = item.idInventario }, null) |
+            @if (item.estado)
+            {
+                <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-warning">
+                    <i class="fas fa-times-circle"></i> Inactivar
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-check-circle"></i> Activar
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>
