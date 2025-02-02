@@ -72,6 +72,10 @@
                                         <i class="fas fa-info-circle"></i> Detalles
                                     </a>
 
+                                    <a href="@Url.Action("VerEvaluaciones", new { id = item.Id })" class="btn btn-outline-info btn-sm me-2" title="VerEvaluaciones">
+                                        <i class="fas fa-edit"></i> Ver Evaluaciones
+                                    </a>
+
                                     @if (item.estado)
                                     {
                                         <a href="@Url.Action("CambiarEstado", new { id = item.Id })" class="btn btn-sm btn-outline-warning">
@@ -84,6 +88,9 @@
                                             <i class="fas fa-check-circle"></i> Activar
                                         </a>
                                     }
+
+
+
                                 </div>
                             </td>
                         </tr>

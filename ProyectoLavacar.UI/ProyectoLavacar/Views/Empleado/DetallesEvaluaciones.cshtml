@@ -1,0 +1,69 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones.EvalucionesDto
+
+@{
+    ViewBag.Title = "Detalles Evaluaciones";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalles del Empleado</title>
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Detalles Evaluaciones</h2>
+        </div>
+
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th colspan="2" class="text-center">Información de Evaluación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th>@Html.DisplayNameFor(model => model.idEvaluacion)</th><td>@Html.DisplayFor(model => model.idEvaluacion)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.idEmpleado)</th><td>@Html.DisplayFor(model => model.idEmpleado)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.fechaEvaluacion)</th><td>@Html.DisplayFor(model => model.fechaEvaluacion)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.calificacion)</th><td>@Html.DisplayFor(model => model.calificacion)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.comentarios)</th><td>@Html.DisplayFor(model => model.comentarios)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.areaMejora)</th><td>@Html.DisplayFor(model => model.areaMejora)</td></tr>
+                    <tr><th>@Html.DisplayNameFor(model => model.recomendaciones)</th><td>@Html.DisplayFor(model => model.recomendaciones)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4 mb-4">
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Volver a la lista
+            </a>
+        </div>
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>
+
