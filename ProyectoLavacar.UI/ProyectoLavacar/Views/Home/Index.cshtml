@@ -1,222 +1,26 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<!--====== Favicon Icon ======-->
-<link rel="shortcut icon" href="~/Content/assets/images/favicon.ico" type="image/png">
-<!--====== Bootstrap css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-<!--====== Fontawesome css ======-->
-<link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/all.min.css">
-<!--====== Fontawesome css ======-->
-<link rel="stylesheet" href="~/Content/assets/fonts/flaticon/flaticon.css">
-<!--====== Magnific Popup css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/magnific-popup.css">
-<!--====== Slick css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/slick.css">
-<!--====== Animate css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/animate.css">
-<!--====== Default css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/default.css">
-<!--====== Style css ======-->
-<link rel="stylesheet" href="~/Content/assets/css/style.css">
-
-<main>
-    <div class="preloader">
-        <div class="lds-ellipsis">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-    <!--====== End Header ======-->
-    <!--====== Search From ======-->
-    <div class="modal fade" id="search-modal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form>
-                    <div class="form_group">
-                        <input type="text" class="form_control" placeholder="Search here...">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div><!--====== Search From ======-->
-    <!--====== Start Header ======-->
-    <header class="header-area header-area-v1">
-        <div class="header-top">
-            <div class="container">
-                <div class="row align-items-center">
-
-                    <div class="col-lg-10 col-md-12">
-                        <div class="header-left">
-                            <ul>
-                                <li class="text"><span>Lunes-Domingo 9:00 AM - 6:00 PM </span></li>
-                                <li class="info">
-                                    <span>
-                                        <a href="tel:+(506)7285 0302 ">
-                                            <i class="fas fa-phone-alt"></i>+(506) 7285 0302
-                                        </a>
-                                    </span>
-                                </li>
-                                <li class="info">
-                                    <span>
-                                        <a href="lavacarhervi@gmail.com  ">
-                                            <i class="far fa-envelope"></i>lavacarhervi@gmail.com
-                                        </a>
-                                    </span>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="search-box d-flex align-items-center">
-
-                            <a href="inicioSesion.html" class="profile-icon mr-3">
-                                <i class="fas fa-user fa-2x"
-                                   style="color: red;"></i>
-                            </a>
-
-                            <a href="#" class="search-icon" data-toggle="modal" data-target="#search-modal">
-                                <i class="fas fa-search fa-2x" style="color: red;"></i>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-        <div class="header-middle">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="brand-logo">
-                            <a href="index-2.html">
-                                <img src="assets/images/logo/downloadd.jpeg" class="img-fluid"
-                                     alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header-navigation">
-            <div class="container">
-                <div class="nav-container d-flex align-items-center justify-content-between">
-                    <!-- site logo -->
-                    <div class="brand-logo">
-                        <a href="index-2.html">
-                            <img src="assets/images/logo/downloadd.jpeg" class="img-fluid"
-                                 alt="">
-                        </a>
-                    </div>
-                    <div class="nav-menu">
-                        <!-- Navbar Close Icon -->
-                        <div class="navbar-close">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-                        <!-- nav-menu -->
-                        <nav class="main-menu">
-                            <ul>
-
-                                <li class="menu-item ">
-                                    <a href="index-2.html">Inicio</a>
-                                    <!--  <ul class="sub-menu">
-                                        <li><a href="index-2.html">Home-2</a></li>
-                                        <li><a href="index-one.html">Home-OnePage</a></li>
-
-                                    </ul>-->
-                                </li>
-                                <li class="menu-item ">
-                                    <a href="about.html">Sobre Nosotros</a>
-                                    <!-- <ul class="sub-menu">
-                                        <li><a href="booking.html">Booking</a></li>
-
-                                        <li><a href="faq.html">Faq</a></li>
-                                    </ul>-->
-
-                                </li>
-                                <li class="menu-item">
-                                    <a href="service.html">Servicios</a>
-                                    <!--  <ul class="sub-menu">
-                                        <li><a href="service.html">Servicios</a></li>
-                                       <li><a href="service-details.html">Service Details</a></li>
-                                    </ul>-->
-                                </li>
-                                <!--  <li class="menu-item"><a href="projects.html">Projects</a>
-
-
-                                </li>
-                                <li class="menu-item menu-item-has-children"><a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                -->
-                                <li class="menu-item">
-                                    <a href="contact.html">Contáctanos</a>
-                                    <ul class="sub-menu">
-                                        <!-- <li><a href="contact-2.html">Contáctanos 2</a></li>-->
-
-
-                                    </ul>
-                                <li class="menu-item menu-item-has-children">
-                                    <a href="">Perfil</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="perfilUsuario.html">Perfil de usuario</a></li>
-                                        <li><a href="perfilEmpleado.html">Perfil de empleados</a></li>
-
-
-                                    </ul>
-                                </li>
-
-                                </li>
-                                <li class="menu-item menu-item-has-children">
-                                    <a href="">Administrador</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="gestionReserva.html">Gestión de reserva</a></li>
-                                        <li><a href="gestionReseñas.html">Gestión de reseñas</a></li>
-                                        <li><a href="gestionEmpleado.html">Gestión de empleados</a></li>
-                                        <li><a href="gestionUsuarios.html">Gestión de usuarios</a></li>
-                                        <li><a href="gestionInventario.html">Gestión de inventario</a></li>
-                                        <li><a href="gestionVentas.html">Gestión de informes de ventas</a></li>
-                                        <li><a href="gestionReportes.html">Gestión de reportes</a></li>
-                                        <li><a href="gestionNomina.html">Gestión de Nomina</a></li>
-
-
-
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                        <!-- nav pushed item -->
-                        <div class="nav-pushed-item">
-                            <div class="navbar-btn">
-                                <a href="contact.html" class="main-btn">Get A Quote</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- nav push item -->
-                    <div class="nav-push-item">
-                        <div class="navbar-btn">
-                            <a href="booking.html" class="main-btn">Reservar Cita</a>
-                        </div>
-                    </div>
-                    <!-- Navbar Toggler -->
-                    <div class="navbar-toggler">
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!--====== End Header ======-->
-    <!--====== Start banner-area Section ======-->
-    <section class="banner-area bg_cover" style="background-image: url(assets/images/bg/hero-bg-1.jpg);">
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Servicio profesional de lavado de autos. Mantén tu vehículo como nuevo con nuestros servicios de calidad.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lavado de Autos - Inicio</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/favicon.ico" type="image/png">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/assets/fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" href="~/Content/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/assets/css/slick.css">
+    <link rel="stylesheet" href="~/Content/assets/css/animate.css">
+    <link rel="stylesheet" href="~/Content/assets/css/default.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+</head>
+<body>
+    <!-- Header: Banner Section -->
+    <header class="banner-area bg_cover" style="background-image: url('../../content/assets/images/bg/hero-bg-1.jpg');">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-11">
@@ -224,8 +28,7 @@
                         <span class="wow fadeInUp" data-wow-delay=".1s">Lava tu auto y hazlo como nuevo</span>
                         <h1 class="wow fadeInUp" data-wow-delay=".2s">Mantén tu auto como nuevo</h1>
                         <h3 class="wow fadeInUp" data-wow-delay=".3s">
-                            Disfruta de un servicio de lavado de calidad,<br>y
-                            deja tu vehículo impecable en cada visita.
+                            Disfruta de un servicio de lavado de calidad,<br>y deja tu vehículo impecable en cada visita.
                         </h3>
                         <ul class="wow fadeInUp" data-wow-delay=".4s">
                             <li><a href="service.html" class="main-btn">Servicios</a></li>
@@ -235,1024 +38,166 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!--====== End banner-area Section ======-->
-    <!--====== Start service-area Section ======-->
-    <section class="service-area service-area-v2 pt-110">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-title text-center mb-60">
-                        <span class="span">Servicios</span>
-                        <h2>Nuestros Mejores Servicios</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-mechanic"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Opti Coat</h4>
-                            <p>
-                                Protege la pintura de tu auto con nuestro tratamiento de recubrimiento Opti Coat para
-                                mantenerlo impecable.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-car-service"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Detailing de Autos</h4>
-                            <p>
-                                Un servicio completo de detallado que abarca la limpieza profunda y restauración del
-                                interior y exterior de tu vehículo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-car-wash-1"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Pulido de Auto</h4>
-                            <p>
-                                Restauramos el brillo de la pintura de tu vehículo mediante un pulido profesional para
-                                hacerlo lucir como nuevo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-car-service-1"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Lavado de Autos</h4>
-                            <p>
-                                Ofrecemos un servicio completo de lavado de autos, cuidando cada detalle para que tu
-                                vehículo quede perfecto.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-vehicle"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Amigable con el Medio Ambiente</h4>
-                            <p>
-                                Utilizamos productos ecológicos y métodos que respetan el medio ambiente, sin comprometer
-                                la calidad del servicio.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="service-details.html" class="service-item mb-50">
-                        <div class="icon">
-                            <i class="flaticon-polisher"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Limpieza Exterior</h4>
-                            <p>Elimina suciedad y contaminantes, dejando la carrocería reluciente y protegida.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="button-box text-center">
-                        <a href="service.html" class="main-btn">Leer más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====== End service-area Section ======-->
-    <!--====== Start why-choos-area Section ======-->
-    <section class="why-choose-area pt-110 pb-120">
-        <div class="choose-bg bg_cover" style="background-image: url(assets/images/service/choose-bg.jpg);"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="choose-content-box">
-                        <div class="section-title section-white-title mb-20">
-                            <span class="span">Nos Importa Tu Auto</span>
-                            <h2>¿Por qué Elegirnos?</h2>
-                        </div>
-                        <p>
-                            Nos especializamos en brindar un servicio de calidad y cuidado para tu vehículo. Nos
-                            aseguramos de que cada lavado se realice con la mayor atención al detalle, utilizando
-                            productos de alta calidad y técnicas que garantizan que tu auto quede como nuevo.
-                        </p>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="check_list">
-                                    <li>Lavado profesional con productos de alta calidad.</li>
-                                    <li>Acondicionamiento interior y exterior del vehículo.</li>
-                                    <li>Servicio rápido y eficiente, adaptado a tus necesidades.</li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="check_list">
-                                    <li>Protección contra la lluvia con productos especializados.</li>
-                                    <li>Lavado a mano para un acabado perfecto.</li>
-                                    <li>Servicios ecológicos que cuidan el medio ambiente.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <a href="#" class="main-btn">Reserva tu cita</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====== End why-choos-area Section ======-->
-    <!--====== Start car-washing-section Section ======-->
-    <section class="car-washing-section pb-110 bg_cover" style="background-image: url(assets/images/bg/map-bg-1.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="washing-img-box">
-                        <img src="assets/images/service/car-wash-1.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="washing-content-box">
-                        <div class="section-title mb-45">
-                            <span class="span">
-                                Ubicación
-                            </span>
-                            <h2>Punto de Lavado de Autos</h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="washing-location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <h6>Punto de Lavado</h6>
-                                    <p>san Antonio de Coronado</p>
-                                </div>
-                            </div>
+    </header>
 
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!--====== End car-washing-section Section ======-->
-    <!--====== Start Gallery Section ======-->
-    <!-- <section class="gallery-section-area pt-120 pb-90" id="gallery-filter">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-title text-center mb-55">
-                        <span class="span">Lattest Work</span>
-                        <h2>Our Latest Project</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="filter-button text-center mb-70">
-                        <button class="filter-btn active" data-filter="*">All</button>
-                        <button class="filter-btn" data-filter=".cat-1">Hand Wash</button>
-                        <button class="filter-btn" data-filter=".cat-2">Hand Wax</button>
-                        <button class="filter-btn" data-filter=".cat-3">Auto Wash</button>
-                        <button class="filter-btn" data-filter=".cat-4">Tripple</button>
-                        <button class="filter-btn" data-filter=".cat-5">Auto Detils</button>
-                    </div>
-                </div>
-            </div>
-            <div class="filter-grid row">
-                <div class="col-lg-3 col-md-6 col-sm-12 grid-column cat-1">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-1.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-1.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 grid-column cat-2">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-2.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-2.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12 grid-column cat-3">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-3.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-3.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 grid-column cat-4">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-4.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-4.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 grid-column cat-5">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-5.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-5.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12 grid-column cat-3">
-                    <div class="gallery-item mb-30">
-                        <div class="gallery-img">
-                            <a href="assets/images/gallery/gallery-6.jpg" class="image-popup">
-                                <img src="assets/images/gallery/gallery-6.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="button-box text-center mt-20">
-                        <a href="#" class="main-btn">Load More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!--====== End Gallery Section ======-->
-    <!--====== Start work-section-area Section ======-->
-    <section class="work-section-area pt-120 pb-90 bg_cover"
-             style="background-image: url(assets/images/bg/work-bg-1.jpg);">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-lg-6">
-                    <div class="section-title section-title section-white-title mb-60">
-                        <span class="span">Proceso de Trabajo</span>
-                        <h2>Proceso de Trabajo</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="button-box mb-70">
-                        <a href="#" class="main-btn">Reserva Ahora</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="work-item border-right mb-30">
-                        <div class="icon">
-                            <span class="count">01</span>
-                            <i class="flaticon-mechanic"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Lavado sin Contacto</h4>
-                            <p>
-                                Usamos tecnologías de lavado sin contacto para mantener la seguridad y limpieza de tu
-                                vehículo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="work-item border-right mb-30">
-                        <div class="icon">
-                            <span class="count">02</span>
-                            <i class="flaticon-car-service"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Materiales Seguros</h4>
-                            <p>
-                                Utilizamos productos ecológicos y materiales de alta calidad para cuidar tu auto y el
-                                medio ambiente.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="work-item border-right mb-30">
-                        <div class="icon">
-                            <span class="count">03</span>
-                            <i class="flaticon-car-wash-1"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Equipos Modernos</h4>
-                            <p>
-                                Contamos con equipos de última generación para garantizar un lavado eficiente y de
-                                calidad.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="work-item mb-30">
-                        <div class="icon">
-                            <span class="count">04</span>
-                            <i class="flaticon-car-wash"></i>
-                        </div>
-                        <div class="info">
-                            <h4>Limpieza Extensa</h4>
-                            <p>Realizamos un proceso de limpieza completo, cuidando cada detalle de tu vehículo.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====== End work-section-area Section ======-->
-    <!--====== Start Pricing Section ======-->
-    <section class="pricing-area pt-110 pb-120">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-title text-center mb-60">
-                        <span class="span">Últimos Paquetes</span>
-                        <h2>Elige tu Paquete</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="pricing-item">
-                        <div class="title text-center">
-                            <h4>Lavado Básico a Mano</h4>
-                        </div>
-                        <div class="price text-center">
-                            <h2><span class="sign">$</span>30<span class="small-text">99</span></h2>
-                        </div>
-                        <div class="pricing-body">
-                            <ul class="list">
-                                <li class="check">Lavado con tela suave</li>
-                                <li class="check">Enjuague sin residuos</li>
-                                <li class="check">Protección contra la lluvia</li>
-                                <li class="uncheck">Lavado a mano completo</li>
-                                <li class="uncheck">Tratamiento de llantas</li>
-                                <li class="uncheck">Repelente al agua</li>
-                            </ul>
-                        </div>
-                        <div class="time text-center">
-                            <span><i class="far fa-clock"></i>40 min</span>
-                        </div>
-                        <div class="button text-center">
-                            <a href="#" class="main-btn">Reserva Ahora</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="pricing-item">
-                        <div class="title text-center">
-                            <h4>Lavado Completo Básico</h4>
-                        </div>
-                        <div class="price text-center">
-                            <h2><span class="sign">$</span>49<span class="small-text">99</span></h2>
-                        </div>
-                        <div class="pricing-body">
-                            <ul class="list">
-                                <li class="check">Lavado con tela suave</li>
-                                <li class="check">Enjuague sin residuos</li>
-                                <li class="check">Protección contra la lluvia</li>
-                                <li class="uncheck">Lavado a mano completo</li>
-                                <li class="check">Tratamiento de llantas</li>
-                                <li class="check">Repelente al agua</li>
-                            </ul>
-                        </div>
-                        <div class="time text-center">
-                            <span><i class="far fa-clock"></i>40 min</span>
-                        </div>
-                        <div class="button text-center">
-                            <a href="#" class="main-btn">Reserva Ahora</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="pricing-item">
-                        <div class="title text-center">
-                            <h4>Lavado Premium Completo</h4>
-                        </div>
-                        <div class="price text-center">
-                            <h2><span class="sign">$</span>59<span class="small-text">99</span></h2>
-                        </div>
-                        <div class="pricing-body">
-                            <ul class="list">
-                                <li class="check">Lavado con tela suave</li>
-                                <li class="check">Enjuague sin residuos</li>
-                                <li class="check">Protección contra la lluvia</li>
-                                <li class="uncheck">Lavado a mano completo</li>
-                                <li class="uncheck">Tratamiento de llantas</li>
-                                <li class="check">Repelente al agua</li>
-                            </ul>
-                        </div>
-                        <div class="time text-center">
-                            <span><i class="far fa-clock"></i>60 min</span>
-                        </div>
-                        <div class="button text-center">
-                            <a href="#" class="main-btn">Reserva Ahora</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="pricing-item">
-                        <div class="title text-center">
-                            <h4>Lavado Deluxe Completo</h4>
-                        </div>
-                        <div class="price text-center">
-                            <h2><span class="sign">$</span>100<span class="small-text">99</span></h2>
-                        </div>
-                        <div class="pricing-body">
-                            <ul class="list">
-                                <li class="check">Lavado con tela suave</li>
-                                <li class="check">Enjuague sin residuos</li>
-                                <li class="check">Protección contra la lluvia</li>
-                                <li class="check">Lavado a mano completo</li>
-                                <li class="check">Tratamiento de llantas</li>
-                                <li class="check">Repelente al agua</li>
-                            </ul>
-                        </div>
-                        <div class="time text-center">
-                            <span><i class="far fa-clock"></i>80 min</span>
-                        </div>
-                        <div class="button text-center">
-                            <a href="#" class="main-btn">Reserva Ahora</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--====== End Pricing Section ======-->
-    <!--====== Start testimonial-area-one Section ======-->
-    <!--  <section class="testimonial-area-one pt-120 pb-30 bg_cover"
-        style="background-image: url(assets/images/bg/testimonial-bg-1.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="testimonial-wrapper">
-                        <div class="section-title section-white-title text-center">
-                            <span class="span">Our Testomonial</span>
-                            <h2>Testomonial</h2>
-                        </div>
-                        <div class="testimonial-slide-one row">
-                            <div class="col-lg-12">
-                                <div class="testimonial-box">
-                                    <i class="flaticon-left-quote"></i>
-                                    <p>“Lorem ipsum dolor consectetur elit Lorem ipsum dolor sit amet sed do eiusmod
-                                        tempor incididunt’’</p>
-                                    <h5>Sarif Jaya Miprut</h5>
-                                    <span>Profile Manager</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="testimonial-box">
-                                    <i class="flaticon-left-quote"></i>
-                                    <p>“Lorem ipsum dolor consectetur elit Lorem ipsum dolor sit amet sed do eiusmod
-                                        tempor incididunt’’</p>
-                                    <h5>Sarif Jaya Miprut</h5>
-                                    <span>Profile Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="call-back-form">
-                        <form>
-                            <h3>Request A Call Back</h3>
-                            <p>consectetur adipisicing tempor incididunt adipisicing.</p>
-                            <div class="form_group">
-                                <label>Your Name</label>
-                                <input type="text" class="form_control" name="name">
-                            </div>
-                            <div class="form_group">
-                                <label>Phone Number</label>
-                                <input type="text" class="form_control" name="phone">
-                            </div>
-                            <div class="form_group">
-                                <label>Choose Service</label>
-                                <input type="text" class="form_control" name="service">
-                            </div>
-                            <div class="form_group">
-                                <button class="main-btn">Send Request</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!--====== End testimonial-area-one Section ======-->
-    <!--<section class="faq-section pt-300 pb-2">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-title text-center mb-50">
-                        <span>Asked questions</span>
-                        <h2>Frequently Asked Questions</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="faq-wrapper mb-60">
-                        <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingone" href="#" data-toggle="collapse"
-                                    data-target="#collapseone" aria-expanded="true"
-                                    aria-controls="collapseone">Implementing Infinite Scroll And Image Lazy<span
-                                        class="toggle_btn"></span>
-                                </a>
-                                <div id="collapseone" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingtwo" href="#" data-toggle="collapse"
-                                    data-target="#collapsetwo" aria-expanded="false"
-                                    aria-controls="collapsetwo">Rescheduling Smashing Looking <span
-                                        class="toggle_btn"></span>
-                                </a>
-                                <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingthree" href="#" data-toggle="collapse"
-                                    data-target="#collapsethree" aria-expanded="false"
-                                    aria-controls="collapsethree">Accessible Inclusiveness Beyond Patterns<span
-                                        class="toggle_btn"></span></a>
-                                <div id="collapsethree" class="collapse" aria-labelledby="headingthree"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingfour" href="#" data-toggle="collapse"
-                                    data-target="#collapsefour" aria-expanded="false"
-                                    aria-controls="collapsefour">Should Designers Learn Code Terminal<span
-                                        class="toggle_btn"></span></a>
-                                <div id="collapsefour" class="collapse" aria-labelledby="headingfour"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingfive" href="#" data-toggle="collapse"
-                                    data-target="#collapsefive" aria-expanded="false"
-                                    aria-controls="collapsefive">Implementing Infinite Scroll And Image Lazy<span
-                                        class="toggle_btn"></span></a>
-                                <div id="collapsefive" class="collapse" aria-labelledby="headingfive"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingsix" href="#" data-toggle="collapse"
-                                    data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">About
-                                    Products<span class="toggle_btn"></span></a>
-                                <div id="collapsesix" class="collapse" aria-labelledby="headingsix"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingseven" href="#" data-toggle="collapse"
-                                    data-target="#collapseseven" aria-expanded="false"
-                                    aria-controls="collapseseven">Rescheduling Smashing Looking <span
-                                        class="toggle_btn"></span></a>
-                                <div id="collapseseven" class="collapse" aria-labelledby="headingseven"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <a class="collapsed card-header" id="headingeight" href="#" data-toggle="collapse"
-                                    data-target="#collapseeight" aria-expanded="false"
-                                    aria-controls="collapseeight">Accessible Inclusiveness Beyond Patterns<span
-                                        class="toggle_btn"></span></a>
-                                <div id="collapseeight" class="collapse" aria-labelledby="headingeight"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <h5>How Indigo Design Usability Testing Takes</h5>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam rem aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing.</p>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">wash et dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Soft - free rinse dolore magna.</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <ul class="list">
-                                                    <li><a href="#">Rain shilde dolore magna aliqua.</a></li>
-                                                    <li><a href="#">Hand Wash magna aliqua.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Sed ut perspiciatis unde omnis iste naaccusantium doloremque laudantium,
-                                            totam aperiam, eaque ipsa quae ab illo Lorem ipsum dolor sit amet,
-                                            consectetur Lorem ipsum dolor empora dipisicing elitsed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.sit amet, consectetur adipisicing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comments-respond mb-40">
-                        <h4 class="comments-heading">Ask Your Question</h4>
-                        <p>Implementing Infinite Scroll And Image Lazy.</p>
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form_group">
-                                        <input type="text" class="form_control" placeholder="Your Name" name="name"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form_group">
-                                        <input type="email" class="form_control" placeholder="Your Email" name="email"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form_group">
-                                        <input type="text" class="form_control" placeholder="Subject" name="subject"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form_group">
-                                        <textarea class="form_control" placeholder="Messege" name="message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form_group">
-                                        <button class="main-btn">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="sidebar-widget-area">
-                        <div class="widget faq-categories-widget mb-40">
-                            <h4 class="widget-title">Faq Category <span><i class="flaticon-help"></i></span></h4>
-                            <ul class="categories-list">
-                                <li><a href="#">Ganeral Question</a></li>
-                                <li><a href="#">Cloth Hand Wash</a></li>
-                                <li><a href="#">Auto Detaling</a></li>
-                                <li><a href="#">Exterior Hand Wash</a></li>
-                                <li><a href="#">Car Washing</a></li>
-                                <li><a href="#">Wheel Shine</a></li>
-                            </ul>
-                        </div>
-                        <div class="widget faq-contact-widget mb-40 bg_cover"
-                            style="background-image: url(assets/images/bg/contact-widget-bg.png);">
-                            <div class="contact-info">
-                                <a href="#" class="main-btn">Contact Now</a>
-                            </div>
-                        </div>
-                        <div class="widget faq-popular-widget mb-40">
-                            <h4 class="widget-title">Most Popular</h4>
-                            <ul class="list">
-                                <li><a href="#">You can pay online for your basic appointment?</a></li>
-                                <li><a href="#">Pay for your wash electronically securely for your wash?</a></li>
-                                <li><a href="#">Book appointment under minutes for your wash?</a></li>
-                                <li><a href="#">You can online your appointment?</a></li>
-                                <li><a href="#">Book appointment online minutes?</a></li>
-                                <li><a href="#">You can pay online for your basic appointment?</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!--====== Start Blog Section ======-->
-    <!-- <section class="blog-grid-secton pb-120 bg_cover" style="background-image: url(assets/images/bg/map-bg-1.jpg);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="section-title text-center mb-50">
-                        <span class="span">Our latest BloG</span>
-                        <h2>Our Recent News </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-item mb-50">
-                        <div class="post-thumbnail">
-                            <a href="#"><img src="assets/images/blog/blog-grid-1.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="entry-content">
-                            <div class="post-meta">
-                                <ul>
-                                    <li><span class="post-date"><i class="fas fa-calendar-alt"></i><a href="#">5 SEP
-                                                2021</a></span></li>
-                                    <li><span class="comment"><i class="far fa-comment"></i><a href="#">Comments
-                                                (03)</a></span></li>
-                                </ul>
-                            </div>
-                            <h3 class="title"><a href="blog-details.html">Smash Podcast Epiod With Paul Boag</a></h3>
-                            <p>Lorem ipsum dolor consectetur adipisicing elit, sed do eiusmod tempor incididunt labore
-                                dolore magna aliquaenim dolore</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-item mb-50">
-                        <div class="post-thumbnail">
-                            <a href="#"><img src="assets/images/blog/blog-grid-2.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="entry-content">
-                            <div class="post-meta">
-                                <ul>
-                                    <li><span class="post-date"><i class="fas fa-calendar-alt"></i><a href="#">5 SEP
-                                                2021</a></span></li>
-                                    <li><span class="comment"><i class="far fa-comment"></i><a href="#">Comments
-                                                (03)</a></span></li>
-                                </ul>
-                            </div>
-                            <h3 class="title"><a href="blog-details.html">Smash Podcast Epiod With Paul Boag</a></h3>
-                            <p>Lorem ipsum dolor consectetur adipisicing elit, sed do eiusmod tempor incididunt labore
-                                dolore magna aliquaenim dolore</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-item mb-50">
-                        <div class="post-thumbnail">
-                            <a href="#"><img src="assets/images/blog/blog-grid-3.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="entry-content">
-                            <div class="post-meta">
-                                <ul>
-                                    <li><span class="post-date"><i class="fas fa-calendar-alt"></i><a href="#">5 SEP
-                                                2021</a></span></li>
-                                    <li><span class="comment"><i class="far fa-comment"></i><a href="#">Comments
-                                                (03)</a></span></li>
-                                </ul>
-                            </div>
-                            <h3 class="title"><a href="blog-details.html">Smash Podcast Epiod With Paul Boag</a></h3>
-                            <p>Lorem ipsum dolor consectetur adipisicing elit, sed do eiusmod tempor incididunt labore
-                                dolore magna aliquaenim dolore</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="button-box text-center">
-                        <a href="#" class="main-btn">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!--====== End Blog Section ======-->
-    <!--====== Start Footer ======-->
-    <footer class="footer-area">
-        <div class="footer-top pt-40 pb-40">
+    <!-- Main Content -->
+    <main>
+        <!-- Services Section -->
+        <section class="service-area service-area-v2 pt-110">
             <div class="container">
-                <!--<div class="row align-items-center">
-                    <div class="col-lg-4">
-                        <div class="brand-logo">
-                            <a href="#"><img src="assets/images/logo/downloadd.jpeg" class="img-fluid" alt=""></a>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="section-title text-center mb-60">
+                            <span class="span">Servicios</span>
+                            <h2>Nuestros Mejores Servicios</h2>
                         </div>
                     </div>
-                    <div class="col-lg-8">
-                        <div class="social-box">
-                            <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fab fa-skype"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                            </ul>
+                </div>
+                <div class="row">
+                    <!-- Service Items -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="service-item mb-50">
+                            <div class="icon"><i class="flaticon-mechanic"></i></div>
+                            <div class="info">
+                                <h4>Opti Coat</h4>
+                                <p>Protege la pintura de tu auto con nuestro tratamiento de recubrimiento Opti Coat para mantenerlo impecable.</p>
+                            </div>
                         </div>
                     </div>
-                </div>-->
+                    <!-- Repeat for other services -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="button-box text-center">
+                            <a href="service.html" class="main-btn">Leer más</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="why-choose-area pt-110 pb-120">
+            <div class="choose-bg bg_cover" style="background-image: url('../../content/assets/images/service/choose-bg.jpg');"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="choose-content-box">
+                            <div class="section-title section-white-title mb-20">
+                                <span class="span">Nos Importa Tu Auto</span>
+                                <h2>¿Por qué Elegirnos?</h2>
+                            </div>
+                            <p>Nos especializamos en brindar un servicio de calidad y cuidado para tu vehículo. Nos aseguramos de que cada lavado se realice con la mayor atención al detalle.</p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="check_list">
+                                        <li>Lavado profesional con productos de alta calidad.</li>
+                                        <li>Acondicionamiento interior y exterior del vehículo.</li>
+                                        <li>Servicio rápido y eficiente, adaptado a tus necesidades.</li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ul class="check_list">
+                                        <li>Protección contra la lluvia con productos especializados.</li>
+                                        <li>Lavado a mano para un acabado perfecto.</li>
+                                        <li>Servicios ecológicos que cuidan el medio ambiente.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="#" class="main-btn">Reserva tu cita</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="car-washing-section pb-110 bg_cover" style="background-image: url('../../content/assets/images/bg/map-bg-1.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="washing-img-box">
+                            <img src="~/Content/assets/images/service/car-wash-1.png" alt="Car Wash Location">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="washing-content-box">
+                            <div class="section-title mb-45">
+                                <span class="span">Ubicación</span>
+                                <h2>Punto de Lavado de Autos</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="washing-location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <h6>Punto de Lavado</h6>
+                                        <p>San Antonio de Coronado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-area pt-110 pb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="section-title text-center mb-60">
+                            <span class="span">Últimos Paquetes</span>
+                            <h2>Elige tu Paquete</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Pricing Items -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="pricing-item">
+                            <div class="title text-center">
+                                <h4>Lavado Básico a Mano</h4>
+                            </div>
+                            <div class="price text-center">
+                                <h2><span class="sign">$</span>30<span class="small-text">99</span></h2>
+                            </div>
+                            <div class="pricing-body">
+                                <ul class="list">
+                                    <li class="check">Lavado con tela suave</li>
+                                    <li class="check">Enjuague sin residuos</li>
+                                    <li class="check">Protección contra la lluvia</li>
+                                    <li class="uncheck">Lavado a mano completo</li>
+                                    <li class="uncheck">Tratamiento de llantas</li>
+                                    <li class="uncheck">Repelente al agua</li>
+                                </ul>
+                            </div>
+                            <div class="time text-center">
+                                <span><i class="far fa-clock"></i>40 min</span>
+                            </div>
+                            <div class="button text-center">
+                                <a href="#" class="main-btn">Reserva Ahora</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat for other pricing items -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-area">
         <div class="footer-widget-area pt-110 pb-110">
             <div class="container">
                 <div class="row">
-                    <!--<div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="widget newsletters-widget">
-                            <h4 class="widget-title">Únete a nuestro comunidad</h4>
-                            <p>Recibe las últimas noticias y ofertas directamente en tu correo.</p>
-                            <form action="email.php" class="newsletters-form">
-                                <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Ingresa tu correo electrónico"
-                                        name="email" required>
-                                    <button class="icon"><i class="fas fa-long-arrow-alt-right"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>-->
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="widget quick-link-widget">
                             <h4 class="widget-title">Enlaces rápidos</h4>
                             <ul class="widget-link">
-                                <li><a href="inicioSesion.html">inicio Sesion</a></li>
+                                <li><a href="inicioSesion.html">Inicio Sesión</a></li>
                                 <li><a href="about.html">Sobre Nosotros</a></li>
-                                <li><a href="booking.html">Rerserva</a></li>
-
+                                <li><a href="booking.html">Reserva</a></li>
                                 <li><a href="contact.html">Contáctanos</a></li>
                             </ul>
                         </div>
@@ -1264,21 +209,17 @@
                                 <p>Lunes - Domingo</p>
                                 <p>9:00 AM - 6:00 PM</p>
                             </div>
-                            <!--<div class="info-box">
-                                <p>Sábado</p>
-                                <p>10:00 AM - 4:00 PM</p>
-                            </div>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="widget contact-info-widget">
                             <h4 class="widget-title">Contáctanos</h4>
                             <div class="info-box mb-20">
-                                <p><i class="fas fa-phone-alt"></i><a href="tel:+0123456789">+(506) 7285 0302 </a></p>
+                                <p><i class="fas fa-phone-alt"></i><a href="tel:+50672850302">+(506) 7285 0302</a></p>
                             </div>
                             <div class="info-box">
                                 <h5 class="mb-20">Dirección del local</h5>
-                                <p><i class="fas fa-map-marker-alt"></i>San Antonio, Coronado<br></p>
+                                <p><i class="fas fa-map-marker-alt"></i>San Antonio, Coronado</p>
                             </div>
                         </div>
                     </div>
@@ -1290,44 +231,37 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="copyright-text">
-                            <p> 2021 <span>Hervi </span>. Todos los derechos reservados</p>
+                            <p>2021 <span>Hervi</span>. Todos los derechos reservados.</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="footer-nav">
                             <ul>
-                                <li><a href="index-2.html">Inicio</a></li>
+                                <li><a href="index.html">Inicio</a></li>
                                 <li><a href="service.html">Servicios</a></li>
-
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer><!--====== End Footer ======-->
-    <!--====== back-to-top ======-->
+    </footer>
+
+    <!-- Back to Top Button -->
     <a href="#" class="back-to-top"><i class="fas fa-angle-up"></i></a>
-    <!--====== Jquery js ======-->
+
+    <!-- Scripts -->
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <!--====== Bootstrap js ======-->
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
     <script src="~/Content/assets/js/popper.min.js"></script>
-    <!--====== Slick js ======-->
     <script src="~/Content/assets/js/slick.min.js"></script>
-    <!--====== Counterup js ======-->
     <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <!--====== Waypoints js ======-->
     <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <!--====== Magnific Popup js ======-->
     <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <!--====== Isotope js ======-->
     <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <!--====== Imagesloaded js ======-->
     <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <!--====== WoW js ======-->
     <script src="~/Content/assets/js/wow.min.js"></script>
-    <!--====== Main js ======-->
     <script src="~/Content/assets/js/main.js"></script>
-</main>
+</body>
+</html>
