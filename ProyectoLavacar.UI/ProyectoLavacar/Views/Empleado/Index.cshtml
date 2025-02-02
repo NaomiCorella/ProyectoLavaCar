@@ -1,91 +1,111 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.UsuariosDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administración de Empleados";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="zxx">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-    
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-    
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cedula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.turno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.puesto)
-        </th>
-        <th></th>
-    </tr>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.primer_apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.segundo_apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-  
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-    
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.numeroCuenta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.turno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.puesto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Administración de Empleados</h2>
+        </div>
 
-</table>
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.primer_apellido)</th>
+                        <th>@Html.DisplayNameFor(model => model.segundo_apellido)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.turno)</th>
+                        <th>@Html.DisplayNameFor(model => model.puesto)</th>
+                        <th>@Html.DisplayNameFor(model => model.estado)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.primer_apellido)</td>
+                            <td>@Html.DisplayFor(modelItem => item.segundo_apellido)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.turno)</td>
+                            <td>@Html.DisplayFor(modelItem => item.puesto)</td>
+                            <td>
+                                @if (item.estado)
+                                {
+                                    <span class="badge bg-success text-white">Activo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger text-white">Inactivo</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+
+                                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                        <i class="fas fa-info-circle"></i> Detalles
+                                    </a>
+
+                                    @if (item.estado)
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.Id })" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-times-circle"></i> Inactivar
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.Id })" class="btn btn-sm btn-outline-success">
+                                            <i class="fas fa-check-circle"></i> Activar
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

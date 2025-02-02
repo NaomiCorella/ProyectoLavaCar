@@ -4,99 +4,97 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalles del Empleado</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Detalles del Empleado</h2>
+        </div>
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th colspan="2" class="text-center">Información del Empleado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                        <td>@Html.DisplayFor(model => model.nombre)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.primer_apellido)</th>
+                        <td>@Html.DisplayFor(model => model.primer_apellido)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.segundo_apellido)</th>
+                        <td>@Html.DisplayFor(model => model.segundo_apellido)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.estado)</th>
+                        <td>@Html.DisplayFor(model => model.estado)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.cedula)</th>
+                        <td>@Html.DisplayFor(model => model.cedula)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.numeroCuenta)</th>
+                        <td>@Html.DisplayFor(model => model.numeroCuenta)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.turno)</th>
+                        <td>@Html.DisplayFor(model => model.turno)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.puesto)</th>
+                        <td>@Html.DisplayFor(model => model.puesto)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-4 mb-4">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary me-2" })
+            @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
 
-<div>
-    <h4>UsuariosDto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.primer_apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.segundo_apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-       
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cedula)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.numeroCuenta)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.turno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.turno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.puesto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.puesto)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>
