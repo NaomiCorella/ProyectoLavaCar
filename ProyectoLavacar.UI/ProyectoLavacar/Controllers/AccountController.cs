@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProyectoLavacar.Models;
@@ -17,18 +18,77 @@ namespace ProyectoLavacar.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly UserManager<ApplicationUser> _userM;
 
         public AccountController()
         {
+            _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
         }
 
-        public ApplicationSignInManager SignInManager
+
+        // Método para cambiar la contraseña
+        [HttpGet]
+        public ActionResult changePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> changePassword(changePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Obtener el ID del usuario autenticado
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                string userId = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (userId == null)
+                {
+                    return View("Error"); // Si no hay un usuario autenticado, retornamos un error
+                }
+
+                // Buscar al usuario por su ID
+                var user = await _userM.FindByIdAsync(userId);
+                if (user == null)
+                {
+                    return View("Error"); // Si el usuario no se encuentra, retornamos un error
+                }
+
+                // Verificar si la contraseña actual es correcta
+                var result = await _userM.ChangePasswordAsync(userId, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("changePasswordSuccess"); // Redirigir a la vista de éxito
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error); // Mostrar errores de cambio de contraseña
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
+        // Vista de éxito (si se cambia la contraseña correctamente)
+        public ActionResult changePasswordSuccess()
+        {
+            return View();
+        }
+    
+
+    public ApplicationSignInManager SignInManager
         {
             get
             {
