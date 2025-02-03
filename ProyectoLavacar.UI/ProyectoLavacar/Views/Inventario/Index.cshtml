@@ -4,71 +4,142 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="zxx">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idInventario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precioUnitario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantidadDisponible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Usuarios</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idInventario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precioUnitario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidadDisponible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.idInventario }, null) |
-            @Html.ActionLink("Details", "Details", new { id = item.idInventario }, null) |
-            @if (item.estado)
-            {
-                <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-warning">
-                    <i class="fas fa-times-circle"></i> Inactivar
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-success">
-                    <i class="fas fa-check-circle"></i> Activar
-                </a>
-            }
-        </td>
-    </tr>
-}
 
-</table>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Administración de Inventario</h2>
+            <a href="@Url.Action("Create", "Inventario")" class="btn btn-outline-success btn-lg">
+                <i class="fas fa-plus me-2"></i> Agregar Producto
+            </a>
+        </div>
+
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                    <tr>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idInventario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.categoria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.precioUnitario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.cantidadDisponible)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idInventario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.categoria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.precioUnitario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cantidadDisponible)
+                            </td>
+                            <td>
+                                @if (item.estado)
+                                {
+                                    <span class="badge bg-success text-white">Activo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger text-white">Inactivo</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a href="@Url.Action("Edit", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+
+                                    <a href="@Url.Action("Details", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                        <i class="fas fa-info-circle"></i> Detalles
+                                    </a>
+
+                                    @*<a href="@Url.Action("Actualizar", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
+                                        <i class="fas fa-edit"></i> ActualizarStock
+                                    </a>*@
+
+                                    @if (item.estado)
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-times-circle"></i> Inactivar
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-success">
+                                            <i class="fas fa-check-circle"></i> Activar
+                                        </a>
+                                    }
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+                <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+                <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+                <script src="~/Content/assets/js/bootstrap.min.js"></script>
+                <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+                <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+                <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+                <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+                <script src="~/Content/assets/js/main.js"></script>
+                <script src="~/Content/assets/js/popper.min.js"></script>
+                <script src="~/Content/assets/js/slick.min.js"></script>
+                <script src="~/Content/assets/js/waypoints.min.js"></script>
+                <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>
+

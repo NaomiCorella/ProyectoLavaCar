@@ -116,6 +116,24 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        // POST: Inventario/Edit/5
+        [HttpPost]
+
+        public async Task<ActionResult> Actualizar (InventarioDto modeloInventario)
+        {
+            try
+            {
+                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(modeloInventario);
+
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         // GET: Inventario/Delete/5
         public ActionResult Delete(int id)

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Detalles del Empleado</title>
-    <!-- Enlaces a estilos -->
+   
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -38,10 +38,10 @@
                     </thead>
 
                         <tbody>
-                            <tr>
+                            @*<tr>
                                 <th>@Html.DisplayNameFor(model => model.Id)</th>
                                 <td>@Html.DisplayFor(model => model.Id)</td>
-                            </tr>
+                            </tr>*@
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.nombre)</th>
                                 <td>@Html.DisplayFor(model => model.nombre)</td>
@@ -64,7 +64,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- Enlaces de acción -->
+
                     <div class="text-center mt-4">
                         @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-primary me-2" })
                         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
@@ -73,7 +73,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

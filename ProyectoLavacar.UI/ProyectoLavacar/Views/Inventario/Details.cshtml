@@ -4,63 +4,87 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalles del Inventario</title>
 
-<div>
-    <h4>InventarioDto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.idInventario)
-        </dt>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="container mt-5 mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Detalles del Inventario</h2>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.idInventario)
-        </dd>
+            <div class="table-responsive shadow-lg rounded">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th colspan="2" class="text-center">Información del Inventario</th>
+                        </tr>
+                    </thead>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+                    <tbody>
+                        @*<tr>
+                            <th>@Html.DisplayNameFor(model => model.idInventario)</th>
+                            <td>@Html.DisplayFor(model => model.idInventario)</td>
+                        </tr>*@
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                            <td>@Html.DisplayFor(model => model.nombre)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.categoria)</th>
+                            <td>@Html.DisplayFor(model => model.categoria)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.precioUnitario)</th>
+                            <td>@Html.DisplayFor(model => model.precioUnitario)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.cantidadDisponible)</th>
+                            <td>@Html.DisplayFor(model => model.cantidadDisponible)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.estado)</th>
+                            <td>@Html.DisplayFor(model => model.estado)</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                <div class="text-center mt-4">
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-primary me-2" })*@
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.categoria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.categoria)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.precioUnitario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.precioUnitario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cantidadDisponible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cantidadDisponible)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>

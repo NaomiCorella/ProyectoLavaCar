@@ -114,6 +114,7 @@
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
     <Compile Include="ModuloEvaluaciones\Detalles\DetallesEvaluacionesLN.cs" />
     <Compile Include="ModuloEvaluaciones\Listar\ListarEvaluacionesLN.cs" />
+    <Compile Include="ModuloInventario\Actualizar\ActualizarInventarioLN.cs" />
     <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioLN.cs" />
     <Compile Include="ModuloInventario\Crear\CrearInventarioLN.cs" />
     <Compile Include="ModuloInventario\Editar\EditarInventarioLN.cs" />

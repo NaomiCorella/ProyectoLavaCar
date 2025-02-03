@@ -127,5 +127,8 @@
   <ItemGroup>
     <Content Include="ScriptBaseDeDatos\BaseDeDatosLavaCar.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AccesoADatos\Interfaces\ModuloInventario\Actualizar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

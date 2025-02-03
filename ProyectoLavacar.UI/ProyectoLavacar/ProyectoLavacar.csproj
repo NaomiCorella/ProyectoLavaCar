@@ -535,6 +535,7 @@
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
+    <Content Include="Views\Inventario\Actualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
