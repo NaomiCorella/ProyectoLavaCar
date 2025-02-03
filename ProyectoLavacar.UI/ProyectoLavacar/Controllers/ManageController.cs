@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
+using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
@@ -18,13 +21,14 @@ namespace ProyectoLavacar.Controllers
 
         public ManageController()
         {
-        }
 
+        }
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
+        
 
         public ApplicationSignInManager SignInManager
         {

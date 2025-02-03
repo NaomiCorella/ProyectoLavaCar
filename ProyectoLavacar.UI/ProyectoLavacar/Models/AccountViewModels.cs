@@ -15,6 +15,8 @@ namespace ProyectoLavacar.Models
         public string ReturnUrl { get; set; }
     }
 
+
+
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -179,11 +181,32 @@ namespace ProyectoLavacar.Models
         public string Code { get; set; }
     }
 
+
     public class ForgotPasswordViewModel
     {
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
+    }
+
+
+    public class changePasswordViewModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña actual")]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "La contraseña debe tener al menos {2} caracteres.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Nueva contraseña")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar nueva contraseña")]
+        [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmación no coinciden.")]
+        public string ConfirmPassword { get; set; }
     }
 }
