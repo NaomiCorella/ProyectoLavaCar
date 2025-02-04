@@ -46,7 +46,11 @@ namespace ProyectoLavacar.Controllers
             List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
             return View(laListaDeInventario);
         }
-
+        public ActionResult lista()
+        {
+            List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
+            return PartialView("_lista", laListaDeInventario);
+        }
         // GET: Inventario/Details/5
         public ActionResult Details(int id)
         {
@@ -129,10 +133,10 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Actualizar()
         {
             InventarioDto elInventario = _BuscarPorIdInventario.Detalle(1);
-
+      
             return View(elInventario);
         }
-
+ 
         // POST: Inventario/Edit/5
         [HttpPost]
         public async Task<ActionResult> Actualizar(InventarioDto modeloInventario)
@@ -203,5 +207,6 @@ namespace ProyectoLavacar.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
     }
 }

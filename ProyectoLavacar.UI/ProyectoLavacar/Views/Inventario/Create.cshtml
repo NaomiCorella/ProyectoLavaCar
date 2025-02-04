@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
 }
 
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -30,7 +31,7 @@
 
         <div class="container mt-5 mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">Agregar Producto al Inventario</h2>
+                <h2 class="mb-0">Ver mi inventario</h2>
             </div>
 
             <div class="card shadow-lg rounded">
@@ -42,12 +43,12 @@
 
                         <div class="form-row">
                             @*<div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.idInventario, htmlAttributes: new { @class = "control-label" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.idInventario, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.idInventario, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                                    @Html.LabelFor(model => model.idInventario, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.idInventario, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.idInventario, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
 
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label" })
@@ -113,6 +114,7 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+    
     }
 
 
