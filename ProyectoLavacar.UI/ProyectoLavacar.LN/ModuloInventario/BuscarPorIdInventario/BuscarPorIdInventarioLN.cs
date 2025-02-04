@@ -39,9 +39,8 @@ namespace ProyectoLavacar.LN.ModuloInventario.BuscarPorId
                 categoria = elInventario.categoria,
                 cantidadDisponible = elInventario.cantidadDisponible,
                 precioUnitario = elInventario.precioUnitario,
-
                 estado = elInventario.estado,
-                idInventario = elInventario.idInventario,
+                idProducto = elInventario.idProducto,
             };
         }
 

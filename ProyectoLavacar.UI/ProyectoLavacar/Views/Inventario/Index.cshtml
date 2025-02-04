@@ -38,7 +38,7 @@
                     <tr>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.idInventario)
+                            @Html.DisplayNameFor(model => model.idProducto)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.nombre)
@@ -65,7 +65,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.idInventario)
+                                @Html.DisplayFor(modelItem => item.idProducto)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.nombre)
@@ -91,27 +91,27 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a href="@Url.Action("Edit", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                    <a href="@Url.Action("Edit", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Editar">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
 
-                                    <a href="@Url.Action("Details", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                    <a href="@Url.Action("Details", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
                                         <i class="fas fa-info-circle"></i> Detalles
                                     </a>
 
-                                    @*<a href="@Url.Action("Actualizar", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
+                                    <a href="@Url.Action("Actualizar", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
                                         <i class="fas fa-edit"></i> ActualizarStock
-                                    </a>*@
+                                    </a>
 
                                     @if (item.estado)
                                     {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-warning">
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-sm btn-outline-warning">
                                             <i class="fas fa-times-circle"></i> Inactivar
                                         </a>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-success">
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-sm btn-outline-success">
                                             <i class="fas fa-check-circle"></i> Activar
                                         </a>
                                     }

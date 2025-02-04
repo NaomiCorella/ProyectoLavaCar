@@ -18,7 +18,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloInventario.BuscarPorIdInventario
         }
         public InventarioTabla Detalle(int idInventario)
         {
-            InventarioTabla laPalabraEnBaseDeDatos = _elContexto.InventarioTabla.Where(elInventario => elInventario.idInventario == idInventario).FirstOrDefault();
+            InventarioTabla laPalabraEnBaseDeDatos = _elContexto.InventarioTabla.Where(elInventario => elInventario.idProducto == idInventario).FirstOrDefault();
             return laPalabraEnBaseDeDatos;
         }
 

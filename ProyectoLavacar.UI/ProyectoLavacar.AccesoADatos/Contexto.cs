@@ -19,7 +19,7 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<UsuariosTabla>().ToTable("[AspNetUsers]");
             modelBuilder.Entity<EmpleadosTabla>().ToTable("Empleados");
             modelBuilder.Entity<ServiciosTabla>().ToTable("Servicios");
-            modelBuilder.Entity<InventarioTabla>().ToTable("Inventario");
+            modelBuilder.Entity<InventarioTabla>().ToTable("Producto");
             modelBuilder.Entity<EvaluacionesTabla>().ToTable("Evaluaciones");
 
 
