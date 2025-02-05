@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScriptBaseDeDatos\BaseDeDatosLavaCar.sql" />
+    <Content Include="ScriptBaseDeDatos\LavaCarBD %282%29.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AccesoADatos\Interfaces\ModuloInventario\Actualizar\" />

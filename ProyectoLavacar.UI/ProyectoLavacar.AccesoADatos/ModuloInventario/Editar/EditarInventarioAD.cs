@@ -19,11 +19,13 @@ namespace ProyectoLavacar.AccesoADatos.ModuloInventario.Editar
         }
         public async Task<int> EditarInventario(InventarioTabla elInventarioParaEditar)
         {
-            InventarioTabla laPersonaEnBaseDeDatos = _elcontexto.InventarioTabla.Where(elInventario => elInventario.idInventario == elInventarioParaEditar.idInventario).FirstOrDefault();
+            InventarioTabla laPersonaEnBaseDeDatos = _elcontexto.InventarioTabla.Where(elInventario => elInventario.idProducto == elInventarioParaEditar.idProducto).FirstOrDefault();
+            laPersonaEnBaseDeDatos.idProducto = elInventarioParaEditar.idProducto;
             laPersonaEnBaseDeDatos.nombre = elInventarioParaEditar.nombre;
             laPersonaEnBaseDeDatos.precioUnitario = elInventarioParaEditar.precioUnitario;
             laPersonaEnBaseDeDatos.cantidadDisponible = elInventarioParaEditar.cantidadDisponible;
             laPersonaEnBaseDeDatos.categoria = elInventarioParaEditar.categoria;
+            laPersonaEnBaseDeDatos.estado = elInventarioParaEditar.estado;
 
             EntityState estado = _elcontexto.Entry(laPersonaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
