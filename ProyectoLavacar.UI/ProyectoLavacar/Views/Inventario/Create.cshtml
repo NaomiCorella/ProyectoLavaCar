@@ -25,7 +25,7 @@
 
 <body>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
     {
         @Html.AntiForgeryToken()
 
@@ -87,20 +87,22 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label d-none" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
-                                        @Html.EditorFor(model => model.estado)
-                                        @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "d-none" } })
+                                        @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger d-none" })
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-outline-success btn-lg">
-                                <i class="fas fa-save me-2"></i> Agregar Producto
+                                <i class="fas fa-save me-2" onsubmit="mostrarAlerta()"></i> Agregar Producto
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -114,11 +116,13 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-    
+<script src="~/Scripts/Inventario/alerta.js"></script>
+
     }
+   
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

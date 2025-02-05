@@ -1,75 +1,72 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto
 
-@{
-    ViewBag.Title = "Actualizar";
-}
-
-<h2>Actualizar</h2>
-
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Actualizar", "Inventario", FormMethod.Post, new { id = "miFormulario" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>InventarioDto</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="mb-3">
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.idProducto)
-            @Html.ValidationMessageFor(model => model.idProducto, "", new { @class = "text-danger" })
-        </div>
 
+    <div class="form-horizontal">
+        <h4>InventarioDto</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    </div>
+        <div class="mb-3">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.idProducto)
+                @Html.ValidationMessageFor(model => model.idProducto, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        <!-- Campo 'nombre' oculto -->
-        @Html.HiddenFor(model => model.nombre)
-        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-    </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        <!-- Campo 'categoria' oculto -->
-        @Html.HiddenFor(model => model.categoria)
-        @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
 
-    <div class="form-group">
-        <!-- Campo 'precioUnitario' oculto -->
-        @Html.HiddenFor(model => model.precioUnitario)
-        @Html.ValidationMessageFor(model => model.precioUnitario, "", new { @class = "text-danger" })
-    </div>
+            @Html.HiddenFor(model => model.nombre)
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        <!-- Campo 'cantidadDisponible' visible -->
-        @Html.LabelFor(model => model.cantidadDisponible, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.cantidadDisponible, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.cantidadDisponible, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            @Html.HiddenFor(model => model.categoria)
+            @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+
+            @Html.HiddenFor(model => model.precioUnitario)
+            @Html.ValidationMessageFor(model => model.precioUnitario, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.cantidadDisponible, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cantidadDisponible, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cantidadDisponible, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.HiddenFor(model => model.estado)
+            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-outline-success btn-lg">
+                    <i class="fas fa-save me-2" onsubmit="mostrarAlerta()"></i> Modificar Stock
+                </button>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <!-- Campo 'estado' oculto -->
-        @Html.HiddenFor(model => model.estado)
-        @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Inventario/alertaStock.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }

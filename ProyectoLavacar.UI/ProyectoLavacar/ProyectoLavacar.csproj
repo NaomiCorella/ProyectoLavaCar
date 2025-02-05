@@ -464,6 +464,9 @@
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900d41d.eot" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\Inventario\alertaStock.js" />
+    <Content Include="Scripts\Inventario\alertaEditar.js" />
+    <Content Include="Scripts\Inventario\alertaCrear.js" />
     <Content Include="Scripts\Inventario\vistaParcial.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -535,12 +538,12 @@
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
-    <Content Include="Views\Inventario\Actualizar.cshtml" />
     <Content Include="Views\Account\changePassword.cshtml" />
     <Content Include="Views\Account\changePasswordSuccess.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
+    <Content Include="Views\Inventario\Actualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

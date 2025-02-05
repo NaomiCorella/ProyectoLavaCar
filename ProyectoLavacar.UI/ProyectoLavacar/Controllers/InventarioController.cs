@@ -82,7 +82,7 @@ namespace ProyectoLavacar.Controllers
                     categoria =modeloDeInvetario.categoria,
                     cantidadDisponible = modeloDeInvetario.cantidadDisponible,
                     precioUnitario = modeloDeInvetario.precioUnitario,
-                    estado = modeloDeInvetario.estado
+                    estado = true
                     
                 };
 
