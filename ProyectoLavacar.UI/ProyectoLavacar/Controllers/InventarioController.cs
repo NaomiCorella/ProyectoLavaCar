@@ -46,10 +46,11 @@ namespace ProyectoLavacar.Controllers
             List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
             return View(laListaDeInventario);
         }
-        public ActionResult lista()
+        public ActionResult lista(int id)
         {
-            List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
-            return PartialView("_lista", laListaDeInventario);
+
+            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
+            return PartialView("_lista", elInventario);
         }
         // GET: Inventario/Details/5
         public ActionResult Details(int id)

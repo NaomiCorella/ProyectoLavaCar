@@ -1,16 +1,21 @@
 ﻿$(document).ready(function () {
-    $("#abrirModal").click(function () {
+    $(document).on("click", ".abrirModal", function () {
+        var id = $(this).data('id');  // Obtener el id del producto
+
+        console.log("ID seleccionado:", id);  // Debug en consola
+
         $.ajax({
-            url: '/Inventario/lista',  // Asegúrate de tener el prefijo '/' si no está en la misma ruta
-            data: { id: 1 },  // El parámetro id se está enviando correctamente
+            url: '/Inventario/lista',
+            data: { id: id },
             type: 'GET',
             success: function (response) {
-                $('#myModal .modal-body').html(response);  // Aquí se asigna la respuesta al cuerpo del modal
-                $('#myModal').modal("show");  // Mostramos el modal
+                $('#myModal .modal-body').html(response);
+                $('#myModal').modal("show");
             },
             error: function (xhr, status, error) {
-                alert("Hubo un error: " + error);  // Mostramos el mensaje de error en caso de fallo
+                alert("Hubo un error: " + error);
             }
         });
     });
 });
+
