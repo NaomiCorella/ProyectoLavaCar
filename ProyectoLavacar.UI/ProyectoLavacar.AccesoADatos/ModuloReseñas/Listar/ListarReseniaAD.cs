@@ -18,20 +18,29 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReseñas.Listar
             _elContexto = new Contexto();
         }
 
-        public List<ReseniaDto> ListarResenias()
+        public List<ReseniaConRespuesta> ListarResenias()
         {
-            List<ReseniaDto> lalistadeServicios = (from laResenia in _elContexto.ReseniasTabla
-                                                     select new ReseniaDto
-                                                     {
-                                                        idResenia = laResenia.idResenia,
-                                                        idCliente = laResenia.idCliente,
-                                                        idServicio = laResenia.idServicio, 
-                                                        fecha = laResenia.fecha.ToString(),
-                                                        calificacion = laResenia.calificacion,
-                                                        comentarios = laResenia.comentarios,
-                                                        estado = laResenia.estado
+            List<ReseniaConRespuesta> lalistadeServicios = (from laResenia in _elContexto.ReseniasTabla
+                                                   join laRespuesta in _elContexto.RespuestaTabla
+                                                   on laResenia.idResenia equals laRespuesta.idResenia into respuestas
+                                                   from respuesta in respuestas.DefaultIfEmpty() 
+                                                   select new ReseniaConRespuesta
+                                                   {
+                                                       idResenia = laResenia.idResenia,
+                                                       idCliente = laResenia.idCliente,
+                                                       idServicio = laResenia.idServicio,
+                                                       fecha = laResenia.fecha.ToString(),
+                                                       calificacion = laResenia.calificacion,
+                                                       comentarios = laResenia.comentarios,
+                                                       estadoResenia = laResenia.estado,
+                                                       idRespuesta = respuesta != null ? (int?)respuesta.idRespuesta : null,
+                                                       idEmpleado = respuesta != null ? respuesta.idEmpleado : null,
+                                                       comentariosRespuesta = respuesta != null ? respuesta.comentarios : null,
+                                                       fechaRespuesta = respuesta != null ? respuesta.fecha.ToString() : null,
+                                                     
+                                                 
 
-                                                     }).ToList();
+        }).ToList();
             return lalistadeServicios;
         }
     }

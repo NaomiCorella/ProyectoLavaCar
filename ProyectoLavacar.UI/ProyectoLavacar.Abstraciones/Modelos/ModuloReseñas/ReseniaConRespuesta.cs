@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
 {
-    public class ReseniaDto
+    public class ReseniaConRespuesta
     {
         public int idResenia { get; set; }
         public string idCliente { get; set; }
@@ -14,7 +14,11 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
         public string fecha { get; set; }
         public int calificacion { get; set; }
         public string comentarios { get; set; }
-        public bool estado { get; set; } = true;
- 
+        public bool estadoResenia { get; set; } = true;
+        public int? idRespuesta { get; set; }
+        public string idEmpleado { get; set; }
+        public string fechaRespuesta { get; set; }
+        public string comentariosRespuesta { get; set; }
+       
     }
 }
