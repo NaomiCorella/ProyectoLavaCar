@@ -126,6 +126,7 @@
     <Compile Include="ModuloReservas\ListarEncargo\ListarEncargoLN.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaLN.cs" />
     <Compile Include="ModuloReservas\ObtenerPorId\ObtenerPorIdReservaLN.cs" />
+    <Compile Include="ModuloReseñas\CrearRespuesta\CrearRespuestaLN.cs" />
     <Compile Include="ModuloReseñas\Crear\CrearReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Editar\EditarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
@@ -155,5 +156,6 @@
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

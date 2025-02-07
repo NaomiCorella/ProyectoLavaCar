@@ -6,15 +6,15 @@ C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
 C:\Users\jkenn\Documents\Clases\Diseño y desarrollo\Proyecto\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.dll
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.pdb
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
-C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.dll
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.pdb
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
 C:\Users\kerli\Source\Repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.dll
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.pdb
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
+C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb

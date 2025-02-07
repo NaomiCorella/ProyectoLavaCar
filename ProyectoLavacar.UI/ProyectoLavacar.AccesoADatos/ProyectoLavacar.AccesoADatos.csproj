@@ -72,6 +72,7 @@
     <Compile Include="ModuloReservas\ListarEncargos\ListarEncargoAD.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaAD.cs" />
     <Compile Include="ModuloReservas\ObtenerPorId\ObtenerPorIdReservaAD.cs" />
+    <Compile Include="ModuloReseñas\CrearRespuesta\CrearRespuestaAD.cs" />
     <Compile Include="ModuloReseñas\Crear\CrearReseniaAD.cs" />
     <Compile Include="ModuloReseñas\Editar\EditarReseniaAD.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaAD.cs" />

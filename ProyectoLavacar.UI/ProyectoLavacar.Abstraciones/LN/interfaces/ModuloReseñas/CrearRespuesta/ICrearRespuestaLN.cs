@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReseñas.Listar
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.CrearRespuesta
 {
-    public interface IListarReseniaAD
+    public interface ICrearRespuestaLN
     {
-        List<ReseniaConRespuesta> ListarResenias();
+        Task<int> CrearRespuesta(RespuestaDto modelo);
     }
 }

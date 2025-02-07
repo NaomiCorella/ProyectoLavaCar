@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Listar
 {
     public interface IListarReseniaLN
     {
-        List<ReseniaDto> ListarResenia();
+        List<ReseniaConRespuesta> ListarResenia();
     }
 }

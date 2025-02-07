@@ -22,36 +22,39 @@ namespace ProyectoLavacar.LN.ModuloReseñas.Listar
             _listarReseniaAD = new ListarReseniaAD();
         }
 
-        public List<ReseniaDto> ListarResenia()
+        public List<ReseniaConRespuesta> ListarResenia()
         {
-            List<ReseniaDto> laListadeServicios = _listarReseniaAD.ListarResenias();
+            List<ReseniaConRespuesta> laListadeServicios = _listarReseniaAD.ListarResenias();
 
             return laListadeServicios;
         }
 
-        private List<ReseniaDto> ObtenerLaListaConvertida(List<ReseniasTabla> lalistaderesenias)
-        {//chequear
-            List<ReseniaDto> lalistaServicios = new List<ReseniaDto>();
-            foreach (ReseniasTabla elServicio in lalistaderesenias)
-            {
-                lalistaServicios.Add(ConvertirObjetoServiciosDto(elServicio));
-            }
-            return lalistaServicios;
-        }
-        private ReseniaDto ConvertirObjetoServiciosDto(ReseniasTabla laResenia)
-        {
+        //private List<ReseniaDto> ObtenerLaListaConvertida(List<ReseniasTabla> lalistaderesenias)
+        //{//chequear
+        //    List<ReseniaDto> lalistaServicios = new List<ReseniaDto>();
+        //    foreach (ReseniasTabla elServicio in lalistaderesenias)
+        //    {
+        //        lalistaServicios.Add(ConvertirObjetoServiciosDto(elServicio));
+        //    }
+        //    return lalistaServicios;
+        //}
+        //private ReseniaDto ConvertirObjetoServiciosDto(ReseniaConRespuesta laResenia)
+        //{
 
-            return new ReseniaDto
-            {
-                idResenia = laResenia.idResenia,
-                idCliente = laResenia.idCliente,
-                idServicio = laResenia.idServicio,
-                fecha = laResenia.fecha.ToString(),
-                calificacion = laResenia.calificacion,
-                comentarios = laResenia.comentarios,
-                estado = laResenia.estado
+        //    return new ReseniaConRespuesta
+        //    {
+        //        idResenia = laResenia.idResenia,
+        //        idCliente = laResenia.idCliente,
+        //        idServicio = laResenia.idServicio,
+        //        fecha = laResenia.fecha.ToString(),
+        //        calificacion = laResenia.calificacion,
+        //        comentarios = laResenia.comentarios,
+        //        idRespuesta = respuesta != null ? (int?)respuesta.idRespuesta : null,
+        //        idEmpleado = respuesta != null ? respuesta.idEmpleado : null,
+        //        comentariosRespuesta = respuesta != null ? respuesta.comentarios : null,
+        //        fechaRespuesta = respuesta != null ? respuesta.fecha.ToString() : null,
 
-            };
-        }
+        //    };
+       // }
     }
 }

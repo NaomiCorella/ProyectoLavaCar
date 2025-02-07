@@ -96,6 +96,8 @@
     <Compile Include="LN\interfaces\ModuloReservas\ListarEncargo\IListarEncargoLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ListarTodo\IListarTodoReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ObtenerPorId\IObtenerPorIdReservaLN.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\CrearRespuesta\ICrearRespuestaAD.cs" />
+    <Compile Include="LN\interfaces\ModuloReseñas\CrearRespuesta\ICrearRespuestaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\Crear\ICrearReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\Editar\IEditarReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaLN.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="ModelosDeBaseDeDatos\InventarioTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\RespuestaTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
@@ -120,7 +123,9 @@
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
     <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />
+    <Compile Include="Modelos\ModuloReseñas\ReseniaConRespuesta.cs" />
     <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />
+    <Compile Include="Modelos\ModuloReseñas\RespuestaDto.cs" />
     <Compile Include="Modelos\ModuloUsuarios\UsuariosDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
