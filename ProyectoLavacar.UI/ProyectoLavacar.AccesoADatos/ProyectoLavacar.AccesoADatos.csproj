@@ -64,7 +64,9 @@
     <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioAD.cs" />
     <Compile Include="ModuloInventario\Crear\CrearInventarioAD.cs" />
     <Compile Include="ModuloInventario\Editar\EditarInventarioAD.cs" />
+    <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoAD.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioAD.cs" />
+    <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoAD.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaAD.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaAD.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteAD.cs" />

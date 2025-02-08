@@ -8,7 +8,7 @@
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
+ 
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -22,6 +22,25 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div id="ModalDeMovimiento" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registrar Movimiento</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -52,8 +71,17 @@
                 <i class="fas fa-plus me-2"></i> Agregar Producto
             </a>
         </div>
+       
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="abrirModalMovimiento btn btn-outline-primary btn-lg">
+                <i class="fas fa-save me-2"></i> Registrar Movimiento
+            </button>
+            <a href="@Url.Action("HistorialDeMovimientos")" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-times me-2"></i> Historial De Movimientos
+            </a>
+        </div>
 
-        <div class="table-responsive shadow-lg rounded">
+        <div class="table-responsive shadow-lg rounded mt-5 mb-5">
             <table class="table table-bordered table-striped text-center">
                 <thead class="table-dark">
                     <tr>
@@ -119,14 +147,12 @@
                                     <a href="@Url.Action("Details", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
                                         <i class="fas fa-info-circle"></i> Detalles
                                     </a>
-                                    <a href="@Url.Action("lista", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
-                                        <i class="fas fa-info-circle"></i> Detalles
-                                    </a>
+                                
 
                                     <a href="@Url.Action("Actualizar", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
                                         <i class="fas fa-edit"></i> ActualizarStock
                                     </a>
-                                    <button class="abrirModal btn btn-primary" data-id="@item.idProducto">Eliminar</button>
+                                    <button class="abrirModalbtn btn-outline-info btn-sm me-2" data-id="@item.idProducto">Eliminar</button>
 
 
 
@@ -145,6 +171,7 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
         <script src="~/Scripts/Inventario/vistaParcial.js"></script>
+        <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
 
     }
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>

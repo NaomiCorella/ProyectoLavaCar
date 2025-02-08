@@ -118,7 +118,9 @@
     <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioLN.cs" />
     <Compile Include="ModuloInventario\Crear\CrearInventarioLN.cs" />
     <Compile Include="ModuloInventario\Editar\EditarInventarioLN.cs" />
+    <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoLN.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioLN.cs" />
+    <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />
