@@ -53,7 +53,9 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Crear\ICrearInventarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Editar\IEditarInventarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\ListarMovimiento\IListarMovimientoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Listar\IListarInventarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloInventario\RegistrarMovimiento\IRegistrarMovimientoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarAdmin\IEditarReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarCliente\IEditarClienteAD.cs" />
@@ -88,7 +90,9 @@
     <Compile Include="LN\interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\Crear\ICrearInventarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\Editar\IEditarInventarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\ListarMovimiento\IListarMovimientoLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\Listar\IListarInventarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloInventario\RegistrarMovimiento\IRegistrarMovimientoLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarAdmin\IEditarReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarCliente\IEditarClienteLN.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="ModelosDeBaseDeDatos\EmpleadosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EvaluacionesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\MovimientoTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RespuestaTabla.cs" />
@@ -120,6 +125,7 @@
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
     <Compile Include="Modelos\ModeloEvaluaciones\EvalucionesDto.cs" />
     <Compile Include="Modelos\ModeloInventario\InventarioDto.cs" />
+    <Compile Include="Modelos\ModeloInventario\MovimientoDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
     <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />
