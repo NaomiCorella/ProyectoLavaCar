@@ -32,66 +32,72 @@
             <h2 class="mb-0">Servicios</h2>
         </div>
 
+        <form method="get" action="@Url.Action("FiltrarServicios")" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre del servicio" />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="precioMin" class="form-control" placeholder="Precio mínimo" />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="precioMax" class="form-control" placeholder="Precio máximo" />
+                </div>
+                <div class="col-md-3">
+                    <select name="modalidad" class="form-control">
+                        <option value="">Seleccione modalidad</option>
+                        <option value="Local">Local</option>
+                        <option value="Domicilio">Domicilio</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="estado" class="form-control">
+                        <option value="">Seleccione disponibilidad</option>
+                        <option value="true">Disponible</option>
+                        <option value="false">No disponible</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
         <div class="table-responsive shadow-lg rounded">
             <table class="table table-bordered table-striped text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idServicio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.costo)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.descripcion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.tiempoDuracion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.estado)
-                        </th>
+                        <th>@Html.DisplayNameFor(model => model.idServicio)</th>
+                        <th>@Html.DisplayNameFor(model => model.costo)</th>
+                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.tiempoDuracion)</th>
+                        <th>@Html.DisplayNameFor(model => model.estado)</th>
+                        <th>@Html.DisplayNameFor(model => model.modalidad)</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idServicio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.costo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tiempoDuracion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.estado)
-                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
+                            <td>@Html.DisplayFor(modelItem => item.costo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.tiempoDuracion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                            <td>@Html.DisplayFor(modelItem => item.modalidad)</td>
                             <td>
                                 @Html.ActionLink("Reservar", "Create", new { id = item.idServicio }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                @Html.ActionLink("Details", "Details", new { id = item.idServicio }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.idServicio })
                             </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>
-
     </div>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>

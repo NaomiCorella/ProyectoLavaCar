@@ -154,6 +154,7 @@ CREATE TABLE Servicios (
     costo DECIMAL(10,2) NOT NULL,
     nombre NVARCHAR(100) NOT NULL,
     descripcion NVARCHAR(200)NOT NULL,
+	 modalidad VARCHAR(100) NOT NULL,
     tiempoDuracion NVARCHAR(20)NOT NULL,
     estado BIT NOT NULL
 );
@@ -162,13 +163,13 @@ GO
 -- Tabla Reservas
 CREATE TABLE Reservas (
     idReserva INT IDENTITY PRIMARY KEY NOT NULL,
-    idUsuario [nvarchar](128) NOT NULL,
+    idCliente [nvarchar](128) NOT NULL,
  idEmpleado [nvarchar](128) NOT NULL,
     idServicio INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     estado BIT NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
+    FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
 	 FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
     
 );
@@ -210,11 +211,12 @@ idMovimiento int identity primary key not null,
 idProducto int not null, 
 nombre nvarchar(20) not null, 
 cantidad int not null,
+fecha Datetime not null,
 foreign key (idProducto) references Producto(idProducto)
 
 );
-
-
+select * from Movimiento
+drop table Movimiento
 
 
 -- Tabla Compra
@@ -234,6 +236,18 @@ FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
     FOREIGN KEY (idReserva) REFERENCES Reservas(idReserva)
 );
 GO
+-- Tabla Respuestas de resenia
+CREATE TABLE Respuesta (
+    idRespuesta INT IDENTITY PRIMARY KEY NOT NULL,
+    idEmpleado nvarchar (128) NOT NULL,
+    comentarios NVARCHAR(MAX)  NOT NULL,
+    fecha DATE NOT NULL,
+    estado BIT NOT NULL,
+	idResenia int not null, 
+   FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
+      FOREIGN KEY (idResenia) REFERENCES Resenias(idResenia),
+);
+GO
 
 -- Tabla Resenias
 CREATE TABLE Resenias (
@@ -244,10 +258,13 @@ CREATE TABLE Resenias (
     comentarios NVARCHAR(MAX)  NOT NULL,
     fecha DATE NOT NULL,
     estado BIT NOT NULL,
+
     FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio),
    FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
+
 );
 GO
+
 
 -- Tabla Evaluaciones
 CREATE TABLE Evaluaciones (
@@ -285,7 +302,7 @@ BEGIN
     INNER JOIN inserted i ON r.idReserva = i.idReserva;
 END;
 GO
-
+select * from AspNetUsers
 
 SELECT TOP 1 u.Id
 FROM [dbo].[AspNetUsers] u
@@ -298,3 +315,48 @@ ORDER BY NEWID();  -- Esto selecciona un registro aleatorio
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Usuario')
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Empleado')
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Administrador')
+
+INSERT INTO Resenias (idServicio, idCliente, calificacion, comentarios, fecha, estado)  
+VALUES  
+(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Excelente servicio, muy satisfecho.', '2025-02-06', 1),  
+(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Muy bueno, pero hay aspectos por mejorar.', '2025-02-06', 1),  
+(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Servicio promedio, esperaba más.', '2025-02-06', 1);
+
+
+INSERT INTO Respuesta (idEmpleado, comentarios, fecha, estado, idResenia)  
+VALUES  
+('123e4567-e89b-12d3-a456-426614174000', '¡Gracias por tu reseña! Nos alegra que estés satisfecho.', '2025-02-07', 1, 3),  
+('123e4567-e89b-12d3-a456-426614174000', 'Apreciamos tu comentario y trabajaremos en mejorar.', '2025-02-07', 1, 4); 
+;
+
+
+INSERT INTO [dbo].[AspNetUsers]  
+    (Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, nombre, primer_apellido, segundo_apellido,  
+     UserName, estado, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEndDateUtc, LockoutEnabled, AccessFailedCount,  
+     cedula, numeroCuenta, turno, puesto)  
+VALUES  
+    ('123e4567-e89b-12d3-a456-426614174000', 'usuario@example.com', 1, 'hashedpassword123', 'securitystamp123',  
+     '1234567890', 'Juan', 'Pérez', 'Gómez', 'juanperez', 1, 1, 0, NULL, 1, 0,  
+     102345678, '12345678901234567890', 'Mañana', 'Administrador');
+SELECT 
+    r.idResenia,
+    r.idServicio,
+    r.idCliente,
+    r.calificacion,
+    r.comentarios AS ComentarioResenia,
+    r.fecha AS FechaResenia,
+    r.estado AS EstadoResenia,
+    rp.idRespuesta,
+    rp.idEmpleado,
+    rp.comentarios AS ComentarioRespuesta,
+    rp.fecha AS FechaRespuesta,
+    rp.estado AS EstadoRespuesta
+FROM Resenias r
+LEFT JOIN Respuesta rp ON r.idResenia = rp.idResenia;
+
+select * from Respuesta
+INSERT INTO Reservas (idCliente, idEmpleado, idServicio, fecha, hora, estado)  
+VALUES  
+('123e4567-e89b-12d3-a456-426614174000', '123e4567-e89b-12d3-a456-426614174000', 1, '2025-03-10', '10:00', 1);
+
+select * from Reservas

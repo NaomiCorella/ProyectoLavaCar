@@ -22,19 +22,19 @@ namespace ProyectoLavacar.AccesoADatos.ModuloServicios.Listar
         {
             List<ServiciosDto> lalistadeServicios = (from elServicio in _elContexto.ServiciosTabla
                                                      select new ServiciosDto
-                                                    {
-                                                        idServicio = elServicio.idServicio,
-                                                        costo = elServicio.costo,
-                                                        nombre= elServicio.nombre,
-                                                        descripcion = elServicio.descripcion,
-                                                        tiempoDuracion = elServicio.tiempoDuracion,
-                                                        estado = elServicio .estado
-                                                              
-                                                      }).ToList();
+                                                     {
+                                                         idServicio = elServicio.idServicio,
+                                                         costo = elServicio.costo,
+                                                         nombre = elServicio.nombre,
+                                                         descripcion = elServicio.descripcion,
+                                                         tiempoDuracion = elServicio.tiempoDuracion,
+                                                         estado = elServicio.estado,
+                                                         modalidad = elServicio.modalidad
+
+                                                     }).ToList();
             return lalistadeServicios;
         }
     }
 }
-
 
 
