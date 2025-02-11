@@ -30,7 +30,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloInventario.Listar
                                                        precioUnitario = elInventario.precioUnitario,
 
                                                        estado = elInventario.estado,
-                                                       idInventario = elInventario.idInventario,
+                                                       idProducto = elInventario.idProducto,
 
                                                    }).ToList();
             return laListaDeInventario;

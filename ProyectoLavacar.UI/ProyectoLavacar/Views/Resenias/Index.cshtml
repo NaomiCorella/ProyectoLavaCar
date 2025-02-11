@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.ReseniaDto>
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.ReseniaConRespuesta>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +21,6 @@
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -35,14 +34,15 @@
             <table class="table table-bordered table-striped text-center">
                 <thead class="table-dark">
                     <tr>
-
-                       
-                        @*<th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idResenia)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.idCliente)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.idServicio)
-                        </th>*@
+                        </th>
                         <th>
                             @Html.DisplayNameFor(model => model.fecha)
                         </th>
@@ -52,68 +52,101 @@
                         <th>
                             @Html.DisplayNameFor(model => model.comentarios)
                         </th>
+
+                    
                         <th>
-                            @Html.DisplayNameFor(model => model.estado)
+                            @Html.DisplayNameFor(model => model.comentariosRespuesta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estadoResenia)
                         </th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                           
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.idCliente)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idServicio)
-                            </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fecha)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.calificacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.comentarios)
-                            </td>
-                            <td>
-                                @if (item.estado)
-                                {
-                                    <span class="badge bg-success">Activo</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-danger">Inactivo</span>
-                                }
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a href="@Url.Action("Edit", new { id = item.idResenia })" class="btn btn-outline-info btn-sm me-2" title="Editar">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a> 
-                                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                                    @if (item.estado)
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idResenia)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idCliente)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idServicio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fecha)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.calificacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.comentarios)
+                                </td>
+                                
+  
+                                <td>
+                                    @if (string.IsNullOrEmpty(item.comentariosRespuesta))
                                     {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-warning">
-                                            <i class="fas fa-times-circle"></i> Inactivar
-                                        </a>
+                                        <span>No hay respuesta</span>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-success">
-                                            <i class="fas fa-check-circle"></i> Activar
-                                        </a>
+                                        @Html.DisplayFor(modelItem => item.comentariosRespuesta)
                                     }
-                                </div>
+                                </td>
 
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                <td>
+                                    @if (item.estadoResenia)
+                                    {
+                                        <span class="badge bg-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Inactivo</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="@Url.Action("Edit", new { id = item.idResenia })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+
+
+                                        @if (item.estadoResenia)
+                                        {
+                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-warning">
+                                                <i class="fas fa-times-circle"></i> Inactivar
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-success">
+                                                <i class="fas fa-check-circle"></i> Activar
+                                            </a>
+                                        }
+                                        @if (string.IsNullOrEmpty(item.comentariosRespuesta))
+                                        {
+                                            <a href="@Url.Action("ResponderReseña", new { id = item.idResenia })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                                <i class="fas fa-edit"></i> Responder
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+</table>
         </div>
 
     </div>

@@ -40,7 +40,7 @@ namespace ProyectoLavacar.LN.ModuloInventario.Crear
                 precioUnitario = elInventario.precioUnitario,
 
                 estado = elInventario.estado,
-                idInventario = elInventario.idInventario,
+                idProducto = elInventario.idProducto,
 
             };
         }

@@ -1,10 +1,12 @@
 ﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Crear;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.CrearRespuesta;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloReseñas.Crear;
+using ProyectoLavacar.LN.ModuloReseñas.CrearRespuesta;
 using ProyectoLavacar.LN.ModuloReseñas.Editar;
 using ProyectoLavacar.LN.ModuloReseñas.Listar;
 using ProyectoLavacar.LN.ModuloReseñas.ObtenerPorId;
@@ -19,7 +21,7 @@ namespace ProyectoLavacar.Controllers
 {
     public class ReseniasController : Controller
     {
-
+        ICrearRespuestaLN _crearRespuesta;
         ICrearReseniaLN _crearResenia;
          IListarReseniaLN _listarResenia;
         Contexto _context;
@@ -32,11 +34,12 @@ namespace ProyectoLavacar.Controllers
             _context = new Contexto();
             _obtenerPorId = new ObtenerPorIdLN();
             _editarResenia = new EditarReseniaLN();
+            _crearRespuesta = new CrearRespuestaLN();
         }
         // GET: Reseñas
         public ActionResult Index()
         {
-            List<ReseniaDto> lalistadeArchivos = _listarResenia.ListarResenia();
+            List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
             return View(lalistadeArchivos);
         }
 
@@ -141,6 +144,39 @@ namespace ProyectoLavacar.Controllers
             {
 
                 return RedirectToAction("Index", "Home");
+            }
+        }
+        public ActionResult ResponderReseña()
+        {
+            return View();
+        }
+
+        // POST: Reseñas/Create
+        [HttpPost]
+        public async Task<ActionResult> ResponderReseña(RespuestaDto modeloDeRespuesta,int id)
+        {
+            try
+            {
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                RespuestaDto respuesta = new RespuestaDto()
+                {
+                    idRespuesta = modeloDeRespuesta.idRespuesta,
+                    idResenia = id,
+                    idEmpleado = idEmpleado,
+                    comentarios = modeloDeRespuesta.comentarios,
+                    fecha = modeloDeRespuesta.fecha,
+                    estado = modeloDeRespuesta.estado
+                
+                };
+
+                int cantidadDeDatosGuardados = await _crearRespuesta.CrearRespuesta(respuesta);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View();
             }
         }
     }

@@ -1,8 +1,11 @@
 ﻿
+using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloInventario.RegistrarMovimiento;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.BuscarPorIdInventario;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.Listar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.ListarMovimiento;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloInventario.RegistrarMovimiento;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloInventario;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -11,6 +14,8 @@ using ProyectoLavacar.LN.ModuloInventario.BuscarPorId;
 using ProyectoLavacar.LN.ModuloInventario.Crear;
 using ProyectoLavacar.LN.ModuloInventario.Editar;
 using ProyectoLavacar.LN.ModuloInventario.Listar;
+using ProyectoLavacar.LN.ModuloInventario.ListarMovimiento;
+using ProyectoLavacar.LN.ModuloInventario.RegistrarMovimiento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +27,8 @@ namespace ProyectoLavacar.Controllers
 {
     public class InventarioController : Controller
     {
-
+        IListarMovimientoLN _listarMovimientos;
+        IRegistrarMovimientoLN _registrarMovimiento;
         IListarInventarioLN _listarInventario;
         IEditarInventarioLN _editarInventario;
         IBuscarPorIdInventarioLN _BuscarPorIdInventario;
@@ -31,7 +37,8 @@ namespace ProyectoLavacar.Controllers
 
         public InventarioController()
         {
-            
+            _listarMovimientos = new ListarMovimientoLN();
+            _registrarMovimiento = new RegistrarMovimientoLN();
             _listarInventario = new ListarInventarioLN();
             _crearInventario = new CrearInventarioLN();
             _editarInventario = new EditarInventarioLN();
@@ -46,7 +53,12 @@ namespace ProyectoLavacar.Controllers
             List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
             return View(laListaDeInventario);
         }
+        public ActionResult lista(int id)
+        {
 
+            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
+            return PartialView("_lista", elInventario);
+        }
         // GET: Inventario/Details/5
         public ActionResult Details(int id)
         {
@@ -59,6 +71,13 @@ namespace ProyectoLavacar.Controllers
         // GET: Inventario/Create
         public ActionResult Create()
         {
+            ViewBag.Categorias = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Limpieza", Text = "Productos de limpieza" },
+                         new SelectListItem { Value = "Protección", Text = "Productos de protección" },
+                            new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
+                                new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
+                         };
             return View();
         }
 
@@ -68,16 +87,17 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+               
                 var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
                 string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 InventarioDto inventario = new InventarioDto()
                 {
-                    idInventario = modeloDeInvetario.idInventario,
+                    idProducto = modeloDeInvetario.idProducto,
                     nombre = modeloDeInvetario.nombre,
                     categoria =modeloDeInvetario.categoria,
                     cantidadDisponible = modeloDeInvetario.cantidadDisponible,
                     precioUnitario = modeloDeInvetario.precioUnitario,
-                    estado = modeloDeInvetario.estado
+                    estado = true
                     
                 };
 
@@ -90,11 +110,55 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        public ActionResult RegistrarMovimiento()
+        {
+            var productos = _listarInventario.ListarInventario()
+                .Where(a => a.estado == true)
+                .ToList();
+
+
+            ViewBag.Productos = productos;
+
+            ViewBag.Nombres = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Entrada", Text = "Entrada" },
+                         new SelectListItem { Value = "Salida", Text = "Salida" },
+       
+                         };
+            return PartialView("_registrarMovimiento");
+        }
+        [HttpPost]
+        public async Task<ActionResult> RegistrarMovimiento(MovimientoDto modeMovimiento)
+        {
+         
+             
+                int cantidadDeDatosGuardados = await _registrarMovimiento.Registrar(modeMovimiento);
+
+                return RedirectToAction("Index");
+
+
+        }
+        public ActionResult HistorialDeMovimientos()
+        {
+            ViewBag.Title = "Historial de Movimientos";
+            var productos = _listarInventario.ListarInventario();
+            ViewBag.Productos = productos;
+            List<MovimientoDto> lalistademovimientos = _listarMovimientos.ListarInventario();
+
+            return View(lalistademovimientos);
+        }
 
         // GET: Inventario/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
+            ViewBag.Categorias = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Limpieza", Text = "Productos de limpieza" },
+                         new SelectListItem { Value = "Protección", Text = "Productos de protección" },
+                            new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
+                                new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
+                         };
+            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(1);
 
             return View(elInventario);
         }
@@ -105,7 +169,50 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(modeloInventario);
+                InventarioDto elInventario = new InventarioDto()
+                {
+                    nombre = modeloInventario.nombre,
+                    categoria = modeloInventario.categoria,
+                    cantidadDisponible = modeloInventario.cantidadDisponible,
+                    precioUnitario = modeloInventario.precioUnitario,
+                    estado = modeloInventario.estado,
+                    idProducto = modeloInventario.idProducto,
+                };
+                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(elInventario);
+
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Actualizar()
+        {
+            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(1);
+      
+            return View(elInventario);
+        }
+ 
+        // POST: Inventario/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> Actualizar(InventarioDto modeloInventario)
+        {
+            try
+            {
+                InventarioDto elInventario = new InventarioDto()
+                {
+                    nombre = modeloInventario.nombre,
+                    categoria = modeloInventario.categoria,
+                    cantidadDisponible = modeloInventario.cantidadDisponible,
+                    precioUnitario = modeloInventario.precioUnitario,
+                    estado = modeloInventario.estado,
+                    idProducto = modeloInventario.idProducto,
+                };
+                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(elInventario);
 
                 return RedirectToAction("Index");
 
@@ -119,21 +226,7 @@ namespace ProyectoLavacar.Controllers
         // POST: Inventario/Edit/5
         [HttpPost]
 
-        public async Task<ActionResult> Actualizar (InventarioDto modeloInventario)
-        {
-            try
-            {
-                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(modeloInventario);
-
-                return RedirectToAction("Index");
-
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
+   
 
         // GET: Inventario/Delete/5
         public ActionResult Delete(int id)
@@ -174,5 +267,8 @@ namespace ProyectoLavacar.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+       
+
     }
 }

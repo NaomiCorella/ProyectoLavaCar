@@ -4,6 +4,46 @@
     ViewBag.Title = "Index";
 }
 
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+ 
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="ModalDeMovimiento" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registrar Movimiento</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -31,14 +71,23 @@
                 <i class="fas fa-plus me-2"></i> Agregar Producto
             </a>
         </div>
+       
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="abrirModalMovimiento btn btn-outline-primary btn-lg">
+                <i class="fas fa-save me-2"></i> Registrar Movimiento
+            </button>
+            <a href="@Url.Action("HistorialDeMovimientos")" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-times me-2"></i> Historial De Movimientos
+            </a>
+        </div>
 
-        <div class="table-responsive shadow-lg rounded">
+        <div class="table-responsive shadow-lg rounded mt-5 mb-5">
             <table class="table table-bordered table-striped text-center">
                 <thead class="table-dark">
                     <tr>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.idInventario)
+                            @Html.DisplayNameFor(model => model.idProducto)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.nombre)
@@ -65,7 +114,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.idInventario)
+                                @Html.DisplayFor(modelItem => item.idProducto)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.nombre)
@@ -91,30 +140,23 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a href="@Url.Action("Edit", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                    <a href="@Url.Action("Edit", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Editar">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
 
-                                    <a href="@Url.Action("Details", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                    <a href="@Url.Action("Details", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
                                         <i class="fas fa-info-circle"></i> Detalles
                                     </a>
+                                
 
-                                    @*<a href="@Url.Action("Actualizar", new { id = item.idInventario })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
+                                    <a href="@Url.Action("Actualizar", new { id = item.idProducto })" class="btn btn-outline-info btn-sm me-2" title="Actualizar">
                                         <i class="fas fa-edit"></i> ActualizarStock
-                                    </a>*@
+                                    </a>
+                                    <button class="abrirModalbtn btn-outline-info btn-sm me-2" data-id="@item.idProducto">Eliminar</button>
 
-                                    @if (item.estado)
-                                    {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-warning">
-                                            <i class="fas fa-times-circle"></i> Inactivar
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idInventario })" class="btn btn-sm btn-outline-success">
-                                            <i class="fas fa-check-circle"></i> Activar
-                                        </a>
-                                    }
+
+
+
                                 </div>
 
                             </td>
@@ -126,19 +168,24 @@
 
     </div>
 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/Inventario/vistaParcial.js"></script>
+        <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
 
-                <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-                <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-                <script src="~/Content/assets/js/bootstrap.min.js"></script>
-                <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-                <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-                <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-                <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-                <script src="~/Content/assets/js/main.js"></script>
-                <script src="~/Content/assets/js/popper.min.js"></script>
-                <script src="~/Content/assets/js/slick.min.js"></script>
-                <script src="~/Content/assets/js/waypoints.min.js"></script>
-                <script src="~/Content/assets/js/wow.min.js"></script>
+    }
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
 
 </html>

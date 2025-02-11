@@ -118,7 +118,9 @@
     <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioLN.cs" />
     <Compile Include="ModuloInventario\Crear\CrearInventarioLN.cs" />
     <Compile Include="ModuloInventario\Editar\EditarInventarioLN.cs" />
+    <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoLN.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioLN.cs" />
+    <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="ModuloReservas\ListarEncargo\ListarEncargoLN.cs" />
     <Compile Include="ModuloReservas\ListarTodo\ListarTodoReservaLN.cs" />
     <Compile Include="ModuloReservas\ObtenerPorId\ObtenerPorIdReservaLN.cs" />
+    <Compile Include="ModuloReseñas\CrearRespuesta\CrearRespuestaLN.cs" />
     <Compile Include="ModuloReseñas\Crear\CrearReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Editar\EditarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
@@ -155,5 +158,6 @@
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

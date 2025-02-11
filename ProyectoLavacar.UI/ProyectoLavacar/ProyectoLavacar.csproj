@@ -464,6 +464,11 @@
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900d41d.eot" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\Inventario\alertaStock.js" />
+    <Content Include="Scripts\Inventario\alertaEditar.js" />
+    <Content Include="Scripts\Inventario\alertaCrear.js" />
+    <Content Include="Scripts\Inventario\ModalMovimiento.js" />
+    <Content Include="Scripts\Inventario\vistaParcial.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
@@ -474,6 +479,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Resenias\alertaCrear.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -488,7 +494,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Resenias\Index.cshtml" />
     <Content Include="Views\Resenias\Create.cshtml" />
     <Content Include="Views\Reservas\Create.cshtml" />
     <Content Include="Views\Reservas\Index.cshtml" />
@@ -534,15 +539,19 @@
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
-    <Content Include="Views\Inventario\Actualizar.cshtml" />
     <Content Include="Views\Account\changePassword.cshtml" />
     <Content Include="Views\Account\changePasswordSuccess.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Inventario\_lista.cshtml" />
+    <Content Include="Views\Inventario\Actualizar.cshtml" />
+    <Content Include="Views\Resenias\Index.cshtml" />
+    <Content Include="Views\Resenias\ResponderReseña.cshtml" />
+    <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
+    <Content Include="Views\Inventario\HistorialDeMovimientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reseñas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

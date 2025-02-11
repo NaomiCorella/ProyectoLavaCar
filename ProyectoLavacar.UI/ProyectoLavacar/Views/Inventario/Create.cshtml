@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
 }
 
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -24,13 +25,13 @@
 
 <body>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="container mt-5 mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">Agregar Producto al Inventario</h2>
+                <h2 class="mb-0">Ver mi inventario</h2>
             </div>
 
             <div class="card shadow-lg rounded">
@@ -42,12 +43,12 @@
 
                         <div class="form-row">
                             @*<div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.idInventario, htmlAttributes: new { @class = "control-label" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.idInventario, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.idInventario, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                @Html.LabelFor(model => model.idInventario, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idInventario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.idInventario, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label" })
@@ -58,23 +59,25 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.categoria, htmlAttributes: new { @class = "control-label" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.categoria, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.precioUnitario, htmlAttributes: new { @class = "control-label" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.precioUnitario, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.precioUnitario, "", new { @class = "text-danger" })
-                                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.categoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.categoria,
+                                    new SelectList(ViewBag.Categorias, "Value", "Text"),
+                                    "-- Seleccione una Categoria --",
+                                    new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.precioUnitario, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.precioUnitario, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.precioUnitario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -86,25 +89,27 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label d-none" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
-                                        @Html.EditorFor(model => model.estado)
-                                        @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "d-none" } })
+                                        @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger d-none" })
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-outline-success btn-lg">
-                                <i class="fas fa-save me-2"></i> Agregar Producto
+                                <i class="fas fa-save me-2" onsubmit="mostrarAlerta()"></i> Agregar Producto
                             </button>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        
     }
 
     <div class="text-center mt-4">
@@ -113,10 +118,13 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/Inventario/alertaCrear.js"></script>
+
     }
+   
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

@@ -21,9 +21,8 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloInventario
                 categoria = elInventario.categoria,
                 cantidadDisponible = elInventario.cantidadDisponible,
                 precioUnitario = elInventario.precioUnitario,
-
                 estado = elInventario.estado,
-                idInventario = elInventario.idInventario,
+                idProducto = elInventario.idProducto,
 
             };
         }

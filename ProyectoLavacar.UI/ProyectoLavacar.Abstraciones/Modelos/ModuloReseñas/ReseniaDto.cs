@@ -15,5 +15,6 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
         public int calificacion { get; set; }
         public string comentarios { get; set; }
         public bool estado { get; set; } = true;
+ 
     }
 }
