@@ -136,8 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ScriptBaseDeDatos\BaseDeDatosLavaCar.sql" />
-    <Content Include="ScriptBaseDeDatos\LavaCarBD %282%29.sql" />
+    <Content Include="ScriptBaseDeDatos\LavaCarBD.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AccesoADatos\Interfaces\ModuloInventario\Actualizar\" />

@@ -18,3 +18,9 @@ C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.A
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
 C:\Users\ncore\source\repos\ProyectoLavaCar\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\bin\Debug\ProyectoLavacar.Abstraciones.pdb
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.AssemblyReference.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.csproj.CoreCompileInputs.cache
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.dll
+E:\fidelitas\setimocuatrimestre\diseño y desarrollo\ProyectoLavacar.UI\ProyectoLavacar.Abstraciones\obj\Debug\ProyectoLavacar.Abstraciones.pdb
