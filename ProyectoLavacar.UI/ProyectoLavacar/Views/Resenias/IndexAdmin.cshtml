@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.ReseniaConRespuesta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "IndexAdmin";
 }
 
 <!DOCTYPE html>
@@ -25,26 +25,26 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <body>
-
-    @using (Html.BeginForm("Index", "Resenias", FormMethod.Get))
-    {
-        <div class="container mt-5 mb-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">Administración de Reseñas</h2>
-                <div class="d-flex">
-                    <select name="ordenarPor" id="ordenarPor" class="form-control mr-2">
-                        <option value="fecha" @(Request["ordenarPor"] == "fecha" ? "selected" : "")>Fecha</option>
-                        <option value="calificacion" @(Request["ordenarPor"] == "calificacion" ? "selected" : "")>Calificación</option>
-                    </select>
-                    <select name="orden" id="orden" class="form-control">
-                        <option value="asc" @(Request["orden"] == "asc" ? "selected" : "")>Ascendente</option>
-                        <option value="desc" @(Request["orden"] == "desc" ? "selected" : "")>Descendente</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary ml-2">Ordenar</button>
+    <div class="container mt-4">
+        @using (Html.BeginForm("IndexAdmin", "Resenias", FormMethod.Get))
+        {
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="text" name="filtroUsuario" class="form-control" placeholder="Filtrar por Usuario">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="filtroContenido" class="form-control" placeholder="Filtrar por Contenido">
+                </div>
+                <div class="col-md-3">
+                    <input type="date" name="filtroFecha" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <a href="@Url.Action("IndexAdmin", "Resenias")" class="btn btn-secondary">Restablecer</a>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
     {
         <div class="container mt-5 mb-5">
@@ -171,7 +171,7 @@
 
         </div>
     }
-    
+    <script src="~/Scripts/Resenias/indexAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -188,4 +188,4 @@
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
 
-</html>
+</ht
