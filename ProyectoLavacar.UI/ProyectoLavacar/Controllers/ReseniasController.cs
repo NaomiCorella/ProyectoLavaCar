@@ -58,6 +58,28 @@ namespace ProyectoLavacar.Controllers
             return View(lalistadeArchivos);
         }
 
+        public ActionResult IndexAdmin(string filtroFecha = "", string filtroUsuario = "", string filtroContenido = "")
+        {
+            List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
+
+            if (!string.IsNullOrEmpty(filtroUsuario))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.idCliente.ToString().Contains(filtroUsuario)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(filtroContenido))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.comentarios.Contains(filtroContenido)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(filtroFecha))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.fecha.ToString() == filtroFecha).ToList();
+            }
+
+            return View(lalistadeArchivos);
+        }
+
 
 
         // GET: Reseñas/Details/5

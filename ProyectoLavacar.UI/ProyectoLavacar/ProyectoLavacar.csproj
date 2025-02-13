@@ -482,6 +482,7 @@
     <Content Include="Scripts\Resenias\alertaCrear.js" />
     <Content Include="Scripts\Resenias\AlertaEliminar_Inactivar.js" />
     <Content Include="Scripts\Resenias\AlertaResenia.js" />
+    <Content Include="Scripts\Resenias\indexAdmin.js" />
     <Content Include="Scripts\Resenias\OrdenarListaResenia.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -552,6 +553,7 @@
     <Content Include="Views\Resenias\ResponderReseña.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
     <Content Include="Views\Inventario\HistorialDeMovimientos.cshtml" />
+    <Content Include="Views\Resenias\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
