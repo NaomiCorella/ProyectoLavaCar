@@ -9,11 +9,11 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
 {
     public class ReseniaDto
     {
-        [Display(Name = "Fecha de Evaluacion")]
+        
         public int idResenia { get; set; }
-        [Display(Name = "Fecha de Evaluacion")]
+        
         public string idCliente { get; set; }
-        [Display(Name = "Fecha de Evaluacion")]
+        
         public int idServicio { get; set; }
         [Display(Name = "Fecha")]
         public string fecha { get; set; }
