@@ -34,7 +34,7 @@ using System.Web.Mvc;
 namespace ProyectoLavacar.Controllers
 {
 
-  
+
 
     public class ReservasController : Controller
     {
@@ -44,14 +44,14 @@ namespace ProyectoLavacar.Controllers
         IListarDisponiblesLN _listarReservasClientes;
         IListarEncargoLN _listarReservasEmpleado;
         IListarTodoReservaLN _listarReservasAdmin;
-        IObtenerPorIdReservaLN _detallesReserva; 
+        IObtenerPorIdReservaLN _detallesReserva;
         IListarServiciosLN _listarServicios;
         Contexto _context;
-   
+
 
         public ReservasController()
         {
-    
+
             _crearReserva = new CrearReservaLN();
             _editarReservaAdmin = new EditarReservaLN();
             _editarReservaCliente = new EditarClienteLN();
@@ -94,6 +94,28 @@ namespace ProyectoLavacar.Controllers
             return View("Index", servicios.ToList());
         }
 
+        public ActionResult FiltrarReservas(string fechaInicio, string fechaFin)
+        {
+            var reservas = _listarReservasAdmin.ListarReservasTodo().ToList(); // Obtener datos primero
+
+            // Intentar convertir los valores de entrada a DateTime
+            DateTime fechaInicioDT, fechaFinDT;
+            bool tieneFechaInicio = DateTime.TryParse(fechaInicio, out fechaInicioDT);
+            bool tieneFechaFin = DateTime.TryParse(fechaFin, out fechaFinDT);
+
+            if (tieneFechaInicio)
+            {
+                reservas = reservas.Where(r => DateTime.Parse(r.fecha) >= fechaInicioDT).ToList();
+            }
+
+            if (tieneFechaFin)
+            {
+                reservas = reservas.Where(r => DateTime.Parse(r.fecha) <= fechaFinDT).ToList();
+            }
+
+            return View("Reservas", reservas);
+        }
+
 
         public ActionResult Index()
         {
@@ -113,7 +135,7 @@ namespace ProyectoLavacar.Controllers
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-           
+
             List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
             return View(lalistaDeReservas);
         }
@@ -126,7 +148,7 @@ namespace ProyectoLavacar.Controllers
             return View(lalistaDeReservas);
         }
 
-        
+
 
         // GET: Reservas/Details/5
         public ActionResult Details(int id)
@@ -241,8 +263,8 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-        
-        int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
+
+                int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
 
                 return RedirectToAction("Index");
             }

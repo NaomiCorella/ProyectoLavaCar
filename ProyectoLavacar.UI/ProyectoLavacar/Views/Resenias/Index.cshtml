@@ -25,44 +25,64 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Administración de Reseñas</h2>
+
+    @using (Html.BeginForm("Index", "Resenias", FormMethod.Get))
+    {
+        <div class="container mt-5 mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Administración de Reseñas</h2>
+                <div class="d-flex">
+                    <select name="ordenarPor" id="ordenarPor" class="form-control mr-2">
+                        <option value="fecha" @(Request["ordenarPor"] == "fecha" ? "selected" : "")>Fecha</option>
+                        <option value="calificacion" @(Request["ordenarPor"] == "calificacion" ? "selected" : "")>Calificación</option>
+                    </select>
+                    <select name="orden" id="orden" class="form-control">
+                        <option value="asc" @(Request["orden"] == "asc" ? "selected" : "")>Ascendente</option>
+                        <option value="desc" @(Request["orden"] == "desc" ? "selected" : "")>Descendente</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary ml-2">Ordenar</button>
+                </div>
+            </div>
         </div>
+    }
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
+    {
+        <div class="container mt-5 mb-5">
 
-        <div class="table-responsive shadow-lg rounded">
-            <table class="table table-bordered table-striped text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idResenia)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idCliente)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idServicio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.fecha)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.calificacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.comentarios)
-                        </th>
 
-                    
-                        <th>
-                            @Html.DisplayNameFor(model => model.comentariosRespuesta)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.estadoResenia)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
+            <div class="table-responsive shadow-lg rounded">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.idResenia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.idCliente)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.idServicio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fecha)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.calificacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.comentarios)
+                            </th>
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.comentariosRespuesta)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.estadoResenia)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -86,8 +106,8 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.comentarios)
                                 </td>
-                                
-  
+
+
                                 <td>
                                     @if (string.IsNullOrEmpty(item.comentariosRespuesta))
                                     {
@@ -137,7 +157,7 @@
                                         }
                                         else
                                         {
-                                            
+
                                         }
 
                                     </div>
@@ -146,11 +166,13 @@
                             </tr>
                         }
                     </tbody>
-</table>
+                </table>
+            </div>
+
         </div>
-
-    </div>
-
+    }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
