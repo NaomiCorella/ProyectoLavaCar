@@ -23,7 +23,7 @@ namespace ProyectoLavacar.Controllers
     {
         ICrearRespuestaLN _crearRespuesta;
         ICrearReseniaLN _crearResenia;
-         IListarReseniaLN _listarResenia;
+        IListarReseniaLN _listarResenia;
         Contexto _context;
         IEditarReseniaLN _editarResenia;
         IObtenerPorIdLN _obtenerPorId;
@@ -37,11 +37,28 @@ namespace ProyectoLavacar.Controllers
             _crearRespuesta = new CrearRespuestaLN();
         }
         // GET: Reseñas
-        public ActionResult Index()
+        public ActionResult Index(string ordenarPor = "fecha", string orden = "asc")
         {
             List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
+
+            // Ordenar según los parámetros
+            if (ordenarPor == "fecha")
+            {
+                lalistadeArchivos = orden == "asc"
+                    ? lalistadeArchivos.OrderBy(r => r.fecha).ToList()
+                    : lalistadeArchivos.OrderByDescending(r => r.fecha).ToList();
+            }
+            else if (ordenarPor == "calificacion")
+            {
+                lalistadeArchivos = orden == "asc"
+                    ? lalistadeArchivos.OrderBy(r => r.calificacion).ToList()
+                    : lalistadeArchivos.OrderByDescending(r => r.calificacion).ToList();
+            }
+
             return View(lalistadeArchivos);
         }
+
+
 
         // GET: Reseñas/Details/5
         public ActionResult Details(int id)
@@ -65,8 +82,8 @@ namespace ProyectoLavacar.Controllers
                 string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 ReseniaDto resenia = new ReseniaDto()
                 {
-                    idResenia= modeloDeResenia.idResenia,
-                    idCliente= idCliente,
+                    idResenia = modeloDeResenia.idResenia,
+                    idCliente = idCliente,
                     idServicio = modeloDeResenia.idServicio,
                     calificacion = modeloDeResenia.calificacion,
                     comentarios = modeloDeResenia.comentarios,
@@ -78,7 +95,7 @@ namespace ProyectoLavacar.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -87,7 +104,7 @@ namespace ProyectoLavacar.Controllers
         // GET: Reseñas/Edit/5
         public ActionResult Edit(int id)
         {
-            ReseniaDto reseña =_obtenerPorId.Detalle(id);
+            ReseniaDto reseña = _obtenerPorId.Detalle(id);
             return View(reseña);
         }
 
@@ -153,7 +170,7 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Reseñas/Create
         [HttpPost]
-        public async Task<ActionResult> ResponderReseña(RespuestaDto modeloDeRespuesta,int id)
+        public async Task<ActionResult> ResponderReseña(RespuestaDto modeloDeRespuesta, int id)
         {
             try
             {
@@ -167,7 +184,7 @@ namespace ProyectoLavacar.Controllers
                     comentarios = modeloDeRespuesta.comentarios,
                     fecha = modeloDeRespuesta.fecha,
                     estado = modeloDeRespuesta.estado
-                
+
                 };
 
                 int cantidadDeDatosGuardados = await _crearRespuesta.CrearRespuesta(respuesta);

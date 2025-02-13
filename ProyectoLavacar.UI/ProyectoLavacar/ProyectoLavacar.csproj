@@ -480,6 +480,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Resenias\alertaCrear.js" />
+    <Content Include="Scripts\Resenias\AlertaEliminar_Inactivar.js" />
+    <Content Include="Scripts\Resenias\AlertaResenia.js" />
+    <Content Include="Scripts\Resenias\OrdenarListaResenia.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

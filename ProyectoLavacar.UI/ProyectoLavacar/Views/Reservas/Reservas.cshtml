@@ -6,83 +6,76 @@
 
 <h2>Reservas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idReserva)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCliente)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idEmpleado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idServicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idReserva)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idCliente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idEmpleado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idServicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hora)
-        </td>
-        <td>
-            @if (item.estado)
-            {
-                <span class="badge bg-success">Activo</span>
-            }
-            else
-            {
-                <span class="badge bg-danger">Inactivo</span>
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { idReserva = item.idReserva }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            @if (item.estado)
-            {
-                @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
-            }
-            else
-            {
-                @Html.ActionLink("Activar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
-            }
-            @if (item.estado == true)
-            {
-
-            }
-        </td>
-    </tr>
+<!-- Formulario de Filtro -->
+@using (Html.BeginForm("FiltrarReservas", "Reservas", FormMethod.Get))
+{
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+            <input type="date" name="fechaInicio" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="fechaFin" class="form-label">Fecha Fin:</label>
+            <input type="date" name="fechaFin" class="form-control" />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
 }
 
+<p>
+    @Html.ActionLink("Crear Nueva Reserva", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.idReserva)</th>
+            <th>@Html.DisplayNameFor(model => model.idCliente)</th>
+            <th>@Html.DisplayNameFor(model => model.idEmpleado)</th>
+            <th>@Html.DisplayNameFor(model => model.idServicio)</th>
+            <th>@Html.DisplayNameFor(model => model.fecha)</th>
+            <th>@Html.DisplayNameFor(model => model.hora)</th>
+            <th>@Html.DisplayNameFor(model => model.estado)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.idReserva)</td>
+                <td>@Html.DisplayFor(modelItem => item.idCliente)</td>
+                <td>@Html.DisplayFor(modelItem => item.idEmpleado)</td>
+                <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
+                <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+                <td>@Html.DisplayFor(modelItem => item.hora)</td>
+                <td>
+                    @if (item.estado)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-danger" })
+
+                    @if (item.estado)
+                    {
+                        @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Activar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
