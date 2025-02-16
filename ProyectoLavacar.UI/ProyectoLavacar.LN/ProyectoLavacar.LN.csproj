@@ -102,6 +102,9 @@
   <ItemGroup>
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloNomina\ConvertirAjustesSalarialesDtoAAjustesSalarialesTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloNomina\ConvertirNominaDtoANominaTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloNomina\ConvertirTramitesDtoATramitesTabla.cs" />
     <Compile Include="General\Conversiones\ModuloResenias\ConvertirResenia.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
@@ -121,6 +124,14 @@
     <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoLN.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioLN.cs" />
     <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoLN.cs" />
+    <Compile Include="ModuloNomina\CrearAjustesSalariales\CrearAjustesSalarialesLN.cs" />
+    <Compile Include="ModuloNomina\CrearNomina\CrearNominaLN.cs" />
+    <Compile Include="ModuloNomina\CrearTramites\CrearTramitesLN.cs" />
+    <Compile Include="ModuloNomina\CrearTramites\TramitessDto.cs" />
+    <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletoLN.cs" />
+    <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
+    <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
+    <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />
