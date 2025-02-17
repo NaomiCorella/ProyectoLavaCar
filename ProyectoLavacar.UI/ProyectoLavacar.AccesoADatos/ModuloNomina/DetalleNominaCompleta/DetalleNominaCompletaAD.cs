@@ -57,7 +57,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
                                numeroCuenta = usuario.numeroCuenta
                            };
 
-            return consulta/*FirstOrDefault()*/; 
+            return consulta.FirstOrDefault(); 
         }
     }
 }
