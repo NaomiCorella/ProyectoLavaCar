@@ -10,7 +10,7 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.List
 {
     public interface IListarGeneralAD
     {
-       List<GeneralDto> ListarGeneral();
+       List<GeneralDto> ListarGeneralTodo();
     }
 }
 

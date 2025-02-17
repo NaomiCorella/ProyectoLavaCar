@@ -20,7 +20,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ListarUnicoEmpleado
             _listarUnicoEmpleadoAD = new ListarUnicoEmpleadoAD();
         }
 
-        public List<UnicoEmpleadoDto> ListarNomina(int idEmpleado)
+        public List<UnicoEmpleadoDto> ListarNomina(string idEmpleado)
         {
             List<UnicoEmpleadoDto> listaUnicoEmpleado = _listarUnicoEmpleadoAD.ListarUnicoEmpleado(idEmpleado);
             return listaUnicoEmpleado;

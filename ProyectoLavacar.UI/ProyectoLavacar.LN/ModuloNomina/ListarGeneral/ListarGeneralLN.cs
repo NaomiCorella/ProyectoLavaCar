@@ -23,7 +23,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ListarGeneral
 
         public List<GeneralDto> ListarNomina()
         {
-            List<GeneralDto> laListaDeNominasEmpleado = _listarGeneralAD.ListarGeneral();
+            List<GeneralDto> laListaDeNominasEmpleado = _listarGeneralAD.ListarGeneralTodo();
             return laListaDeNominasEmpleado;
         }
 
