@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.Editar;
+using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +19,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.EditarNomina
         }
         public async Task<int> EditarNomina(NominaTabla elNominaParaEditar)
         {
-            NominaTabla elNominaEnBaseDeDatos = _elcontexto.NominaTabla.Where(elNomina => elNomina.Id == elNominaParaEditar.Id).FirstOrDefault();
+            NominaTabla elNominaEnBaseDeDatos = _elcontexto.NominaTabla.Where(elNomina => elNomina.IdNomina == elNominaParaEditar.IdNomina).FirstOrDefault();
             elNominaEnBaseDeDatos.IdNomina = elNominaParaEditar.IdNomina;
             elNominaEnBaseDeDatos.IdEmpleado = elNominaParaEditar.IdEmpleado;
             elNominaEnBaseDeDatos.SalarioNeto = elNominaParaEditar.SalarioNeto;

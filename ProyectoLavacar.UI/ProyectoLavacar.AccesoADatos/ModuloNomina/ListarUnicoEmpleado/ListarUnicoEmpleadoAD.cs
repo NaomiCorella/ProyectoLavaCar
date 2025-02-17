@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.ListarUnicoEmpleado;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,19 +20,19 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarUnicoEmpleado
     public List<UnicoEmpleadoDto> ListarUnicoEmpleado(string idEmpleado)
     {
         List<UnicoEmpleadoDto> lalistaDeUnicoEmpleado = (from elUnicoEmpleado in _elContexto.NominaTabla
-                                                         join empleados in _elContexto.UsuariosTabla on elUnicoEmpleado.idEmpleado equals empleados.Id
-                                                         where elUnicoEmpleado.idEmpleado == idEmpleado
+                                                         join empleados in _elContexto.UsuariosTabla on elUnicoEmpleado.IdEmpleado equals empleados.Id
+                                                         where elUnicoEmpleado.IdEmpleado == idEmpleado
 
 
                                                          select new UnicoEmpleadoDto
                                                          {
-                                                             IdNomina = nomina.IdNomina,
-                                                             SalarioNeto = nomina.SalarioNeto,
-                                                             SalarioBruto = nomina.SalarioBruto,
-                                                             FechaDePago = nomina.FechaDePago,
+                                                             IdNomina = elUnicoEmpleado.IdNomina,
+                                                             SalarioNeto = elUnicoEmpleado.SalarioNeto,
+                                                             SalarioBruto = elUnicoEmpleado.SalarioBruto,
+                                                             FechaDePago = elUnicoEmpleado.FechaDePago,
 
-                                                             IdEmpleado = usuario.Id,
-                                                             nombre = usuario.nombre,
+                                                             IdEmpleado = empleados.Id,
+                                                             nombre = empleados.nombre,
 
                                                          }).ToList();
         return lalistaDeUnicoEmpleado;

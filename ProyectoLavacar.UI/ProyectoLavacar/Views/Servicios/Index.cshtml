@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloServicios.ServiciosDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Servicios</h2>
+        </div>
+
+        <form method="get" action="@Url.Action("FiltrarServicios")" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre del servicio" />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="precioMin" class="form-control" placeholder="Precio mínimo" />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="precioMax" class="form-control" placeholder="Precio máximo" />
+                </div>
+                <div class="col-md-3">
+                    <select name="modalidad" class="form-control">
+                        <option value="">Seleccione modalidad</option>
+                        <option value="Local">Local</option>
+                        <option value="Domicilio">Domicilio</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="estado" class="form-control">
+                        <option value="">Seleccione disponibilidad</option>
+                        <option value="true">Disponible</option>
+                        <option value="false">No disponible</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.idServicio)</th>
+                        <th>@Html.DisplayNameFor(model => model.costo)</th>
+                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.tiempoDuracion)</th>
+                        <th>@Html.DisplayNameFor(model => model.estado)</th>
+                        <th>@Html.DisplayNameFor(model => model.modalidad)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
+                            <td>@Html.DisplayFor(modelItem => item.costo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.tiempoDuracion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                            <td>@Html.DisplayFor(modelItem => item.modalidad)</td>
+                            <td>
+                                @Html.ActionLink("Reservar", "Create", new { id = item.idServicio }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.idServicio }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.idServicio })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

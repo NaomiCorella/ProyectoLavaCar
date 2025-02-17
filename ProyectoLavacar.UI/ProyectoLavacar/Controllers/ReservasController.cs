@@ -45,7 +45,7 @@ namespace ProyectoLavacar.Controllers
         IListarEncargoLN _listarReservasEmpleado;
         IListarTodoReservaLN _listarReservasAdmin;
         IObtenerPorIdReservaLN _detallesReserva;
-        IListarServiciosLN _listarServicios;
+     
         Contexto _context;
 
 
@@ -59,40 +59,10 @@ namespace ProyectoLavacar.Controllers
             _listarReservasEmpleado = new ListarEncargoLN();
             _listarReservasAdmin = new ListarTodoReservaLN();
             _detallesReserva = new ObtenerPorIdReservaLN();
-            _listarServicios = new ListarServiciosLN();
+          
             _context = new Contexto();
         }
-        public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
-        {
-            var servicios = _listarServicios.ListarServicios().AsQueryable();
-
-            if (!string.IsNullOrEmpty(nombre))
-            {
-                servicios = servicios.Where(s => s.nombre.Contains(nombre));
-            }
-
-            if (precioMin.HasValue)
-            {
-                servicios = servicios.Where(s => s.costo >= precioMin.Value);
-            }
-
-            if (precioMax.HasValue)
-            {
-                servicios = servicios.Where(s => s.costo <= precioMax.Value);
-            }
-
-            if (!string.IsNullOrEmpty(modalidad))
-            {
-                servicios = servicios.Where(s => s.modalidad == modalidad);
-            }
-
-            if (estado.HasValue)
-            {
-                servicios = servicios.Where(s => s.estado == estado.Value);
-            }
-
-            return View("Index", servicios.ToList());
-        }
+       
 
         public ActionResult FiltrarReservas(string fechaInicio, string fechaFin)
         {
@@ -117,14 +87,10 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-        public ActionResult Index()
-        {
-            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
-            return View(lalistaDeReservas);
-        }
+ 
 
         // GET: Reservas
-        public ActionResult Reservas() //ReservasAdmin
+        public ActionResult Index() //ReservasAdmin
         {
             List<ReservasDto> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);

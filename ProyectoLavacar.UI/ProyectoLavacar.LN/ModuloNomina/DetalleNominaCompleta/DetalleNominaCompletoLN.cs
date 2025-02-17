@@ -51,13 +51,13 @@ namespace ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta
                 // Ajustes salariales
                 IdAjusteSalarial = laNomina.IdAjusteSalarial,
                 Monto = laNomina.Monto,
-                Razon = laNomina.Razon,
+                RazonAjuste = laNomina.RazonAjuste,
 
                 // Tramites
                 IdTramite = laNomina.IdTramite,
                 FechaInicio = laNomina.FechaInicio,
                 FechaFin = laNomina.FechaFin,
-                Razon1 = laNomina.Razon1,
+                RazonTramite = laNomina.RazonTramite,
 
                 // Datos del empleado
                 IdEmpleado = laNomina.IdEmpleado,

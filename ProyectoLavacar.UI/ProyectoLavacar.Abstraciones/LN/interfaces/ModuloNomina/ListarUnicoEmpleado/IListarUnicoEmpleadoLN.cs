@@ -10,6 +10,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmp
 {
     public interface IListarUnicoEmpleadoLN
     {
-        List<UnicoEmpleadoDto> ListarNomina(int idEmpleado);
+        List<UnicoEmpleadoDto> ListarNomina(string idEmpleado);
     }
 }

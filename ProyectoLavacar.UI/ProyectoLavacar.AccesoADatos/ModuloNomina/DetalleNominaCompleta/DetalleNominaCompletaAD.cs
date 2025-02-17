@@ -1,4 +1,6 @@
-﻿using ProyectoLavacar.AccesoADatos.ModuloNominaCompleta.Detalles;
+﻿
+using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.DetalleNominaCompleta;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using System;
 using System.Linq;
 
@@ -15,10 +17,10 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
 
         public NominaCompletaDto Detalle(int idNomina)
         {
-            var consulta = from nomina in NominaCompleta
-                           join ajuste in _elContexto.AjustesSalariales on nomina.IdEmpleado equals ajuste.IdEmpleado
-                           join tramite in _elContexto.Tramites on nomina.IdEmpleado equals tramite.IdEmpleado
-                           join usuario in _elContexto.Usuarios on nomina.IdEmpleado equals usuario.Id
+            var consulta = from nomina in _elContexto.NominaTabla
+                           join ajuste in _elContexto.AjustesSalarialesTabla on nomina.IdEmpleado equals ajuste.IdEmpleado
+                           join tramite in _elContexto.TramitesTabla on nomina.IdEmpleado equals tramite.IdEmpleado
+                           join usuario in _elContexto.UsuariosTabla on nomina.IdEmpleado equals usuario.Id
                            where nomina.IdNomina == idNomina
                            select new NominaCompletaDto
                            {
@@ -34,25 +36,25 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
                                DiasUtiliVacaciones = nomina.DiasUtiliVacaciones,
                                Incapacidad = nomina.Incapacidad,
                                TipoDeContrato = nomina.TipoDeContrato,
-                               EstadoNomina = nomina.Estado,
+                               Estado = nomina.Estado,
                                IdAjusteSalarial = ajuste.IdAjusteSalarial,
-                               MontoAjuste = ajuste.Monto,
+                               Monto = ajuste.Monto,
                                RazonAjuste = ajuste.Razon,
                                IdTramite = tramite.IdTramite,
-                               FechaInicioTramite = tramite.FechaInicio,
-                               FechaFinTramite = tramite.FechaFin,
+                               FechaInicio = tramite.FechaInicio,
+                               FechaFin = tramite.FechaFin,
                                RazonTramite = tramite.Razon,
                                IdEmpleado = usuario.Id,
-                               NombreEmpleado = usuario.nombre,
-                               PrimerApellidoEmpleado = usuario.primer_apellido,
-                               SegundoApellidoEmpleado = usuario.segundo_apellido,
-                               TelefonoEmpleado = usuario.PhoneNumber,
-                               CorreoEmpleado = usuario.Email,
-                               CedulaEmpleado = usuario.cedula,
-                               PuestoEmpleado = usuario.puesto,
-                               TurnoEmpleado = usuario.turno,
-                               EstadoEmpleado = usuario.estado,
-                               NumeroCuentaEmpleado = usuario.numeroCuenta
+                               nombre = usuario.nombre,
+                               primer_apellido = usuario.primer_apellido,
+                               segundo_apellido = usuario.segundo_apellido,
+                               telefono = usuario.PhoneNumber,
+                               correo = usuario.Email,
+                               cedula = usuario.cedula,
+                               puesto = usuario.puesto,
+                               turno = usuario.turno,
+                               estado = usuario.estado,
+                               numeroCuenta = usuario.numeroCuenta
                            };
 
             return consulta/*FirstOrDefault()*/; 

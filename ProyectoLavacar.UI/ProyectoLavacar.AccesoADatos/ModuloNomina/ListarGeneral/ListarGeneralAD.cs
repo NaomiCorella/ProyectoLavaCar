@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 
 namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarGeneral
