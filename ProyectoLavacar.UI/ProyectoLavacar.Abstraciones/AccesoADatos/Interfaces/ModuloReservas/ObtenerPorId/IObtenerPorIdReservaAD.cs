@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ObtenerPorId
 {
-    public interface IObtenerPorIdReservaAD
+    public interface IObtenerPorIdNominaAD
     {
-        ReservasTabla Detalle(int idReserva);
+        NominaTabla  Detalle(int idNomina);
     }
 }

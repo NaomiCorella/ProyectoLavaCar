@@ -9,61 +9,94 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idReserva)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCliente)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idEmpleado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idServicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idReserva)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idCliente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idEmpleado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idServicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditarMiReserva", new { idReserva = item.idReserva }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idEmpleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idServicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hora)
+            </th>
+            <th>
+                <p>Estado de la Reserva</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idReserva)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idServicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+                <td>
+                    @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                </td>
+
+
+
+                <td>
+                    @if (item.estado)
+                    {
+                    <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                    <span class="badge bg-danger">Cancelada</span>
+                    }
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "EditarMiReserva", new { idReserva = item.idReserva }) |
+                    @if (item.estado)
+                    {
+                    <a href="@Url.Action("CambiarEstadoCancelacion", new { id = item.idReserva })" class="btn btn-sm btn-outline-warning">
+                        <i class="fas fa-times-circle"></i> Cancelar
+                    </a>
+                    }
+                    else
+                    {
+                    <a href="@Url.Action("CambiarEstadoCancelacion", new { id = item.idReserva })" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-check-circle"></i> Activar
+                    </a>
+                    }
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
 }
 
-</table>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/Scripts/Reservas/CancelacionEActivacion.js"></script>

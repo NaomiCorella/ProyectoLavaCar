@@ -74,6 +74,7 @@
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaAD.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralAD.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoAD.cs" />
+    <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaAD.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaAD.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteAD.cs" />

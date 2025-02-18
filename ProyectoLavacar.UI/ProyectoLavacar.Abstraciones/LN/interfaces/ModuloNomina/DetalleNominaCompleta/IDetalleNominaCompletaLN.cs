@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetalleNominaC
 {
     public interface IDetalleNominaCompletaLN
     {
-
+        NominaCompletaDto Detalle(int idNomina);
     }
 }

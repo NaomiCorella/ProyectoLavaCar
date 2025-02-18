@@ -45,7 +45,7 @@ namespace ProyectoLavacar.Controllers
         IListarEncargoLN _listarReservasEmpleado;
         IListarTodoReservaLN _listarReservasAdmin;
         IObtenerPorIdReservaLN _detallesReserva;
-     
+        IListarServiciosLN _listarServicios;
         Contexto _context;
 
 
@@ -59,10 +59,40 @@ namespace ProyectoLavacar.Controllers
             _listarReservasEmpleado = new ListarEncargoLN();
             _listarReservasAdmin = new ListarTodoReservaLN();
             _detallesReserva = new ObtenerPorIdReservaLN();
-          
+            _listarServicios = new ListarServiciosLN();
             _context = new Contexto();
         }
-       
+        public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
+        {
+            var servicios = _listarServicios.ListarServicios().AsQueryable();
+
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                servicios = servicios.Where(s => s.nombre.Contains(nombre));
+            }
+
+            if (precioMin.HasValue)
+            {
+                servicios = servicios.Where(s => s.costo >= precioMin.Value);
+            }
+
+            if (precioMax.HasValue)
+            {
+                servicios = servicios.Where(s => s.costo <= precioMax.Value);
+            }
+
+            if (!string.IsNullOrEmpty(modalidad))
+            {
+                servicios = servicios.Where(s => s.modalidad == modalidad);
+            }
+
+            if (estado.HasValue)
+            {
+                servicios = servicios.Where(s => s.estado == estado.Value);
+            }
+
+            return View("Index", servicios.ToList());
+        }
 
         public ActionResult FiltrarReservas(string fechaInicio, string fechaFin)
         {
@@ -87,10 +117,14 @@ namespace ProyectoLavacar.Controllers
         }
 
 
- 
+        public ActionResult Index()
+        {
+            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
+            return View(lalistaDeReservas);
+        }
 
         // GET: Reservas
-        public ActionResult Index() //ReservasAdmin
+        public ActionResult Reservas() //ReservasAdmin
         {
             List<ReservasDto> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);
@@ -170,31 +204,31 @@ namespace ProyectoLavacar.Controllers
 
             try
             {
-                // Convertir la fecha y hora recibida en el modelo
+             
                 DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
                 TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
                 DateTime fechaHoraSeleccionada = fechaSeleccionada.Add(horaSeleccionada);
 
-                // Verificar si ya hay una reserva con la misma fecha y hora
+            
                 bool existeReserva = _context.ReservasTabla
                     .Any(r => r.idServicio == id && r.fecha == fechaSeleccionada && r.hora == horaSeleccionada);
 
                 if (existeReserva)
                 {
-                    // Si ya existe una reserva, devolver un error o mensaje
+                 
                     ModelState.AddModelError("", "La fecha y hora seleccionada ya está ocupada. Por favor elige otra.");
                     return View(modeloDeReserva);
                 }
 
-                // Crear el objeto de la reserva si no hay conflictos
+          
                 ReservasDto reserva = new ReservasDto()
                 {
                     idReserva = 1,
                     idCliente = idCliente,
                     idServicio = id,
                     idEmpleado = idCliente,
-                    fecha = modeloDeReserva.fecha, // Fecha seleccionada
-                    hora = modeloDeReserva.hora,   // Hora seleccionada
+                    fecha = modeloDeReserva.fecha, 
+                    hora = modeloDeReserva.hora,  
                     estado = modeloDeReserva.estado
                 };
 
@@ -305,6 +339,26 @@ namespace ProyectoLavacar.Controllers
             {
 
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+
+
+        public ActionResult CambiarEstadoCancelacion(int id)
+        {
+
+            try
+            {
+                var reserva = _context.ReservasTabla.Find(id);
+                reserva.estado = !reserva.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("MisReservas");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("MisReservas");
             }
         }
     }
