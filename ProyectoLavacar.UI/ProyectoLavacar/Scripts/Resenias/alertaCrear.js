@@ -3,10 +3,10 @@
         event.preventDefault(); 
 
         let comentarios = document.getElementById("comentarios").value.trim();
-
+        let calificacion = document.getElementById("calificacion").value.trim();
 
  
-        if (comentarios === "") {
+        if (comentarios === "" && calificacion === "") {
             Swal.fire({
                 title: "Campos incompletos",
                 text: "Por favor, completa todos los campos obligatorios.",

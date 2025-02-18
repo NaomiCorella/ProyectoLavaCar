@@ -1,20 +1,19 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto
 
+
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-
-<h2>Editar </h2>
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Editar</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Administración de Usuarios</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -26,62 +25,35 @@
 </head>
 
 <body>
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>ReservasDto</h4>
+            <h4>Reservas</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="mb-3">
 
-                <div class="col-md-10">
 
-                    @Html.HiddenFor(model => model.idReserva)
-                    @Html.ValidationMessageFor(model => model.idReserva, "", new { @class = "text-danger" })
-                </div>
 
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
 
-            <div class="mb-3">
-
-                <div class="col-md-10">
-
-                    @Html.HiddenFor(model => model.idCliente)
-                    @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "text-danger" })
-                </div>
-
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-
-            @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "control-label" })
-
-            @if (ViewBag.empleados is string message)
+            @if (ViewBag.Servicios is string message)
             {
                 <p>@message</p>
             }
             else
             {
-                @Html.DropDownListFor(model => model.idEmpleado,
-                    new SelectList(ViewBag.empleados, "Id", "nombre"),
-                    "Seleccione un empleado",
+                @Html.DropDownListFor(model => model.idServicio,
+                    new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
+                    "Seleccione un servicio",
                     new { @class = "form-control" })
             }
 
-            @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
         </div>
-
-        @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
-
-        @Html.DropDownListFor(model => model.idServicio,
-            new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
-            "Seleccione un servicio",
-            new { @class = "form-control" })
-
-
-        @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
 
 
         <div class="form-group">
@@ -92,6 +64,7 @@
             </div>
         </div>
 
+
         <div class="form-group">
             @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -101,30 +74,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.estado)
-                    @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Crear Reserva" class="btn btn-primary" />
             </div>
         </div>
 
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+    <div class="text-center mt-4">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-info" })
     </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
@@ -138,4 +104,5 @@
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
+
 </html>

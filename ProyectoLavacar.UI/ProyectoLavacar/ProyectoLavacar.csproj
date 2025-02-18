@@ -569,6 +569,7 @@
     <Content Include="Views\Nomina\IngresarAjustes.cshtml" />
     <Content Include="Views\Nomina\Create.cshtml" />
     <Content Include="Views\Nomina\IngresarTramites.cshtml" />
+    <Content Include="Views\Reservas\ReservarCita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
