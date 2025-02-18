@@ -4,6 +4,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+using ProyectoLavacar.AccesoADatos.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.AccesoADatos.ModuloReservas.ObtenerPorId;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,10 @@ namespace ProyectoLavacar.LN.ModuloNomina.ObtenerPorId
 {
     public class ObtenerPorIdLN : IObtenerPorIdLN
     {
-        IObtenerPorIdNominaAD _obtenerPorIdNominaAD;
+        IObtenerPorIdAD _obtenerPorIdNominaAD;
         public ObtenerPorIdLN()
         {
-            _obtenerPorIdNominaAD = new ObtenerPorIdReservaAD();
+            _obtenerPorIdNominaAD = new ObtenerPorIdAD();
         }
         public NominaDto Detalle(int idNomina)
         {

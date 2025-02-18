@@ -507,7 +507,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Servicios\Index.cshtml" />
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
@@ -560,7 +559,7 @@
     <Content Include="Views\Reservas\Create.cshtml" />
     <Content Include="Views\Reservas\Edit.cshtml" />
     <Content Include="Views\Reservas\EditarMiReserva.cshtml" />
-    <Content Include="Views\Reservas\Index.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
     <Content Include="Views\Reservas\MisReservas.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
     <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
