@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ObtenerPorId
 {
-    public class ObtenerPorIdReservaAD : IObtenerPorIdNominaAD
+    public class ObtenerPorIdReservaAD : IObtenerPorIdReservasAD
     {
         Contexto _elContexto;
 
@@ -18,7 +18,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ObtenerPorId
         }
         public ReservasTabla Detalle(int idReserva)
         {
-            ReservasTabla laPalabraEnBaseDeDatos = _elContexto.ReservasTabla.Where(laReserva => laReserva.idReserva == idReserva).FirstOrDefault();
+            ReservasTabla laPalabraEnBaseDeDatos = _elContexto.ReservasTabla.Where(lareserva => lareserva.idReserva == idReserva).FirstOrDefault();
             return laPalabraEnBaseDeDatos;
         }
     }

@@ -234,7 +234,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("/MisReservas");
             }
             catch (Exception ex)
             {

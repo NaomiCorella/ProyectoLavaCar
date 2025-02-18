@@ -70,7 +70,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarEncargos\IListarEncargoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarTodo\IListarTodoReservaAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ObtenerPorId\IObtenerPorIdReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ObtenerPorId\IObtenerPorIdReservasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Crear\ICrearReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Editar\IEditarReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\ListarTodo\IListarTodoReseniaAD.cs" />

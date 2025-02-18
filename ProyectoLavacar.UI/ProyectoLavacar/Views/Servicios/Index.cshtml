@@ -89,9 +89,9 @@
                             <td>@Html.DisplayFor(modelItem => item.estado)</td>
                             <td>@Html.DisplayFor(modelItem => item.modalidad)</td>
                             <td>
-                                @Html.ActionLink("Reservar", "Create", new { id = item.idServicio }) |
+                                @Html.ActionLink("Reservar", "Create", "Reservas", new { id = item.idServicio }, null)
+                                |
                                 @Html.ActionLink("Details", "Details", new { id = item.idServicio }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.idServicio })
                             </td>
                         </tr>
                     }
