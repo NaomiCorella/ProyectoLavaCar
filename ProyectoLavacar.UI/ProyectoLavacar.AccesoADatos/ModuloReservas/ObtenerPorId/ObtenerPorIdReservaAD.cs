@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ObtenerPorId
 {
-    public class ObtenerPorIdReservaAD : IObtenerPorIdReservaAD
+    public class ObtenerPorIdReservaAD : IObtenerPorIdNominaAD
     {
         Contexto _elContexto;
 

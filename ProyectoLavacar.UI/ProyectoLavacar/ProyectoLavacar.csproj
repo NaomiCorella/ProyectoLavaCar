@@ -310,6 +310,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ReseniasController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
@@ -563,6 +564,12 @@
     <Content Include="Views\Reservas\MisReservas.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
     <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
+    <Content Include="Views\Nomina\Index.cshtml" />
+    <Content Include="Views\Nomina\Nomina.cshtml" />
+    <Content Include="Views\Nomina\Details.cshtml" />
+    <Content Include="Views\Nomina\IngresarAjustes.cshtml" />
+    <Content Include="Views\Nomina\Create.cshtml" />
+    <Content Include="Views\Nomina\IngresarTramites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
