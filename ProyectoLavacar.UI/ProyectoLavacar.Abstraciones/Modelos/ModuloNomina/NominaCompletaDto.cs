@@ -25,13 +25,13 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
 
         public int IdAjusteSalarial { get; set; }
         public decimal Monto { get; set; }
-        public string Razon { get; set; }
+        public string RazonAjuste { get; set; }
 
 
         public int IdTramite { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public string Razon1 { get; set; }
+        public string RazonTramite { get; set; }
 
         public string IdEmpleado { get; set; }
         public string nombre { get; set; }
@@ -39,7 +39,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public string segundo_apellido { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
-        public string cedula { get; set; }
+        public int cedula { get; set; }
         public string puesto { get; set; }
         public string turno { get; set; }
         public bool estado { get; set; }

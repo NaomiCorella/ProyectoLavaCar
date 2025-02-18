@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.Obte
 {
     public interface IObtenerPorIdAD
     {
-        NominaTabla Detalle(string idNomina);
+        NominaTabla Detalle(int idNomina);
     }
 }

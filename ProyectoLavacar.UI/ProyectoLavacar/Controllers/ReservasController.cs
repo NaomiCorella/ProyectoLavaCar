@@ -204,31 +204,31 @@ namespace ProyectoLavacar.Controllers
 
             try
             {
-                // Convertir la fecha y hora recibida en el modelo
+             
                 DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
                 TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
                 DateTime fechaHoraSeleccionada = fechaSeleccionada.Add(horaSeleccionada);
 
-                // Verificar si ya hay una reserva con la misma fecha y hora
+            
                 bool existeReserva = _context.ReservasTabla
                     .Any(r => r.idServicio == id && r.fecha == fechaSeleccionada && r.hora == horaSeleccionada);
 
                 if (existeReserva)
                 {
-                    // Si ya existe una reserva, devolver un error o mensaje
+                 
                     ModelState.AddModelError("", "La fecha y hora seleccionada ya está ocupada. Por favor elige otra.");
                     return View(modeloDeReserva);
                 }
 
-                // Crear el objeto de la reserva si no hay conflictos
+          
                 ReservasDto reserva = new ReservasDto()
                 {
                     idReserva = 1,
                     idCliente = idCliente,
                     idServicio = id,
                     idEmpleado = idCliente,
-                    fecha = modeloDeReserva.fecha, // Fecha seleccionada
-                    hora = modeloDeReserva.hora,   // Hora seleccionada
+                    fecha = modeloDeReserva.fecha, 
+                    hora = modeloDeReserva.hora,  
                     estado = modeloDeReserva.estado
                 };
 
@@ -339,6 +339,26 @@ namespace ProyectoLavacar.Controllers
             {
 
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+
+
+        public ActionResult CambiarEstadoCancelacion(int id)
+        {
+
+            try
+            {
+                var reserva = _context.ReservasTabla.Find(id);
+                reserva.estado = !reserva.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("MisReservas");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("MisReservas");
             }
         }
     }

@@ -132,6 +132,7 @@
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
+    <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />

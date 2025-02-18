@@ -8,7 +8,7 @@
             // Mostrar alerta de confirmación para inactivar
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: '¿Quieres inactivar esta reseña?',
+                text: '¿Quieres cancelar su reservación?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -17,8 +17,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Si el usuario confirma, redirigir a la acción de inactivar
-                    window.location.href = button.href; // Usar el enlace original del botón
+                    window.location.href = button.href; 
                 }
             });
         });
@@ -30,7 +29,7 @@
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: '¿Quieres activar esta reseña?',
+                text: '¿Quieres activar nuevamente su reservación?',
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#28a745',
@@ -45,10 +44,8 @@
             });
         });
     });
-
     document.getElementById("miFormulario").addEventListener("submit", function (event) {
         event.preventDefault();
-
-            event.target.submit(); 
+        event.target.submit();
     });
 });

@@ -50,7 +50,10 @@
                 <td>@Html.DisplayFor(modelItem => item.idEmpleado)</td>
                 <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
                 <td>@Html.DisplayFor(modelItem => item.fecha)</td>
-                <td>@Html.DisplayFor(modelItem => item.hora)</td>
+                
+                <td>
+                    @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                </td>
                 <td>
                     @if (item.estado)
                     {
