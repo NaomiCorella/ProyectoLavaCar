@@ -11,6 +11,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
     public class NominaTabla
     {
        
+       [Key]
         public int IdNomina { get; set; }
         public string IdEmpleado { get; set; }
         public decimal SalarioNeto { get; set; }
