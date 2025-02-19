@@ -77,6 +77,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\Listar\IListarReseniaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReseñas\ObtenerPorId\IObtenerPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloServicios\Listar\IListarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloServicios\ObtenerPorId\IDetallesServicioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Crear\ICrearUsuarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Editar\IEditarUsuarioAD.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="LN\interfaces\ModuloReseñas\Listar\IListarReseniaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReseñas\ObtenerPorId\IObtenerPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloServicios\Listar\IListarServiciosLN.cs" />
+    <Compile Include="LN\interfaces\ModuloServicios\ObtenerPorId\IDetalleServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\BuscarPorId\IBuscarPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
