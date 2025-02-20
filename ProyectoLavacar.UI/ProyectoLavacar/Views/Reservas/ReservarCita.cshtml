@@ -36,33 +36,52 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <!-- Fecha -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
-                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <!-- Hora -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.hora, new { @class = "form-control", type = "time", required = "required" })
-                    @Html.ValidationMessageFor(model => model.hora, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Crear Reserva" class="btn btn-primary" />
-                </div>
+            @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
+
+            @if (ViewBag.Servicios is string message)
+            {
+                <p>@message</p>
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.idServicio,
+                    new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
+                    "Seleccione un servicio",
+                    new { @class = "form-control" })
+            }
+
+            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
+                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.hora, new { @class = "form-control", type = "time", required = "required" })
+                @Html.ValidationMessageFor(model => model.hora, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear Reserva" class="btn btn-primary" />
+            </div>
+        </div>
+
     }
 
-     <div class="text-center mt-4">
+    <div class="text-center mt-4">
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-info" })
     </div>
 

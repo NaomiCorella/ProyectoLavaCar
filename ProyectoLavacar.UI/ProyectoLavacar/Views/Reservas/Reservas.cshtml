@@ -1,84 +1,139 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto>
-
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservaCompleta>
 @{
     ViewBag.Title = "Reservas";
 }
 
 <h2>Reservas</h2>
+<!DOCTYPE html>
+<html lang="zxx">
 
-<!-- Formulario de Filtro -->
-@using (Html.BeginForm("FiltrarReservas", "Reservas", FormMethod.Get))
-{
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
-            <input type="date" name="fechaInicio" class="form-control" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Formulario de Filtro -->
+    @using (Html.BeginForm("FiltrarReservas", "Reservas", FormMethod.Get))
+    {
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+                <input type="date" name="fechaInicio" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="fechaFin" class="form-label">Fecha Fin:</label>
+                <input type="date" name="fechaFin" class="form-control" />
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
         </div>
-        <div class="col-md-4">
-            <label for="fechaFin" class="form-label">Fecha Fin:</label>
-            <input type="date" name="fechaFin" class="form-control" />
-        </div>
-        <div class="col-md-4 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary">Filtrar</button>
-        </div>
+    }
+
+    <div class="table-responsive shadow-lg rounded">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.idReserva)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreCliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreEmpleado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.hora)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idReserva)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreCliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreEmpleado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                            @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                        </td>
+                        <td>
+                            @if (item.estado)
+                            {
+                                <span class="badge bg-success">Activo</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Inactivo</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
+                            @Html.ActionLink("Detalles", "DetallesReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
+
+                            @if (item.estado)
+                            {
+                                @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Activar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-}
 
-<p>
-    @Html.ActionLink("Crear Nueva Reserva", "Create", null, new { @class = "btn btn-success" })
-</p>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.idReserva)</th>
-            <th>@Html.DisplayNameFor(model => model.idCliente)</th>
-            <th>@Html.DisplayNameFor(model => model.idEmpleado)</th>
-            <th>@Html.DisplayNameFor(model => model.idServicio)</th>
-            <th>@Html.DisplayNameFor(model => model.fecha)</th>
-            <th>@Html.DisplayNameFor(model => model.hora)</th>
-            <th>@Html.DisplayNameFor(model => model.estado)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.idReserva)</td>
-                <td>@Html.DisplayFor(modelItem => item.idCliente)</td>
-                <td>@Html.DisplayFor(modelItem => item.idEmpleado)</td>
-                <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
-                <td>@Html.DisplayFor(modelItem => item.fecha)</td>
-                
-                <td>
-                    @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
-                </td>
-                <td>
-                    @if (item.estado)
-                    {
-                        <span class="badge bg-success">Activo</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-danger">Inactivo</span>
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
-                    @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-danger" })
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
 
-                    @if (item.estado)
-                    {
-                        @Html.ActionLink("Inactivar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Activar", "CambiarEstado", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+</html>

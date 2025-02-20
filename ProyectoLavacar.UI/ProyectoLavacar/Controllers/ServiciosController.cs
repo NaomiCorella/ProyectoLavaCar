@@ -1,6 +1,8 @@
 ﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
 using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
+using ProyectoLavacar.LN.ModuloServicios.ObtenerPorId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace ProyectoLavacar.Controllers
     public class ServiciosController : Controller
     {
         IListarServiciosLN _listarServicios;
-
+        IDetalleServiciosLN _detallesServicios;
         public ServiciosController()
         {
             _listarServicios = new ListarServiciosLN();
+            _detallesServicios = new DetalleServiciosLN();
+
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -51,6 +55,7 @@ namespace ProyectoLavacar.Controllers
         // GET: Servicios
         public ActionResult Index()
         {
+           
             List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
             return View(lalistaDeReservas);
         }
@@ -58,7 +63,10 @@ namespace ProyectoLavacar.Controllers
         // GET: Servicios/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ServiciosDto servicio = _detallesServicios.Detalle(id);
+            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
+            ViewBag.servicios = lalistaDeReservas;
+            return View(servicio);
         }
 
         // GET: Servicios/Create

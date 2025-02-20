@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ObtenerPorId
+namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloServicios.ObtenerPorId
 {
-    public interface IObtenerPorIdNominaAD
+     public interface IDetallesServicioAD
     {
-        NominaTabla  Detalle(int idNomina);
+        ServiciosTabla Detalle(int idServicio);
     }
 }
