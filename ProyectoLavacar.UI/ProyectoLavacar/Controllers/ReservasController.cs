@@ -119,17 +119,10 @@ namespace ProyectoLavacar.Controllers
             return View("Reservas", reservas);
         }
 
-
-        public ActionResult Index()
-        {
-            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
-            return View(lalistaDeReservas);
-        }
-
         // GET: Reservas
         public ActionResult Reservas() //ReservasAdmin
         {
-            List<ReservasDto> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);
         }
         // GET: Reservas
@@ -139,7 +132,7 @@ namespace ProyectoLavacar.Controllers
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
 
-            List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
             return View(lalistaDeReservas);
         }
 
@@ -147,7 +140,7 @@ namespace ProyectoLavacar.Controllers
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado)
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado)
                 .OrderByDescending(r => r.estado)
                 .ToList();
 
@@ -352,7 +345,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("/MisReservas");
             }
             catch
             {

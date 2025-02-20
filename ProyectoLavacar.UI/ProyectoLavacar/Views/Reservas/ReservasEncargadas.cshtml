@@ -1,8 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto>
-
-@{
-    ViewBag.Title = "ReservasEncargadas";
-}
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservaCompleta>
 
 <h2>Reservas</h2>
 <!DOCTYPE html>
@@ -35,13 +31,11 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.idCliente)
+                        @Html.DisplayNameFor(model => model.nombreCliente)
                     </th>
+                  
                     <th>
-                        @Html.DisplayNameFor(model => model.idEmpleado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.idServicio)
+                        @Html.DisplayNameFor(model => model.nombreServicio)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.fecha)
@@ -61,13 +55,11 @@
                     <tr>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.idCliente)
+                            @Html.DisplayFor(modelItem => item.nombreCliente)
                         </td>
+                      
                         <td>
-                            @Html.DisplayFor(modelItem => item.idEmpleado)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.idServicio)
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.fecha)
@@ -78,21 +70,21 @@
                         <td>
                             @if (item.estado)
                             {
-                                <span class="badge bg-success">Completada</span>
+                                <span class="badge bg-success">Activa</span>
                             }
                             else
                             {
-                                <span class="badge bg-danger">Incompleta</span>
+                                <span class="badge bg-danger">Inactiva</span>
                             }
                         </td>
                         <td>
                             @if (item.estado)
                             {
-                                @Html.ActionLink("Completada", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
+                                @Html.ActionLink("Inactivar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
                             }
                             else
                             {
-                                @Html.ActionLink("Cancelar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
+                                @Html.ActionLink("Activar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
                             }
                         </td>
                     </tr>

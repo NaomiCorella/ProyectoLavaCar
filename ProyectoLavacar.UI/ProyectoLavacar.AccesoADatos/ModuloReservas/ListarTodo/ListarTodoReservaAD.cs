@@ -19,10 +19,16 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarTodo
             _elContexto = new Contexto();
         }
 
-        public List<ReservasDto> ListarReservasTodo()
+        public List<ReservaCompleta> ListarReservasTodo()
         {
-            List<ReservasDto> lalistadeServicios = (from reserva in _elContexto.ReservasTabla
-                                                     select new ReservasDto
+            List<ReservaCompleta> lalistadeServicios = (from reserva in _elContexto.ReservasTabla
+                                                        join elCliente in _elContexto.UsuariosTabla
+                                                            on reserva.idCliente equals elCliente.Id
+                                                        join elEmpleado in _elContexto.UsuariosTabla
+                                                    on reserva.idEmpleado equals elEmpleado.Id
+                                                        join servicio in _elContexto.ServiciosTabla
+                                                      on reserva.idServicio equals servicio.idServicio
+                                                        select new ReservaCompleta
                                                      {
                                                          idReserva = reserva.idReserva,
                                                          idCliente = reserva.idCliente,
@@ -30,7 +36,10 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarTodo
                                                          idServicio = reserva.idServicio,
                                                          fecha = reserva.fecha.ToString(),
                                                          hora = reserva.hora.ToString(),
-                                                         estado = reserva.estado
+                                                         estado = reserva.estado,
+                                                         nombreCliente= elCliente.nombre,
+                                                         nombreEmpleado = elEmpleado.nombre,
+                                                         nombreServicio= servicio.nombre
                                                      }).ToList();
             return lalistadeServicios;
         }

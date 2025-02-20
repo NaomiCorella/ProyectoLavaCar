@@ -17,17 +17,24 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarDisponibles
             _elContexto = new Contexto();
         }
 
-        public List<ReservasDto> ListarReservasCliente(string idCliente)
+        public List<ReservaCompleta> ListarReservasCliente(string idCliente)
         {
-            List<ReservasDto> lalistadeServicios = (from reserva in _elContexto.ReservasTabla
+            List<ReservaCompleta> lalistadeServicios = (from reserva in _elContexto.ReservasTabla
                                                     join cliente in _elContexto.UsuariosTabla on reserva.idCliente equals cliente.Id
                                                     where reserva.idCliente == idCliente
-                                                    select new ReservasDto
+                                                    join empleados in _elContexto.UsuariosTabla
+                                                           on reserva.idEmpleado equals empleados.Id
+                                                    join servicio in _elContexto.ServiciosTabla
+                                                      on reserva.idServicio equals servicio.idServicio
+                                                    select new ReservaCompleta
                                                     {
                                                         idReserva = reserva.idReserva,
                                                         idCliente = reserva.idCliente,
                                                         idEmpleado = reserva.idEmpleado,
                                                         idServicio = reserva.idServicio,
+                                                        nombreServicio = servicio.nombre,
+                                                        nombreCliente = cliente.nombre,
+                                                        nombreEmpleado = empleados.nombre,
                                                         fecha = reserva.fecha.ToString(),
                                                         hora = reserva.hora.ToString(),
                                                         estado = reserva.estado

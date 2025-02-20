@@ -158,6 +158,7 @@
     <Compile Include="Modelos\ModuloNomina\NominaDto.cs" />
     <Compile Include="Modelos\ModuloNomina\TramitesDto.cs" />
     <Compile Include="Modelos\ModuloNomina\UnicoEmpleadoDto.cs" />
+    <Compile Include="Modelos\ModuloReservas\ReservaCompleta.cs" />
     <Compile Include="Modelos\ModuloReservas\ReservasDto.cs" />
     <Compile Include="Modelos\ModuloReseñas\ReseniaConRespuesta.cs" />
     <Compile Include="Modelos\ModuloReseñas\ReseniaDto.cs" />

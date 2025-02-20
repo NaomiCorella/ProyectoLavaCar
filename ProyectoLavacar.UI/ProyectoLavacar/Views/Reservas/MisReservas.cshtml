@@ -1,10 +1,7 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto>
-
-@{
-    ViewBag.Title = "MisReservas";
-}
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservaCompleta>
 
 
+<h2>Reservas</h2>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -24,18 +21,36 @@
 </head>
 
 <body>
+    <!-- Formulario de Filtro -->
+    @using (Html.BeginForm("FiltrarReservas", "Reservas", FormMethod.Get))
+    {
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+                <input type="date" name="fechaInicio" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="fechaFin" class="form-label">Fecha Fin:</label>
+                <input type="date" name="fechaFin" class="form-control" />
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    }
 
-
-    <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+    <div class="table-responsive shadow-lg rounded">
         <table class="table table-bordered table-striped text-center">
             <thead class="table-dark">
                 <tr>
-                   
                     <th>
-                        @Html.DisplayNameFor(model => model.idEmpleado)
+                        @Html.DisplayNameFor(model => model.idReserva)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.idServicio)
+                        @Html.DisplayNameFor(model => model.nombreEmpleado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.fecha)
@@ -44,7 +59,7 @@
                         @Html.DisplayNameFor(model => model.hora)
                     </th>
                     <th>
-                        <p>Estado de la Reserva</p>
+                        @Html.DisplayNameFor(model => model.estado)
                     </th>
                     <th></th>
                 </tr>
@@ -53,12 +68,13 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                       
+                 
+                        
                         <td>
-                            @Html.DisplayFor(modelItem => item.idEmpleado)
+                            @Html.DisplayFor(modelItem => item.nombreEmpleado)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.idServicio)
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.fecha)
@@ -66,9 +82,6 @@
                         <td>
                             @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
                         </td>
-
-
-
                         <td>
                             @if (item.estado)
                             {
@@ -76,39 +89,29 @@
                             }
                             else
                             {
-                                <span class="badge bg-danger">Cancelada</span>
+                                <span class="badge bg-danger">Inactivo</span>
                             }
                         </td>
-
                         <td>
-                            @Html.ActionLink("Edit", "EditarMiReserva", new { idReserva = item.idReserva }) |
+                            @Html.ActionLink("Editar", "EditarMiReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
+                            @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
+
                             @if (item.estado)
                             {
-                                <a href="@Url.Action("CambiarEstadoCancelacion", new { id = item.idReserva })" class="btn btn-sm btn-outline-warning">
-                                    <i class="fas fa-times-circle"></i> Cancelar
-                                </a>
+                                @Html.ActionLink("Inactivar", "CambiarEstadoCancelacion", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
                             }
                             else
                             {
-                                <a href="@Url.Action("CambiarEstadoCancelacion", new { id = item.idReserva })" class="btn btn-sm btn-outline-success">
-                                    <i class="fas fa-check-circle"></i> Activar
-                                </a>
+                                @Html.ActionLink("Activar", "CambiarEstadoCancelacion", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
                             }
-
-
-
                         </td>
                     </tr>
                 }
-
             </tbody>
         </table>
     </div>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/Scripts/Reservas/CancelacionEActivacion.js"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

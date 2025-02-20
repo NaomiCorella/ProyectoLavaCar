@@ -1,5 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto>
-
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservaCompleta>
 @{
     ViewBag.Title = "Reservas";
 }
@@ -42,34 +41,54 @@
         </div>
     }
 
-    <p>
-        @Html.ActionLink("Crear Nueva Reserva", "Create", null, new { @class = "btn btn-success" })
-    </p>
-
     <div class="table-responsive shadow-lg rounded">
         <table class="table table-bordered table-striped text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.idReserva)</th>
-                    <th>@Html.DisplayNameFor(model => model.idCliente)</th>
-                    <th>@Html.DisplayNameFor(model => model.idEmpleado)</th>
-                    <th>@Html.DisplayNameFor(model => model.idServicio)</th>
-                    <th>@Html.DisplayNameFor(model => model.fecha)</th>
-                    <th>@Html.DisplayNameFor(model => model.hora)</th>
-                    <th>@Html.DisplayNameFor(model => model.estado)</th>
-                    <th>Acciones</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.idReserva)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreCliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreEmpleado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.hora)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.idReserva)</td>
-                        <td>@Html.DisplayFor(modelItem => item.idCliente)</td>
-                        <td>@Html.DisplayFor(modelItem => item.idEmpleado)</td>
-                        <td>@Html.DisplayFor(modelItem => item.idServicio)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fecha)</td>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idReserva)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreCliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreEmpleado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
                         <td>
                             @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
                         </td>
@@ -85,7 +104,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
-                            @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" }) 
+                            @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
 
                             @if (item.estado)
                             {
@@ -101,7 +120,7 @@
             </tbody>
         </table>
     </div>
-  
+
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
