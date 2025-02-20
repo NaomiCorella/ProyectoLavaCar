@@ -19,6 +19,7 @@ using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -57,6 +58,13 @@ namespace ProyectoLavacar.Controllers
 
             return View(lalistadeNomina);
         }
+        public ActionResult ProcesosYGestiones(int idNomina)
+        {
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
+         
+
+            return View(nomina);
+        }
 
         public ActionResult Nomina(string idEmpleado)
         {
@@ -85,8 +93,6 @@ namespace ProyectoLavacar.Controllers
             try
             {
                
-              
-
                 int cantidadDeDatosGuardados = await _crearNomina.RegistrarNomina(modeloDeNomina);
 
                 return RedirectToAction("Index");
@@ -96,19 +102,31 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
-        public ActionResult IngresarAjustes()
+        public ActionResult IngresarAjustes(int idNomina)
         {
+            ViewBag.tipo = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Deduccion", Text = "Deduccion" },
+                         new SelectListItem { Value = "Bonificacion", Text = "Bonificacion" } 
+                         };
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> IngresarAjustes(AjustesSalarialesDto modeloDeAjustes)
+        public async Task<ActionResult> IngresarAjustes(AjustesSalarialesDto modeloDeAjustes, int idNomina)
         {
             try
             {
 
+                AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
+                {
+                    IdAjusteSalarial = modeloDeAjustes.IdAjusteSalarial,
+                    IdNomina = idNomina,
+                    Monto = modeloDeAjustes.Monto,
+                    Razon = modeloDeAjustes.Razon,
+                    tipo = modeloDeAjustes.tipo
+                };
 
-
-                int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(modeloDeAjustes);
+                int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
 
                 return RedirectToAction("Index");
             }
@@ -118,20 +136,33 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult IngresarTramites()
+        public ActionResult IngresarTramites(int idNomina)
         {
+            ViewBag.tipo = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Incapacidad", Text = "Incapacidad" },
+                         new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" }
+                         };
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> IngresarTramites(TramitesDto modeloDeTramites)
+        public async Task<ActionResult> IngresarTramites(TramitesDto modeloDeTramites,int idNomina)
         {
             try
             {
+                TramitesDto tramite = new TramitesDto()
+                {
+                    IdTramite = modeloDeTramites.IdTramite,
+                    IdNomina = idNomina,
+                    FechaFin = modeloDeTramites.FechaFin,
+                    FechaInicio= modeloDeTramites.FechaInicio,
+                    Razon = modeloDeTramites.Razon,
+                    tipo = modeloDeTramites.tipo
+                };
 
 
-
-                int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(modeloDeTramites);
+                int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
 
                 return RedirectToAction("Index");
             }

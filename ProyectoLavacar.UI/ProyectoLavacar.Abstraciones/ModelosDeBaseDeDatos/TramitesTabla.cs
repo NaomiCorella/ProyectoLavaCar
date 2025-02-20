@@ -13,7 +13,6 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         [Key]
         public int IdTramite { get; set; }
 
-        public string IdEmpleado { get; set; }
 
         public DateTime FechaInicio { get; set; }
 
@@ -21,5 +20,8 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public DateTime FechaFin { get; set; }
 
         public string Razon { get; set; }
+
+        public int IdNomina { get; set; }
+        public string tipo { get; set; }
     }
 }

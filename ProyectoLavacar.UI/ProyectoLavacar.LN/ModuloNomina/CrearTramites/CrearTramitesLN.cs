@@ -40,10 +40,11 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             return new TramitesTabla()
             {
                 IdTramite = elTramites.IdTramite,
-                IdEmpleado = elTramites.IdEmpleado,
+                IdNomina = elTramites.IdNomina,
                 FechaInicio = elTramites.FechaInicio,
                 FechaFin = elTramites.FechaFin,
-                Razon = elTramites.Razon
+                Razon = elTramites.Razon,
+                tipo = elTramites.tipo
 
 
             };

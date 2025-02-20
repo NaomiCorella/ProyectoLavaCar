@@ -562,15 +562,16 @@
     <Content Include="Views\Nomina\Index.cshtml" />
     <Content Include="Views\Nomina\Nomina.cshtml" />
     <Content Include="Views\Nomina\Details.cshtml" />
-    <Content Include="Views\Nomina\IngresarAjustes.cshtml" />
     <Content Include="Views\Nomina\Create.cshtml" />
-    <Content Include="Views\Nomina\IngresarTramites.cshtml" />
     <Content Include="Views\Reservas\ReservarCita.cshtml" />
     <Content Include="Views\Servicios\Details.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
     <Content Include="Views\Reservas\MisReservas.cshtml" />
     <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
     <Content Include="Views\Reservas\DetallesReserva.cshtml" />
+    <Content Include="Views\Nomina\IngresarAjustes.cshtml" />
+    <Content Include="Views\Nomina\IngresarTramites.cshtml" />
+    <Content Include="Views\Nomina\ProcesosYGestiones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

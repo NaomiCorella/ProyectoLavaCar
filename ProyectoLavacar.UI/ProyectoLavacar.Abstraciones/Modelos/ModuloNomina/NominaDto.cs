@@ -22,5 +22,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public decimal? Incapacidad { get; set; }
         public string TipoDeContrato { get; set; }
         public bool Estado { get; set; }
+        public decimal totalBono { get; set; }
+        public decimal totalDedu { get; set; }
     }
 }

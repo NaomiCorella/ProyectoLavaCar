@@ -70,7 +70,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta
                 puesto = laNomina.puesto,
                 turno = laNomina.turno,
                 estado = laNomina.estado,
-                numeroCuenta = laNomina.numeroCuenta
+                numeroCuenta = laNomina.numeroCuenta,
+                 totalBono = laNomina.totalBono,
+                totalDedu = laNomina.totalDedu
             };
         }
     }

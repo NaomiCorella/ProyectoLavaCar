@@ -127,26 +127,8 @@ ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo
 GO
 
 -----------------------------------------------------------------------------------------------------------------------------
-
-
-
+select * from AjustesSalariales
 ---------------------------------------------------------------------------------------------------------------------------------------------------
---Tabla de Incapacidades y Vacaciones 
-CREATE TABLE Tramites (
-idTramite int identity primary key not null, 
-idEmpleado nvarchar(128) not null, 
-fechaInicio datetime not null, 
-fechaFin datetime not null, 
-Razon nvarchar(300) not null,
-foreign key(idEmpleado) references AspnetUsers(Id));
-
---Tabla de bonificaciones y deducciones
- CREATE TABLE AjustesSalariales( 
- idAjusteSalariale int identity primary key not null, 
- monto decimal not null, 
- razon nvarchar(300) not null, 
- idEmpleado nvarchar(128) not null, 
- foreign key (idEmpleado) references AspNetUsers(Id)); 
 
 -- Tabla Servicios
 CREATE TABLE Servicios (
@@ -190,10 +172,30 @@ CREATE TABLE Nomina (
     incapacidad DECIMAL(10,2),
     tipoDeContrato NVARCHAR(50),
     estado BIT NOT NULL,
+	totalBono decimal (10,2) not null,
+	totalDedu decimal (10,2) not null, 
     FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
 
+--Tabla de Incapacidades y Vacaciones 
+CREATE TABLE Tramites (
+idTramite int identity primary key not null, 
+idNomina int not null, 
+fechaInicio datetime not null, 
+fechaFin datetime not null, 
+Razon nvarchar(300) not null,
+tipo nvarchar(100) not null,
+foreign key(idNomina) references Nomina(idNomina));
+
+--Tabla de bonificaciones y deducciones
+ CREATE TABLE AjustesSalariales( 
+ idAjusteSalarial int identity primary key not null, 
+ monto decimal not null, 
+ razon nvarchar(300) not null, 
+ idNomina int not null, 
+tipo nvarchar(100) not null,
+foreign key(idNomina) references Nomina(idNomina));
 
 -- Tabla Producto
 CREATE TABLE Producto (

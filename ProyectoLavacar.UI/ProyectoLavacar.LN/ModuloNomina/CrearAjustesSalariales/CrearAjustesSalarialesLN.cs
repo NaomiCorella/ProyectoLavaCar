@@ -39,9 +39,10 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
             return new AjustesSalarialesTabla()
             {
                 IdAjusteSalarial = elAjustesSalariales.IdAjusteSalarial,
-                IdEmpleado = elAjustesSalariales.IdEmpleado,
+                IdNomina = elAjustesSalariales.IdNomina,
                 Monto = elAjustesSalariales.Monto,
-                Razon = elAjustesSalariales.Razon
+                Razon = elAjustesSalariales.Razon,
+                tipo = elAjustesSalariales.tipo
 
 
 
