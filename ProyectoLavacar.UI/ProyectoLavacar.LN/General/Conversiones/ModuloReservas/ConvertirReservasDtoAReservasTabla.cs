@@ -25,7 +25,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloReservas
                 idCliente = reserva.idCliente,
                 idEmpleado = reserva.idEmpleado,
                 idServicio = reserva.idServicio,
-                fecha = _fecha.ObtenerFecha(),
+                fecha = DateTime.Parse(reserva.fecha),
                 hora = TimeSpan.Parse(reserva.hora),
                 estado = reserva.estado
             };

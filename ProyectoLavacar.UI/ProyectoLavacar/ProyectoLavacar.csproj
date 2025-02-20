@@ -310,8 +310,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ReservasController.cs" />
+    <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ReseniasController.cs" />
+    <Compile Include="Controllers\ReservasController.cs" />
+    <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -329,6 +331,7 @@
     <Compile Include="Views\Empleado\Details.cshtml.__projection.g.cs" />
     <Compile Include="Views\Empleado\Edit.cshtml.__projection.g.cs" />
     <Compile Include="Views\Empleado\Index.cshtml.__projection.g.cs" />
+    <Compile Include="Views\Resenias\Edit.cshtml.__projection.g.cs" />
     <Compile Include="Views\Usuario\Create.cshtml.__projection.g.cs" />
     <Compile Include="Views\Usuario\Details.cshtml.__projection.g.cs" />
     <Compile Include="Views\Usuario\Edit.cshtml.__projection.g.cs" />
@@ -484,6 +487,11 @@
     <Content Include="Scripts\Resenias\AlertaResenia.js" />
     <Content Include="Scripts\Resenias\indexAdmin.js" />
     <Content Include="Scripts\Resenias\OrdenarListaResenia.js" />
+    <Content Include="Scripts\Reservas\CancelacionEActivacion.js" />
+    <Content Include="Scripts\Reservas\editReservas.js" />
+    <Content Include="Views\Resenias\Edit.cshtml.__projection.g.js" />
+    <Content Include="Views\Resenias\Index.cshtml.__projection.g.js" />
+    <Content Include="Views\Resenias\IndexAdmin.cshtml.__projection.g.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -498,15 +506,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Resenias\Create.cshtml" />
-    <Content Include="Views\Reservas\Create.cshtml" />
-    <Content Include="Views\Reservas\Index.cshtml" />
-    <Content Include="Views\Reservas\Edit.cshtml" />
-    <Content Include="Views\Resenias\Edit.cshtml" />
-    <Content Include="Views\Reservas\MisReservas.cshtml" />
-    <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
-    <Content Include="Views\Reservas\Reservas.cshtml" />
-    <Content Include="Views\Reservas\EditarMiReserva.cshtml" />
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
@@ -549,11 +548,29 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
     <Content Include="Views\Inventario\Actualizar.cshtml" />
-    <Content Include="Views\Resenias\Index.cshtml" />
-    <Content Include="Views\Resenias\ResponderReseña.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
     <Content Include="Views\Inventario\HistorialDeMovimientos.cshtml" />
+    <Content Include="Views\Resenias\Create.cshtml" />
+    <Content Include="Views\Resenias\Edit.cshtml" />
+    <Content Include="Views\Resenias\Index.cshtml" />
     <Content Include="Views\Resenias\IndexAdmin.cshtml" />
+    <Content Include="Views\Resenias\ResponderReseña.cshtml" />
+    <Content Include="Views\Reservas\Create.cshtml" />
+    <Content Include="Views\Reservas\Edit.cshtml" />
+    <Content Include="Views\Reservas\EditarMiReserva.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
+    <Content Include="Views\Nomina\Index.cshtml" />
+    <Content Include="Views\Nomina\Nomina.cshtml" />
+    <Content Include="Views\Nomina\Details.cshtml" />
+    <Content Include="Views\Nomina\IngresarAjustes.cshtml" />
+    <Content Include="Views\Nomina\Create.cshtml" />
+    <Content Include="Views\Nomina\IngresarTramites.cshtml" />
+    <Content Include="Views\Reservas\ReservarCita.cshtml" />
+    <Content Include="Views\Servicios\Details.cshtml" />
+    <Content Include="Views\Reservas\Reservas.cshtml" />
+    <Content Include="Views\Reservas\MisReservas.cshtml" />
+    <Content Include="Views\Reservas\ReservasEncargadas.cshtml" />
+    <Content Include="Views\Reservas\DetallesReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

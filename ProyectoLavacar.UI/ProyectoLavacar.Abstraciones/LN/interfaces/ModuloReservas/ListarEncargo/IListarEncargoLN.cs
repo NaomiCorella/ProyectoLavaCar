@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarEncarg
 {
     public interface IListarEncargoLN
     {
-        List<ReservasDto> Listar(string idEmpleado);
+        List<ReservaCompleta> Listar(string idEmpleado);
     }
 }

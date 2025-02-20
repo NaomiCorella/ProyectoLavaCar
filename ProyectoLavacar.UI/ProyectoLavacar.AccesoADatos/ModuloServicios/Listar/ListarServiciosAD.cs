@@ -20,8 +20,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloServicios.Listar
 
         public List<ServiciosDto> ListarServicios()
         {
-            List<ServiciosDto> lalistadeServicios = (from elServicio in _elContexto.ServiciosTabla
-                                                     select new ServiciosDto
+            List<ServiciosDto> lalistadeServicios = (from elServicio in _elContexto.ServiciosTabla where elServicio.estado ==true
+                select new ServiciosDto
                                                      {
                                                          idServicio = elServicio.idServicio,
                                                          costo = elServicio.costo,

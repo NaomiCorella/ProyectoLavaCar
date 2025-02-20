@@ -23,6 +23,9 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<EvaluacionesTabla>().ToTable("Evaluaciones");
             modelBuilder.Entity<RespuestaTabla>().ToTable("Respuesta");
             modelBuilder.Entity<MovimientoTabla>().ToTable("Movimiento");
+            modelBuilder.Entity<AjustesSalarialesTabla>().ToTable("AjustesSalariales");
+            modelBuilder.Entity<TramitesTabla>().ToTable("Tramites");
+            modelBuilder.Entity<NominaTabla>().ToTable("Nomina");
             modelBuilder.Entity<AspNetUserRolesTabla>().HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<RolesTabla>().ToTable("AspNetRoles");
 
@@ -38,6 +41,11 @@ namespace ProyectoLavacar.AccesoADatos
 
         public DbSet<RespuestaTabla> RespuestaTabla { get; set; }
         public DbSet<MovimientoTabla> MovimientoTabla { get; set; }
+
+        public DbSet<AjustesSalarialesTabla> AjustesSalarialesTabla { get; set; }
+        public DbSet<TramitesTabla> TramitesTabla { get; set; }
+        public DbSet<NominaTabla> NominaTabla { get; set; }
+
         public DbSet<AspNetUserRolesTabla> AspNetUserRolesTabla { get; set; }
         public DbSet<RolesTabla> RolesTabla { get; set; }
 
