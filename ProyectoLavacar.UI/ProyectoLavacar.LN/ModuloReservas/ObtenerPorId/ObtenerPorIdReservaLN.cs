@@ -14,7 +14,7 @@ namespace ProyectoLavacar.LN.ModuloReservas.ObtenerPorId
     public class ObtenerPorIdReservaLN : IObtenerPorIdReservaLN
     {
 
-        IObtenerPorIdReservaAD _obtenerPorIdReservaAD;
+        IObtenerPorIdReservasAD _obtenerPorIdReservaAD;
         public ObtenerPorIdReservaLN()
         {
             _obtenerPorIdReservaAD = new ObtenerPorIdReservaAD();

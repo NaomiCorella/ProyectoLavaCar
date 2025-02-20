@@ -3,6 +3,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.CrearRespuesta;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReseñas.ObtenerPorId;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloReseñas.Crear;
@@ -10,6 +11,7 @@ using ProyectoLavacar.LN.ModuloReseñas.CrearRespuesta;
 using ProyectoLavacar.LN.ModuloReseñas.Editar;
 using ProyectoLavacar.LN.ModuloReseñas.Listar;
 using ProyectoLavacar.LN.ModuloReseñas.ObtenerPorId;
+using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +29,10 @@ namespace ProyectoLavacar.Controllers
         Contexto _context;
         IEditarReseniaLN _editarResenia;
         IObtenerPorIdLN _obtenerPorId;
+        IListarServiciosLN _listarServicios;
         public ReseniasController()
         {
+            _listarServicios = new ListarServiciosLN();
             _crearResenia = new CrearReseniaLN();
             _listarResenia = new ListarReseniaLN();
             _context = new Contexto();
@@ -39,7 +43,8 @@ namespace ProyectoLavacar.Controllers
         // GET: Reseñas
         public ActionResult Index(string ordenarPor = "fecha", string orden = "asc")
         {
-            List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
+            var lalistadeArchivos = _listarResenia.ListarResenia().Where(r => r.estadoResenia).ToList();
+
 
             // Ordenar según los parámetros
             if (ordenarPor == "fecha")
@@ -58,6 +63,28 @@ namespace ProyectoLavacar.Controllers
             return View(lalistadeArchivos);
         }
 
+        public ActionResult IndexAdmin(string filtroFecha = "", string filtroUsuario = "", string filtroContenido = "")
+        {
+            List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
+
+            if (!string.IsNullOrEmpty(filtroUsuario))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.idCliente.ToString().Contains(filtroUsuario)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(filtroContenido))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.comentarios.Contains(filtroContenido)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(filtroFecha))
+            {
+                lalistadeArchivos = lalistadeArchivos.Where(r => r.fecha.ToString() == filtroFecha).ToList();
+            }
+
+            return View(lalistadeArchivos);
+        }
+
 
 
         // GET: Reseñas/Details/5
@@ -69,6 +96,10 @@ namespace ProyectoLavacar.Controllers
         // GET: Reseñas/Create
         public ActionResult Create()
         {
+            var servicios = _listarServicios.ListarServicios()
+             .Where(a => a.estado == true)
+             .ToList();
+            ViewBag.Servicios = servicios;
             return View();
         }
 
@@ -163,8 +194,10 @@ namespace ProyectoLavacar.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult ResponderReseña()
+        public ActionResult ResponderReseña(int id)
         {
+            ReseniaDto reseña = _obtenerPorId.Detalle(id);
+            ViewBag.Reseña = reseña;
             return View();
         }
 

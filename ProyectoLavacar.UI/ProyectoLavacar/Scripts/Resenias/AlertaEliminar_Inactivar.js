@@ -24,12 +24,10 @@
         });
     });
 
-    // Evento para los botones de activar
     document.querySelectorAll(".btn-outline-success").forEach(button => {
         button.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevenir el enlace por defecto
+            event.preventDefault(); 
 
-            // Mostrar alerta de confirmación para activar
             Swal.fire({
                 title: '¿Estás seguro?',
                 text: '¿Quieres activar esta reseña?',
@@ -41,34 +39,16 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Si el usuario confirma, redirigir a la acción de activar
-                    window.location.href = button.href; // Usar el enlace original del botón
+                    
+                    window.location.href = button.href; 
                 }
             });
         });
     });
 
-    // Formulario de respuesta
     document.getElementById("miFormulario").addEventListener("submit", function (event) {
         event.preventDefault();
 
-        let comentarios = document.getElementById("comentarios").value.trim();
-
-        if (comentarios === "") {
-            Swal.fire({
-                title: "Campos incompletos",
-                text: "Por favor, completa todos los campos obligatorios.",
-                icon: "error"
-            });
-            return;
-        }
-
-        Swal.fire({
-            title: "Respuesta agregada",
-            text: "Su respuesta ha sido guardada correctamente.",
-            icon: "success"
-        }).then(() => {
-            event.target.submit(); // Enviar el formulario si todo es correcto
-        });
+            event.target.submit(); 
     });
 });

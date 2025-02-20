@@ -18,7 +18,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReservas
         [Display(Name = "Hora")]
         public string hora { get; set; }
         [Display(Name = "Disponibilidad")]
-        public bool estado { get; set; } = true;
+        public bool estado { get; set; } 
 
     }
 }

@@ -102,14 +102,14 @@
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Administrador</a>
                                         <ul class="sub-menu">
-                                            <li><a href="gestionReserva.html">Gestión de reserva</a></li>
-                                            <li><a href="gestionReseñas.html">Gestión de reseñas</a></li>
+                                            <li>@Html.ActionLink("Gestion de Reservas", "Reservas", "Reservas", new { area = "" }, new { @class = "nav-link" })</li>
+                                            <li>@Html.ActionLink("Gestion de Reseñas", "IndexAdmin", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li><a href="gestionEmpleado.html">Gestión de empleados</a></li>
                                             <li><a href="gestionUsuarios.html">Gestión de usuarios</a></li>
-                                            <li><a href="gestionInventario.html">Gestión de inventario</a></li>
+                                            <li>@Html.ActionLink("Gestion de INventario", "Index", "Inventario", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li><a href="gestionVentas.html">Gestión de informes de ventas</a></li>
                                             <li><a href="gestionReportes.html">Gestión de reportes</a></li>
-                                            <li><a href="gestionNomina.html">Gestión de Nomina</a></li>
+                                            <li>@Html.ActionLink("Gestion de NOmina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
                                         </ul>
                                     </li>
                                    
@@ -119,14 +119,14 @@
                             <!-- Nav Pushed Item -->
                             <div class="nav-pushed-item">
                                 <div class="navbar-btn">
-                                    <a href="contact.html" class="main-btn">Get A Quote</a>
+                                    @Html.ActionLink("Reseñas", "Index", "Resenias", new { area = "" }, new { @class = "navbar-brand" })
                                 </div>
                             </div>
                         </div>
                         <!-- Nav Push Item -->
                         <div class="nav-push-item">
                             <div class="navbar-btn">
-                                <a href="booking.html" class="main-btn">Reservar Cita</a>
+                                @Html.ActionLink("Reservar Cita", "ReservarCita", "Reservas", new { area = "" }, new { @class = "navbar-brand" })
                             </div>
                         </div>
                         <!-- Navbar Toggler -->

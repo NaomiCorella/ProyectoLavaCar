@@ -67,7 +67,16 @@
     <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoAD.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioAD.cs" />
     <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoAD.cs" />
+    <Compile Include="ModuloNomina\CrearAjusteSalariales\CrearAjustesSalarialesAD.cs" />
+    <Compile Include="ModuloNomina\CrearNomina\CrearNominaAD.cs" />
+    <Compile Include="ModuloNomina\CrearTramites\CrearTramitesAD.cs" />
+    <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletaAD.cs" />
+    <Compile Include="ModuloNomina\EditarNomina\EditarNominaAD.cs" />
+    <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralAD.cs" />
+    <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoAD.cs" />
+    <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaAD.cs" />
+    <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaAD.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaAD.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteAD.cs" />
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesAD.cs" />
@@ -81,6 +90,7 @@
     <Compile Include="ModuloReseñas\Listar\ListarReseniaAD.cs" />
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloServicios\Listar\ListarServiciosAD.cs" />
+    <Compile Include="ModuloServicios\ObtenerPorId\DetallesServicioAD.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdAD.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioAD.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioAD.cs" />
