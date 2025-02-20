@@ -94,7 +94,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Editar", "EditarMiReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
-                            @Html.ActionLink("Detalles", "Details", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
+                            @Html.ActionLink("Detalles", "DetallesReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
 
                             @if (item.estado)
                             {

@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.DetallesReservaCompleta;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.EditarCliente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarDisponibles;
@@ -17,6 +18,7 @@ using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloReservas.Crear;
+using ProyectoLavacar.LN.ModuloReservas.DetallesReservaCompleta;
 using ProyectoLavacar.LN.ModuloReservas.Editar;
 using ProyectoLavacar.LN.ModuloReservas.EditarCliente;
 using ProyectoLavacar.LN.ModuloReservas.ListarDisponibles;
@@ -50,6 +52,7 @@ namespace ProyectoLavacar.Controllers
         IListarServiciosLN _listarServicios;
         Contexto _context;
         IListarEmpleadoLN _listarEmpleado;
+        IDetallesReservaCompletaLN _detallesReservaCompleta;
 
         public ReservasController()
         {
@@ -64,6 +67,7 @@ namespace ProyectoLavacar.Controllers
             _listarServicios = new ListarServiciosLN();
             _context = new Contexto();
             _listarEmpleado = new ListarEmpleadoLN();
+            _detallesReservaCompleta = new DetallesReservaCompletaLN();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -151,9 +155,10 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Reservas/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetallesReserva(int idReserva)
         {
-            return View();
+            ReservaCompleta reserva = _detallesReservaCompleta.Detalle(idReserva);
+            return View(reserva);
         }
 
 
@@ -263,9 +268,6 @@ namespace ProyectoLavacar.Controllers
 
             try
             {
-
-             
-
 
                 ReservasDto reserva = new ReservasDto()
                 {

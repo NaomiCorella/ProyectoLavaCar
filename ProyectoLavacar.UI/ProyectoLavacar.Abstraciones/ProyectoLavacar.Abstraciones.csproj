@@ -65,6 +65,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarUnicoEmpleado\IListarUnicoEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ObtenerPorId\IObtenerPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloReservas\DetallesReservaCompleta\IDetallesReservaCompletaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarAdmin\IEditarReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarCliente\IEditarClienteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesAD.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="LN\interfaces\ModuloNomina\ListarUnicoEmpleado\IListarUnicoEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\ObtenerPorId\IObtenerPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloReservas\DetallesReservaCompleta\IDetallesReservaCompletaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarAdmin\IEditarReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarCliente\IEditarClienteLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\ListarDisponibles\IListarDisponiblesLN.cs" />
