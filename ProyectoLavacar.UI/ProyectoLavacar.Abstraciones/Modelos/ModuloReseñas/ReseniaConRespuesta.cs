@@ -11,6 +11,9 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
     {
         public int idResenia { get; set; }
         public string idCliente { get; set; }
+        public string nombreCliente { get; set; }
+        public string nombreEmpleado { get; set; }
+        public string nombreServicio { get; set; }
         public int idServicio { get; set; }
         [Display(Name = "Fecha")]
         public string fecha { get; set; }

@@ -43,7 +43,8 @@ namespace ProyectoLavacar.Controllers
         // GET: Reseñas
         public ActionResult Index(string ordenarPor = "fecha", string orden = "asc")
         {
-            List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
+            var lalistadeArchivos = _listarResenia.ListarResenia().Where(r => r.estadoResenia).ToList();
+
 
             // Ordenar según los parámetros
             if (ordenarPor == "fecha")
@@ -193,8 +194,10 @@ namespace ProyectoLavacar.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult ResponderReseña()
+        public ActionResult ResponderReseña(int id)
         {
+            ReseniaDto reseña = _obtenerPorId.Detalle(id);
+            ViewBag.Reseña = reseña;
             return View();
         }
 
