@@ -1,9 +1,10 @@
-﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.RespuestaDto
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloReservas.ReservasDto
+
+
 
 @{
     ViewBag.Title = "Create";
 }
-
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -25,34 +26,60 @@
 
 <body>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario", onsubmit = "mostrarAlerta()" }))
+
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>RespuestaDto</h4>
+            <h4>Reservas</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="mb-3">
-                <label for="comentarioOriginal" class="form-label fw-bold">Comentario Original</label>
-                <textarea id="comentarioOriginal" class="form-control" rows="3" readonly>@ViewBag.Reseña.comentarios</textarea>
-            </div>
 
-            <div class="mb-3">
-                <label for="comentarios" class="form-label fw-bold">Respuesta</label>
-                @Html.TextAreaFor(model => model.comentarios, new { @class = "form-control", rows = 4, placeholder = "Escribe tu respuesta aquí...", id = "comentarios", required = "required" })
-                @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
+
+            @if (ViewBag.Servicios is string message)
+            {
+                <p>@message</p>
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.idServicio,
+                    new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
+                    "Seleccione un servicio",
+                    new { @class = "form-control" })
+            }
+
+            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
+                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-outline-success btn-lg">
-                <i class="fas fa-save me-2"></i> Agregar Respuesta
-            </button>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.hora, new { @class = "form-control", type = "time", required = "required" })
+                @Html.ValidationMessageFor(model => model.hora, "", new { @class = "text-danger" })
+            </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear Reserva" class="btn btn-primary" />
+            </div>
+        </div>
+
     }
-
 
     <div class="text-center mt-4">
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-info" })
@@ -60,14 +87,10 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-
-
     }
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @*<script src="~/Scripts/Resenias/alertaCrear.js"></script>*@
+
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

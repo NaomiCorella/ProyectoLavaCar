@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarTodo
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.DetallesReservaCompleta
 {
-    public interface IListarTodoReservaLN
+     public interface IDetallesReservaCompletaLN
     {
-        List<ReservaCompleta> ListarReservasTodo();
+        ReservaCompleta Detalle(int idReserva);
     }
 }

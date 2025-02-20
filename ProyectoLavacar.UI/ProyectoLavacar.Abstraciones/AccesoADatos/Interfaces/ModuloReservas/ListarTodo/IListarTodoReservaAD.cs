@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.Li
 {
     public interface IListarTodoReservaAD
     {
-        List<ReservasDto> ListarReservasTodo();
+        List<ReservaCompleta> ListarReservasTodo();
     }
 }

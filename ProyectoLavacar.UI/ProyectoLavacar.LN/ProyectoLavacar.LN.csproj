@@ -134,6 +134,7 @@
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
+    <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
     <Compile Include="ModuloReservas\EditarCliente\EditarClienteLN.cs" />
     <Compile Include="ModuloReservas\ListarDisponibles\ListarDisponiblesLN.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="ModuloReseñas\Listar\ListarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
+    <Compile Include="ModuloServicios\ObtenerPorId\DetalleServiciosLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioLN.cs" />

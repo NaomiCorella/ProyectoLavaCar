@@ -1,7 +1,9 @@
 ﻿using Antlr.Runtime.Tree;
 using Microsoft.AspNet.Identity;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.DetallesReservaCompleta;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.EditarCliente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarDisponibles;
@@ -14,7 +16,9 @@ using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloReservas.Crear;
+using ProyectoLavacar.LN.ModuloReservas.DetallesReservaCompleta;
 using ProyectoLavacar.LN.ModuloReservas.Editar;
 using ProyectoLavacar.LN.ModuloReservas.EditarCliente;
 using ProyectoLavacar.LN.ModuloReservas.ListarDisponibles;
@@ -47,7 +51,8 @@ namespace ProyectoLavacar.Controllers
         IObtenerPorIdReservaLN _detallesReserva;
         IListarServiciosLN _listarServicios;
         Contexto _context;
-
+        IListarEmpleadoLN _listarEmpleado;
+        IDetallesReservaCompletaLN _detallesReservaCompleta;
 
         public ReservasController()
         {
@@ -61,6 +66,8 @@ namespace ProyectoLavacar.Controllers
             _detallesReserva = new ObtenerPorIdReservaLN();
             _listarServicios = new ListarServiciosLN();
             _context = new Contexto();
+            _listarEmpleado = new ListarEmpleadoLN();
+            _detallesReservaCompleta = new DetallesReservaCompletaLN();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -116,17 +123,10 @@ namespace ProyectoLavacar.Controllers
             return View("Reservas", reservas);
         }
 
-
-        public ActionResult Index()
-        {
-            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
-            return View(lalistaDeReservas);
-        }
-
         // GET: Reservas
         public ActionResult Reservas() //ReservasAdmin
         {
-            List<ReservasDto> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);
         }
         // GET: Reservas
@@ -136,7 +136,7 @@ namespace ProyectoLavacar.Controllers
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
 
-            List<ReservasDto> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
             return View(lalistaDeReservas);
         }
 
@@ -144,16 +144,21 @@ namespace ProyectoLavacar.Controllers
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            List<ReservasDto> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado);
+            List<ReservaCompleta> lalistaDeReservas = _listarReservasEmpleado.Listar(idEmpleado)
+                .OrderByDescending(r => r.estado)
+                .ToList();
+
             return View(lalistaDeReservas);
         }
 
 
 
+
         // GET: Reservas/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetallesReserva(int idReserva)
         {
-            return View();
+            ReservaCompleta reserva = _detallesReservaCompleta.Detalle(idReserva);
+            return View(reserva);
         }
 
 
@@ -229,7 +234,50 @@ namespace ProyectoLavacar.Controllers
                     idEmpleado = idCliente,
                     fecha = modeloDeReserva.fecha, 
                     hora = modeloDeReserva.hora,  
-                    estado = modeloDeReserva.estado
+                    estado = true
+                };
+
+                int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
+
+                return RedirectToAction("/MisReservas");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                return View();
+            }
+        }
+
+        // GET: Reservas/Create
+        public ActionResult ReservarCita ()
+        {
+            var servicios = _listarServicios.ListarServicios()
+               .Where(a => a.estado == true)
+               .ToList();
+            ViewBag.Servicios = servicios;
+           
+            return View();
+        }
+
+        // POST: Reservas/Create
+        [HttpPost]
+        public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
+        {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            try
+            {
+
+                ReservasDto reserva = new ReservasDto()
+                {
+                    idReserva = 1,
+                    idCliente = idCliente,
+                    idServicio = modeloDeReserva.idServicio,
+                    idEmpleado = idCliente,
+                    fecha = modeloDeReserva.fecha,
+                    hora = modeloDeReserva.hora,
+                    estado = true
                 };
 
                 int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
@@ -246,13 +294,19 @@ namespace ProyectoLavacar.Controllers
 
 
 
-
-
         /// //////////////// Admin //////////////////
 
         // GET: Reservas/Edit/5
         public ActionResult Edit(int idReserva)
         {
+            var servicios = _listarServicios.ListarServicios()
+               .Where(a => a.estado == true)
+               .ToList();
+            ViewBag.Servicios = servicios;
+            var empleados = _listarEmpleado.ListarEmpleados()
+               .Where(a => a.estado == true)
+               .ToList();
+            ViewBag.empleados = empleados;
             ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
             return View(modeloReserva);
         }
@@ -266,7 +320,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Reservas");
             }
             catch
             {
@@ -293,7 +347,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("/MisReservas");
             }
             catch
             {
@@ -359,6 +413,23 @@ namespace ProyectoLavacar.Controllers
             {
 
                 return RedirectToAction("MisReservas");
+            }
+        }
+        public ActionResult CambiarEstadoEncargo(int id)
+        {
+
+            try
+            {
+                var reserva = _context.ReservasTabla.Find(id);
+                reserva.estado = !reserva.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("ReservasEncargadas");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("ReservasEncargadas");
             }
         }
     }

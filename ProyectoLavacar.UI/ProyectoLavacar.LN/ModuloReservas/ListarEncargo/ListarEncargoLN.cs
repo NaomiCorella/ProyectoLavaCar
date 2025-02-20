@@ -21,9 +21,9 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarEncargo
             _listarEncargoReservasAD = new ListarEncargoAD();
         }
 
-        public List<ReservasDto> Listar(string idEmpleado)
+        public List<ReservaCompleta> Listar(string idEmpleado)
         {
-            List<ReservasDto> laListaDeActividadesPersona = _listarEncargoReservasAD.ListarReservasEmpleado(idEmpleado);
+            List<ReservaCompleta> laListaDeActividadesPersona = _listarEncargoReservasAD.ListarReservasEmpleado(idEmpleado);
 
             return laListaDeActividadesPersona;
         }
