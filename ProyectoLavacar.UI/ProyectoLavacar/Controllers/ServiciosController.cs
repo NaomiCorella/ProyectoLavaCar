@@ -55,6 +55,7 @@ namespace ProyectoLavacar.Controllers
         // GET: Servicios
         public ActionResult Index()
         {
+           
             List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
             return View(lalistaDeReservas);
         }
@@ -63,6 +64,8 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Details(int id)
         {
             ServiciosDto servicio = _detallesServicios.Detalle(id);
+            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
+            ViewBag.servicios = lalistaDeReservas;
             return View(servicio);
         }
 

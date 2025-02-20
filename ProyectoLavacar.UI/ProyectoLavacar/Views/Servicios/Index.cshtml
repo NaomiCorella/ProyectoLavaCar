@@ -54,14 +54,13 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 align-items-stretch">
                 @foreach (var item in Model)
                 {
-
                     <div class="col d-flex">
                         <div class="service-item mb-50 d-flex flex-column h-100">
                             <div class="icon">
                                 <i class="flaticon-mechanic"></i>
                             </div>
-                            <div class="info flex-grow-1">
-                                <h4>  @Html.ActionLink(item.nombre, "Details", "Servicios", new { id = item.idServicio }, new { @class = "text-decoration-none" })</h4>
+                            <div class="info flex-grow-1 d-flex flex-column justify-content-between">
+                                <h4>@Html.ActionLink(item.nombre, "Details", "Servicios", new { id = item.idServicio }, new { @class = "text-decoration-none" })</h4>
                                 <p>@item.descripcion</p>
                             </div>
                             <div class="price text-center p-3">
@@ -69,6 +68,7 @@
                             </div>
                         </div>
                     </div>
+
                 }
             </div>
         </div>
@@ -106,7 +106,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <a href="#" class="main-btn">Reservar Cita</a>
+           
                     </div>
                 </div>
             </div>
