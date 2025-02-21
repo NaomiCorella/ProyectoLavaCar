@@ -72,7 +72,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             }
             else
             {
-                return 0;
+
+                decimal vacacio = vacaciones(elTramites);
+                return vacacio;
             }
           
         }
@@ -95,6 +97,46 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             _crearAjusteSalarial.RegistarAjusteSalariales(ajuste);
             return deduccion;
 
+        }
+
+        private decimal vacaciones (TramitesDto eltramites)
+        {
+            NominaDto laNomina = _obtenerNomina.Detalle(eltramites.IdNomina);
+            int diasUtilizados = laNomina.DiasUtiliVacaciones;
+            if (laNomina.DiasUtiliVacaciones < laNomina.DiasDispoVacaciones)
+            {
+                DateTime fechaInicio = eltramites.FechaInicio;
+                DateTime fechaFin = eltramites.FechaFin;
+                int diasDiferencia = Math.Abs((fechaInicio - fechaFin).Days);
+                diasUtilizados += diasDiferencia;
+                NominaDto nominaModificada = new NominaDto()
+                {
+                    IdNomina = laNomina.IdNomina,
+                    IdEmpleado = laNomina.IdEmpleado,
+                    SalarioBruto = laNomina.SalarioBruto,
+                    SalarioNeto = laNomina.SalarioNeto,
+                    HorasExtras = laNomina.HorasExtras,
+                    HorasDobles = laNomina.HorasDobles,
+                    HorasOrdinarias = laNomina.HorasOrdinarias,
+                    PeriodoDePago = laNomina.PeriodoDePago,
+                    FechaDePago = laNomina.FechaDePago,
+                    TipoDeContrato = laNomina.TipoDeContrato,
+                    DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
+                    DiasUtiliVacaciones = diasUtilizados,
+                    Incapacidad = laNomina.Incapacidad,
+                    Estado = laNomina.Estado,
+                    totalBono = laNomina.totalBono,
+                    totalDedu = laNomina.totalDedu
+                };
+                _editarNomina.EditarNomina(nominaModificada);
+                return diasUtilizados;
+            }
+            else
+            {
+                return 0;
+            }
+
+          
         }
 
     }
