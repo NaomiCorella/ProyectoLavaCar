@@ -4,135 +4,170 @@
     ViewBag.Title = "ProcesosYGestiones";
 }
 
-<h2>ProcesosYGestiones</h2>
 
-<div class="container mt-5 mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Procesos</h2>
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2>ProcesosYGestiones</h2>
+
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Procesos</h2>
+        </div>
+        <div class="d-flex justify-content-between mb-4">
+
+            @Html.ActionLink(
+           "Gestionar Deducciones",
+           "Procesar Nomina",
+           new { idNomina = Model.IdNomina },
+           new { @class = "btn btn-outline-warning btn-lg" }
+       )
+
+
+            @Html.ActionLink(
+              "Gestionar Ajustes",
+              "IngresarAjustes",
+              new { idNomina = Model.IdNomina },
+              new { @class = "btn btn-outline-warning btn-lg" }
+          )
+
+            @Html.ActionLink(
+                "Gestionar Tramites",
+                "IngresarTramites",
+                new { idNomina = Model.IdNomina },
+                new { @class = "btn btn-outline-warning btn-lg" }
+            )
+
+
+
+        </div>
     </div>
-    <div class="d-flex justify-content-between mb-4">
-
-        @Html.ActionLink(
-       "Gestionar Deducciones",
-       "Procesar Nomina",
-       new { idNomina = Model.IdNomina },
-       new { @class = "btn btn-outline-warning btn-lg"}
-   )
 
 
-        @Html.ActionLink(
-          "Gestionar Ajustes",
-          "IngresarAjustes",
-          new { idNomina = Model.IdNomina },
-          new { @class = "btn btn-outline-warning btn-lg" }
-      )
+    <div>
 
-        @Html.ActionLink(
-            "Gestionar Tramites",
-            "IngresarTramites",
-            new { idNomina = Model.IdNomina },
-            new { @class = "btn btn-outline-warning btn-lg" }
-        )
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SalarioNeto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SalarioNeto)
+            </dd>
 
 
 
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaDePago)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaDePago)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaInicio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.totalBono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.totalBono)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.totalDedu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.totalDedu)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.primer_apellido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.primer_apellido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.segundo_apellido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.segundo_apellido)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.puesto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.puesto)
+            </dd>
+
+
+
+        </dl>
     </div>
-</div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
 
-
-<div>
-
-    <hr />
-    <dl class="dl-horizontal">
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SalarioNeto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SalarioNeto)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaDePago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaDePago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.totalBono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.totalBono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.totalDedu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.totalDedu)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.primer_apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.segundo_apellido)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cedula)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.puesto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.puesto)
-        </dd>
-
-
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</html>
