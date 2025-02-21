@@ -38,8 +38,17 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
         public async Task<int> RegistroTramites(TramitesDto modelo)
         {
             decimal nomina = Validacion(modelo);
-            int cantidadDeDatosAlmacenados = await _crearTramitessAD.RegistrarTramites(ConvertirObjetoTramitessTabla(modelo));
-            return cantidadDeDatosAlmacenados;
+            if (nomina != 0)
+            {
+                int cantidadDeDatosAlmacenados = await _crearTramitessAD.RegistrarTramites(ConvertirObjetoTramitessTabla(modelo));
+                return cantidadDeDatosAlmacenados;
+            }
+            else
+            {
+                return 0;
+            }
+
+           
         }
 
 
@@ -61,7 +70,6 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             };
         }
 
-
         private decimal Validacion(TramitesDto elTramites)
         {
 
@@ -72,8 +80,11 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             }
             else
             {
-
                 decimal vacacio = vacaciones(elTramites);
+                if (vacacio == 0)
+                {
+                    return 0;
+                }
                 return vacacio;
             }
           

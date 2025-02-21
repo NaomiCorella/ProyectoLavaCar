@@ -163,13 +163,27 @@ namespace ProyectoLavacar.Controllers
 
 
                 int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+                if (cantidadDeDatosGuardados == 0)
+                {
+                    return RedirectToAction("/Error");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+
+                  
             }
             catch
             {
                 return View();
             }
+        }
+        public ActionResult Error()
+        {
+
+            return View();
         }
 
         // GET: Nomina/Edit/5
