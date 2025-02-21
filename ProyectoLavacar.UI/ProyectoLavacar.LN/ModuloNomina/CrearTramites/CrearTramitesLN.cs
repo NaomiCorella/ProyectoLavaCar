@@ -83,7 +83,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             DateTime fechaInicio = elTramites.FechaInicio;
             DateTime fechaFin = elTramites.FechaFin;
             int diasDiferencia = Math.Abs((fechaInicio - fechaFin).Days);
-            decimal deduccion = (nomina.SalarioNeto / 30m) / 8m * diasDiferencia;
+            decimal deduccion = (nomina.SalarioNeto / 30m) * diasDiferencia;
             AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
             {
                 IdAjusteSalarial= 0,
