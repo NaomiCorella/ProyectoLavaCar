@@ -139,8 +139,19 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                     totalBono = laNomina.totalBono,
                     totalDedu = laNomina.totalDedu
                 };
-                _editarNomina.EditarNomina(nominaModificada);
-                return diasUtilizados;
+
+
+                if(diasUtilizados <= laNomina.DiasDispoVacaciones)
+                {
+                    _editarNomina.EditarNomina(nominaModificada);
+                    return diasUtilizados;
+                }
+                else
+                {
+                    return 0;
+                }
+               
+               
             }
             else
             {
