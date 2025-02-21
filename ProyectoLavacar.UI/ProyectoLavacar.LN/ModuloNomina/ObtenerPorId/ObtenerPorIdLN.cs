@@ -45,7 +45,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.ObtenerPorId
                PeriodoDePago = nomina.PeriodoDePago,
                SalarioBruto = nomina.SalarioBruto,
                SalarioNeto = nomina.SalarioNeto,
-               TipoDeContrato= nomina.TipoDeContrato
+               TipoDeContrato= nomina.TipoDeContrato,
+               totalBono = nomina.totalBono,
+               totalDedu = nomina.totalDedu
             };
         }
     }

@@ -28,7 +28,9 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
                 DiasUtiliVacaciones = laNomina.DiasUtiliVacaciones,
                 Incapacidad = laNomina.Incapacidad,
-                Estado = laNomina.Estado
+                Estado = laNomina.Estado,
+                totalBono = laNomina.totalBono,
+                totalDedu = laNomina.totalDedu
 
             };
         }
