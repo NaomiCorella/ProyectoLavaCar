@@ -54,7 +54,12 @@
                 new { @class = "btn btn-outline-warning btn-lg" }
             )
 
-
+            @Html.ActionLink(
+                "Gestionar Accidentes",
+                "IngresarAccidente",
+                new { idNomina = Model.IdNomina },
+                new { @class = "btn btn-outline-warning btn-lg" }
+            )
 
         </div>
     </div>

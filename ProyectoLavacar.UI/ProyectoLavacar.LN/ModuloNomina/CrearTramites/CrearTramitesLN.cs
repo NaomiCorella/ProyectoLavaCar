@@ -62,7 +62,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 IdTramite = elTramites.IdTramite,
                 IdNomina = elTramites.IdNomina,
                 FechaInicio = elTramites.FechaInicio,
-                FechaFin = elTramites.FechaFin,
+                duracion = elTramites.duracion,
                 Razon = elTramites.Razon,
                 tipo = elTramites.tipo
 
@@ -93,10 +93,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
         private decimal incapacidad(TramitesDto elTramites)
         {
             NominaDto nomina = _obtenerNomina.Detalle(elTramites.IdNomina);
-            DateTime fechaInicio = elTramites.FechaInicio;
-            DateTime fechaFin = elTramites.FechaFin;
-            int diasDiferencia = Math.Abs((fechaInicio - fechaFin).Days);
-            decimal deduccion = (nomina.SalarioNeto / 30m) * diasDiferencia;
+            int duracion = elTramites.duracion;
+            decimal deduccion = (nomina.SalarioNeto / 30m) * duracion;
             AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
             {
                 IdAjusteSalarial= 0,
@@ -117,9 +115,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             if (laNomina.DiasUtiliVacaciones < laNomina.DiasDispoVacaciones)
             {
                 DateTime fechaInicio = eltramites.FechaInicio;
-                DateTime fechaFin = eltramites.FechaFin;
-                int diasDiferencia = Math.Abs((fechaInicio - fechaFin).Days);
-                diasUtilizados += diasDiferencia;
+                int duracion = eltramites.duracion;
+                diasUtilizados += duracion;
                 NominaDto nominaModificada = new NominaDto()
                 {
                     IdNomina = laNomina.IdNomina,

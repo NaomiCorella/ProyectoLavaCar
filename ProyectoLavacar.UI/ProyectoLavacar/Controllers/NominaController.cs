@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
+﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetalleNominaCompleta;
@@ -9,6 +10,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;
+using ProyectoLavacar.LN.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.LN.ModuloNomina.CrearNomina;
 using ProyectoLavacar.LN.ModuloNomina.CrearTramites;
 using ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta;
@@ -37,6 +39,7 @@ namespace ProyectoLavacar.Controllers
         IListarGeneralLN _listarGeneralEmpleadosNom;
         IListarUnicoEmpleadoLN _listarNominadelEmpleado;
         IObtenerPorIdLN _obtenerporId;
+        ICrearAccidenteLN _crearAccidentes;
 
         public  NominaController()
         {
@@ -48,6 +51,7 @@ namespace ProyectoLavacar.Controllers
             _listarGeneralEmpleadosNom = new ListarGeneralLN();
             _listarNominadelEmpleado = new ListarUnicoEmpleadoLN();
             _obtenerporId = new ObtenerPorIdLN();
+            _crearAccidentes = new CrearAccidenteLN();
 
         }
         // GET: Nomina
@@ -155,7 +159,7 @@ namespace ProyectoLavacar.Controllers
                 {
                     IdTramite = modeloDeTramites.IdTramite,
                     IdNomina = idNomina,
-                    FechaFin = modeloDeTramites.FechaFin,
+                    duracion = modeloDeTramites.duracion,
                     FechaInicio= modeloDeTramites.FechaInicio,
                     Razon = modeloDeTramites.Razon,
                     tipo = modeloDeTramites.tipo
@@ -180,6 +184,38 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
+        public ActionResult IngresarAccidente(int idNomina)
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> IngresarAccidente(AccidenteDto modelo, int idNomina)
+        {
+            try
+            {
+
+                AccidenteDto accidente = new AccidenteDto()
+                {
+                    idAccidente = 0,
+                    IdNomina = idNomina,
+                   duracion =modelo.duracion,
+                   FechaInicio =modelo.FechaInicio,
+                   Razon = modelo.Razon,
+                   tipo="Bonificacion",
+                };
+
+                int cantidadDeDatosGuardados = await _crearAccidentes.RegistroTramites(accidente);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Error()
         {
 

@@ -573,6 +573,7 @@
     <Content Include="Views\Nomina\IngresarTramites.cshtml" />
     <Content Include="Views\Nomina\ProcesosYGestiones.cshtml" />
     <Content Include="Views\Nomina\Error.cshtml" />
+    <Content Include="Views\Nomina\IngresarAccidente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

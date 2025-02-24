@@ -56,7 +56,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta
                 // Tramites
                 IdTramite = laNomina.IdTramite,
                 FechaInicio = laNomina.FechaInicio,
-                FechaFin = laNomina.FechaFin,
+                duracion = laNomina.duracion,
                 RazonTramite = laNomina.RazonTramite,
 
                 // Datos del empleado

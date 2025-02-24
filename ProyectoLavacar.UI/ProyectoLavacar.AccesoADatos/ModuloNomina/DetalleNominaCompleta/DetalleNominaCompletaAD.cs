@@ -44,7 +44,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
                                RazonAjuste = ajuste != null ? ajuste.Razon : null,  
                                IdTramite = tramite != null ? tramite.IdTramite : (int?)null,  
                                FechaInicio = tramite != null ? tramite.FechaInicio.ToString() : null,  
-                               FechaFin = tramite != null ? tramite.FechaFin.ToString() : null,  
+                               duracion = tramite != null ? tramite.duracion : (int?)null,  
                                RazonTramite = tramite != null ? tramite.Razon : null,  
                                IdEmpleado = usuario.Id,
                                nombre = usuario.nombre,

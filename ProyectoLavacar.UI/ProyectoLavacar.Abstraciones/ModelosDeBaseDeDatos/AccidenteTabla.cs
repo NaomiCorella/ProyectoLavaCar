@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
+namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
 {
-    public class TramitesDto
+    public class AccidenteTabla
     {
-        public int IdTramite { get; set; }
-
+        [Key]
+        public int idAccidente { get; set; }
         public DateTime FechaInicio { get; set; }
 
         public int duracion { get; set; }

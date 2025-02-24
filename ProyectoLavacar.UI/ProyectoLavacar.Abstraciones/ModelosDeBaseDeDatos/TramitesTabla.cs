@@ -17,7 +17,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public DateTime FechaInicio { get; set; }
 
 
-        public DateTime FechaFin { get; set; }
+        public int duracion { get; set; }
 
         public string Razon { get; set; }
 

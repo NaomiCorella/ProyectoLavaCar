@@ -30,7 +30,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
 
         public int? IdTramite { get; set; }
         public string FechaInicio { get; set; }
-        public string FechaFin { get; set; }
+        public int? duracion { get; set; }
         public string RazonTramite { get; set; }
 
         public string IdEmpleado { get; set; }

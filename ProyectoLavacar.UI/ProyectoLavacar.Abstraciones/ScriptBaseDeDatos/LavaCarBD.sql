@@ -183,7 +183,16 @@ CREATE TABLE Tramites (
 idTramite int identity primary key not null, 
 idNomina int not null, 
 fechaInicio datetime not null, 
-fechaFin datetime not null, 
+duracion int not null, 
+Razon nvarchar(300) not null,
+tipo nvarchar(100) not null,
+foreign key(idNomina) references Nomina(idNomina));
+
+CREATE TABLE Accidente (
+idAccidente int identity primary key not null, 
+idNomina int not null, 
+fechaInicio datetime not null, 
+duracion int not null, 
 Razon nvarchar(300) not null,
 tipo nvarchar(100) not null,
 foreign key(idNomina) references Nomina(idNomina));
@@ -191,6 +200,13 @@ foreign key(idNomina) references Nomina(idNomina));
 --Tabla de bonificaciones y deducciones
  CREATE TABLE AjustesSalariales( 
  idAjusteSalarial int identity primary key not null, 
+ monto decimal not null, 
+ razon nvarchar(300) not null, 
+ idNomina int not null, 
+tipo nvarchar(100) not null,
+foreign key(idNomina) references Nomina(idNomina));
+ CREATE TABLE Rebajos( 
+ idRebajos int identity primary key not null, 
  monto decimal not null, 
  razon nvarchar(300) not null, 
  idNomina int not null, 
@@ -361,4 +377,10 @@ INSERT INTO Reservas (idCliente, idEmpleado, idServicio, fecha, hora, estado)
 VALUES  
 ('123e4567-e89b-12d3-a456-426614174000', '123e4567-e89b-12d3-a456-426614174000', 1, '2025-03-10', '10:00', 1);
 
-select * from Reservas
+select * from AspNetUsers
+
+
+INSERT INTO Nomina 
+(idEmpleado, salarioNeto, salarioBruto, fechaDePago, periodoDePago, horasOrdinarias, horasExtras, horasDobles, diasDispoVacaciones, diasUtiliVacaciones, incapacidad, tipoDeContrato, estado, totalBono, totalDedu)
+VALUES 
+('96b79881-618c-46b2-baed-115e51510753', 2500.00, 3000.00, '2025-02-20', 'Mensual', 160, 10, 5, 15, 10, 0.00, 'Indefinido', 1, 200.00, 100.00);

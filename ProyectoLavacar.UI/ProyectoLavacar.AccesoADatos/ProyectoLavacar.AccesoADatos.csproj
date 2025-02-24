@@ -67,6 +67,7 @@
     <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoAD.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioAD.cs" />
     <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoAD.cs" />
+    <Compile Include="ModuloNomina\CrearAccidente\CrearAccidenteAD.cs" />
     <Compile Include="ModuloNomina\CrearAjusteSalariales\CrearAjustesSalarialesAD.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaAD.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesAD.cs" />

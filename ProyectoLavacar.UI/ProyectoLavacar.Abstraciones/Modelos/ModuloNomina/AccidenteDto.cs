@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
 {
-    public class TramitesDto
+    public class AccidenteDto
     {
-        public int IdTramite { get; set; }
+        public int idAccidente { get; set; }
 
         public DateTime FechaInicio { get; set; }
 
