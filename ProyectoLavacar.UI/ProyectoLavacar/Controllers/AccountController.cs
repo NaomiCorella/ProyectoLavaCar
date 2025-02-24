@@ -218,7 +218,8 @@ namespace ProyectoLavacar.Controllers
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
-                    estado = model.Estado
+                    estado = true,
+                   
                
 
                 };
