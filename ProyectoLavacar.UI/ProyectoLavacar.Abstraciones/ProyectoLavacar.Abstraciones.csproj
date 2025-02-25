@@ -61,6 +61,8 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearNomina\ICrearNominaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearTramites\ICrearTramitesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetalleNominaCompleta\IDetallesNominaCompletaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesAjustes\IDetallesAjustesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesTramites\IDetallesTramitesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarAjuste\IEditarAjusteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\Editar\IEditarNominaAD.cs" />
@@ -116,6 +118,8 @@
     <Compile Include="LN\interfaces\ModuloNomina\CrearNomina\ICrearNominaLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\CrearTramites\ICrearTramitesLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\DetalleNominaCompleta\IDetalleNominaCompletaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloNomina\DetallesAjustes\IDetallesAjustesLN.cs" />
+    <Compile Include="LN\interfaces\ModuloNomina\DetallesTramites\IDetallesTramitesLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\EditarAjustes\IEditarAjusteLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\EditarNomina\IEditarNominaLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\EditarTramites\IEditarTramitesLN.cs" />

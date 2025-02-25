@@ -128,7 +128,9 @@
     <Compile Include="ModuloNomina\CrearAjustesSalariales\CrearAjustesSalarialesLN.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaLN.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesLN.cs" />
+    <Compile Include="ModuloNomina\DetalleAjustes\DetallesAjustesLN.cs" />
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletoLN.cs" />
+    <Compile Include="ModuloNomina\DetallesTramites\DetallesTramitesLN.cs" />
     <Compile Include="ModuloNomina\EditarAjustes\EditarAjustesLN.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
     <Compile Include="ModuloNomina\EditarTramites\EditarTramitesLN.cs" />

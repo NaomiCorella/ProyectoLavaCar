@@ -4,6 +4,8 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalaria
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetalleNominaCompleta;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetallesAjustes;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetallesTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarTramites;
@@ -18,7 +20,9 @@ using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;
 using ProyectoLavacar.LN.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.LN.ModuloNomina.CrearNomina;
 using ProyectoLavacar.LN.ModuloNomina.CrearTramites;
+using ProyectoLavacar.LN.ModuloNomina.DetalleAjustes;
 using ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta;
+using ProyectoLavacar.LN.ModuloNomina.DetallesTramites;
 using ProyectoLavacar.LN.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.LN.ModuloNomina.EditarNomina;
 using ProyectoLavacar.LN.ModuloNomina.EditarTramites;
@@ -53,6 +57,8 @@ namespace ProyectoLavacar.Controllers
         IListarAjustesLN _listarAjustes;
         IEditarTramitesLN _editarTramites;
         IEditarAjusteLN _editarAjustes;
+        IDetallesAjustesLN _detallesAjustes;
+        IDetallesTramitesLN _detallesTramites;
 
         public  NominaController()
         {
@@ -69,6 +75,8 @@ namespace ProyectoLavacar.Controllers
             _listarAjustes = new ListarAjustesLN();
             _editarTramites = new EditarTramitesLN();
             _editarAjustes = new EditarAjustesLN();
+             _detallesAjustes = new DetallesAjustesLN();
+             _detallesTramites = new DetallesTramitesLN();
 
         }
         // GET: Nomina
@@ -260,19 +268,40 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-        public ActionResult EditarAjustes(int idAJustes)
+        public ActionResult EditarAjustes(int idAjustes)
         {
-
-            return View();
+            AjustesSalarialesDto ajuste = _detallesAjustes.Detalle(idAjustes);
+            return View(ajuste);
         }
 
         // POST: Nomina/Edit/5
         [HttpPost]
-        public ActionResult EditarAjustes(int idAjustes, AjustesSalarialesDto ajuste)
+        public async Task<ActionResult>  EditarAjustes( AjustesSalarialesDto ajuste)
         {
             try
             {
-              
+                int cantidadDeDatosEditados = await _editarAjustes.Editar(ajuste);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult EditarTramites(int idTramite)
+        {
+            TramitesDto ajuste = _detallesTramites.Detalle(idTramite);
+            return View(ajuste);
+        }
+
+        // POST: Nomina/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> EditarTramites(TramitesDto ajuste)
+        {
+            try
+            {
+                int cantidadDeDatosEditados = await _editarTramites.Editar(ajuste);
 
                 return RedirectToAction("Index");
             }

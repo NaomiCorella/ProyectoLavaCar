@@ -71,7 +71,9 @@
     <Compile Include="ModuloNomina\CrearAjusteSalariales\CrearAjustesSalarialesAD.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaAD.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesAD.cs" />
+    <Compile Include="ModuloNomina\DetalleAjustes\DetalleAjustesAD.cs" />
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletaAD.cs" />
+    <Compile Include="ModuloNomina\DetalleTramite\DetalleTramiteAD.cs" />
     <Compile Include="ModuloNomina\EditarAjustes\EditarAjustesAD.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaAD.cs" />
     <Compile Include="ModuloNomina\EditarTramite\EditarTramiteAD.cs" />

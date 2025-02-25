@@ -576,6 +576,8 @@
     <Content Include="Views\Nomina\IngresarVacaciones.cshtml" />
     <Content Include="Views\Nomina\ListarTramites.cshtml" />
     <Content Include="Views\Nomina\ListarAjustes.cshtml" />
+    <Content Include="Views\Nomina\EditarAjustes.cshtml" />
+    <Content Include="Views\Nomina\EditarTramites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
