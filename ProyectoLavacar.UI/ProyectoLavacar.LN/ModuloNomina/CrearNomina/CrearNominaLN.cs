@@ -50,12 +50,22 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearNomina
             DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
             DiasUtiliVacaciones = laNomina.DiasUtiliVacaciones,
             Incapacidad = laNomina.Incapacidad,
-            Estado = laNomina.Estado
+            Estado = laNomina.Estado,
+            totalBono =0,
+            totalDedu=0,
+            deduccionCCSS=0,
+            deduccionISR = 0,
+            bonoHorasExtra = 0,
+            rebajosDeuda =0,
+            rebajosSancion=0
+              
 
 
 
-        };
+    };
     }
+
+     
 }
 }
 

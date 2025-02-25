@@ -77,6 +77,7 @@
     <Compile Include="ModuloNomina\EditarAjustes\EditarAjustesAD.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaAD.cs" />
     <Compile Include="ModuloNomina\EditarTramite\EditarTramiteAD.cs" />
+    <Compile Include="ModuloNomina\ListarRebajos\ListarRebajosAD.cs" />
     <Compile Include="ModuloNomina\ListarTramites\ListarTramitesAD.cs" />
     <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesAD.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralAD.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaAD.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaAD.cs" />
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdAD.cs" />
+    <Compile Include="ModuloServicios\Crear\CrearServiciosAD.cs" />
     <Compile Include="ModuloServicios\Listar\ListarServiciosAD.cs" />
     <Compile Include="ModuloServicios\ObtenerPorId\DetallesServicioAD.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdAD.cs" />

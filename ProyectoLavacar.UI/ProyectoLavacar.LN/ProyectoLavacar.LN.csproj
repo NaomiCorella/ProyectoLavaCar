@@ -136,9 +136,11 @@
     <Compile Include="ModuloNomina\EditarTramites\EditarTramitesLN.cs" />
     <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesLN.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
+    <Compile Include="ModuloNomina\ListarRebajos\ListarRebajosLN.cs" />
     <Compile Include="ModuloNomina\ListarTramites\ListarTramitesLN.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
+    <Compile Include="ModuloNomina\ProcesarNomina\ProcesarNominaLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdLN.cs" />
+    <Compile Include="ModuloServicios\CrearServiciosLN.cs" />
     <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
     <Compile Include="ModuloServicios\ObtenerPorId\DetalleServiciosLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />

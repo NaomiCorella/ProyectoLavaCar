@@ -24,5 +24,10 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public bool Estado { get; set; }
         public decimal totalBono { get; set; }
         public decimal totalDedu { get; set; }
+       public decimal deduccionCCSS { get; set; }
+      public decimal deduccionISR { get; set; }
+        public decimal bonoHorasExtra { get; set; }
+                public decimal rebajosDeuda { get; set; }
+        public decimal rebajosSancion { get; set; }
     }
 }
