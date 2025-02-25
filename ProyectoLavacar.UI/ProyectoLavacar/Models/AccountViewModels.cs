@@ -105,7 +105,8 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
-        [Required]
+        
+
         [Display(Name = "Rol")]
         public string Role { get; set; }
     }

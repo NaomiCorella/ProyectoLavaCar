@@ -46,6 +46,23 @@ namespace ProyectoLavacar.Controllers
             _context = new Contexto();
         }
 
+
+        public ActionResult FiltrarPorProducto(string nombreProducto)
+        {
+            ViewBag.Title = "Inventario Filtrado";
+
+
+            string filtroNormalizado = nombreProducto.ToLower().TrimEnd('s');
+
+            List<InventarioDto> productosFiltrados = _listarInventario.ListarInventario()
+                .Where(p => p.estado == true &&
+                    p.nombre.ToLower().TrimEnd('s').Contains(filtroNormalizado))
+                .ToList();
+
+            return View("Index", productosFiltrados);
+        }
+
+
         // GET: Inventario
         public ActionResult Index()
         {
