@@ -30,7 +30,12 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 Incapacidad = laNomina.Incapacidad,
                 Estado = laNomina.Estado,
                 totalBono = laNomina.totalBono,
-                totalDedu = laNomina.totalDedu
+                totalDedu = laNomina.totalDedu,
+                deduccionCCSS = laNomina.deduccionCCSS,
+                deduccionISR = laNomina.deduccionISR,
+                bonoHorasExtra = laNomina.bonoHorasExtra,
+                rebajosDeuda = laNomina.rebajosDeuda,
+                rebajosSancion = laNomina.rebajosSancion
 
             };
         }

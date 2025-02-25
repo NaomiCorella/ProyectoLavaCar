@@ -32,9 +32,51 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
 
         public NominaDto ProcesarNomina(int idNomina)
         {
-            throw new NotImplementedException();
+            NominaDto laNomina = _detallesNomina.Detalle(idNomina);
+            decimal impuestos = CalcularISR(idNomina);
+            decimal rebajosPorSancion = rebajosSancion(idNomina);
+            decimal rebajosPorDeuda = rebajosDeuda(idNomina);    
+            decimal deducciones = laNomina.totalDedu;
+            decimal seguro = CalcularSeguro(idNomina);
+            decimal bonosHorasExtra = horasExtra(idNomina);
+            decimal bonificaciones = laNomina.totalBono;
+
+            decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
+            decimal salarioNeto = salario - impuestos - rebajosPorDeuda - rebajosPorSancion - deducciones;
+
+
+            NominaDto NominaNueva = new NominaDto
+            {
+                IdNomina = laNomina.IdNomina,
+                IdEmpleado = laNomina.IdEmpleado,
+                SalarioBruto = laNomina.SalarioBruto,
+                SalarioNeto = laNomina.SalarioNeto,
+                HorasExtras = laNomina.HorasExtras,
+                HorasDobles = laNomina.HorasDobles,
+                HorasOrdinarias = laNomina.HorasOrdinarias,
+                PeriodoDePago = laNomina.PeriodoDePago,
+                FechaDePago = laNomina.FechaDePago,
+                TipoDeContrato = laNomina.TipoDeContrato,
+                DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
+                DiasUtiliVacaciones = laNomina.DiasUtiliVacaciones,
+                Incapacidad = laNomina.Incapacidad,
+                Estado = laNomina.Estado,
+                totalBono = laNomina.totalBono,
+                totalDedu = laNomina.totalDedu,
+
+                deduccionCCSS = seguro,
+                deduccionISR = impuestos,
+                bonoHorasExtra = bonosHorasExtra,
+                rebajosDeuda = rebajosPorDeuda,
+                rebajosSancion = rebajosPorSancion
+            };
+
+            _editarNomina.EditarNomina(NominaNueva);
+            return NominaNueva;
+            
         }
 
+ 
         public decimal CalcularISR(int idNomina)
         {
             decimal impuesto = 0;
@@ -55,8 +97,17 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
             }
               
         }
+        public decimal CalcularSeguro(int idNomina)
+        {
+            decimal impuesto = 0;
+            NominaDto nomina = _detallesNomina.Detalle(idNomina);
+           
+                impuesto = (nomina.SalarioBruto ?? 0m) * 0.105m;
+                return impuesto;
+            
 
-  
+        }
+
         public decimal horasExtra(int idNomina)
         {
             NominaDto nomina = _detallesNomina.Detalle(idNomina);
