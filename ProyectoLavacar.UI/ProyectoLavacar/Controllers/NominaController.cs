@@ -1,10 +1,15 @@
-﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
+﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetalleNominaCompleta;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarNomina;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarTramites;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarAjustes;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarGeneral;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
@@ -14,8 +19,12 @@ using ProyectoLavacar.LN.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.LN.ModuloNomina.CrearNomina;
 using ProyectoLavacar.LN.ModuloNomina.CrearTramites;
 using ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta;
+using ProyectoLavacar.LN.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.LN.ModuloNomina.EditarNomina;
+using ProyectoLavacar.LN.ModuloNomina.EditarTramites;
+using ProyectoLavacar.LN.ModuloNomina.ListarAjustes;
 using ProyectoLavacar.LN.ModuloNomina.ListarGeneral;
+using ProyectoLavacar.LN.ModuloNomina.ListarTramites;
 using ProyectoLavacar.LN.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
 using System;
@@ -40,6 +49,10 @@ namespace ProyectoLavacar.Controllers
         IListarUnicoEmpleadoLN _listarNominadelEmpleado;
         IObtenerPorIdLN _obtenerporId;
         ICrearAccidenteLN _crearAccidentes;
+        IListarTramitesLN _listarTramites;
+        IListarAjustesLN _listarAjustes;
+        IEditarTramitesLN _editarTramites;
+        IEditarAjusteLN _editarAjustes;
 
         public  NominaController()
         {
@@ -52,6 +65,10 @@ namespace ProyectoLavacar.Controllers
             _listarNominadelEmpleado = new ListarUnicoEmpleadoLN();
             _obtenerporId = new ObtenerPorIdLN();
             _crearAccidentes = new CrearAccidenteLN();
+            _listarTramites = new ListarTramitesLN();
+            _listarAjustes = new ListarAjustesLN();
+            _editarTramites = new EditarTramitesLN();
+            _editarAjustes = new EditarAjustesLN();
 
         }
         // GET: Nomina
@@ -65,8 +82,6 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ProcesosYGestiones(int idNomina)
         {
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
-         
-
             return View(nomina);
         }
 
@@ -145,7 +160,8 @@ namespace ProyectoLavacar.Controllers
             ViewBag.tipo = new List<SelectListItem>
                      {
                          new SelectListItem { Value = "Incapacidad", Text = "Incapacidad" },
-                         new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" }
+                         new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" },
+                          new SelectListItem { Value = "AccidenteLaboral", Text = "Accidente Laboral" }
                          };
             return View();
         }
@@ -185,28 +201,78 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult IngresarAccidente(int idNomina)
+
+        public ActionResult IngresarVacaciones()
         {
            
             return View();
         }
+
         [HttpPost]
-        public async Task<ActionResult> IngresarAccidente(AccidenteDto modelo, int idNomina)
+        public async Task<ActionResult> IngresarVacaciones(TramitesDto modeloDeTramites)
         {
             try
             {
-
-                AccidenteDto accidente = new AccidenteDto()
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                UnicoEmpleadoDto nomina = _listarNominadelEmpleado.ListarNomina(idEmpleado).LastOrDefault();
+                TramitesDto tramite = new TramitesDto()
                 {
-                    idAccidente = 0,
-                    IdNomina = idNomina,
-                   duracion =modelo.duracion,
-                   FechaInicio =modelo.FechaInicio,
-                   Razon = modelo.Razon,
-                   tipo="Bonificacion",
+                    IdTramite = modeloDeTramites.IdTramite,
+                    IdNomina = nomina.IdNomina,
+                    duracion = modeloDeTramites.duracion,
+                    FechaInicio = modeloDeTramites.FechaInicio,
+                    Razon = modeloDeTramites.Razon,
+                    tipo = "Vacaciones"
                 };
 
-                int cantidadDeDatosGuardados = await _crearAccidentes.RegistroTramites(accidente);
+
+                int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+                if (cantidadDeDatosGuardados == 0)
+                {
+                    return RedirectToAction("/Error");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ListarTramites(int idNomina)
+        {
+            List<TramitesDto> tramites = _listarTramites.ListarTodo(idNomina);
+
+            return View(tramites);
+        }
+        public ActionResult ListarAjustes(int idNomina)
+        {
+            List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo();
+
+            return View(tramites);
+        }
+
+
+        public ActionResult EditarAjustes(int idAJustes)
+        {
+
+            return View();
+        }
+
+        // POST: Nomina/Edit/5
+        [HttpPost]
+        public ActionResult EditarAjustes(int idAjustes, AjustesSalarialesDto ajuste)
+        {
+            try
+            {
+              
 
                 return RedirectToAction("Index");
             }
@@ -215,6 +281,8 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
+
 
         public ActionResult Error()
         {
@@ -244,26 +312,6 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        // GET: Nomina/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Nomina/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

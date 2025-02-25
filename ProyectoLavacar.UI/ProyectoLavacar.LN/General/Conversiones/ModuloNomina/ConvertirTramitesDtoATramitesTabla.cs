@@ -16,11 +16,11 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
             return new TramitesTabla
             {
                 IdTramite = elTramites.IdTramite,
-                IdNomina = elTramites.IdNomina,
-                FechaInicio = elTramites.FechaInicio,
+                //IdNomina = elTramites.IdNomina,
+                //FechaInicio = elTramites.FechaInicio,
                 duracion = elTramites.duracion,
-                Razon = elTramites.Razon,
-                tipo = elTramites.tipo
+                //Razon = elTramites.Razon,
+                //tipo = elTramites.tipo
 
 
             };

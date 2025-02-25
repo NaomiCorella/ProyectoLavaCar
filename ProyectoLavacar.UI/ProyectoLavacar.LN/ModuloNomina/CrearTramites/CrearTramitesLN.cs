@@ -107,6 +107,23 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             return deduccion;
 
         }
+        public decimal Accidente(TramitesDto eltramite)
+        {
+
+            NominaDto nomina = _obtenerNomina.Detalle(eltramite.IdNomina);
+            int duracion = eltramite.duracion;
+            decimal bonificacion = (nomina.SalarioNeto / 30m) * duracion;
+            AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
+            {
+                IdAjusteSalarial = 0,
+                IdNomina =  eltramite.IdNomina,
+                Monto = bonificacion,
+                Razon = "Bonificacion de accidente Laboral",
+                tipo = "Bonificacion"
+            };
+            _crearAjusteSalarial.RegistarAjusteSalariales(ajuste);
+            return bonificacion; 
+        }
 
         private decimal vacaciones (TramitesDto eltramites)
         {

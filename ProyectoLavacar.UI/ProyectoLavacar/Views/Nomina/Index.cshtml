@@ -73,6 +73,8 @@
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("DetallesNomina", "Nomina", new { idEmpleado = item.IdEmpleado }) |
                             @Html.ActionLink("ProcesosYGestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
+                            @Html.ActionLink("ListarAjustes", "ListarAjustes", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("ListarTramites", "ListarTramites", new { idNomina = item.IdNomina }) |
                         </td>
                     </tr>
                 }

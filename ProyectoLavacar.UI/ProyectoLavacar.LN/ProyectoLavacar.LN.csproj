@@ -129,8 +129,12 @@
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaLN.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesLN.cs" />
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletoLN.cs" />
+    <Compile Include="ModuloNomina\EditarAjustes\EditarAjustesLN.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
+    <Compile Include="ModuloNomina\EditarTramites\EditarTramitesLN.cs" />
+    <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesLN.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
+    <Compile Include="ModuloNomina\ListarTramites\ListarTramitesLN.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />

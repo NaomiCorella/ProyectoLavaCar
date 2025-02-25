@@ -186,7 +186,8 @@
                             @Html.DisplayFor(modelItem => item.numeroCuenta)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("ListarAjustes", "ListarAjustes", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("ListarTramites", "ListarTramites", new { idNomina = item.IdNomina }) |
                             @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                         </td>

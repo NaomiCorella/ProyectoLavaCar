@@ -93,8 +93,14 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "EditarMiReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
-                            @Html.ActionLink("Detalles", "DetallesReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
+                            <div class="d-flex justify-content-center">
+                                <a href="@Url.Action("Edit", new { idReserva = item.idReserva })" class="btn btn-outline-primary btn-sm me-2" title="Editar">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+
+                                <a href="@Url.Action("DetallesReserva", new { idReserva = item.idReserva })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                    <i class="fas fa-info-circle"></i> Detalles
+                                </a>
 
                             @if (item.estado)
                             {
