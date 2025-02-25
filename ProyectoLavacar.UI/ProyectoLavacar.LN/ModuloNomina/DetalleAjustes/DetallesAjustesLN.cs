@@ -35,7 +35,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.DetalleAjustes
                 IdAjusteSalarial = ajustes.IdAjusteSalarial,
                 IdNomina = ajustes.IdNomina,
                 Monto = ajustes.Monto,
-                Razon = ajustes.Razon
+                Razon = ajustes.Razon,
+                tipo = ajustes.tipo
             };
         }
     }
