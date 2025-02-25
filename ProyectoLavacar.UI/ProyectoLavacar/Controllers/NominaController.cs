@@ -186,7 +186,8 @@ namespace ProyectoLavacar.Controllers
                     duracion = modeloDeTramites.duracion,
                     FechaInicio= modeloDeTramites.FechaInicio,
                     Razon = modeloDeTramites.Razon,
-                    tipo = modeloDeTramites.tipo
+                    tipo = modeloDeTramites.tipo,
+                    estado= 1
                 };
 
 
@@ -231,7 +232,8 @@ namespace ProyectoLavacar.Controllers
                     duracion = modeloDeTramites.duracion,
                     FechaInicio = modeloDeTramites.FechaInicio,
                     Razon = modeloDeTramites.Razon,
-                    tipo = "Vacaciones"
+                    tipo = "Vacaciones",
+                    estado = 0,
                 };
 
 
@@ -247,6 +249,47 @@ namespace ProyectoLavacar.Controllers
 
 
 
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        public ActionResult AceptarVacacion(int idTramite)
+        {
+            ViewBag.estado = new SelectList(new List<object>
+                {
+                 new { Value = 0, Text = "Pendiente" },
+                 new { Value = 1, Text = "Aceptada" },
+                 new { Value = 2, Text = "Denegada" }
+                }, "Value", "Text");
+
+
+            TramitesDto ajuste = _detallesTramites.Detalle(idTramite);
+            return View(ajuste);
+        }
+
+        // POST: Nomina/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> AceptarVacacion(TramitesDto ajuste)
+        {
+            try
+            {
+                TramitesDto tramite = new TramitesDto
+                {
+                    IdTramite = ajuste.IdTramite,
+                    estado = ajuste.estado,
+                    duracion = ajuste.duracion,
+                    FechaInicio = ajuste.FechaInicio,
+                    IdNomina = ajuste.IdNomina,
+                    Razon = ajuste.Razon,
+                    tipo = ajuste.tipo
+                };
+                int cantidadDeDatosEditados = await _editarTramites.Editar(ajuste);
+
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -325,21 +368,6 @@ namespace ProyectoLavacar.Controllers
             return View();
         }
 
-        // POST: Nomina/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         
     }

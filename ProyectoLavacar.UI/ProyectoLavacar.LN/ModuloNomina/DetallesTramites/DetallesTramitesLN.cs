@@ -34,7 +34,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.DetallesTramites
                 duracion = tramite.duracion,
                 FechaInicio = tramite.FechaInicio,
                 Razon = tramite.Razon,
-                tipo = tramite.tipo
+                tipo = tramite.tipo,
+                estado= tramite.estado
             };
         }
     }

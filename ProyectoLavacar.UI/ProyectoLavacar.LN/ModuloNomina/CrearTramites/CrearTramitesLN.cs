@@ -64,7 +64,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 FechaInicio = elTramites.FechaInicio,
                 duracion = elTramites.duracion,
                 Razon = elTramites.Razon,
-                tipo = elTramites.tipo
+                tipo = elTramites.tipo,
+                estado= elTramites.estado
 
 
             };
@@ -102,6 +103,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 Monto=deduccion,
                 Razon="Ingreso de capacidad",
                 tipo="Deduccion"
+           
             };
             _crearAjusteSalarial.RegistarAjusteSalariales(ajuste);
             return deduccion;

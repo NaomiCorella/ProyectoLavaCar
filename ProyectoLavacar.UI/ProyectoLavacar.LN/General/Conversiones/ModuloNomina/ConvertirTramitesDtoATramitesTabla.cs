@@ -19,6 +19,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 //IdNomina = elTramites.IdNomina,
                 //FechaInicio = elTramites.FechaInicio,
                 duracion = elTramites.duracion,
+                estado = elTramites.estado
                 //Razon = elTramites.Razon,
                 //tipo = elTramites.tipo
 

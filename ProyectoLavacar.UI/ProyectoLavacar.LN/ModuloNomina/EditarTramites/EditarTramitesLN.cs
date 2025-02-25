@@ -42,28 +42,36 @@ namespace ProyectoLavacar.LN.ModuloNomina.EditarTramites
 
         public async Task<int> Editar(TramitesDto tramite)
         {
-       
 
-            TramitesDto tramiteAnterior = _detallesajustes.Detalle(tramite.IdTramite);
-            NominaDto nomina = _obtenerNomina.Detalle(tramite.IdNomina);
-
-            decimal incapacidadAnterior = Math.Round((nomina.SalarioNeto / 30m) * tramiteAnterior.duracion, 2);
-            decimal incapacidadNueva = Math.Round((nomina.SalarioNeto / 30m) * tramite.duracion, 2);
-
-            decimal diferencia = Math.Abs(incapacidadAnterior - incapacidadNueva);
-
-            AjustesSalarialesDto AjusteNuevo = new AjustesSalarialesDto
+            if (tramite.tipo == "Incapacidad")
             {
-                IdAjusteSalarial = 0,
-                IdNomina = tramite.IdNomina,
-                Monto = diferencia,
-                Razon = "Edicion de Incapacidad",
-                tipo = "Deduccion"
-            };
+                TramitesDto tramiteAnterior = _detallesajustes.Detalle(tramite.IdTramite);
+                NominaDto nomina = _obtenerNomina.Detalle(tramite.IdNomina);
 
-            await _crearAjuste.RegistarAjusteSalariales(AjusteNuevo);
-            int cantidadDeDatosEditados = await _editarTramitesAD.Editar(_convertirObjeto.ConvertirTramites(tramite));
-            return cantidadDeDatosEditados;
+                decimal incapacidadAnterior = Math.Round((nomina.SalarioNeto / 30m) * tramiteAnterior.duracion, 2);
+                decimal incapacidadNueva = Math.Round((nomina.SalarioNeto / 30m) * tramite.duracion, 2);
+
+                decimal diferencia = Math.Abs(incapacidadAnterior - incapacidadNueva);
+
+                AjustesSalarialesDto AjusteNuevo = new AjustesSalarialesDto
+                {
+                    IdAjusteSalarial = 0,
+                    IdNomina = tramite.IdNomina,
+                    Monto = diferencia,
+                    Razon = "Edicion de Incapacidad",
+                    tipo = "Deduccion"
+                };
+
+                await _crearAjuste.RegistarAjusteSalariales(AjusteNuevo);
+                int cantidadDeDatosEditados = await _editarTramitesAD.Editar(_convertirObjeto.ConvertirTramites(tramite));
+                return cantidadDeDatosEditados;
+            }
+            else
+            {
+                int cantidadDeDatosEditados = await _editarTramitesAD.Editar(_convertirObjeto.ConvertirTramites(tramite));
+                return cantidadDeDatosEditados;
+            }
+            
         }
     }
 }

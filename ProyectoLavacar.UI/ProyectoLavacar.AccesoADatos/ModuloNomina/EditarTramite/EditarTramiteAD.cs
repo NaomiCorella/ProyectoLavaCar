@@ -21,6 +21,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.EditarTramite
         {
             TramitesTabla tramiteenBaseDeDatos = _elcontexto.TramitesTabla.Where(elTramite => elTramite.IdTramite == tramite.IdTramite).FirstOrDefault();
             tramiteenBaseDeDatos.duracion = tramite.duracion;
+            tramiteenBaseDeDatos.estado = tramite.estado;
              EntityState estado = _elcontexto.Entry(tramiteenBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
 
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
