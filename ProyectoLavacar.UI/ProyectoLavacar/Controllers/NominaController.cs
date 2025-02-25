@@ -52,7 +52,7 @@ namespace ProyectoLavacar.Controllers
         IListarGeneralLN _listarGeneralEmpleadosNom;
         IListarUnicoEmpleadoLN _listarNominadelEmpleado;
         IObtenerPorIdLN _obtenerporId;
-        ICrearAccidenteLN _crearAccidentes;
+        ICrearRebajoLN _crearAccidentes;
         IListarTramitesLN _listarTramites;
         IListarAjustesLN _listarAjustes;
         IEditarTramitesLN _editarTramites;
@@ -70,7 +70,7 @@ namespace ProyectoLavacar.Controllers
             _listarGeneralEmpleadosNom = new ListarGeneralLN();
             _listarNominadelEmpleado = new ListarUnicoEmpleadoLN();
             _obtenerporId = new ObtenerPorIdLN();
-            _crearAccidentes = new CrearAccidenteLN();
+            _crearAccidentes = new CrearRebajoLN();
             _listarTramites = new ListarTramitesLN();
             _listarAjustes = new ListarAjustesLN();
             _editarTramites = new EditarTramitesLN();
@@ -129,6 +129,29 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
+        public ActionResult IngresarRebajos()
+        {
+            return View();
+        }
+
+        // POST: Nomina/Create
+        [HttpPost]
+        public async Task<ActionResult> IngresarRebajos(RebajosDto modeloDeNomina)
+        {
+            try
+            {
+
+                int cantidadDeDatosGuardados = await _crearAccidentes.RegistroTramites(modeloDeNomina);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult IngresarAjustes(int idNomina)
         {
             ViewBag.tipo = new List<SelectListItem>

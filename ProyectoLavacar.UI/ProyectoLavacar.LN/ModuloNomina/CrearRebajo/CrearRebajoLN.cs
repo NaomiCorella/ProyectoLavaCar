@@ -15,46 +15,38 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.LN.ModuloNomina.CrearAccidente
 {
-    public class CrearAccidenteLN : ICrearAccidenteLN
+    public class CrearRebajoLN : ICrearRebajoLN
     {
-        ICrearAccidenteAD _crearAccidente;
+        ICrearRebajoAD _crearAccidente;
         ICrearAjusteSalarialesLN _crearAjustes;
         IObtenerPorIdLN _obtenerNomina;
-        public CrearAccidenteLN()
+        public CrearRebajoLN()
         {
-            _crearAccidente = new CrearAccidenteAD();
+            _crearAccidente = new CrearRebajoAD();
             _crearAjustes = new CrearAjustesSalarialesLN();
             _obtenerNomina = new ObtenerPorIdLN();
         }
 
-        public async Task<int> RegistroTramites(AccidenteDto modelo)
+        public async Task<int> RegistroTramites(RebajosDto modelo)
         {
 
             int cantidadDeDatosAlmacenados = await _crearAccidente.RegistrarTramites(ConvertirObjetoTramitessTabla(modelo));
-            NominaDto nomina = _obtenerNomina.Detalle(modelo.IdNomina);
-            AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
-            {
-                IdAjusteSalarial = 0,
-                IdNomina = modelo.IdNomina,
-                Monto = (nomina.SalarioNeto / 30m) * modelo.duracion,
-                Razon = modelo.Razon,
-                tipo = "Bonificacion"
-            };
-            int cantidad = await _crearAjustes.RegistarAjusteSalariales(ajuste);
+            
             return cantidadDeDatosAlmacenados;
         }
-        private AccidenteTabla ConvertirObjetoTramitessTabla(AccidenteDto elAccidente)
+        private RebajosTabla ConvertirObjetoTramitessTabla(RebajosDto elAccidente)
         {
 
 
-            return new AccidenteTabla()
+            return new RebajosTabla()
             {
-                idAccidente = elAccidente.idAccidente,
+                idRebajo = elAccidente.idRebajo,
                 IdNomina = elAccidente.IdNomina,
-                FechaInicio = elAccidente.FechaInicio,
-                duracion = elAccidente.duracion,
+                Monto = elAccidente.Monto,
                 Razon = elAccidente.Razon,
                 tipo = elAccidente.tipo
+                
+
 
             };
         }

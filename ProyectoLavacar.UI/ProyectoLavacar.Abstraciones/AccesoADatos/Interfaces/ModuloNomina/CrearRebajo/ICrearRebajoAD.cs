@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.CrearAccidente
 {
-    public interface ICrearAccidenteAD
+    public interface ICrearRebajoAD
     {
-        Task<int> RegistrarTramites(AccidenteTabla elTramiteARegistrar);
+        Task<int> RegistrarTramites(RebajosTabla elTramiteARegistrar);
     }
 }

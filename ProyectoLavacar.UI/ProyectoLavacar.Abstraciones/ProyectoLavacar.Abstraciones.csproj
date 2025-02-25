@@ -56,7 +56,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\ListarMovimiento\IListarMovimientoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Listar\IListarInventarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\RegistrarMovimiento\IRegistrarMovimientoAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearAccidente\ICrearAccidenteAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearRebajo\ICrearRebajoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearAjusteSalariales\ICrearAjusteSalarialesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearNomina\ICrearNominaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearTramites\ICrearTramitesAD.cs" />
@@ -113,7 +113,7 @@
     <Compile Include="LN\interfaces\ModuloInventario\ListarMovimiento\IListarMovimientoLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\Listar\IListarInventarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\RegistrarMovimiento\IRegistrarMovimientoLN.cs" />
-    <Compile Include="LN\interfaces\ModuloNomina\CrearAccidente\ICrearAccidenteLN.cs" />
+    <Compile Include="LN\interfaces\ModuloNomina\CrearRebajo\ICrearRebajoLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\CrearAjusteSalariales\ICrearAjusteSalarialesLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\CrearNomina\ICrearNominaLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\CrearTramites\ICrearTramitesLN.cs" />
@@ -149,7 +149,7 @@
     <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
-    <Compile Include="ModelosDeBaseDeDatos\AccidenteTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\RebajosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AjustesSalarialesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AspNetUserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EmpleadosTabla.cs" />
@@ -169,7 +169,7 @@
     <Compile Include="Modelos\ModeloInventario\MovimientoDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
-    <Compile Include="Modelos\ModuloNomina\AccidenteDto.cs" />
+    <Compile Include="Modelos\ModuloNomina\RebajosDto.cs" />
     <Compile Include="Modelos\ModuloNomina\AjustesSalarialesDto.cs" />
     <Compile Include="Modelos\ModuloNomina\GeneralDto.cs" />
     <Compile Include="Modelos\ModuloNomina\NominaCompletaDto.cs" />
@@ -185,10 +185,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ScriptBaseDeDatos\LavaCarBD.sql" />
+    <Folder Include="AccesoADatos\Interfaces\ModuloInventario\Actualizar\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AccesoADatos\Interfaces\ModuloInventario\Actualizar\" />
+    <Content Include="ScriptBaseDeDatos\BDAnalisis.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

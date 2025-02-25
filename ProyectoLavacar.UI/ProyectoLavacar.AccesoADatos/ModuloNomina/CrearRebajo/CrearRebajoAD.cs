@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.AccesoADatos.ModuloNomina.CrearAccidente
 {
-   public class CrearAccidenteAD : ICrearAccidenteAD
+   public class CrearRebajoAD : ICrearRebajoAD
     {
    
         Contexto _elContexto;
 
-        public CrearAccidenteAD()
+        public CrearRebajoAD()
         {
             _elContexto = new Contexto();
         }
 
-        public async Task<int> RegistrarTramites(AccidenteTabla elTramiteARegistrar)
+        public async Task<int> RegistrarTramites(RebajosTabla elTramiteARegistrar)
         {
             try
             {
-                _elContexto.AccidenteTabla.Add(elTramiteARegistrar);
+                _elContexto.RebajosTabla.Add(elTramiteARegistrar);
                 EntityState estado = _elContexto.Entry(elTramiteARegistrar).State = System.Data.Entity.EntityState.Added;
                 int cantidadDeDatosAlmacenados = await _elContexto.SaveChangesAsync();
                 return cantidadDeDatosAlmacenados;

@@ -1,3 +1,4 @@
+
 -- Crear base de datos
 CREATE DATABASE LavacarBD;
 GO
@@ -5,6 +6,8 @@ GO
 -- Usar la base de datos
 USE LavacarBD;
 GO
+-------------------------------------------------------------------------------------------------------------------------------------
+--Usuario--
 
 ---------------IDENTITY / Tabla de CLientes
 /****** Object:  Table [dbo].[AspNetRoles]    Script Date: 12/11/2024 13:29:30 ******/
@@ -125,10 +128,8 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
 GO
-
------------------------------------------------------------------------------------------------------------------------------
-select * from AjustesSalariales
----------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Reservas--
 
 -- Tabla Servicios
 CREATE TABLE Servicios (
@@ -156,6 +157,11 @@ CREATE TABLE Reservas (
     
 );
 GO
+
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Nomina--
+
+
 -- Tabla Nomina
 CREATE TABLE Nomina (
     idNomina INT IDENTITY PRIMARY KEY NOT NULL,
@@ -188,12 +194,11 @@ Razon nvarchar(300) not null,
 tipo nvarchar(100) not null,
 foreign key(idNomina) references Nomina(idNomina));
 
-CREATE TABLE Accidente (
-idAccidente int identity primary key not null, 
+CREATE TABLE RebajosEspecificos (
+idRebajo int identity primary key not null, 
 idNomina int not null, 
-fechaInicio datetime not null, 
-duracion int not null, 
-Razon nvarchar(300) not null,
+monto decimal not null, 
+ razon nvarchar(300) not null,  
 tipo nvarchar(100) not null,
 foreign key(idNomina) references Nomina(idNomina));
 
@@ -212,6 +217,8 @@ foreign key(idNomina) references Nomina(idNomina));
  idNomina int not null, 
 tipo nvarchar(100) not null,
 foreign key(idNomina) references Nomina(idNomina));
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Inventario--
 
 -- Tabla Producto
 CREATE TABLE Producto (
@@ -233,15 +240,13 @@ fecha Datetime not null,
 foreign key (idProducto) references Producto(idProducto)
 
 );
-select * from Movimiento
-drop table Movimiento
 
-
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo NotificacionCompra-- ?????
 -- Tabla Compra
 CREATE TABLE Compra (
     idCompra INT IDENTITY PRIMARY KEY NOT NULL,
-    idUsuario nvarchar(128) NOT NULL,
-   
+    idUsuario nvarchar(128) NOT NULL, 
     idServicio INT NOT NULL,
     idReserva INT NOT NULL,
     total DECIMAL(10,2) NOT NULL,
@@ -254,18 +259,9 @@ FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
     FOREIGN KEY (idReserva) REFERENCES Reservas(idReserva)
 );
 GO
--- Tabla Respuestas de resenia
-CREATE TABLE Respuesta (
-    idRespuesta INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado nvarchar (128) NOT NULL,
-    comentarios NVARCHAR(MAX)  NOT NULL,
-    fecha DATE NOT NULL,
-    estado BIT NOT NULL,
-	idResenia int not null, 
-   FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
-      FOREIGN KEY (idResenia) REFERENCES Resenias(idResenia),
-);
-GO
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Resenias-- 
+
 
 -- Tabla Resenias
 CREATE TABLE Resenias (
@@ -282,7 +278,21 @@ CREATE TABLE Resenias (
 
 );
 GO
+-- Tabla Respuestas de resenia
+CREATE TABLE Respuesta (
+    idRespuesta INT IDENTITY PRIMARY KEY NOT NULL,
+    idEmpleado nvarchar (128) NOT NULL,
+    comentarios NVARCHAR(MAX)  NOT NULL,
+    fecha DATE NOT NULL,
+    estado BIT NOT NULL,
+	idResenia int not null, 
+   FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
+      FOREIGN KEY (idResenia) REFERENCES Resenias(idResenia),
+);
+GO
 
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Reportes-- 
 
 -- Tabla Evaluaciones
 CREATE TABLE Evaluaciones (
@@ -296,8 +306,10 @@ CREATE TABLE Evaluaciones (
 FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
- 
- CREATE TRIGGER trg_InsertReserva
+-------------------------------------------------------------------------------------------------------------------------------------
+--Modulo Triggers e inster NECESARIOS--
+
+CREATE TRIGGER trg_InsertReserva
 ON Reservas
 AFTER INSERT
 AS
@@ -320,67 +332,7 @@ BEGIN
     INNER JOIN inserted i ON r.idReserva = i.idReserva;
 END;
 GO
-select * from AspNetUsers
-
-SELECT TOP 1 u.Id
-FROM [dbo].[AspNetUsers] u
-JOIN [dbo].[AspNetUserRoles] ur ON u.Id = ur.UserId
-JOIN [dbo].[AspNetRoles] r ON ur.RoleId = r.Id
-WHERE r.Name = 'Empleado'  -- Asumiendo que el rol se llama 'Empleado'
-ORDER BY NEWID();  -- Esto selecciona un registro aleatorio
-
 
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Usuario')
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Empleado')
 Insert into AspNetRoles (Id, Name) values (NEWID(),'Administrador')
-
-INSERT INTO Resenias (idServicio, idCliente, calificacion, comentarios, fecha, estado)  
-VALUES  
-(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Excelente servicio, muy satisfecho.', '2025-02-06', 1),  
-(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Muy bueno, pero hay aspectos por mejorar.', '2025-02-06', 1),  
-(1, '123e4567-e89b-12d3-a456-426614174000', 1, 'Servicio promedio, esperaba más.', '2025-02-06', 1);
-
-
-INSERT INTO Respuesta (idEmpleado, comentarios, fecha, estado, idResenia)  
-VALUES  
-('123e4567-e89b-12d3-a456-426614174000', '¡Gracias por tu reseña! Nos alegra que estés satisfecho.', '2025-02-07', 1, 3),  
-('123e4567-e89b-12d3-a456-426614174000', 'Apreciamos tu comentario y trabajaremos en mejorar.', '2025-02-07', 1, 4); 
-;
-
-
-INSERT INTO [dbo].[AspNetUsers]  
-    (Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, nombre, primer_apellido, segundo_apellido,  
-     UserName, estado, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEndDateUtc, LockoutEnabled, AccessFailedCount,  
-     cedula, numeroCuenta, turno, puesto)  
-VALUES  
-    ('123e4567-e89b-12d3-a456-426614174000', 'usuario@example.com', 1, 'hashedpassword123', 'securitystamp123',  
-     '1234567890', 'Juan', 'Pérez', 'Gómez', 'juanperez', 1, 1, 0, NULL, 1, 0,  
-     102345678, '12345678901234567890', 'Mañana', 'Administrador');
-SELECT 
-    r.idResenia,
-    r.idServicio,
-    r.idCliente,
-    r.calificacion,
-    r.comentarios AS ComentarioResenia,
-    r.fecha AS FechaResenia,
-    r.estado AS EstadoResenia,
-    rp.idRespuesta,
-    rp.idEmpleado,
-    rp.comentarios AS ComentarioRespuesta,
-    rp.fecha AS FechaRespuesta,
-    rp.estado AS EstadoRespuesta
-FROM Resenias r
-LEFT JOIN Respuesta rp ON r.idResenia = rp.idResenia;
-
-select * from Respuesta
-INSERT INTO Reservas (idCliente, idEmpleado, idServicio, fecha, hora, estado)  
-VALUES  
-('123e4567-e89b-12d3-a456-426614174000', '123e4567-e89b-12d3-a456-426614174000', 1, '2025-03-10', '10:00', 1);
-
-select * from AspNetUsers
-
-
-INSERT INTO Nomina 
-(idEmpleado, salarioNeto, salarioBruto, fechaDePago, periodoDePago, horasOrdinarias, horasExtras, horasDobles, diasDispoVacaciones, diasUtiliVacaciones, incapacidad, tipoDeContrato, estado, totalBono, totalDedu)
-VALUES 
-('96b79881-618c-46b2-baed-115e51510753', 2500.00, 3000.00, '2025-02-20', 'Mensual', 160, 10, 5, 15, 10, 0.00, 'Indefinido', 1, 200.00, 100.00);

@@ -124,7 +124,7 @@
     <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoLN.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioLN.cs" />
     <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoLN.cs" />
-    <Compile Include="ModuloNomina\CrearAccidente\CrearAccidenteLN.cs" />
+    <Compile Include="ModuloNomina\CrearRebajo\CrearRebajoLN.cs" />
     <Compile Include="ModuloNomina\CrearAjustesSalariales\CrearAjustesSalarialesLN.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaLN.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesLN.cs" />
