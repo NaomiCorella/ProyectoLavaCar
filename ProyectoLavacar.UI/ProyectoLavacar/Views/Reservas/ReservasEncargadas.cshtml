@@ -25,87 +25,88 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.nombreCliente)
-                    </th>
-                  
-                    <th>
-                        @Html.DisplayNameFor(model => model.nombreServicio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.fecha)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.hora)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.estado)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <div class="container mt-5 mb-5">
+        <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
                     <tr>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombreCliente)
-                        </td>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombreServicio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fecha)
-                        </td>
-                        <td>
-                            @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
-                        </td>
-                        <td>
-                            @if (item.estado)
-                            {
-                                <span class="badge bg-success">Activa</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-danger">Inactiva</span>
-                            }
-                        </td>
-                        <td>
-                            @if (item.estado)
-                            {
-                                @Html.ActionLink("Inactivar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Activar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
-                            }
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombreCliente)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombreServicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.fecha)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.hora)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombreCliente)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombreServicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fecha)
+                            </td>
+                            <td>
+                                @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                            </td>
+                            <td>
+                                @if (item.estado)
+                                {
+                                    <span class="badge bg-success">Activa</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Inactiva</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.estado)
+                                {
+                                    @Html.ActionLink("Inactivar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Activar", "CambiarEstadoEncargo", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
 
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
+        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="~/Content/assets/js/bootstrap.min.js"></script>
+        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/Content/assets/js/main.js"></script>
+        <script src="~/Content/assets/js/popper.min.js"></script>
+        <script src="~/Content/assets/js/slick.min.js"></script>
+        <script src="~/Content/assets/js/waypoints.min.js"></script>
+        <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
 
 </html>
