@@ -1,0 +1,186 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.NominaDto
+
+@{
+    ViewBag.Title = "ProcesarNomina";
+}
+
+<h2>ProcesarNomina</h2>
+
+<div>
+    <h4>NominaDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdNomina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdNomina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEmpleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdEmpleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalarioNeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalarioNeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalarioBruto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalarioBruto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDePago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDePago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PeriodoDePago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeriodoDePago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasOrdinarias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasOrdinarias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasExtras)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasExtras)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasDobles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasDobles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiasDispoVacaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiasUtiliVacaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Incapacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incapacidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDeContrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDeContrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalBono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalBono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalDedu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalDedu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deduccionCCSS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deduccionCCSS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deduccionISR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deduccionISR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bonoHorasExtra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bonoHorasExtra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rebajosDeuda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rebajosDeuda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rebajosSancion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rebajosSancion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ConfimarNomina", "ConfimarNomina", new { idNomina = Model.IdNomina }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

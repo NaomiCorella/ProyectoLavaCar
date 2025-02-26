@@ -14,6 +14,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ProcesarNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;
@@ -31,6 +32,7 @@ using ProyectoLavacar.LN.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.LN.ModuloNomina.ListarTramites;
 using ProyectoLavacar.LN.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
+using ProyectoLavacar.LN.ModuloNomina.ProcesarNomina;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +61,7 @@ namespace ProyectoLavacar.Controllers
         IEditarAjusteLN _editarAjustes;
         IDetallesAjustesLN _detallesAjustes;
         IDetallesTramitesLN _detallesTramites;
+        IProcesarNominaLN _procesarNomina;
 
         public  NominaController()
         {
@@ -77,6 +80,7 @@ namespace ProyectoLavacar.Controllers
             _editarAjustes = new EditarAjustesLN();
              _detallesAjustes = new DetallesAjustesLN();
              _detallesTramites = new DetallesTramitesLN();
+            _procesarNomina = new ProcesarNominaLN();
 
         }
         // GET: Nomina
@@ -377,8 +381,17 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        public ActionResult ProcesarNomina(int idNomina)
+        {
+            NominaDto nomina = _obtenerporId.Detalle(idNomina);
+            return View(nomina);
+        }
+        public ActionResult ConfimarNomina(int idNomina)
+        {
+            NominaDto nomina = _procesarNomina.ProcesarNomina(idNomina);
 
-
+            return RedirectToAction("Index");
+        }
         public ActionResult Error()
         {
 
@@ -386,12 +399,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-
+       
         
     }
 }

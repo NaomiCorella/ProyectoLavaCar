@@ -1,4 +1,4 @@
-﻿a
+﻿
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.DetalleNominaCompleta;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using System;

@@ -50,7 +50,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
                 IdNomina = laNomina.IdNomina,
                 IdEmpleado = laNomina.IdEmpleado,
                 SalarioBruto = laNomina.SalarioBruto,
-                SalarioNeto = laNomina.SalarioNeto,
+                SalarioNeto = salarioNeto,
                 HorasExtras = laNomina.HorasExtras,
                 HorasDobles = laNomina.HorasDobles,
                 HorasOrdinarias = laNomina.HorasOrdinarias,
@@ -63,7 +63,6 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
                 Estado = laNomina.Estado,
                 totalBono = laNomina.totalBono,
                 totalDedu = laNomina.totalDedu,
-
                 deduccionCCSS = seguro,
                 deduccionISR = impuestos,
                 bonoHorasExtra = bonosHorasExtra,

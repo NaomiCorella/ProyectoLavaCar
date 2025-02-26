@@ -38,4 +38,4 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarRebajos
         }
     }
 }
-}
+
