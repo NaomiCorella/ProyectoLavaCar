@@ -51,8 +51,6 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
            
         }
 
-
-
         private TramitesTabla ConvertirObjetoTramitessTabla(TramitesDto elTramites)
         {
 
@@ -79,14 +77,19 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 decimal deduccion = incapacidad(elTramites);
                 return deduccion;
             }
-            else
+            if(elTramites.tipo =="Vacaciones")
             {
-                decimal vacacio = vacaciones(elTramites);
+            decimal vacacio = vacaciones(elTramites);
                 if (vacacio == 0)
                 {
                     return 0;
                 }
                 return vacacio;
+            }
+            else
+            {
+                decimal bonificacion = Accidente(elTramites);
+                return bonificacion;
             }
           
         }

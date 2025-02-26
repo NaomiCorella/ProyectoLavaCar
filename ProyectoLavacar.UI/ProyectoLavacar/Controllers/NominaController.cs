@@ -35,6 +35,7 @@ using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.LN.ModuloNomina.ProcesarNomina;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -134,18 +135,32 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult IngresarRebajos()
+        public ActionResult IngresarRebajos(int idNomina)
         {
+            ViewBag.tipo = new List<SelectListItem>
+                     {
+                         new SelectListItem { Value = "Sancion", Text = "Sancion" },
+                         new SelectListItem { Value = "Deuda", Text = "Deuda" },
+                   
+                         };
             return View();
         }
 
         // POST: Nomina/Create
         [HttpPost]
-        public async Task<ActionResult> IngresarRebajos(RebajosDto modeloDeNomina)
+        public async Task<ActionResult> IngresarRebajos(RebajosDto modeloDeNomina,int idNomina)
         {
             try
             {
-
+                RebajosDto ajuste = new RebajosDto()
+                {
+                    idRebajo = modeloDeNomina.idRebajo,
+                    IdNomina = idNomina,
+                    Monto = modeloDeNomina.Monto,
+                    Razon = modeloDeNomina.Razon,
+                    tipo = modeloDeNomina.tipo
+                    
+                };
                 int cantidadDeDatosGuardados = await _crearAccidentes.RegistroTramites(modeloDeNomina);
 
                 return RedirectToAction("Index");
