@@ -184,6 +184,7 @@ namespace ProyectoLavacar.Controllers
         }
         public ActionResult MiPerfil()//empleado
         {
+        
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             UsuariosDto user = _buscarPorId.Detalle(idUsuario);
@@ -195,6 +196,19 @@ namespace ProyectoLavacar.Controllers
                 .FirstOrDefault();
 
             ViewBag.estadoRegistro = ultimoRegistro?.estado;
+
+
+            DateTime fecha = DateTime.Now;
+  
+            if (ultimoRegistro != null && ultimoRegistro.HoraSalida.Day == fecha.Day)
+            {
+                ViewBag.ValidacionRegistro = true;
+            }
+            else
+            {
+                ViewBag.ValidacionRegistro = false;
+            }
+
 
             PerfilEmpleado usuario = new PerfilEmpleado
             {
@@ -247,10 +261,12 @@ namespace ProyectoLavacar.Controllers
             {
                 var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
                 string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
                 var ultimoRegistro = _context.RegistroHorasTabla
            .Where(r => r.idEmpleado == idUsuario)
            .OrderByDescending(r => r.HoraEntrada)
            .FirstOrDefault();
+
                 RegistroHorasDto hora = new RegistroHorasDto
                 {
                     idRegistro = ultimoRegistro.idRegistro,

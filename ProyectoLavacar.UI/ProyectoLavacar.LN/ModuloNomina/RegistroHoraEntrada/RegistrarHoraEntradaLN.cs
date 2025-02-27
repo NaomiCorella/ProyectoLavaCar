@@ -39,7 +39,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraEntrada
             {
               
                 idRegistro = modelo.idRegistro,
-                HoraSalida = _fecha.ObtenerFecha(),
+                HoraSalida = _fecha.ObtenerFecha().AddDays(2),
                 HoraEntrada = _fecha.ObtenerFecha(),
                 idEmpleado=modelo.idEmpleado,
                 estado = modelo.estado,

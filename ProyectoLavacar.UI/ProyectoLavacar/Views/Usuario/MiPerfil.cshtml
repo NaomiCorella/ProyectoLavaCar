@@ -99,7 +99,7 @@
             <tr>
                 <th>Fecha</th>
                 <th>calificacion</th>
-              
+
 
             </tr>
         </thead>
@@ -109,7 +109,7 @@
                 <tr>
                     <td>@evaluacion.fechaEvaluacion</td>
                     <td>@evaluacion.calificacion</td>
-              
+
 
                 </tr>
             }
@@ -124,7 +124,7 @@
                 <th>Fecha</th>
                 <th>Concepto</th>
                 <th>Monto</th>
-      
+
             </tr>
         </thead>
         <tbody>
@@ -134,7 +134,7 @@
                     <td>@nomina.FechaDePago</td>
                     <td>@nomina.PeriodoDePago</td>
                     <td>@nomina.SalarioNeto</td>
-                   
+
                 </tr>
             }
         </tbody>
@@ -151,7 +151,16 @@
     }
     else
     {
-      if (!ViewBag.estadoRegistro)
+        if (ViewBag.ValidacionRegistro)
+        {
+        <p>
+            Ya ingreso su registro de horas por el dia. En caso de problemas hable con su administrador
+        </p>
+
+    }
+    else
+    {
+        if (!ViewBag.estadoRegistro)
         {
 
             <a href="@Url.Action("RegistrarHoraSalida")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraSalida">
@@ -166,6 +175,8 @@
         }
     }
 
+}
+
 
     @Html.ActionLink("Back to List", "Index")
-</p>
+    </p>
