@@ -42,7 +42,8 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraEntrada
                 HoraSalida = _fecha.ObtenerFecha(),
                 HoraEntrada = _fecha.ObtenerFecha(),
                 idEmpleado=modelo.idEmpleado,
-                estado = modelo.estado
+                estado = modelo.estado,
+                totalHoras = modelo.totalHoras
 
             };
         }

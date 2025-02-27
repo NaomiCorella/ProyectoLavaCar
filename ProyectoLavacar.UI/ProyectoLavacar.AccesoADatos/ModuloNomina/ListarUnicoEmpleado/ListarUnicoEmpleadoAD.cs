@@ -52,8 +52,12 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarUnicoEmpleado
                                                              TipoDeContrato = elUnicoEmpleado.TipoDeContrato,
                                                              turno = empleados.turno,
                                                              totalBono = elUnicoEmpleado.totalBono,
-                                                             totalDedu = elUnicoEmpleado.totalDedu
-
+                                                             totalDedu = elUnicoEmpleado.totalDedu,
+                                                              deduccionCCSS = elUnicoEmpleado.deduccionCCSS,
+                                                             deduccionISR = elUnicoEmpleado.deduccionISR,
+                                                             bonoHorasExtra = elUnicoEmpleado.bonoHorasExtra,
+                                                             rebajosDeuda = elUnicoEmpleado.rebajosDeuda,
+                                                             rebajosSancion = elUnicoEmpleado.rebajosSancion
 
 
                                                          }).ToList();

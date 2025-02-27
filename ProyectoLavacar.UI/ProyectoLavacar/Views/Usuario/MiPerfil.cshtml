@@ -143,19 +143,29 @@
 
 
 <p>
-    @if (!ViewBag.estadoRegistro)
-    {
-
-        <a href="@Url.Action("RegistrarHoraSalida")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraSalida">
-            RegistrarHoraSalida
-        </a>
-    }
-    else
+    @if (ViewBag.estadoRegistro == null)
     {
         <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraEntrada">
             RegistrarHoraEntrada
         </a>
     }
+    else
+    {
+      if (!ViewBag.estadoRegistro)
+        {
+
+            <a href="@Url.Action("RegistrarHoraSalida")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraSalida">
+                RegistrarHoraSalida
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraEntrada">
+                RegistrarHoraEntrada
+            </a>
+        }
+    }
+
 
     @Html.ActionLink("Back to List", "Index")
 </p>

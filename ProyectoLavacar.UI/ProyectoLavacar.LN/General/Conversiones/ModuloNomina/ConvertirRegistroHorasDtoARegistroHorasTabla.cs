@@ -25,6 +25,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 idRegistro = hora.idRegistro,
                 estado = hora.estado,
                 HoraSalida= _fecha.ObtenerFecha(),
+                totalHoras = hora.totalHoras,
             };
         }
     }

@@ -18,5 +18,6 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public DateTime HoraSalida { get; set; }
         public string idEmpleado { get; set; }
         public bool estado { get; set; }
+        public int totalHoras { get; set; }
     }
 }

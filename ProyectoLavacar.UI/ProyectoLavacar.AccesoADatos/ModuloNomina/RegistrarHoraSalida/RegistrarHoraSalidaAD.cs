@@ -22,6 +22,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.RegistrarHoraSalida
             RegistroHorasTabla horaEnBaseDeDatos = _elcontexto.RegistroHorasTabla.Where(elRegistro => elRegistro.idRegistro == horaSalida.idRegistro).FirstOrDefault();
             horaEnBaseDeDatos.HoraSalida = horaSalida.HoraSalida;
             horaEnBaseDeDatos.estado = horaSalida.estado;
+            horaEnBaseDeDatos.totalHoras = horaSalida.totalHoras;
             EntityState estado = _elcontexto.Entry(horaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
 
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();

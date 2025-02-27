@@ -226,7 +226,8 @@ namespace ProyectoLavacar.Controllers
                     HoraSalida = "Hora No Registrada",
                     idEmpleado = idUsuario,
                     HoraEntrada = DateTime.Now.ToString(),
-                    estado = false
+                    estado = false,
+                    totalHoras = 0
                 };  
                 int cantidadDeDatosEditados = await _registroHoraEntrada.RegistrarHoraEntrada(hora);
                 return RedirectToAction("MiPerfil");
@@ -256,7 +257,8 @@ namespace ProyectoLavacar.Controllers
                     HoraSalida = DateTime.Now.ToString(),
                     idEmpleado = idUsuario,
                     HoraEntrada = DateTime.Now.ToString(),
-                    estado = true
+                    estado = true,
+                    totalHoras=0
                 };
                 int cantidadDeDatosEditados = await _registroHoraSalida.RegistroHoraSalida(hora);
                 return RedirectToAction("MiPerfil");

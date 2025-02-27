@@ -21,7 +21,13 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public decimal? Incapacidad { get; set; }
         public string TipoDeContrato { get; set; }
         public bool Estado { get; set; }
-
+        public decimal totalBono { get; set; }
+        public decimal totalDedu { get; set; }
+        public decimal deduccionCCSS { get; set; }
+        public decimal deduccionISR { get; set; }
+        public decimal bonoHorasExtra { get; set; }
+        public decimal rebajosDeuda { get; set; }
+        public decimal rebajosSancion { get; set; }
         public string IdEmpleado { get; set; }
         public string nombre { get; set; }
         public string primer_apellido { get; set; }
@@ -33,7 +39,6 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public string turno { get; set; }
         public bool estado { get; set; }
         public string numeroCuenta { get; set; }
-        public decimal totalBono { get; set; }
-        public decimal totalDedu { get; set; }
+ 
     }
 }
