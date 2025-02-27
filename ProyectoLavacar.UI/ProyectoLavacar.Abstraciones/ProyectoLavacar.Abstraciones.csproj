@@ -66,6 +66,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarAjuste\IEditarAjusteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\Editar\IEditarNominaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\IngresarHoras\IRegistroHoraEntradaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarAjustes\IListarAjustesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarGeneral\IListarGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarRebajos\IListarRebajosAD.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarUnicoEmpleado\IListarUnicoEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ObtenerPorId\IObtenerPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ProcesarNomina\IProcesarNominaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\RegistroHoraSalida\IRegistroHoraSalidaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\Crear\ICrearReservaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\DetallesReservaCompleta\IDetallesReservaCompletaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloReservas\EditarAdmin\IEditarReservaAD.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="LN\interfaces\General\ModuloEmpleados\IConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloNomina\IConvertirAjustesSalarialesDtoAAjustesSalarialesTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloNomina\IConvertirNominaDtoANominaTabla.cs" />
+    <Compile Include="LN\interfaces\General\ModuloNomina\IConvertirRegistroHorasDtoARegistroHorasTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloNomina\IConvertirTramitesDtoATramitesTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReservas\IConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReseñas\IConvertirResenia.cs" />
@@ -133,6 +136,8 @@
     <Compile Include="LN\interfaces\ModuloNomina\ListarUnicoEmpleado\IListarUnicoEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\ObtenerPorId\IObtenerPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloNomina\ProcesarNomina\IProcesarNominaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloNomina\RegistroHoraEntrada\IRegistroHoraEntradaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloNomina\RegistroHoraSalida\IRegistroHoraSalidaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\Crear\ICrearReservaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\DetallesReservaCompleta\IDetallesReservaCompletaLN.cs" />
     <Compile Include="LN\interfaces\ModuloReservas\EditarAdmin\IEditarReservaLN.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="ModelosDeBaseDeDatos\InventarioTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\MovimientoTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\NominaTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\RegistroHorasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReseniasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ReservasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RespuestaTabla.cs" />
@@ -180,6 +186,7 @@
     <Compile Include="Modelos\ModuloNomina\GeneralDto.cs" />
     <Compile Include="Modelos\ModuloNomina\NominaCompletaDto.cs" />
     <Compile Include="Modelos\ModuloNomina\NominaDto.cs" />
+    <Compile Include="Modelos\ModuloNomina\RegistroHorasDto.cs" />
     <Compile Include="Modelos\ModuloNomina\TramitesDto.cs" />
     <Compile Include="Modelos\ModuloNomina\UnicoEmpleadoDto.cs" />
     <Compile Include="Modelos\ModuloReservas\ReservaCompleta.cs" />

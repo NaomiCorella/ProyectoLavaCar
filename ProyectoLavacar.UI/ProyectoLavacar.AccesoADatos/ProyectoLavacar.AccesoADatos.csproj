@@ -83,6 +83,8 @@
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralAD.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoAD.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdAD.cs" />
+    <Compile Include="ModuloNomina\RegistrarHoraEntrada\RegistrarHoraEntradaAD.cs" />
+    <Compile Include="ModuloNomina\RegistrarHoraSalida\RegistrarHoraSalidaAD.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaAD.cs" />
     <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaAD.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaAD.cs" />

@@ -104,6 +104,7 @@
     <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirAjustesSalarialesDtoAAjustesSalarialesTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirNominaDtoANominaTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloNomina\ConvertirRegistroHorasDtoARegistroHorasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirTramitesDtoATramitesTabla.cs" />
     <Compile Include="General\Conversiones\ModuloResenias\ConvertirResenia.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloNomina\ProcesarNomina\ProcesarNominaLN.cs" />
+    <Compile Include="ModuloNomina\RegistroHoraEntrada\RegistrarHoraEntradaLN.cs" />
+    <Compile Include="ModuloNomina\RegistroHoraSalida\RegistroHoraSalidaLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />

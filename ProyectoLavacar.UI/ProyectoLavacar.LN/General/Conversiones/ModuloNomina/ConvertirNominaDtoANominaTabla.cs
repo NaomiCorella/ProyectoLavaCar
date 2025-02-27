@@ -11,6 +11,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
 {
     public class ConvertirNominaDtoANominaTabla : IConvertirNominaDtoANominaTabla
     {
+
         public NominaTabla ConvertirNomina(NominaDto laNomina)
         {
             return new NominaTabla
