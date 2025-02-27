@@ -95,8 +95,9 @@
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Perfil</a>
                                         <ul class="sub-menu">
-                                            <li><a href="perfilUsuario.html">Perfil de usuario</a></li>
-                                            <li><a href="perfilEmpleado.html">Perfil de empleados</a></li>
+                                            <li>@Html.ActionLink("Perfil", "Perfil", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+                                            <li>@Html.ActionLink("PerfilEmpleados", "MiPerfil", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children">

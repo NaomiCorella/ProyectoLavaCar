@@ -170,7 +170,7 @@
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\TramitesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
-    <Compile Include="Modelos\ModeloEvaluaciones\EvalucionesDto.cs" />
+    <Compile Include="Modelos\ModeloEvaluaciones\EvaluacionesDto.cs" />
     <Compile Include="Modelos\ModeloInventario\InventarioDto.cs" />
     <Compile Include="Modelos\ModeloInventario\MovimientoDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />

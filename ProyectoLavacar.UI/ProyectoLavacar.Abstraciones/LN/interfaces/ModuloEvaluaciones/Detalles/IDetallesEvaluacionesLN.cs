@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles
 {
     public interface IDetallesEvaluacionesLN
     {
-        EvalucionesDto Detalle(int idEvaluacion);
+        EvaluacionesDto Detalle(int idEvaluacion);
     }
 }

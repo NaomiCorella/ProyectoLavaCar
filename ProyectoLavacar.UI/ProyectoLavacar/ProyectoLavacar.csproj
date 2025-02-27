@@ -321,6 +321,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PerfilEmpleado.cs" />
+    <Compile Include="Models\PerfilUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Views\Account\Empleado\Create.cshtml.__projection.g.cs" />
@@ -582,6 +584,8 @@
     <Content Include="Views\Nomina\IngresarRebajos.cshtml" />
     <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
+    <Content Include="Views\Usuario\Perfil.cshtml" />
+    <Content Include="Views\Usuario\MiPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

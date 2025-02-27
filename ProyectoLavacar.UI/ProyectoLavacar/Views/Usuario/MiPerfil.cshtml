@@ -1,0 +1,148 @@
+﻿@model ProyectoLavacar.Models.PerfilEmpleado
+
+@{
+    ViewBag.Title = "MiPerfil";
+}
+
+<h2>MiPerfil</h2>
+
+<div>
+    <h4>PerfilEmpleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.primer_apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.primer_apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.segundo_apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.segundo_apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.turno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.turno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puesto)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h3>Reservas</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Servicio</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reserva in Model.reservas)
+            {
+                <tr>
+                    <td>@reserva.fecha</td>
+                    <td>@reserva.hora</td>
+                    <td>@reserva.idServicio</td>
+                    <td>@reserva.estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <h3>Desempeño</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>calificacion</th>
+              
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evaluacion in Model.evaluaciones)
+            {
+                <tr>
+                    <td>@evaluacion.fechaEvaluacion</td>
+                    <td>@evaluacion.calificacion</td>
+              
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <h3>Nomina</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+      
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nomina in Model.nomina)
+            {
+                <tr>
+                    <td>@nomina.FechaDePago</td>
+                    <td>@nomina.PeriodoDePago</td>
+                    <td>@nomina.SalarioNeto</td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
