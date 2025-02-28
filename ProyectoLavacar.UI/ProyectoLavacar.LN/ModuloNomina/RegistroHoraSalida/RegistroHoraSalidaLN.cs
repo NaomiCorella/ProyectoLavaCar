@@ -40,6 +40,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraSalida
 
         public async Task<int> RegistroHoraSalida(RegistroHorasDto hora)
         {
+            int horas = HorasTotales(hora);
             RegistroHorasDto horaEditada = new RegistroHorasDto()
             {
                 idRegistro = hora.idRegistro,
@@ -47,7 +48,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraSalida
                 HoraSalida = hora.HoraSalida,
                 idEmpleado = hora.idEmpleado,
                 estado = hora.estado,
-                totalHoras = HorasTotales(hora)
+                totalHoras = horas
             };
             int cantidadDeDatosEditados = await _Registrar.RegistroHoraSalida(_convertirObjeto.Convertir(horaEditada));
             int hecho=registrarHorasExtra(hora);
@@ -59,7 +60,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraSalida
             DateTime horaEntrada = DateTime.Parse(hora.HoraEntrada);
             DateTime horaSalida = DateTime.Parse(hora.HoraSalida);
 
-            TimeSpan diferencia = horaEntrada - horaSalida;
+            TimeSpan diferencia = horaSalida - horaEntrada;
 
             int horasTotales = (int)diferencia.TotalHours;
             return horasTotales;

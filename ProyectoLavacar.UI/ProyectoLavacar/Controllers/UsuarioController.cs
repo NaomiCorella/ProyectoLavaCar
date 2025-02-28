@@ -272,7 +272,7 @@ namespace ProyectoLavacar.Controllers
                     idRegistro = ultimoRegistro.idRegistro,
                     HoraSalida = DateTime.Now.ToString(),
                     idEmpleado = idUsuario,
-                    HoraEntrada = DateTime.Now.ToString(),
+                    HoraEntrada = ultimoRegistro.HoraEntrada.ToString(),
                     estado = true,
                     totalHoras=0
                 };
