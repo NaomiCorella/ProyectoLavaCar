@@ -1,11 +1,14 @@
-﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
+﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Crear;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using ProyectoLavacar.LN.ModuloServicios;
 using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
 using ProyectoLavacar.LN.ModuloServicios.ObtenerPorId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,11 +18,12 @@ namespace ProyectoLavacar.Controllers
     {
         IListarServiciosLN _listarServicios;
         IDetalleServiciosLN _detallesServicios;
+        ICrearServiciosLN _crearServicios;
         public ServiciosController()
         {
             _listarServicios = new ListarServiciosLN();
             _detallesServicios = new DetalleServiciosLN();
-
+            _crearServicios = new CrearServiciosLN();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -77,11 +81,11 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Servicios/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(ServiciosDto elservicio)
         {
             try
             {
-                // TODO: Add insert logic here
+                int cantidadDeDatosGuardados = await _crearServicios.Crear(elservicio);
 
                 return RedirectToAction("Index");
             }

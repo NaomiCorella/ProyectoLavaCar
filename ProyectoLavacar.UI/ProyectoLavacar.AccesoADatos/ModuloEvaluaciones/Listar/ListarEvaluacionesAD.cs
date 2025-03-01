@@ -18,14 +18,14 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEvaluaciones
             _elContexto = new Contexto();
         }
 
-        public List<EvalucionesDto> ListarEvaluaciones(string idEmpleado)
+        public List<EvaluacionesDto> ListarEvaluaciones(string idEmpleado)
         {
-            List<EvalucionesDto> lalistaDeEvaluaciones = (from laEvaluacion in _elContexto.EvaluacionesTabla
+            List<EvaluacionesDto> lalistaDeEvaluaciones = (from laEvaluacion in _elContexto.EvaluacionesTabla
                                                           join empleados in _elContexto.UsuariosTabla on laEvaluacion.idEmpleado equals empleados.Id
                                                           where laEvaluacion.idEmpleado == idEmpleado
                                                        
 
-                                                          select new EvalucionesDto
+                                                          select new EvaluacionesDto
                                                    {
                                                        idEvaluacion = laEvaluacion.idEvaluacion,
                                                        idEmpleado = laEvaluacion.idEmpleado,

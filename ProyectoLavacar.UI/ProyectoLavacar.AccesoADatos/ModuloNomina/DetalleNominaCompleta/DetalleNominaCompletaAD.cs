@@ -18,8 +18,10 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
         public NominaCompletaDto Detalle(int idNomina)
         {
             var consulta = from nomina in _elContexto.NominaTabla
-                           join ajuste in _elContexto.AjustesSalarialesTabla on nomina.IdEmpleado equals ajuste.IdEmpleado
-                           join tramite in _elContexto.TramitesTabla on nomina.IdEmpleado equals tramite.IdEmpleado
+                           join ajuste in _elContexto.AjustesSalarialesTabla on nomina.IdNomina equals ajuste.IdNomina into ajustes
+                           from ajuste in ajustes.DefaultIfEmpty()  
+                           join tramite in _elContexto.TramitesTabla on nomina.IdNomina equals tramite.IdNomina into tramites
+                           from tramite in tramites.DefaultIfEmpty() 
                            join usuario in _elContexto.UsuariosTabla on nomina.IdEmpleado equals usuario.Id
                            where nomina.IdNomina == idNomina
                            select new NominaCompletaDto
@@ -37,13 +39,13 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
                                Incapacidad = nomina.Incapacidad,
                                TipoDeContrato = nomina.TipoDeContrato,
                                Estado = nomina.Estado,
-                               IdAjusteSalarial = ajuste.IdAjusteSalarial,
-                               Monto = ajuste.Monto,
-                               RazonAjuste = ajuste.Razon,
-                               IdTramite = tramite.IdTramite,
-                               FechaInicio = tramite.FechaInicio,
-                               FechaFin = tramite.FechaFin,
-                               RazonTramite = tramite.Razon,
+                               IdAjusteSalarial = ajuste != null ? ajuste.IdAjusteSalarial : (int?)null,  
+                               Monto = ajuste != null ? ajuste.Monto : (decimal?)null, 
+                               RazonAjuste = ajuste != null ? ajuste.Razon : null,  
+                               IdTramite = tramite != null ? tramite.IdTramite : (int?)null,  
+                               FechaInicio = tramite != null ? tramite.FechaInicio.ToString() : null,  
+                               duracion = tramite != null ? tramite.duracion : (int?)null,  
+                               RazonTramite = tramite != null ? tramite.Razon : null,  
                                IdEmpleado = usuario.Id,
                                nombre = usuario.nombre,
                                primer_apellido = usuario.primer_apellido,
@@ -54,8 +56,11 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.DetalleNominaCompleta
                                puesto = usuario.puesto,
                                turno = usuario.turno,
                                estado = usuario.estado,
-                               numeroCuenta = usuario.numeroCuenta
+                               numeroCuenta = usuario.numeroCuenta,
+                               totalBono = nomina.totalBono,
+                               totalDedu = nomina.totalDedu
                            };
+
 
             return consulta.FirstOrDefault(); 
         }

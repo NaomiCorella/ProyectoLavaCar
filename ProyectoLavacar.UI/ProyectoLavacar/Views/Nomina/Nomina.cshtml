@@ -4,168 +4,212 @@
     ViewBag.Title = "Nomina";
 }
 
-<h2>Nomina</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdNomina)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalarioNeto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalarioBruto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaDePago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PeriodoDePago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HorasOrdinarias)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HorasExtras)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HorasDobles)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Incapacidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoDeContrato)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdEmpleado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cedula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.puesto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.turno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
-        </th>
-        <th></th>
-    </tr>
+<h2>Reservas</h2>
+<!DOCTYPE html>
+<html lang="zxx">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdNomina)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalarioNeto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalarioBruto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaDePago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PeriodoDePago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HorasOrdinarias)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HorasExtras)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HorasDobles)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiasDispoVacaciones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiasUtiliVacaciones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Incapacidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoDeContrato)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEmpleado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.primer_apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.segundo_apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.puesto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.turno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.numeroCuenta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-</table>
+<body>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <div class="table-responsive shadow-lg rounded">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdNomina)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioNeto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioBruto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaDePago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PeriodoDePago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HorasOrdinarias)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HorasExtras)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HorasDobles)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Incapacidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoDeContrato)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEmpleado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.primer_apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.segundo_apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.correo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.cedula)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.puesto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.turno)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.numeroCuenta)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdNomina)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioNeto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioBruto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaDePago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodoDePago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorasOrdinarias)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorasExtras)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorasDobles)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiasDispoVacaciones)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiasUtiliVacaciones)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Incapacidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoDeContrato)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdEmpleado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.primer_apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.segundo_apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cedula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.puesto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.turno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numeroCuenta)
+                        </td>
+                        <td>
+                            @Html.ActionLink("ListarAjustes", "ListarAjustes", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("ListarTramites", "ListarTramites", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>
