@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto.cs" />
+    <Compile Include="ModuloBitacora\Listar\ListarBitacoraAD.cs" />
+    <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraAD.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioAD.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdAD.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioAD.cs" />

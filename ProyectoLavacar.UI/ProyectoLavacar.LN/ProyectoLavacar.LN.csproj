@@ -110,6 +110,8 @@
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
+    <Compile Include="ModuloBitacora\Listar\ListarBitacoraLN.cs" />
+    <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioLN.cs" />

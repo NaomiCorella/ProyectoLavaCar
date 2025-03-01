@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+﻿using ProyectoLavacar.Abstracciones.ModelosDeBaseDeDatos;
+using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -31,6 +32,9 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<RebajosTabla>().ToTable("RebajosEspecificos");
             modelBuilder.Entity<RegistroHorasTabla>().ToTable("REGISTROHORAS");
 
+
+            modelBuilder.Entity<BitacoraTabla>().ToTable("BITACORA_EVENTOS");
+
         }
         public DbSet<RegistroHorasTabla> RegistroHorasTabla { get; set; }
         public DbSet<RebajosTabla> RebajosTabla { get; set; }
@@ -48,6 +52,9 @@ namespace ProyectoLavacar.AccesoADatos
         public DbSet<AjustesSalarialesTabla> AjustesSalarialesTabla { get; set; }
         public DbSet<TramitesTabla> TramitesTabla { get; set; }
         public DbSet<NominaTabla> NominaTabla { get; set; }
+
+
+        public DbSet<BitacoraTabla> BitacoraTabla { get; set; }
 
         public DbSet<AspNetUserRolesTabla> AspNetUserRolesTabla { get; set; }
         public DbSet<RolesTabla> RolesTabla { get; set; }
