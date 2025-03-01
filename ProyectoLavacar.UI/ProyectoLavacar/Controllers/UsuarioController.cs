@@ -4,36 +4,62 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.IngresarHoras;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.RegistroHoraEntrada;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.RegistroHoraSalida;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarDisponibles;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.ListarEncargo;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.ModuloEvaluaciones;
+using ProyectoLavacar.LN.ModuloNomina.ListarUnicoEmpleado;
+using ProyectoLavacar.LN.ModuloNomina.RegistroHoraEntrada;
+using ProyectoLavacar.LN.ModuloNomina.RegistroHoraSalida;
+using ProyectoLavacar.LN.ModuloReservas.ListarDisponibles;
+using ProyectoLavacar.LN.ModuloReservas.ListarEncargo;
 using ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.LN.ModuloUsuarios.Crear;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using ProyectoLavacar.LN.ModuloUsuarios.Listar;
+using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
 {
     public class UsuarioController : Controller
     {
-    
+
         IListarUsuarioLN _listarUsuario;
         IEditarUsuarioLN _editarUsuario;
         IBuscarPorIdLN _buscarPorId;
         Contexto _context;
-
+        IListarDisponiblesLN _listarReservasClientes;
+        IListarEncargoLN _listarReservasEmpleado;
+        IListarUnicoEmpleadoLN _listarNominadelEmpleado;
+        IListarEvaluacionesLN _listarEvaluaciones;
+        IRegistroHoraEntradaLN _registroHoraEntrada;
+        IRegistroHoraSalidaLN _registroHoraSalida;
         public UsuarioController()
         {
-     
+            _listarReservasClientes = new ListarDisponiblesLN();
             _listarUsuario = new ListarUsuarioLN();
             _editarUsuario = new EditarUsuarioLN();
             _buscarPorId = new BuscarPorIdLN();
             _context = new Contexto();
+            _listarReservasEmpleado = new ListarEncargoLN();
+            _listarNominadelEmpleado = new ListarUnicoEmpleadoLN();
+            _listarEvaluaciones = new ListarEvaluacionesLN();
+            _registroHoraEntrada = new RegistrarHoraEntradaLN();
+            _registroHoraSalida = new RegistroHoraSalidaLN();
         }
-    
+
         // GET: Usuario
         public ActionResult Index()
         {
@@ -46,7 +72,7 @@ namespace ProyectoLavacar.Controllers
         // GET: Usuario/Details/5
         public ActionResult Details(string id)
         {
-           
+
 
             UsuariosDto Finanzas = _buscarPorId.Detalle(id);
             return View(Finanzas);
@@ -65,9 +91,9 @@ namespace ProyectoLavacar.Controllers
             try
             {
                 // TODO: Add insert logic here
-             
+
                 return RedirectToAction("Index");
-                
+
             }
             catch
             {
@@ -136,6 +162,127 @@ namespace ProyectoLavacar.Controllers
             {
 
                 return RedirectToAction("Index", "Home");
+            }
+
+        }
+        public ActionResult Perfil()//usuario
+        {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            UsuariosDto user = _buscarPorId.Detalle(idUsuario);
+            List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); ;
+            PerfilUsuario usuario = new PerfilUsuario
+            {
+                nombre = user.nombre,
+                primer_apellido = user.primer_apellido,
+                segundo_apellido = user.segundo_apellido,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                reservas = reservas
+            };
+            return View(usuario);
+        }
+        public ActionResult MiPerfil()//empleado
+        {
+        
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            UsuariosDto user = _buscarPorId.Detalle(idUsuario);
+            List<ReservaCompleta> reservas = _listarReservasEmpleado.Listar(idUsuario); 
+            List<UnicoEmpleadoDto> nomina = _listarNominadelEmpleado.ListarNomina(idUsuario);
+            var ultimoRegistro = _context.RegistroHorasTabla
+                .Where(r => r.idEmpleado == idUsuario)
+                .OrderByDescending(r => r.HoraEntrada)
+                .FirstOrDefault();
+
+            ViewBag.estadoRegistro = ultimoRegistro?.estado;
+
+
+            DateTime fecha = DateTime.Now;
+  
+            if (ultimoRegistro != null && ultimoRegistro.HoraSalida.Day == fecha.Day)
+            {
+                ViewBag.ValidacionRegistro = true;
+            }
+            else
+            {
+                ViewBag.ValidacionRegistro = false;
+            }
+
+
+            PerfilEmpleado usuario = new PerfilEmpleado
+            {
+                nombre = user.nombre,
+                primer_apellido = user.primer_apellido,
+                segundo_apellido = user.segundo_apellido,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                reservas = reservas,
+                nomina = nomina,
+                evaluaciones = _listarEvaluaciones.ListarEvaluaciones(idUsuario),
+                puesto = user.puesto,
+                turno= user.turno
+
+            };
+            return View(usuario);
+        }
+
+        public async Task<ActionResult> RegistrarHoraEntrada()
+        {
+
+            try
+            {
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                RegistroHorasDto hora = new RegistroHorasDto
+                {
+                    idRegistro=0,
+                    HoraSalida = "Hora No Registrada",
+                    idEmpleado = idUsuario,
+                    HoraEntrada = DateTime.Now.ToString(),
+                    estado = false,
+                    totalHoras = 0
+                };  
+                int cantidadDeDatosEditados = await _registroHoraEntrada.RegistrarHoraEntrada(hora);
+                return RedirectToAction("MiPerfil");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("MiPerfil");
+            }
+        }
+
+
+        public async Task<ActionResult> RegistrarHoraSalida()
+        {
+
+            try
+            {
+                var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                var ultimoRegistro = _context.RegistroHorasTabla
+           .Where(r => r.idEmpleado == idUsuario)
+           .OrderByDescending(r => r.HoraEntrada)
+           .FirstOrDefault();
+
+                RegistroHorasDto hora = new RegistroHorasDto
+                {
+                    idRegistro = ultimoRegistro.idRegistro,
+                    HoraSalida = DateTime.Now.ToString(),
+                    idEmpleado = idUsuario,
+                    HoraEntrada = ultimoRegistro.HoraEntrada.ToString(),
+                    estado = true,
+                    totalHoras=0
+                };
+                int cantidadDeDatosEditados = await _registroHoraSalida.RegistroHoraSalida(hora);
+                return RedirectToAction("MiPerfil");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("MiPerfil");
             }
         }
     }

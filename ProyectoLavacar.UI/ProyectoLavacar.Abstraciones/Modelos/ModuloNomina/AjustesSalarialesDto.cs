@@ -14,6 +14,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
 
         public string Razon { get; set; }
 
-        public string IdEmpleado { get; set; }
+        public int IdNomina { get; set; }
+        public string tipo { get; set; }
     }
 }

@@ -55,7 +55,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult VerEvaluaciones(string id)
         {
             ViewBag.Title = "Lista De Evaluaciones";
-            List<EvalucionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
+            List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
             return View(laListaDeFinanzas);
         }
 
@@ -64,13 +64,13 @@ namespace ProyectoLavacar.Controllers
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             ViewBag.Title = "Lista De Evaluaciones";
-            List<EvalucionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
+            List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
             return View(laListaDeFinanzas);
         }
 
         public ActionResult DetallesEvaluaciones(int id)
         {
-            EvalucionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
+            EvaluacionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
             return View(Finanzas);
         }
 

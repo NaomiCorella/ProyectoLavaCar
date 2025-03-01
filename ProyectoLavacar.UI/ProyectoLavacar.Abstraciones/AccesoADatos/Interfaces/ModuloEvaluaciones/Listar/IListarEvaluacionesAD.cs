@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEvaluacione
 {
     public interface IListarEvaluacionesAD
     {
-        List<EvalucionesDto> ListarEvaluaciones(string idEmpleado);
+        List<EvaluacionesDto> ListarEvaluaciones(string idEmpleado);
     }
 }

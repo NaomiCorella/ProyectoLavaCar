@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones
 {
-    public class EvalucionesDto
+    public class EvaluacionesDto
     {
         public int idEvaluacion { get; set; }
         public string idEmpleado { get; set; }

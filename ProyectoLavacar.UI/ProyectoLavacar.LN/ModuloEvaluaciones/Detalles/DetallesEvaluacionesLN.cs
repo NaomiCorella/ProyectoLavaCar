@@ -21,16 +21,16 @@ namespace ProyectoLavacar.LN.ModuloEvaluaciones.Detalles
         {
             _detallesEvaluacionesAD = new DetallesEvaluacionesAD();
         }
-        public EvalucionesDto Detalle(int idEvaluacion)
+        public EvaluacionesDto Detalle(int idEvaluacion)
         {
             EvaluacionesTabla reservaEnBaseDeDatos = _detallesEvaluacionesAD.Detalle(idEvaluacion);
-            EvalucionesDto laEvaluacionAMostrar = ConvertirAReservaAMostrar(reservaEnBaseDeDatos);
+            EvaluacionesDto laEvaluacionAMostrar = ConvertirAReservaAMostrar(reservaEnBaseDeDatos);
             return laEvaluacionAMostrar;
         }
-        private EvalucionesDto ConvertirAReservaAMostrar(EvaluacionesTabla laEvaluacion)
+        private EvaluacionesDto ConvertirAReservaAMostrar(EvaluacionesTabla laEvaluacion)
         {
 
-            return new EvalucionesDto
+            return new EvaluacionesDto
             {
                 idEvaluacion = laEvaluacion.idEvaluacion,
                 idEmpleado = laEvaluacion.idEmpleado,

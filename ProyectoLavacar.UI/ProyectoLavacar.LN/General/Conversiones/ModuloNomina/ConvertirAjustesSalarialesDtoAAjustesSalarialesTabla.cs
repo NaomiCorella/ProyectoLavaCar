@@ -17,9 +17,10 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
             return new AjustesSalarialesTabla
             {
                 IdAjusteSalarial=elAjustesSalariales.IdAjusteSalarial,
-                IdEmpleado=elAjustesSalariales.IdEmpleado,
+                //IdNomina=elAjustesSalariales.IdNomina,
                 Monto=elAjustesSalariales.Monto,
-                Razon = elAjustesSalariales.Razon
+                //Razon = elAjustesSalariales.Razon,
+                //tipo = elAjustesSalariales.tipo
             };
         }
     }

@@ -23,26 +23,26 @@ namespace ProyectoLavacar.LN.ModuloEvaluaciones
             _listarEvaluacionesAD = new ListarEvaluacionesAD();
         }
 
-        public List<EvalucionesDto> ListarEvaluaciones(string idEmpleado)
+        public List<EvaluacionesDto> ListarEvaluaciones(string idEmpleado)
         {
-            List<EvalucionesDto> lalistaEvaluaciones = _listarEvaluacionesAD.ListarEvaluaciones(idEmpleado);
+            List<EvaluacionesDto> lalistaEvaluaciones = _listarEvaluacionesAD.ListarEvaluaciones(idEmpleado);
 
             return lalistaEvaluaciones;
         }
 
-        private List<EvalucionesDto> ObtenerLaListaConvertida(List<EvaluacionesTabla> lalistaDeEvaluaciones)
+        private List<EvaluacionesDto> ObtenerLaListaConvertida(List<EvaluacionesTabla> lalistaDeEvaluaciones)
         {//chequear
-            List<EvalucionesDto> lalistaEvalua = new List<EvalucionesDto>();
+            List<EvaluacionesDto> lalistaEvalua = new List<EvaluacionesDto>();
             foreach (EvaluacionesTabla laEvaluacion in lalistaDeEvaluaciones)
             {
                 lalistaEvalua.Add(ConvertirObjetoServiciosDto(laEvaluacion));
             }
             return lalistaEvalua;
         }
-        private EvalucionesDto ConvertirObjetoServiciosDto(EvaluacionesTabla laEvaluacion)
+        private EvaluacionesDto ConvertirObjetoServiciosDto(EvaluacionesTabla laEvaluacion)
         {
 
-            return new EvalucionesDto
+            return new EvaluacionesDto
             {
                 idEvaluacion = laEvaluacion.idEvaluacion,
                 idEmpleado = laEvaluacion.idEmpleado,

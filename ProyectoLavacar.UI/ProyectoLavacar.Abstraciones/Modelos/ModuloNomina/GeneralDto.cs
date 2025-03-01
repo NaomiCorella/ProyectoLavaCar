@@ -28,11 +28,13 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public string segundo_apellido { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
-        public string cedula { get; set; }
+        public int cedula { get; set; }
         public string puesto { get; set; }
         public string turno { get; set; }
         public bool estado { get; set; }
         public string numeroCuenta { get; set; }
+        public decimal totalBono { get; set; }
+        public decimal totalDedu { get; set; }
 
     }
 }
