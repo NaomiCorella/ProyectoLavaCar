@@ -26,13 +26,39 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarUnicoEmpleado
 
                                                          select new UnicoEmpleadoDto
                                                          {
-                                                             IdNomina = elUnicoEmpleado.IdNomina,
-                                                             SalarioNeto = elUnicoEmpleado.SalarioNeto,
-                                                             SalarioBruto = elUnicoEmpleado.SalarioBruto,
+                                                           
+                                                             IdEmpleado= elUnicoEmpleado.IdEmpleado,
+                                                             cedula = empleados.cedula,
+                                                             correo= empleados.Email,
+                                                             DiasDispoVacaciones = elUnicoEmpleado.DiasDispoVacaciones,
+                                                             DiasUtiliVacaciones = elUnicoEmpleado.DiasUtiliVacaciones,
+                                                             estado = empleados.estado,
                                                              FechaDePago = elUnicoEmpleado.FechaDePago,
-
-                                                             IdEmpleado = empleados.Id,
+                                                             Estado = elUnicoEmpleado.Estado,
+                                                             HorasDobles = elUnicoEmpleado.HorasDobles,
+                                                             HorasExtras = elUnicoEmpleado.HorasExtras,
+                                                             HorasOrdinarias  = elUnicoEmpleado.HorasOrdinarias,
+                                                             IdNomina = elUnicoEmpleado.IdNomina,
+                                                             Incapacidad = elUnicoEmpleado.Incapacidad,
                                                              nombre = empleados.nombre,
+                                                             numeroCuenta = empleados.numeroCuenta,
+                                                             PeriodoDePago = elUnicoEmpleado.PeriodoDePago,
+                                                             primer_apellido = empleados.primer_apellido,
+                                                             puesto = empleados.puesto,
+                                                             SalarioBruto = elUnicoEmpleado.SalarioBruto,
+                                                             SalarioNeto = elUnicoEmpleado.SalarioNeto,
+                                                             segundo_apellido = empleados.segundo_apellido,
+                                                             telefono = empleados.PhoneNumber,
+                                                             TipoDeContrato = elUnicoEmpleado.TipoDeContrato,
+                                                             turno = empleados.turno,
+                                                             totalBono = elUnicoEmpleado.totalBono,
+                                                             totalDedu = elUnicoEmpleado.totalDedu,
+                                                              deduccionCCSS = elUnicoEmpleado.deduccionCCSS,
+                                                             deduccionISR = elUnicoEmpleado.deduccionISR,
+                                                             bonoHorasExtra = elUnicoEmpleado.bonoHorasExtra,
+                                                             rebajosDeuda = elUnicoEmpleado.rebajosDeuda,
+                                                             rebajosSancion = elUnicoEmpleado.rebajosSancion
+
 
                                                          }).ToList();
         return lalistaDeUnicoEmpleado;

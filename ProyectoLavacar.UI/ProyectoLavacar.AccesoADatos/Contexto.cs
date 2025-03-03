@@ -28,9 +28,12 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<NominaTabla>().ToTable("Nomina");
             modelBuilder.Entity<AspNetUserRolesTabla>().HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<RolesTabla>().ToTable("AspNetRoles");
-
+            modelBuilder.Entity<RebajosTabla>().ToTable("RebajosEspecificos");
+            modelBuilder.Entity<RegistroHorasTabla>().ToTable("REGISTROHORAS");
 
         }
+        public DbSet<RegistroHorasTabla> RegistroHorasTabla { get; set; }
+        public DbSet<RebajosTabla> RebajosTabla { get; set; }
         public DbSet<ReservasTabla> ReservasTabla { get; set; }
         public DbSet<ReseniasTabla> ReseniasTabla { get; set; }
         public DbSet<UsuariosTabla> UsuariosTabla { get; set; }
