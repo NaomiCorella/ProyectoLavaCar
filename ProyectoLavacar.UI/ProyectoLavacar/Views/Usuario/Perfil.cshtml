@@ -1,0 +1,73 @@
+﻿@model ProyectoLavacar.Models.PerfilUsuario
+
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<h2>Perfil</h2>
+
+<div>
+    <h4>PerfilUsuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.primer_apellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.primer_apellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.segundo_apellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.segundo_apellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+
+<h3>Reservas</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Servicio</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reserva in Model.reservas)
+        {
+            <tr>
+                <td>@reserva.fecha</td>
+                <td>@reserva.hora</td>
+                <td>@reserva.idServicio</td>
+                <td>@reserva.estado</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.Perfil.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

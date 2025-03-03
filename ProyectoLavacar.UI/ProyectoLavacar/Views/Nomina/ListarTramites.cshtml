@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.TramitesDto>
+
+@{
+    ViewBag.Title = "ListarTramites";
+}
+
+<h2>ListarTramites</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdTramite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Razon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdNomina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdTramite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.duracion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Razon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdNomina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo)
+        </td>
+        <td>
+            @Html.ActionLink("EditarTramites", "EditarTramites", new { idTramite = item.IdTramite }) |
+            @if (item.tipo == "Vacaciones")
+            {
+                @Html.ActionLink("AceptarVacacion", "AceptarVacacion", new { idTramite = item.IdTramite  }) 
+            }
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

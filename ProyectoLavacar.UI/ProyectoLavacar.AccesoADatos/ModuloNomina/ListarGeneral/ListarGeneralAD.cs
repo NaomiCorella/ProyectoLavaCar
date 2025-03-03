@@ -24,13 +24,32 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarGeneral
                                                on nomina.IdEmpleado equals usuario.Id
                                                select new GeneralDto
                                                {
-                                                   IdNomina = nomina.IdNomina,
-                                                   SalarioNeto = nomina.SalarioNeto,
+                                                   IdEmpleado = nomina.IdEmpleado,
+                                                   cedula = usuario.cedula,
+                                                   correo = usuario.Email,
+                                                   DiasDispoVacaciones = nomina.DiasDispoVacaciones,
+                                                   DiasUtiliVacaciones = nomina.DiasUtiliVacaciones,
+                                                   estado = usuario.estado,
                                                    FechaDePago = nomina.FechaDePago,
                                                    Estado = nomina.Estado,
-                                                   IdEmpleado = usuario.Id,
+                                                   HorasDobles = nomina.HorasDobles,
+                                                   HorasExtras = nomina.HorasExtras,
+                                                   HorasOrdinarias = nomina.HorasOrdinarias,
+                                                   IdNomina = nomina.IdNomina,
+                                                   Incapacidad = nomina.Incapacidad,
                                                    nombre = usuario.nombre,
-
+                                                   numeroCuenta = usuario.numeroCuenta,
+                                                   PeriodoDePago = nomina.PeriodoDePago,
+                                                   primer_apellido = usuario.primer_apellido,
+                                                   puesto = usuario.puesto,
+                                                   SalarioBruto = nomina.SalarioBruto,
+                                                   SalarioNeto = nomina.SalarioNeto,
+                                                   segundo_apellido = usuario.segundo_apellido,
+                                                   telefono = usuario.PhoneNumber,
+                                                   TipoDeContrato = nomina.TipoDeContrato,
+                                                   turno = usuario.turno,
+                                                   totalBono = nomina.totalBono,
+                                                   totalDedu = nomina.totalDedu
                                                }).ToList();
 
             return lalistaGeneral;

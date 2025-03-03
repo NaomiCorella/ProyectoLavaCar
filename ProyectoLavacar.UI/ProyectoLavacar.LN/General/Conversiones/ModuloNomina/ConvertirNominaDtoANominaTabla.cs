@@ -11,6 +11,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
 {
     public class ConvertirNominaDtoANominaTabla : IConvertirNominaDtoANominaTabla
     {
+
         public NominaTabla ConvertirNomina(NominaDto laNomina)
         {
             return new NominaTabla
@@ -28,7 +29,14 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
                 DiasUtiliVacaciones = laNomina.DiasUtiliVacaciones,
                 Incapacidad = laNomina.Incapacidad,
-                Estado = laNomina.Estado
+                Estado = laNomina.Estado,
+                totalBono = laNomina.totalBono,
+                totalDedu = laNomina.totalDedu,
+                deduccionCCSS = laNomina.deduccionCCSS,
+                deduccionISR = laNomina.deduccionISR,
+                bonoHorasExtra = laNomina.bonoHorasExtra,
+                rebajosDeuda = laNomina.rebajosDeuda,
+                rebajosSancion = laNomina.rebajosSancion
 
             };
         }
