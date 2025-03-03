@@ -55,6 +55,11 @@
     <Compile Include="Contexto.cs" />
     <Compile Include="ModuloBitacora\Listar\ListarBitacoraAD.cs" />
     <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraAD.cs" />
+    <Compile Include="ModuloCompra\Crear\CrearCompraAD.cs" />
+    <Compile Include="ModuloCompra\DetalleCompraCompleta\DetalleCompraCompletaAD.cs" />
+    <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleAD.cs" />
+    <Compile Include="ModuloCompra\Listar\ListarCompraAD.cs" />
+    <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioAD.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdAD.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioAD.cs" />
