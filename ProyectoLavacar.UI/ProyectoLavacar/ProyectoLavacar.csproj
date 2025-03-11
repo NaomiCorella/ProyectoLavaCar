@@ -549,14 +549,11 @@
     <Content Include="Views\Inventario\Edit.cshtml" />
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
-    <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
-    <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
     <Content Include="Views\Account\changePassword.cshtml" />
     <Content Include="Views\Account\changePasswordSuccess.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
-    <Content Include="Views\Inventario\Actualizar.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
     <Content Include="Views\Inventario\HistorialDeMovimientos.cshtml" />
     <Content Include="Views\Resenias\Create.cshtml" />
@@ -588,15 +585,20 @@
     <Content Include="Views\Nomina\EditarAjustes.cshtml" />
     <Content Include="Views\Nomina\EditarTramites.cshtml" />
     <Content Include="Views\Nomina\AceptarVacacion.cshtml" />
-    <Content Include="Views\Nomina\IngresarRebajos.cshtml" />
     <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
+
     <Content Include="Views\Compra\Index.cshtml" />
     <Content Include="Views\Compra\DetallesCompra.cshtml" />
     <Content Include="Views\Compra\MisCompra.cshtml" />
     <Content Include="Views\Compra\Create.cshtml" />
+
+    <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
+    <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
+    <Content Include="Views\Empleado\RegistroDeEvaluaciones.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

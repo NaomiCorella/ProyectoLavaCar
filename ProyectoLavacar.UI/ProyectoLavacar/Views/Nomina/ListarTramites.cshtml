@@ -53,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.tipo)
         </td>
         <td>
-            @Html.ActionLink("EditarTramites", "EditarTramites", new { idTramite = item.IdTramite }) |
+            @*@Html.ActionLink("EditarTramites", "EditarTramites", new { idTramite = item.IdTramite }) |*@
             @if (item.tipo == "Vacaciones")
             {
                 @Html.ActionLink("AceptarVacacion", "AceptarVacacion", new { idTramite = item.IdTramite  }) 

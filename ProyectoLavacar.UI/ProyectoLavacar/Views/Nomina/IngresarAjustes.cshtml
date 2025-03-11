@@ -4,7 +4,6 @@
     ViewBag.Title = "IngresarAjustes";
 }
 
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -21,6 +20,11 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +38,6 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -44,23 +47,35 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Razon, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Razon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.tipo,
+                             new SelectList(ViewBag.tipo, "Value", "Text"),
+                             "-- Seleccione un nombre --",
+                             new { @class = "form-control", id = "tipoSelect" })
+                    @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="selectDeduccion">
+                @Html.LabelFor(model => model.Razon, "Razon", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Razon,
+                             new SelectList(ViewBag.RazonDeduccion, "Value", "Text"),
+                             "-- Seleccione una razón --",
+                             new { @class = "form-control", id = "RazonDeduccion" })
                     @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group hidden" id="selectBonificacion">
+                @Html.LabelFor(model => model.Razon, "Razon", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.tipo,
-                        new SelectList(ViewBag.tipo, "Value", "Text"),
-                        "-- Seleccione un nombre --",
-                        new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.Razon,
+                             new SelectList(ViewBag.RazonBonificacion, "Value", "Text"),
+                             "-- Seleccione una razón --",
+                             new { @class = "form-control", id = "RazonBonificacion" })
+                    @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -75,8 +90,32 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(document).ready(function () {
+                $('#tipoSelect').change(function () {
+                    var selectedValue = $(this).val();
+                    $('.form-group.hidden').hide(); // Ocultar todos los selects adicionales
 
+                    if (selectedValue === 'Deduccion') {
+                        $('#selectDeduccion').show();
+                    } else if (selectedValue === 'Bonificacion') {
+                        $('#selectBonificacion').show();
+                    }
+                });
 
+                $('form').submit(function () {
+                    var selectedValue = $('#tipoSelect').val();
+                    if (selectedValue === 'Deduccion') {
+                        $('#RazonBonificacion').prop('disabled', true);
+                    } else if (selectedValue === 'Bonificacion') {
+                        $('#RazonDeduccion').prop('disabled', true);
+                    }
+                });
+            });
+        </script>
+    }
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -90,6 +129,9 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
+
 </body>
 
 </html>
+
+

@@ -21,6 +21,11 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,60 +34,126 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>TramitesDto</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>TramitesDto</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.FechaInicio, new { @class = "form-control", type = "date", required = "required" })
+                    @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.FechaInicio, new { @class = "form-control", type = "date", required = "required" })
-                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.duracion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.duracion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.duracion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.tipo,
+                             new SelectList(ViewBag.tipo, "Value", "Text"),
+                             "-- Seleccione un nombre --",
+                             new { @class = "form-control", id = "tipoSelect" })
+                    @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="Aseguradora">
+                @Html.Label("Aseguradora", "Aseguradora", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Aseguradora", new SelectList(ViewBag.Aseguradora, "Value", "Text"), "-- Seleccione una opción --", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="selectDeduccion">
+                @Html.LabelFor(model => model.Razon, "Razon", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Razon,
+                             new SelectList(ViewBag.PorCSSS, "Value", "Text"),
+                             "-- Seleccione una razón --",
+                             new { @class = "form-control", id = "RazonDeduccion" })
+                    @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="selectBonificacion">
+                @Html.LabelFor(model => model.Razon, "Razon", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Razon,
+                             new SelectList(ViewBag.PorINS, "Value", "Text"),
+                             "-- Seleccione una razón --",
+                             new { @class = "form-control", id = "RazonBonificacion" })
+                    @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.duracion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.duracion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.duracion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Razon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Razon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.tipo,
-                    new SelectList(ViewBag.tipo, "Value", "Text"),
-                    "-- Seleccione un nombre --",
-                    new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
     }
 
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+  
+        $('#tipoSelect').change(function () {
+            var selectedValue = $(this).val();
+            $('#Aseguradora').hide();
+            $('#selectDeduccion').hide();
+            $('#selectBonificacion').hide();
 
+            if (selectedValue === 'Incapacidad') {
+                $('#Aseguradora').show();
+            }
+        });
+
+    
+        $('#Aseguradora select').change(function () {
+            var selectedValue = $(this).val();
+
+         
+            $('#selectDeduccion').hide();
+            $('#selectBonificacion').hide();
+
+            if (selectedValue === 'INS') {
+                $('#selectBonificacion').show();
+            } else if (selectedValue === 'CSSS') {
+                $('#selectDeduccion').show();
+            }
+        });
+
+        
+        $('form').submit(function () {
+            var selectedValue = $('#Aseguradora select').val();
+
+         
+            $('#RazonDeduccion').prop('disabled', false);
+            $('#RazonBonificacion').prop('disabled', false);
+
+            if (selectedValue === 'INS') {
+                $('#RazonDeduccion').prop('disabled', true);
+            } else if (selectedValue === 'CSSS') {
+                $('#RazonBonificacion').prop('disabled', true);
+            }
+        });
+    });
+</script>
+    }
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -96,6 +167,24 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
+
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
