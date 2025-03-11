@@ -135,51 +135,34 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult IngresarRebajos(int idNomina)
-        {
-            ViewBag.tipo = new List<SelectListItem>
-                     {
-                         new SelectListItem { Value = "Sancion", Text = "Sancion" },
-                         new SelectListItem { Value = "Deuda", Text = "Deuda" },
-                   
-                         };
-            return View();
-        }
-
-        // POST: Nomina/Create
-        [HttpPost]
-        public async Task<ActionResult> IngresarRebajos(RebajosDto modeloDeNomina,int idNomina)
-        {
-            try
-            {
-                RebajosDto ajuste = new RebajosDto()
-                {
-                    idRebajo = modeloDeNomina.idRebajo,
-                    IdNomina = idNomina,
-                    Monto = modeloDeNomina.Monto,
-                    Razon = modeloDeNomina.Razon,
-                    tipo = modeloDeNomina.tipo
-                    
-                };
-                int cantidadDeDatosGuardados = await _crearAccidentes.RegistroTramites(modeloDeNomina);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         public ActionResult IngresarAjustes(int idNomina)
         {
             ViewBag.tipo = new List<SelectListItem>
-                     {
-                         new SelectListItem { Value = "Deduccion", Text = "Deduccion" },
-                         new SelectListItem { Value = "Bonificacion", Text = "Bonificacion" } 
-                         };
+    {
+        new SelectListItem { Value = "Deduccion", Text = "Deduccion" },
+        new SelectListItem { Value = "Bonificacion", Text = "Bonificacion" }
+    };
+
+            ViewBag.RazonDeduccion = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Sancion", Text = "Sancion por mal comportamiento" },
+        new SelectListItem { Value = "Deuda", Text = "Deuda personal" },
+        new SelectListItem { Value = "Malgasto", Text = "Malgasto de productos" },
+        new SelectListItem { Value = "MalaGestion", Text = "Mala gestion de equipo" }
+
+    };
+
+            ViewBag.RazonBonificacion = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "TrabajadorDelMes", Text = "Trabajador del mes" },
+        new SelectListItem { Value = "MayoresCarrosLavados", Text = "Mayor cantidad de carros lavados" },
+        new SelectListItem { Value = "BuenComportamiento", Text = "Buen comportamiento" }
+
+    };
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> IngresarAjustes(AjustesSalarialesDto modeloDeAjustes, int idNomina)
         {
@@ -208,13 +191,46 @@ namespace ProyectoLavacar.Controllers
         public ActionResult IngresarTramites(int idNomina)
         {
             ViewBag.tipo = new List<SelectListItem>
-                     {
-                         new SelectListItem { Value = "Incapacidad", Text = "Incapacidad" },
-                         new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" },
-                          new SelectListItem { Value = "AccidenteLaboral", Text = "Accidente Laboral" }
-                         };
+    {
+        new SelectListItem { Value = "Incapacidad", Text = "Incapacidad" },
+        new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" }
+    };
+
+            ViewBag.Aseguradora = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "INS", Text = "INS" },
+        new SelectListItem { Value = "CSSS", Text = "CSSS" }
+    };
+
+            ViewBag.PorINS = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Temporal", Text = "Temporal" },
+        new SelectListItem { Value = "Menor Permanente", Text = "Menor Permanente" },
+        new SelectListItem { Value = "ParcialPermanente", Text = "Parcial Permanente" },
+        new SelectListItem { Value = "TotalPermanente", Text = "Total Permanente" },
+        new SelectListItem { Value = "GranInvalido", Text = "Gran Invalido" }
+    };
+
+            ViewBag.PorCSSS = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Enfermedad", Text = "Enfermedad" },
+        new SelectListItem { Value = "LicenciasDeMaternidad", Text = "Licencias De Maternidad" },
+        new SelectListItem { Value = "LicenciasDeFaseTerminal", Text = "Licencias De Fase Terminal" },
+        new SelectListItem { Value = "LicenciaDeCuido", Text = "Licencia para cuido de persona menor gravemente enferma." },
+        new SelectListItem { Value = "LicenciaExtraordinaria", Text = "Licencia Extraordinaria" },
+        new SelectListItem { Value = "AccidentesTransito", Text = "Accidentes Transito" }
+    };
+
             return View();
         }
+
+
+
+
+
+
+
+
 
         [HttpPost]
         public async Task<ActionResult> IngresarTramites(TramitesDto modeloDeTramites,int idNomina)
@@ -310,7 +326,14 @@ namespace ProyectoLavacar.Controllers
 
 
             TramitesDto ajuste = _detallesTramites.Detalle(idTramite);
+
+            DateTime FechaInicio = ajuste.FechaInicio; 
+            int duracion = ajuste.duracion; 
+            DateTime FechaFinal = FechaInicio.AddDays(duracion);
+            ViewBag.FechaInicio = ajuste.FechaInicio.ToString("dd/MM/yyyy");
+            ViewBag.FechaFinal = ajuste.FechaInicio.AddDays(ajuste.duracion).ToString("dd/MM/yyyy"); 
             return View(ajuste);
+           
         }
 
         // POST: Nomina/Edit/5
