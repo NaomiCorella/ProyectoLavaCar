@@ -100,6 +100,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\Conversiones\ModuloCompra\ConvertirCompraDtoACompraTabla.cs" />
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirAjustesSalarialesDtoAAjustesSalarialesTabla.cs" />
@@ -110,6 +111,13 @@
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
+    <Compile Include="ModuloBitacora\Listar\ListarBitacoraLN.cs" />
+    <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraLN.cs" />
+    <Compile Include="ModuloCompra\Crear\CrearCompraLN.cs" />
+    <Compile Include="ModuloCompra\DetalleCompraCompleto\DetalleCompraCompletaLN.cs" />
+    <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleLN.cs" />
+    <Compile Include="ModuloCompra\Listar\ListarCompraLN.cs" />
+    <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioLN.cs" />
