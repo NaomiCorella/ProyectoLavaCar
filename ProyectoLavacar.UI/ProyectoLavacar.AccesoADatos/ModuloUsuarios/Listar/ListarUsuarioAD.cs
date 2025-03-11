@@ -32,6 +32,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Listar
                                                       segundo_apellido = elCliente.segundo_apellido,
                                                       PhoneNumber = elCliente.PhoneNumber,
                                                       Email = elCliente.Email,
+                                                      cedula =elCliente.cedula,
+
                                                      
                                                       estado = elCliente.estado,
                                                       Id = elCliente.Id,
