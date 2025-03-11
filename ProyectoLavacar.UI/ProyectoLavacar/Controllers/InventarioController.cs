@@ -147,11 +147,11 @@ namespace ProyectoLavacar.Controllers
         [HttpPost]
         public async Task<ActionResult> RegistrarMovimiento(MovimientoDto modeMovimiento)
         {
-         
-             
-                int cantidadDeDatosGuardados = await _registrarMovimiento.Registrar(modeMovimiento);
-
-                return RedirectToAction("Index");
+            int cantidadDeDatosGuardados = await _registrarMovimiento.Registrar(modeMovimiento);
+            InventarioDto modelo = _BuscarPorIdInventario.Detalle(modeMovimiento.idProducto);
+           
+            int cantidadDeDatosEditados = await _editarInventario.EditarInventario(modelo);
+            return RedirectToAction("Index");
 
 
         }
@@ -207,39 +207,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult Actualizar()
-        {
-            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(1);
-      
-            return View(elInventario);
-        }
- 
-        // POST: Inventario/Edit/5
-        [HttpPost]
-        public async Task<ActionResult> Actualizar(InventarioDto modeloInventario)
-        {
-            try
-            {
-                InventarioDto elInventario = new InventarioDto()
-                {
-                    nombre = modeloInventario.nombre,
-                    categoria = modeloInventario.categoria,
-                    cantidadDisponible = modeloInventario.cantidadDisponible,
-                    precioUnitario = modeloInventario.precioUnitario,
-                    estado = modeloInventario.estado,
-                    idProducto = modeloInventario.idProducto,
-                };
-                int cantidadDeDatosEditados = await _editarInventario.EditarInventario(elInventario);
-
-                return RedirectToAction("Index");
-
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
         // POST: Inventario/Edit/5
         [HttpPost]
 

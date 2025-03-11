@@ -542,14 +542,11 @@
     <Content Include="Views\Inventario\Edit.cshtml" />
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
-    <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
-    <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
     <Content Include="Views\Account\changePassword.cshtml" />
     <Content Include="Views\Account\changePasswordSuccess.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
-    <Content Include="Views\Inventario\Actualizar.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
     <Content Include="Views\Inventario\HistorialDeMovimientos.cshtml" />
     <Content Include="Views\Resenias\Create.cshtml" />
@@ -586,6 +583,8 @@
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
+    <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
+    <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
