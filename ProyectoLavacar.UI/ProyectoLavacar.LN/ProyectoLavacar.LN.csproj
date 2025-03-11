@@ -116,6 +116,7 @@
     <Compile Include="ModuloEmpleados\Crear\CrearEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
+    <Compile Include="ModuloEvaluaciones\Crear\CrearEvaluacionLN.cs" />
     <Compile Include="ModuloEvaluaciones\Detalles\DetallesEvaluacionesLN.cs" />
     <Compile Include="ModuloEvaluaciones\Listar\ListarEvaluacionesLN.cs" />
     <Compile Include="ModuloInventario\Actualizar\ActualizarInventarioLN.cs" />

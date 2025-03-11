@@ -48,6 +48,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Crear\ICrearEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Editar\IEditarEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEmpleados\Listar\IListarEmpleadoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloEvaluaciones\Crear\ICrearEvaluacionAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEvaluaciones\Detalles\IDetallesEvaluacionesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloEvaluaciones\Listar\IListarEvaluacionesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioAD.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="LN\interfaces\ModuloEmpleados\Crear\ICrearEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\Editar\IEditarEmpleadoLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\Listar\IListarEmpleadoLN.cs" />
+    <Compile Include="LN\interfaces\ModuloEvaluaciones\Crear\ICrearEvaluacionLN.cs" />
     <Compile Include="LN\interfaces\ModuloEvaluaciones\Detalles\IDetallesEvaluacionesLN.cs" />
     <Compile Include="LN\interfaces\ModuloEvaluaciones\Listar\IListarEvaluacionesLN.cs" />
     <Compile Include="LN\interfaces\ModuloInventario\BuscarPorIdInventario\IBuscarPorIdInventarioLN.cs" />

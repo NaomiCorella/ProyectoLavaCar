@@ -584,6 +584,7 @@
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
+    <Content Include="Views\Empleado\RegistroDeEvaluaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
