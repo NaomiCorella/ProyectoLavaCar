@@ -12,7 +12,6 @@ namespace ProyectoLavacar.Models
 	public class PerfilEmpleado
 	{
     
-        public string id { get; set; }
         public string nombre { get; set; }
 
         public string primer_apellido { get; set; }

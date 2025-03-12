@@ -26,8 +26,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar
             laPersonaEnBaseDeDatos.segundo_apellido = elClienteParaEditar.segundo_apellido;
             laPersonaEnBaseDeDatos.PhoneNumber = elClienteParaEditar.PhoneNumber;
             laPersonaEnBaseDeDatos.Email = elClienteParaEditar.Email;
-            laPersonaEnBaseDeDatos.PasswordHash = elClienteParaEditar.PasswordHash;
-
+          
             EntityState estado = _elcontexto.Entry(laPersonaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
             return cantidadDeDatosAlmacenados;

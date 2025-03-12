@@ -68,7 +68,6 @@
 </table>
 
 <p>
-    <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
-        <i class="fas fa-edit"></i> Editar
-    </a>    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.Perfil.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
