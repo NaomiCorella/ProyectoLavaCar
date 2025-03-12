@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IdCompra)
+            @Html.DisplayNameFor(model => model.idCompra)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.idCliente)
@@ -30,13 +30,13 @@
             @Html.DisplayNameFor(model => model.Cedula)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdServicio)
+            @Html.DisplayNameFor(model => model.idServicio)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NombreServicio)
+            @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CostoServicio)
+            @Html.DisplayNameFor(model => model.costo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Total)
@@ -56,7 +56,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IdCompra)
+            @Html.DisplayFor(modelItem => item.idCompra)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.idCliente)
@@ -74,13 +74,13 @@
             @Html.DisplayFor(modelItem => item.Cedula)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IdServicio)
+            @Html.DisplayFor(modelItem => item.idServicio)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NombreServicio)
+            @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CostoServicio)
+            @Html.DisplayFor(modelItem => item.costo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Total)
@@ -95,7 +95,7 @@
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
         <td>
-            <a href="@Url.Action("DetallesCompra", new { idCompra = item.IdCompra })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+            <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
                 <i class="fas fa-info-circle"></i> Detalles
             </a>
         </td>
