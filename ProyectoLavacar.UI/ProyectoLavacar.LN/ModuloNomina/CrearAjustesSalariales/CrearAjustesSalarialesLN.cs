@@ -118,7 +118,6 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
                          ""Razon"":""{ajuste.Razon}"",
                         ""IdNomina"": ""{ajuste.IdNomina}"",
                         ""tipo"": ""{ajuste.IdAjusteSalarial}"",
-                     
                                          }}";
             var bitacora = new BitacoraDto
             {

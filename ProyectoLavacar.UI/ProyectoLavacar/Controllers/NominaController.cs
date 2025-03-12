@@ -226,12 +226,6 @@ namespace ProyectoLavacar.Controllers
 
 
 
-
-
-
-
-
-
         [HttpPost]
         public async Task<ActionResult> IngresarTramites(TramitesDto modeloDeTramites,int idNomina)
         {

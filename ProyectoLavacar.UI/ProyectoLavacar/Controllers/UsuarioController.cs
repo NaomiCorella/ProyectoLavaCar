@@ -15,6 +15,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -29,6 +30,7 @@ using ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.LN.ModuloUsuarios.Crear;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using ProyectoLavacar.LN.ModuloUsuarios.Listar;
+using ProyectoLavacar.LN.ModuloUsuarios.Remover;
 using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
