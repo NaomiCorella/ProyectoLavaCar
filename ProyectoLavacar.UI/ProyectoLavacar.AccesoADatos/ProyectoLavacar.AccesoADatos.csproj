@@ -66,6 +66,7 @@
     <Compile Include="ModuloEmpleados\Crear\CrearEmpleadoAD.cs" />
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoAD.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoAD.cs" />
+    <Compile Include="ModuloEvaluaciones\Crear\CrearEvaluacionAD.cs" />
     <Compile Include="ModuloEvaluaciones\Detalles\DetallesEvaluacionesAD.cs" />
     <Compile Include="ModuloEvaluaciones\Listar\ListarEvaluacionesAD.cs" />
     <Compile Include="ModuloInventario\BuscarPorIdInventario\BuscarPorIdInventarioAD.cs" />

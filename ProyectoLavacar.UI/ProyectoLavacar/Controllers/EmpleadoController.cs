@@ -4,6 +4,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
@@ -15,6 +16,7 @@ using ProyectoLavacar.LN.ModuloEmpleados.Crear;
 using ProyectoLavacar.LN.ModuloEmpleados.Editar;
 using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
+using ProyectoLavacar.LN.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Detalles;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,7 @@ namespace ProyectoLavacar.Controllers
         IEditarEmpleadoLN _editarEmpleado;
         IBuscarPorIdLN _buscarPorId;
         Contexto _context;
+        ICrearEvaluacionLN _crearEvaluacionLN;
 
         public EmpleadoController()
         {
@@ -43,6 +46,7 @@ namespace ProyectoLavacar.Controllers
             _buscarPorId = new BuscarPorIdLN();
             _context = new Contexto();
             _listarEvaluaciones = new ListarEvaluacionesLN();
+            _crearEvaluacionLN = new CrearEvaluacionLN();
         }
 
         // GET: Empleado
@@ -83,6 +87,29 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado/Create
+        public ActionResult RegistroDeEvaluaciones()
+        {
+            return View();
+        }
+
+        // POST: Empleado/Create
+        [HttpPost]
+        public async Task<ActionResult> RegistroDeEvaluaciones(EvaluacionesDto modelo)
+        {
+            try
+            {
+                int cantidadDeDatosGuardados = await _crearEvaluacionLN.Crear(modelo);
+
+                return RedirectToAction("VerEvaluaciones");
+               
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -103,6 +130,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
 
         // GET: Empleado/Edit/5
         public ActionResult Edit(string id)

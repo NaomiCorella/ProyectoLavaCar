@@ -1,5 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones.EvalucionesDto>
-
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones.EvaluacionesDto>
 @{
     ViewBag.Title = "Ver Evaluaciones";
 }
@@ -37,11 +36,11 @@
                     <tr>
                     <tr>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.idEvaluacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idEmpleado)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.idEvaluacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.idEmpleado)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.fechaEvaluacion)
                         </th>
@@ -66,11 +65,11 @@
                     {
                         <tr>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.idEvaluacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idEmpleado)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.idEvaluacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idEmpleado)
+                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.fechaEvaluacion)
                             </td>
