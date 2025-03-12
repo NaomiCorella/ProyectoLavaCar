@@ -1,61 +1,56 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.RespuestaDto
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Respuesta";
 }
 
-
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Usuarios</title>
-    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
     <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
-    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
-
 <body>
-
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario", onsubmit = "mostrarAlerta()" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>RespuestaDto</h4>
+    <div class="container mt-5 mb-5">
+        <div class="shadow p-4 rounded bg-white">
+            <h2 class="text-center mb-4">Crear Respuesta</h2>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="mb-3">
-                <label for="comentarioOriginal" class="form-label fw-bold">Comentario Original</label>
-                <textarea id="comentarioOriginal" class="form-control" rows="3" readonly>@ViewBag.Reseña.comentarios</textarea>
-            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="mb-3">
-                <label for="comentarios" class="form-label fw-bold">Respuesta</label>
-                @Html.TextAreaFor(model => model.comentarios, new { @class = "form-control", rows = 4, placeholder = "Escribe tu respuesta aquí...", id = "comentarios", required = "required" })
-                @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
-            </div>
+                
+                <div class="mb-4">
+                    <label for="comentarioOriginal" class="form-label fw-bold">Comentario Original</label>
+                    <textarea id="comentarioOriginal" class="form-control" rows="3" readonly>@ViewBag.Reseña.comentarios</textarea>
+                </div>
+
+               
+                <div class="mb-4">
+                    @Html.LabelFor(model => model.comentarios, htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.TextAreaFor(model => model.comentarios, new { @class = "form-control textarea-larga", rows = 4, placeholder = "Escribe tu respuesta aquí...", id = "comentarios", required = "required" })
+                    @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
+                </div>
+
+               
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-outline-success btn-lg flex-grow-1 me-2">
+                        <i class="fas fa-save me-2"></i> Agregar Respuesta
+                    </button>
+                    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-info btn-lg flex-grow-1 ms-2" })
+                </div>
+            }
         </div>
-
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-outline-success btn-lg">
-                <i class="fas fa-save me-2"></i> Agregar Respuesta
-            </button>
-        </div>
-    }
-
-
-    <div class="text-center mt-4">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-info" })
     </div>
 
     @section Scripts {
