@@ -23,7 +23,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloUsuarios
                 Email = elCliente.Email,
                 estado = elCliente.estado,
                 Id = elCliente.Id,
-             
+               
             };
         }
     }

@@ -114,6 +114,7 @@
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioAD.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioAD.cs" />
     <Compile Include="ModuloUsuarios\Listar\ListarUsuarioAD.cs" />
+    <Compile Include="ModuloUsuarios\Remover\RemoverAD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

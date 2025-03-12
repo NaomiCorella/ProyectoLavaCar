@@ -1,4 +1,4 @@
-﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloUsuarios.Editar;
+﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using System;
 using System.Collections.Generic;
@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar
+namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Remover
 {
-    public class EditarUsuarioAD : IEditarUsuarioAD
+    public class RemoverAD : IRemoverAD
     {
         Contexto _elcontexto;
 
-        public EditarUsuarioAD()
+        public RemoverAD()
         {
             _elcontexto = new Contexto();
         }
@@ -21,11 +21,6 @@ namespace ProyectoLavacar.AccesoADatos.ModuloUsuarios.Editar
         public async Task<int> EditarUsuarios(UsuariosTabla elClienteParaEditar)
         {
             UsuariosTabla laPersonaEnBaseDeDatos = _elcontexto.UsuariosTabla.Where(elCliente => elCliente.Id == elClienteParaEditar.Id).FirstOrDefault();
-            laPersonaEnBaseDeDatos.nombre = elClienteParaEditar.nombre;
-            laPersonaEnBaseDeDatos.primer_apellido = elClienteParaEditar.primer_apellido;
-            laPersonaEnBaseDeDatos.segundo_apellido = elClienteParaEditar.segundo_apellido;
-            laPersonaEnBaseDeDatos.PhoneNumber = elClienteParaEditar.PhoneNumber;
-            laPersonaEnBaseDeDatos.Email = elClienteParaEditar.Email;
             laPersonaEnBaseDeDatos.PasswordHash = elClienteParaEditar.PasswordHash;
 
             EntityState estado = _elcontexto.Entry(laPersonaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;

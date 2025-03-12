@@ -7,6 +7,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -20,6 +21,7 @@ using ProyectoLavacar.LN.ModuloEvaluaciones;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Detalles;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
+using ProyectoLavacar.LN.ModuloUsuarios.Remover;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +42,7 @@ namespace ProyectoLavacar.Controllers
         Contexto _context;
         ICrearEvaluacionLN _crearEvaluacionLN;
         IEditarUsuarioLN _editarUsuario;
-
+        IRemoverLN _remover;
         public EmpleadoController()
         {
             _detallesEvaluaciones = new DetallesEvaluacionesLN();
@@ -51,6 +53,7 @@ namespace ProyectoLavacar.Controllers
             _listarEvaluaciones = new ListarEvaluacionesLN();
             _crearEvaluacionLN = new CrearEvaluacionLN();
             _editarUsuario = new EditarUsuarioLN();
+            _remover = new RemoverLN();
         }
 
         // GET: Empleado
@@ -202,9 +205,10 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = Usuario.primer_apellido,
                     puesto = Usuario.puesto,
                     segundo_apellido = Usuario.segundo_apellido,
-                    turno = Usuario.turno
+                    turno = Usuario.turno,
+                     PasswordHash = "novalido"
                 };
-                int cantidadDeDatosEditados = await _editarUsuario.EditarUsuarios(userEliminado);
+                int cantidadDeDatosEditados = await _remover.EditarUsuarios(userEliminado);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
