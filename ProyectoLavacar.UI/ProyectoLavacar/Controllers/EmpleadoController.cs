@@ -40,7 +40,7 @@ namespace ProyectoLavacar.Controllers
         Contexto _context;
         ICrearEvaluacionLN _crearEvaluacionLN;
         IEditarUsuarioLN _editarUsuario;
-
+        IRemoverLN _remover;
         public EmpleadoController()
         {
             _detallesEvaluaciones = new DetallesEvaluacionesLN();
@@ -51,6 +51,7 @@ namespace ProyectoLavacar.Controllers
             _listarEvaluaciones = new ListarEvaluacionesLN();
             _crearEvaluacionLN = new CrearEvaluacionLN();
             _editarUsuario = new EditarUsuarioLN();
+            _remover = new RemoverLN();
         }
 
         // GET: Empleado
@@ -202,9 +203,10 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = Usuario.primer_apellido,
                     puesto = Usuario.puesto,
                     segundo_apellido = Usuario.segundo_apellido,
-                    turno = Usuario.turno
+                    turno = Usuario.turno,
+                    PasswordHash = "novalido"
                 };
-                int cantidadDeDatosEditados = await _editarUsuario.EditarUsuarios(userEliminado);
+                int cantidadDeDatosEditados = await _remover.EditarUsuarios(userEliminado);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

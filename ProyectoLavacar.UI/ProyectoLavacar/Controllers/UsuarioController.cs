@@ -46,6 +46,7 @@ namespace ProyectoLavacar.Controllers
         IListarEvaluacionesLN _listarEvaluaciones;
         IRegistroHoraEntradaLN _registroHoraEntrada;
         IRegistroHoraSalidaLN _registroHoraSalida;
+        IRemoverLN _remover;
         public UsuarioController()
         {
             _listarReservasClientes = new ListarDisponiblesLN();
@@ -58,6 +59,7 @@ namespace ProyectoLavacar.Controllers
             _listarEvaluaciones = new ListarEvaluacionesLN();
             _registroHoraEntrada = new RegistrarHoraEntradaLN();
             _registroHoraSalida = new RegistroHoraSalidaLN();
+            _remover = new RemoverLN();
         }
 
         // GET: Usuario
@@ -167,10 +169,10 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = Usuario.primer_apellido,
                     puesto = Usuario.puesto,
                     segundo_apellido = Usuario.segundo_apellido,
-                    turno = Usuario.turno
+                    turno = Usuario.turno,
+                    PasswordHash = "novalido"
                 };
-                int  cantidadDeDatosEditados =  await _editarUsuario.EditarUsuarios(userEliminado);
-                return RedirectToAction("Index");
+                int cantidadDeDatosEditados = await _remover.EditarUsuarios(userEliminado); return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -187,6 +189,7 @@ namespace ProyectoLavacar.Controllers
             List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); ;
             PerfilUsuario usuario = new PerfilUsuario
             {
+                id = user.Id,
                 nombre = user.nombre,
                 primer_apellido = user.primer_apellido,
                 segundo_apellido = user.segundo_apellido,
@@ -226,6 +229,7 @@ namespace ProyectoLavacar.Controllers
 
             PerfilEmpleado usuario = new PerfilEmpleado
             {
+                id = user.Id,
                 nombre = user.nombre,
                 primer_apellido = user.primer_apellido,
                 segundo_apellido = user.segundo_apellido,
