@@ -64,7 +64,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de finanzas";
-            List<UsuariosDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios();
+            List<UsuariosDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios().Where(p => p.estado == true).ToList();
             return View(laListaDeFinanzas);
         }
 
@@ -147,7 +147,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult CambiarEstado(string id)
+        public async Task<ActionResult> CambiarEstado(string id)
         {
 
             try
@@ -155,7 +155,21 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-
+                UsuariosDto userEliminado = new UsuariosDto
+                {
+                    Id = Usuario.Id,
+                    nombre = Usuario.nombre,
+                    cedula = Usuario.cedula,
+                    Email = "userEliminado@gmail.com",
+                    estado = false,
+                    numeroCuenta = Usuario.numeroCuenta,
+                    PhoneNumber = "noValido",
+                    primer_apellido = Usuario.primer_apellido,
+                    puesto = Usuario.puesto,
+                    segundo_apellido = Usuario.segundo_apellido,
+                    turno = Usuario.turno
+                };
+                int  cantidadDeDatosEditados =  await _editarUsuario.EditarUsuarios(userEliminado);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

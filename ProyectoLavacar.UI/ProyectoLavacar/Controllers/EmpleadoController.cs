@@ -6,6 +6,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -18,6 +19,7 @@ using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,7 @@ namespace ProyectoLavacar.Controllers
         IBuscarPorIdLN _buscarPorId;
         Contexto _context;
         ICrearEvaluacionLN _crearEvaluacionLN;
+        IEditarUsuarioLN _editarUsuario;
 
         public EmpleadoController()
         {
@@ -47,13 +50,14 @@ namespace ProyectoLavacar.Controllers
             _context = new Contexto();
             _listarEvaluaciones = new ListarEvaluacionesLN();
             _crearEvaluacionLN = new CrearEvaluacionLN();
+            _editarUsuario = new EditarUsuarioLN();
         }
 
         // GET: Empleado
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
-            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados();
+            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); ;
             return View(laListaDeFinanzas);
         }
         public ActionResult VerEvaluaciones(string id)
@@ -178,7 +182,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult CambiarEstado(string id)
+        public async Task<ActionResult> CambiarEstado(string id)
         {
 
             try
@@ -186,7 +190,21 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-
+                UsuariosDto userEliminado = new UsuariosDto
+                {
+                    Id = Usuario.Id,
+                    nombre = Usuario.nombre,
+                    cedula = Usuario.cedula,
+                    Email = "userEliminado@gmail.com",
+                    estado = false,
+                    numeroCuenta = Usuario.numeroCuenta,
+                    PhoneNumber = "noValido",
+                    primer_apellido = Usuario.primer_apellido,
+                    puesto = Usuario.puesto,
+                    segundo_apellido = Usuario.segundo_apellido,
+                    turno = Usuario.turno
+                };
+                int cantidadDeDatosEditados = await _editarUsuario.EditarUsuarios(userEliminado);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
