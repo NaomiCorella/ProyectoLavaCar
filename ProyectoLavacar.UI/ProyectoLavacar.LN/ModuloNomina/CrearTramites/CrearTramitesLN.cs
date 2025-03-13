@@ -77,19 +77,26 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
 
             if (elTramites.tipo == "Incapacidad")
             {
-
-                decimal csss = CSSS(elTramites);
-                if(csss != 0)
+                if(elTramites.aseguradora == "CSSS")
                 {
-                    decimal cantidad = incapacidad(elTramites, csss);
+                    decimal csss = CSSS(elTramites);
+                    if (csss != 0)
+                    {
+                        decimal cantidad = incapacidad(elTramites, csss);
+                        return 1;
+                    }
                 }
-                //me falta un if
-                //decimal ins = INS(elTramites);
-                //if (ins != 0)
-                //{
-                //    decimal cantidad = incapacidad(elTramites, ins);
-                //}
-                return 1;
+                else
+                {
+                    decimal ins = INS(elTramites);
+                    if (ins != 0)
+                    {
+                        decimal cantidad = incapacidad(elTramites, ins);
+                        return 1;
+                    }
+                }
+
+              
             }
             if(elTramites.tipo =="Vacaciones")
             {
