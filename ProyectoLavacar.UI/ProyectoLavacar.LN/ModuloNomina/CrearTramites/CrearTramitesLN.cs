@@ -74,8 +74,15 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
 
             if (elTramites.tipo == "Incapacidad")
             {
-                decimal deduccion = incapacidad(elTramites);
-                return deduccion;
+
+
+             //me falta un if
+             decimal ins = INS(elTramites);
+                if (ins != 0)
+                {
+                    decimal cantidad = incapacidad(elTramites, ins);
+                }
+                return ins;
             }
             if(elTramites.tipo =="Vacaciones")
             {
@@ -93,23 +100,131 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             }
           
         }
-
-        private decimal incapacidad(TramitesDto elTramites)
+        private decimal INS(TramitesDto elTramites)
         {
             NominaDto nomina = _obtenerNomina.Detalle(elTramites.IdNomina);
             int duracion = elTramites.duracion;
-            decimal deduccion = (nomina.SalarioNeto / 30m) * duracion;
+            decimal salarioNeto = nomina.SalarioNeto;
+            decimal salarioMinimo = 250430m; 
+            decimal deduccion = 0;
+            decimal rentaMensual = 0;
+            decimal pagoTotal = 0;
+            decimal limiteRegimen = 20442000m;
+            switch (elTramites.Razon)
+            {
+                case "Temporal":
+                    if (duracion <= 3)
+                    {
+                      
+                        deduccion = (salarioNeto / 30m) * duracion;
+                    }
+                    else if (duracion <= 45)
+                    {
+                  
+                        deduccion = ((salarioNeto / 30m) * 3) + ((salarioNeto / 30m) * (duracion - 3) * 0.4m);
+
+                    }
+                    else
+                    {
+                        decimal salarioExcedente = salarioNeto - salarioMinimo;
+                        decimal deduccionInicial = ((salarioNeto / 30m) * 3) + ((salarioNeto / 30m) * 42 * 0.4m);
+                        decimal deduccionPosterior = ((salarioMinimo / 30m) * (duracion - 45)) + ((salarioExcedente / 30m) * (duracion - 45) * 0.4m);
+                        deduccion = deduccionInicial + deduccionPosterior;
+                    }
+                    return deduccion;
+                
+                case "Menor Permanente":
+
+                     rentaMensual = salarioNeto * 0.6m;
+                     pagoTotal = rentaMensual * 60; 
+
+                    if (pagoTotal <= limiteRegimen)
+                    {
+                        deduccion = pagoTotal * 0.4m;
+                    }
+                    else
+                    {
+                        deduccion = rentaMensual * 0.4m; 
+                    }
+
+
+                    return deduccion;
+                case "ParcialPermanente":
+                     rentaMensual = salarioNeto * 0.6m;
+
+                 
+                    decimal adelantoAnual = rentaMensual * 12;
+
+         
+                    decimal decimoTercerMes = rentaMensual;
+
+
+                    decimal ajusteAnual = 1.05m;
+
+           
+                    decimal totalRenta5Anios = 0;
+
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        totalRenta5Anios += rentaMensual * 12;
+                        rentaMensual *= ajusteAnual;
+                    }
+
+                 
+                    decimal totalPagos = adelantoAnual + decimoTercerMes + totalRenta5Anios;
+
+                    decimal deduccionPatrono = totalPagos * 0.4m;
+
+                    return deduccionPatrono;
+                case "TotalPermanente":
+                    decimal indemnizacion = salarioNeto * 12; 
+                    decimal vacacionesNoUtilizadas = (salarioNeto / 30m) * nomina.DiasDispoVacaciones; 
+                    deduccion = indemnizacion + vacacionesNoUtilizadas;
+                    return deduccion;
+                case "GranInvalido":
+                   
+                    decimal plusRenta = salarioNeto * 0.1m; 
+                    rentaMensual = salarioNeto * 0.6m + plusRenta;
+
+                    decimal adelantoRenta = rentaMensual * 24;
+
+                   
+                    decimal seguroEnfermedad = 100000m;
+
+                    
+                    decimal decimoTercerMesRenta = rentaMensual;
+
+                 
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        rentaMensual *= 1.05m; 
+                    }
+
+                    deduccion =   adelantoRenta + seguroEnfermedad + decimoTercerMesRenta + (rentaMensual * 60);
+                     decimal deduccionT = deduccion * 0.4m;
+                    return deduccionT;
+                default:
+                    deduccion = 0;
+                    return deduccion;
+            }
+
+        }
+        private decimal incapacidad(TramitesDto elTramites,decimal cantidad)
+        {
+            NominaDto nomina = _obtenerNomina.Detalle(elTramites.IdNomina);
+            int duracion = elTramites.duracion;
+           
             AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
             {
                 IdAjusteSalarial= 0,
                 IdNomina=elTramites.IdNomina,
-                Monto=deduccion,
-                Razon="Ingreso de capacidad",
-                tipo="Deduccion"
+                Monto=cantidad,
+                Razon="Ingreso de incapacidad",
+                tipo="Bonificacion"
            
             };
             _crearAjusteSalarial.RegistarAjusteSalariales(ajuste);
-            return deduccion;
+            return cantidad;
 
         }
         public decimal Accidente(TramitesDto eltramite)
