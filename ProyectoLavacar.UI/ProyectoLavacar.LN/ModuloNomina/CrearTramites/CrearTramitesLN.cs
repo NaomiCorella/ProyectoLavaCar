@@ -64,7 +64,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 duracion = elTramites.duracion,
                 Razon = elTramites.Razon,
                 tipo = elTramites.tipo,
-                estado= elTramites.estado
+                estado= elTramites.estado,
+                aseguradora = elTramites.aseguradora
+
 
 
             };
@@ -87,10 +89,12 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 //{
                 //    decimal cantidad = incapacidad(elTramites, ins);
                 //}
-                return csss;
+                return 1;
             }
             if(elTramites.tipo =="Vacaciones")
             {
+
+
             decimal vacacio = vacaciones(elTramites);
                 if (vacacio == 0)
                 {
@@ -395,7 +399,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 if(diasUtilizados <= laNomina.DiasDispoVacaciones)
                 {
                     _editarNomina.EditarNomina(nominaModificada);
-                    return diasUtilizados;
+                    return 2;
                 }
                 else
                 {

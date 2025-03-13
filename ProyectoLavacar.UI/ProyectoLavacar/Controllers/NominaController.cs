@@ -231,19 +231,43 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                TramitesDto tramite = new TramitesDto()
+               int cantidadDeDatosGuardados = 0;
+
+                if (modeloDeTramites.tipo == "Vacaciones")
                 {
-                    IdTramite = modeloDeTramites.IdTramite,
-                    IdNomina = idNomina,
-                    duracion = modeloDeTramites.duracion,
-                    FechaInicio= modeloDeTramites.FechaInicio,
-                    Razon = modeloDeTramites.Razon,
-                    tipo = modeloDeTramites.tipo,
-                    estado= 1
-                };
+                    TramitesDto vaca = new TramitesDto()
+                    {
+                        IdTramite = modeloDeTramites.IdTramite,
+                        IdNomina = idNomina,
+                        duracion = modeloDeTramites.duracion,
+                        FechaInicio = modeloDeTramites.FechaInicio,
+                        Razon = "Pedido de vacaciones",
+                        tipo = modeloDeTramites.tipo,
+                        estado = 1,
+                        aseguradora = modeloDeTramites.aseguradora
+                    };
+                    cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(vaca);
+
+                }
+                else
+                {
+                    TramitesDto tramite = new TramitesDto()
+                    {
+                        IdTramite = modeloDeTramites.IdTramite,
+                        IdNomina = idNomina,
+                        duracion = modeloDeTramites.duracion,
+                        FechaInicio = modeloDeTramites.FechaInicio,
+                        Razon = modeloDeTramites.Razon,
+                        tipo = modeloDeTramites.tipo,
+                        estado = 1,
+                        aseguradora = modeloDeTramites.aseguradora
+                    };
+                    cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+                }
 
 
-                int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+
+                   
                 if (cantidadDeDatosGuardados == 0)
                 {
                     return RedirectToAction("/Error");

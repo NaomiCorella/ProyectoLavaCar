@@ -22,5 +22,6 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         [Display(Name = "Categoria de Tramite")]
         public string tipo { get; set; }
         public int estado { get; set; }
+        public string aseguradora { get; set; }
     }
 }
