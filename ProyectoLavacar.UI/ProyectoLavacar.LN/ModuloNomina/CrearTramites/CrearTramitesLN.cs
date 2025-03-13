@@ -17,6 +17,7 @@ using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,14 +76,18 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             if (elTramites.tipo == "Incapacidad")
             {
 
-
-             //me falta un if
-             decimal ins = INS(elTramites);
-                if (ins != 0)
+                decimal csss = CSSS(elTramites);
+                if(csss != 0)
                 {
-                    decimal cantidad = incapacidad(elTramites, ins);
+                    decimal cantidad = incapacidad(elTramites, csss);
                 }
-                return ins;
+                //me falta un if
+                //decimal ins = INS(elTramites);
+                //if (ins != 0)
+                //{
+                //    decimal cantidad = incapacidad(elTramites, ins);
+                //}
+                return csss;
             }
             if(elTramites.tipo =="Vacaciones")
             {
@@ -99,6 +104,118 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 return bonificacion;
             }
           
+        }
+
+        private decimal CSSS(TramitesDto eltramites)
+        {
+            NominaDto nomina = _obtenerNomina.Detalle(eltramites.IdNomina);
+            int duracion = eltramites.duracion;
+            decimal salarioNeto = nomina.SalarioNeto;
+            decimal deduccion = 0;
+            decimal salarioBase = 250430m;
+            decimal salarioPromedioFaseTerminal = salarioNeto; 
+            decimal subsidioTotal = 0;
+            switch (eltramites.Razon)
+            {
+                case "Enfermedad":
+                   
+                    decimal salarioPromedio = salarioNeto; 
+                    decimal subsidioDiario = (salarioPromedio * 0.15m * 4) / 30;
+                    if (duracion <= 3)
+                    {
+                        deduccion = subsidioDiario * duracion;
+                    }
+                    else
+                    {
+                        deduccion = subsidioDiario * 3; 
+                    }
+                    return deduccion;
+                case "LicenciasDeMaternidad":
+                    decimal salarioPromedioTresMeses = salarioNeto; 
+                    decimal salarioDiario = salarioPromedioTresMeses / 30;
+                    decimal salarioPatrono = salarioDiario * 0.5m * duracion;
+                    deduccion = salarioPatrono;
+                    return deduccion;
+                case "LicenciasDeFaseTerminal":
+                     salarioPromedioFaseTerminal = salarioNeto; 
+                     subsidioTotal = 0;
+
+                    if (salarioPromedioFaseTerminal <= 2 * salarioBase)
+                    {
+                        subsidioTotal = salarioPromedioFaseTerminal * duracion;
+                    }
+                    else if (salarioPromedioFaseTerminal <= 3 * salarioBase)
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + ((salarioPromedioFaseTerminal - 2 * salarioBase) * 0.8m * duracion);
+                    }
+                    else
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + (salarioBase * 0.8m * duracion) + ((salarioPromedioFaseTerminal - 3 * salarioBase) * 0.6m * duracion);
+                    }
+
+                    deduccion = subsidioTotal;
+                    return deduccion;
+                case "LicenciaDeCuido":
+                     salarioPromedioFaseTerminal = salarioNeto; 
+                     subsidioTotal = 0;
+
+                    if (salarioPromedioFaseTerminal <= 2 * salarioBase)
+                    {
+                        subsidioTotal = salarioPromedioFaseTerminal * duracion;
+                    }
+                    else if (salarioPromedioFaseTerminal <= 3 * salarioBase)
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + ((salarioPromedioFaseTerminal - 2 * salarioBase) * 0.8m * duracion);
+                    }
+                    else
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + (salarioBase * 0.8m * duracion) + ((salarioPromedioFaseTerminal - 3 * salarioBase) * 0.6m * duracion);
+                    }
+
+                    deduccion = subsidioTotal;
+                    return deduccion;
+                case "LicenciaExtraordinaria":
+                     salarioPromedioFaseTerminal = salarioNeto; 
+                     subsidioTotal = 0;
+
+                    if (salarioPromedioFaseTerminal <= 2 * salarioBase)
+                    {
+                        subsidioTotal = salarioPromedioFaseTerminal * duracion;
+                    }
+                    else if (salarioPromedioFaseTerminal <= 3 * salarioBase)
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + ((salarioPromedioFaseTerminal - 2 * salarioBase) * 0.8m * duracion);
+                    }
+                    else
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + (salarioBase * 0.8m * duracion) + ((salarioPromedioFaseTerminal - 3 * salarioBase) * 0.6m * duracion);
+                    }
+
+                    deduccion = subsidioTotal;
+                    return deduccion;
+                case "AccidentesTransito":
+                     salarioPromedioFaseTerminal = salarioNeto; 
+                     subsidioTotal = 0;
+
+                    if (salarioPromedioFaseTerminal <= 2 * salarioBase)
+                    {
+                        subsidioTotal = salarioPromedioFaseTerminal * duracion;
+                    }
+                    else if (salarioPromedioFaseTerminal <= 3 * salarioBase)
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + ((salarioPromedioFaseTerminal - 2 * salarioBase) * 0.8m * duracion);
+                    }
+                    else
+                    {
+                        subsidioTotal = (2 * salarioBase * duracion) + (salarioBase * 0.8m * duracion) + ((salarioPromedioFaseTerminal - 3 * salarioBase) * 0.6m * duracion);
+                    }
+
+                    deduccion = subsidioTotal;
+                    return deduccion;
+                default:
+
+                    return deduccion;
+            }
         }
         private decimal INS(TramitesDto elTramites)
         {
