@@ -12,7 +12,6 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -24,11 +23,11 @@
 </head>
 
 <body>
-    <h2>ProcesosYGestiones</h2>
+    
 
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Procesos</h2>
+            <h2>ProcesosYGestiones</h2>
         </div>
         <div class="d-flex justify-content-between mb-4">
 
@@ -36,14 +35,14 @@
 
             @Html.ActionLink(
               "Gestionar Ajustes",
-              "IngresarAjustes",
+              "ListarAjustes",
               new { idNomina = Model.IdNomina },
               new { @class = "btn btn-outline-warning btn-lg" }
           )
 
             @Html.ActionLink(
                 "Gestionar Tramites",
-                "IngresarTramites",
+                "ListarTramites",
                 new { idNomina = Model.IdNomina },
                 new { @class = "btn btn-outline-warning btn-lg" }
             )
@@ -64,91 +63,78 @@
 
         <hr />
         <dl class="dl-horizontal">
+            <div>
+                <h2>Detalles del Empleado</h2>
+                <dt>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.primer_apellido)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.primer_apellido)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.segundo_apellido)
+                </dt>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.cedula)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cedula)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.puesto)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.puesto)
+                </dd>
 
 
-            <dt>
-                @Html.DisplayNameFor(model => model.SalarioNeto)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FechaInicio)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.SalarioNeto)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.FechaInicio)
+                </dd>
+            </div>
 
+            <div>
+                <h2>Informes de pago</h2>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FechaDePago)
+                </dt>
 
+                <dd>
+                    @Html.DisplayFor(model => model.FechaDePago)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SalarioNeto)
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaDePago)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SalarioNeto)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.totalBono)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FechaDePago)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaInicio)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FechaInicio)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.totalBono)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.totalBono)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.totalDedu)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.totalDedu)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.nombre)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.nombre)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.primer_apellido)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.primer_apellido)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.segundo_apellido)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.segundo_apellido)
-            </dd>
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.cedula)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.cedula)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.puesto)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.puesto)
-            </dd>
-
-
+                <dd>
+                    @Html.DisplayFor(model => model.totalDedu)
+                </dd>
+            </div>
 
         </dl>
     </div>

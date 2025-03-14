@@ -1,4 +1,4 @@
-﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.NominaDto
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.UnicoEmpleadoDto
 
 @{
     ViewBag.Title = "ProcesarNomina";
@@ -11,27 +11,26 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.IdNomina)
+            @Html.DisplayNameFor(model => model.FechaDePago)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdNomina)
+            @Html.DisplayFor(model => model.FechaDePago)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdEmpleado)
+            @Html.DisplayNameFor(model => model.primer_apellido)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdEmpleado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SalarioNeto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SalarioNeto)
+            @Html.DisplayFor(model => model.primer_apellido)
         </dd>
 
         <dt>
@@ -40,86 +39,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.SalarioBruto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaDePago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaDePago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PeriodoDePago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PeriodoDePago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasOrdinarias)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasOrdinarias)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasExtras)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasExtras)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasDobles)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasDobles)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiasDispoVacaciones)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiasUtiliVacaciones)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Incapacidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Incapacidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoDeContrato)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoDeContrato)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
         </dd>
 
         <dt>
@@ -137,47 +56,6 @@
         <dd>
             @Html.DisplayFor(model => model.totalDedu)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.deduccionCCSS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.deduccionCCSS)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.deduccionISR)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.deduccionISR)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bonoHorasExtra)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bonoHorasExtra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rebajosDeuda)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rebajosDeuda)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rebajosSancion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rebajosSancion)
-        </dd>
-
     </dl>
 </div>
 <p>

@@ -383,13 +383,13 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ListarTramites(int idNomina)
         {
             List<TramitesDto> tramites = _listarTramites.ListarTodo(idNomina);
-
+            ViewBag.idNomina = idNomina;
             return View(tramites);
         }
         public ActionResult ListarAjustes(int idNomina)
         {
             List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo();
-
+            ViewBag.idNomina = idNomina;
             return View(tramites);
         }
 

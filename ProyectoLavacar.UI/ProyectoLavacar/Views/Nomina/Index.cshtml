@@ -32,11 +32,9 @@
         <table class="table table-bordered table-striped text-center">
             <thead class="table-dark">
                 <tr>
+                   
                     <th>
-                        @Html.DisplayNameFor(model => model.IdNomina)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SalarioNeto)
+                        @Html.DisplayNameFor(model => model.nombre)
                     </th>
 
                     <th>
@@ -44,7 +42,7 @@
                     </th>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.SalarioBruto)
                     </th>
 
                     <th></th>
@@ -54,11 +52,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                      
                         <td>
-                            @Html.DisplayFor(modelItem => item.IdNomina)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalarioNeto)
+                            @Html.DisplayFor(modelItem => item.nombre)
                         </td>
 
                         <td>
@@ -66,15 +62,13 @@
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
+                            @Html.DisplayFor(modelItem => item.SalarioBruto)
                         </td>
 
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("DetallesNomina", "Nomina", new { idEmpleado = item.IdEmpleado }) |
-                            @Html.ActionLink("ProcesosYGestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
-                            @Html.ActionLink("ListarAjustes", "ListarAjustes", new { idNomina = item.IdNomina }) |
-                            @Html.ActionLink("ListarTramites", "ListarTramites", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("Detalles", "Nomina", new { idEmpleado = item.IdEmpleado }) |
+                            @Html.ActionLink("Gestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
+                          
                         </td>
                     </tr>
                 }
@@ -82,7 +76,7 @@
         </table>
     </div>
 
-    </div>
+   
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
