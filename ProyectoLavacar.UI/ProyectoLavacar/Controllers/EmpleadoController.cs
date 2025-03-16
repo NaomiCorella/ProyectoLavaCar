@@ -64,7 +64,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
-            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); ;
+            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
             var listaNomina = _listarNomina.ListarNomina();
            foreach (UsuariosDto usuario in laListaDeFinanzas)
             {
