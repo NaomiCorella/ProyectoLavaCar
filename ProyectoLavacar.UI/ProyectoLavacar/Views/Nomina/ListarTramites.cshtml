@@ -77,8 +77,16 @@
 
                             @if (item.tipo == "Vacaciones")
                             {
-                                @Html.ActionLink("AceptarVacacion", "AceptarVacacion", new { idTramite = item.IdTramite }, new { @class = "btn btn-outline-success btn-md" })
+                                if (item.estado == 0)
+                                {
+                                    @Html.ActionLink("AceptarVacacion", "AceptarVacacion", new { idTramite = item.IdTramite }, new { @class = "btn btn-outline-success btn-md" })
+                                }
+                                    else
+                                      {
+                                    <p>Peticion ya ha sido revisada</p>
+                                     }
                             }
+                       
 
                         </td>
                     </tr>

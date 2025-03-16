@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
+﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.BuscarPorId;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearTramites;
@@ -14,15 +15,19 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ProcesarNomina;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;
+using ProyectoLavacar.LN.ModuloEmpleados.BuscarPorId;
 using ProyectoLavacar.LN.ModuloNomina.CrearNomina;
 using ProyectoLavacar.LN.ModuloNomina.CrearTramites;
 using ProyectoLavacar.LN.ModuloNomina.DetalleAjustes;
 using ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta;
 using ProyectoLavacar.LN.ModuloNomina.DetallesTramites;
 using ProyectoLavacar.LN.ModuloNomina.EditarNomina;
+using ProyectoLavacar.LN.ModuloNomina.EditarTramites;
 using ProyectoLavacar.LN.ModuloNomina.ListarAjustes;
 using ProyectoLavacar.LN.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.LN.ModuloNomina.ListarTramites;
@@ -59,9 +64,12 @@ namespace ProyectoLavacar.Controllers
         IDetallesAjustesLN _detallesAjustes;
         IDetallesTramitesLN _detallesTramites;
         IProcesarNominaLN _procesarNomina;
+        IBuscarPorIdLN _buscarPorIdEmpleado;
 
-        public  NominaController()
+        public NominaController()
         {
+            _buscarPorIdEmpleado = new BuscarPorIdLN();
+
             _crearAjustes = new CrearAjustesSalarialesLN();
             _crearNomina = new CrearNominaLN();
             _crearTramites = new CrearTramitesLN();
@@ -73,7 +81,6 @@ namespace ProyectoLavacar.Controllers
             _listarTramites = new ListarTramitesLN();
             _listarAjustes = new ListarAjustesLN();
             _editarTramites = new EditarTramitesLN();
-
             _detallesAjustes = new DetallesAjustesLN();
              _detallesTramites = new DetallesTramitesLN();
             _procesarNomina = new ProcesarNominaLN();
@@ -407,11 +414,10 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-        [HttpPost]
+      
         public async Task<ActionResult> AnularAjustes(int  id)
         {
-            try
-            {
+           
 
                 AjustesSalarialesDto modeloDeAjustes = _detallesAjustes.Detalle(id);
 
@@ -441,19 +447,35 @@ namespace ProyectoLavacar.Controllers
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
                 }
-
-
                     return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        
         }
         public ActionResult ProcesarNomina(int idNomina)
         {
             NominaDto nomina = _obtenerporId.Detalle(idNomina);
-            return View(nomina);
+            UsuariosDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            UnicoEmpleadoDto nominaEmpleado = new UnicoEmpleadoDto
+            {
+                IdNomina = nomina.IdNomina,
+                IdEmpleado = nomina.IdEmpleado,
+                SalarioBruto = nomina.SalarioBruto,
+                SalarioNeto = nomina.SalarioNeto,
+                HorasExtras = nomina.HorasExtras,
+                HorasDobles = nomina.HorasDobles,
+                HorasOrdinarias = nomina.HorasOrdinarias,
+                PeriodoDePago = nomina.PeriodoDePago,
+                FechaDePago = nomina.FechaDePago,
+                TipoDeContrato = nomina.TipoDeContrato,
+                DiasDispoVacaciones = nomina.DiasDispoVacaciones,
+                DiasUtiliVacaciones = nomina.DiasUtiliVacaciones,
+                Incapacidad = nomina.Incapacidad,
+                Estado = nomina.Estado,
+                totalBono = nomina.totalBono,
+                totalDedu = nomina.totalDedu,
+                nombre = usuario.nombre,
+                primer_apellido = usuario.primer_apellido
+            };
+            return View(nominaEmpleado);
         }
         public ActionResult ConfimarNomina(int idNomina)
         {

@@ -142,6 +142,7 @@
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletoLN.cs" />
     <Compile Include="ModuloNomina\DetallesTramites\DetallesTramitesLN.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
+    <Compile Include="ModuloNomina\EditarTramites\EditarTramitesLN.cs" />
     <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesLN.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
     <Compile Include="ModuloNomina\ListarTramites\ListarTramitesLN.cs" />

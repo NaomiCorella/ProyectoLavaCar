@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite
 {
-    public interface IEditarTramitesAD
+    public interface IEditarTramiteAD
     {
         Task<int> Editar(TramitesTabla tramite);
     }

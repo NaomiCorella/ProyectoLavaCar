@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Listar\IListarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Crear\ICrearCompraAD.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetalleNominaCompleta\IDetallesNominaCompletaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesAjustes\IDetallesAjustesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesTramites\IDetallesTramitesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\Editar\IEditarNominaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\IngresarHoras\IRegistroHoraEntradaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarAjustes\IListarAjustesAD.cs" />
