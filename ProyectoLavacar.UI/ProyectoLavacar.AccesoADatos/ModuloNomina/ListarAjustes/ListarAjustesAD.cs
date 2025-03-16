@@ -21,16 +21,16 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarAjustes
         {
             List<AjustesSalarialesDto> lalistaGeneral = (from ajustes in _elContexto.AjustesSalarialesTabla
                                                          join nomina in _elContexto.NominaTabla
-                                               on ajustes.IdNomina equals nomina.IdNomina
-
+                                                         on ajustes.IdNomina equals nomina.IdNomina
                                                          select new AjustesSalarialesDto
                                                          {
                                                              IdAjusteSalarial = ajustes.IdAjusteSalarial,
                                                              IdNomina = ajustes.IdNomina,
                                                              Monto = ajustes.Monto,
                                                              Razon = ajustes.Razon
-
-                                                         }).ToList();
+                                                         })
+                                              .Distinct() // Elimina duplicados
+                                              .ToList();
 
             return lalistaGeneral;
         }

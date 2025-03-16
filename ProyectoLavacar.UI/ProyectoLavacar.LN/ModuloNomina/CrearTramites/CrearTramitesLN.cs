@@ -77,7 +77,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
 
             if (elTramites.tipo == "Incapacidad")
             {
-                if(elTramites.aseguradora == "CSSS")
+                if (elTramites.aseguradora == "CSSS")
                 {
                     decimal csss = CSSS(elTramites);
                     if (csss != 0)
@@ -85,6 +85,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                         decimal cantidad = incapacidad(elTramites, csss);
                         return 1;
                     }
+
                 }
                 else
                 {
@@ -96,32 +97,24 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                     }
                 }
 
-              
             }
-            if(elTramites.tipo =="Vacaciones")
+            else
             {
-
-
-            decimal vacacio = vacaciones(elTramites);
+                decimal vacacio = vacaciones(elTramites);
                 if (vacacio == 0)
                 {
                     return 0;
                 }
                 return vacacio;
             }
-            else
-            {
-                decimal bonificacion = Accidente(elTramites);
-                return bonificacion;
-            }
-          
+            return 2;
         }
 
         private decimal CSSS(TramitesDto eltramites)
         {
             NominaDto nomina = _obtenerNomina.Detalle(eltramites.IdNomina);
             int duracion = eltramites.duracion;
-            decimal salarioNeto = nomina.SalarioNeto;
+            decimal salarioNeto = (decimal)nomina.SalarioBruto;
             decimal deduccion = 0;
             decimal salarioBase = 250430m;
             decimal salarioPromedioFaseTerminal = salarioNeto; 
@@ -232,12 +225,12 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
         {
             NominaDto nomina = _obtenerNomina.Detalle(elTramites.IdNomina);
             int duracion = elTramites.duracion;
-            decimal salarioNeto = nomina.SalarioNeto;
+            decimal salarioNeto = (decimal)nomina.SalarioBruto;
             decimal salarioMinimo = 250430m; 
             decimal deduccion = 0;
             decimal rentaMensual = 0;
             decimal pagoTotal = 0;
-            decimal limiteRegimen = 20442000m;
+            decimal limiteRegimen = 200000000m;
             switch (elTramites.Razon)
             {
                 case "Temporal":

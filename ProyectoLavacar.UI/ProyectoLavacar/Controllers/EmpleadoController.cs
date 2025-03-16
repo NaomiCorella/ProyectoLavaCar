@@ -6,6 +6,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
@@ -20,6 +21,7 @@ using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.LN.ModuloNomina.ListarGeneral;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using ProyectoLavacar.LN.ModuloUsuarios.Remover;
 using System;
@@ -43,6 +45,7 @@ namespace ProyectoLavacar.Controllers
         ICrearEvaluacionLN _crearEvaluacionLN;
         IEditarUsuarioLN _editarUsuario;
         IRemoverLN _remover;
+        IListarGeneralLN _listarNomina;
         public EmpleadoController()
         {
             _detallesEvaluaciones = new DetallesEvaluacionesLN();
@@ -54,6 +57,7 @@ namespace ProyectoLavacar.Controllers
             _crearEvaluacionLN = new CrearEvaluacionLN();
             _editarUsuario = new EditarUsuarioLN();
             _remover = new RemoverLN();
+            _listarNomina = new ListarGeneralLN();
         }
 
         // GET: Empleado
@@ -61,6 +65,21 @@ namespace ProyectoLavacar.Controllers
         {
             ViewBag.Title = "La Listas de Empleados";
             List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); ;
+            var listaNomina = _listarNomina.ListarNomina();
+           foreach (UsuariosDto usuario in laListaDeFinanzas)
+            {
+                foreach(var nomina in listaNomina)
+                {
+                    if(usuario.Id == nomina.IdEmpleado)
+                    {
+                        usuario.nomina = true;
+                    }
+                    else
+                    {
+                        usuario.nomina = false;
+                    }
+                }
+            }
             return View(laListaDeFinanzas);
         }
         public ActionResult VerEvaluaciones(string id)

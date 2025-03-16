@@ -89,7 +89,14 @@
                                             <i class="fas fa-check-circle"></i> Activar
                                         </a>
                                     }
+                                    @if (!item.nomina)
+                                    {
+                                        @Html.ActionLink("RegistroDeNomina", "Create", "Nomina", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
 
+                                     }else
+                                       {
+                                        <p>Nomina del empleado ya registrada</p>
+                                       }
 
 
                                 </div>

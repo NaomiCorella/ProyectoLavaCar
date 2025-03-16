@@ -75,17 +75,13 @@
     <Compile Include="ModuloInventario\ListarMovimiento\ListarMovimientoAD.cs" />
     <Compile Include="ModuloInventario\Listar\ListarInventarioAD.cs" />
     <Compile Include="ModuloInventario\RegistrarMovimiento\RegistrarMovimientoAD.cs" />
-    <Compile Include="ModuloNomina\CrearRebajo\CrearRebajoAD.cs" />
     <Compile Include="ModuloNomina\CrearAjusteSalariales\CrearAjustesSalarialesAD.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaAD.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesAD.cs" />
     <Compile Include="ModuloNomina\DetalleAjustes\DetalleAjustesAD.cs" />
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletaAD.cs" />
     <Compile Include="ModuloNomina\DetalleTramite\DetalleTramiteAD.cs" />
-    <Compile Include="ModuloNomina\EditarAjustes\EditarAjustesAD.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaAD.cs" />
-    <Compile Include="ModuloNomina\EditarTramite\EditarTramiteAD.cs" />
-    <Compile Include="ModuloNomina\ListarRebajos\ListarRebajosAD.cs" />
     <Compile Include="ModuloNomina\ListarTramites\ListarTramitesAD.cs" />
     <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesAD.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralAD.cs" />

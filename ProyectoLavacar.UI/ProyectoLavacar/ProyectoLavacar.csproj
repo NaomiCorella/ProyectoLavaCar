@@ -568,7 +568,6 @@
     <Content Include="Views\Nomina\Index.cshtml" />
     <Content Include="Views\Nomina\Nomina.cshtml" />
     <Content Include="Views\Nomina\Details.cshtml" />
-    <Content Include="Views\Nomina\Create.cshtml" />
     <Content Include="Views\Reservas\ReservarCita.cshtml" />
     <Content Include="Views\Servicios\Details.cshtml" />
     <Content Include="Views\Reservas\Reservas.cshtml" />
@@ -594,6 +593,7 @@
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\RegistroDeEvaluaciones.cshtml" />
+    <Content Include="Views\Nomina\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
