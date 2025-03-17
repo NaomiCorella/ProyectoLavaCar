@@ -543,7 +543,11 @@ namespace ProyectoLavacar.Controllers
 
             AgregarFila(table, "Nombre:", nomina.nombre, cellFont, BaseColor.WHITE);
             AgregarFila(table, "Salario Bruto:", nomina.SalarioBruto.ToString(), cellFont, backgroundColor);
-            AgregarFila(table, "Salario Neto:", $"₡{nomina.SalarioNeto:N2}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Horas Extra:", $"₡{nomina.HorasExtras}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Dias de Vacaciones Disponibles:", $"₡{nomina.DiasDispoVacaciones}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Dias de Vacaciones Utilizados:", $"₡{nomina.DiasUtiliVacaciones}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Bonificaciones:", $"₡{nomina.totalBono}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Deducciones:", $"₡{nomina.totalDedu}", cellFont, BaseColor.WHITE);
 
             doc.Add(table);
 
