@@ -108,9 +108,9 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Details/5
-        public ActionResult Details(int idNomina)
+        public ActionResult Details(int id)
         {
-            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
             return View(nomina);
         }
 

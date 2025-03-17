@@ -84,9 +84,6 @@ namespace ProyectoLavacar.Controllers
         // GET: Inventario/Details/5
         public ActionResult Details(int id)
         {
-
-
-
             InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
             return View(elInventario);
         }
