@@ -412,7 +412,7 @@ namespace ProyectoLavacar.Controllers
         }
         public ActionResult ListarAjustes(int idNomina)
         {
-            List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo();
+            List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina).ToList();
             ViewBag.idNomina = idNomina;
             return View(tramites);
         }
