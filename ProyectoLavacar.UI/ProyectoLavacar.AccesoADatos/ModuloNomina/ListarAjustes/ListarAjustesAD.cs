@@ -27,7 +27,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarAjustes
                                                              IdAjusteSalarial = ajustes.IdAjusteSalarial,
                                                              IdNomina = ajustes.IdNomina,
                                                              Monto = ajustes.Monto,
-                                                             Razon = ajustes.Razon
+                                                             Razon = ajustes.Razon,
+                                                             tipo= ajustes.tipo
                                                          })
                                               .Distinct() // Elimina duplicados
                                               .ToList();
