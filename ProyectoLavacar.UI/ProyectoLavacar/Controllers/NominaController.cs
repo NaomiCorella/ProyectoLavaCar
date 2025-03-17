@@ -1,4 +1,6 @@
-﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.BuscarPorId;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.BuscarPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
@@ -15,6 +17,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ProcesarNomina;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloInventario;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
@@ -37,6 +40,7 @@ using ProyectoLavacar.LN.ModuloNomina.ProcesarNomina;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -490,7 +494,89 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Edit/5
-       
-        
+
+        public FileResult DescargarPDFDetalle(int id)
+        {
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
+
+            if (nomina == null)
+            {
+                return null;
+            }
+
+            // Crear el PDF
+            MemoryStream ms = new MemoryStream();
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40); // Márgenes
+            PdfWriter.GetInstance(doc, ms).CloseStream = false;
+
+            doc.Open();
+
+            // Colores y fuentes personalizados
+            BaseColor headerColor = new BaseColor(27, 50, 85); // Azul oscuro (como en tu vista)
+            BaseColor textColor = BaseColor.BLACK;
+            BaseColor backgroundColor = new BaseColor(240, 240, 240); // Gris claro para fondo de celdas
+
+            Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.WHITE);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, textColor);
+            Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+
+            // Título
+            Paragraph title = new Paragraph($"Detalles de al nomina de - {nomina.FechaDePago}\n\n", titleFont);
+            title.Alignment = Element.ALIGN_CENTER;
+            doc.Add(title);
+
+            // Crear tabla similar a la vista
+            PdfPTable table = new PdfPTable(2) { WidthPercentage = 100 };
+            table.SetWidths(new float[] { 1.5f, 2f }); // Ancho de las columnas
+
+            // Encabezado de tabla (como el fondo azul en tu vista)
+            PdfPCell headerCell = new PdfPCell(new Phrase("Información de la nomina", headerFont))
+            {
+                Colspan = 2,
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                BackgroundColor = headerColor,
+                Padding = 10
+            };
+            table.AddCell(headerCell);
+
+            // Agregar filas con datos
+
+            AgregarFila(table, "Nombre:", nomina.nombre, cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Salario Bruto:", nomina.SalarioBruto.ToString(), cellFont, backgroundColor);
+            AgregarFila(table, "Salario Neto:", $"₡{nomina.SalarioNeto:N2}", cellFont, BaseColor.WHITE);
+
+            doc.Add(table);
+
+            // Fecha de generación del PDF
+            Paragraph fecha = new Paragraph($"\n\nFecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm:ss}", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10));
+            fecha.Alignment = Element.ALIGN_RIGHT;
+            doc.Add(fecha);
+
+            doc.Close();
+
+            ms.Position = 0;
+            return File(ms, "application/pdf", $"Nomina_{nomina.nombre}.pdf");
+        }
+
+        // Método para agregar filas a la tabla con estilos
+        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            table.AddCell(cellTitulo);
+            table.AddCell(cellValor);
+        }
     }
 }
