@@ -94,6 +94,9 @@
             <a href="@Url.Action("HistorialDeMovimientos")" class="btn btn-outline-info ml-2">
                 <i class="fas fa-times me-2"></i> Historial De Movimientos
             </a>
+            <a href="@Url.Action("DescargarPDF")" class="btn btn-outline-info ml-2">
+                <i class="fas fa-times me-2"></i> DescargarPDF
+            </a>
         </div>
 
         <div class="table-responsive shadow-lg rounded mt-5 mb-5">
@@ -177,7 +180,9 @@
                                         </a>
                                     }
 
-
+                                    <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="btn btn-outline-success btn-action">
+                                        <i class="fas fa-times-circle"></i> Descargar PDF
+                                    </a>
 
 
                                 </div>
