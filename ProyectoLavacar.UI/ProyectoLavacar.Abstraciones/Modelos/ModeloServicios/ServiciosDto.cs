@@ -22,6 +22,8 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloServicios
         public bool estado { get; set; } = true;
         [Display(Name = "Modalidad")]
         public string modalidad { get; set; }
+        [Display(Name = "Precio")]
+        public decimal precio { get; set; }
     }
 
 }

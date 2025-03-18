@@ -121,6 +121,7 @@
     <Compile Include="LN\interfaces\ModuloCompra\ListarDisponibles\IListarDisponibleLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\Listar\IListarLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\ObtenerPorId\IObtenerPorIdLN.cs" />
+    <Compile Include="LN\interfaces\ModuloCorreos\IEmailSender.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorEvaluacionYDesempeño\IBuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorId\IBuscarPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\CrearEvaluacioYDesempeño\ICrearEvaluacioYDesempenioLN.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Modelos\ModuloBitacora\BitacoraDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraCompletaDto.cs" />
+    <Compile Include="Modelos\ModuloCorreos\EmailSenderOptions.cs" />
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
     <Compile Include="Modelos\ModuloNomina\RebajosDto.cs" />
     <Compile Include="Modelos\ModuloNomina\AjustesSalarialesDto.cs" />
@@ -225,6 +227,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScriptBaseDeDatos\BDAnalisis.sql" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

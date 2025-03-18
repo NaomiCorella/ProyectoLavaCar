@@ -35,6 +35,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
         public string puesto { get; set; }
         public string PasswordHash { get; set; }
         public bool nomina { get; set; }
-
+        public string ResetToken { get; set; }
+        public DateTime? ResetTokenExpira { get; set; }
     }
 }

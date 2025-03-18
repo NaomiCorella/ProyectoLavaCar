@@ -29,9 +29,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloServicios.Listar
                                                          descripcion = elServicio.descripcion,
                                                          tiempoDuracion = elServicio.tiempoDuracion,
                                                          estado = elServicio.estado,
-                                                         modalidad = elServicio.modalidad
-
-                                                     }).ToList();
+                                                         modalidad = elServicio.modalidad,
+                                                         precio = elServicio.precio
+                }).ToList();
             return lalistadeServicios;
         }
     }
