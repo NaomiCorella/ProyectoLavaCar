@@ -17,7 +17,7 @@ namespace ProyectoLavacar.LN.ModuloCompra.DetalleCompraCompleto
         {
             _obtenerPorIdAD = new DetalleCompraCompletaAD();
         }
-        public CompraCompletaDto Detalle(int idCompra)
+        public CompraCompletaDto Detalle(Guid idCompra)
         {
             CompraCompletaDto CompraEnBaseDeDatos = _obtenerPorIdAD.Detalle(idCompra);
             CompraCompletaDto laCompraAMostrar = ConvertirACompraAMostrar(CompraEnBaseDeDatos);

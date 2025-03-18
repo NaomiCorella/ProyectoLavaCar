@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 {
     public class CompraCompletaDto
     {
-        public int idCompra { get; set; }
+        public Guid idCompra { get; set; }
         public string idCliente { get; set; }
 
         [Display(Name = "Nombre")]

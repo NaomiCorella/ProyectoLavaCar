@@ -10,7 +10,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
     public class CompraTabla
     {
         [Key]
-        public int idCompra { get; set; }
+        public Guid idCompra { get; set; }
         public string idCliente { get; set; }
      
         public decimal Total { get; set; }

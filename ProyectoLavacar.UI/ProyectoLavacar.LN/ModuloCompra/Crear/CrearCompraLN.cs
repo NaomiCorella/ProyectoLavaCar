@@ -40,7 +40,6 @@ namespace ProyectoLavacar.LN.ModuloCompra.Crear
             return new CompraTabla
             {
                 idCompra = Compra.idCompra,
-
                 idCliente = Compra.idCliente,
                 DescripcionServicio = Compra.DescripcionServicio,
                 fecha = _fecha.ObtenerFecha(),
@@ -48,17 +47,16 @@ namespace ProyectoLavacar.LN.ModuloCompra.Crear
                 Estado = Compra.Estado
             };
         }
-    
-
-            public async Task<int> CrearCompraServicios(CompraDto modelo)
+          public async Task<int> CrearCompraServicios(CompraDto modelo)
         {
             int cantidadDeDatos=0;
+
             foreach (int servicio in modelo.listaServicios)
             {
                 CompraServiciosDto compraServicio = new CompraServiciosDto
                 {
-                    idCompra = 1,
-                    idCompraServicios = 1,
+                    idCompra = modelo.idCompra,
+                    idCompraServicios =9,
                     idServicio = servicio
                 };
                 cantidadDeDatos = await _compraServicio.CrearCompra(compraServicio);

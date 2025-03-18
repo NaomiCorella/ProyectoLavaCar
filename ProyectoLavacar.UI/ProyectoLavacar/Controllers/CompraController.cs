@@ -106,7 +106,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Compra/Details/5
-        public ActionResult DetallesCompra(int IdCompra)
+        public ActionResult DetallesCompra(Guid IdCompra)
         {
             CompraCompletaDto compra = _detallesCompraCompleta.Detalle(IdCompra);
             return View(compra);
@@ -166,7 +166,7 @@ namespace ProyectoLavacar.Controllers
 
                 CompraDto compra = new CompraDto()
                 {
-                    idCompra = modeloDeCompra.idCompra,
+                    idCompra = Guid.NewGuid(),
                     idCliente = cliente.Id,
                     DescripcionServicio = modeloDeCompra.DescripcionServicio,
                     fecha = modeloDeCompra.fecha,
@@ -225,7 +225,7 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-        public FileResult DescargarPDFCompra(int idCompra)
+        public FileResult DescargarPDFCompra(Guid idCompra)
         {
             CompraCompletaDto compra = _detallesCompraCompleta.Detalle(idCompra);
 

@@ -11,7 +11,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
     
         public class CompraDto
         {
-         public int idCompra { get; set; }
+         public Guid idCompra { get; set; }
         public string idCliente { get; set; }
         public List<int> listaServicios { get; set; } = new List<int>();
 

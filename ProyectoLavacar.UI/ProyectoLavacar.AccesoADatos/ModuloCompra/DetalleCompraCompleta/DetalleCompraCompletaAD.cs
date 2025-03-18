@@ -16,7 +16,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.DetalleCompraCompleta
         {
             _elcontexto = new Contexto();
         }
-        public CompraCompletaDto Detalle(int idCompra)
+        public CompraCompletaDto Detalle(Guid idCompra)
         {
             var CompraCompleta = (from compra in _elcontexto.CompraTabla
                                   join elCliente in _elcontexto.UsuariosTabla

@@ -19,7 +19,7 @@ namespace ProyectoLavacar.LN.ModuloCompra.ObtenerPorId
         {
             _obtenerPorIdCompraAD = new ObtenerPorIdAD();
         }
-        public CompraDto Detalle(int idCompra)
+        public CompraDto Detalle(Guid idCompra)
         {
             CompraTabla CompraEnBaseDeDatos = _obtenerPorIdCompraAD.Detalle(idCompra);
             CompraDto laCompraAMostrar = ConvertirACompraAMostrar(CompraEnBaseDeDatos);
