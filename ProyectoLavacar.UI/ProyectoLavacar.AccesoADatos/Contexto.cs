@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
+﻿using ProyectoLavacar.Abstracciones.ModelosDeBaseDeDatos;
+using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,14 +24,30 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<EvaluacionesTabla>().ToTable("Evaluaciones");
             modelBuilder.Entity<RespuestaTabla>().ToTable("Respuesta");
             modelBuilder.Entity<MovimientoTabla>().ToTable("Movimiento");
+
             modelBuilder.Entity<AjustesSalarialesTabla>().ToTable("AjustesSalariales");
             modelBuilder.Entity<TramitesTabla>().ToTable("Tramites");
             modelBuilder.Entity<NominaTabla>().ToTable("Nomina");
+            modelBuilder.Entity<RebajosTabla>().ToTable("RebajosEspecificos");
+            modelBuilder.Entity<RegistroHorasTabla>().ToTable("REGISTROHORAS");
+
+
+            modelBuilder.Entity<BitacoraTabla>().ToTable("BITACORA_EVENTOS");
+
+            modelBuilder.Entity<CompraTabla>().ToTable("Compra");
+
             modelBuilder.Entity<AspNetUserRolesTabla>().HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<RolesTabla>().ToTable("AspNetRoles");
+            
+
+
+
+
 
 
         }
+        public DbSet<RegistroHorasTabla> RegistroHorasTabla { get; set; }
+        public DbSet<RebajosTabla> RebajosTabla { get; set; }
         public DbSet<ReservasTabla> ReservasTabla { get; set; }
         public DbSet<ReseniasTabla> ReseniasTabla { get; set; }
         public DbSet<UsuariosTabla> UsuariosTabla { get; set; }
@@ -46,6 +63,9 @@ namespace ProyectoLavacar.AccesoADatos
         public DbSet<TramitesTabla> TramitesTabla { get; set; }
         public DbSet<NominaTabla> NominaTabla { get; set; }
 
+        public DbSet<BitacoraTabla> BitacoraTabla { get; set; }
+
+        public DbSet<CompraTabla> CompraTabla { get; set; }
         public DbSet<AspNetUserRolesTabla> AspNetUserRolesTabla { get; set; }
         public DbSet<RolesTabla> RolesTabla { get; set; }
 

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.AjustesSalarialesDto>
+
+@{
+    ViewBag.Title = "ListarAjustes";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <h2>Listado de ajustes salariales registrados</h2>
+
+    @Html.ActionLink(
+      "Registrar un ajuste salarial",
+      "IngresarAjustes",
+      new { idNomina = ViewBag.idNomina },
+      new { @class = "btn btn-outline-warning btn-lg" }
+    )
+
+    <div class="container mt-5 mb-5">
+        <form method="get" action="@Url.Action("FiltrarPorProducto", "Nomina")" class="form-inline mb-3">
+            <input type="hidden" name="idNomina" value="@ViewData["idNomina"]" /> <!-- Campo oculto para idNomina -->
+
+            <div class="form-group">
+                <select name="estado" class="form-control">
+                    <option value="">Filtrar...</option>
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary ml-2">
+                <i class="fas fa-search me-2"></i> Buscar
+            </button>
+
+            <a href="@Url.Action("ListarAjustes", "Nomina", new { idNomina = ViewData["idNomina"] })"
+               class="btn btn-outline-info ml-2">
+                <i class="fas fa-undo me-2"></i> Restablecer
+            </a>
+        </form>
+    </div>
+
+
+    <div class="table-responsive shadow-lg rounded">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Razon)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Monto)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Razon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Monto)
+                        </td>
+                        <td>
+
+                            @Html.ActionLink("Anular", "AnularAjustes", new { id = item.IdAjusteSalarial }, new { @class = "btn btn-outline-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+
+        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="~/Content/assets/js/bootstrap.min.js"></script>
+        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/Content/assets/js/main.js"></script>
+        <script src="~/Content/assets/js/popper.min.js"></script>
+        <script src="~/Content/assets/js/slick.min.js"></script>
+        <script src="~/Content/assets/js/waypoints.min.js"></script>
+        <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

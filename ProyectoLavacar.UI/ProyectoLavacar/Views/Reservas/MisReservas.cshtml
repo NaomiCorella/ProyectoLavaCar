@@ -34,18 +34,19 @@
                 <input type="date" name="fechaFin" class="form-control" />
             </div>
             <div class="col-md-4 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-outline-primary ml-2"><i class="fas fa-search me-2"></i>Filtrar</button>
             </div>
         </div>
     }
 
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
+<div class="container mt-5 mb-5">
+    <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
                 <tr>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.idReserva)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.nombreEmpleado)
                     </th>
@@ -68,8 +69,8 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                 
-                        
+
+
                         <td>
                             @Html.DisplayFor(modelItem => item.nombreEmpleado)
                         </td>
@@ -93,18 +94,35 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "EditarMiReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-warning" }) |
-                            @Html.ActionLink("Detalles", "DetallesReserva", new { idReserva = item.idReserva }, new { @class = "btn btn-sm btn-info" })
+                            <div class="d-flex justify-content-center">
+                                <a href="@Url.Action("Edit", new { idReserva = item.idReserva })" class="btn btn-outline-primary btn-sm me-2" title="Editar">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
 
-                            @if (item.estado)
-                            {
-                                @Html.ActionLink("Inactivar", "CambiarEstadoCancelacion", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-warning" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Activar", "CambiarEstadoCancelacion", new { id = item.idReserva }, new { @class = "btn btn-sm btn-outline-success" })
-                            }
+                                <a href="@Url.Action("DetallesReserva", new { idReserva = item.idReserva })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
+                                    <i class="fas fa-info-circle"></i> Detalles
+                                </a>
+
+
+                                @if (item.estado)
+                                {
+                                    <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="btn btn-outline-warning btn-sm me-2" title="Inactivar">
+                                        <i class="fas fa-ban"></i> Inactivar
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="btn btn-outline-success btn-sm me-2" title="Activar">
+                                        <i class="fas fa-check-circle"></i> Activar
+                                    </a>
+                                }
+                            </div>
+
+
                         </td>
+
+
+
                     </tr>
                 }
             </tbody>

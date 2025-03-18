@@ -100,21 +100,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\Conversiones\ModuloCompra\ConvertirCompraDtoACompraTabla.cs" />
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirAjustesSalarialesDtoAAjustesSalarialesTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirNominaDtoANominaTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloNomina\ConvertirRegistroHorasDtoARegistroHorasTabla.cs" />
     <Compile Include="General\Conversiones\ModuloNomina\ConvertirTramitesDtoATramitesTabla.cs" />
     <Compile Include="General\Conversiones\ModuloResenias\ConvertirResenia.cs" />
     <Compile Include="General\Conversiones\ModuloReservas\ConvertirReservasDtoAReservasTabla.cs" />
+    <Compile Include="General\Conversiones\ModuloUsuarios\Convertir.cs" />
     <Compile Include="General\Conversiones\ModuloUsuarios\ConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="General\Fecha\Fecha.cs" />
+    <Compile Include="ModuloBitacora\Listar\ListarBitacoraLN.cs" />
+    <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraLN.cs" />
+    <Compile Include="ModuloCompra\Crear\CrearCompraLN.cs" />
+    <Compile Include="ModuloCompra\DetalleCompraCompleto\DetalleCompraCompletaLN.cs" />
+    <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleLN.cs" />
+    <Compile Include="ModuloCompra\Listar\ListarCompraLN.cs" />
+    <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\Crear\CrearEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Editar\EditarEmpleadoLN.cs" />
     <Compile Include="ModuloEmpleados\Listar\ListarEmpleadoLN.cs" />
+    <Compile Include="ModuloEvaluaciones\Crear\CrearEvaluacionLN.cs" />
     <Compile Include="ModuloEvaluaciones\Detalles\DetallesEvaluacionesLN.cs" />
     <Compile Include="ModuloEvaluaciones\Listar\ListarEvaluacionesLN.cs" />
     <Compile Include="ModuloInventario\Actualizar\ActualizarInventarioLN.cs" />
@@ -127,12 +138,19 @@
     <Compile Include="ModuloNomina\CrearAjustesSalariales\CrearAjustesSalarialesLN.cs" />
     <Compile Include="ModuloNomina\CrearNomina\CrearNominaLN.cs" />
     <Compile Include="ModuloNomina\CrearTramites\CrearTramitesLN.cs" />
-    <Compile Include="ModuloNomina\CrearTramites\TramitessDto.cs" />
+    <Compile Include="ModuloNomina\DetalleAjustes\DetallesAjustesLN.cs" />
     <Compile Include="ModuloNomina\DetalleNominaCompleta\DetalleNominaCompletoLN.cs" />
+    <Compile Include="ModuloNomina\DetallesTramites\DetallesTramitesLN.cs" />
     <Compile Include="ModuloNomina\EditarNomina\EditarNominaLN.cs" />
+    <Compile Include="ModuloNomina\EditarTramites\EditarTramitesLN.cs" />
+    <Compile Include="ModuloNomina\ListarAjustes\ListarAjustesLN.cs" />
     <Compile Include="ModuloNomina\ListarGeneral\ListarGeneralLN.cs" />
+    <Compile Include="ModuloNomina\ListarTramites\ListarTramitesLN.cs" />
     <Compile Include="ModuloNomina\ListarUnicoEmpleado\ListarUnicoEmpleadoLN.cs" />
     <Compile Include="ModuloNomina\ObtenerPorId\ObtenerPorIdLN.cs" />
+    <Compile Include="ModuloNomina\ProcesarNomina\ProcesarNominaLN.cs" />
+    <Compile Include="ModuloNomina\RegistroHoraEntrada\RegistrarHoraEntradaLN.cs" />
+    <Compile Include="ModuloNomina\RegistroHoraSalida\RegistroHoraSalidaLN.cs" />
     <Compile Include="ModuloReservas\Crear\CrearReservaLN.cs" />
     <Compile Include="ModuloReservas\DetallesReservaCompleta\DetallesReservaCompletaLN.cs" />
     <Compile Include="ModuloReservas\EditarAdmin\EditarReservaLN.cs" />
@@ -147,12 +165,14 @@
     <Compile Include="ModuloReseñas\ListarTodo\ListarTodoReseniaLN.cs" />
     <Compile Include="ModuloReseñas\Listar\ListarReseniaLN.cs" />
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdLN.cs" />
+    <Compile Include="ModuloServicios\CrearServiciosLN.cs" />
     <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
     <Compile Include="ModuloServicios\ObtenerPorId\DetalleServiciosLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Listar\ListarUsuarioLN.cs" />
+    <Compile Include="ModuloUsuarios\Remover\RemoverLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

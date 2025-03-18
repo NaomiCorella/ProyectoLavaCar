@@ -34,6 +34,12 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.EditarNomina
             elNominaEnBaseDeDatos.Incapacidad = elNominaParaEditar.Incapacidad;
             elNominaEnBaseDeDatos.TipoDeContrato = elNominaParaEditar.TipoDeContrato;
             elNominaEnBaseDeDatos.Estado = elNominaParaEditar.Estado;
+            elNominaEnBaseDeDatos.totalBono = elNominaParaEditar.totalBono;
+            elNominaEnBaseDeDatos.totalDedu = elNominaParaEditar.totalDedu;
+            elNominaEnBaseDeDatos.bonoHorasExtra = elNominaParaEditar.bonoHorasExtra;
+            elNominaEnBaseDeDatos.deduccionCCSS = elNominaParaEditar.deduccionCCSS;
+            elNominaEnBaseDeDatos.deduccionISR = elNominaParaEditar.deduccionISR;
+           
             EntityState estado = _elcontexto.Entry(elNominaEnBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
             return cantidadDeDatosAlmacenados;

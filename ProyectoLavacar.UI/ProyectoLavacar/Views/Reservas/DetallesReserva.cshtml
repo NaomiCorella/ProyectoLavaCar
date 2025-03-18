@@ -4,17 +4,14 @@
     ViewBag.Title = "DetallesReserva";
 }
 
-
-
-<h2>Reservas</h2>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Administración de Empleados</title>
+
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -26,79 +23,67 @@
 </head>
 
 <body>
-    <h2>DetallesReserva</h2>
+    <div class="container mt-5 mb-5">
+        <div class="container mt-5 mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Detalles de la Reserva</h2>
+            </div>
 
-    <div>
- 
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.idReserva)
-            </dt>
+            <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+                <table class="table table-bordered table-hover">
+                    <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
+                        <tr>
+                            <th colspan="2" class="text-center">Información de la Reserva</th>
+                        </tr>
+                    </thead>
 
-            <dd>
-                @Html.DisplayFor(model => model.idReserva)
-            </dd>
+                    <tbody>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.idReserva)</th>
+                            <td>@Html.DisplayFor(model => model.idReserva)</td>
+                        </tr>
 
-          
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.nombreCliente)</th>
+                            <td>@Html.DisplayFor(model => model.nombreCliente)</td>
+                        </tr>
 
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.nombreEmpleado)</th>
+                            <td>@Html.DisplayFor(model => model.nombreEmpleado)</td>
+                        </tr>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.nombreCliente)
-            </dt>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.nombreServicio)</th>
+                            <td>@Html.DisplayFor(model => model.nombreServicio)</td>
+                        </tr>
 
-            <dd>
-                @Html.DisplayFor(model => model.nombreCliente)
-            </dd>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.fecha)</th>
+                            <td>@Html.DisplayFor(model => model.fecha)</td>
+                        </tr>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.nombreEmpleado)
-            </dt>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.hora)</th>
+                            <td>@Html.DisplayFor(model => model.hora)</td>
+                        </tr>
 
-            <dd>
-                @Html.DisplayFor(model => model.nombreEmpleado)
-            </dd>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.estado)</th>
+                            <td>@Html.DisplayFor(model => model.estado)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.nombreServicio)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.nombreServicio)
-            </dd>
-
-         
-
-            <dt>
-                @Html.DisplayNameFor(model => model.fecha)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fecha)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.hora)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.hora)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.estado)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.estado)
-            </dd>
-
-        </dl>
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Reservas", "Reservas")" class="main-btn btn-lg">
+                    <i class="fas fa-arrow-left me-2"></i> Volver a la Gestión
+                </a>
+            </div>
+        </div>
     </div>
-    <p>
 
-        @Html.ActionLink("Back to List", "Index")
-    </p>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

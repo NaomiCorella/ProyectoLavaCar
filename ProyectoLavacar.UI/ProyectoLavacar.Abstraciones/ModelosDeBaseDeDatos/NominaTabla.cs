@@ -26,5 +26,11 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public decimal? Incapacidad { get; set; } 
         public string TipoDeContrato { get; set; }
         public bool Estado { get; set; }
+        public decimal totalBono { get; set; }
+        public decimal totalDedu { get; set; }
+        public decimal deduccionCCSS { get; set; }
+        public decimal deduccionISR { get; set; }
+        public decimal bonoHorasExtra { get; set; }
+   
     }
 }

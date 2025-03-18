@@ -67,23 +67,35 @@ namespace ProyectoLavacar.Controllers
         {
             List<ReseniaConRespuesta> lalistadeArchivos = _listarResenia.ListarResenia();
 
-            if (!string.IsNullOrEmpty(filtroUsuario))
+            if (!string.IsNullOrWhiteSpace(filtroUsuario))
             {
-                lalistadeArchivos = lalistadeArchivos.Where(r => r.idCliente.ToString().Contains(filtroUsuario)).ToList();
+               
+                string filtroNormalizado = filtroUsuario.ToLower().Trim().TrimEnd('s');
+
+                lalistadeArchivos = lalistadeArchivos
+                    .Where(r => r.nombreCliente != null &&
+                                r.nombreCliente.ToLower().Trim().TrimEnd('s').Contains(filtroNormalizado))
+                    .ToList();
             }
 
-            if (!string.IsNullOrEmpty(filtroContenido))
+            if (!string.IsNullOrWhiteSpace(filtroContenido))
             {
-                lalistadeArchivos = lalistadeArchivos.Where(r => r.comentarios.Contains(filtroContenido)).ToList();
+                lalistadeArchivos = lalistadeArchivos
+                    .Where(r => r.comentarios != null &&
+                                r.comentarios.ToLower().Contains(filtroContenido.ToLower()))
+                    .ToList();
             }
 
-            if (!string.IsNullOrEmpty(filtroFecha))
+            if (!string.IsNullOrWhiteSpace(filtroFecha))
             {
-                lalistadeArchivos = lalistadeArchivos.Where(r => r.fecha.ToString() == filtroFecha).ToList();
+                lalistadeArchivos = lalistadeArchivos
+                    .Where(r => r.fecha != null && r.fecha.ToString() == filtroFecha)
+                    .ToList();
             }
 
             return View(lalistadeArchivos);
         }
+
 
 
 

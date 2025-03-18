@@ -35,10 +35,11 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId
                 segundo_apellido = elCliente.segundo_apellido,
                 PhoneNumber = elCliente.PhoneNumber,
                 Email = elCliente.Email,
-          
                 estado = elCliente.estado,
                 Id = elCliente.Id,
-          
+                turno = elCliente.turno,
+                puesto = elCliente.puesto
+
             };
         }
     }

@@ -20,11 +20,20 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <style>
+        
+        .btn-action {
+            min-width: 120px; 
+            margin: 5px; 
+        }
+    </style>
 </head>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
     <div class="container mt-4">
         @using (Html.BeginForm("IndexAdmin", "Resenias", FormMethod.Get))
         {
@@ -39,47 +48,28 @@
                     <input type="date" name="filtroFecha" class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
-                    <a href="@Url.Action("IndexAdmin", "Resenias")" class="btn btn-secondary">Restablecer</a>
+                    <button type="submit" class="btn btn-outline-primary ml-2"><i class="fas fa-search me-2"></i>Filtrar</button>
+                    <a href="@Url.Action("IndexAdmin", "Resenias")" class="btn btn-outline-info ml-2"><i class="fas fa-undo me-2"></i> Restablecer</a>
                 </div>
             </div>
         }
     </div>
+
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
     {
         <div class="container mt-5 mb-5">
-
-
-            <div class="table-responsive shadow-lg rounded">
-                <table class="table table-bordered table-striped text-center">
-                    <thead class="table-dark">
+            <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+                <table class="table table-bordered table-hover text-center align-middle">
+                    <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.idResenia)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.idCliente)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.idServicio)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.fecha)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.calificacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.comentarios)
-                            </th>
-
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.comentariosRespuesta)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.estadoResenia)
-                            </th>
+                            @*<th>@Html.DisplayNameFor(model => model.idResenia)</th>*@
+                            <th>@Html.DisplayNameFor(model => model.nombreCliente)</th>
+                            <th>@Html.DisplayNameFor(model => model.nombreServicio)</th>
+                            <th>@Html.DisplayNameFor(model => model.fecha)</th>
+                            <th>@Html.DisplayNameFor(model => model.calificacion)</th>
+                            <th>@Html.DisplayNameFor(model => model.comentarios)</th>
+                            <th>@Html.DisplayNameFor(model => model.comentariosRespuesta)</th>
+                            <th>@Html.DisplayNameFor(model => model.estadoResenia)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -87,27 +77,12 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.idResenia)
-                                </td>
-
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.idCliente)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.idServicio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.fecha)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.calificacion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.comentarios)
-                                </td>
-
-
+                                @*<td>@Html.DisplayFor(modelItem => item.idResenia)</td>*@
+                                <td>@Html.DisplayFor(modelItem => item.nombreCliente)</td>
+                                <td>@Html.DisplayFor(modelItem => item.nombreServicio)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+                                <td>@Html.DisplayFor(modelItem => item.calificacion)</td>
+                                <td>@Html.DisplayFor(modelItem => item.comentarios)</td>
                                 <td>
                                     @if (string.IsNullOrEmpty(item.comentariosRespuesta))
                                     {
@@ -118,7 +93,6 @@
                                         @Html.DisplayFor(modelItem => item.comentariosRespuesta)
                                     }
                                 </td>
-
                                 <td>
                                     @if (item.estadoResenia)
                                     {
@@ -129,48 +103,44 @@
                                         <span class="badge bg-danger">Inactivo</span>
                                     }
                                 </td>
-
                                 <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="@Url.Action("Edit", new { id = item.idResenia })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+                                    <div class="d-flex justify-content-center flex-wrap">
+                                        <a href="@Url.Action("Edit", new { id = item.idResenia })" class="btn btn-outline-primary btn-action" title="Editar">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
 
-
                                         @if (item.estadoResenia)
                                         {
-                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-warning">
+                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-outline-warning btn-action">
                                                 <i class="fas fa-times-circle"></i> Inactivar
                                             </a>
                                         }
                                         else
                                         {
-                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-sm btn-outline-success">
+                                            <a href="@Url.Action("CambiarEstado", new { id = item.idResenia })" class="btn btn-outline-success btn-action">
                                                 <i class="fas fa-check-circle"></i> Activar
                                             </a>
                                         }
+
                                         @if (string.IsNullOrEmpty(item.comentariosRespuesta))
                                         {
-                                            <a href="@Url.Action("ResponderReseña", new { id = item.idResenia })" class="btn btn-outline-info btn-sm me-2" title="Editar">
-                                                <i class="fas fa-edit"></i> Responder
+                                            <a href="@Url.Action("ResponderReseña", new { id = item.idResenia })" class="btn btn-outline-info btn-action" title="Responder">
+                                                <i class="fas fa-reply"></i> Responder
                                             </a>
                                         }
-                                        else
-                                        {
-
-                                        }
-
                                     </div>
-
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
-
         </div>
+
+
+
     }
+
     <script src="~/Scripts/Resenias/indexAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
@@ -188,4 +158,4 @@
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
 
-</ht
+</html>

@@ -23,22 +23,22 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearNomina
     }
 
 
-        public async Task<int> RegistrarNomina(NominaDto modelo)
+        public async Task<int> RegistrarNomina(NominaDto modelo, string id)
     {
-        int cantidadDeDatosAlmacenados = await _crearNominasAD.RegistrarNomina(ConvertirObjetoNominasTabla(modelo));
+        int cantidadDeDatosAlmacenados = await _crearNominasAD.RegistrarNomina(ConvertirObjetoNominasTabla(modelo,id));
         return cantidadDeDatosAlmacenados;
     }
 
 
 
-    private NominaTabla ConvertirObjetoNominasTabla(NominaDto laNomina)
+    private NominaTabla ConvertirObjetoNominasTabla(NominaDto laNomina,string id)
     {
 
 
         return new NominaTabla()
         {
             IdNomina = laNomina.IdNomina,
-            IdEmpleado = laNomina.IdEmpleado,
+            IdEmpleado = id,
             SalarioBruto = laNomina.SalarioBruto,
             SalarioNeto = laNomina.SalarioNeto,
             HorasExtras = laNomina.HorasExtras,
@@ -50,12 +50,20 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearNomina
             DiasDispoVacaciones = laNomina.DiasDispoVacaciones,
             DiasUtiliVacaciones = laNomina.DiasUtiliVacaciones,
             Incapacidad = laNomina.Incapacidad,
-            Estado = laNomina.Estado
+            Estado = true,
+            totalBono =0,
+            totalDedu=0,
+            deduccionCCSS=0,
+            deduccionISR = 0,
+            bonoHorasExtra = 0
+              
 
 
 
-        };
+    };
     }
+
+     
 }
 }
 

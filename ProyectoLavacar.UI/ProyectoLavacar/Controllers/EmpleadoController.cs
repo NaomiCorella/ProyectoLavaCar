@@ -4,7 +4,11 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarGeneral;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -15,7 +19,11 @@ using ProyectoLavacar.LN.ModuloEmpleados.Crear;
 using ProyectoLavacar.LN.ModuloEmpleados.Editar;
 using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
+using ProyectoLavacar.LN.ModuloEvaluaciones.Crear;
 using ProyectoLavacar.LN.ModuloEvaluaciones.Detalles;
+using ProyectoLavacar.LN.ModuloNomina.ListarGeneral;
+using ProyectoLavacar.LN.ModuloUsuarios.Editar;
+using ProyectoLavacar.LN.ModuloUsuarios.Remover;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +42,10 @@ namespace ProyectoLavacar.Controllers
         IEditarEmpleadoLN _editarEmpleado;
         IBuscarPorIdLN _buscarPorId;
         Contexto _context;
-
+        ICrearEvaluacionLN _crearEvaluacionLN;
+        IEditarUsuarioLN _editarUsuario;
+        IRemoverLN _remover;
+        IListarGeneralLN _listarNomina;
         public EmpleadoController()
         {
             _detallesEvaluaciones = new DetallesEvaluacionesLN();
@@ -43,19 +54,38 @@ namespace ProyectoLavacar.Controllers
             _buscarPorId = new BuscarPorIdLN();
             _context = new Contexto();
             _listarEvaluaciones = new ListarEvaluacionesLN();
+            _crearEvaluacionLN = new CrearEvaluacionLN();
+            _editarUsuario = new EditarUsuarioLN();
+            _remover = new RemoverLN();
+            _listarNomina = new ListarGeneralLN();
         }
 
         // GET: Empleado
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
-            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados();
+            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
+            var listaNomina = _listarNomina.ListarNomina();
+           foreach (UsuariosDto usuario in laListaDeFinanzas)
+            {
+                foreach(var nomina in listaNomina)
+                {
+                    if(usuario.Id == nomina.IdEmpleado)
+                    {
+                        usuario.nomina = true;
+                    }
+                    else
+                    {
+                        usuario.nomina = false;
+                    }
+                }
+            }
             return View(laListaDeFinanzas);
         }
         public ActionResult VerEvaluaciones(string id)
         {
             ViewBag.Title = "Lista De Evaluaciones";
-            List<EvalucionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
+            List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
             return View(laListaDeFinanzas);
         }
 
@@ -64,13 +94,13 @@ namespace ProyectoLavacar.Controllers
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             ViewBag.Title = "Lista De Evaluaciones";
-            List<EvalucionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
+            List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
             return View(laListaDeFinanzas);
         }
 
         public ActionResult DetallesEvaluaciones(int id)
         {
-            EvalucionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
+            EvaluacionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
             return View(Finanzas);
         }
 
@@ -83,6 +113,29 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado/Create
+        public ActionResult RegistroDeEvaluaciones()
+        {
+            return View();
+        }
+
+        // POST: Empleado/Create
+        [HttpPost]
+        public async Task<ActionResult> RegistroDeEvaluaciones(EvaluacionesDto modelo)
+        {
+            try
+            {
+                int cantidadDeDatosGuardados = await _crearEvaluacionLN.Crear(modelo);
+
+                return RedirectToAction("VerEvaluaciones");
+               
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -103,6 +156,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+
 
         // GET: Empleado/Edit/5
         public ActionResult Edit(string id)
@@ -150,7 +204,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult CambiarEstado(string id)
+        public async Task<ActionResult> CambiarEstado(string id)
         {
 
             try
@@ -158,7 +212,22 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-
+                UsuariosDto userEliminado = new UsuariosDto
+                {
+                    Id = Usuario.Id,
+                    nombre = Usuario.nombre,
+                    cedula = Usuario.cedula,
+                    Email = "userEliminado@gmail.com",
+                    estado = false,
+                    numeroCuenta = Usuario.numeroCuenta,
+                    PhoneNumber = "noValido",
+                    primer_apellido = Usuario.primer_apellido,
+                    puesto = Usuario.puesto,
+                    segundo_apellido = Usuario.segundo_apellido,
+                    turno = Usuario.turno,
+                    PasswordHash = "novalido"
+                };
+                int cantidadDeDatosEditados = await _remover.EditarUsuarios(userEliminado);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
