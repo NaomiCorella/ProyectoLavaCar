@@ -240,6 +240,10 @@ textarea.form_control {
 button {
   border: none; }
 
+
+.textarea-larga {
+    width: 100%;
+}
 /*
     Start Preloader css
 */

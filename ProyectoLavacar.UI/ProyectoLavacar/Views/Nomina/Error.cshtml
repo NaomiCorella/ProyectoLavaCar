@@ -23,11 +23,14 @@
 
 <body>
 
-
-
-    <h4>No se puede ingresar mas dias de vacaciones</h4>
-<h3>Este empleado ha usado todos los dias de vacaciones</h3>
-
+    <div class="container mt-5">
+        <div class="alert alert-danger text-center" role="alert">
+            <h4 class="alert-heading">No se puede ingresar más días de vacaciones</h4>
+            <p>Este empleado ha usado todos los días de vacaciones disponibles.</p>
+            <hr>
+            @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-outline-danger" })
+        </div>
+    </div>
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

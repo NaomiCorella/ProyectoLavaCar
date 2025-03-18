@@ -103,9 +103,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.RegistroHoraSalida
                 totalDedu = laNomina.totalDedu,
                 deduccionCCSS = laNomina.deduccionCCSS,
                 deduccionISR = laNomina.deduccionISR,
-                bonoHorasExtra = laNomina.bonoHorasExtra,
-                rebajosDeuda = laNomina.rebajosDeuda,
-                rebajosSancion = laNomina.rebajosSancion
+                bonoHorasExtra = laNomina.bonoHorasExtra
 
             };
             _editarNomina.EditarNomina(nomina);
