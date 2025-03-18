@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,23 +31,23 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
 
         public NominaDto ProcesarNomina(int idNomina)
         {
-            NominaDto laNomina = _detallesNomina.Detalle(idNomina);
+          NominaDto laNomina = _detallesNomina.Detalle(idNomina);
             decimal impuestos = CalcularISR(idNomina);  
-            decimal deducciones = laNomina.totalDedu;
-            decimal seguro = CalcularSeguro(idNomina);
+            //decimal deducciones = laNomina.totalDedu;
+           decimal seguro = CalcularSeguro(idNomina);
             decimal bonosHorasExtra = horasExtra(idNomina);
-            decimal bonificaciones = laNomina.totalBono;
+            //decimal bonificaciones = laNomina.totalBono;
 
-            decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
-            decimal salarioNeto = salario - impuestos  - deducciones-seguro;
-
+            //decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
+            //decimal salarioNeto = salario - impuestos  - deducciones-seguro;
+            decimal totalSalario = Total(idNomina);
 
             NominaDto NominaNueva = new NominaDto
             {
                 IdNomina = laNomina.IdNomina,
                 IdEmpleado = laNomina.IdEmpleado,
                 SalarioBruto = laNomina.SalarioBruto,
-                SalarioNeto = salarioNeto,
+                SalarioNeto = totalSalario,
                 HorasExtras = laNomina.HorasExtras,
                 HorasDobles = laNomina.HorasDobles,
                 HorasOrdinarias = laNomina.HorasOrdinarias,
@@ -70,7 +71,20 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
             
         }
 
- 
+            public decimal Total(int idNomina)
+        {
+            NominaDto laNomina = _detallesNomina.Detalle(idNomina);
+            decimal impuestos = CalcularISR(idNomina);
+            decimal deducciones = laNomina.totalDedu;
+            decimal seguro = CalcularSeguro(idNomina);
+            decimal bonosHorasExtra = horasExtra(idNomina);
+            decimal bonificaciones = laNomina.totalBono;
+
+            decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
+            decimal salarioNeto = salario - impuestos - deducciones - seguro;
+            return salarioNeto;
+        }
+
         public decimal CalcularISR(int idNomina)
         {
             decimal impuesto = 0;
