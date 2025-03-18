@@ -322,20 +322,25 @@ foreign key (idProducto) references Producto(idProducto)
 --Modulo NotificacionCompra-- ?????
 -- Tabla Compra
 CREATE TABLE Compra (
-    idCompra INT IDENTITY PRIMARY KEY NOT NULL,
-    idUsuario nvarchar(128) NOT NULL, 
-    idServicio INT NOT NULL,
-    idReserva INT NOT NULL,
+    idCompra uniqueidentifier PRIMARY KEY NOT NULL,
+    idCliente nvarchar(128) NOT NULL, 
     total DECIMAL(10,2) NOT NULL,
     fecha DATE NOT NULL,
     descripcionServicio NVARCHAR(200) NOT NULL,
     estado BIT NOT NULL,
-FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
-  
-    FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio),
-    FOREIGN KEY (idReserva) REFERENCES Reservas(idReserva)
+FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
 );
 GO
+
+CREATE TABLE CompraServicios (
+    idCompra uniqueidentifier,
+	idCompraServicios INT IDENTITY PRIMARY KEY NOT NULL,
+    idServicio INT,
+    FOREIGN KEY (idCompra) REFERENCES Compra(idCompra),
+    FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio)
+);
+
+
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Resenias-- 
 

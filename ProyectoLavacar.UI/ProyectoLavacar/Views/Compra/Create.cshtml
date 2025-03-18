@@ -45,6 +45,7 @@
 
 
 
+
     <div class="form-group">
         @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -62,15 +63,19 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Estado)
-                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-                </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                <!-- Verificar si el modelo no es nulo antes de acceder a Model.Total -->
+                <input type="text" class="form-control" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
+                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
+    </div>
+
+
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -116,29 +121,51 @@
             });
 
             
-            $("#idServicio").change(function () {
-                var idServicio = $(this).val();
-                if (idServicio) {
-                    $.ajax({
-                        url: '@Url.Action("ObtenerPrecioServicio", "Compra")',
-                        type: 'GET',
-                        data: { idServicio: idServicio },
-                        success: function (response) {
-                            if (response.success) {
-                                $("#total").val(response.precio);
-                            } else {
-                                $("#total").val("");
-                                alert("No se pudo obtener el precio del servicio.");
-                            }
-                        },
-                        error: function () {
-                            alert("Ocurrió un error al obtener el precio del servicio.");
-                        }
-                    });
-                } else {
-                    $("#total").val("");
+           
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+  
+    function calcularTotal() {
+        var total = 0;
+
+     
+        $("input[name='listaServicios']:checked").each(function () {
+            var servicioId = $(this).val();
+
+         
+            $.ajax({
+                url: '@Url.Action("ObtenerPrecioServicio", "Compra")', 
+                type: 'GET',
+                data: { idServicio: servicioId },
+                success: function (response) {
+                    if (response.success) {
+                      
+                        total += parseFloat(response.precio);
+                    }
+
+                    
+                    $("#Total").val(total.toFixed(2)); 
+                },
+                error: function () {
+                    alert("Ocurrió un error al obtener el precio del servicio.");
                 }
             });
         });
+    }
+
+    // Ejecutar el cálculo cuando se marque o desmarque un checkbox
+    $("input[name='listaServicios']").change(function () {
+        calcularTotal();
+    });
+
+    // Llamar al calcular total cuando se cargue la página por primera vez
+    calcularTotal();
+});
+
+
     </script>
+
 }

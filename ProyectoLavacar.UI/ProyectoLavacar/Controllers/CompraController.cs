@@ -171,7 +171,7 @@ namespace ProyectoLavacar.Controllers
                     DescripcionServicio = modeloDeCompra.DescripcionServicio,
                     fecha = modeloDeCompra.fecha,
                     Estado = true,
-                    Total = 1000,
+                    Total = modeloDeCompra.Total,
                     listaServicios=modeloDeCompra.listaServicios
                 };
 
@@ -223,6 +223,7 @@ namespace ProyectoLavacar.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+
 
 
         public FileResult DescargarPDFCompra(Guid idCompra)
