@@ -193,7 +193,8 @@ namespace ProyectoLavacar.Controllers
                     IdNomina = idNomina,
                     Monto = modeloDeAjustes.Monto,
                     Razon = modeloDeAjustes.Razon,
-                    tipo = modeloDeAjustes.tipo
+                    tipo = modeloDeAjustes.tipo,
+                    estado = true
                 };
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
@@ -412,13 +413,28 @@ namespace ProyectoLavacar.Controllers
         }
         public ActionResult ListarAjustes(int idNomina)
         {
+            ViewData["idNomina"] = idNomina;
             List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina).ToList();
-            ViewBag.idNomina = idNomina;
+       
             return View(tramites);
         }
 
+        public ActionResult FiltrarPorProducto(int idNomina, bool? estado)
+        {
+            ViewData["idNomina"] = idNomina; // Mantener idNomina en la vista
+            ViewBag.Title = "Ajustes Filtrado";
 
-      
+            var ajustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina);
+
+            // Aplicar el filtro solo si estado tiene un valor
+            if (estado.HasValue)
+            {
+                ajustes = ajustes.Where(p => p.estado == estado.Value);
+            }
+
+            return View("ListarAjustes", ajustes.ToList());
+        }
+
         public async Task<ActionResult> AnularAjustes(int  id)
         {
            
@@ -433,7 +449,8 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de bono",
-                        tipo ="Deduccion"
+                        tipo ="Deduccion",
+                        estado = false
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
@@ -446,7 +463,9 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de deduccion",
-                        tipo = "Bonificacion"
+                        tipo = "Bonificacion",
+                        estado = false
+
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
