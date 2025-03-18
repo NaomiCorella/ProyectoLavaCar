@@ -32,7 +32,6 @@ namespace ProyectoLavacar.LN.ModuloCompra.ObtenerPorId
             {
                 idCompra = laCompra.idCompra,
                 idCliente = laCompra.idCliente,
-                idServicio = laCompra.idServicio,
                 Total = laCompra.Total,
                 DescripcionServicio = laCompra.DescripcionServicio,
                 fecha = laCompra.fecha.ToString(),

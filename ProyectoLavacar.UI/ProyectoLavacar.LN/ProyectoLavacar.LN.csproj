@@ -114,6 +114,7 @@
     <Compile Include="General\Fecha\Fecha.cs" />
     <Compile Include="ModuloBitacora\Listar\ListarBitacoraLN.cs" />
     <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraLN.cs" />
+    <Compile Include="ModuloCompra\CrearCompraServicio\CrearCompraServicioLN.cs" />
     <Compile Include="ModuloCompra\Crear\CrearCompraLN.cs" />
     <Compile Include="ModuloCompra\DetalleCompraCompleto\DetalleCompraCompletaLN.cs" />
     <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleLN.cs" />

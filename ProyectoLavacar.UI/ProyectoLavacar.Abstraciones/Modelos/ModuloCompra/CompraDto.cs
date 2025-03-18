@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
         {
          public int idCompra { get; set; }
         public string idCliente { get; set; }
-        public int idServicio { get; set; }
+        public List<int> listaServicios { get; set; } = new List<int>();
 
         [Display(Name = "Total")]
         public decimal Total { get; set; }

@@ -26,6 +26,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+
 
 namespace ProyectoLavacar.Controllers
 {
@@ -115,10 +117,9 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Create()
         {
             var servicios = _listarServicios.ListarServicios()
-              .Where(a => a.estado == true)
-              .ToList();
+    .Where(a => a.estado == true) .ToList();
             ViewBag.Servicios = servicios;
-
+       
             return View();
         }
 
@@ -128,6 +129,8 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+                modeloDeCompra.listaServicios = modeloDeCompra.listaServicios ?? new List<int>();
+
                 if (numeroCedula == 0)
                 {
                     ModelState.AddModelError("", "Debe ingresar una cédula.");
@@ -145,25 +148,31 @@ namespace ProyectoLavacar.Controllers
 
                 TempData["ClienteEncontrado"] = $"Cliente encontrado: {cliente.nombre} {cliente.primer_apellido}";
 
-
-                var servicio = _listarServicios.ListarServicios()
-                    .FirstOrDefault(s => s.idServicio == modeloDeCompra.idServicio);
-
-                if (servicio == null)
+                // Aquí procesas los servicios seleccionados
+                foreach (int idServicio in modeloDeCompra.listaServicios)
                 {
-                    ModelState.AddModelError("", "No se encontró el servicio seleccionado.");
-                    return View(modeloDeCompra);
+                    // Lógica para procesar cada servicio seleccionado
+                    // Puedes buscar el servicio en la base de datos y asociarlo con la compra
+                    var servicio = _listarServicios.ListarServicios().FirstOrDefault(s => s.idServicio == idServicio);
+
+                    if (servicio == null)
+                    {
+                        ModelState.AddModelError("", $"No se encontró el servicio con ID {idServicio}");
+                        return View(modeloDeCompra);
+                    }
+
+                    // Agregar lógica adicional si es necesario para cada servicio
                 }
 
                 CompraDto compra = new CompraDto()
                 {
                     idCompra = modeloDeCompra.idCompra,
                     idCliente = cliente.Id,
-                    idServicio = modeloDeCompra.idServicio,
                     DescripcionServicio = modeloDeCompra.DescripcionServicio,
                     fecha = modeloDeCompra.fecha,
-                    Total = servicio.costo,
-                    Estado = true
+                    Estado = true,
+                    Total = 1000,
+                    listaServicios=modeloDeCompra.listaServicios
                 };
 
                 int cantidadDeDatosGuardados = await _crearCompra.CrearCompra(compra);
@@ -182,6 +191,7 @@ namespace ProyectoLavacar.Controllers
                 return View(modeloDeCompra);
             }
         }
+
 
         public JsonResult BuscarClientePorCedula(int numeroCedula)
         {

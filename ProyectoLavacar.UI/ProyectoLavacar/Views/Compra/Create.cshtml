@@ -29,22 +29,21 @@
     </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.idServicio, "Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.idServicio, new SelectList(ViewBag.Servicios, "idServicio", "nombre"), "Seleccione un servicio", new { @class = "form-control", id = "idServicio" })
-            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
+    @foreach (var servicio in ViewBag.Servicios)
+    {
+        // Si Model.listaServicios es nulo, usar una lista vacía
+        var listaServicios = Model?.listaServicios ?? new List<int>();
+
+        bool isChecked = listaServicios.Contains(servicio.idServicio);
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="listaServicios" value="@servicio.idServicio" id="servicio_@servicio.idServicio" @(isChecked ? "checked" : "") />
+            <label class="form-check-label" for="servicio_@servicio.idServicio">@servicio.nombre</label>
         </div>
-    </div>
+    }
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Total, "Precio del Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", id = "total", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -64,14 +63,14 @@
     </div>
 
     @*<div class="form-group">
-        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Estado)
-                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Estado)
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

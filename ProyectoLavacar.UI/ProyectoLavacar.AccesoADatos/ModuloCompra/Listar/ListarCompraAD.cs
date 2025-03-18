@@ -22,13 +22,13 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.Listar
             List<CompraCompletaDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
                                                      join elCliente in _elcontexto.UsuariosTabla
                                                      on compra.idCliente equals elCliente.Id
-                                                     join servicio in _elcontexto.ServiciosTabla
-                                                     on compra.idServicio equals servicio.idServicio
+                                                 
+                                             
                                                      select new CompraCompletaDto
                                                      {
                                                          idCompra = compra.idCompra,
                                                          idCliente = compra.idCliente,
-                                                         idServicio = compra.idServicio,
+                                                       
 
                                                          Total = compra.Total,
                                                          Fecha = compra.fecha.ToString(), 
@@ -40,8 +40,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.Listar
                                                          SegundoApellido = elCliente.segundo_apellido,
                                                          Cedula = elCliente.cedula,
 
-                                                         nombre = servicio.nombre,
-                                                         costo = servicio.costo
+                                                       
 
 
                                                      }).ToList();

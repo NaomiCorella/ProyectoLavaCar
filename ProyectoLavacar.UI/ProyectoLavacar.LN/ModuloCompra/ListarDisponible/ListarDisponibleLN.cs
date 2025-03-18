@@ -50,7 +50,7 @@ namespace ProyectoLavacar.LN.ModuloCompra.ListarDisponible
             {
                 idCompra = Compra.idCompra,
                 idCliente = clientes.Id,
-                idServicio = Compra.idServicio,
+        
                 DescripcionServicio = Compra.DescripcionServicio,
                 fecha = Compra.fecha.ToString(),
                 Total = Compra.Total,

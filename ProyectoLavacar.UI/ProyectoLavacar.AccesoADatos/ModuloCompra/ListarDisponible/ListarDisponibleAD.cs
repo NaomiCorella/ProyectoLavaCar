@@ -20,14 +20,13 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.ListarDisponible
             var lalistadeCompra = (from compra in _elContexto.CompraTabla
                                    join cliente in _elContexto.UsuariosTabla
                                        on compra.idCliente equals cliente.Id
-                                   join servicio in _elContexto.ServiciosTabla
-                                       on compra.idServicio equals servicio.idServicio
+                                   
                                    where compra.idCliente == idCliente
                                    select new CompraCompletaDto
                                    {
                                        idCompra = compra.idCompra,
                                        idCliente = compra.idCliente,
-                                       idServicio = compra.idServicio,
+                                    
                                        Total = compra.Total,
                                        Fecha = compra.fecha.ToString(),
                                        DescripcionServicio = compra.DescripcionServicio,
@@ -37,8 +36,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.ListarDisponible
                                        SegundoApellido = cliente.segundo_apellido,
                                        Cedula = cliente.cedula,
                                        
-                                       nombre = servicio.nombre,
-                                       costo = servicio.costo
+                                      
                                       
                                    }).ToList();
 
