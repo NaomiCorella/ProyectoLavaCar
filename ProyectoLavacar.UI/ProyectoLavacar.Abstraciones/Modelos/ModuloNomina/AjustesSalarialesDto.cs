@@ -18,7 +18,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
         public int IdNomina { get; set; }
         [Display(Name = "Categoria de Ajuste")]
         public string tipo { get; set; }
+        public bool estado { get; set; }
 
-      
     }
 }

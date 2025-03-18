@@ -10,5 +10,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ProcesarNomina
     public interface IProcesarNominaLN
     {
         NominaDto ProcesarNomina(int idNomina);
+        decimal Total(int idNomina);
     }
 }
