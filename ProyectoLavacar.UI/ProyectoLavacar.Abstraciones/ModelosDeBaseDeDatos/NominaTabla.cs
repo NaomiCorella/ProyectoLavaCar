@@ -31,7 +31,6 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public decimal deduccionCCSS { get; set; }
         public decimal deduccionISR { get; set; }
         public decimal bonoHorasExtra { get; set; }
-        public decimal rebajosDeuda { get; set; }
-        public decimal rebajosSancion { get; set; }
+   
     }
 }

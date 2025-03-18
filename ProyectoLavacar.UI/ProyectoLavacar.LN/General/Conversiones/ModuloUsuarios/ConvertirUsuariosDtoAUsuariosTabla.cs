@@ -21,7 +21,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloUsuarios
                 segundo_apellido = elCliente.segundo_apellido,
                 PhoneNumber = elCliente.PhoneNumber,
                 Email = elCliente.Email,
-              
                 estado = elCliente.estado,
                 Id = elCliente.Id,
              

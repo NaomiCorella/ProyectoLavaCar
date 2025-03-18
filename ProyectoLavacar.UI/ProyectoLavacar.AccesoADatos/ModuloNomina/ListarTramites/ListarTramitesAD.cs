@@ -19,21 +19,20 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarAjustes
 
         public List<TramitesDto> ListarTodo(int idNomina)
         {
-            List<TramitesDto> lalistaGeneral = (from tramite in _elContexto.TramitesTabla
-                                                         join nomina in _elContexto.NominaTabla
-                                               on tramite.IdNomina equals idNomina
+            List<TramitesDto> lalistaGeneral = _elContexto.TramitesTabla
+     .Where(tramite => tramite.IdNomina == idNomina) // Filtra en lugar de hacer JOIN
+     .Select(tramite => new TramitesDto
+     {
+         IdTramite = tramite.IdTramite,
+         IdNomina = tramite.IdNomina,
+         duracion = tramite.duracion,
+         FechaInicio = tramite.FechaInicio,
+         Razon = tramite.Razon,
+         tipo = tramite.tipo,
+         estado = tramite.estado
+     })
+     .ToList();
 
-                                                         select new TramitesDto
-                                                         {
-                                                            IdTramite =tramite.IdTramite,
-                                                            IdNomina = tramite.IdNomina,
-                                                            duracion = tramite.duracion,
-                                                            FechaInicio= tramite.FechaInicio,
-                                                            Razon = tramite.Razon,
-                                                            tipo = tramite.tipo,
-                                                            estado = tramite.estado
-
-                                                         }).ToList();
 
             return lalistaGeneral;
         }

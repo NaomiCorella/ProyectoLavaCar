@@ -1,5 +1,7 @@
 ﻿using Antlr.Runtime.Tree;
 using Microsoft.AspNet.Identity;
+using ProyectoLavacar.Abstracciones.LN.Interfaces.ModuloBitacora.Registrar;
+using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
@@ -53,7 +55,7 @@ namespace ProyectoLavacar.Controllers
         Contexto _context;
         IListarEmpleadoLN _listarEmpleado;
         IDetallesReservaCompletaLN _detallesReservaCompleta;
-
+        IRegistrarBitacoraLN _registrarBitacoraLN;
         public ReservasController()
         {
 
@@ -308,7 +310,20 @@ namespace ProyectoLavacar.Controllers
                .ToList();
             ViewBag.empleados = empleados;
             ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
+            string datos = $@"
+            {{
+                 ""IdReserva"": ""{modeloReserva.idReserva}"",
+                ""IdCliente"": ""{modeloReserva.idCliente}"",
+                 ""IdEmpleado"": ""{modeloReserva.idEmpleado}"",
+                ""IdServicio"": ""{modeloReserva.idServicio}"",
+                ""Fecha"": ""{modeloReserva.fecha}"",
+                 ""Hora"": ""{modeloReserva.hora}"",
+                 ""Estado"": ""{modeloReserva.estado}""
+                    }}";
+
+            TempData["DatosAnteriores"] = datos;
             return View(modeloReserva);
+            
         }
 
         // POST: Reservas/Edit/5
@@ -317,8 +332,8 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-
-                int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva);
+                string datosanteriores = TempData["DatosAnteriores"] as string;
+                int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
 
                 return RedirectToAction("Reservas");
             }
@@ -386,6 +401,30 @@ namespace ProyectoLavacar.Controllers
                 var reserva = _context.ReservasTabla.Find(id);
                 reserva.estado = !reserva.estado;
                 _context.SaveChanges();
+                string datosPosteriores = $@"
+{{
+    ""IdReserva"": ""{reserva.idReserva}"",
+    ""IdCliente"": ""{reserva.idCliente}"",
+    ""IdEmpleado"": ""{reserva.idEmpleado}"",
+    ""IdServicio"": ""{reserva.idServicio}"",
+    ""Fecha"": ""{reserva.fecha}"",
+    ""Hora"": ""{reserva.hora}"",
+    ""Estado"": ""{reserva.estado}""
+}}";
+
+                var bitacora = new BitacoraDto
+                {
+                    IdEvento = 0,
+                    TablaDeEvento = "Reservas",
+                    TipoDeEvento = "Editar de Reservas",
+                    FechaDeEvento = "19-11-2024",
+                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
+                    StackTrace = "no hubo error",
+                    DatosAnteriores = datosPosteriores,
+                    DatosPosteriores = datosPosteriores
+                };
+
+               _registrarBitacoraLN.RegistrarBitacora(bitacora);
 
                 return RedirectToAction("Reservas/Reservas");
             }

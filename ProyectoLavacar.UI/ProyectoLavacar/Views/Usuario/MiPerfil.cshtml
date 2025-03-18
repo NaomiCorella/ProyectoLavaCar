@@ -141,6 +141,9 @@
     </table>
 </div>
 
+<div class="navbar-btn">
+    @Html.ActionLink("Ingresar Vacaciones", "IngresarVacaciones", "Nomina", new { area = "" }, new { @class = "navbar-brand" })
+</div>
 
 <p>
     @if (ViewBag.estadoRegistro == null)
@@ -177,6 +180,8 @@
 
 }
 
-
+<a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
+    <i class="fas fa-edit"></i> Editar
+</a>
     @Html.ActionLink("Back to List", "Index")
     </p>

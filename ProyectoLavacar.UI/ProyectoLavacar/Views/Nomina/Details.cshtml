@@ -27,13 +27,7 @@
     <h4>NominaCompletaDto</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdNomina)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdNomina)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.SalarioNeto)
@@ -131,13 +125,7 @@
             @Html.DisplayFor(model => model.Estado)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdAjusteSalarial)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdAjusteSalarial)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Monto)
@@ -155,13 +143,8 @@
             @Html.DisplayFor(model => model.RazonAjuste)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdTramite)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdTramite)
-        </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.FechaInicio)
@@ -171,7 +154,7 @@
             @Html.DisplayFor(model => model.FechaInicio)
         </dd>
 
-    
+
 
         <dt>
             @Html.DisplayNameFor(model => model.RazonTramite)
@@ -181,13 +164,7 @@
             @Html.DisplayFor(model => model.RazonTramite)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdEmpleado)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdEmpleado)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
@@ -270,7 +247,9 @@
         </dd>
 
     </dl>
- 
+    <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="btn btn-outline-success btn-action">
+        <i class="fas fa-times-circle"></i> Descargar PDF
+    </a>
     <p>
 
         @Html.ActionLink("Back to List", "Index")

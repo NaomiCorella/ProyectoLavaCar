@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Editar
 {
     public interface IEditarReservaLN
     {
-        Task<int> EditarPersonas(ReservasDto laReserva);
+        Task<int> EditarPersonas(ReservasDto laReserva,string datos);
     }
 }

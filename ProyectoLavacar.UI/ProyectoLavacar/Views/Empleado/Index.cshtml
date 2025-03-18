@@ -27,6 +27,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Administración de Empleados</h2>
         </div>
+        <a>@Html.ActionLink("Registrar", "RegisterEmployee", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</a>
 
         <div class="table-responsive shadow-lg rounded">
             <table class="table table-bordered table-striped text-center">
@@ -88,7 +89,14 @@
                                             <i class="fas fa-check-circle"></i> Activar
                                         </a>
                                     }
+                                    @if (!item.nomina)
+                                    {
+                                        @Html.ActionLink("RegistroDeNomina", "Create", "Nomina", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
 
+                                     }else
+                                       {
+                                        <p>Nomina del empleado ya registrada</p>
+                                       }
 
 
                                 </div>

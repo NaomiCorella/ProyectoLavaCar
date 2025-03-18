@@ -15,6 +15,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
@@ -29,6 +30,7 @@ using ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId;
 using ProyectoLavacar.LN.ModuloUsuarios.Crear;
 using ProyectoLavacar.LN.ModuloUsuarios.Editar;
 using ProyectoLavacar.LN.ModuloUsuarios.Listar;
+using ProyectoLavacar.LN.ModuloUsuarios.Remover;
 using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
@@ -46,6 +48,7 @@ namespace ProyectoLavacar.Controllers
         IListarEvaluacionesLN _listarEvaluaciones;
         IRegistroHoraEntradaLN _registroHoraEntrada;
         IRegistroHoraSalidaLN _registroHoraSalida;
+        IRemoverLN _remover;
         public UsuarioController()
         {
             _listarReservasClientes = new ListarDisponiblesLN();
@@ -58,13 +61,14 @@ namespace ProyectoLavacar.Controllers
             _listarEvaluaciones = new ListarEvaluacionesLN();
             _registroHoraEntrada = new RegistrarHoraEntradaLN();
             _registroHoraSalida = new RegistroHoraSalidaLN();
+            _remover = new RemoverLN();
         }
 
         // GET: Usuario
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de finanzas";
-            List<UsuariosDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios();
+            List<UsuariosDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios().Where(p => p.estado == true).ToList();
             return View(laListaDeFinanzas);
         }
 
@@ -147,7 +151,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult CambiarEstado(string id)
+        public async Task<ActionResult> CambiarEstado(string id)
         {
 
             try
@@ -155,8 +159,22 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-
-                return RedirectToAction("Index");
+                UsuariosDto userEliminado = new UsuariosDto
+                {
+                    Id = Usuario.Id,
+                    nombre = Usuario.nombre,
+                    cedula = Usuario.cedula,
+                    Email = "userEliminado@gmail.com",
+                    estado = false,
+                    numeroCuenta = Usuario.numeroCuenta,
+                    PhoneNumber = "noValido",
+                    primer_apellido = Usuario.primer_apellido,
+                    puesto = Usuario.puesto,
+                    segundo_apellido = Usuario.segundo_apellido,
+                    turno = Usuario.turno,
+                    PasswordHash = "novalido"
+                };
+                int cantidadDeDatosEditados = await _remover.EditarUsuarios(userEliminado); return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -173,6 +191,7 @@ namespace ProyectoLavacar.Controllers
             List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); ;
             PerfilUsuario usuario = new PerfilUsuario
             {
+                id = user.Id,
                 nombre = user.nombre,
                 primer_apellido = user.primer_apellido,
                 segundo_apellido = user.segundo_apellido,
@@ -212,6 +231,7 @@ namespace ProyectoLavacar.Controllers
 
             PerfilEmpleado usuario = new PerfilEmpleado
             {
+                id = user.Id,
                 nombre = user.nombre,
                 primer_apellido = user.primer_apellido,
                 segundo_apellido = user.segundo_apellido,

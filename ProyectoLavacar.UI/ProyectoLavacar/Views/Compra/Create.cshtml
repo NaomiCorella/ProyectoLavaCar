@@ -1,0 +1,145 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraDto
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Compra</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div id="nombreCliente" class="alert alert-info" style="display: none;"></div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idCliente, "Buscar por Cédula", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="number" name="numeroCedula" id="numeroCedula" class="form-control" />
+            <button type="button" id="buscarCliente" class="btn btn-primary mt-2">Buscar Cliente</button>
+            @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idServicio, "Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.idServicio, new SelectList(ViewBag.Servicios, "idServicio", "nombre"), "Seleccione un servicio", new { @class = "form-control", id = "idServicio" })
+            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Total, "Precio del Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", id = "total", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
+            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DescripcionServicio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Estado)
+                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Volver a la lista
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            
+            $("#buscarCliente").click(function () {
+                var cedula = $("#numeroCedula").val();
+                if (cedula === "") {
+                    alert("Por favor, ingrese una cédula.");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("BuscarClientePorCedula", "Compra")',
+                    type: 'GET',
+                    data: { numeroCedula: cedula },
+                    success: function (response) {
+                        if (response.success) {
+                            $("#nombreCliente").text("Cliente encontrado: " + response.nombre + " " + response.apellido).show();
+                        } else {
+                            $("#nombreCliente").text("No se encontró un cliente con esa cédula.").show();
+                        }
+                    },
+                    error: function () {
+                        alert("Ocurrió un error al buscar el cliente.");
+                    }
+                });
+            });
+
+            
+            $("#idServicio").change(function () {
+                var idServicio = $(this).val();
+                if (idServicio) {
+                    $.ajax({
+                        url: '@Url.Action("ObtenerPrecioServicio", "Compra")',
+                        type: 'GET',
+                        data: { idServicio: idServicio },
+                        success: function (response) {
+                            if (response.success) {
+                                $("#total").val(response.precio);
+                            } else {
+                                $("#total").val("");
+                                alert("No se pudo obtener el precio del servicio.");
+                            }
+                        },
+                        error: function () {
+                            alert("Ocurrió un error al obtener el precio del servicio.");
+                        }
+                    });
+                } else {
+                    $("#total").val("");
+                }
+            });
+        });
+    </script>
+}
