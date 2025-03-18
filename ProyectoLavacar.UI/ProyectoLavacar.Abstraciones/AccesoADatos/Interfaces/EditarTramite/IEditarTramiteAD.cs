@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarAjuste
+namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite
 {
-    public interface IEditarAjusteAD
+    public interface IEditarTramiteAD
     {
-        Task<int> Editar(AjustesSalarialesTabla ajuste);
+        Task<int> Editar(TramitesTabla tramite);
     }
 }

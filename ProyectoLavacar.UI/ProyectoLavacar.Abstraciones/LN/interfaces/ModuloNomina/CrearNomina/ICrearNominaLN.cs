@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina
 {
     public interface ICrearNominaLN
     {
-        Task<int> RegistrarNomina(NominaDto modelo);
+        Task<int> RegistrarNomina(NominaDto modelo,string id);
     }
 }

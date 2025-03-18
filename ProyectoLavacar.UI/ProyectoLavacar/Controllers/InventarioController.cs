@@ -72,7 +72,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Inventario";
-            List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario();
+            List<InventarioDto> laListaDeInventario = _listarInventario.ListarInventario().Where(p => p.estado == true).ToList();
             return View(laListaDeInventario);
         }
         public ActionResult lista(int id)
@@ -84,9 +84,6 @@ namespace ProyectoLavacar.Controllers
         // GET: Inventario/Details/5
         public ActionResult Details(int id)
         {
-
-
-
             InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
             return View(elInventario);
         }
@@ -175,7 +172,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Inventario/Edit/5
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
             ViewBag.Categorias = new List<SelectListItem>
                      {
@@ -184,7 +181,7 @@ namespace ProyectoLavacar.Controllers
                             new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
                                 new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
                          };
-            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(1);
+            InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
 
             return View(elInventario);
         }
@@ -212,7 +209,7 @@ namespace ProyectoLavacar.Controllers
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
 

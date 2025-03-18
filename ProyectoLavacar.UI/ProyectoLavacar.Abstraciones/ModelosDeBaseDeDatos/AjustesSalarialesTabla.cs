@@ -21,5 +21,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public int IdNomina { get; set; }
         public string tipo { get; set; }
 
+       
+
     }
 }

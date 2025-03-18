@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Listar\IListarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Crear\ICrearCompraAD.cs" />
@@ -64,20 +65,17 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\ListarMovimiento\IListarMovimientoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\Listar\IListarInventarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloInventario\RegistrarMovimiento\IRegistrarMovimientoAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearRebajo\ICrearRebajoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearAjusteSalariales\ICrearAjusteSalarialesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearNomina\ICrearNominaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\CrearTramites\ICrearTramitesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetalleNominaCompleta\IDetallesNominaCompletaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesAjustes\IDetallesAjustesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\DetallesTramites\IDetallesTramitesAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarAjuste\IEditarAjusteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\Editar\IEditarNominaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\IngresarHoras\IRegistroHoraEntradaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarAjustes\IListarAjustesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarGeneral\IListarGeneralAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarRebajos\IListarRebajosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarTramites\IListarTramitesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ListarUnicoEmpleado\IListarUnicoEmpleadoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloNomina\ObtenerPorId\IObtenerPorIdAD.cs" />
@@ -103,6 +101,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Crear\ICrearUsuarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Editar\IEditarUsuarioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Listar\IListarUsuarioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloUsuarios\Remover\IRemoverAD.cs" />
     <Compile Include="LN\interfaces\General\Fecha\IFecha.cs" />
     <Compile Include="LN\interfaces\General\ModulaInventario\IConvertirInventarioDtoAInventarioTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloCompra\IConvertirCompraDtoACompraTabla.cs" />
@@ -113,6 +112,7 @@
     <Compile Include="LN\interfaces\General\ModuloNomina\IConvertirTramitesDtoATramitesTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReservas\IConvertirReservasDtoAReservasTabla.cs" />
     <Compile Include="LN\interfaces\General\ModuloReseñas\IConvertirResenia.cs" />
+    <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertir.cs" />
     <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Listar\IListarBitacoraLN.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraLN.cs" />
@@ -177,6 +177,7 @@
     <Compile Include="LN\interfaces\ModuloUsuarios\Crear\ICrearUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Editar\IEditarUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
+    <Compile Include="LN\interfaces\ModuloUsuarios\Remover\IRemoverLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\BitacoraTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CompraTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RebajosTabla.cs" />

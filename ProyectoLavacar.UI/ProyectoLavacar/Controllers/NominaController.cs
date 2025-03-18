@@ -1,4 +1,6 @@
-﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.BuscarPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAccidente;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearNomina;
@@ -15,16 +17,18 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ProcesarNomina;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloInventario;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;
-using ProyectoLavacar.LN.ModuloNomina.CrearAccidente;
+using ProyectoLavacar.LN.ModuloEmpleados.BuscarPorId;
 using ProyectoLavacar.LN.ModuloNomina.CrearNomina;
 using ProyectoLavacar.LN.ModuloNomina.CrearTramites;
 using ProyectoLavacar.LN.ModuloNomina.DetalleAjustes;
 using ProyectoLavacar.LN.ModuloNomina.DetalleNominaCompleta;
 using ProyectoLavacar.LN.ModuloNomina.DetallesTramites;
-using ProyectoLavacar.LN.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.LN.ModuloNomina.EditarNomina;
 using ProyectoLavacar.LN.ModuloNomina.EditarTramites;
 using ProyectoLavacar.LN.ModuloNomina.ListarAjustes;
@@ -36,6 +40,7 @@ using ProyectoLavacar.LN.ModuloNomina.ProcesarNomina;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -63,9 +68,12 @@ namespace ProyectoLavacar.Controllers
         IDetallesAjustesLN _detallesAjustes;
         IDetallesTramitesLN _detallesTramites;
         IProcesarNominaLN _procesarNomina;
+        IBuscarPorIdLN _buscarPorIdEmpleado;
 
-        public  NominaController()
+        public NominaController()
         {
+            _buscarPorIdEmpleado = new BuscarPorIdLN();
+
             _crearAjustes = new CrearAjustesSalarialesLN();
             _crearNomina = new CrearNominaLN();
             _crearTramites = new CrearTramitesLN();
@@ -74,12 +82,10 @@ namespace ProyectoLavacar.Controllers
             _listarGeneralEmpleadosNom = new ListarGeneralLN();
             _listarNominadelEmpleado = new ListarUnicoEmpleadoLN();
             _obtenerporId = new ObtenerPorIdLN();
-            _crearAccidentes = new CrearRebajoLN();
             _listarTramites = new ListarTramitesLN();
             _listarAjustes = new ListarAjustesLN();
             _editarTramites = new EditarTramitesLN();
-            _editarAjustes = new EditarAjustesLN();
-             _detallesAjustes = new DetallesAjustesLN();
+            _detallesAjustes = new DetallesAjustesLN();
              _detallesTramites = new DetallesTramitesLN();
             _procesarNomina = new ProcesarNominaLN();
 
@@ -106,26 +112,38 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Details/5
-        public ActionResult Details(int idNomina)
+        public ActionResult Details(int id)
         {
-            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
             return View(nomina);
         }
 
         // GET: Nomina/Create
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
+            ViewBag.Periodo = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Quincenal", Text = "Quincenal" },
+        new SelectListItem { Value = "Mensual", Text = "Mensual" }
+    };
+            ViewBag.tipo = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Indefinido", Text = "Indefinido" },
+        new SelectListItem { Value = "CortoPlazo", Text = "Corto Plazo" },
+                new SelectListItem { Value = "LargoPlazo", Text = "Largo Plazo" }
+
+    };
             return View();
         }
 
         // POST: Nomina/Create
         [HttpPost]
-        public async Task<ActionResult> Create(NominaDto modeloDeNomina)
+        public async Task<ActionResult> Create(NominaDto modeloDeNomina,string id)
         {
             try
             {
                
-                int cantidadDeDatosGuardados = await _crearNomina.RegistrarNomina(modeloDeNomina);
+                int cantidadDeDatosGuardados = await _crearNomina.RegistrarNomina(modeloDeNomina,  id);
 
                 return RedirectToAction("Index");
             }
@@ -226,30 +244,48 @@ namespace ProyectoLavacar.Controllers
 
 
 
-
-
-
-
-
-
         [HttpPost]
         public async Task<ActionResult> IngresarTramites(TramitesDto modeloDeTramites,int idNomina)
         {
             try
             {
-                TramitesDto tramite = new TramitesDto()
+               int cantidadDeDatosGuardados = 0;
+
+                if (modeloDeTramites.tipo == "Vacaciones")
                 {
-                    IdTramite = modeloDeTramites.IdTramite,
-                    IdNomina = idNomina,
-                    duracion = modeloDeTramites.duracion,
-                    FechaInicio= modeloDeTramites.FechaInicio,
-                    Razon = modeloDeTramites.Razon,
-                    tipo = modeloDeTramites.tipo,
-                    estado= 1
-                };
+                    TramitesDto vaca = new TramitesDto()
+                    {
+                        IdTramite = modeloDeTramites.IdTramite,
+                        IdNomina = idNomina,
+                        duracion = modeloDeTramites.duracion,
+                        FechaInicio = modeloDeTramites.FechaInicio,
+                        Razon = "Pedido de vacaciones",
+                        tipo = modeloDeTramites.tipo,
+                        estado = 1,
+                        aseguradora = modeloDeTramites.aseguradora
+                    };
+                    cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(vaca);
+
+                }
+                else
+                {
+                    TramitesDto tramite = new TramitesDto()
+                    {
+                        IdTramite = modeloDeTramites.IdTramite,
+                        IdNomina = idNomina,
+                        duracion = modeloDeTramites.duracion,
+                        FechaInicio = modeloDeTramites.FechaInicio,
+                        Razon = modeloDeTramites.Razon,
+                        tipo = modeloDeTramites.tipo,
+                        estado = 1,
+                        aseguradora = modeloDeTramites.aseguradora
+                    };
+                    cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+                }
 
 
-                int cantidadDeDatosGuardados = await _crearTramites.RegistroTramites(tramite);
+
+                   
                 if (cantidadDeDatosGuardados == 0)
                 {
                     return RedirectToAction("/Error");
@@ -271,7 +307,11 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult IngresarVacaciones()
         {
-           
+         
+            ViewBag.tipo = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Vacaciones", Text = "Vacaciones" }
+    };
             return View();
         }
 
@@ -338,21 +378,23 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Nomina/Edit/5
         [HttpPost]
-        public async Task<ActionResult> AceptarVacacion(TramitesDto ajuste)
+        public async Task<ActionResult> AceptarVacacion(TramitesDto ajuste, int idTramite)
         {
             try
             {
+                TramitesDto ajustepasado = _detallesTramites.Detalle(idTramite);
                 TramitesDto tramite = new TramitesDto
                 {
-                    IdTramite = ajuste.IdTramite,
+                    IdTramite = ajustepasado.IdTramite,
                     estado = ajuste.estado,
-                    duracion = ajuste.duracion,
-                    FechaInicio = ajuste.FechaInicio,
-                    IdNomina = ajuste.IdNomina,
-                    Razon = ajuste.Razon,
-                    tipo = ajuste.tipo
+                    duracion = ajustepasado.duracion,
+                    FechaInicio = ajustepasado.FechaInicio,
+                    IdNomina = ajustepasado.IdNomina,
+                    Razon = ajustepasado.Razon,
+                    tipo = ajustepasado.tipo
                 };
-                int cantidadDeDatosEditados = await _editarTramites.Editar(ajuste);
+
+                int cantidadDeDatosEditados = await _editarTramites.Editar(tramite);
 
                 return RedirectToAction("Index");
             }
@@ -365,64 +407,79 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ListarTramites(int idNomina)
         {
             List<TramitesDto> tramites = _listarTramites.ListarTodo(idNomina);
-
+            ViewBag.idNomina = idNomina;
             return View(tramites);
         }
         public ActionResult ListarAjustes(int idNomina)
         {
-            List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo();
-
+            List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina).ToList();
+            ViewBag.idNomina = idNomina;
             return View(tramites);
         }
 
 
-        public ActionResult EditarAjustes(int idAjustes)
+      
+        public async Task<ActionResult> AnularAjustes(int  id)
         {
-            AjustesSalarialesDto ajuste = _detallesAjustes.Detalle(idAjustes);
-            return View(ajuste);
+           
+
+                AjustesSalarialesDto modeloDeAjustes = _detallesAjustes.Detalle(id);
+
+                if(modeloDeAjustes.tipo == "Bonificacion")
+                {
+                    AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
+                    {
+                        IdAjusteSalarial = modeloDeAjustes.IdAjusteSalarial,
+                        IdNomina = modeloDeAjustes.IdNomina,
+                        Monto = modeloDeAjustes.Monto,
+                        Razon = "Anulacion de bono",
+                        tipo ="Deduccion"
+                    };
+
+                    int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
+                }
+                else
+                {
+                    AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
+                    {
+                        IdAjusteSalarial = modeloDeAjustes.IdAjusteSalarial,
+                        IdNomina = modeloDeAjustes.IdNomina,
+                        Monto = modeloDeAjustes.Monto,
+                        Razon = "Anulacion de deduccion",
+                        tipo = "Bonificacion"
+                    };
+
+                    int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
+                }
+                    return RedirectToAction("Index");
+        
         }
-
-        // POST: Nomina/Edit/5
-        [HttpPost]
-        public async Task<ActionResult>  EditarAjustes( AjustesSalarialesDto ajuste)
-        {
-            try
-            {
-                int cantidadDeDatosEditados = await _editarAjustes.Editar(ajuste);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        public ActionResult EditarTramites(int idTramite)
-        {
-            TramitesDto ajuste = _detallesTramites.Detalle(idTramite);
-            return View(ajuste);
-        }
-
-        // POST: Nomina/Edit/5
-        [HttpPost]
-        public async Task<ActionResult> EditarTramites(TramitesDto ajuste)
-        {
-            try
-            {
-                int cantidadDeDatosEditados = await _editarTramites.Editar(ajuste);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public ActionResult ProcesarNomina(int idNomina)
         {
             NominaDto nomina = _obtenerporId.Detalle(idNomina);
-            return View(nomina);
+            UsuariosDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            UnicoEmpleadoDto nominaEmpleado = new UnicoEmpleadoDto
+            {
+                IdNomina = nomina.IdNomina,
+                IdEmpleado = nomina.IdEmpleado,
+                SalarioBruto = nomina.SalarioBruto,
+                SalarioNeto = nomina.SalarioNeto,
+                HorasExtras = nomina.HorasExtras,
+                HorasDobles = nomina.HorasDobles,
+                HorasOrdinarias = nomina.HorasOrdinarias,
+                PeriodoDePago = nomina.PeriodoDePago,
+                FechaDePago = nomina.FechaDePago,
+                TipoDeContrato = nomina.TipoDeContrato,
+                DiasDispoVacaciones = nomina.DiasDispoVacaciones,
+                DiasUtiliVacaciones = nomina.DiasUtiliVacaciones,
+                Incapacidad = nomina.Incapacidad,
+                Estado = nomina.Estado,
+                totalBono = nomina.totalBono,
+                totalDedu = nomina.totalDedu,
+                nombre = usuario.nombre,
+                primer_apellido = usuario.primer_apellido
+            };
+            return View(nominaEmpleado);
         }
         public ActionResult ConfimarNomina(int idNomina)
         {
@@ -437,7 +494,93 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Edit/5
-       
-        
+
+        public FileResult DescargarPDFDetalle(int id)
+        {
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
+
+            if (nomina == null)
+            {
+                return null;
+            }
+
+            // Crear el PDF
+            MemoryStream ms = new MemoryStream();
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40); // Márgenes
+            PdfWriter.GetInstance(doc, ms).CloseStream = false;
+
+            doc.Open();
+
+            // Colores y fuentes personalizados
+            BaseColor headerColor = new BaseColor(27, 50, 85); // Azul oscuro (como en tu vista)
+            BaseColor textColor = BaseColor.BLACK;
+            BaseColor backgroundColor = new BaseColor(240, 240, 240); // Gris claro para fondo de celdas
+
+            Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.WHITE);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, textColor);
+            Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+
+            // Título
+            Paragraph title = new Paragraph($"Detalles de al nomina de - {nomina.FechaDePago}\n\n", titleFont);
+            title.Alignment = Element.ALIGN_CENTER;
+            doc.Add(title);
+
+            // Crear tabla similar a la vista
+            PdfPTable table = new PdfPTable(2) { WidthPercentage = 100 };
+            table.SetWidths(new float[] { 1.5f, 2f }); // Ancho de las columnas
+
+            // Encabezado de tabla (como el fondo azul en tu vista)
+            PdfPCell headerCell = new PdfPCell(new Phrase("Información de la nomina", headerFont))
+            {
+                Colspan = 2,
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                BackgroundColor = headerColor,
+                Padding = 10
+            };
+            table.AddCell(headerCell);
+
+            // Agregar filas con datos
+
+            AgregarFila(table, "Nombre:", nomina.nombre, cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Salario Bruto:", nomina.SalarioBruto.ToString(), cellFont, backgroundColor);
+            AgregarFila(table, "Horas Extra:", $"₡{nomina.HorasExtras}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Dias de Vacaciones Disponibles:", $"₡{nomina.DiasDispoVacaciones}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Dias de Vacaciones Utilizados:", $"₡{nomina.DiasUtiliVacaciones}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Bonificaciones:", $"₡{nomina.totalBono}", cellFont, BaseColor.WHITE);
+            AgregarFila(table, "Deducciones:", $"₡{nomina.totalDedu}", cellFont, BaseColor.WHITE);
+
+            doc.Add(table);
+
+            // Fecha de generación del PDF
+            Paragraph fecha = new Paragraph($"\n\nFecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm:ss}", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10));
+            fecha.Alignment = Element.ALIGN_RIGHT;
+            doc.Add(fecha);
+
+            doc.Close();
+
+            ms.Position = 0;
+            return File(ms, "application/pdf", $"Nomina_{nomina.nombre}.pdf");
+        }
+
+        // Método para agregar filas a la tabla con estilos
+        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            table.AddCell(cellTitulo);
+            table.AddCell(cellValor);
+        }
     }
 }

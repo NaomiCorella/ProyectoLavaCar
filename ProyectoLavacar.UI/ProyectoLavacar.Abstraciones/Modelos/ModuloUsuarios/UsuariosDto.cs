@@ -33,5 +33,8 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
         public string turno { get; set; }
         [Display(Name = "Puesto")]
         public string puesto { get; set; }
+        public string PasswordHash { get; set; }
+        public bool nomina { get; set; }
+
     }
 }

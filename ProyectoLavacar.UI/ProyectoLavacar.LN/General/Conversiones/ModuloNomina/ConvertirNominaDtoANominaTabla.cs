@@ -35,8 +35,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloNomina
                 deduccionCCSS = laNomina.deduccionCCSS,
                 deduccionISR = laNomina.deduccionISR,
                 bonoHorasExtra = laNomina.bonoHorasExtra,
-                rebajosDeuda = laNomina.rebajosDeuda,
-                rebajosSancion = laNomina.rebajosSancion
+               
 
             };
         }

@@ -55,9 +55,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarUnicoEmpleado
                                                              totalDedu = elUnicoEmpleado.totalDedu,
                                                               deduccionCCSS = elUnicoEmpleado.deduccionCCSS,
                                                              deduccionISR = elUnicoEmpleado.deduccionISR,
-                                                             bonoHorasExtra = elUnicoEmpleado.bonoHorasExtra,
-                                                             rebajosDeuda = elUnicoEmpleado.rebajosDeuda,
-                                                             rebajosSancion = elUnicoEmpleado.rebajosSancion
+                                                             bonoHorasExtra = elUnicoEmpleado.bonoHorasExtra
 
 
                                                          }).ToList();
