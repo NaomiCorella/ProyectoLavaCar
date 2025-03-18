@@ -9,6 +9,7 @@ namespace ProyectoLavacar.Models
 {
     public class PerfilUsuario
     {
+        public string id { get; set; }
         public string nombre { get; set; }
         [Display(Name = "Primer Apellido")]
         public string primer_apellido { get; set; }

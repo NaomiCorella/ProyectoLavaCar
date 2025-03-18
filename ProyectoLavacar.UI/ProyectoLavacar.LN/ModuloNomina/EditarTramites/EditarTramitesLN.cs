@@ -1,5 +1,4 @@
-﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarAjuste;
-using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite;
+﻿using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite;
 using ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloNomina;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearAjusteSalariales;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.CrearTramites;
@@ -8,7 +7,6 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.DetallesTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.EditarTramites;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
-using ProyectoLavacar.AccesoADatos.ModuloNomina.EditarAjustes;
 using ProyectoLavacar.AccesoADatos.ModuloNomina.EditarTramite;
 using ProyectoLavacar.LN.General.Conversiones.ModuloNomina;
 using ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales;

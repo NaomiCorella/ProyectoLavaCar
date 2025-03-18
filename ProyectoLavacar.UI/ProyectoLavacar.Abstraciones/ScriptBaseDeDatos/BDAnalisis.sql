@@ -165,24 +165,28 @@ GO
 -- Tabla Nomina
 CREATE TABLE Nomina (
     idNomina INT IDENTITY PRIMARY KEY NOT NULL,
-    idEmpleado nvarchar(128) NOT NULL,
+    idEmpleado NVARCHAR(128) NOT NULL,
+    salarioBruto DECIMAL(10,2) NOT NULL,
     salarioNeto DECIMAL(10,2) NOT NULL,
-    salarioBruto DECIMAL(10,2),
     fechaDePago DATE NOT NULL,
     periodoDePago NVARCHAR(50),
     horasOrdinarias INT,
     horasExtras INT,
     horasDobles INT,
-    diasDispoVacaciones int not null,
-	diasUtiliVacaciones int not null,
+    diasDispoVacaciones INT NOT NULL,
+    diasUtiliVacaciones INT NOT NULL,
     incapacidad DECIMAL(10,2),
     tipoDeContrato NVARCHAR(50),
     estado BIT NOT NULL,
-	totalBono decimal (10,2) not null,
-	totalDedu decimal (10,2) not null, 
+    totalBono DECIMAL(10,2) NOT NULL,
+    totalDedu DECIMAL(10,2) NOT NULL,
+    deduccionCCSS DECIMAL(10,2),     
+    deduccionISR DECIMAL(10,2),  
+	bonoHorasExtra decimal(10,2)
     FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 );
 GO
+
 
 --Tabla de Incapacidades y Vacaciones 
 CREATE TABLE Tramites (
@@ -192,14 +196,8 @@ fechaInicio datetime not null,
 duracion int not null, 
 Razon nvarchar(300) not null,
 tipo nvarchar(100) not null,
-foreign key(idNomina) references Nomina(idNomina));
-
-CREATE TABLE RebajosEspecificos (
-idRebajo int identity primary key not null, 
-idNomina int not null, 
-monto decimal not null, 
- razon nvarchar(300) not null,  
-tipo nvarchar(100) not null,
+estado int,
+aseguradora nvarchar(300)
 foreign key(idNomina) references Nomina(idNomina));
 
 --Tabla de bonificaciones y deducciones
@@ -210,13 +208,92 @@ foreign key(idNomina) references Nomina(idNomina));
  idNomina int not null, 
 tipo nvarchar(100) not null,
 foreign key(idNomina) references Nomina(idNomina));
- CREATE TABLE Rebajos( 
- idRebajos int identity primary key not null, 
- monto decimal not null, 
- razon nvarchar(300) not null, 
- idNomina int not null, 
-tipo nvarchar(100) not null,
-foreign key(idNomina) references Nomina(idNomina));
+
+CREATE TABLE REGISTROHORAS(
+idRegistro int identity primary key not null, 
+HoraEntrada datetime not null,
+HoraSalida datetime not null, 
+ idEmpleado NVARCHAR(128) NOT NULL,
+ totalHoras int not null,
+ estado bit not null,
+    FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
+)
+
+
+--Procedimiento para que las nominas se generen cada mes
+CREATE PROCEDURE GenerarNuevaNominaMensual
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Insertar la nueva nómina basada en la del mes anterior
+    INSERT INTO Nomina (
+        idEmpleado, 
+        salarioBruto, 
+        salarioNeto, 
+        fechaDePago, 
+        periodoDePago, 
+        horasOrdinarias, 
+        horasExtras, 
+        horasDobles, 
+        diasDispoVacaciones, 
+        diasUtiliVacaciones, 
+        incapacidad, 
+        tipoDeContrato, 
+        estado, 
+        totalBono, 
+        totalDedu, 
+        deduccionCCSS, 
+        deduccionISR, 
+        bonoHorasExtra
+    )
+    SELECT 
+        n.idEmpleado, 
+        n.salarioBruto, 
+        0, 
+        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
+        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
+        n.horasOrdinarias, 
+        0 AS horasExtras, 
+        0 AS horasDobles, 
+        n.diasDispoVacaciones, 
+        n.diasUtiliVacaciones-2, 
+        NULL AS incapacidad, 
+        n.tipoDeContrato, 
+        1 AS estado,  -- Activo
+        0 AS totalBono, 
+        0 AS totalDedu, 
+        0 AS deduccionCCSS, 
+        0 AS deduccionISR, 
+        0 AS bonoHorasExtra
+    FROM Nomina n
+    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
+                           FROM Nomina 
+                           WHERE idEmpleado = n.idEmpleado);
+
+END;
+GO
+-- EXEC GenerarNuevaNominaMensual; esto hay que hacerlo como un job
+
+---trigger para desactivar las nominas pasadas
+CREATE TRIGGER TR_DesactivarNominasAntiguas
+ON Nomina
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+  
+    UPDATE n
+    SET estado = 0
+    FROM Nomina n
+    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
+    AND estado = 1; 
+
+    PRINT 'Nóminas anteriores desactivadas correctamente.';
+END;
+GO
+
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Inventario--
 

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.EditarTramite
+namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloUsuarios.Remover
 {
-    public interface IEditarTramitesAD
+    public interface IRemoverAD
     {
-        Task<int> Editar(TramitesTabla tramite);
+        Task<int> EditarUsuarios(UsuariosTabla elClienteParaEditar);
     }
 }

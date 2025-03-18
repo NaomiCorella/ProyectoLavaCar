@@ -7,7 +7,6 @@ using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos.ModuloNomina.ObtenerPorId;
 using ProyectoLavacar.LN.ModuloNomina.EditarNomina;
-using ProyectoLavacar.LN.ModuloNomina.ListarRebajos;
 using ProyectoLavacar.LN.ModuloNomina.ObtenerPorId;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,6 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
         IObtenerPorIdLN _detallesNomina;
         public ProcesarNominaLN()
         {
-            _listar = new ListarRebajosLN();
             _editarNomina = new EditarNominaLN();
             _detallesNomina = new ObtenerPorIdLN();
         }
@@ -33,16 +31,14 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
         public NominaDto ProcesarNomina(int idNomina)
         {
             NominaDto laNomina = _detallesNomina.Detalle(idNomina);
-            decimal impuestos = CalcularISR(idNomina);
-            decimal rebajosPorSancion = rebajosSancion(idNomina);
-            decimal rebajosPorDeuda = rebajosDeuda(idNomina);    
+            decimal impuestos = CalcularISR(idNomina);  
             decimal deducciones = laNomina.totalDedu;
             decimal seguro = CalcularSeguro(idNomina);
             decimal bonosHorasExtra = horasExtra(idNomina);
             decimal bonificaciones = laNomina.totalBono;
 
             decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
-            decimal salarioNeto = salario - impuestos - rebajosPorDeuda - rebajosPorSancion - deducciones-seguro;
+            decimal salarioNeto = salario - impuestos  - deducciones-seguro;
 
 
             NominaDto NominaNueva = new NominaDto
@@ -66,8 +62,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
                 deduccionCCSS = seguro,
                 deduccionISR = impuestos,
                 bonoHorasExtra = bonosHorasExtra,
-                rebajosDeuda = rebajosPorDeuda,
-                rebajosSancion = rebajosPorSancion
+             
             };
 
             _editarNomina.EditarNomina(NominaNueva);
@@ -119,33 +114,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
             decimal bonosExtra = totalextra + totaldobles;
             return bonosExtra;
         }
-        public decimal rebajosDeuda(int idNomina)
-        {
-            NominaDto nomina = _detallesNomina.Detalle(idNomina);
-            List<RebajosDto> rebajos = _listar.Listar(idNomina);
-            decimal rebajosTotalesDeuda = 0;
-             foreach(RebajosDto rebajo in rebajos)
-            {
-                if (rebajo.tipo == "Deuda")
-                {
-                    rebajosTotalesDeuda += rebajo.Monto;
-                }
-            }
-            return rebajosTotalesDeuda;
-        }
-        public decimal rebajosSancion(int idNomina)
-        {
-            NominaDto nomina = _detallesNomina.Detalle(idNomina);
-            List<RebajosDto> rebajos = _listar.Listar(idNomina);
-            decimal rebajosSancion = 0;
-            foreach (RebajosDto rebajo in rebajos)
-            {
-                if (rebajo.tipo == "Sancion")
-                {
-                    rebajosSancion += rebajo.Monto;
-                }
-            }
-            return rebajosSancion;
-        }
+      
+      
     }
 }

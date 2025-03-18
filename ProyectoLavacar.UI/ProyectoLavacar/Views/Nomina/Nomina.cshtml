@@ -26,17 +26,12 @@
 
 <body>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
 
     <div class="table-responsive shadow-lg rounded">
         <table class="table table-bordered table-striped text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdNomina)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.SalarioNeto)
                     </th>
@@ -49,33 +44,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.PeriodoDePago)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HorasOrdinarias)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HorasExtras)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HorasDobles)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Incapacidad)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TipoDeContrato)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Estado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdEmpleado)
-                    </th>
+                   
                     <th>
                         @Html.DisplayNameFor(model => model.nombre)
                     </th>
@@ -85,27 +54,14 @@
                     <th>
                         @Html.DisplayNameFor(model => model.segundo_apellido)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.telefono)
-                    </th>
+                   
                     <th>
                         @Html.DisplayNameFor(model => model.correo)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.cedula)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.puesto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.turno)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.estado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.numeroCuenta)
-                    </th>
+                   
                     <th></th>
                 </tr>
             </thead>
@@ -113,9 +69,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdNomina)
-                        </td>
+                      
                         <td>
                             @Html.DisplayFor(modelItem => item.SalarioNeto)
                         </td>
@@ -128,33 +82,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.PeriodoDePago)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HorasOrdinarias)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HorasExtras)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HorasDobles)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DiasDispoVacaciones)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DiasUtiliVacaciones)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Incapacidad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoDeContrato)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdEmpleado)
-                        </td>
+                      
                         <td>
                             @Html.DisplayFor(modelItem => item.nombre)
                         </td>
@@ -164,32 +92,18 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.segundo_apellido)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.telefono)
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.correo)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.cedula)
                         </td>
+                       
                         <td>
-                            @Html.DisplayFor(modelItem => item.puesto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.turno)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estado)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.numeroCuenta)
-                        </td>
-                        <td>
-                            @Html.ActionLink("ListarAjustes", "ListarAjustes", new { idNomina = item.IdNomina }) |
-                            @Html.ActionLink("ListarTramites", "ListarTramites", new { idNomina = item.IdNomina }) |
+                            @Html.ActionLink("Gestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
                             @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
                         </td>
                     </tr>
                 }
