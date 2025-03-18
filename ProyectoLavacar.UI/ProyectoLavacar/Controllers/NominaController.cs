@@ -193,7 +193,8 @@ namespace ProyectoLavacar.Controllers
                     IdNomina = idNomina,
                     Monto = modeloDeAjustes.Monto,
                     Razon = modeloDeAjustes.Razon,
-                    tipo = modeloDeAjustes.tipo
+                    tipo = modeloDeAjustes.tipo,
+                    estado = true
                 };
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
@@ -412,13 +413,28 @@ namespace ProyectoLavacar.Controllers
         }
         public ActionResult ListarAjustes(int idNomina)
         {
+            ViewData["idNomina"] = idNomina;
             List<AjustesSalarialesDto> tramites = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina).ToList();
-            ViewBag.idNomina = idNomina;
+       
             return View(tramites);
         }
 
+        public ActionResult FiltrarPorProducto(int idNomina, bool? estado)
+        {
+            ViewData["idNomina"] = idNomina; // Mantener idNomina en la vista
+            ViewBag.Title = "Ajustes Filtrado";
 
-      
+            var ajustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina);
+
+            // Aplicar el filtro solo si estado tiene un valor
+            if (estado.HasValue)
+            {
+                ajustes = ajustes.Where(p => p.estado == estado.Value);
+            }
+
+            return View("ListarAjustes", ajustes.ToList());
+        }
+
         public async Task<ActionResult> AnularAjustes(int  id)
         {
            
@@ -433,7 +449,8 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de bono",
-                        tipo ="Deduccion"
+                        tipo ="Deduccion",
+                        estado = false
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
@@ -446,7 +463,9 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de deduccion",
-                        tipo = "Bonificacion"
+                        tipo = "Bonificacion",
+                        estado = false
+
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
@@ -479,6 +498,7 @@ namespace ProyectoLavacar.Controllers
                 nombre = usuario.nombre,
                 primer_apellido = usuario.primer_apellido
             };
+            ViewBag.total = _procesarNomina.Total(idNomina);
             return View(nominaEmpleado);
         }
         public ActionResult ConfimarNomina(int idNomina)
@@ -498,7 +518,7 @@ namespace ProyectoLavacar.Controllers
         public FileResult DescargarPDFDetalle(int id)
         {
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
-
+            List<AjustesSalarialesDto> listaDeAjustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == id).ToList();
             if (nomina == null)
             {
                 return null;
@@ -548,6 +568,20 @@ namespace ProyectoLavacar.Controllers
             AgregarFila(table, "Dias de Vacaciones Utilizados:", $"₡{nomina.DiasUtiliVacaciones}", cellFont, BaseColor.WHITE);
             AgregarFila(table, "Bonificaciones:", $"₡{nomina.totalBono}", cellFont, BaseColor.WHITE);
             AgregarFila(table, "Deducciones:", $"₡{nomina.totalDedu}", cellFont, BaseColor.WHITE);
+            foreach(AjustesSalarialesDto ajuste in listaDeAjustes)
+            {
+                if(ajuste.tipo == "Bonificacion"&& ajuste.estado)
+                {
+                    AgregarFilaBon(table, "Bonificacion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
+
+                }
+               if(ajuste.tipo == "Deduccion" && ajuste.estado)
+                {
+                    AgregarFilaBon(table, "Deduccion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
+
+                }
+
+            }
 
             doc.Add(table);
 
@@ -581,6 +615,32 @@ namespace ProyectoLavacar.Controllers
 
             table.AddCell(cellTitulo);
             table.AddCell(cellValor);
+        }
+        private void AgregarFilaBon(PdfPTable table, string titulo, string valor,string tipo, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+            PdfPCell cell = new PdfPCell(new Phrase(tipo, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1
+            };
+
+            table.AddCell(cellTitulo);
+            table.AddCell(cellValor);
+            table.AddCell(cell);
         }
     }
 }

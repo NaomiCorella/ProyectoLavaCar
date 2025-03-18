@@ -57,7 +57,8 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
                 IdNomina = elAjustesSalariales.IdNomina,
                 Monto = elAjustesSalariales.Monto,
                 Razon = elAjustesSalariales.Razon,
-                tipo = elAjustesSalariales.tipo
+                tipo = elAjustesSalariales.tipo,
+                estado=elAjustesSalariales.estado
 
 
 
