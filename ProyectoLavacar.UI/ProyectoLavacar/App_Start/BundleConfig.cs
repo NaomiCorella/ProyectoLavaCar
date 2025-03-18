@@ -1,5 +1,7 @@
 ﻿using System.Web;
+using System.Web.Helpers;
 using System.Web.Optimization;
+using System.Web.UI.WebControls;
 
 namespace ProyectoLavacar
 {
@@ -20,11 +22,13 @@ namespace ProyectoLavacar
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/chart.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/chart.min.css"));
         }
     }
 }

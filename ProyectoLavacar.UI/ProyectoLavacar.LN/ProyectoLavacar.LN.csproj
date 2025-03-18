@@ -72,6 +72,7 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -119,6 +120,7 @@
     <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleLN.cs" />
     <Compile Include="ModuloCompra\Listar\ListarCompraLN.cs" />
     <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdLN.cs" />
+    <Compile Include="ModuloCorreos\EmailSender.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorEvaluacionYDesempeño\BuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="ModuloEmpleados\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloEmpleados\CrearEvaluacioYDesempeño\CrearEvaluacioYDesempenioLN.cs" />
@@ -191,6 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
