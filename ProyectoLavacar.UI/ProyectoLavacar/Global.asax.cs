@@ -1,3 +1,4 @@
+using ProyectoLavacar.LN.ModuloCorreos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace ProyectoLavacar
     {
         protected void Application_Start()
         {
+            var emailSender = new EmailSender();
+            Application["EmailSender"] = emailSender;
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
