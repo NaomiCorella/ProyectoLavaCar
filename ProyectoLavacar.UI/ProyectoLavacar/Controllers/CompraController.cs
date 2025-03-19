@@ -287,13 +287,13 @@ namespace ProyectoLavacar.Controllers
             PdfPTable servicioTable = new PdfPTable(2) { WidthPercentage = 100 };
             servicioTable.SetWidths(new float[] { 3, 2 });
             AgregarEncabezado(servicioTable, "Servicio", cellFont, headerColor);
-            AgregarEncabezado(servicioTable, "Costo", cellFont, headerColor);
+            AgregarEncabezado(servicioTable, "Precio", cellFont, headerColor);
             foreach (ServiciosDto servicio in compra.listaDeServicios)
             {
               
 
                 servicioTable.AddCell(new PdfPCell(new Phrase(servicio.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
-                servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.costo:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.precio:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
             }
             AgregarEncabezado(servicioTable, "Comentarios del servicio", cellFont, headerColor);
             servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
