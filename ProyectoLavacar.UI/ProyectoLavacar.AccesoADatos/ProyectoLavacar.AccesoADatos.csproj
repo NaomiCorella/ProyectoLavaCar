@@ -58,6 +58,7 @@
     <Compile Include="ModuloCompra\CrearCompraServicio\CrearCompraServicioAD.cs" />
     <Compile Include="ModuloCompra\Crear\CrearCompraAD.cs" />
     <Compile Include="ModuloCompra\DetalleCompraCompleta\DetalleCompraCompletaAD.cs" />
+    <Compile Include="ModuloCompra\ListarDetalles\ListarDetallesDeServicioAD.cs" />
     <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleAD.cs" />
     <Compile Include="ModuloCompra\Listar\ListarCompraAD.cs" />
     <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdAD.cs" />

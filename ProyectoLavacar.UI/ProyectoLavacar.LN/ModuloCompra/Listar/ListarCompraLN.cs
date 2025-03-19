@@ -18,10 +18,9 @@ namespace ProyectoLavacar.LN.ModuloCompra.Listar
             _listarCompraAD = new ListarCompraAD();
         }
 
-        public List<CompraCompletaDto> ListarCompra()
+        public List<CompraDto> ListarCompra()
         {
-            List<CompraCompletaDto> laListadeCompra = _listarCompraAD.ListarCompra();
-
+            List<CompraDto> laListadeCompra = _listarCompraAD.ListarCompra();
             return laListadeCompra;
         }
     }

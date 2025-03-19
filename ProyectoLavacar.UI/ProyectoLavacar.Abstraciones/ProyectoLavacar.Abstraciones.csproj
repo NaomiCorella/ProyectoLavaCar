@@ -48,6 +48,7 @@
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServicioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Crear\ICrearCompraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\DetalleCompraCompleto\IDetalleCompraCompletaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ListarDetalles\IListarDetallesDeServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ListarDisponibles\IListarDisponiblesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Listar\IListarCompraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ObtenerPorId\IObtenerPorIdAD.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="LN\interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\Crear\ICrearCompraLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\DetalleCompraCompleta\IDetalleCompraCompletaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloCompra\ListarDetalles\IListarDetallesDeServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\ListarDisponibles\IListarDisponibleLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\Listar\IListarLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\ObtenerPorId\IObtenerPorIdLN.cs" />

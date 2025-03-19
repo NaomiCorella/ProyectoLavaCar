@@ -30,7 +30,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.ListarDisponible
                                        Total = compra.Total,
                                        Fecha = compra.fecha.ToString(),
                                        DescripcionServicio = compra.DescripcionServicio,
-                                       Estado = compra.Estado,
+                                    
                                        Nombre = cliente.nombre,
                                        PrimerApellido = cliente.primer_apellido,
                                        SegundoApellido = cliente.segundo_apellido,

@@ -20,6 +20,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 
         [Display(Name = "Fecha")]
         public string fecha { get; set; }
+
         [Display(Name = "Descripción")]
         public string DescripcionServicio { get; set; }
         public bool Estado { get; set; }

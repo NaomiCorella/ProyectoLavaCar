@@ -117,6 +117,7 @@
     <Compile Include="ModuloCompra\CrearCompraServicio\CrearCompraServicioLN.cs" />
     <Compile Include="ModuloCompra\Crear\CrearCompraLN.cs" />
     <Compile Include="ModuloCompra\DetalleCompraCompleto\DetalleCompraCompletaLN.cs" />
+    <Compile Include="ModuloCompra\ListarDetalles\ListarDetallesDeServicioLN.cs" />
     <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleLN.cs" />
     <Compile Include="ModuloCompra\Listar\ListarCompraLN.cs" />
     <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdLN.cs" />

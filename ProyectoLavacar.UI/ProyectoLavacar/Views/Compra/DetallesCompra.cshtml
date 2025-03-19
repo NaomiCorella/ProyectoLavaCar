@@ -59,30 +59,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.idServicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idServicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.costo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costo)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Total)
         </dt>
 
@@ -106,13 +82,25 @@
             @Html.DisplayFor(model => model.DescripcionServicio)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
+        @foreach (var servicio in Model.listaDeServicios)
+        {
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
+            <dt>
+                Servicio
+            </dt>
+
+            <dd>
+                @servicio.nombre
+            </dd>
+            <dt>
+                Costo del Servicio
+            </dt>
+
+            <dd>
+                @servicio.costo
+            </dd>
+
+        }
 
     </dl>
 </div>

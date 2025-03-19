@@ -1,166 +1,63 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraCompletaDto>
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraDto>
 
 @{
     ViewBag.Title = "Index";
 }
 
+<h2>Index</h2>
 
-<!DOCTYPE html>
-<html lang="zxx">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionServicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración Informe de Compras</title>
-    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
-    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
-    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
-</head>
-
-<body>
-
-    <h2>Informe de Compra</h2>
-
-
-    @using (Html.BeginForm("Filtro", "Compra", FormMethod.Get))
-    {
-        <div class="form-group">
-            <label for="fechaInicio">Fecha Inicio</label>
-            <input type="date" name="fechaInicio" id="fechaInicio" class="form-control" value="" />
-        </div>
-
-        <div class="form-group">
-            <label for="fechaFin">Fecha Fin</label>
-            <input type="date" name="fechaFin" id="fechaFin" class="form-control" value="" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Filtrar</button>
-    }
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.idCompra)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.idCliente)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrimerApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SegundoApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cedula)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.idServicio)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.costo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionServicio)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>*@
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
+@foreach (var item in Model) {
+    <tr>
+        <td>
             @Html.DisplayFor(modelItem => item.idCompra)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.idCliente)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrimerApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SegundoApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cedula)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.idServicio)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.costo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionServicio)
-                </td>
-                @*<td>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescripcionServicio)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Estado)
-        </td>*@
-                <td>
-                    <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
-                        <i class="fas fa-info-circle"></i> Detalles
-                    </a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Detalles", "DetallesCompra", new {  idCompra=item.idCompra  }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
 
-                    <a href="@Url.Action("DescargarPDFCompra", new { idCompra = item.idCompra })" class="btn btn-outline-danger btn-sm" title="Descargar PDF">
-                        <i class="fas fa-file-pdf"></i> PDF
-                    </a>
-                </td>
-
-
-            </tr>
-        }
-
-    </table>
-
-
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
-</body>
-
-</html>
+</table>

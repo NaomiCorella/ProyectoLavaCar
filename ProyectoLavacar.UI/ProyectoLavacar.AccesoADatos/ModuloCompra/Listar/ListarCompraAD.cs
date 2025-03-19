@@ -17,32 +17,19 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.Listar
             _elcontexto = new Contexto();
         }
 
-        public List<CompraCompletaDto> ListarCompra()
+        public List<CompraDto> ListarCompra()
         {
-            List<CompraCompletaDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
+            List<CompraDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
                                                      join elCliente in _elcontexto.UsuariosTabla
                                                      on compra.idCliente equals elCliente.Id
                                                  
                                              
-                                                     select new CompraCompletaDto
+                                                     select new CompraDto
                                                      {
                                                          idCompra = compra.idCompra,
                                                          idCliente = compra.idCliente,
-                                                       
-
                                                          Total = compra.Total,
-                                                         Fecha = compra.fecha.ToString(), 
                                                          DescripcionServicio = compra.DescripcionServicio,
-                                                         Estado = compra.Estado,
-
-                                                         Nombre = elCliente.nombre,
-                                                         PrimerApellido = elCliente.primer_apellido,
-                                                         SegundoApellido = elCliente.segundo_apellido,
-                                                         Cedula = elCliente.cedula,
-
-                                                       
-
-
                                                      }).ToList();
 
             return listaDeCompra;

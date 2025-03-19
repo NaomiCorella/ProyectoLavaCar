@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.Listar
+namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.ListarDetalles
 {
-    public interface IListarLN
+    public interface IListarDetallesDeServiciosLN
     {
-        List<CompraDto> ListarCompra();
+        List<CompraServiciosDto> ListarCompra(Guid idCompra);
     }
 }
