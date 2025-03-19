@@ -331,7 +331,6 @@ CREATE TABLE Compra (
 FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
 );
 GO
-
 CREATE TABLE CompraServicios (
     idCompra uniqueidentifier,
 	idCompraServicios INT IDENTITY PRIMARY KEY NOT NULL,
@@ -340,7 +339,7 @@ CREATE TABLE CompraServicios (
     FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio)
 );
 
-
+select * from CompraServicios
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Resenias-- 
 
