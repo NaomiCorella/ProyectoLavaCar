@@ -28,6 +28,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
 using System.Web.UI.WebControls;
+using System.Web.Services.Description;
 
 
 namespace ProyectoLavacar.Controllers
@@ -64,7 +65,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Filtro(string fechaInicio, string fechaFin)
         {
 
-            List<CompraDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
+            List<CompraAdminDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
 
 
             DateTime fechaInicioDT, fechaFinDT;
@@ -72,16 +73,16 @@ namespace ProyectoLavacar.Controllers
             bool tieneFechaFin = DateTime.TryParse(fechaFin, out fechaFinDT);
 
 
-            //if (tieneFechaInicio)
-            //{
-            //    lalistaDeCompras = lalistaDeCompras.Where(c => DateTime.Parse(c.Fecha) >= fechaInicioDT).ToList();
-            //}
+            if (tieneFechaInicio)
+            {
+                lalistaDeCompras = lalistaDeCompras.Where(c => DateTime.Parse(c.Fecha) >= fechaInicioDT).ToList();
+            }
 
 
-            //if (tieneFechaFin)
-            //{
-            //    lalistaDeCompras = lalistaDeCompras.Where(c => DateTime.Parse(c.Fecha) <= fechaFinDT).ToList();
-            //}
+            if (tieneFechaFin)
+            {
+                lalistaDeCompras = lalistaDeCompras.Where(c => DateTime.Parse(c.Fecha) <= fechaFinDT).ToList();
+            }
 
             return View("Index", lalistaDeCompras);
             ;
@@ -92,17 +93,15 @@ namespace ProyectoLavacar.Controllers
         // GET: Compra
         public ActionResult Index()
         {
-            List<CompraDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
+            List<CompraAdminDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
             return View(lalistaDeCompras);
         }
 
-        public ActionResult MisCompra() //ComprasCliente
+        public ActionResult MisCompras() //ComprasCliente
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-
-            List<CompraCompletaDto> lalistaDeCompras = _listarCompraCliente.Listar(idCliente);
+            List<CompraAdminDto> lalistaDeCompras = _listarCompraCliente.Listar(idCliente);
             return View(lalistaDeCompras);
         }
 
@@ -228,120 +227,123 @@ namespace ProyectoLavacar.Controllers
 
 
 
-        //public FileResult DescargarPDFCompra(Guid idCompra)
-        //{
-        //    CompraCompletaDto compra = _detallesCompraCompleta.Detalle(idCompra);
+        public FileResult DescargarPDFCompra(Guid idCompra)
+        {
+            CompraCompletaDto compra = _detallesCompraCompleta.Detalle(idCompra);
 
-        //    if (compra == null)
-        //    {
-        //        return null;
-        //    }
+            if (compra == null)
+            {
+                return null;
+            }
 
-        //    // Crear PDF
-        //    MemoryStream ms = new MemoryStream();
-        //    Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
-        //    PdfWriter writer = PdfWriter.GetInstance(doc, ms);
-        //    writer.CloseStream = false;
+            // Crear PDF
+            MemoryStream ms = new MemoryStream();
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            writer.CloseStream = false;
 
-        //    doc.Open();
+            doc.Open();
 
-        //    // Fuentes y colores
-        //    BaseColor headerColor = new BaseColor(100, 150, 200);
-        //    Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
-        //    Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
-        //    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
-        //    Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14,  BaseColor.BLACK);
+            // Fuentes y colores
+            BaseColor headerColor = new BaseColor(100, 150, 200);
+            Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+            Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
 
-        //    // ENCABEZADO 
-        //    PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
-        //    headerTable.SetWidths(new float[] { 1, 2 });
+            // ENCABEZADO 
+            PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
+            headerTable.SetWidths(new float[] { 1, 2 });
 
-        //    PdfPCell empresaCell = new PdfPCell(new Phrase("LavaCar HERVI \nTel: +(506) 7285 0302 \nCorreo: lavacarhervi@gmail.com", cellFont))
-        //    {
-        //        Border = PdfPCell.NO_BORDER,
-        //        HorizontalAlignment = Element.ALIGN_RIGHT
-        //    };
-        //    headerTable.AddCell(new PdfPCell(new Phrase("INFORME DE SERVICIOS", titleFont)) { Border = PdfPCell.NO_BORDER });
-        //    headerTable.AddCell(empresaCell);
-        //    doc.Add(headerTable);
+            PdfPCell empresaCell = new PdfPCell(new Phrase("LavaCar HERVI \nTel: +(506) 7285 0302 \nCorreo: lavacarhervi@gmail.com", cellFont))
+            {
+                Border = PdfPCell.NO_BORDER,
+                HorizontalAlignment = Element.ALIGN_RIGHT
+            };
+            headerTable.AddCell(new PdfPCell(new Phrase("INFORME DE SERVICIOS", titleFont)) { Border = PdfPCell.NO_BORDER });
+            headerTable.AddCell(empresaCell);
+            doc.Add(headerTable);
 
-        //    // TÍTULO
-        //    Paragraph title = new Paragraph($"Informe #{idCompra}\n\n", titleFont)
-        //    {
-        //        Alignment = Element.ALIGN_CENTER
-        //    };
-        //    doc.Add(title);
+            // TÍTULO
+            Paragraph title = new Paragraph($"Informe \n\n", titleFont)
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
+            doc.Add(title);
 
-        //    // DATOS DEL CLIENTE
-        //    PdfPTable clienteTable = new PdfPTable(2) { WidthPercentage = 100 };
-        //    clienteTable.SetWidths(new float[] { 1.5f, 2f });
+            // DATOS DEL CLIENTE
+            PdfPTable clienteTable = new PdfPTable(2) { WidthPercentage = 100 };
+            clienteTable.SetWidths(new float[] { 1.5f, 2f });
 
-        //    AgregarFila(clienteTable, "Cliente:", $"{compra.Nombre} {compra.PrimerApellido} {compra.SegundoApellido}", cellFont);
-        //    AgregarFila(clienteTable, "Cédula:", compra.Cedula.ToString(), cellFont);
-        //    AgregarFila(clienteTable, "Fecha de Compra:", DateTime.Parse(compra.Fecha).ToString("dd/MM/yyyy"), cellFont);
-           
-        //    doc.Add(clienteTable);
+            AgregarFila(clienteTable, "Cliente:", $"{compra.Nombre} {compra.PrimerApellido} {compra.SegundoApellido}", cellFont);
+            AgregarFila(clienteTable, "Cédula:", compra.Cedula.ToString(), cellFont);
+            AgregarFila(clienteTable, "Fecha de Compra:", DateTime.Parse(compra.Fecha).ToString("dd/MM/yyyy"), cellFont);
 
-        //    doc.Add(new Paragraph("\n"));
+            doc.Add(clienteTable);
 
-        //    // DETALLES DEL SERVICIO
-        //    PdfPTable servicioTable = new PdfPTable(3) { WidthPercentage = 100 };
-        //    servicioTable.SetWidths(new float[] { 3, 5, 2 });
+            doc.Add(new Paragraph("\n"));
 
-        //    AgregarEncabezado(servicioTable, "Servicio", cellFont, headerColor);
-        //    AgregarEncabezado(servicioTable, "Descripción", cellFont, headerColor);
-        //    AgregarEncabezado(servicioTable, "Costo", cellFont, headerColor);
+            // DETALLES DEL SERVICIO
+            PdfPTable servicioTable = new PdfPTable(2) { WidthPercentage = 100 };
+            servicioTable.SetWidths(new float[] { 3, 2 });
+            AgregarEncabezado(servicioTable, "Servicio", cellFont, headerColor);
+            AgregarEncabezado(servicioTable, "Costo", cellFont, headerColor);
+            foreach (ServiciosDto servicio in compra.listaDeServicios)
+            {
+              
 
-            
-        //    servicioTable.AddCell(new PdfPCell(new Phrase(compra.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
-        //    servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
-        //    servicioTable.AddCell(new PdfPCell(new Phrase($"₡{compra.costo:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase(servicio.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.costo:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+            }
+            AgregarEncabezado(servicioTable, "Comentarios del servicio", cellFont, headerColor);
+            servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
 
-        //    doc.Add(servicioTable);
+
+            doc.Add(servicioTable);
 
 
-        //    doc.Add(new Paragraph("\n"));
+            doc.Add(new Paragraph("\n"));
 
-        //    // TOTAL
-        //    PdfPTable totalTable = new PdfPTable(2) { WidthPercentage = 50, HorizontalAlignment = Element.ALIGN_RIGHT };
-        //    totalTable.SetWidths(new float[] { 1.5f, 2f });
+            // TOTAL
+            PdfPTable totalTable = new PdfPTable(2) { WidthPercentage = 50, HorizontalAlignment = Element.ALIGN_RIGHT };
+            totalTable.SetWidths(new float[] { 1.5f, 2f });
 
-        //    AgregarFila(totalTable, "Total:", $"₡{compra.Total:N2}", totalFont);
-        //    doc.Add(totalTable);
+            AgregarFila(totalTable, "Total:", $"₡{compra.Total:N2}", totalFont);
+            doc.Add(totalTable);
 
-        //    // PIE DE PÁGINA
-        //    Paragraph footer = new Paragraph("\nGracias por confiar en nosotros.\nLavaCar HERVI", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10))
-        //    {
-        //        Alignment = Element.ALIGN_CENTER
-        //    };
-        //    doc.Add(footer);
+            // PIE DE PÁGINA
+            Paragraph footer = new Paragraph("\nGracias por confiar en nosotros.\nLavaCar HERVI", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10))
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
+            doc.Add(footer);
 
-        //    doc.Close();
-        //    ms.Position = 0;
-        //    return File(ms, "application/pdf", $"Factura_Servicio_{idCompra}.pdf");
-        //}
+            doc.Close();
+            ms.Position = 0;
+            return File(ms, "application/pdf", $"Factura_Servicio_{idCompra}.pdf");
+        }
 
-       
 
-        //private void AgregarFila(PdfPTable table, string titulo, string valor, Font font)
-        //{
-        //    table.AddCell(new PdfPCell(new Phrase(titulo, font)) { Padding = 8, BorderWidth = 1 });
-        //    table.AddCell(new PdfPCell(new Phrase(valor, font)) { Padding = 8, BorderWidth = 1 });
-        //}
 
-        //private void AgregarEncabezado(PdfPTable table, string texto, Font font, BaseColor backgroundColor)
-        //{
-        //    PdfPCell cell = new PdfPCell(new Phrase(texto, font))
-        //    {
-        //        BackgroundColor = backgroundColor,
-        //        Padding = 8,
-        //        BorderWidth = 1,
-        //        HorizontalAlignment = Element.ALIGN_CENTER
-        //    };
-        //    table.AddCell(cell);
-        //}
-    
-    
+        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font)
+        {
+            table.AddCell(new PdfPCell(new Phrase(titulo, font)) { Padding = 8, BorderWidth = 1 });
+            table.AddCell(new PdfPCell(new Phrase(valor, font)) { Padding = 8, BorderWidth = 1 });
+        }
+
+        private void AgregarEncabezado(PdfPTable table, string texto, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell cell = new PdfPCell(new Phrase(texto, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            };
+            table.AddCell(cell);
+        }
+
+
     }
 }
 

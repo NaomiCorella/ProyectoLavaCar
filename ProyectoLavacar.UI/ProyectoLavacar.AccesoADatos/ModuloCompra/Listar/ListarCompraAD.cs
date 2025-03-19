@@ -17,17 +17,19 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.Listar
             _elcontexto = new Contexto();
         }
 
-        public List<CompraDto> ListarCompra()
+        public List<CompraAdminDto> ListarCompra()
         {
-            List<CompraDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
+            List<CompraAdminDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
                                                      join elCliente in _elcontexto.UsuariosTabla
                                                      on compra.idCliente equals elCliente.Id
-                                                 
-                                             
-                                                     select new CompraDto
+                                                     select new CompraAdminDto
                                                      {
                                                          idCompra = compra.idCompra,
                                                          idCliente = compra.idCliente,
+                                                         Nombre = elCliente.nombre,
+                                                         PrimerApellido = elCliente.primer_apellido,
+                                                         Cedula = elCliente.cedula,
+                                                         Fecha = compra.fecha.ToString(),  
                                                          Total = compra.Total,
                                                          DescripcionServicio = compra.DescripcionServicio,
                                                      }).ToList();

@@ -15,14 +15,14 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.ListarDisponible
             _elContexto = new Contexto();
         }
 
-        public List<CompraCompletaDto> ListarComprasCliente(string idCliente)
+        public List<CompraAdminDto> ListarComprasCliente(string idCliente)
         {
             var lalistadeCompra = (from compra in _elContexto.CompraTabla
                                    join cliente in _elContexto.UsuariosTabla
                                        on compra.idCliente equals cliente.Id
                                    
                                    where compra.idCliente == idCliente
-                                   select new CompraCompletaDto
+                                   select new CompraAdminDto
                                    {
                                        idCompra = compra.idCompra,
                                        idCliente = compra.idCliente,

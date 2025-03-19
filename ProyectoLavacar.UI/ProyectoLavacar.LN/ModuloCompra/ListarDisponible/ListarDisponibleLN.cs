@@ -19,47 +19,17 @@ namespace ProyectoLavacar.LN.ModuloCompra.ListarDisponible
             _listarDisponiblesComprasAD = new ListarDisponibleAD();
         }
 
-        public List<CompraCompletaDto> Listar(string idCliente)
+        public List<CompraAdminDto> Listar(string idCliente)
         {
-            List<CompraCompletaDto> laListaDeActividadesPersona = _listarDisponiblesComprasAD.ListarComprasCliente(idCliente);
+            List<CompraAdminDto> laListaDeActividadesPersona = _listarDisponiblesComprasAD.ListarComprasCliente(idCliente);
 
             return laListaDeActividadesPersona;
         }
 
-        private List<CompraDto> ObtenerLaListaConvertida(List<CompraTabla> lalistadeCompras, List<UsuariosTabla> lalistadeClientes)
-        {
-            List<CompraDto> laListaDeActividades = new List<CompraDto>();
-
-            var joinLista = from Compra in lalistadeCompras
-                            join clientes in lalistadeClientes on Compra.idCliente equals clientes.Id
-                            select new { Compra, clientes };
-
-            foreach (var item in joinLista)
-            {
-                laListaDeActividades.Add(ConvertirObjetoServiciosDto(item.Compra, item.clientes));
-            }
-
-            return laListaDeActividades;
-        }
+      
 
 
-        private CompraDto ConvertirObjetoServiciosDto(CompraTabla Compra, UsuariosTabla clientes)
-        {
-
-            return new CompraDto
-            {
-                idCompra = Compra.idCompra,
-                idCliente = clientes.Id,
-        
-                DescripcionServicio = Compra.DescripcionServicio,
-                fecha = Compra.fecha.ToString(),
-                Total = Compra.Total,
-                Estado = Compra.Estado
-
-
-
-            };
-        }
+       
     }
 }
 

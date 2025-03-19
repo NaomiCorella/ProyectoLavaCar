@@ -206,6 +206,7 @@
     <Compile Include="Modelos\ModeloInventario\MovimientoDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloBitacora\BitacoraDto.cs" />
+    <Compile Include="Modelos\ModuloCompra\CompraAdminDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraCompletaDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraServiciosDto.cs" />

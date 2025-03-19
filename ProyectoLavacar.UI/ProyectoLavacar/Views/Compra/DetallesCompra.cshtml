@@ -81,28 +81,33 @@
         <dd>
             @Html.DisplayFor(model => model.DescripcionServicio)
         </dd>
+        <div>
+            <h3>Servicios</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reserva in Model.listaDeServicios)
+                    {
+                        <tr>
+                            <td>@reserva.nombre</td>
+                            <td>@reserva.costo</td>
 
-        @foreach (var servicio in Model.listaDeServicios)
-        {
-
-            <dt>
-                Servicio
-            </dt>
-
-            <dd>
-                @servicio.nombre
-            </dd>
-            <dt>
-                Costo del Servicio
-            </dt>
-
-            <dd>
-                @servicio.costo
-            </dd>
-
-        }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
     </dl>
+    <a href="@Url.Action("DescargarPDFCompra", new { idCompra =Model.idCompra })" class="btn btn-outline-info ml-2">
+        <i class="fas fa-times me-2"></i> DescargarPDF
+    </a>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

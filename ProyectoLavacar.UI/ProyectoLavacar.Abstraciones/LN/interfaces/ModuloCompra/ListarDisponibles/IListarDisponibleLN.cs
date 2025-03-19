@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.ListarDisponib
 {
     public interface IListarDisponibleLN
     {
-        List<CompraCompletaDto> Listar(string idCliente);
+        List<CompraAdminDto> Listar(string idCliente);
     }
 }
