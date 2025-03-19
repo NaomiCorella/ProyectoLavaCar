@@ -26,6 +26,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using System.Web.UI.WebControls;
+using System.Web.Services.Description;
+
 
 namespace ProyectoLavacar.Controllers
 {
@@ -61,7 +65,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Filtro(string fechaInicio, string fechaFin)
         {
 
-            List<CompraCompletaDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
+            List<CompraAdminDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
 
 
             DateTime fechaInicioDT, fechaFinDT;
@@ -89,24 +93,23 @@ namespace ProyectoLavacar.Controllers
         // GET: Compra
         public ActionResult Index()
         {
-            List<CompraCompletaDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
+            List<CompraAdminDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
             return View(lalistaDeCompras);
         }
 
-        public ActionResult MisCompra() //ComprasCliente
+        public ActionResult MisCompras() //ComprasCliente
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-
-            List<CompraCompletaDto> lalistaDeCompras = _listarCompraCliente.Listar(idCliente);
+            List<CompraAdminDto> lalistaDeCompras = _listarCompraCliente.Listar(idCliente);
             return View(lalistaDeCompras);
         }
 
         // GET: Compra/Details/5
-        public ActionResult DetallesCompra(int IdCompra)
+        public ActionResult DetallesCompra(Guid IdCompra)
         {
             CompraCompletaDto compra = _detallesCompraCompleta.Detalle(IdCompra);
+            ViewBag.Cliente = _listarClientes.ListarUsuarios().FirstOrDefault(c => c.Id == compra.idCliente);
             return View(compra);
         }
 
@@ -115,10 +118,9 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Create()
         {
             var servicios = _listarServicios.ListarServicios()
-              .Where(a => a.estado == true)
-              .ToList();
+    .Where(a => a.estado == true) .ToList();
             ViewBag.Servicios = servicios;
-
+       
             return View();
         }
 
@@ -128,6 +130,8 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+                modeloDeCompra.listaServicios = modeloDeCompra.listaServicios ?? new List<int>();
+
                 if (numeroCedula == 0)
                 {
                     ModelState.AddModelError("", "Debe ingresar una cédula.");
@@ -145,25 +149,31 @@ namespace ProyectoLavacar.Controllers
 
                 TempData["ClienteEncontrado"] = $"Cliente encontrado: {cliente.nombre} {cliente.primer_apellido}";
 
-
-                var servicio = _listarServicios.ListarServicios()
-                    .FirstOrDefault(s => s.idServicio == modeloDeCompra.idServicio);
-
-                if (servicio == null)
+                // Aquí procesas los servicios seleccionados
+                foreach (int idServicio in modeloDeCompra.listaServicios)
                 {
-                    ModelState.AddModelError("", "No se encontró el servicio seleccionado.");
-                    return View(modeloDeCompra);
+                    // Lógica para procesar cada servicio seleccionado
+                    // Puedes buscar el servicio en la base de datos y asociarlo con la compra
+                    var servicio = _listarServicios.ListarServicios().FirstOrDefault(s => s.idServicio == idServicio);
+
+                    if (servicio == null)
+                    {
+                        ModelState.AddModelError("", $"No se encontró el servicio con ID {idServicio}");
+                        return View(modeloDeCompra);
+                    }
+
+                    // Agregar lógica adicional si es necesario para cada servicio
                 }
 
                 CompraDto compra = new CompraDto()
                 {
-                    idCompra = modeloDeCompra.idCompra,
+                    idCompra = Guid.NewGuid(),
                     idCliente = cliente.Id,
-                    idServicio = modeloDeCompra.idServicio,
                     DescripcionServicio = modeloDeCompra.DescripcionServicio,
                     fecha = modeloDeCompra.fecha,
-                    Total = servicio.costo,
-                    Estado = true
+                    Estado = true,
+                    Total = modeloDeCompra.Total,
+                    listaServicios=modeloDeCompra.listaServicios
                 };
 
                 int cantidadDeDatosGuardados = await _crearCompra.CrearCompra(compra);
@@ -182,6 +192,7 @@ namespace ProyectoLavacar.Controllers
                 return View(modeloDeCompra);
             }
         }
+
 
         public JsonResult BuscarClientePorCedula(int numeroCedula)
         {
@@ -215,7 +226,8 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-        public FileResult DescargarPDFCompra(int idCompra)
+
+        public FileResult DescargarPDFCompra(Guid idCompra)
         {
             CompraCompletaDto compra = _detallesCompraCompleta.Detalle(idCompra);
 
@@ -237,7 +249,7 @@ namespace ProyectoLavacar.Controllers
             Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
             Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
             Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
-            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14,  BaseColor.BLACK);
+            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
 
             // ENCABEZADO 
             PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
@@ -253,7 +265,7 @@ namespace ProyectoLavacar.Controllers
             doc.Add(headerTable);
 
             // TÍTULO
-            Paragraph title = new Paragraph($"Informe #{idCompra}\n\n", titleFont)
+            Paragraph title = new Paragraph($"Informe \n\n", titleFont)
             {
                 Alignment = Element.ALIGN_CENTER
             };
@@ -266,23 +278,26 @@ namespace ProyectoLavacar.Controllers
             AgregarFila(clienteTable, "Cliente:", $"{compra.Nombre} {compra.PrimerApellido} {compra.SegundoApellido}", cellFont);
             AgregarFila(clienteTable, "Cédula:", compra.Cedula.ToString(), cellFont);
             AgregarFila(clienteTable, "Fecha de Compra:", DateTime.Parse(compra.Fecha).ToString("dd/MM/yyyy"), cellFont);
-           
+
             doc.Add(clienteTable);
 
             doc.Add(new Paragraph("\n"));
 
             // DETALLES DEL SERVICIO
-            PdfPTable servicioTable = new PdfPTable(3) { WidthPercentage = 100 };
-            servicioTable.SetWidths(new float[] { 3, 5, 2 });
-
+            PdfPTable servicioTable = new PdfPTable(2) { WidthPercentage = 100 };
+            servicioTable.SetWidths(new float[] { 3, 2 });
             AgregarEncabezado(servicioTable, "Servicio", cellFont, headerColor);
-            AgregarEncabezado(servicioTable, "Descripción", cellFont, headerColor);
             AgregarEncabezado(servicioTable, "Costo", cellFont, headerColor);
+            foreach (ServiciosDto servicio in compra.listaDeServicios)
+            {
+              
 
-            
-            servicioTable.AddCell(new PdfPCell(new Phrase(compra.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase(servicio.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.costo:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+            }
+            AgregarEncabezado(servicioTable, "Comentarios del servicio", cellFont, headerColor);
             servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
-            servicioTable.AddCell(new PdfPCell(new Phrase($"₡{compra.costo:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+
 
             doc.Add(servicioTable);
 
@@ -308,7 +323,7 @@ namespace ProyectoLavacar.Controllers
             return File(ms, "application/pdf", $"Factura_Servicio_{idCompra}.pdf");
         }
 
-       
+
 
         private void AgregarFila(PdfPTable table, string titulo, string valor, Font font)
         {
@@ -327,6 +342,8 @@ namespace ProyectoLavacar.Controllers
             };
             table.AddCell(cell);
         }
+
+
     }
 }
 

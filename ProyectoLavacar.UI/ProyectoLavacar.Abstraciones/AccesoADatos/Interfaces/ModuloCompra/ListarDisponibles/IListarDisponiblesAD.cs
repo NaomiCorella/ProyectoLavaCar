@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloCompra.List
 {
     public interface IListarDisponiblesAD
     {
-        List<CompraCompletaDto> ListarComprasCliente(string idCliente);
+        List<CompraAdminDto> ListarComprasCliente(string idCliente);
     }
 }

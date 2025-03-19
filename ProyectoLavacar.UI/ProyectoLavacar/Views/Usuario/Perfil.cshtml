@@ -67,6 +67,31 @@
     </tbody>
 </table>
 
+<h3>Compras</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Total</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var compras in Model.compras)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => compras.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => compras.Total)
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
 <p>
     <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
         <i class="fas fa-edit"></i> Editar

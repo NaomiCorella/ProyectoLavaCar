@@ -24,7 +24,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloCompra
             {
                 idCompra = compra.idCompra,
                 idCliente = compra.idCliente,
-                idServicio = compra.idServicio,
+      
                 fecha = _fecha.ObtenerFecha(),
                 DescripcionServicio = compra.DescripcionServicio,
                 Total = compra.Total,
