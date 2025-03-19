@@ -221,58 +221,58 @@ HoraSalida datetime not null,
 
 
 --Procedimiento para que las nominas se generen cada mes
-CREATE PROCEDURE GenerarNuevaNominaMensual
-AS
-BEGIN
-    SET NOCOUNT ON;
+--CREATE PROCEDURE GenerarNuevaNominaMensual
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
 
-    -- Insertar la nueva nómina basada en la del mes anterior
-    INSERT INTO Nomina (
-        idEmpleado, 
-        salarioBruto, 
-        salarioNeto, 
-        fechaDePago, 
-        periodoDePago, 
-        horasOrdinarias, 
-        horasExtras, 
-        horasDobles, 
-        diasDispoVacaciones, 
-        diasUtiliVacaciones, 
-        incapacidad, 
-        tipoDeContrato, 
-        estado, 
-        totalBono, 
-        totalDedu, 
-        deduccionCCSS, 
-        deduccionISR, 
-        bonoHorasExtra
-    )
-    SELECT 
-        n.idEmpleado, 
-        n.salarioBruto, 
-        0, 
-        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
-        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
-        n.horasOrdinarias, 
-        0 AS horasExtras, 
-        0 AS horasDobles, 
-        n.diasDispoVacaciones, 
-        n.diasUtiliVacaciones-2, 
-        NULL AS incapacidad, 
-        n.tipoDeContrato, 
-        1 AS estado,  -- Activo
-        0 AS totalBono, 
-        0 AS totalDedu, 
-        0 AS deduccionCCSS, 
-        0 AS deduccionISR, 
-        0 AS bonoHorasExtra
-    FROM Nomina n
-    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
-                           FROM Nomina 
-                           WHERE idEmpleado = n.idEmpleado);
+--    -- Insertar la nueva nómina basada en la del mes anterior
+--    INSERT INTO Nomina (
+--        idEmpleado, 
+--        salarioBruto, 
+--        salarioNeto, 
+--        fechaDePago, 
+--        periodoDePago, 
+--        horasOrdinarias, 
+--        horasExtras, 
+--        horasDobles, 
+--        diasDispoVacaciones, 
+--        diasUtiliVacaciones, 
+--        incapacidad, 
+--        tipoDeContrato, 
+--        estado, 
+--        totalBono, 
+--        totalDedu, 
+--        deduccionCCSS, 
+--        deduccionISR, 
+--        bonoHorasExtra
+--    )
+--    SELECT 
+--        n.idEmpleado, 
+--        n.salarioBruto, 
+--        0, 
+--        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
+--        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
+--        n.horasOrdinarias, 
+--        0 AS horasExtras, 
+--        0 AS horasDobles, 
+--        n.diasDispoVacaciones, 
+--        n.diasUtiliVacaciones-2, 
+--        NULL AS incapacidad, 
+--        n.tipoDeContrato, 
+--        1 AS estado,  -- Activo
+--        0 AS totalBono, 
+--        0 AS totalDedu, 
+--        0 AS deduccionCCSS, 
+--        0 AS deduccionISR, 
+--        0 AS bonoHorasExtra
+--    FROM Nomina n
+--    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
+--                           FROM Nomina 
+--                           WHERE idEmpleado = n.idEmpleado);
 
-END;
-GO
+--END;
+--GO
 -- EXEC GenerarNuevaNominaMensual; esto hay que hacerlo como un job
 
 ---trigger para desactivar las nominas pasadas

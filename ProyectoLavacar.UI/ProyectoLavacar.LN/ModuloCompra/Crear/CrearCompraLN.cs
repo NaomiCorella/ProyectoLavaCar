@@ -78,7 +78,7 @@ namespace ProyectoLavacar.LN.ModuloCompra.Crear
                 {
                     if (serv.idServicio == servicio)
                     {
-                        total += serv.costo;
+                        total += serv.precio;
                     }
                 }
             }
