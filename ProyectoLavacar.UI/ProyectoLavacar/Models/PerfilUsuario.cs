@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModuloCompra;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,7 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Numero de Telefono")]
         public string PhoneNumber { get; set; }
         public List<ReservaCompleta> reservas { get; set; }
+        public List<CompraAdminDto> compras { get; set; }
 
     }
 }

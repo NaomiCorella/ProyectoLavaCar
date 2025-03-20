@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloNomina.IngresarHoras;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.ListarDisponibles;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloNomina.RegistroHoraEntrada;
@@ -16,10 +17,12 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloCompra;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.ModuloCompra.ListarDisponible;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
 using ProyectoLavacar.LN.ModuloNomina.ListarUnicoEmpleado;
 using ProyectoLavacar.LN.ModuloNomina.RegistroHoraEntrada;
@@ -49,6 +52,7 @@ namespace ProyectoLavacar.Controllers
         IRegistroHoraEntradaLN _registroHoraEntrada;
         IRegistroHoraSalidaLN _registroHoraSalida;
         IRemoverLN _remover;
+        IListarDisponibleLN _listarCompraCliente;
         public UsuarioController()
         {
             _listarReservasClientes = new ListarDisponiblesLN();
@@ -62,6 +66,7 @@ namespace ProyectoLavacar.Controllers
             _registroHoraEntrada = new RegistrarHoraEntradaLN();
             _registroHoraSalida = new RegistroHoraSalidaLN();
             _remover = new RemoverLN();
+            _listarCompraCliente = new ListarDisponibleLN();
         }
 
         // GET: Usuario
@@ -188,7 +193,8 @@ namespace ProyectoLavacar.Controllers
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             UsuariosDto user = _buscarPorId.Detalle(idUsuario);
-            List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); ;
+            List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); 
+            List<CompraAdminDto> compras = _listarCompraCliente.Listar(idUsuario);
             PerfilUsuario usuario = new PerfilUsuario
             {
                 id = user.Id,
@@ -197,7 +203,8 @@ namespace ProyectoLavacar.Controllers
                 segundo_apellido = user.segundo_apellido,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                reservas = reservas
+                reservas = reservas,
+                compras = compras
             };
             return View(usuario);
         }

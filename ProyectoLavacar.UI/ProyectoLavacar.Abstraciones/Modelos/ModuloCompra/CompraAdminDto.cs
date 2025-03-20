@@ -8,22 +8,30 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 {
-    
-        public class CompraDto
-        {
-         public Guid idCompra { get; set; }
+   public  class CompraAdminDto
+    {
+        public Guid idCompra { get; set; }
         public string idCliente { get; set; }
-        public List<int> listaServicios { get; set; } = new List<int>();
+
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Primer Apellido")]
+        public string PrimerApellido { get; set; }
+        [Display(Name = "Segundo Apellido")]
+        public string SegundoApellido { get; set; }
+
+        [Display(Name = "Cédula")]
+        public int Cedula { get; set; }
 
         [Display(Name = "Total")]
         public decimal Total { get; set; }
 
         [Display(Name = "Fecha")]
-        public string fecha { get; set; }
-
+        public string Fecha { get; set; }
         [Display(Name = "Descripción")]
         public string DescripcionServicio { get; set; }
-        public bool Estado { get; set; }
-        } 
-    }
 
+
+    }
+}
