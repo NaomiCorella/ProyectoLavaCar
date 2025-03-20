@@ -16,7 +16,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.ObtenerPorId
         {
             _elContexto = new Contexto();
         }
-        public CompraTabla Detalle(int idCompra)
+        public CompraTabla Detalle(Guid idCompra)
         {
             CompraTabla laPalabraEnBaseDeDatos = _elContexto.CompraTabla.Where(laCompra => laCompra.idCompra == idCompra).FirstOrDefault();
             return laPalabraEnBaseDeDatos;

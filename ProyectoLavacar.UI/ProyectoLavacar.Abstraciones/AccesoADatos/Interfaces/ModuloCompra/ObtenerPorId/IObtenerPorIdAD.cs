@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloCompra.Obte
 {
     public interface IObtenerPorIdAD
     {
-        CompraTabla Detalle(int idCompra);
+        CompraTabla Detalle(Guid idCompra);
     }
 }

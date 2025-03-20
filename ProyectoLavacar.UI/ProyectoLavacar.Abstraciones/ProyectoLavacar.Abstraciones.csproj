@@ -45,8 +45,10 @@
     <Compile Include="AccesoADatos\Interfaces\EditarTramite\IEditarTramiteAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Listar\IListarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServicioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Crear\ICrearCompraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\DetalleCompraCompleto\IDetalleCompraCompletaAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ListarDetalles\IListarDetallesDeServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ListarDisponibles\IListarDisponiblesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\Listar\IListarCompraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\ObtenerPorId\IObtenerPorIdAD.cs" />
@@ -116,11 +118,14 @@
     <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertirUsuariosDtoAUsuariosTabla.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Listar\IListarBitacoraLN.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraLN.cs" />
+    <Compile Include="LN\interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\Crear\ICrearCompraLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\DetalleCompraCompleta\IDetalleCompraCompletaLN.cs" />
+    <Compile Include="LN\interfaces\ModuloCompra\ListarDetalles\IListarDetallesDeServiciosLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\ListarDisponibles\IListarDisponibleLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\Listar\IListarLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\ObtenerPorId\IObtenerPorIdLN.cs" />
+    <Compile Include="LN\interfaces\ModuloCorreos\IEmailSender.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorEvaluacionYDesempeño\IBuscarPorEvaluacionYDesempenioLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\BuscarPorId\IBuscarPorIdLN.cs" />
     <Compile Include="LN\interfaces\ModuloEmpleados\CrearEvaluacioYDesempeño\ICrearEvaluacioYDesempenioLN.cs" />
@@ -179,6 +184,7 @@
     <Compile Include="LN\interfaces\ModuloUsuarios\Listar\IListarUsuarioLN.cs" />
     <Compile Include="LN\interfaces\ModuloUsuarios\Remover\IRemoverLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\BitacoraTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\CompraServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CompraTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RebajosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AjustesSalarialesTabla.cs" />
@@ -201,8 +207,14 @@
     <Compile Include="Modelos\ModeloInventario\MovimientoDto.cs" />
     <Compile Include="Modelos\ModeloServicios\ServiciosDto.cs" />
     <Compile Include="Modelos\ModuloBitacora\BitacoraDto.cs" />
+    <Compile Include="Modelos\ModuloCompra\CompraAdminDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraDto.cs" />
     <Compile Include="Modelos\ModuloCompra\CompraCompletaDto.cs" />
+
+    <Compile Include="Modelos\ModuloCorreos\EmailSenderOptions.cs" />
+
+    <Compile Include="Modelos\ModuloCompra\CompraServiciosDto.cs" />
+
     <Compile Include="Modelos\ModuloEmpleados\EmpleadosDto.cs" />
     <Compile Include="Modelos\ModuloNomina\RebajosDto.cs" />
     <Compile Include="Modelos\ModuloNomina\AjustesSalarialesDto.cs" />
@@ -225,6 +237,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScriptBaseDeDatos\BDAnalisis.sql" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

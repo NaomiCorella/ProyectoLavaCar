@@ -450,6 +450,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PlantillasDeCorreos\PlantillaDeCorreoBienvenida.html" />
+    <Content Include="Content\PlantillasDeCorreos\PlantillaDeCorreoBienvenidaEmpleados.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -476,6 +478,8 @@
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900d41d.eot" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
     <Content Include="Scripts\Inventario\alertaStock.js" />
     <Content Include="Scripts\Inventario\alertaEditar.js" />
     <Content Include="Scripts\Inventario\alertaCrear.js" />
@@ -586,14 +590,14 @@
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
-    <Content Include="Views\Compra\Index.cshtml" />
-    <Content Include="Views\Compra\DetallesCompra.cshtml" />
-    <Content Include="Views\Compra\MisCompra.cshtml" />
+    <Content Include="Views\Compra\MisCompras.cshtml" />
     <Content Include="Views\Compra\Create.cshtml" />
     <Content Include="Views\Empleado\MisEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\VerEvaluaciones.cshtml" />
     <Content Include="Views\Empleado\RegistroDeEvaluaciones.cshtml" />
     <Content Include="Views\Nomina\Create.cshtml" />
+    <Content Include="Views\Compra\DetallesCompra.cshtml" />
+    <Content Include="Views\Compra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

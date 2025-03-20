@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.Listar
 {
     public interface IListarLN
     {
-        List<CompraCompletaDto> ListarCompra();
+        List<CompraAdminDto> ListarCompra();
     }
 }

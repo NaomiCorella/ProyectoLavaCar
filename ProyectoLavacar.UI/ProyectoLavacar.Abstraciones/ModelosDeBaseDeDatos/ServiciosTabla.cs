@@ -19,6 +19,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public string tiempoDuracion { get; set; }
         public bool estado { get; set; } = true;
         public string modalidad { get; set; }
+        public decimal precio { get; set; }
 
     }
 }

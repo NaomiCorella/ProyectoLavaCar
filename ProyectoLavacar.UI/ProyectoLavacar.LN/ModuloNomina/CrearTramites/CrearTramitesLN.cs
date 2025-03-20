@@ -239,36 +239,14 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                       
                         deduccion = (salarioNeto / 30m) * duracion;
                     }
-                    else if (duracion <= 45)
-                    {
-                  
-                        deduccion = ((salarioNeto / 30m) * 3) + ((salarioNeto / 30m) * (duracion - 3) * 0.4m);
-
-                    }
-                    else
-                    {
-                        decimal salarioExcedente = salarioNeto - salarioMinimo;
-                        decimal deduccionInicial = ((salarioNeto / 30m) * 3) + ((salarioNeto / 30m) * 42 * 0.4m);
-                        decimal deduccionPosterior = ((salarioMinimo / 30m) * (duracion - 45)) + ((salarioExcedente / 30m) * (duracion - 45) * 0.4m);
-                        deduccion = deduccionInicial + deduccionPosterior;
-                    }
+                   
                     return deduccion;
                 
                 case "Menor Permanente":
 
                      rentaMensual = salarioNeto * 0.6m;
-                     pagoTotal = rentaMensual * 60; 
-
-                    if (pagoTotal <= limiteRegimen)
-                    {
-                        deduccion = pagoTotal * 0.4m;
-                    }
-                    else
-                    {
-                        deduccion = rentaMensual * 0.4m; 
-                    }
-
-
+                     pagoTotal = rentaMensual * 60;
+                     deduccion = pagoTotal * 0.40m;
                     return deduccion;
                 case "ParcialPermanente":
                      rentaMensual = salarioNeto * 0.6m;
@@ -282,17 +260,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
 
                     decimal ajusteAnual = 1.05m;
 
-           
-                    decimal totalRenta5Anios = 0;
-
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        totalRenta5Anios += rentaMensual * 12;
-                        rentaMensual *= ajusteAnual;
-                    }
-
+          
                  
-                    decimal totalPagos = adelantoAnual + decimoTercerMes + totalRenta5Anios;
+                    decimal totalPagos = adelantoAnual + decimoTercerMes ;
 
                     decimal deduccionPatrono = totalPagos * 0.4m;
 
