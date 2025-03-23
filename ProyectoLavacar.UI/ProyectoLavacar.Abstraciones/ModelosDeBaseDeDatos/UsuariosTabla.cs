@@ -28,5 +28,6 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public string PasswordHash { get; set; }
         public string ResetToken { get; set; }
         public DateTime? ResetTokenExpira { get; set; }
+        public DateTime? ingreso { get; set; }
     }
 }

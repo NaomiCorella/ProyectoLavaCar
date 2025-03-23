@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Margen de Ventas y Total de Ventas";
+    var margenVentas = ViewBag.MargenVentas;
+    var margenPorcentualVentas = ViewBag.MargenPorcentualVentas;
+    var totalVentas = ViewBag.TotalVentas;
+}
+
+<h2>Margen de Ventas</h2>
+
+<!-- Contenedor para los tres paneles -->
+<div class="panel-container">
+
+    <!-- Panel de Margen de Ventas -->
+    <div class="panel">
+        <h3>Margen de Ventas</h3>
+        <p class="margen" style="color: #27ae60;">
+            ₡ @margenVentas.ToString("N2")
+        </p>
+    </div>
+
+    <!-- Panel de Margen Porcentual de Ventas -->
+    <div class="panel">
+        <h3>Margen Porcentual de Ventas</h3>
+        <p class="margen" style="color: #e67e22;">
+            @margenPorcentualVentas.ToString("N2")%
+        </p>
+    </div>
+
+    <!-- Panel de Total de Ventas -->
+    <div class="panel">
+        <h3>Total Ventas</h3>
+        <p class="margen" style="color: #3498db;">
+            ₡ @totalVentas.ToString("N2")
+        </p>
+    </div>
+
+</div>
+
+@* Estilos CSS para la Vista Parcial *@
+<style>
+    /* Estilo para el contenedor de los paneles (usamos flexbox para alinearlos horizontalmente) */
+    .panel-container {
+        display: flex;
+        justify-content: space-between; /* Espacio entre los paneles */
+        flex-wrap: wrap; /* Permite que los paneles se ajusten en la siguiente fila si no hay espacio suficiente */
+        gap: 20px; /* Espacio entre los paneles */
+        margin-top: 20px;
+    }
+
+    /* Estilo común para todos los paneles */
+    .panel {
+        border: 2px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f7f7f7;
+        width: 30%; /* Ancho fijo del 30% para cada panel (se ajusta si hay menos espacio disponible) */
+        text-align: center;
+    }
+
+    /* Estilo para los títulos de los paneles */
+    .panel h3 {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    /* Estilo para los valores numéricos dentro de los paneles */
+    .margen {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    
+</style>
