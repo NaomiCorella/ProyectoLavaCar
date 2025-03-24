@@ -276,23 +276,23 @@ HoraSalida datetime not null,
 -- EXEC GenerarNuevaNominaMensual; esto hay que hacerlo como un job
 
 ---trigger para desactivar las nominas pasadas
-CREATE TRIGGER TR_DesactivarNominasAntiguas
-ON Nomina
-AFTER INSERT
-AS
-BEGIN
-    SET NOCOUNT ON;
+--CREATE TRIGGER TR_DesactivarNominasAntiguas
+--ON Nomina
+--AFTER INSERT
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
 
   
-    UPDATE n
-    SET estado = 0
-    FROM Nomina n
-    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
-    AND estado = 1; 
+--    UPDATE n
+--    SET estado = 0
+--    FROM Nomina n
+--    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
+--    AND estado = 1; 
 
-    PRINT 'Nóminas anteriores desactivadas correctamente.';
-END;
-GO
+--    PRINT 'Nóminas anteriores desactivadas correctamente.';
+--END;
+--GO
 
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Inventario--

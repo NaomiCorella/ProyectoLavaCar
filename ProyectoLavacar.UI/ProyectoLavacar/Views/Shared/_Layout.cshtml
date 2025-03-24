@@ -47,8 +47,33 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="search-box d-flex align-items-center">
-                             @Html.Partial("_LoginPartial")
-                            <a href="inicioSesion.html" class="profile-icon mr-3"><i class="fas fa-user fa-2x" style="color: red;"></i></a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                              
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <!-- Si el usuario es Admin -->
+                                    <a href="@Url.Action("MiPerfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user-shield fa-2x" style="color: blue;"></i>
+                                        <span>@User.Identity.Name (Admin)</span>
+                                    </a>
+                                }
+                                else if (User.IsInRole("Usuario"))
+                                {
+                                    <!-- Si el usuario es un Usuario normal -->
+                                    <a href="@Url.Action("Perfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user fa-2x" style="color: green;"></i>
+                                        <span>@User.Identity.Name</span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+
+                                <a href="@Url.Action("Login", "Account")" class="profile-icon mr-3">
+                                    <i class="fas fa-user fa-2x" style="color: red;"></i>
+                                </a>
+                            }
                             <a href="#" class="search-icon" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search fa-2x" style="color: red;"></i></a>
                         </div>
                     </div>
