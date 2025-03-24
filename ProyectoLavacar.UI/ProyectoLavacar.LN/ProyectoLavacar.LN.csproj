@@ -102,7 +102,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlitrosGraficos\GraficoVentasServicio.cs" />
     <Compile Include="General\Conversiones\ModuloCompra\ConvertirCompraDtoACompraTabla.cs" />
     <Compile Include="General\Conversiones\ModuloEmpleados\ConvertirEmpleadosDtoAEmpleadosTabla.cs" />
     <Compile Include="General\Conversiones\ModuloInventario\ConvertirInventarioDtoAInventarioTabla.cs" />

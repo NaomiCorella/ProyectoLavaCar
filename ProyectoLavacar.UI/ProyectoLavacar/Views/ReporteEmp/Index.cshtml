@@ -1,0 +1,18 @@
+﻿<h2>Reporte de Empleado</h2>
+<div id="promedioCalificacionEmpleadoPanel">
+    @Html.Action("ObtenerPromedioCalificacionEmpleado", "ReporteEmp")
+</div>
+<div id="totalVentasPanel">
+    @Html.Action("ObtenerVentasEmpleado")
+</div>
+<div id="margenVentasEmpleadoPanel">
+    @Html.Action("ObtenerMargenVentasEmpleado", "ReporteEmp")
+</div>
+
+<div id="resumenVentasEmpleadoPanel">
+    @Html.Action("ObtenerResumenVentasEmpleado", "ReporteEmp")
+</div>
+<div>@Html.Partial("_ResumenEmpleado")</div>
+<div>
+    @Html.Action("listar")
+</div>

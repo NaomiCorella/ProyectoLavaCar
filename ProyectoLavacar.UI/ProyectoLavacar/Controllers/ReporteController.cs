@@ -1,6 +1,5 @@
 ﻿using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos;
-using ProyectoLavacar.LN.FlitrosGraficos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace ProyectoLavacar.Controllers
 {
     public class ReporteController : Controller
     {
-        private readonly GraficoVentasServicio _graficoVentasServicio;
+        
         Contexto _context;
         public ReporteController()
         {
@@ -60,13 +59,17 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ObtenerMargenVentas()
         {
             // Calcular el Margen de Ventas: Sumar la diferencia entre precio y costo
-            var margenVentas = _context.CompraTabla
+            decimal margenVentas = _context.CompraServiciosTabla
+                .Join(_context.CompraTabla,
+                    compraServicio => compraServicio.idCompra, // Relacionamos la compra con el idCompra
+                    compra => compra.idCompra,
+                    (compraServicio, compra) => new { compraServicio, compra })
                 .Join(_context.ServiciosTabla,
-                    compra => compra.idServicio,
+                    compraServicio => compraServicio.compraServicio.idServicio, // Relacionamos con Servicios usando el idServicio en CompraServiciosTabla
                     servicio => servicio.idServicio,
-                    (compra, servicio) => new
+                    (compraServicio, servicio) => new
                     {
-                        TotalVenta = compra.Total,
+                        TotalVenta = compraServicio.compra.Total,
                         Precio = servicio.precio,
                         Costo = servicio.costo
                     })
@@ -86,17 +89,8 @@ namespace ProyectoLavacar.Controllers
             ViewBag.TotalVentas = totalVentas; // Agregar el Total de Ventas
 
             return PartialView("_MargenVentas"); // Renderizar una vista parcial
-            
         }
         #endregion
-
-
-
-
-
-
-
-
 
         #region Usuarios por mes
         public ActionResult ObtenerUsuariosPorMes()
@@ -129,15 +123,19 @@ namespace ProyectoLavacar.Controllers
         #region
         public ActionResult ObtenerGraficoVentasPorMes()
         {
-            // Obtener todas las compras y los servicios correspondientes
-            var compras = _context.CompraTabla
+            // Obtener todas las compras relacionadas con servicios
+            var compras = _context.CompraServiciosTabla
+                .Join(_context.CompraTabla,
+                    compraServicio => compraServicio.idCompra,
+                    compra => compra.idCompra,
+                    (compraServicio, compra) => new { compraServicio, compra })
                 .Join(_context.ServiciosTabla,
-                    compra => compra.idServicio,
+                    compraServicio => compraServicio.compraServicio.idServicio,
                     servicio => servicio.idServicio,
-                    (compra, servicio) => new
+                    (compraServicio, servicio) => new
                     {
-                        Fecha = compra.fecha,
-                        TotalVenta = compra.Total,
+                        Fecha = compraServicio.compra.fecha,
+                        TotalVenta = compraServicio.compra.Total,
                         MargenVenta = servicio.precio - servicio.costo // Calculamos el margen de cada venta
                     })
                 .ToList();
@@ -175,9 +173,10 @@ namespace ProyectoLavacar.Controllers
             ViewBag.MargenVentas = margenVentas;
 
             // Devolver la vista parcial
-             return PartialView("_GraficoVentas");
-            
+            return PartialView("_GraficoVentas");
         }
+
+
         #endregion
 
 
@@ -185,14 +184,18 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ObtenerDatosPorMes(int? mes)
         {
             // Consulta base para obtener las compras y servicios
-            var compras = _context.CompraTabla
+            var compras = _context.CompraServiciosTabla
+                .Join(_context.CompraTabla,
+                    compraServicio => compraServicio.idCompra,
+                    compra => compra.idCompra,
+                    (compraServicio, compra) => new { compraServicio, compra })
                 .Join(_context.ServiciosTabla,
-                    compra => compra.idServicio,
+                    compraServicio => compraServicio.compraServicio.idServicio,
                     servicio => servicio.idServicio,
-                    (compra, servicio) => new
+                    (compraServicio, servicio) => new
                     {
-                        Fecha = compra.fecha,
-                        TotalVenta = compra.Total,
+                        Fecha = compraServicio.compra.fecha,
+                        TotalVenta = compraServicio.compra.Total,
                         MargenVenta = servicio.precio - servicio.costo
                     });
 
@@ -229,6 +232,7 @@ namespace ProyectoLavacar.Controllers
             // Retornar los datos en formato JSON
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
 

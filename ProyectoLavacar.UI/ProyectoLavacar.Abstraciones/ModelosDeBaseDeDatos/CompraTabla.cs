@@ -12,7 +12,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         [Key]
         public Guid idCompra { get; set; }
         public string idCliente { get; set; }
-        public int idServicio { get; set; }
+        
         public decimal Total { get; set; }
         public DateTime fecha { get; set; }
         public string DescripcionServicio { get; set; }

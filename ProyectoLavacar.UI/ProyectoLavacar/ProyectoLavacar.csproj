@@ -605,10 +605,16 @@
     <Content Include="Views\Reporte\_MargenVentas.cshtml" />
     <Content Include="Views\Reporte\_ServiciosPorMes.cshtml" />
     <Content Include="Views\Reporte\_GraficoVentas.cshtml" />
+    <Content Include="Views\ReporteEmp\_TotalVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_listar.cshtml" />
+    <Content Include="Views\ReporteEmp\Index.cshtml" />
+    <Content Include="Views\ReporteEmp\_MargenVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_ResumenVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ReporteEmp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

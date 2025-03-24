@@ -1,4 +1,8 @@
-﻿using ProyectoLavacar.AccesoADatos;
+﻿
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
+using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.ModuloEvaluaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +14,13 @@ namespace ProyectoLavacar.Controllers
     public class ReporteEmpController : Controller
     {
         Contexto _context;
+        IListarEvaluacionesLN _listar;
         // GET: ReporteEmp
 
         public ReporteEmpController()
         {
             _context = new Contexto();
+            _listar = new ListarEvaluacionesLN();
         }
 
         public ActionResult Index()
@@ -22,114 +28,168 @@ namespace ProyectoLavacar.Controllers
             return View();
         }
 
-        public ActionResult ObtenerServiciosPorMes()
+        public ActionResult listar()
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            var datos = _context.ReservasTabla
-                .Where(r => r.idCliente == idCliente) 
-                .GroupBy(r => new { Año = r.fecha.Year, Mes = r.fecha.Month })
-                .Select(g => new
-                {
-                    Año = g.Key.Año,
-                    Mes = g.Key.Mes,
-                    TotalServicios = g.Count()
-                })
-                .OrderBy(g => g.Año)
-                .ThenBy(g => g.Mes)
-                .ToList()
-                .Select(g => new Dictionary<string, object>
-                {
-            { "Mes", g.Mes.ToString("D2") + "/" + g.Año }, // Format MM/YYYY
-            { "TotalServicios", g.TotalServicios }
-                })
-                .ToList();
+            List<EvaluacionesDto> lalistaDeReservas = _listar.ListarEvaluaciones(idEmpleado);
 
-            ViewBag.ServiciosPorMes = datos;
+            return PartialView("_listar", lalistaDeReservas); // Pasar la lista a la vista parcial
+        }
+        
 
-            return PartialView("_ServiciosPorMesEmp");
+        public ActionResult ObtenerVentasEmpleado()
+        {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // Obtener total de ventas del empleado basado en las reservas
+            var totalVentasEmpleado = _context.ReservasTabla
+                .Join(_context.ServiciosTabla,
+                    reserva => reserva.idServicio,  // Relacionamos las reservas con los servicios
+                    servicio => servicio.idServicio,  // Relacionamos por idServicio
+                    (reserva, servicio) => new
+                    {
+                        TotalVenta = servicio.precio, // Precio del servicio como total de la venta
+                        idEmpleado = reserva.idEmpleado // Usamos el idEmpleado de la reserva
+                    })
+                .Where(x => x.idEmpleado == idEmpleado) // Filtramos por el idEmpleado
+                .Sum(x => x.TotalVenta); // Sumamos todas las ventas del empleado
+
+            ViewBag.TotalVentasEmpleado = totalVentasEmpleado;
+
+            return PartialView("_TotalVentasEmpleado"); // Retornar la vista parcial que mostrará el total de ventas
         }
 
-        public ActionResult ObtenerMargenVentas()
+
+
+        public ActionResult ObtenerMargenVentasEmpleado()
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            var margenVentas = _context.CompraTabla
+            // Calcular el margen de ventas y el total de ventas
+            var datosVentas = _context.ReservasTabla
                 .Join(_context.ServiciosTabla,
-                    compra => compra.idServicio,
+                    reserva => reserva.idServicio,
                     servicio => servicio.idServicio,
-                    (compra, servicio) => new
+                    (reserva, servicio) => new
                     {
-                        TotalVenta = compra.Total,
-                        Precio = servicio.precio,
-                        Costo = servicio.costo,
-                        idCliente = compra.idCliente // Include idCliente in the join
+                        TotalVenta = servicio.precio,  // Precio del servicio vendido
+                        Costo = servicio.costo,        // Costo del servicio
+                        idEmpleado = reserva.idEmpleado
                     })
-                .Where(x => x.idCliente == idCliente) // Filter by idCliente
-                .Sum(x => x.Precio - x.Costo); // Calculate the margin
+                .Where(x => x.idEmpleado == idEmpleado) // Filtrar por el empleado logueado
+                .ToList(); // Convertir a lista para poder operar en memoria
 
-            decimal totalVentas = _context.CompraTabla
-                .Where(c => c.Estado && c.idCliente == idCliente) // Filter by idCliente
-                .Sum(c => c.Total);
-
-            decimal margenPorcentualVentas = totalVentas == 0 ? 0 : (margenVentas / totalVentas) * 100;
+            decimal totalVentas = datosVentas.Sum(x => x.TotalVenta);
+            decimal margenVentas = datosVentas.Sum(x => x.TotalVenta - x.Costo);
+            decimal margenPorcentual = totalVentas == 0 ? 0 : (margenVentas / totalVentas) * 100;
 
             ViewBag.MargenVentas = margenVentas;
-            ViewBag.MargenPorcentualVentas = margenPorcentualVentas;
+            ViewBag.MargenPorcentual = margenPorcentual;
             ViewBag.TotalVentas = totalVentas;
 
-            return PartialView("_MargenVentasEmp");
-   
+            return PartialView("_MargenVentasEmpleado"); // Vista parcial
         }
-        public ActionResult ObtenerGraficoVentasPorMes()
+
+        public ActionResult ObtenerResumenVentasEmpleado()
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            var compras = _context.CompraTabla
+            // Obtener los datos de ventas y margen de ventas
+            var datosVentas = _context.ReservasTabla
                 .Join(_context.ServiciosTabla,
-                    compra => compra.idServicio,
+                    reserva => reserva.idServicio,
                     servicio => servicio.idServicio,
-                    (compra, servicio) => new
+                    (reserva, servicio) => new
                     {
-                        Fecha = compra.fecha,
-                        TotalVenta = compra.Total,
-                        MargenVenta = servicio.precio - servicio.costo,
-                        idCliente = compra.idCliente // Include idCliente in the join
+                        TotalVenta = servicio.precio,  // Precio del servicio vendido
+                        Costo = servicio.costo,        // Costo del servicio
+                        idEmpleado = reserva.idEmpleado
                     })
-                .Where(c => c.idCliente == idCliente) // Filter by idCliente
+                .Where(x => x.idEmpleado == idEmpleado) // Filtrar por el empleado logueado
+                .ToList(); // Convertir a lista para poder operar en memoria
+
+            decimal totalVentas = datosVentas.Sum(x => x.TotalVenta);
+            decimal margenVentas = datosVentas.Sum(x => x.TotalVenta - x.Costo);
+            decimal margenPorcentual = totalVentas == 0 ? 0 : (margenVentas / totalVentas) * 100;
+
+            // Enviar datos a la vista
+            ViewBag.TotalVentasEmpleado = totalVentas;
+            ViewBag.MargenVentas = margenVentas;
+            ViewBag.MargenPorcentual = margenPorcentual;
+
+            return PartialView("_ResumenVentasEmpleado"); // Vista parcial
+        }
+
+        public ActionResult ObtenerPromedioCalificacionEmpleado()
+        {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // Obtener las calificaciones del empleado
+            var calificaciones = _context.EvaluacionesTabla
+                .Where(e => e.idEmpleado == idEmpleado)
+                .Select(e => e.calificacion)
                 .ToList();
 
-            List<string> fechas = new List<string>();
-            List<decimal> totalVentas = new List<decimal>();
-            List<decimal> margenVentas = new List<decimal>();
+            // Calcular el promedio con conversión explícita a decimal
+            decimal promedioCalificacion = calificaciones.Any() ? (decimal)calificaciones.Average() : 0;
 
-            foreach (var compra in compras)
-            {
-                string mesAnyo = compra.Fecha.ToString("yyyy-MM");
+            // Enviar el resultado a la vista
+            ViewBag.PromedioCalificacion = promedioCalificacion;
 
-                int index = fechas.IndexOf(mesAnyo);
-                if (index != -1)
-                {
-                    totalVentas[index] += compra.TotalVenta;
-                    margenVentas[index] += compra.MargenVenta;
-                }
-                else
-                {
-                    fechas.Add(mesAnyo);
-                    totalVentas.Add(compra.TotalVenta);
-                    margenVentas.Add(compra.MargenVenta);
-                }
-            }
-
-            ViewBag.Fechas = fechas;
-            ViewBag.TotalVentas = totalVentas;
-            ViewBag.MargenVentas = margenVentas;
-
-            return PartialView("_GraficoVentas");
+            return PartialView("_PromedioCalificacionEmpleado");
         }
+
+        public ActionResult ObtenerResumenEmpleado()
+        {
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // Obtener datos de ventas y margen de ventas
+            var datosVentas = _context.ReservasTabla
+                .Join(_context.ServiciosTabla,
+                    reserva => reserva.idServicio,
+                    servicio => servicio.idServicio,
+                    (reserva, servicio) => new
+                    {
+                        TotalVenta = servicio.precio,  // Precio del servicio vendido
+                        Costo = servicio.costo,        // Costo del servicio
+                        idEmpleado = reserva.idEmpleado
+                    })
+                .Where(x => x.idEmpleado == idEmpleado) // Filtrar por el empleado logueado
+                .ToList(); // Convertir a lista para poder operar en memoria
+
+            decimal totalVentas = datosVentas.Sum(x => x.TotalVenta);
+            decimal margenVentas = datosVentas.Sum(x => x.TotalVenta - x.Costo);
+            decimal margenPorcentual = totalVentas == 0 ? 0 : (margenVentas / totalVentas) * 100;
+
+            // Obtener las calificaciones del empleado
+            var calificaciones = _context.EvaluacionesTabla
+                .Where(e => e.idEmpleado == idEmpleado)
+                .Select(e => e.calificacion)
+                .ToList();
+
+            // Calcular el promedio con conversión explícita a decimal
+            decimal promedioCalificacion = calificaciones.Any() ? (decimal)calificaciones.Average() : 0;
+
+            // Enviar los resultados a la vista
+            ViewBag.TotalVentasEmpleado = totalVentas;
+            ViewBag.MargenVentas = margenVentas;
+            ViewBag.MargenPorcentual = margenPorcentual;
+            ViewBag.PromedioCalificacion = promedioCalificacion;
+
+            return PartialView("_ResumenEmpleado"); // Vista parcial unificada
+        }
+
+
+
+
 
     }
 }
+

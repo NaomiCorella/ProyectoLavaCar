@@ -1,0 +1,36 @@
+﻿@{
+    decimal promedioCalificacion = ViewBag.PromedioCalificacion ?? 0;
+}
+
+<div class="dashboard-panel rating-panel">
+    <h2>Promedio de Calificación</h2>
+    <p class="rating">⭐ @promedioCalificacion.ToString("N2")</p>
+</div>
+
+<style>
+    .dashboard-panel {
+        width: 300px;
+        padding: 20px;
+        background: #28a745; /* Verde */
+        color: white;
+        text-align: center;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .rating-panel {
+        background: #ffc107; /* Amarillo */
+    }
+
+    .dashboard-panel h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .dashboard-panel .rating {
+        font-size: 30px;
+        font-weight: bold;
+    }
+</style>
