@@ -1,8 +1,10 @@
 ﻿using Antlr.Runtime.Tree;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using ProyectoLavacar.Abstracciones.LN.Interfaces.ModuloBitacora.Registrar;
 using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.DetallesReservaCompleta;
@@ -44,6 +46,7 @@ namespace ProyectoLavacar.Controllers
 
     public class ReservasController : Controller
     {
+        IEmailSender _emailSender;
         ICrearReservaLN _crearReserva;
         IEditarReservaLN _editarReservaAdmin;
         IEditarClienteLN _editarReservaCliente;
@@ -58,7 +61,7 @@ namespace ProyectoLavacar.Controllers
         IRegistrarBitacoraLN _registrarBitacoraLN;
         public ReservasController()
         {
-
+            _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _crearReserva = new CrearReservaLN();
             _editarReservaAdmin = new EditarReservaLN();
             _editarReservaCliente = new EditarClienteLN();
@@ -270,6 +273,7 @@ namespace ProyectoLavacar.Controllers
 
             try
             {
+               
 
                 ReservasDto reserva = new ReservasDto()
                 {

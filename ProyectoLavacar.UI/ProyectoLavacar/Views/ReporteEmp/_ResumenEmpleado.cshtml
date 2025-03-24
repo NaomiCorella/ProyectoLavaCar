@@ -1,46 +1,65 @@
-﻿
-@{
-    decimal totalVentas = ViewBag.TotalVentasEmpleado ?? 0;
-    decimal margenVentas = ViewBag.MargenVentas ?? 0;
-    decimal margenPorcentual = ViewBag.MargenPorcentual ?? 0;
-    decimal promedioCalificacion = ViewBag.PromedioCalificacion ?? 0;
+﻿@{
+    var promedioCalificacion = ViewBag.PromedioCalificacion as decimal?;
+    var totalVentasEmpleado = ViewBag.TotalVentasEmpleado as decimal?;
+    var margenVentas = ViewBag.MargenVentas as decimal?;
+    var margenPorcentual = ViewBag.MargenPorcentual as decimal?;
 }
 
-<div class="card shadow-sm p-4">
-    <h4 class="mb-3 text-center">Resumen del Empleado</h4>
-
+<div class="container">
     <div class="row">
-        <!-- Total de Ventas -->
-        <div class="col-md-6">
-            <div class="card bg-light p-3 text-center">
-                <h5>Total de Ventas</h5>
-                <p class="display-6 text-primary">@totalVentas.ToString("C")</p>
+        <!-- Panel de Promedio de Calificación -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg rounded-6">
+                <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
+                    Promedio de Calificación del Empleado
+                </div>
+                <div class="card-body text-center">
+                    @if (promedioCalificacion.HasValue)
+                    {
+                    <h4>@promedioCalificacion.Value.ToString("F2")</h4>
+                    }
+                    else
+                    {
+                    <h4>No disponible</h4>
+                    }
+                </div>
             </div>
         </div>
 
-        <!-- Margen de Ventas -->
-        <div class="col-md-6">
-            <div class="card bg-light p-3 text-center">
-                <h5>Margen de Ventas</h5>
-                <p class="display-6 text-success">@margenVentas.ToString("C")</p>
-            </div>
-        </div>
-    </div>
+        <!-- Panel de Resumen de Ventas -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg rounded-6">
+                <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
+                    Resumen de Ventas del Empleado
+                </div>
+                <div class="card-body text-center">
+                    @if (totalVentasEmpleado.HasValue)
+                    {
+                    <h5>Total Ventas: @totalVentasEmpleado.Value.ToString("C2")</h5>
+                    }
+                    else
+                    {
+                    <h5>Total Ventas: No disponible</h5>
+                    }
 
-    <div class="row mt-3">
-        <!-- Margen Porcentual -->
-        <div class="col-md-6">
-            <div class="card bg-light p-3 text-center">
-                <h5>Margen Porcentual</h5>
-                <p class="display-6 text-warning">@margenPorcentual.ToString("0.00")%</p>
-            </div>
-        </div>
+                    @if (margenVentas.HasValue)
+                    {
+                    <h5>Margen de Ventas: @margenVentas.Value.ToString("C2")</h5>
+                    }
+                    else
+                    {
+                    <h5>Margen de Ventas: No disponible</h5>
+                    }
 
-        <!-- Promedio de Calificación -->
-        <div class="col-md-6">
-            <div class="card bg-light p-3 text-center">
-                <h5>Promedio de Calificación</h5>
-                <p class="display-6 text-info">@promedioCalificacion.ToString("0.0")</p>
+                    @if (margenPorcentual.HasValue)
+                    {
+                    <h5>Margen Porcentual: @margenPorcentual.Value.ToString("F2")%</h5>
+                    }
+                    else
+                    {
+                    <h5>Margen Porcentual: No disponible</h5>
+                    }
+                </div>
             </div>
         </div>
     </div>

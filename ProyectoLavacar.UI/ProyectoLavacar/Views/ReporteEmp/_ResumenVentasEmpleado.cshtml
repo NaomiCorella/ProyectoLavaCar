@@ -4,20 +4,34 @@
     decimal margenPorcentual = ViewBag.MargenPorcentual ?? 0;
 }
 
-<div class="dashboard-panel">
-    <h2>Resumen de Ventas</h2>
+<div class="dashboard-panels-container">
+    <!-- Panel de Total de Ventas -->
+    <div class="dashboard-panel">
+        <h2>Total de Ventas</h2>
+        <p class="amount">₡@totalVentas.ToString("N2")</p> <!-- Formato de moneda -->
+    </div>
 
-    <h3>Total de Ventas</h3>
-    <p class="amount">₡@totalVentas.ToString("N2")</p> <!-- Formato de moneda -->
+    <!-- Panel de Margen de Ventas -->
+    <div class="dashboard-panel">
+        <h2>Margen de Ventas</h2>
+        <p class="amount">₡@margenVentas.ToString("N2")</p>
+    </div>
 
-    <h3>Margen de Ventas</h3>
-    <p class="amount">₡@margenVentas.ToString("N2")</p>
-
-    <h3>Margen Porcentual</h3>
-    <p class="percentage">@(margenPorcentual.ToString("N2"))%</p>
+    <!-- Panel de Margen Porcentual -->
+    <div class="dashboard-panel">
+        <h2>Margen Porcentual</h2>
+        <p class="percentage">@margenPorcentual.ToString("N2")%</p>
+    </div>
 </div>
 
 <style>
+    .dashboard-panels-container {
+        display: flex;
+        gap: 20px; /* Espaciado entre paneles */
+        flex-wrap: wrap; /* Ajustar el contenido cuando hay más de un panel */
+        justify-content: space-around; /* Alinear los paneles en el contenedor */
+    }
+
     .dashboard-panel {
         width: 300px;
         padding: 20px;

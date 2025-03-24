@@ -612,6 +612,7 @@
     <Content Include="Views\ReporteEmp\_ResumenVentasEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_GraficoVentasEmpleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
