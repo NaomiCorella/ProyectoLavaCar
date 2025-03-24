@@ -31,29 +31,31 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Reservas</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Reservas</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
 
-            @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
 
-            @if (ViewBag.Servicios is string message)
-            {
-                <p>@message</p>
-            }
-            else
-            {
-                @Html.DropDownListFor(model => model.idServicio,
-                    new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
-                    "Seleccione un servicio",
-                    new { @class = "form-control" })
-            }
+        @if (ViewBag.Servicios != null && ViewBag.Servicios.Count > 0)
+        {
+            @Html.DropDownListFor(model => model.idServicio,
+                new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
+                "Seleccione un servicio",
+                new { @class = "form-control" })
+        }
+        else
+        {
+            <p class="text-danger">⚠️ No hay servicios disponibles.</p>
+        }
 
-            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
-        </div>
+
+
+        @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
+    </div>
 
 
         <div class="form-group">

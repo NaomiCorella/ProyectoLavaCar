@@ -172,7 +172,9 @@
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdLN.cs" />
     <Compile Include="ModuloServicios\CrearServiciosLN.cs" />
     <Compile Include="ModuloServicios\ListarServicios\ListarServiciosLN.cs" />
+    <Compile Include="ModuloServicios\ObtenerPorId\BuscarAsyncSerLN.cs" />
     <Compile Include="ModuloServicios\ObtenerPorId\DetalleServiciosLN.cs" />
+    <Compile Include="ModuloUsuarios\BuscarPorId\BuscarAsyncLN.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdLN.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioLN.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioLN.cs" />
