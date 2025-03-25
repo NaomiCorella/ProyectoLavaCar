@@ -98,17 +98,16 @@ CREATE TABLE [dbo].[AspNetUsers](
 	numeroCuenta  nvarchar(30),
 	turno nvarchar(30),
 	puesto nvarchar(50),
-	FechaGeneracionCodigo DATETIME NULL,
-	CodigoRecuperacion NVARCHAR(100) NULL,
-    FechaExpiracionCodigo DATETIME NULL,
-	ingreso Datetime null
+FechaGeneracionCodigo DATETIME NULL,
+CodigoRecuperacion NVARCHAR(100) NULL,
+FechaExpiracionCodigo DATETIME NULL,
+ingreso Datetime null
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
 ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[AspNetUsers] ([Id])
 ON DELETE CASCADE
@@ -145,7 +144,7 @@ CREATE TABLE Servicios (
 	 modalidad VARCHAR(100) NOT NULL,
     tiempoDuracion NVARCHAR(20)NOT NULL,
     estado BIT NOT NULL,
-    precio decimal(10,2) not null
+	precio decimal (10,2) not null
 );
 GO
 
@@ -213,6 +212,7 @@ foreign key(idNomina) references Nomina(idNomina));
  razon nvarchar(300) not null, 
  idNomina int not null, 
 tipo nvarchar(100) not null,
+estado bit not null,
 foreign key(idNomina) references Nomina(idNomina));
 
 CREATE TABLE REGISTROHORAS(
@@ -227,78 +227,78 @@ HoraSalida datetime not null,
 
 
 --Procedimiento para que las nominas se generen cada mes
---CREATE PROCEDURE GenerarNuevaNominaMensual
---AS
---BEGIN
---    SET NOCOUNT ON;
+CREATE PROCEDURE GenerarNuevaNominaMensual
+AS
+BEGIN
+    SET NOCOUNT ON;
 
---    -- Insertar la nueva nómina basada en la del mes anterior
---    INSERT INTO Nomina (
---        idEmpleado, 
---        salarioBruto, 
---        salarioNeto, 
---        fechaDePago, 
---        periodoDePago, 
---        horasOrdinarias, 
---        horasExtras, 
---        horasDobles, 
---        diasDispoVacaciones, 
---        diasUtiliVacaciones, 
---        incapacidad, 
---        tipoDeContrato, 
---        estado, 
---        totalBono, 
---        totalDedu, 
---        deduccionCCSS, 
---        deduccionISR, 
---        bonoHorasExtra
---    )
---    SELECT 
---        n.idEmpleado, 
---        n.salarioBruto, 
---        0, 
---        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
---        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
---        n.horasOrdinarias, 
---        0 AS horasExtras, 
---        0 AS horasDobles, 
---        n.diasDispoVacaciones, 
---        n.diasUtiliVacaciones-2, 
---        NULL AS incapacidad, 
---        n.tipoDeContrato, 
---        1 AS estado,  -- Activo
---        0 AS totalBono, 
---        0 AS totalDedu, 
---        0 AS deduccionCCSS, 
---        0 AS deduccionISR, 
---        0 AS bonoHorasExtra
---    FROM Nomina n
---    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
---                           FROM Nomina 
---                           WHERE idEmpleado = n.idEmpleado);
+    -- Insertar la nueva nómina basada en la del mes anterior
+    INSERT INTO Nomina (
+        idEmpleado, 
+        salarioBruto, 
+        salarioNeto, 
+        fechaDePago, 
+        periodoDePago, 
+        horasOrdinarias, 
+        horasExtras, 
+        horasDobles, 
+        diasDispoVacaciones, 
+        diasUtiliVacaciones, 
+        incapacidad, 
+        tipoDeContrato, 
+        estado, 
+        totalBono, 
+        totalDedu, 
+        deduccionCCSS, 
+        deduccionISR, 
+        bonoHorasExtra
+    )
+    SELECT 
+        n.idEmpleado, 
+        n.salarioBruto, 
+        0, 
+        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
+        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
+        n.horasOrdinarias, 
+        0 AS horasExtras, 
+        0 AS horasDobles, 
+        n.diasDispoVacaciones, 
+        n.diasUtiliVacaciones-2, 
+        NULL AS incapacidad, 
+        n.tipoDeContrato, 
+        1 AS estado,  -- Activo
+        0 AS totalBono, 
+        0 AS totalDedu, 
+        0 AS deduccionCCSS, 
+        0 AS deduccionISR, 
+        0 AS bonoHorasExtra
+    FROM Nomina n
+    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
+                           FROM Nomina 
+                           WHERE idEmpleado = n.idEmpleado);
 
---END;
---GO
+END;
+GO
 -- EXEC GenerarNuevaNominaMensual; esto hay que hacerlo como un job
 
 ---trigger para desactivar las nominas pasadas
---CREATE TRIGGER TR_DesactivarNominasAntiguas
---ON Nomina
---AFTER INSERT
---AS
---BEGIN
---    SET NOCOUNT ON;
+CREATE TRIGGER TR_DesactivarNominasAntiguas
+ON Nomina
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
 
   
---    UPDATE n
---    SET estado = 0
---    FROM Nomina n
---    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
---    AND estado = 1; 
+    UPDATE n
+    SET estado = 0
+    FROM Nomina n
+    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
+    AND estado = 1; 
 
---    PRINT 'Nóminas anteriores desactivadas correctamente.';
---END;
---GO
+    PRINT 'Nóminas anteriores desactivadas correctamente.';
+END;
+GO
 
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Inventario--
@@ -334,6 +334,8 @@ CREATE TABLE Compra (
     fecha DATE NOT NULL,
     descripcionServicio NVARCHAR(200) NOT NULL,
     estado BIT NOT NULL,
+	idEmpleado nvarchar(128) not null,
+FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
 FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
 );
 GO
@@ -345,7 +347,7 @@ CREATE TABLE CompraServicios (
     FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio)
 );
 
-select * from CompraServicios
+
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Resenias-- 
 
@@ -395,7 +397,17 @@ FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 GO
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Triggers e inster NECESARIOS--
-
+CREATE TABLE BITACORA_EVENTOS (
+    IdEvento INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    TablaDeEvento VARCHAR(150) NOT NULL,
+    TipoDeEvento VARCHAR(150) NOT NULL,
+    FechaDeEvento DATETIME NOT NULL,
+    DescripcionDeEvento VARCHAR(MAX) NOT NULL,
+    StackTrace VARCHAR(MAX) NOT NULL,
+    DatosAnteriores VARCHAR(MAX) NULL,
+    DatosPosteriores VARCHAR(MAX) NULL
+);
+GO
 CREATE TRIGGER trg_InsertReserva
 ON Reservas
 AFTER INSERT
