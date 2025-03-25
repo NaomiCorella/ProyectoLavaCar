@@ -18,7 +18,7 @@ namespace ProyectoLavacar.Models
         public string numeroCuenta {  get; set; }
         public string turno { get; set; }
         public string puesto { get; set; }
-        public DateTime ingreso { get; set; }
+        public DateTime? ingreso { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

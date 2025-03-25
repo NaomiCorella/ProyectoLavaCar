@@ -27,13 +27,19 @@ namespace ProyectoLavacar.Controllers
         private ApplicationUserManager _userManager;
         private readonly UserManager<ApplicationUser> _userM;
          private readonly IEmailSender _emailSender;
+       
+        public AccountController()
+        {
+            _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
+        }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
         {
         
             UserManager = userManager;
             SignInManager = signInManager;
             _emailSender = emailSender;
+            
 
 
         }
@@ -226,7 +232,7 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
-                    ingreso = _fecha.ObtenerFecha()
+                    ingreso = DateTime.Now
 
                 };
 

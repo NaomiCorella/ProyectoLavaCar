@@ -85,6 +85,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult VerEvaluaciones(string id)
         {
             ViewBag.Title = "Lista De Evaluaciones";
+            ViewBag.idEmpleado = id;
             List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
             return View(laListaDeFinanzas);
         }
@@ -113,8 +114,9 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado/Create
-        public ActionResult RegistroDeEvaluaciones()
+        public ActionResult RegistroDeEvaluaciones(string id)
         {
+            ViewBag.idEmpleado = id;
             return View();
         }
 
@@ -124,6 +126,18 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+              
+                EvaluacionesDto evaluacion = new EvaluacionesDto()
+                {
+                    areaMejora = modelo.areaMejora,
+                    calificacion = modelo.calificacion,
+                    comentarios = modelo.comentarios,
+                    fechaEvaluacion = DateTime.Now.ToString(),
+                    idEmpleado = modelo.idEmpleado,
+                    idEvaluacion = modelo.idEvaluacion,
+                    recomendaciones = modelo.recomendaciones
+
+                };
                 int cantidadDeDatosGuardados = await _crearEvaluacionLN.Crear(modelo);
 
                 return RedirectToAction("VerEvaluaciones");

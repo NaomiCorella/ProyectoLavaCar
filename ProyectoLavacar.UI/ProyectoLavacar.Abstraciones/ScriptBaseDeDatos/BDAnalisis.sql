@@ -144,7 +144,8 @@ CREATE TABLE Servicios (
     descripcion NVARCHAR(200)NOT NULL,
 	 modalidad VARCHAR(100) NOT NULL,
     tiempoDuracion NVARCHAR(20)NOT NULL,
-    estado BIT NOT NULL
+    estado BIT NOT NULL,
+    precio decimal(10,2) not null
 );
 GO
 
