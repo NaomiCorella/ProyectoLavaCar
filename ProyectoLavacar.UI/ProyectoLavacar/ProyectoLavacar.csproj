@@ -550,7 +550,6 @@
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
-
     <Content Include="Views\Inventario\Index.cshtml" />
     <Content Include="Views\Inventario\Create.cshtml" />
     <Content Include="Views\Inventario\Edit.cshtml" />
@@ -586,7 +585,6 @@
     <Content Include="Views\Nomina\ListarTramites.cshtml" />
     <Content Include="Views\Nomina\ListarAjustes.cshtml" />
     <Content Include="Views\Nomina\AceptarVacacion.cshtml" />
-    <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
@@ -611,11 +609,11 @@
     <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_GraficoVentasEmpleado.cshtml" />
-
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Account\changePassword.cshtml" />
     <Content Include="Views\Account\changePasswordSuccess.cshtml" />
-
+    <Content Include="Views\Servicios\GestionServicios.cshtml" />
+    <Content Include="Views\Servicios\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

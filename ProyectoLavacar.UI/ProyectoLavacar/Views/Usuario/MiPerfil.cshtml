@@ -127,8 +127,6 @@
                     <tr>
                         <td>@evaluacion.fechaEvaluacion</td>
                         <td>@evaluacion.calificacion</td>
-
-
                     </tr>
                 }
             </tbody>
@@ -162,7 +160,9 @@
     <div class="navbar-btn">
         @Html.ActionLink("Ingresar Vacaciones", "IngresarVacaciones", "Nomina", new { area = "" }, new { @class = "navbar-brand" })
     </div>
-
+    <div class="navbar-btn">
+        @Html.ActionLink("Ver Reportes", "Index", "ReporteEmp", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
     <p>
         @if (ViewBag.estadoRegistro == null)
         {
