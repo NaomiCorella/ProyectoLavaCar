@@ -97,13 +97,18 @@ CREATE TABLE [dbo].[AspNetUsers](
 	cedula int , 
 	numeroCuenta  nvarchar(30),
 	turno nvarchar(30),
-	puesto nvarchar(50)
+	puesto nvarchar(50),
+	FechaGeneracionCodigo DATETIME NULL,
+	CodigoRecuperacion NVARCHAR(100) NULL,
+    FechaExpiracionCodigo DATETIME NULL,
+	ingreso Datetime null
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+
 ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[AspNetUsers] ([Id])
 ON DELETE CASCADE

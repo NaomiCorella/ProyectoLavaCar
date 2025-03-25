@@ -1,0 +1,32 @@
+﻿@{
+    decimal totalVentasEmpleado = ViewBag.TotalVentasEmpleado ?? 0; // Si no hay ventas, poner 0
+}
+
+<div class="dashboard-panel">
+    <h2>Total de Ventas del Empleado</h2>
+    <p class="amount">₡@totalVentasEmpleado.ToString("N2")</p> <!-- Formato de moneda -->
+</div>
+
+<style>
+    .dashboard-panel {
+        width: 300px;
+        padding: 20px;
+        background: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+        .dashboard-panel h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-panel .amount {
+            font-size: 30px;
+            font-weight: bold;
+        }
+</style>

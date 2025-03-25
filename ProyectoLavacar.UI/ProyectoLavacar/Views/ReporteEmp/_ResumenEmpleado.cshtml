@@ -1,0 +1,66 @@
+﻿@{
+    var promedioCalificacion = ViewBag.PromedioCalificacion as decimal?;
+    var totalVentasEmpleado = ViewBag.TotalVentasEmpleado as decimal?;
+    var margenVentas = ViewBag.MargenVentas as decimal?;
+    var margenPorcentual = ViewBag.MargenPorcentual as decimal?;
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Panel de Promedio de Calificación -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg rounded-6">
+                <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
+                    Promedio de Calificación del Empleado
+                </div>
+                <div class="card-body text-center">
+                    @if (promedioCalificacion.HasValue)
+                    {
+                    <h4>@promedioCalificacion.Value.ToString("F2")</h4>
+                    }
+                    else
+                    {
+                    <h4>No disponible</h4>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de Resumen de Ventas -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg rounded-6">
+                <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
+                    Resumen de Ventas del Empleado
+                </div>
+                <div class="card-body text-center">
+                    @if (totalVentasEmpleado.HasValue)
+                    {
+                    <h5>Total Ventas: @totalVentasEmpleado.Value.ToString("C2")</h5>
+                    }
+                    else
+                    {
+                    <h5>Total Ventas: No disponible</h5>
+                    }
+
+                    @if (margenVentas.HasValue)
+                    {
+                    <h5>Margen de Ventas: @margenVentas.Value.ToString("C2")</h5>
+                    }
+                    else
+                    {
+                    <h5>Margen de Ventas: No disponible</h5>
+                    }
+
+                    @if (margenPorcentual.HasValue)
+                    {
+                    <h5>Margen Porcentual: @margenPorcentual.Value.ToString("F2")%</h5>
+                    }
+                    else
+                    {
+                    <h5>Margen Porcentual: No disponible</h5>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

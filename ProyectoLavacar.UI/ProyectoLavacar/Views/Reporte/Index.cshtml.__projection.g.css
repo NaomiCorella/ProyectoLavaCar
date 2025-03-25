@@ -1,0 +1,5 @@
+/* BEGIN EXTERNAL SOURCE */
+div {
+display: flex; justify-content: space-between; gap: 10px;
+}
+/* END EXTERNAL SOURCE */
