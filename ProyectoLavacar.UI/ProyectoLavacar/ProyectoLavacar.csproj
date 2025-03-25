@@ -550,14 +550,12 @@
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+
     <Content Include="Views\Inventario\Index.cshtml" />
     <Content Include="Views\Inventario\Create.cshtml" />
     <Content Include="Views\Inventario\Edit.cshtml" />
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
-    <Content Include="Views\Account\changePassword.cshtml" />
-    <Content Include="Views\Account\changePasswordSuccess.cshtml" />
-    <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
@@ -613,6 +611,11 @@
     <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_GraficoVentasEmpleado.cshtml" />
+
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Account\changePassword.cshtml" />
+    <Content Include="Views\Account\changePasswordSuccess.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

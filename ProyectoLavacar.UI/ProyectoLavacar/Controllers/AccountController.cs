@@ -26,22 +26,16 @@ namespace ProyectoLavacar.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly UserManager<ApplicationUser> _userM;
-        private readonly IEmailSender _emailSender;
-        private Contexto _contexto;
-        private IFecha _fecha;
-        public AccountController()
-        {
-            _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
-            _contexto = new Contexto();
-            _fecha = new Fecha();
-        }
+         private readonly IEmailSender _emailSender;
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
         {
+        
             UserManager = userManager;
             SignInManager = signInManager;
             _emailSender = emailSender;
+
+
         }
 
 
@@ -96,8 +90,10 @@ namespace ProyectoLavacar.Controllers
         public ActionResult changePasswordSuccess()
         {
             return View();
+
         }
     
+
 
     public ApplicationSignInManager SignInManager
         {
