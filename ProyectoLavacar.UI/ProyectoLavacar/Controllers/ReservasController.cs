@@ -462,7 +462,7 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                string datosanteriores = TempData["DatosAnteriores"] as string;
+              string datosanteriores = TempData["DatosAnteriores"] as string;
                 int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
 
                 return RedirectToAction("Reservas");
@@ -531,30 +531,30 @@ namespace ProyectoLavacar.Controllers
                 var reserva = _context.ReservasTabla.Find(id);
                 reserva.estado = !reserva.estado;
                 _context.SaveChanges();
-                string datosPosteriores = $@"
-{{
-    ""IdReserva"": ""{reserva.idReserva}"",
-    ""IdCliente"": ""{reserva.idCliente}"",
-    ""IdEmpleado"": ""{reserva.idEmpleado}"",
-    ""IdServicio"": ""{reserva.idServicio}"",
-    ""Fecha"": ""{reserva.fecha}"",
-    ""Hora"": ""{reserva.hora}"",
-    ""Estado"": ""{reserva.estado}""
-}}";
+//                string datosPosteriores = $@"
+//{{
+//    ""IdReserva"": ""{reserva.idReserva}"",
+//    ""IdCliente"": ""{reserva.idCliente}"",
+//    ""IdEmpleado"": ""{reserva.idEmpleado}"",
+//    ""IdServicio"": ""{reserva.idServicio}"",
+//    ""Fecha"": ""{reserva.fecha}"",
+//    ""Hora"": ""{reserva.hora}"",
+//    ""Estado"": ""{reserva.estado}""
+//}}";
 
-                var bitacora = new BitacoraDto
-                {
-                    IdEvento = 0,
-                    TablaDeEvento = "Reservas",
-                    TipoDeEvento = "Editar de Reservas",
-                    FechaDeEvento = "19-11-2024",
-                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
-                    StackTrace = "no hubo error",
-                    DatosAnteriores = datosPosteriores,
-                    DatosPosteriores = datosPosteriores
-                };
+//                var bitacora = new BitacoraDto
+//                {
+//                    IdEvento = 0,
+//                    TablaDeEvento = "Reservas",
+//                    TipoDeEvento = "Editar de Reservas",
+//                    FechaDeEvento = "19-11-2024",
+//                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
+//                    StackTrace = "no hubo error",
+//                    DatosAnteriores = datosPosteriores,
+//                    DatosPosteriores = datosPosteriores
+//                };
 
-               _registrarBitacoraLN.RegistrarBitacora(bitacora);
+//               _registrarBitacoraLN.RegistrarBitacora(bitacora);
 
                 return RedirectToAction("Reservas/Reservas");
             }
