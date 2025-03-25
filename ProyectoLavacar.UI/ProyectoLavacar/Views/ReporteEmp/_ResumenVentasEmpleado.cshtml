@@ -1,0 +1,66 @@
+﻿@{
+    decimal totalVentas = ViewBag.TotalVentasEmpleado ?? 0;
+    decimal margenVentas = ViewBag.MargenVentas ?? 0;
+    decimal margenPorcentual = ViewBag.MargenPorcentual ?? 0;
+}
+
+<div class="dashboard-panels-container">
+    <!-- Panel de Total de Ventas -->
+    <div class="dashboard-panel">
+        <h2>Total de Ventas</h2>
+        <p class="amount">₡@totalVentas.ToString("N2")</p> <!-- Formato de moneda -->
+    </div>
+
+    <!-- Panel de Margen de Ventas -->
+    <div class="dashboard-panel">
+        <h2>Margen de Ventas</h2>
+        <p class="amount">₡@margenVentas.ToString("N2")</p>
+    </div>
+
+    <!-- Panel de Margen Porcentual -->
+    <div class="dashboard-panel">
+        <h2>Margen Porcentual</h2>
+        <p class="percentage">@margenPorcentual.ToString("N2")%</p>
+    </div>
+</div>
+
+<style>
+    .dashboard-panels-container {
+        display: flex;
+        gap: 20px; /* Espaciado entre paneles */
+        flex-wrap: wrap; /* Ajustar el contenido cuando hay más de un panel */
+        justify-content: space-around; /* Alinear los paneles en el contenedor */
+    }
+
+    .dashboard-panel {
+        width: 300px;
+        padding: 20px;
+        background: #007bff; /* Color azul */
+        color: white;
+        text-align: center;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+        .dashboard-panel h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-panel h3 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .dashboard-panel .amount {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .dashboard-panel .percentage {
+            font-size: 22px;
+            font-weight: bold;
+        }
+</style>

@@ -110,6 +110,7 @@ namespace ProyectoLavacar.Models
 
         [Display(Name = "Rol")]
         public string Role { get; set; }
+
     }
     public class RegisterEmployeeViewModel
     {
@@ -160,6 +161,7 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Rol")]
         public string Role { get; set; }
+        public DateTime ingreso { get; set; }
     }
 
     public class ResetPasswordViewModel

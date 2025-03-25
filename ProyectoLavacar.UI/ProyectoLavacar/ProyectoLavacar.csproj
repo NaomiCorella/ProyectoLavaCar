@@ -318,6 +318,8 @@
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\ReporteEmpController.cs" />
     <Compile Include="Controllers\ReseniasController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
@@ -598,6 +600,19 @@
     <Content Include="Views\Nomina\Create.cshtml" />
     <Content Include="Views\Compra\DetallesCompra.cshtml" />
     <Content Include="Views\Compra\Index.cshtml" />
+    <Content Include="Views\Reporte\_UsuariosPorMes.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
+    <Content Include="Views\Reporte\_MargenVentas.cshtml" />
+    <Content Include="Views\Reporte\_ServiciosPorMes.cshtml" />
+    <Content Include="Views\Reporte\_GraficoVentas.cshtml" />
+    <Content Include="Views\ReporteEmp\_TotalVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_listar.cshtml" />
+    <Content Include="Views\ReporteEmp\Index.cshtml" />
+    <Content Include="Views\ReporteEmp\_MargenVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_ResumenVentasEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
+    <Content Include="Views\ReporteEmp\_GraficoVentasEmpleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

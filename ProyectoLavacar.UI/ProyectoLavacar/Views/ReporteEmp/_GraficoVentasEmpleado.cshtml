@@ -1,0 +1,149 @@
+﻿@{
+    var fechas = ViewBag.Fechas as List<string>;       // Asegúrate de que Fechas es una lista de cadenas
+    var totalVentas = ViewBag.TotalVentas as List<decimal>; // Asegúrate de que TotalVentas es una lista de decimales
+    var margenVentas = ViewBag.MargenVentas as List<decimal>; // Asegúrate de que MargenVentas es una lista de decimales
+}
+
+<style>
+    /* Estilos para el gráfico */
+    #graficoVentas {
+        width: 100% !important;
+        max-width: 1000px;
+        height: 400px;
+        margin: 0 auto;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    h2 {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        color: #000000;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .filter-container {
+        margin: 20px 0;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="filter-container">
+        <label for="mes">Selecciona un mes:</label>
+        <select id="mes" onchange="cargarDatosPorMes()">
+            <option value="">-- Todos los meses --</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card shadow-lg rounded-6">
+            <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
+                Ventas Por Mes y Margen Por Mes
+            </div>
+            <div class="card-body text-center">
+                <canvas id="graficoVentas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('graficoVentas').getContext('2d');
+
+        // Convertir las listas de C# a JavaScript (sin Json.Serialize)
+        var fechas = @Html.Raw(Json.Encode(fechas)); // Fechas (Mes/Año)
+        var totalVentas = @Html.Raw(Json.Encode(totalVentas)); // Total Ventas
+        var margenVentas = @Html.Raw(Json.Encode(margenVentas)); // Margen Ventas
+
+        var config = {
+            type: 'bar',
+            data: {
+                labels: fechas, // Fechas como etiquetas
+                datasets: [
+                    {
+                        label: 'Total Ventas',
+                        data: totalVentas, // Datos de Total Ventas
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Margen de Ventas',
+                        data: margenVentas, // Datos de Margen Ventas
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        type: 'line',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Ventas Totales y Margen por Mes'
+                    }
+                },
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+        };
+
+        var chart = new Chart(ctx, config);
+
+        // Función para cargar los datos por mes
+        window.cargarDatosPorMes = function() {
+            var mes = document.getElementById('mes').value;
+
+            $.ajax({
+                url: '@Url.Action("ObtenerDatosPorMes", "Reporte")', // Ajustar la ruta del controlador
+                type: 'GET',
+                data: { mes: mes || null },
+                success: function (data) {
+                    // Actualizar gráfico con los nuevos datos
+                    chart.data.labels = data.fechas;
+                    chart.data.datasets[0].data = data.totalVentas;
+                    chart.data.datasets[1].data = data.margenVentas;
+                    chart.update();
+                },
+                error: function (error) {
+                    console.log("Error en la solicitud AJAX:", error);
+                }
+            });
+        }
+    });
+</script>
