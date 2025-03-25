@@ -120,7 +120,10 @@ namespace ProyectoLavacar.Controllers
             var servicios = _listarServicios.ListarServicios()
     .Where(a => a.estado == true) .ToList();
             ViewBag.Servicios = servicios;
-       
+            var empleados = _listarEmpleado.ListarEmpleados()
+        .Where(a => a.estado == true)
+        .ToList();
+            ViewBag.empleados = empleados;
             return View();
         }
 
@@ -173,7 +176,8 @@ namespace ProyectoLavacar.Controllers
                     fecha = modeloDeCompra.fecha,
                     Estado = true,
                     Total = modeloDeCompra.Total,
-                    listaServicios=modeloDeCompra.listaServicios
+                    listaServicios=modeloDeCompra.listaServicios,
+                    idEmpleado= modeloDeCompra.idEmpleado
                 };
 
                 int cantidadDeDatosGuardados = await _crearCompra.CrearCompra(compra);

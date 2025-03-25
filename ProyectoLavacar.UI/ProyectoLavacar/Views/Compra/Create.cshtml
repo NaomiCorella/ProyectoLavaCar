@@ -74,6 +74,22 @@
         </div>
     </div>
 
+    <div class="mb-3">
+        @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "control-label" })
+        @if (ViewBag.empleados is string message)
+        {
+            <p>@message</p>
+        }
+        else
+        {
+            @Html.DropDownListFor(model => model.idEmpleado,
+                new SelectList(ViewBag.empleados, "Id", "nombre"),
+                "Seleccione un empleado",
+                new { @class = "form-control" })
+        }
+        @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "text-danger" })
+    </div>
+
 
 
 

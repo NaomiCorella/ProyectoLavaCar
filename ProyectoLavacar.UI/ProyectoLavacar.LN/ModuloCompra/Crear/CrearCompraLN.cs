@@ -47,7 +47,8 @@ namespace ProyectoLavacar.LN.ModuloCompra.Crear
                 DescripcionServicio = Compra.DescripcionServicio,
                 fecha = _fecha.ObtenerFecha(),
                 Total = total(Compra),
-                Estado = Compra.Estado
+                Estado = Compra.Estado,
+                idEmpleado = Compra.idEmpleado
             };
         }
           public async Task<int> CrearCompraServicios(CompraDto modelo)
