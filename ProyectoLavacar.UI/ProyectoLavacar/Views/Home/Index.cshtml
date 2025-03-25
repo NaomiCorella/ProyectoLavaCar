@@ -44,36 +44,37 @@
     <main>
         <!-- Services Section -->
         <section class="service-area service-area-v2 pt-110">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="section-title text-center mb-60">
-                            <span class="span">Servicios</span>
-                            <h2>Nuestros Mejores Servicios</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- Service Items -->
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="service-item mb-50">
-                            <div class="icon"><i class="flaticon-mechanic"></i></div>
-                            <div class="info">
-                                <h4>Opti Coat</h4>
-                                <p>Protege la pintura de tu auto con nuestro tratamiento de recubrimiento Opti Coat para mantenerlo impecable.</p>
+            <section class="service-area service-area-v2 pt-110">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="section-title text-center mb-60">
+                                <span class="span">Servicios</span>
+                                <h2>Nuestros mejores servicios</h2>
                             </div>
                         </div>
                     </div>
-                    <!-- Repeat for other services -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="button-box text-center">
-                            <a href="service.html" class="main-btn">Leer más</a>
-                        </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 align-items-stretch">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col d-flex">
+                                <a href="@Url.Action("Details", "Servicios", new { id = item.idServicio })" class="service-item mb-50 d-flex flex-column h-100 w-100 text-decoration-none text-dark">
+                                    <div class="icon">
+                                        <i class="flaticon-mechanic"></i>
+                                    </div>
+                                    <div class="info flex-grow-1 d-flex flex-column justify-content-between">
+                                        <h5>@item.nombre</h5>
+                                        <p>@item.descripcion</p>
+                                    </div>
+                                    <div class="price text-center p-3">
+                                        <strong>@item.precio</strong>
+                                    </div>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
 
         <!-- Why Choose Us Section -->
@@ -141,49 +142,7 @@
             </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section class="pricing-area pt-110 pb-120">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="section-title text-center mb-60">
-                            <span class="span">Últimos Paquetes</span>
-                            <h2>Elige tu Paquete</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- Pricing Items -->
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="pricing-item">
-                            <div class="title text-center">
-                                <h4>Lavado Básico a Mano</h4>
-                            </div>
-                            <div class="price text-center">
-                                <h2><span class="sign">$</span>30<span class="small-text">99</span></h2>
-                            </div>
-                            <div class="pricing-body">
-                                <ul class="list">
-                                    <li class="check">Lavado con tela suave</li>
-                                    <li class="check">Enjuague sin residuos</li>
-                                    <li class="check">Protección contra la lluvia</li>
-                                    <li class="uncheck">Lavado a mano completo</li>
-                                    <li class="uncheck">Tratamiento de llantas</li>
-                                    <li class="uncheck">Repelente al agua</li>
-                                </ul>
-                            </div>
-                            <div class="time text-center">
-                                <span><i class="far fa-clock"></i>40 min</span>
-                            </div>
-                            <div class="button text-center">
-                                <a href="#" class="main-btn">Reserva Ahora</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat for other pricing items -->
-                </div>
-            </div>
-        </section>
+       
     </main>
 
     <!-- Footer -->

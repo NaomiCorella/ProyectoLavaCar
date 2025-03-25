@@ -1,0 +1,220 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="ModalDeMovimiento" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registrar Movimiento</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Usuarios</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+
+<body>
+
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Administración de Inventario</h2>
+            <a href="@Url.Action("Create", "Inventario")" class="btn btn-outline-success btn-lg">
+                <i class="fas fa-plus me-2"></i> Agregar Producto
+            </a>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <form method="get" action="@Url.Action("FiltrarPorProducto", "Inventario")" class="form-inline mb-3">
+                <div class="form-group">
+                    <input type="text" name="nombreProducto" class="form-control" placeholder="Buscar producto..." />
+                </div>
+                <button type="submit" class="btn btn-outline-primary ml-2"><i class="fas fa-search me-2"></i> Buscar </button>
+                <a href="@Url.Action("Index", "Inventario")" class="btn btn-outline-info ml-2"><i class="fas fa-undo me-2"></i> Restablecer</a>
+            </form>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="abrirModalMovimiento btn btn-outline-success ml-2">
+                <i class="fas fa-save me-2"></i> Registrar Movimiento
+            </button>
+            <a href="@Url.Action("HistorialDeMovimientos")" class="btn btn-outline-info ml-2">
+                <i class="fas fa-times me-2"></i> Historial De Movimientos
+            </a>
+            <a href="@Url.Action("DescargarPDF")" class="btn btn-outline-info ml-2">
+                <i class="fas fa-times me-2"></i> DescargarPDF
+            </a>
+        </div>
+
+        <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+            <table class="table table-bordered table-hover text-center">
+                <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idProducto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.categoria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.precioUnitario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.cantidadDisponible)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.categoria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.precioUnitario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cantidadDisponible)
+                            </td>
+                            <td>
+                                @if (item.estado)
+                                {
+                                    <span class="badge bg-success text-white">Activo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger text-white">Inactivo</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a href="@Url.Action("Edit", new { id = item.idProducto })" class="btn btn-outline-primary btn-sm me-2" title="Editar">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+
+                                    <a href="@Url.Action("Details", new { id = item.idProducto })" class="btn btn-outline-secondary btn-sm me-2" title="Detalles">
+                                        <i class="fas fa-info-circle"></i> Detalles
+                                    </a>
+
+
+                                    @* Esto hacerlo como lo tienen ellos con un sweet alert *@
+                                    @if (item.estado)
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-outline-warning btn-action">
+                                            <i class="fas fa-times-circle"></i> Inactivar
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-outline-success btn-action">
+                                            <i class="fas fa-check-circle"></i> Activar
+                                        </a>
+                                    }
+
+                                    <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="btn btn-outline-success btn-action">
+                                        <i class="fas fa-times-circle"></i> Descargar PDF
+                                    </a>
+
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+   
+        <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
+
+    }
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>
+

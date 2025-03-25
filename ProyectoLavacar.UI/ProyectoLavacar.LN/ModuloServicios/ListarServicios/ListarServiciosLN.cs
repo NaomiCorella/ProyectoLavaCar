@@ -16,42 +16,43 @@ namespace ProyectoLavacar.LN.ModuloServicios.ListarServicios
     {
 
         IListarServiciosAD _listarServiciosAD;
-            public ListarServiciosLN()
-            {
+        public ListarServiciosLN()
+        {
             _listarServiciosAD = new ListarServiciosAD();
-            }
+        }
 
-            public List<ServiciosDto> ListarServicios()
+        public List<ServiciosDto> ListarServicios()
+        {
+            List<ServiciosDto> laListadeServicios = _listarServiciosAD.ListarServicios();
+
+            return laListadeServicios;
+        }
+
+        private List<ServiciosDto> ObtenerLaListaConvertida(List<ServiciosTabla> laListasDeServicios)
+        {//chequear
+            List<ServiciosDto> lalistaServicios = new List<ServiciosDto>();
+            foreach (ServiciosTabla elServicio in laListasDeServicios)
             {
-                List<ServiciosDto> laListadeServicios = _listarServiciosAD.ListarServicios();
-
-                return laListadeServicios;
-            }
-
-            private List<ServiciosDto> ObtenerLaListaConvertida(List<ServiciosTabla> laListasDeServicios)
-            {//chequear
-                List<ServiciosDto> lalistaServicios = new List<ServiciosDto>();
-                foreach (ServiciosTabla elServicio in laListasDeServicios)
-                {
                 lalistaServicios.Add(ConvertirObjetoServiciosDto(elServicio));
-                }
-                return lalistaServicios;
             }
-            private ServiciosDto ConvertirObjetoServiciosDto(ServiciosTabla elServicio)
+            return lalistaServicios;
+        }
+        private ServiciosDto ConvertirObjetoServiciosDto(ServiciosTabla elServicio)
+        {
+
+            return new ServiciosDto
             {
-
-                return new ServiciosDto
-                {
-                    idServicio = elServicio.idServicio,
-                    costo = elServicio.costo,
-                    nombre = elServicio.nombre,
-                    descripcion = elServicio.descripcion,
-                    tiempoDuracion = elServicio.tiempoDuracion,
-                    estado = elServicio.estado
-
-                };
-            }
+                idServicio = elServicio.idServicio,
+                costo = elServicio.costo,
+                nombre = elServicio.nombre,
+                descripcion = elServicio.descripcion,
+                tiempoDuracion = elServicio.tiempoDuracion,
+                estado = elServicio.estado,
+                modalidad = elServicio.modalidad,
+                precio = elServicio.precio
+            };
         }
     }
+}
 
 

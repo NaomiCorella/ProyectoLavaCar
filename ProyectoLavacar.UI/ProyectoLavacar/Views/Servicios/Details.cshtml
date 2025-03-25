@@ -1,0 +1,116 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloServicios.ServiciosDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+   <section class="breadcrumbs-area bg_cover" style="background-image: url(assets/images/bg/breadcrumb-bg-1.jpg);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="breadcrumbs-content text-center">
+                    <h1>Detalles Servicio</h1>
+                    <ul>
+                        <li><a href="index-2.html">Inicio</a></li>
+                        <li class="active">Service-Single</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--====== End breadcrumbs-area Section ======-->
+<!--====== Start service-details-section Section ======-->
+<section class="service-details-section pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+                <div class="service-details-wrapper">
+                    <div class="title">
+                        <a href="#" class="cat-btn">@Model.nombre</a>
+                        <h3>@Model.nombre</h3>
+                    </div>
+                    <p>
+                        Ofrecemos un servicio de lavado exterior completo a mano para dejar tu vehículo impecable.
+                        Nuestro equipo utiliza productos de alta calidad y técnicas especializadas para proteger
+                        y restaurar la apariencia de tu auto.
+                    </p>
+
+                    <div class="content-box">
+                        <i class="flaticon-mechanic"></i>
+                        <h4>@Model.nombre</h4>
+                        <p>
+                            @Model.descripcion
+                        </p>
+                        <p>
+                            @Model.precio
+                        </p>
+                    </div>
+
+       
+
+                   
+                </div>
+            </div>
+
+            <!-- Barra Lateral -->
+            <div class="col-lg-4">
+                <div class="sidebar-widget-area">
+                    <!-- Lista de Servicios -->
+                    <!-- Reserva de Cita -->
+                    <div class="widget booking-widget mb-40">
+                        <h4>Reserva Tu Lavado</h4>
+                        <span>Usa nuestra herramienta de reservas en línea</span>
+                        <p>
+                            Programa tu cita de manera rápida y sencilla con nuestro sistema de reservas en línea.
+                            Atención garantizada para tu vehículo.
+                        </p>
+                        @Html.ActionLink("Reservar Tu Cita", "Create", "Reservas", new { id = Model.idServicio }, new { @class = "btn btn-sm btn-success" })
+
+
+                    </div>
+
+                    <div class="text-center mt-4">
+                        @Html.ActionLink("Ver todos los servicios", "Index", null, new { @class = "btn btn-outline-info" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

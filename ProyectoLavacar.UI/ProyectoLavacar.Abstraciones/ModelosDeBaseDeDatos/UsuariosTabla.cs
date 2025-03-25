@@ -25,5 +25,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public string numeroCuenta { get; set; }
         public string turno { get; set; }
         public string puesto { get; set; }
+        public string PasswordHash { get; set; }
+        public DateTime? ingreso { get; set; }
     }
 }

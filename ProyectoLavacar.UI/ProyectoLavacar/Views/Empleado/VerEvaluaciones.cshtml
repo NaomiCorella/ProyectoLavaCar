@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones.EvaluacionesDto>
+@{
+    ViewBag.Title = "Ver Evaluaciones";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Ver Evaluaciones</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Ver Evaluaciones</h2>
+        </div>
+
+        <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                    <tr>
+                    <tr>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.idEvaluacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.idEmpleado)
+                            </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.fechaEvaluacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.calificacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.comentarios)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.areaMejora)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.recomendaciones)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.idEvaluacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idEmpleado)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fechaEvaluacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.calificacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comentarios)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.areaMejora)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.recomendaciones)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="btn btn-outline-info btn-sm me-2"
+                                   title="Detalles Evaluaciones">
+                                    <i class="fas fa-info-circle"></i> Detalles Evaluaciones
+                                </a>
+                                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

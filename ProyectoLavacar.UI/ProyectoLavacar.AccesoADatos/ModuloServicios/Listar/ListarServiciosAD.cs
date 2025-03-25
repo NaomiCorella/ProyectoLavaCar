@@ -20,21 +20,21 @@ namespace ProyectoLavacar.AccesoADatos.ModuloServicios.Listar
 
         public List<ServiciosDto> ListarServicios()
         {
-            List<ServiciosDto> lalistadeServicios = (from elServicio in _elContexto.ServiciosTabla
-                                                     select new ServiciosDto
-                                                    {
-                                                        idServicio = elServicio.idServicio,
-                                                        costo = elServicio.costo,
-                                                        nombre= elServicio.nombre,
-                                                        descripcion = elServicio.descripcion,
-                                                        tiempoDuracion = elServicio.tiempoDuracion,
-                                                        estado = elServicio .estado
-                                                              
-                                                      }).ToList();
+            List<ServiciosDto> lalistadeServicios = (from elServicio in _elContexto.ServiciosTabla where elServicio.estado ==true
+                select new ServiciosDto
+                                                     {
+                                                         idServicio = elServicio.idServicio,
+                                                         costo = elServicio.costo,
+                                                         nombre = elServicio.nombre,
+                                                         descripcion = elServicio.descripcion,
+                                                         tiempoDuracion = elServicio.tiempoDuracion,
+                                                         estado = elServicio.estado,
+                                                         modalidad = elServicio.modalidad,
+                                                         precio = elServicio.precio
+                }).ToList();
             return lalistadeServicios;
         }
     }
 }
-
 
 

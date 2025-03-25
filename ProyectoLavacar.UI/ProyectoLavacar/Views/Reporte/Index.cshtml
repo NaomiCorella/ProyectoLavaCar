@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div>
+        @Html.Action("ObtenerMargenVentas")
+    </div>
+
+    <br />
+    <br />
+    <!-- Cargar el reporte de servicios por mes -->
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
+        @Html.Action("ObtenerServiciosPorMes")
+
+
+        @Html.Action("ObtenerUsuariosPorMes")
+    </div>
+    <br />
+    <br />
+    <div>
+        @Html.Action("ObtenerGraficoVentasPorMes")
+    </div>

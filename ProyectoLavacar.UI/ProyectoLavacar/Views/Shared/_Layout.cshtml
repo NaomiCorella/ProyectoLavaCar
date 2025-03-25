@@ -47,8 +47,33 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="search-box d-flex align-items-center">
-                             @Html.Partial("_LoginPartial")
-                            <a href="inicioSesion.html" class="profile-icon mr-3"><i class="fas fa-user fa-2x" style="color: red;"></i></a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                              
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <!-- Si el usuario es Admin -->
+                                    <a href="@Url.Action("MiPerfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user-shield fa-2x" style="color: blue;"></i>
+                                        <span>@User.Identity.Name (Admin)</span>
+                                    </a>
+                                }
+                                else if (User.IsInRole("Usuario"))
+                                {
+                                    <!-- Si el usuario es un Usuario normal -->
+                                    <a href="@Url.Action("Perfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user fa-2x" style="color: green;"></i>
+                                        <span>@User.Identity.Name</span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+
+                                <a href="@Url.Action("Login", "Account")" class="profile-icon mr-3">
+                                    <i class="fas fa-user fa-2x" style="color: red;"></i>
+                                </a>
+                            }
                             <a href="#" class="search-icon" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search fa-2x" style="color: red;"></i></a>
                         </div>
                     </div>
@@ -95,21 +120,22 @@
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Perfil</a>
                                         <ul class="sub-menu">
-                                            <li><a href="perfilUsuario.html">Perfil de usuario</a></li>
-                                            <li><a href="perfilEmpleado.html">Perfil de empleados</a></li>
+                                            <li>@Html.ActionLink("Perfil", "Perfil", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+                                            <li>@Html.ActionLink("PerfilEmpleados", "MiPerfil", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Administrador</a>
                                         <ul class="sub-menu">
-                                            <li><a href="gestionReserva.html">Gestión de reserva</a></li>
-                                            <li><a href="gestionReseñas.html">Gestión de reseñas</a></li>
-                                            <li><a href="gestionEmpleado.html">Gestión de empleados</a></li>
+                                            <li>@Html.ActionLink("Gestion de Reservas", "Reservas", "Reservas", new { area = "" }, new { @class = "nav-link" })</li>
+                                            <li>@Html.ActionLink("Gestion de Reseñas", "IndexAdmin", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
+                                            <li>@Html.ActionLink("Gestion de Empleados", "Index", "Empleado", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li><a href="gestionUsuarios.html">Gestión de usuarios</a></li>
-                                            <li><a href="gestionInventario.html">Gestión de inventario</a></li>
+                                            <li>@Html.ActionLink("Gestion de Inventario", "Index", "Inventario", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li><a href="gestionVentas.html">Gestión de informes de ventas</a></li>
                                             <li><a href="gestionReportes.html">Gestión de reportes</a></li>
-                                            <li><a href="gestionNomina.html">Gestión de Nomina</a></li>
+                                            <li>@Html.ActionLink("Gestion de Nomina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
                                         </ul>
                                     </li>
                                    
@@ -119,14 +145,14 @@
                             <!-- Nav Pushed Item -->
                             <div class="nav-pushed-item">
                                 <div class="navbar-btn">
-                                    <a href="contact.html" class="main-btn">Get A Quote</a>
+                                    @Html.ActionLink("Reseñas", "Index", "Resenias", new { area = "" }, new { @class = "navbar-brand" })
                                 </div>
                             </div>
                         </div>
                         <!-- Nav Push Item -->
                         <div class="nav-push-item">
                             <div class="navbar-btn">
-                                <a href="booking.html" class="main-btn">Reservar Cita</a>
+                                @Html.ActionLink("Reservar Cita", "ReservarCita", "Reservas", new { area = "" }, new { @class = "navbar-brand" })
                             </div>
                         </div>
                         <!-- Navbar Toggler -->

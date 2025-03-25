@@ -18,20 +18,40 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReseñas.Listar
             _elContexto = new Contexto();
         }
 
-        public List<ReseniaDto> ListarResenias()
+        public List<ReseniaConRespuesta> ListarResenias()
         {
-            List<ReseniaDto> lalistadeServicios = (from laResenia in _elContexto.ReseniasTabla
-                                                     select new ReseniaDto
-                                                     {
-                                                        idResenia = laResenia.idResenia,
-                                                        idCliente = laResenia.idCliente,
-                                                        idServicio = laResenia.idServicio, 
-                                                        fecha = laResenia.fecha.ToString(),
-                                                        calificacion = laResenia.calificacion,
-                                                        comentarios = laResenia.comentarios,
-                                                        estado = laResenia.estado
+            List<ReseniaConRespuesta> lalistadeServicios = (from laResenia in _elContexto.ReseniasTabla
+                                                            join laRespuesta in _elContexto.RespuestaTabla
+                                                            on laResenia.idResenia equals laRespuesta.idResenia into respuestas
+                                                            from respuesta in respuestas.DefaultIfEmpty() 
+                                                            join elCliente in _elContexto.UsuariosTabla
+                                                            on laResenia.idCliente equals elCliente.Id
+                                                            join elEmpleado in _elContexto.UsuariosTabla
+                                                            on respuesta.idEmpleado equals elEmpleado.Id into empleados
+                                                            from elEmpleado in empleados.DefaultIfEmpty()
+                                                            join elServicio in _elContexto.ServiciosTabla
+                                                            on laResenia.idServicio equals elServicio.idServicio
 
-                                                     }).ToList();
+                                                            select new ReseniaConRespuesta
+                                                   {
+                                                       idResenia = laResenia.idResenia,
+                                                       idCliente = laResenia.idCliente,
+                                                       idServicio = laResenia.idServicio,
+                                                       nombreCliente = elCliente.nombre,
+                                                       nombreEmpleado = elEmpleado.nombre,
+                                                       nombreServicio = elServicio.nombre,
+                                                       fecha = laResenia.fecha.ToString(),
+                                                       calificacion = laResenia.calificacion,
+                                                       comentarios = laResenia.comentarios,
+                                                       estadoResenia = laResenia.estado,
+                                                       idRespuesta = respuesta != null ? (int?)respuesta.idRespuesta : null,
+                                                       idEmpleado = respuesta != null ? respuesta.idEmpleado : null,
+                                                       comentariosRespuesta = respuesta != null ? respuesta.comentarios : null,
+                                                       fechaRespuesta = respuesta != null ? respuesta.fecha.ToString() : null,
+                                                     
+                                                 
+
+        }).ToList();
             return lalistadeServicios;
         }
     }

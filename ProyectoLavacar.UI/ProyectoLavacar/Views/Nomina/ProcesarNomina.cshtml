@@ -1,0 +1,108 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.UnicoEmpleadoDto
+
+@{
+    ViewBag.Title = "ProcesarNomina";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <h2>ProcesarNomina</h2>
+
+    <div>
+        <h4>NominaDto</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaDePago)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaDePago)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.primer_apellido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.primer_apellido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SalarioBruto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SalarioBruto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.totalBono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.totalBono)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.totalDedu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.totalDedu)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SalarioNeto)
+            </dt>
+
+            <dd>
+                <p>@ViewBag.total</p>
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("ConfimarNomina", "ConfimarNomina", new { idNomina = Model.IdNomina }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

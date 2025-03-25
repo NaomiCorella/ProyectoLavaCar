@@ -23,37 +23,37 @@ namespace ProyectoLavacar.LN.ModuloReservas.ListarTodo
             _listarTodoReservasAD = new ListarTodoReservaAD();
         }
 
-        public List<ReservasDto> ListarReservasTodo()
+        public List<ReservaCompleta> ListarReservasTodo()
         {
-            List<ReservasDto> laListadeServicios = _listarTodoReservasAD.ListarReservasTodo();
+            List<ReservaCompleta> laListadeServicios = _listarTodoReservasAD.ListarReservasTodo();
 
             return laListadeServicios;
         }
 
-        private List<ReservasDto> ObtenerLaListaConvertida(List<ReservasTabla> laListasDeServicios)
-        {//chequear
-            List<ReservasDto> lalistaServicios = new List<ReservasDto>();
-            foreach (ReservasTabla elServicio in laListasDeServicios)
-            {
-                lalistaServicios.Add(ConvertirObjetoServiciosDto(elServicio));
-            }
-            return lalistaServicios;
-        }
-        private ReservasDto ConvertirObjetoServiciosDto(ReservasTabla reserva)
-        {
+        //private List<ReservasDto> ObtenerLaListaConvertida(List<ReservasTabla> laListasDeServicios)
+        //{//chequear
+        //    List<ReservasDto> lalistaServicios = new List<ReservasDto>();
+        //    foreach (ReservasTabla elServicio in laListasDeServicios)
+        //    {
+        //        lalistaServicios.Add(ConvertirObjetoServiciosDto(elServicio));
+        //    }
+        //    return lalistaServicios;
+        //}
+        //private ReservaCompleta ConvertirObjetoServiciosDto(ReservasTabla reserva)
+        //{
 
-            return new ReservasDto
-            {
-                idReserva = reserva.idReserva,
-                idCliente = reserva.idCliente,
-                idEmpleado = reserva.idEmpleado,
-                idServicio = reserva.idServicio,
-                fecha = reserva.fecha.ToString(),
-                hora = reserva.hora.ToString(),
-                estado = reserva.estado
+        //    return new ReservaCompleta
+        //    {
+        //        idReserva = reserva.idReserva,
+        //        idCliente = reserva.idCliente,
+        //        idEmpleado = reserva.idEmpleado,
+        //        idServicio = reserva.idServicio,
+        //        fecha = reserva.fecha.ToString(),
+        //        hora = reserva.hora.ToString(),
+        //        estado = reserva.estado
 
-            };
+        //    };
         }
     
 }
-}
+

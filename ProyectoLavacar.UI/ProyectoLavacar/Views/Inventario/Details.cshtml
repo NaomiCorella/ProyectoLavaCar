@@ -1,0 +1,97 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalles del Inventario</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="container mt-5 mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Detalles del Inventario</h2>
+            </div>
+
+            <div class="table-responsive shadow-lg rounded mt-5 mb-5">
+                <table class="table table-bordered table-hover text">
+                    <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
+                        <tr>
+                            <th colspan="2" class="text-center">Información del Inventario</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.idProducto)</th>
+                            <td>@Html.DisplayFor(model => model.idProducto)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                            <td>@Html.DisplayFor(model => model.nombre)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.categoria)</th>
+                            <td>@Html.DisplayFor(model => model.categoria)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.precioUnitario)</th>
+                            <td>@Html.DisplayFor(model => model.precioUnitario)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.cantidadDisponible)</th>
+                            <td>@Html.DisplayFor(model => model.cantidadDisponible)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.estado)</th>
+                            <td>@Html.DisplayFor(model => model.estado)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <div class="text-center mt-4">
+                @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-primary me-2" })*@
+                <div class="text-center mt-5">
+                    <a href="@Url.Action("Index", "Inventario")" class="main-btn btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i> Volver a la Gestión
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>

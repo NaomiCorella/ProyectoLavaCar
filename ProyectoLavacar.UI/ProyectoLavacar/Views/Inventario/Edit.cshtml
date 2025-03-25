@@ -1,0 +1,121 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar </h2>
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Editar</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="container mt-5 mb-5">
+        <div class="shadow p-4 rounded">
+            <h4>Editar Producto</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="mb-3">
+
+            <div class="col-md-10">
+
+                <div class="col-md-10">
+
+                    @Html.HiddenFor(model => model.idProducto)
+                    @Html.ValidationMessageFor(model => model.idProducto, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.categoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.categoria,
+                        new SelectList(ViewBag.Categorias, "Value", "Text"),
+                        "-- Seleccione una Categoria --",
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.precioUnitario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.precioUnitario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.precioUnitario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="mb-3">
+                @Html.HiddenFor(model => model.cantidadDisponible)
+                @Html.ValidationMessageFor(model => model.cantidadDisponible, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.HiddenFor(model => model.estado)
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-outline-success me-2">
+                    <i class="fas fa-save me-2" onsubmit="mostrarAlerta()"></i> Guardar Cambios
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    </div>
+    }
+            }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @*<script src="~/Scripts/Inventario/alertaEditar.js"></script>*@
+    }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>
+

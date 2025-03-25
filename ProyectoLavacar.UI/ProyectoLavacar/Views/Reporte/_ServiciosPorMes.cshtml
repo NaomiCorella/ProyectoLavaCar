@@ -1,0 +1,71 @@
+﻿
+@{
+    var serviciosPorMes = ViewBag.ServiciosPorMes as List<Dictionary<string, object>>;
+
+    if (serviciosPorMes == null)
+    {
+        serviciosPorMes = new List<Dictionary<string, object>>(); // Evitar nulos
+    }
+}
+<style>
+    /* Estilos para el gráfico */
+    #graficoServicios {
+        width: 100% !important; /* Asegura que el gráfico sea responsive */
+        max-width: 800px; /* Máximo de 800px de ancho */
+        height: 400px; /* Alto del gráfico */
+        margin: 0 auto; /* Centra el gráfico */
+        background-color: #f7f7f7; /* Fondo oscuro para el gráfico */
+        border-radius: 8px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado alrededor del gráfico */
+    }
+
+    /* Estilo adicional para el contenedor del gráfico */
+    h2 {
+        text-align: center; /* Centra el título */
+        font-family: Arial, sans-serif; /* Tipo de fuente */
+        font-size: 24px; /* Tamaño del título */
+        color: #000000; /* Color blanco para el título */
+        margin-bottom: 20px; /* Espacio debajo del título */
+    }
+</style>
+
+<div class="col-lg-6">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header text-white bg-success text-center fw-bold">
+            Reporte de Servicios por Mes
+        </div>
+        <div class="card-body text-center">
+            <canvas id="graficoServicios"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Datos para el gráfico de servicios por mes
+        let meses = @Html.Raw(Json.Encode(serviciosPorMes.Select(m => m["Mes"])));
+        let totales = @Html.Raw(Json.Encode(serviciosPorMes.Select(m => m["TotalServicios"])));
+
+        let ctx = document.getElementById('graficoServicios').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: meses,
+                datasets: [{
+                    label: 'Servicios por Mes',
+                    data: totales,
+                    backgroundColor: 'rgb(133, 195, 104)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    });
+</script>

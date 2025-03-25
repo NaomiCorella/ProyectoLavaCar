@@ -1,0 +1,129 @@
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.UnicoEmpleadoDto>
+
+@{
+    ViewBag.Title = "Nomina";
+}
+
+
+<h2>Reservas</h2>
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <div class="table-responsive shadow-lg rounded">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioNeto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioBruto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaDePago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PeriodoDePago)
+                    </th>
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.primer_apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.segundo_apellido)
+                    </th>
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.correo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.cedula)
+                    </th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                      
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioNeto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioBruto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaDePago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodoDePago)
+                        </td>
+                      
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.primer_apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.segundo_apellido)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cedula)
+                        </td>
+                       
+                        <td>
+                            @Html.ActionLink("Gestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
+                            @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+
+</html>

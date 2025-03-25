@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +11,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
+using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.General.Fecha;
+using ProyectoLavacar.LN.ModuloCorreos;
 using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
@@ -19,17 +26,15 @@ namespace ProyectoLavacar.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly UserManager<ApplicationUser> _userM;
+         private readonly IEmailSender _emailSender;
 
-        public AccountController()
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
         {
-            _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
+        
             UserManager = userManager;
             SignInManager = signInManager;
+            _emailSender = emailSender;
+
 
         }
 
@@ -85,8 +90,10 @@ namespace ProyectoLavacar.Controllers
         public ActionResult changePasswordSuccess()
         {
             return View();
+
         }
     
+
 
     public ApplicationSignInManager SignInManager
         {
@@ -218,13 +225,14 @@ namespace ProyectoLavacar.Controllers
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
-                    estado = model.Estado
-               
+                    estado = true,
+                    ingreso = _fecha.ObtenerFecha()
 
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
-             
+                var Asunto = "¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi";
+
                 if (result.Succeeded)
                 {
                     // Asignar el rol al usuario
@@ -232,6 +240,9 @@ namespace ProyectoLavacar.Controllers
 
                     if (resultRole.Succeeded)
                     {
+                        string cuerpoDelCorreo = ObtenerPlantillaCorreo();
+                        string correoConvertido = string.Format(cuerpoDelCorreo, model.Nombre, model.PrimerApellido);
+                        await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToAction("Index", "Home");
                     }
@@ -250,6 +261,29 @@ namespace ProyectoLavacar.Controllers
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             return View(model);
         }
+
+
+
+        #region metodoPlantilla
+        private string ObtenerPlantillaCorreoEmpleado()
+        {
+            string filePath = Server.MapPath("~/Content/PlantillasDeCorreos/PlantillaDeCorreoBienvenidaEmpleados.html");
+
+            string htmlContent = System.IO.File.ReadAllText(filePath);
+            return htmlContent;
+        }
+        private string ObtenerPlantillaCorreo()
+        {
+            string filePath = Server.MapPath("~/Content/PlantillasDeCorreos/PlantillaDeCorreoBienvenida.html");
+
+            string htmlContent = System.IO.File.ReadAllText(filePath);
+            return htmlContent;
+        }
+
+        #endregion
+
+
+
         // POST: /Account/Register
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
@@ -284,9 +318,13 @@ namespace ProyectoLavacar.Controllers
                 {
                     // Asignar el rol al usuario
                     var resultRole = await UserManager.AddToRoleAsync(user.Id, "Empleado");
-
+                    var nombreCompleto = model.Nombre + " " + model.PrimerApellido;
+                    var Asunto = "🎉¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi 🎉";
                     if (resultRole.Succeeded)
                     {
+                        string cuerpoDelCorreo = ObtenerPlantillaCorreoEmpleado();
+                        string correoConvertido = string.Format(cuerpoDelCorreo, nombreCompleto, model.Password, model.Email);
+                        await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToAction("Index", "Home");
                     }
@@ -324,25 +362,77 @@ namespace ProyectoLavacar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            // Comprobamos que el modelo no es nulo
+            if (model == null)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // No revelar que el usuario no existe o que no está confirmado
-                    return View("ForgotPasswordConfirmation");
-                }
-
-                // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
-                // Enviar un correo electrónico con este vínculo
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Restablecer contraseña", "Para restablecer la contraseña, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                ModelState.AddModelError("", "El modelo no puede ser nulo.");
+                return View(model);
             }
 
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-            return View(model);
+            // Validamos que el Email está presente
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                ModelState.AddModelError("Email", "El correo electrónico es obligatorio.");
+                return View(model); // Devuelve la vista con los errores
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model); // Si el modelo no es válido
+            }
+
+            try
+            {
+                // Generar un código único
+                var resetCode = Guid.NewGuid().ToString();
+
+                // Construir el enlace de restablecimiento
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { token = resetCode, email = model.Email }, protocol: Request.Url.Scheme);
+
+                // Configurar asunto y mensaje
+                var asunto = "Restablecer tu contraseña";
+
+                var correoConvertido = $"Hola " + model.Email + ".\n" +
+                    "Para restablecer tu contraseña, por favor haz clic en el siguiente enlace\n" +
+                    $"✔️ <a href=\"{callbackUrl}\">Restablecer contraseña</a>\n" +
+                    "Si no solicitaste este cambio, por favor ignora este mensaje.\n" +
+                    "Atentamente, El equipo de soporte de Lavacar Hervi";
+
+                await GuardarCodigoEnBaseDeDatos(model.Email, resetCode);
+
+                // Enviar el correo con el método especificado
+                await _emailSender.SendEmailAsync(model.Email, asunto, correoConvertido).ConfigureAwait(false);
+
+                // Redirigir a ForgotPasswordConfirmation
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+            catch (Exception ex)
+            {
+                // Registrar el error en los logs para depuración
+                System.Diagnostics.Debug.WriteLine($"Error enviando el correo: {ex.Message}");
+                ModelState.AddModelError("", "Ocurrió un problema enviando el correo. Por favor, inténtalo más tarde.");
+                return View(model); // Regresar a la vista con el error
+            }
+        }
+
+
+        private async Task GuardarCodigoEnBaseDeDatos(string email, string token)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Contexto"].ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "UPDATE AspNetUsers SET CodigoRecuperacion = @CodigoRecuperacion, FechaGeneracionCodigo = @FechaGeneracion, FechaExpiracionCodigo = @FechaExpiracion WHERE Email = @Email";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CodigoRecuperacion", token);
+                    command.Parameters.AddWithValue("@FechaGeneracion", DateTime.Now);
+                    command.Parameters.AddWithValue("@FechaExpiracion", DateTime.Now.AddMinutes(5)); // Expira en 5 minutos
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
 
         //
@@ -355,10 +445,11 @@ namespace ProyectoLavacar.Controllers
 
         //
         // GET: /Account/ResetPassword
+        [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string token)
         {
-            return code == null ? View("Error") : View();
+            return View();
         }
 
         //
@@ -368,23 +459,45 @@ namespace ProyectoLavacar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (model == null || string.IsNullOrEmpty(model.Email))
+            {
+                ModelState.AddModelError("", "El correo es obligatorios.");
+                return View(model);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
+
+            try
             {
-                // No revelar que el usuario no existe
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                // Obtener el usuario asociado al correo electrónico
+                var user = await _userM.FindByEmailAsync(model.Email);
+
+                if (string.IsNullOrEmpty(user.Id))
+                {
+                    ModelState.AddModelError("", "Usuario no encontrado.");
+                    return View(model);
+                }
+
+                ApplicationDbContext context = new ApplicationDbContext();
+                UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(context);
+                UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(store);
+                String hashedNewPassword = UserManager.PasswordHasher.HashPassword(model.Password);
+                ApplicationUser cUser = await store.FindByIdAsync(user.Id);
+                await store.SetPasswordHashAsync(cUser, hashedNewPassword);
+                await store.UpdateAsync(cUser);
+
+
+                // Redirigir a la página de confirmación
+                return RedirectToAction("ResetPasswordConfirmation");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
+            catch (Exception ex)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                ModelState.AddModelError("", $"Error: {ex.Message}");
+                return View(model);
             }
-            AddErrors(result);
-            return View();
         }
 
         //

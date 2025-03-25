@@ -1,0 +1,115 @@
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraCompletaDto
+
+@{
+    ViewBag.Title = "DetallesCompra";
+}
+
+<h2>DetallesCompra</h2>
+
+<div>
+    <h4>CompraCompletaDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimerApellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimerApellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SegundoApellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SegundoApellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionServicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionServicio)
+        </dd>
+        <div>
+            <h3>Servicios</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reserva in Model.listaDeServicios)
+                    {
+                        <tr>
+                            <td>@reserva.nombre</td>
+                            <td>@reserva.precio</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </dl>
+    <a href="@Url.Action("DescargarPDFCompra", new { idCompra =Model.idCompra })" class="btn btn-outline-info ml-2">
+        <i class="fas fa-times me-2"></i> DescargarPDF
+    </a>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
