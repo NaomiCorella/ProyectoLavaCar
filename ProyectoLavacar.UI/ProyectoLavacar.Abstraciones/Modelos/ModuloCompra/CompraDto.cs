@@ -13,6 +13,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
         {
          public Guid idCompra { get; set; }
         public string idCliente { get; set; }
+        public string idEmpleado { get; set; }
         public List<int> listaServicios { get; set; } = new List<int>();
 
         [Display(Name = "Total")]

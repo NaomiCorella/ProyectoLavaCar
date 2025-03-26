@@ -29,6 +29,7 @@ namespace ProyectoLavacar.Controllers
         private readonly IEmailSender _emailSender;
         private Contexto _contexto;
         private IFecha _fecha;
+
         public AccountController()
         {
             _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -96,8 +97,10 @@ namespace ProyectoLavacar.Controllers
         public ActionResult changePasswordSuccess()
         {
             return View();
+
         }
     
+
 
     public ApplicationSignInManager SignInManager
         {
@@ -230,7 +233,7 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
-                    ingreso = _fecha.ObtenerFecha()
+                    ingreso = DateTime.Now
 
                 };
 
