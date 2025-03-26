@@ -24,139 +24,122 @@
 <body>
     <h2>MiPerfil</h2>
 
-    <div>
-        <h4>PerfilEmpleado</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.nombre)
-            </dt>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="text-center mb-3">Perfil de Empleado</h4>
+                    <div class="text-center mb-4">
+                        <img src="~/assets/images/avatar.png" class="rounded-circle" alt="Avatar" width="100">
+                    </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.nombre)
-            </dd>
+                    <div>
+                        <h5>Información Personal</h5>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>@Html.DisplayNameFor(model => model.nombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.nombre)</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.primer_apellido)
-            </dt>
+                            <dt>@Html.DisplayNameFor(model => model.primer_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.primer_apellido)</dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.primer_apellido)
-            </dd>
+                            <dt>@Html.DisplayNameFor(model => model.segundo_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.segundo_apellido)</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.segundo_apellido)
-            </dt>
+                            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                            <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.segundo_apellido)
-            </dd>
+                            <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                            <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
+                            <dt>@Html.DisplayNameFor(model => model.turno)</dt>
+                            <dd>@Html.DisplayFor(model => model.turno)</dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
+                            <dt>@Html.DisplayNameFor(model => model.puesto)</dt>
+                            <dd>@Html.DisplayFor(model => model.puesto)</dd>
+                        </dl>
+                    </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="@Url.Action("ActualizarEmpleado", "Empleado")" class="btn btn-primary mx-3 d-flex align-items-center">
+                            <i class="fas fa-edit me-2"></i> Actualizar Información
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
+            <div class="col-lg-8">
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="mb-3">Reservas</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Servicio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in Model.reservas)
+                            {
+                                <tr>
+                                    <td>@reserva.fecha</td>
+                                    <td>@reserva.hora</td>
+                                    <td>@reserva.idServicio</td>
+                                    <td>@reserva.estado</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.turno)
-            </dt>
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="mb-3">Evaluaciones de Desempeño</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var evaluacion in Model.evaluaciones)
+                            {
+                                <tr>
+                                    <td>@evaluacion.fechaEvaluacion</td>
+                                    <td>@evaluacion.calificacion</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.turno)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.puesto)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.puesto)
-            </dd>
-
-        </dl>
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="mb-3">Nómina</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var nomina in Model.nomina)
+                            {
+                                <tr>
+                                    <td>@nomina.FechaDePago</td>
+                                    <td>@nomina.PeriodoDePago</td>
+                                    <td>@nomina.SalarioNeto</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <h3>Reservas</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Servicio</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var reserva in Model.reservas)
-                {
-                    <tr>
-                        <td>@reserva.fecha</td>
-                        <td>@reserva.hora</td>
-                        <td>@reserva.idServicio</td>
-                        <td>@reserva.estado</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <h3>Desempeño</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>calificacion</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var evaluacion in Model.evaluaciones)
-                {
-                    <tr>
-                        <td>@evaluacion.fechaEvaluacion</td>
-                        <td>@evaluacion.calificacion</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <h3>Nomina</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Concepto</th>
-                    <th>Monto</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var nomina in Model.nomina)
-                {
-                    <tr>
-                        <td>@nomina.FechaDePago</td>
-                        <td>@nomina.PeriodoDePago</td>
-                        <td>@nomina.SalarioNeto</td>
-
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
     <div class="navbar-btn">
         @Html.ActionLink("Ingresar Vacaciones", "IngresarVacaciones", "Nomina", new { area = "" }, new { @class = "navbar-brand" })
     </div>

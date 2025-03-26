@@ -25,42 +25,51 @@
 <body>
     <h2>Perfil</h2>
 
-    <div>
-        <h4>PerfilUsuario</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.nombre)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.nombre)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.primer_apellido)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.primer_apellido)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.segundo_apellido)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.segundo_apellido)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-        </dl>
+   
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow p-4 rounded mb-4">
+                    <h4 class="text-center mb-3">Perfil de Usuario</h4>
+                    <div class="text-center mb-4">
+                        <img src="~/assets/images/avatar.png" class="rounded-circle" alt="Avatar" width="100">
+                    </div>
+
+                    <div>
+                        <h5>Información Personal</h5>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>@Html.DisplayNameFor(model => model.nombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.nombre)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.primer_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.primer_apellido)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.segundo_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.segundo_apellido)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                            <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                            <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-3">
+                      
+                        <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-primary mx-3 d-flex align-items-center" title="Editar">
+                            <i class="fas fa-edit me-2"></i> Actualizar Información
+                        </a>
+                        <a href="@Url.Action("CambiarContraseña", "Usuario")" class="btn btn-danger mx-3 d-flex align-items-center">
+                            <i class="fas fa-key me-2"></i> Cambiar Contraseña
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <h3>Reservas</h3>
     <table class="table">
