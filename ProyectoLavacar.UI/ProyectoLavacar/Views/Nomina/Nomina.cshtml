@@ -5,7 +5,7 @@
 }
 
 
-<h2>Reservas</h2>
+<h2>Información de pago</h2>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -27,88 +27,32 @@
 <body>
 
 
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-                    
-                    <th>
-                        @Html.DisplayNameFor(model => model.SalarioNeto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SalarioBruto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaDePago)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PeriodoDePago)
-                    </th>
-                   
-                    <th>
-                        @Html.DisplayNameFor(model => model.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.primer_apellido)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.segundo_apellido)
-                    </th>
-                   
-                    <th>
-                        @Html.DisplayNameFor(model => model.correo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.cedula)
-                    </th>
-                   
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalarioNeto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalarioBruto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaDePago)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PeriodoDePago)
-                        </td>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.primer_apellido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.segundo_apellido)
-                        </td>
-                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.correo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.cedula)
-                        </td>
-                       
-                        <td>
-                            @Html.ActionLink("Gestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
-                            @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
+    <div class="container mt-5 mb-5">
+        @foreach (var item in Model)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Detalles de Pago - 
+                </div>
+                <div class="card-body">
+                    <p><strong>Salario Neto:</strong> @Html.DisplayFor(modelItem => item.SalarioNeto)</p>
 
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                    <p><strong>Periodo de Pago:</strong> @Html.DisplayFor(modelItem => item.PeriodoDePago)</p>
+                    <p><strong>Fecha de Pago:</strong> @Html.DisplayFor(modelItem => item.FechaDePago)</p>
+
+                    <div class="d-flex justify-content-between">
+                        
+                        <a href="@Url.Action("Details", new { id = item.IdNomina })" class="btn btn-outline-info btn-sm">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="text-center mt-4 mb-5">
+            <a href="gestionNomina.html" class="main-btn btn-lg">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </a>
+        </div>
     </div>
 
 
