@@ -199,7 +199,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeAjustes.IdNomina });
             }
             catch
             {
@@ -293,7 +293,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeTramites.IdNomina });
                 }
 
 
@@ -343,7 +343,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MiPerfil");
                 }
 
 
@@ -397,7 +397,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarTramites.Editar(tramite);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarTramites", new { idNomina = ajustepasado.IdNomina });
             }
             catch
             {
@@ -470,8 +470,8 @@ namespace ProyectoLavacar.Controllers
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
                 }
-                    return RedirectToAction("Index");
-        
+            return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
+
         }
         public ActionResult ProcesarNomina(int idNomina)
         {
@@ -505,7 +505,7 @@ namespace ProyectoLavacar.Controllers
         {
             NominaDto nomina = _procesarNomina.ProcesarNomina(idNomina);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ProcesosYGestiones", new { idNomina = nomina.IdNomina });
         }
         public ActionResult Error()
         {

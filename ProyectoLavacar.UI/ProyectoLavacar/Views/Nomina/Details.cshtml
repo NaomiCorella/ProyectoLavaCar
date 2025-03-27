@@ -24,236 +24,80 @@
 </head>
 
 <body>
-    <h4>NominaCompletaDto</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <div class="container mt-5 mb-5">
+        <div class="card-header bg-gradient-primary text-white">
+            <h4 class="mb-0">Detalles de Nómina</h4>
+        </div>
+
+        <div class="card shadow-sm rounded-4 mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Información del Empleado</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Empleado:</strong> @Model.nombre @Model.primer_apellido @Model.segundo_apellido</p>
+                        <p><strong>Cédula:</strong> @Model.cedula</p>
+                        <p><strong>Puesto:</strong> @Model.puesto</p>
+                        <p><strong>Turno:</strong> @Model.turno</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Teléfono:</strong> @Model.telefono</p>
+                        <p><strong>Correo:</strong> @Model.correo</p>
+                        <p><strong>Fecha de Pago:</strong> @Model.FechaDePago</p>
+                        <p><strong>Periodo de Pago:</strong> @Model.PeriodoDePago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm rounded-4 mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-success">Detalle del Salario</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Salario Bruto:</strong> @Model.SalarioBruto</p>
+                        <p><strong>Horas Ordinarias:</strong> @Model.HorasOrdinarias</p>
+                        <p><strong>Horas Extras:</strong> @Model.HorasExtras</p>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Salario Neto:</strong> @Model.SalarioNeto</p>
+                      
+                        <p><strong>Días de Vacaciones Disponibles:</strong> @Model.DiasDispoVacaciones</p>
+                        <p><strong>Días Utilizados de Vacaciones:</strong> @Model.DiasUtiliVacaciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm rounded-4 mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-warning">Ajustes y Otros Detalles</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Bonificaciones:</strong> @Model.totalBono</p>
+                        <p><strong>Deducciones:</strong> @Model.totalDedu</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Fecha de Inicio:</strong> @Model.FechaInicio</p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-4">
+            <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="btn btn-outline-success btn-action">
+                <i class="fas fa-download me-2"></i> Descargar PDF
+            </a>
+        </div>
+
+        <div class="text-center">
+            <a href="@Url.Action("Index", "Nominas")" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left me-2"></i> Volver
+            </a>
+        </div>
+    </div>
 
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SalarioNeto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SalarioNeto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SalarioBruto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SalarioBruto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaDePago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaDePago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PeriodoDePago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PeriodoDePago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasOrdinarias)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasOrdinarias)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasExtras)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasExtras)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HorasDobles)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HorasDobles)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiasDispoVacaciones)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiasDispoVacaciones)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiasUtiliVacaciones)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiasUtiliVacaciones)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Incapacidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Incapacidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoDeContrato)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoDeContrato)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Monto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Monto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RazonAjuste)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RazonAjuste)
-        </dd>
-
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RazonTramite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RazonTramite)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.primer_apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.segundo_apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cedula)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.puesto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.puesto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.turno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.turno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.numeroCuenta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.numeroCuenta)
-        </dd>
-
-    </dl>
-    <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="btn btn-outline-success btn-action">
-        <i class="fas fa-times-circle"></i> Descargar PDF
-    </a>
-    <p>
-
-        @Html.ActionLink("Back to List", "Index")
-    </p>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
