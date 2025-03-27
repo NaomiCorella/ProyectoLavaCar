@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <h2 class="text-center my-4 fw-bold">Perfil</h2>
+
 
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -31,9 +31,7 @@
             <div class="col-lg-4">
                 <div class="card shadow p-4 rounded mb-4">
                     <h4 class="text-center mb-3">Perfil de Usuario</h4>
-                    <div class="text-center mb-4">
-                        <img src="~/assets/images/avatar.png" class="rounded-circle" alt="Avatar" width="100">
-                    </div>
+                    
 
                     <!-- Información Personal -->
                     <div>
@@ -57,76 +55,88 @@
                         </dl>
                     </div>
 
-                   
-                    <div class="d-flex justify-content-center mt-3">
-                        <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-primary mx-3 d-flex align-items-center" title="Editar">
+                    <!-- Botones -->
+                    <div class="d-flex flex-column align-items-center gap-3 mt-3">
+                        <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Editar">
                             <i class="fas fa-edit me-2"></i> Actualizar Información
                         </a>
-                        <a href="@Url.Action("CambiarContraseña", "Usuario")" class="btn btn-danger mx-3 d-flex align-items-center" title="Cambiar Contraseña">
+                        <a href="@Url.Action("CambiarContraseña", "Usuario")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Cambiar Contraseña">
                             <i class="fas fa-key me-2"></i> Cambiar Contraseña
                         </a>
-                        <form id="logoutForm" action="@Url.Action("LogOff", "Account")" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-warning mx-3 d-flex align-items-center" title="Cerrar Sesión">
+                        <form id="logoutForm" action="@Url.Action("LogOff", "Account")" method="post" class="w-100">
+                            <button type="submit" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Cerrar Sesión">
                                 <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
                             </button>
                         </form>
                     </div>
                 </div>
+
             </div>
 
-            
+
             <div class="col-lg-8">
 
-                <h3 class="mb-3">Reservas</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Servicio</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var reserva in Model.reservas)
-                        {
+                <!-- Card for Reservas -->
+                <div class="card shadow p-4 mb-4">
+                    <h3 class="mb-3">Reservas</h3>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>@reserva.fecha</td>
-                                <td>@reserva.hora</td>
-                                <td>@reserva.idServicio</td>
-                                <td>@reserva.estado</td>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Servicio</th>
+                                <th>Estado</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in Model.reservas.Take(3))
+                            {
+                                <tr>
+                                    <td>@reserva.fecha</td>
+                                    <td>@reserva.hora</td>
+                                    <td>@reserva.idServicio</td>
+                                    <td>@reserva.estado</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("MisReservas", "Reservas")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
 
-            
-                <h3 class="mb-3">Compras</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var compras in Model.compras)
-                        {
+                <!-- Card for Compras -->
+                <div class="card shadow p-4 mb-4">
+                    <h3 class="mb-3">Compras</h3>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => compras.Fecha)</td>
-                                <td>@Html.DisplayFor(modelItem => compras.Total)</td>
+                                <th>Fecha</th>
+                                <th>Total</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var compras in Model.compras.Take(3))
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => compras.Fecha)</td>
+                                    <td>@Html.DisplayFor(modelItem => compras.Total)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("MisCompras", "Compra")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
 
-           
+                <!-- Link to go back to the list -->
                 <p>
-                    
                     @Html.ActionLink("Back to List", "Index")
                 </p>
 
             </div>
+
         </div>
     </div>
 
