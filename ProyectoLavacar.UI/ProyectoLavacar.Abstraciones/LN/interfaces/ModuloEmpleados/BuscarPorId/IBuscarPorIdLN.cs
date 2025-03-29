@@ -10,6 +10,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.BuscarPorId
 {
     public interface IBuscarPorIdLN
     {
-        UsuariosDto Detalle(string idEmpleado);
+        EmpleadoDto Detalle(string idEmpleado);
     }
 }

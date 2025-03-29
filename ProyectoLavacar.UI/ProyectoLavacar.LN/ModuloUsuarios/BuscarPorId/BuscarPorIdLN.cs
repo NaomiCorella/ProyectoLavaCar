@@ -19,16 +19,16 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId
         {
             _obtenerPorIdAD = new BuscarPorIdAD();
         }
-        public UsuariosDto Detalle (string idCliente)
+        public EmpleadoDto Detalle (string idCliente)
         {
             UsuariosTabla clientesEnBaseDeDatos = _obtenerPorIdAD.Detalle(idCliente);
-            UsuariosDto elClienetAMostrar = ConvertirAPersonaAMostrar(clientesEnBaseDeDatos);
+            EmpleadoDto elClienetAMostrar = ConvertirAPersonaAMostrar(clientesEnBaseDeDatos);
             return elClienetAMostrar;
         }
-        private UsuariosDto ConvertirAPersonaAMostrar(UsuariosTabla elCliente)
+        private EmpleadoDto ConvertirAPersonaAMostrar(UsuariosTabla elCliente)
         {
             
-            return new UsuariosDto
+            return new EmpleadoDto
             {
                 nombre = elCliente.nombre,
                 primer_apellido = elCliente.primer_apellido,

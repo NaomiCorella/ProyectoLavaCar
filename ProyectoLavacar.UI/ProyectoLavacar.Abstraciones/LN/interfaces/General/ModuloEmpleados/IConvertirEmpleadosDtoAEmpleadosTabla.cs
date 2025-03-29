@@ -11,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloEmpleados
 {
     public interface IConvertirEmpleadosDtoAEmpleadosTabla
     {
-        UsuariosTabla ConvertirEmpleados(UsuariosDto elEmpleado);
+        UsuariosTabla ConvertirEmpleados(EmpleadoDto elEmpleado);
     }
 }

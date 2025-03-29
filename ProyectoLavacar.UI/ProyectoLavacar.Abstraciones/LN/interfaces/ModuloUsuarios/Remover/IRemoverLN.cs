@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Remover
 {
     public interface IRemoverLN
     {
-        Task<int> EditarUsuarios(UsuariosDto elClieteEnVista);
+        Task<int> EditarUsuarios(EmpleadoDto elClieteEnVista);
     }
 }

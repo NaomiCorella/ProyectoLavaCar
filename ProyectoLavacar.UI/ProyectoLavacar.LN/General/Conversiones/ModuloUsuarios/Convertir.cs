@@ -11,7 +11,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloUsuarios
 {
     public class convertir : IConvertir
     {
-        public UsuariosTabla ConvertirCliente(UsuariosDto elCliente)
+        public UsuariosTabla ConvertirCliente(EmpleadoDto elCliente)
         {
             return new UsuariosTabla
             {

@@ -58,27 +58,33 @@ namespace ProyectoLavacar.Controllers
         #region Margenes Ventas
         public ActionResult ObtenerMargenVentas()
         {
-            // Calcular el Margen de Ventas: Sumar la diferencia entre precio y costo
-            decimal margenVentas = _context.CompraServiciosTabla
-                .Join(_context.CompraTabla,
-                    compraServicio => compraServicio.idCompra, // Relacionamos la compra con el idCompra
-                    compra => compra.idCompra,
-                    (compraServicio, compra) => new { compraServicio, compra })
-                .Join(_context.ServiciosTabla,
-                    compraServicio => compraServicio.compraServicio.idServicio, // Relacionamos con Servicios usando el idServicio en CompraServiciosTabla
-                    servicio => servicio.idServicio,
-                    (compraServicio, servicio) => new
-                    {
-                        TotalVenta = compraServicio.compra.Total,
-                        Precio = servicio.precio,
-                        Costo = servicio.costo
-                    })
-                .Sum(x => x.Precio - x.Costo); // Sumar los márgenes de cada venta
+            var margenVentasLista = _context.CompraServiciosTabla
+    .Join(_context.CompraTabla,
+        compraServicio => compraServicio.idCompra,
+        compra => compra.idCompra,
+        (compraServicio, compra) => new { compraServicio, compra })
+    .Join(_context.ServiciosTabla,
+        compraServicio => compraServicio.compraServicio.idServicio,
+        servicio => servicio.idServicio,
+        (compraServicio, servicio) => new
+        {
+            Precio = (servicio.precio == null ? 0m : servicio.precio),
+            Costo = (servicio.costo == null ? 0m : servicio.costo)
+        })
+    .ToList(); // Materializa los datos en memoria
 
-            // Calcular el Total de Ventas: Sumar los totales de la tabla Compra
+            decimal margenVentas = margenVentasLista.Sum(x => x.Precio - x.Costo);
+
+
+
             decimal totalVentas = _context.CompraTabla
-                .Where(c => c.Estado)  // Consideramos solo compras activas
-                .Sum(c => c.Total);
+     .Where(c => c.Estado)  // Consideramos solo compras activas
+     .Select(c => new { Total = (decimal?)c.Total })  // Convierte Total a nullable
+     .ToList()  // Materializa los datos en memoria
+     .Sum(c => c.Total ?? 0m);  // Si es NULL, usa 0m
+
+            ;
+
 
             // Calcular el Margen Porcentual de Ventas (si el total de ventas es 0, asignamos 0)
             decimal margenPorcentualVentas = totalVentas == 0 ? 0 : (margenVentas / totalVentas) * 100;

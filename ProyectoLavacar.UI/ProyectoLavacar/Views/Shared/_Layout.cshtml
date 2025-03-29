@@ -42,14 +42,15 @@
                                 <li class="text"><span>Lunes-Domingo 9:00 AM - 6:00 PM </span></li>
                                 <li class="info"><span><a href="tel:+(506)7285 0302 "><i class="fas fa-phone-alt"></i>+(506) 7285 0302</a></span></li>
                                 <li class="info"><span><a href="mailto:lavacarhervi@gmail.com"><i class="far fa-envelope"></i>lavacarhervi@gmail.com</a></span></li>
+
                             </ul>
                         </div>
-                    </div>
+                    </div> 
                     <div class="col-lg-2">
                         <div class="search-box d-flex align-items-center">
                             @if (User.Identity.IsAuthenticated)
                             {
-                            
+
                                 if (User.IsInRole("Admin"))
                                 {
                                     <!-- Si el usuario es Admin -->
@@ -116,7 +117,7 @@
                                     <li class="menu-item"><a href="service.html">Servicios</a></li>
                                     <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                                     <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-
+                                    
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Perfil</a>
                                         <ul class="sub-menu">

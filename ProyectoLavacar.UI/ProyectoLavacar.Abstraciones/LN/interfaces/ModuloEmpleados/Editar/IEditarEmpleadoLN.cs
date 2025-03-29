@@ -11,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Editar
 {
     public interface IEditarEmpleadoLN
     {
-        Task<int> EditarEmpleados(UsuariosDto elEmpleadoEnVista);
+        Task<int> EditarEmpleados(EmpleadoDto elEmpleadoEnVista);
     }
 }

@@ -46,6 +46,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -69,11 +70,11 @@ namespace ProyectoLavacar.Controllers
         IDetallesTramitesLN _detallesTramites;
         IProcesarNominaLN _procesarNomina;
         IBuscarPorIdLN _buscarPorIdEmpleado;
-
+        IEmailSender _emailSender;
         public NominaController()
         {
             _buscarPorIdEmpleado = new BuscarPorIdLN();
-
+            _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _crearAjustes = new CrearAjustesSalarialesLN();
             _crearNomina = new CrearNominaLN();
             _crearTramites = new CrearTramitesLN();
@@ -476,7 +477,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult ProcesarNomina(int idNomina)
         {
             NominaDto nomina = _obtenerporId.Detalle(idNomina);
-            UsuariosDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            EmpleadoDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
             UnicoEmpleadoDto nominaEmpleado = new UnicoEmpleadoDto
             {
                 IdNomina = nomina.IdNomina,
@@ -501,12 +502,44 @@ namespace ProyectoLavacar.Controllers
             ViewBag.total = _procesarNomina.Total(idNomina);
             return View(nominaEmpleado);
         }
-        public ActionResult ConfimarNomina(int idNomina)
+        
+
+        public async Task<ActionResult> ConfimarNomina(int idNomina)
         {
             NominaDto nomina = _procesarNomina.ProcesarNomina(idNomina);
+            if (nomina == null)
+            {
+                TempData["ErrorMessage"] = "No se pudo procesar la nómina.";
+                return RedirectToAction("Index");
+            }
+
+            EmpleadoDto usuario = _buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            if (usuario == null || string.IsNullOrEmpty(usuario.Email))
+            {
+                TempData["ErrorMessage"] = "No se pudo obtener el correo del empleado.";
+                return RedirectToAction("Index");
+            }
+
+            string asunto = "Confirmación de Nómina";
+            string mensaje = $"Estimado {usuario.nombre} {usuario.primer_apellido},<br><br>" +
+                             $"Se ha procesado su nómina correspondiente al período {nomina.PeriodoDePago}.<br>" +
+                             $"Salario Neto: {nomina.SalarioNeto:C2} <br>" +
+                             $"Fecha de Pago: {nomina.FechaDePago:dd/MM/yyyy} <br><br>" +
+                             $"Saludos,<br>Administración";
+
+            try
+            {
+                await _emailSender.SendEmailAsync(usuario.Email, asunto, mensaje);
+                TempData["SuccessMessage"] = "Nómina confirmada y correo enviado correctamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "La nómina fue confirmada, pero ocurrió un error al enviar el correo.";
+            }
 
             return RedirectToAction("Index");
         }
+
         public ActionResult Error()
         {
 
