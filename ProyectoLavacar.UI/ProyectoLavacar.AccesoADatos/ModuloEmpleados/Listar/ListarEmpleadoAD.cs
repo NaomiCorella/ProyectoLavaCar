@@ -17,16 +17,16 @@ namespace ProyectoLavacar.AccesoADatos.ModuloEmpleados.Listar
         {
             _elContexto = new Contexto();
         }
-        public List<UsuariosDto> ListarEmpleado()
+        public List<EmpleadoDto> ListarEmpleado()
         {
-            List<UsuariosDto> laListaDeEmpleados = (from elEmpleado in _elContexto.UsuariosTabla
+            List<EmpleadoDto> laListaDeEmpleados = (from elEmpleado in _elContexto.UsuariosTabla
                                                     join usuarioRol in _elContexto.AspNetUserRolesTabla
                                                         on elEmpleado.Id equals usuarioRol.UserId
                                                     join elRol in _elContexto.RolesTabla
                                                         on usuarioRol.RoleId equals elRol.Id
                                                     where elRol.Name == "Empleado"
 
-                                                    select new UsuariosDto
+                                                    select new EmpleadoDto
                                                    {
                                                        nombre = elEmpleado.nombre,
                                                        primer_apellido = elEmpleado.primer_apellido,

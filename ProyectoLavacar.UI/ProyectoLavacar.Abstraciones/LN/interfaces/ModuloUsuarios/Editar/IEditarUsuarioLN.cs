@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Editar
 {
     public interface IEditarUsuarioLN
     {
-        Task<int> EditarUsuarios(UsuariosDto elClieteEnVista);
+        Task<int> EditarUsuarios(EmpleadoDto elClieteEnVista);
 
     }
 }

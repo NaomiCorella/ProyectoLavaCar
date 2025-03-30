@@ -73,7 +73,7 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de finanzas";
-            List<UsuariosDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios().Where(p => p.estado == true).ToList();
+            List<EmpleadoDto> laListaDeFinanzas = _listarUsuario.ListarUsuarios().Where(p => p.estado == true).ToList();
             return View(laListaDeFinanzas);
         }
 
@@ -83,7 +83,7 @@ namespace ProyectoLavacar.Controllers
         {
 
 
-            UsuariosDto Finanzas = _buscarPorId.Detalle(id);
+            EmpleadoDto Finanzas = _buscarPorId.Detalle(id);
             return View(Finanzas);
         }
 
@@ -95,7 +95,7 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Usuario/Create
         [HttpPost]
-        public async Task<ActionResult> Create(UsuariosDto modeloDeUsuarios)
+        public async Task<ActionResult> Create(EmpleadoDto modeloDeUsuarios)
         {
             try
             {
@@ -113,14 +113,14 @@ namespace ProyectoLavacar.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(string id)
         {
-            UsuariosDto laFinanza = _buscarPorId.Detalle(id);
+            EmpleadoDto laFinanza = _buscarPorId.Detalle(id);
 
             return View(laFinanza);
         }
 
         // POST: Usuario/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(UsuariosDto elUsuario)
+        public async Task<ActionResult> Edit(EmpleadoDto elUsuario)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-                UsuariosDto userEliminado = new UsuariosDto
+                EmpleadoDto userEliminado = new EmpleadoDto
                 {
                     Id = Usuario.Id,
                     nombre = Usuario.nombre,
@@ -192,7 +192,7 @@ namespace ProyectoLavacar.Controllers
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            UsuariosDto user = _buscarPorId.Detalle(idUsuario);
+            EmpleadoDto user = _buscarPorId.Detalle(idUsuario);
             List<ReservaCompleta> reservas =  _listarReservasClientes.Listar(idUsuario); 
             List<CompraAdminDto> compras = _listarCompraCliente.Listar(idUsuario);
             PerfilUsuario usuario = new PerfilUsuario
@@ -213,7 +213,7 @@ namespace ProyectoLavacar.Controllers
         
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idUsuario = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            UsuariosDto user = _buscarPorId.Detalle(idUsuario);
+            EmpleadoDto user = _buscarPorId.Detalle(idUsuario);
             List<ReservaCompleta> reservas = _listarReservasEmpleado.Listar(idUsuario); 
             List<UnicoEmpleadoDto> nomina = _listarNominadelEmpleado.ListarNomina(idUsuario);
             var ultimoRegistro = _context.RegistroHorasTabla

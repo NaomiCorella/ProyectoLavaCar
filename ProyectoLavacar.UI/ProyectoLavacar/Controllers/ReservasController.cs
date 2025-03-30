@@ -380,7 +380,7 @@ namespace ProyectoLavacar.Controllers
             ReservasDto reserva = new ReservasDto()
             {
                 idCliente = idCliente,
-                idServicio = modeloDeReserva.idServicio,  // Usamos el idServicio para la reserva
+                idServicio = modeloDeReserva.idServicio, 
                 idEmpleado = idCliente,
                 fecha = modeloDeReserva.fecha,
                 hora = modeloDeReserva.hora,
@@ -398,18 +398,17 @@ namespace ProyectoLavacar.Controllers
                 string mensaje = $"Estimado {usuario.nombre},\n\nSu reserva ha sido confirmada con éxito.\n\n" +
                                  $"📅 Fecha: {modeloDeReserva.fecha}\n" +
                                  $"⏰ Hora: {modeloDeReserva.hora}\n" +
-                                 $"🛠 Servicio: {servicio.nombre}\n\n" +  // Aquí se incluye el nombre del servicio
+                                 $"🛠 Servicio: {servicio.nombre}\n\n" +
                                  $"Gracias por elegirnos.";
 
                 await _emailSender.SendEmailAsync(usuario.Email, asunto, mensaje);
 
-                // Redirigir a la vista de mis reservas
                 return RedirectToAction("MisReservas");
             }
             else
             {
                 Console.WriteLine("⚠️ No se pudo guardar la reserva.");
-                // Recargar los servicios
+              
                 var servicios = _listarServicios.ListarServicios()
                     .Where(a => a.estado == true)
                     .ToList();

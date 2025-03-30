@@ -23,7 +23,7 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.Editar
             _convertirObjeto = new ConvertirUsuariosDtoAUsuariosTabla();
         }
 
-        public async Task<int> EditarUsuarios(UsuariosDto elClieteEnVista)
+        public async Task<int> EditarUsuarios(EmpleadoDto elClieteEnVista)
         {
             int cantidadDeDatosEditados = await _editarPersonasAD.EditarUsuarios(_convertirObjeto.ConvertirCliente(elClieteEnVista));
             return cantidadDeDatosEditados;
