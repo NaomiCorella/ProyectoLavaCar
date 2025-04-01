@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
 {
-    public class UsuariosDto
+    public class EmpleadoDto
     {
         public string Id { get; set; }
         [Display(Name = "Nombre")]

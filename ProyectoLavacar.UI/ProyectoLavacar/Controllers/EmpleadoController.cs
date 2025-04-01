@@ -64,9 +64,9 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
-            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
+            List<EmpleadoDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
             var listaNomina = _listarNomina.ListarNomina();
-           foreach (UsuariosDto usuario in laListaDeFinanzas)
+           foreach (EmpleadoDto usuario in laListaDeFinanzas)
             {
                 foreach(var nomina in listaNomina)
                 {
@@ -109,7 +109,7 @@ namespace ProyectoLavacar.Controllers
         // GET: Empleado/Details/5
         public ActionResult Details(string id)
         {
-            UsuariosDto Finanzas = _buscarPorId.Detalle(id);
+            EmpleadoDto Finanzas = _buscarPorId.Detalle(id);
             return View(Finanzas);
         }
 
@@ -157,7 +157,7 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Empleado/Create
         [HttpPost]
-        public async Task<ActionResult> Create(UsuariosDto modeloDeEmpleado)
+        public async Task<ActionResult> Create(EmpleadoDto modeloDeEmpleado)
         {
             try
             {
@@ -175,14 +175,14 @@ namespace ProyectoLavacar.Controllers
         // GET: Empleado/Edit/5
         public ActionResult Edit(string id)
         {
-            UsuariosDto laFinanza = _buscarPorId.Detalle(id);
+            EmpleadoDto laFinanza = _buscarPorId.Detalle(id);
 
             return View(laFinanza);
         }
 
         // POST: Empleado/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(UsuariosDto elEmpleado)
+        public async Task<ActionResult> Edit(EmpleadoDto elEmpleado)
         {
             try
             {
@@ -226,7 +226,7 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-                UsuariosDto userEliminado = new UsuariosDto
+                EmpleadoDto userEliminado = new EmpleadoDto
                 {
                     Id = Usuario.Id,
                     nombre = Usuario.nombre,

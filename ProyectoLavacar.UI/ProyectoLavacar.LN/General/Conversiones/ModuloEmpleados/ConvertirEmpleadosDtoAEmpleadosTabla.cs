@@ -13,7 +13,7 @@ namespace ProyectoLavacar.LN.General.Conversiones.ModuloEmpleados
     public class ConvertirEmpleadosDtoAEmpleadosTabla : IConvertirEmpleadosDtoAEmpleadosTabla
     {
 
-        public UsuariosTabla ConvertirEmpleados(UsuariosDto elEmpleado)
+        public UsuariosTabla ConvertirEmpleados(EmpleadoDto elEmpleado)
         {
             return new UsuariosTabla
             {
