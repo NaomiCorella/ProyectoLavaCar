@@ -1384,7 +1384,7 @@ button {
       margin-bottom: 15px;
       text-transform: uppercase; }
 
-.service-area-v1 {
+/*.service-area-v1 {
   position: relative;
   z-index: 1; }
   .service-area-v1:after {
@@ -1435,7 +1435,7 @@ button {
         padding-left: 10px;
         vertical-align: middle; }
       .service-area-v1 .service-item .info .btn_link:hover {
-        color: #ff0012 }
+        color: #ff0012 }*/
 
 .service-area-v2 {
   padding-bottom: 180px; }
@@ -1448,15 +1448,17 @@ button {
   @media (max-width: 767px) {
     .service-area-v2 {
       padding-bottom: 120px; } }
-  .service-area-v2 .service-item {
-    background: #23203e;
+.service-area-v2 .service-item {
+    background: #2320BA;
     text-align: center;
     padding: 55px 40px 48px;
     border-radius: 5px;
     -webkit-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s; }
+    transition: all 0.3s ease-out 0s;
+}
     .service-area-v2 .service-item:hover {
-      background: #ff0012 }
+        background: #8720BA
+    }
       .service-area-v2 .service-item:hover .icon {
         background: rgba(35, 32, 62, 0.5); }
     .service-area-v2 .service-item .icon {
