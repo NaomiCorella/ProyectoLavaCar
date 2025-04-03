@@ -9,6 +9,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.DetalleCompraC
 {
     public interface IDetalleCompraCompletaLN
     {
-        CompraCompletaDto Detalle(int idCompra);
+        CompraCompletaDto Detalle(Guid idCompra);
     }
 }

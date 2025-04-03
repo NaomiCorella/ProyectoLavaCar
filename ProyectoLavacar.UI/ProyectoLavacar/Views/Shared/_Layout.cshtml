@@ -42,13 +42,39 @@
                                 <li class="text"><span>Lunes-Domingo 9:00 AM - 6:00 PM </span></li>
                                 <li class="info"><span><a href="tel:+(506)7285 0302 "><i class="fas fa-phone-alt"></i>+(506) 7285 0302</a></span></li>
                                 <li class="info"><span><a href="mailto:lavacarhervi@gmail.com"><i class="far fa-envelope"></i>lavacarhervi@gmail.com</a></span></li>
+
                             </ul>
                         </div>
-                    </div>
+                    </div> 
                     <div class="col-lg-2">
                         <div class="search-box d-flex align-items-center">
-                             @Html.Partial("_LoginPartial")
-                            <a href="inicioSesion.html" class="profile-icon mr-3"><i class="fas fa-user fa-2x" style="color: red;"></i></a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <!-- Si el usuario es Admin -->
+                                    <a href="@Url.Action("MiPerfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user-shield fa-2x" style="color: white;"></i>
+                                        <span>@User.Identity.Name (Admin)</span>
+                                    </a>
+                                }
+                                else if (User.IsInRole("Usuario"))
+                                {
+                                  
+                                    <a href="@Url.Action("Perfil", "Usuario")" class="profile-icon mr-3">
+                                        <i class="fas fa-user fa-2x" style="color: white;"></i>
+                                        <span>@User.Identity.Name</span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+
+                                <a href="@Url.Action("Login", "Account")" class="profile-icon mr-3">
+                                    <i class="fas fa-user fa-2x" style="color: red;"></i>
+                                </a>
+                            }
                             <a href="#" class="search-icon" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search fa-2x" style="color: red;"></i></a>
                         </div>
                     </div>
@@ -91,7 +117,7 @@
                                     <li class="menu-item"><a href="service.html">Servicios</a></li>
                                     <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                                     <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-
+                                    
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Perfil</a>
                                         <ul class="sub-menu">
@@ -109,7 +135,7 @@
                                             <li><a href="gestionUsuarios.html">Gestión de usuarios</a></li>
                                             <li>@Html.ActionLink("Gestion de Inventario", "Index", "Inventario", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li><a href="gestionVentas.html">Gestión de informes de ventas</a></li>
-                                            <li><a href="gestionReportes.html">Gestión de reportes</a></li>
+                                            <li>@Html.ActionLink("Gestion de Reportes", "Index", "Reporte", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li>@Html.ActionLink("Gestion de Nomina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
                                         </ul>
                                     </li>

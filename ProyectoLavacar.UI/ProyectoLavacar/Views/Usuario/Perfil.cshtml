@@ -4,71 +4,152 @@
 @{
     ViewBag.Title = "Perfil";
 }
+<!DOCTYPE html>
+<html lang="zxx">
 
-<h2>Perfil</h2>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Usuarios</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-<div>
-    <h4>PerfilUsuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.primer_apellido)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.segundo_apellido)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-    </dl>
-</div>
+<body>
 
-<h3>Reservas</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Servicio</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var reserva in Model.reservas)
-        {
-            <tr>
-                <td>@reserva.fecha</td>
-                <td>@reserva.hora</td>
-                <td>@reserva.idServicio</td>
-                <td>@reserva.estado</td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-<p>
-    <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
-        <i class="fas fa-edit"></i> Editar
-    </a>    @Html.ActionLink("Back to List", "Index")
-</p>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <!-- Perfil de Usuario -->
+            <div class="col-lg-4">
+                <div class="card shadow p-4 rounded mb-4">
+                    <h4 class="text-center mb-3">Perfil de Usuario</h4>
+                    
+
+                    <!-- Información Personal -->
+                    <div>
+                        <h5>Información Personal</h5>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>@Html.DisplayNameFor(model => model.nombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.nombre)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.primer_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.primer_apellido)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.segundo_apellido)</dt>
+                            <dd>@Html.DisplayFor(model => model.segundo_apellido)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                            <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+                            <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                            <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
+                        </dl>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="d-flex flex-column align-items-center gap-3 mt-3">
+                        <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Editar">
+                            <i class="fas fa-edit me-2"></i> Actualizar Información
+                        </a>
+                        <a href="@Url.Action("CambiarContraseña", "Usuario")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Cambiar Contraseña">
+                            <i class="fas fa-key me-2"></i> Cambiar Contraseña
+                        </a>
+                        <form id="logoutForm" action="@Url.Action("LogOff", "Account")" method="post" class="w-100">
+                            <button type="submit" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center" title="Cerrar Sesión">
+                                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-8">
+
+                <!-- Card for Reservas -->
+                <div class="card shadow p-4 mb-4">
+                    <h3 class="mb-3">Reservas</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Servicio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in Model.reservas.Take(3))
+                            {
+                                <tr>
+                                    <td>@reserva.fecha</td>
+                                    <td>@reserva.hora</td>
+                                    <td>@reserva.idServicio</td>
+                                    <td>@reserva.estado</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("MisReservas", "Reservas")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
+
+                <!-- Card for Compras -->
+                <div class="card shadow p-4 mb-4">
+                    <h3 class="mb-3">Compras</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var compras in Model.compras.Take(3))
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => compras.Fecha)</td>
+                                    <td>@Html.DisplayFor(modelItem => compras.Total)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("MisCompras", "Compra")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
+
+                <!-- Link to go back to the list -->
+                <p>
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>

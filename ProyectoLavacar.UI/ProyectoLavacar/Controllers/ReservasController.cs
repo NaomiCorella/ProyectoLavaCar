@@ -1,8 +1,10 @@
 ﻿using Antlr.Runtime.Tree;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using ProyectoLavacar.Abstracciones.LN.Interfaces.ModuloBitacora.Registrar;
 using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
 using ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloReservas.ListarTodo;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.Crear;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloReservas.DetallesReservaCompleta;
@@ -18,6 +20,7 @@ using ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloReservas;
 using ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos;
 using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.ModuloCorreos;
 using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.LN.ModuloReservas.Crear;
 using ProyectoLavacar.LN.ModuloReservas.DetallesReservaCompleta;
@@ -31,11 +34,19 @@ using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
 using ProyectoLavacar.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId;
+using ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.ObtenerPorId;
+using ProyectoLavacar.LN.ModuloServicios.ObtenerPorId;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -44,6 +55,9 @@ namespace ProyectoLavacar.Controllers
 
     public class ReservasController : Controller
     {
+        IBuscarAsyncSerLN _detalleServicios;
+        IBuscarAsyncLN _buscarPorId;
+        IEmailSender _emailSender;
         ICrearReservaLN _crearReserva;
         IEditarReservaLN _editarReservaAdmin;
         IEditarClienteLN _editarReservaCliente;
@@ -58,7 +72,7 @@ namespace ProyectoLavacar.Controllers
         IRegistrarBitacoraLN _registrarBitacoraLN;
         public ReservasController()
         {
-
+            _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _crearReserva = new CrearReservaLN();
             _editarReservaAdmin = new EditarReservaLN();
             _editarReservaCliente = new EditarClienteLN();
@@ -70,6 +84,12 @@ namespace ProyectoLavacar.Controllers
             _context = new Contexto();
             _listarEmpleado = new ListarEmpleadoLN();
             _detallesReservaCompleta = new DetallesReservaCompletaLN();
+            _buscarPorId = new BuscarAsyncLN();
+            _detalleServicios = new BuscarAsyncSerLN();
+        }
+        public ReservasController(IEmailSender emailSender)
+        {
+            _emailSender = emailSender;
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -251,47 +271,156 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Reservas/Create
-        public ActionResult ReservarCita ()
+        //public ActionResult ReservarCita ()
+        //{
+        //    var servicios = _listarServicios.ListarServicios()
+        //       .Where(a => a.estado == true)
+        //       .ToList();
+        //    ViewBag.Servicios = servicios;
+
+        //    return View();
+        //}
+
+        //// POST: Reservas/Create
+        //[HttpPost]
+        //public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
+        //{
+        //    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+        //    string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        //    try
+        //    {
+
+
+        //        ReservasDto reserva = new ReservasDto()
+        //        {
+        //            idReserva = 1,
+        //            idCliente = idCliente,
+        //            idServicio = modeloDeReserva.idServicio,
+        //            idEmpleado = idCliente,
+        //            fecha = modeloDeReserva.fecha,
+        //            hora = modeloDeReserva.hora,
+        //            estado = true
+        //        };
+
+        //        int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
+
+        //        return RedirectToAction("/MisReservas");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejo de errores
+        //        return View();
+        //    }
+        //}
+
+        // GET: Reservas/Create
+        // GET: Reservas/Create
+        // GET: Reservas/Create
+        // Controlador GET
+        public ActionResult ReservarCita()
         {
             var servicios = _listarServicios.ListarServicios()
-               .Where(a => a.estado == true)
-               .ToList();
+                .Where(a => a.estado == true)
+                .ToList();
+
+            Console.WriteLine($" Cantidad de servicios encontrados: {servicios.Count}");
+
+            foreach (var servicio in servicios)
+            {
+                Console.WriteLine($"✅ Servicio: {servicio.nombre} - Estado: {servicio.estado}");
+            }
+
             ViewBag.Servicios = servicios;
-           
             return View();
         }
 
-        // POST: Reservas/Create
+
+
         [HttpPost]
         public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
         {
-            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            // Mostrar datos recibidos
+            Console.WriteLine($"idServicio: {modeloDeReserva.idServicio}, Fecha: {modeloDeReserva.fecha}, Hora: {modeloDeReserva.hora}");
 
-            try
+            // Validar datos
+            if (modeloDeReserva.idServicio == 0 || modeloDeReserva.fecha == null || modeloDeReserva.hora == null)
             {
-
-                ReservasDto reserva = new ReservasDto()
-                {
-                    idReserva = 1,
-                    idCliente = idCliente,
-                    idServicio = modeloDeReserva.idServicio,
-                    idEmpleado = idCliente,
-                    fecha = modeloDeReserva.fecha,
-                    hora = modeloDeReserva.hora,
-                    estado = true
-                };
-
-                int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
-
-                return RedirectToAction("/MisReservas");
+                Console.WriteLine("⚠️ Los datos del formulario son inválidos.");
+                return View(); // O redirige a alguna página que maneje esto
             }
-            catch (Exception ex)
+
+            // Verificar usuario logueado
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            string idCliente = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(idCliente))
             {
-                // Manejo de errores
+                Console.WriteLine("⚠️ No se pudo obtener el ID del usuario logueado.");
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Buscar usuario en la base de datos
+            var usuario = await _buscarPorId.DetalleAsync(idCliente);
+            if (usuario == null)
+            {
+                Console.WriteLine("⚠️ Usuario no encontrado.");
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Obtener el nombre del servicio usando el idServicio
+            var servicio = await _detalleServicios.DetalleAsync(modeloDeReserva.idServicio);
+            if (servicio == null)
+            {
+                Console.WriteLine("⚠️ Servicio no encontrado.");
+                return View();
+            }
+
+            // Crear la reserva
+            ReservasDto reserva = new ReservasDto()
+            {
+                idCliente = idCliente,
+                idServicio = modeloDeReserva.idServicio, 
+                idEmpleado = idCliente,
+                fecha = modeloDeReserva.fecha,
+                hora = modeloDeReserva.hora,
+                estado = true
+            };
+
+            // Guardar la reserva
+            int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
+            Console.WriteLine($"Cantidad de registros guardados: {cantidadDeDatosGuardados}");
+
+            if (cantidadDeDatosGuardados > 0)
+            {
+                // Enviar correo con el nombre del servicio
+                string asunto = "Confirmación de reserva";
+                string mensaje = $"Estimado {usuario.nombre},\n\nSu reserva ha sido confirmada con éxito.\n\n" +
+                                 $"📅 Fecha: {modeloDeReserva.fecha}\n" +
+                                 $"⏰ Hora: {modeloDeReserva.hora}\n" +
+                                 $"🛠 Servicio: {servicio.nombre}\n\n" +
+                                 $"Gracias por elegirnos.";
+
+                await _emailSender.SendEmailAsync(usuario.Email, asunto, mensaje);
+
+                return RedirectToAction("MisReservas");
+            }
+            else
+            {
+                Console.WriteLine("⚠️ No se pudo guardar la reserva.");
+              
+                var servicios = _listarServicios.ListarServicios()
+                    .Where(a => a.estado == true)
+                    .ToList();
+                ViewBag.Servicios = servicios;
                 return View();
             }
         }
+
+
+
+
+
 
 
 
@@ -332,7 +461,7 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-                string datosanteriores = TempData["DatosAnteriores"] as string;
+              string datosanteriores = TempData["DatosAnteriores"] as string;
                 int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
 
                 return RedirectToAction("Reservas");
@@ -401,30 +530,30 @@ namespace ProyectoLavacar.Controllers
                 var reserva = _context.ReservasTabla.Find(id);
                 reserva.estado = !reserva.estado;
                 _context.SaveChanges();
-                string datosPosteriores = $@"
-{{
-    ""IdReserva"": ""{reserva.idReserva}"",
-    ""IdCliente"": ""{reserva.idCliente}"",
-    ""IdEmpleado"": ""{reserva.idEmpleado}"",
-    ""IdServicio"": ""{reserva.idServicio}"",
-    ""Fecha"": ""{reserva.fecha}"",
-    ""Hora"": ""{reserva.hora}"",
-    ""Estado"": ""{reserva.estado}""
-}}";
+//                string datosPosteriores = $@"
+//{{
+//    ""IdReserva"": ""{reserva.idReserva}"",
+//    ""IdCliente"": ""{reserva.idCliente}"",
+//    ""IdEmpleado"": ""{reserva.idEmpleado}"",
+//    ""IdServicio"": ""{reserva.idServicio}"",
+//    ""Fecha"": ""{reserva.fecha}"",
+//    ""Hora"": ""{reserva.hora}"",
+//    ""Estado"": ""{reserva.estado}""
+//}}";
 
-                var bitacora = new BitacoraDto
-                {
-                    IdEvento = 0,
-                    TablaDeEvento = "Reservas",
-                    TipoDeEvento = "Editar de Reservas",
-                    FechaDeEvento = "19-11-2024",
-                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
-                    StackTrace = "no hubo error",
-                    DatosAnteriores = datosPosteriores,
-                    DatosPosteriores = datosPosteriores
-                };
+//                var bitacora = new BitacoraDto
+//                {
+//                    IdEvento = 0,
+//                    TablaDeEvento = "Reservas",
+//                    TipoDeEvento = "Editar de Reservas",
+//                    FechaDeEvento = "19-11-2024",
+//                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
+//                    StackTrace = "no hubo error",
+//                    DatosAnteriores = datosPosteriores,
+//                    DatosPosteriores = datosPosteriores
+//                };
 
-               _registrarBitacoraLN.RegistrarBitacora(bitacora);
+//               _registrarBitacoraLN.RegistrarBitacora(bitacora);
 
                 return RedirectToAction("Reservas/Reservas");
             }

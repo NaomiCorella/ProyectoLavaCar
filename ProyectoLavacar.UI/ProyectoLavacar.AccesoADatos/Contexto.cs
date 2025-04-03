@@ -35,6 +35,7 @@ namespace ProyectoLavacar.AccesoADatos
             modelBuilder.Entity<BitacoraTabla>().ToTable("BITACORA_EVENTOS");
 
             modelBuilder.Entity<CompraTabla>().ToTable("Compra");
+            modelBuilder.Entity<CompraServiciosTabla>().ToTable("CompraServicios");
 
             modelBuilder.Entity<AspNetUserRolesTabla>().HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<RolesTabla>().ToTable("AspNetRoles");
@@ -46,6 +47,7 @@ namespace ProyectoLavacar.AccesoADatos
 
 
         }
+        public DbSet<CompraServiciosTabla> CompraServiciosTabla { get; set; }
         public DbSet<RegistroHorasTabla> RegistroHorasTabla { get; set; }
         public DbSet<RebajosTabla> RebajosTabla { get; set; }
         public DbSet<ReservasTabla> ReservasTabla { get; set; }

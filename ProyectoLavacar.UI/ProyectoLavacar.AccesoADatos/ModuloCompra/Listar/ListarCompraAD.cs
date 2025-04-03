@@ -17,34 +17,28 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.Listar
             _elcontexto = new Contexto();
         }
 
-        public List<CompraCompletaDto> ListarCompra()
+        public List<CompraAdminDto> ListarCompra()
         {
-            List<CompraCompletaDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
+            List<CompraAdminDto> listaDeCompra = (from compra in _elcontexto.CompraTabla
                                                      join elCliente in _elcontexto.UsuariosTabla
                                                      on compra.idCliente equals elCliente.Id
-                                                     join servicio in _elcontexto.ServiciosTabla
-                                                     on compra.idServicio equals servicio.idServicio
-                                                     select new CompraCompletaDto
+                                                  join elEmpleado in _elcontexto.UsuariosTabla
+                                                  on compra.idEmpleado equals elEmpleado.Id
+                                                  select new CompraAdminDto
                                                      {
                                                          idCompra = compra.idCompra,
                                                          idCliente = compra.idCliente,
-                                                         idServicio = compra.idServicio,
-
-                                                         Total = compra.Total,
-                                                         Fecha = compra.fecha.ToString(), 
-                                                         DescripcionServicio = compra.DescripcionServicio,
-                                                         Estado = compra.Estado,
-
                                                          Nombre = elCliente.nombre,
                                                          PrimerApellido = elCliente.primer_apellido,
-                                                         SegundoApellido = elCliente.segundo_apellido,
                                                          Cedula = elCliente.cedula,
-
-                                                         nombre = servicio.nombre,
-                                                         costo = servicio.costo
-
-
-                                                     }).ToList();
+                                                         Fecha = compra.fecha.ToString(),  
+                                                         Total = compra.Total,
+                                                         DescripcionServicio = compra.DescripcionServicio,
+                                                         idEmpleado = compra.idEmpleado,
+                                                      NombreEmp = elEmpleado.nombre,
+                                                      PrimerApellidoEmp = elEmpleado.primer_apellido,
+                                               
+                                                  }).ToList();
 
             return listaDeCompra;
         }

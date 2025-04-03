@@ -16,32 +16,28 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.DetalleCompraCompleta
         {
             _elcontexto = new Contexto();
         }
-        public CompraCompletaDto Detalle(int idCompra)
+        public CompraCompletaDto Detalle(Guid idCompra)
         {
             var CompraCompleta = (from compra in _elcontexto.CompraTabla
                                   join elCliente in _elcontexto.UsuariosTabla
                                   on compra.idCliente equals elCliente.Id
-                                  join servicio in _elcontexto.ServiciosTabla
-                                  on compra.idServicio equals servicio.idServicio
+                                 
                                   where compra.idCompra == idCompra 
                                   select new CompraCompletaDto
                                   {
                                       idCompra = compra.idCompra,
                                       idCliente = compra.idCliente,
-                                      idServicio = compra.idServicio,
+                                    
 
                                       Total = compra.Total,
                                       Fecha = compra.fecha.ToString(),
                                       DescripcionServicio = compra.DescripcionServicio,
-                                      Estado = compra.Estado,
 
                                       Nombre = elCliente.nombre,
                                       PrimerApellido = elCliente.primer_apellido,
                                       SegundoApellido = elCliente.segundo_apellido,
                                       Cedula = elCliente.cedula,
 
-                                      nombre = servicio.nombre,
-                                      costo = servicio.costo
 
                                   }).FirstOrDefault(); 
 

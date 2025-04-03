@@ -3,185 +3,230 @@
 @{
     ViewBag.Title = "MiPerfil";
 }
+<!DOCTYPE html>
+<html lang="zxx">
 
-<h2>MiPerfil</h2>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Usuarios</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-<div>
-    <h4>PerfilEmpleado</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+<body>
+    <h2>MiPerfil</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="text-center mb-3">Perfil de Empleado</h4>
+                    <div class="text-center mb-4">
+                        <img src="~/assets/images/avatar.png" class="rounded-circle" alt="Avatar" width="100">
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.primer_apellido)
-        </dt>
+                    <div>
+                       
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>@Html.DisplayNameFor(model => model.nombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.nombre) @Html.DisplayFor(model => model.primer_apellido) @Html.DisplayFor(model => model.segundo_apellido)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.primer_apellido)
-        </dd>
+                            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                            <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.segundo_apellido)
-        </dt>
+                            <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                            <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.segundo_apellido)
-        </dd>
+                            <dt>@Html.DisplayNameFor(model => model.turno)</dt>
+                            <dd>@Html.DisplayFor(model => model.turno)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                            <dt>@Html.DisplayNameFor(model => model.puesto)</dt>
+                            <dd>@Html.DisplayFor(model => model.puesto)</dd>
+                        </dl>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                    <div class="d-flex flex-column gap-3 align-items-center mt-4">
+                        <!-- Botón Actualizar Información -->
+                        <a href="@Url.Action("ActualizarEmpleado", "Empleado")" class="btn btn-outline-dark w-75 d-flex justify-content-center align-items-center text-center">
+                            <i class="fas fa-edit me-2"></i> Actualizar Información
+                        </a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+                        <!-- Botón Cerrar Sesión -->
+                        <form id="logoutForm" action="@Url.Action("LogOff", "Account")" method="post" class="w-75">
+                            <button type="submit" class="btn btn-outline-dark w-100 d-flex justify-content-center align-items-center text-center">
+                                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.turno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.turno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.puesto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.puesto)
-        </dd>
-
-    </dl>
-</div>
-<div>
-    <h3>Reservas</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Servicio</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var reserva in Model.reservas)
-            {
-                <tr>
-                    <td>@reserva.fecha</td>
-                    <td>@reserva.hora</td>
-                    <td>@reserva.idServicio</td>
-                    <td>@reserva.estado</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<div>
-    <h3>Desempeño</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>calificacion</th>
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="text-center mb-3">Acciones</h4>
 
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var evaluacion in Model.evaluaciones)
-            {
-                <tr>
-                    <td>@evaluacion.fechaEvaluacion</td>
-                    <td>@evaluacion.calificacion</td>
+                    <div class="container mt-3">
+                        <div class="row g-3">
+
+                            <!-- Registro de horas (ocupando 12 columnas para centrar) -->
+                            <div class="col-12 d-flex flex-column align-items-center gap-3">
+                                @if (ViewBag.estadoRegistro == null)
+                                {
+                                    <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-clock me-2"></i> Registrar Hora Entrada
+                                    </a>
+                                }
+                                else
+                                {
+                                    if (ViewBag.ValidacionRegistro)
+                                    {
+                                        <p class="text-danger text-center w-100">
+                                            Ya ingresó su registro de horas por el día. En caso de problemas, hable con su administrador.
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        if (!ViewBag.estadoRegistro)
+                                        {
+                                            <a href="@Url.Action("RegistrarHoraSalida")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                                                <i class="fas fa-clock me-2"></i> Registrar Hora Salida
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                                                <i class="fas fa-clock me-2"></i> Registrar Hora Entrada
+                                            </a>
+                                        }
+                                    }
+                                }
+                                <a href="@Url.Action("Index", "ReporteEmp")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-chart-line me-2"></i> Ver Reportes
+                                </a>
+
+                                <a href="@Url.Action("IngresarVacaciones", "Nomina")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-plane me-2"></i> Ingresar Vacaciones
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<div>
-    <h3>Nomina</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Concepto</th>
-                <th>Monto</th>
+            <div class="col-lg-8">
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <h4 class="mb-3">Reservas</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Servicio</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var nomina in Model.nomina)
-            {
-                <tr>
-                    <td>@nomina.FechaDePago</td>
-                    <td>@nomina.PeriodoDePago</td>
-                    <td>@nomina.SalarioNeto</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in Model.reservas.Take(3))
+                            {
+                                <tr>
+                                    <td>@reserva.fecha</td>
+                                    <td>@reserva.hora</td>
+                                    <td>@reserva.idServicio</td>
 
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("ReservasEncargadas", "Reservas")" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
 
-<div class="navbar-btn">
-    @Html.ActionLink("Ingresar Vacaciones", "IngresarVacaciones", "Nomina", new { area = "" }, new { @class = "navbar-brand" })
-</div>
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Evaluaciones de Desempeño</h4>
 
-<p>
-    @if (ViewBag.estadoRegistro == null)
-    {
-        <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraEntrada">
-            RegistrarHoraEntrada
-        </a>
-    }
-    else
-    {
-        if (ViewBag.ValidacionRegistro)
-        {
-        <p>
-            Ya ingreso su registro de horas por el dia. En caso de problemas hable con su administrador
-        </p>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var evaluacion in Model.evaluaciones.Take(3))
+                            {
+                                <tr>
+                                    <td>@evaluacion.fechaEvaluacion</td>
+                                    <td>@evaluacion.calificacion</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                 
+                    <a href="@Url.Action("MisEvaluaciones","Empleado", new { id = Model.id })" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
 
-    }
-    else
-    {
-        if (!ViewBag.estadoRegistro)
-        {
+                <div class="card shadow-lg p-4 rounded-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Nómina</h4>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var nomina in Model.nomina.Take(3))
+                            {
+                                <tr>
+                                    <td>@nomina.FechaDePago</td>
+                                    <td>@nomina.PeriodoDePago</td>
+                                    <td>@nomina.SalarioNeto</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="@Url.Action("Nomina","Nomina", new { idEmpleado = Model.id })" class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center">
+                        Ver más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <a href="@Url.Action("RegistrarHoraSalida")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraSalida">
-                RegistrarHoraSalida
-            </a>
-        }
-        else
-        {
-            <a href="@Url.Action("RegistrarHoraEntrada")" class="btn btn-outline-success btn-sm me-2" title="RegistrarHoraEntrada">
-                RegistrarHoraEntrada
-            </a>
-        }
-    }
 
-}
 
-<a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-outline-info btn-sm me-2" title="Editar">
-    <i class="fas fa-edit"></i> Editar
-</a>
+
+
     @Html.ActionLink("Back to List", "Index")
     </p>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>

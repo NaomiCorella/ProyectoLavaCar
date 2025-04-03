@@ -22,12 +22,12 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.Crear
 
             _crearUsuarioAD = new CrearUsuarioAD();
         }
-        public async Task<int> RegistrarUsuarios(UsuariosDto modelo)
+        public async Task<int> RegistrarUsuarios(EmpleadoDto modelo)
         {
             int cantidadDeDatosAlmacenados = await _crearUsuarioAD.RegistrarUsuarios(ConvertirObjetoClientesTabla(modelo));
             return cantidadDeDatosAlmacenados;
         }
-        private UsuariosTabla ConvertirObjetoClientesTabla(UsuariosDto elCliente)
+        private UsuariosTabla ConvertirObjetoClientesTabla(EmpleadoDto elCliente)
         {
             return new UsuariosTabla()
             {

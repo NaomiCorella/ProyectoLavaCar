@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar
 {
     public interface IListarUsuarioLN
     {
-        List<UsuariosDto> ListarUsuarios();
+        List<EmpleadoDto> ListarUsuarios();
 
     }
 }

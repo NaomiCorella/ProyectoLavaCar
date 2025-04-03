@@ -97,7 +97,11 @@ CREATE TABLE [dbo].[AspNetUsers](
 	cedula int , 
 	numeroCuenta  nvarchar(30),
 	turno nvarchar(30),
-	puesto nvarchar(50)
+	puesto nvarchar(50),
+FechaGeneracionCodigo DATETIME NULL,
+CodigoRecuperacion NVARCHAR(100) NULL,
+FechaExpiracionCodigo DATETIME NULL,
+ingreso Datetime null
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -139,7 +143,8 @@ CREATE TABLE Servicios (
     descripcion NVARCHAR(200)NOT NULL,
 	 modalidad VARCHAR(100) NOT NULL,
     tiempoDuracion NVARCHAR(20)NOT NULL,
-    estado BIT NOT NULL
+    estado BIT NOT NULL,
+	precio decimal (10,2) not null
 );
 GO
 
@@ -207,6 +212,7 @@ foreign key(idNomina) references Nomina(idNomina));
  razon nvarchar(300) not null, 
  idNomina int not null, 
 tipo nvarchar(100) not null,
+estado bit not null,
 foreign key(idNomina) references Nomina(idNomina));
 
 CREATE TABLE REGISTROHORAS(
@@ -322,20 +328,26 @@ foreign key (idProducto) references Producto(idProducto)
 --Modulo NotificacionCompra-- ?????
 -- Tabla Compra
 CREATE TABLE Compra (
-    idCompra INT IDENTITY PRIMARY KEY NOT NULL,
-    idUsuario nvarchar(128) NOT NULL, 
-    idServicio INT NOT NULL,
-    idReserva INT NOT NULL,
+    idCompra uniqueidentifier PRIMARY KEY NOT NULL,
+    idCliente nvarchar(128) NOT NULL, 
     total DECIMAL(10,2) NOT NULL,
     fecha DATE NOT NULL,
     descripcionServicio NVARCHAR(200) NOT NULL,
     estado BIT NOT NULL,
-FOREIGN KEY (idUsuario) REFERENCES AspNetUsers(Id),
-  
-    FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio),
-    FOREIGN KEY (idReserva) REFERENCES Reservas(idReserva)
+	idEmpleado nvarchar(128) not null,
+FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id),
+FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
 );
 GO
+CREATE TABLE CompraServicios (
+    idCompra uniqueidentifier,
+	idCompraServicios INT IDENTITY PRIMARY KEY NOT NULL,
+    idServicio INT,
+    FOREIGN KEY (idCompra) REFERENCES Compra(idCompra),
+    FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio)
+);
+
+
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Resenias-- 
 
@@ -385,7 +397,17 @@ FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
 GO
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Triggers e inster NECESARIOS--
-
+CREATE TABLE BITACORA_EVENTOS (
+    IdEvento INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    TablaDeEvento VARCHAR(150) NOT NULL,
+    TipoDeEvento VARCHAR(150) NOT NULL,
+    FechaDeEvento DATETIME NOT NULL,
+    DescripcionDeEvento VARCHAR(MAX) NOT NULL,
+    StackTrace VARCHAR(MAX) NOT NULL,
+    DatosAnteriores VARCHAR(MAX) NULL,
+    DatosPosteriores VARCHAR(MAX) NULL
+);
+GO
 CREATE TRIGGER trg_InsertReserva
 ON Reservas
 AFTER INSERT

@@ -55,8 +55,10 @@
     <Compile Include="Contexto.cs" />
     <Compile Include="ModuloBitacora\Listar\ListarBitacoraAD.cs" />
     <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraAD.cs" />
+    <Compile Include="ModuloCompra\CrearCompraServicio\CrearCompraServicioAD.cs" />
     <Compile Include="ModuloCompra\Crear\CrearCompraAD.cs" />
     <Compile Include="ModuloCompra\DetalleCompraCompleta\DetalleCompraCompletaAD.cs" />
+    <Compile Include="ModuloCompra\ListarDetalles\ListarDetallesDeServicioAD.cs" />
     <Compile Include="ModuloCompra\ListarDisponible\ListarDisponibleAD.cs" />
     <Compile Include="ModuloCompra\Listar\ListarCompraAD.cs" />
     <Compile Include="ModuloCompra\ObtenerPorId\ObtenerPorIdAD.cs" />
@@ -106,7 +108,9 @@
     <Compile Include="ModuloReseñas\ObtenerPorId\ObtenerPorIdAD.cs" />
     <Compile Include="ModuloServicios\Crear\CrearServiciosAD.cs" />
     <Compile Include="ModuloServicios\Listar\ListarServiciosAD.cs" />
+    <Compile Include="ModuloServicios\ObtenerPorId\BuscarAsyncSerAD.cs" />
     <Compile Include="ModuloServicios\ObtenerPorId\DetallesServicioAD.cs" />
+    <Compile Include="ModuloUsuarios\BuscarPorId\BuscarAsyncAD.cs" />
     <Compile Include="ModuloUsuarios\BuscarPorId\BuscarPorIdAD.cs" />
     <Compile Include="ModuloUsuarios\Crear\CrearUsuarioAD.cs" />
     <Compile Include="ModuloUsuarios\Editar\EditarUsuarioAD.cs" />
@@ -124,7 +128,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

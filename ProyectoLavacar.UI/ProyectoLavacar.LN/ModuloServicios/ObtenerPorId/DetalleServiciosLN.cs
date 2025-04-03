@@ -38,8 +38,8 @@ namespace ProyectoLavacar.LN.ModuloServicios.ObtenerPorId
                 descripcion = elServicio.descripcion,
                 tiempoDuracion = elServicio.tiempoDuracion,
                 estado = elServicio.estado,
-                modalidad = elServicio.modalidad
-
+                modalidad = elServicio.modalidad,
+                precio = elServicio.precio
             };
 
 

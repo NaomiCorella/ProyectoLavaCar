@@ -2,6 +2,7 @@
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloServicios;
 using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
 using ProyectoLavacar.LN.ModuloServicios.ObtenerPorId;
@@ -19,11 +20,13 @@ namespace ProyectoLavacar.Controllers
         IListarServiciosLN _listarServicios;
         IDetalleServiciosLN _detallesServicios;
         ICrearServiciosLN _crearServicios;
+        Contexto _context;
         public ServiciosController()
         {
             _listarServicios = new ListarServiciosLN();
             _detallesServicios = new DetalleServiciosLN();
             _crearServicios = new CrearServiciosLN();
+            _context = new Contexto();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -60,6 +63,12 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Index()
         {
            
+            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
+            return View(lalistaDeReservas);
+        }
+        public ActionResult GestionServicios()
+        {
+
             List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
             return View(lalistaDeReservas);
         }
@@ -136,6 +145,24 @@ namespace ProyectoLavacar.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult CambiarEstado(int id)
+        {
+
+            try
+            {
+                var resenia = _context.ServiciosTabla.Find(id);
+                resenia.estado = !resenia.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
             }
         }
     }

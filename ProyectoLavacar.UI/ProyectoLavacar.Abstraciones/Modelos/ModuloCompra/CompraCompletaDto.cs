@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 {
     public class CompraCompletaDto
     {
-        public int idCompra { get; set; }
+        public Guid idCompra { get; set; }
         public string idCliente { get; set; }
 
         [Display(Name = "Nombre")]
@@ -22,14 +24,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 
         [Display(Name = "Cédula")]
         public int Cedula { get; set; }
-        public int idServicio { get; set; }
-
-        [Display(Name = "Servicio")]
-        public string nombre { get; set; }
-
-        [Display(Name = "Costo")]
-        public decimal costo { get; set; }
-
+      
         [Display(Name = "Total")]
         public decimal Total { get; set; }
 
@@ -37,7 +32,19 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
         public string Fecha { get; set; }
         [Display(Name = "Descripción")]
         public string DescripcionServicio { get; set; }
-        public bool Estado { get; set; }
+
+        public string idEmpleado { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string NombreEmp { get; set; }
+
+        [Display(Name = "Primer Apellido")]
+        public string PrimerApellidoEmp { get; set; }
+        [Display(Name = "Segundo Apellido")]
+
+        public List<ServiciosDto> listaDeServicios { get; set; } = new List<ServiciosDto>(); // Inicialización de la lista
+
+
     }
 
 }

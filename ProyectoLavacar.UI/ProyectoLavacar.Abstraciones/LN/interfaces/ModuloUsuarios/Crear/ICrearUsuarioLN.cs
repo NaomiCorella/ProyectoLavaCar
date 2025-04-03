@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Crear
 {
     public interface ICrearUsuarioLN
     {
-        Task<int> RegistrarUsuarios(UsuariosDto modelo);
+        Task<int> RegistrarUsuarios(EmpleadoDto modelo);
 
     }
 }

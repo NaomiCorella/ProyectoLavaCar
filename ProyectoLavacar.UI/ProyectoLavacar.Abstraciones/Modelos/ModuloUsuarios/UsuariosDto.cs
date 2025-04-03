@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
 {
-    public class UsuariosDto
+    public class EmpleadoDto
     {
         public string Id { get; set; }
         [Display(Name = "Nombre")]
@@ -35,6 +35,6 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
         public string puesto { get; set; }
         public string PasswordHash { get; set; }
         public bool nomina { get; set; }
-
+        public string ingreso { get; set; }
     }
 }

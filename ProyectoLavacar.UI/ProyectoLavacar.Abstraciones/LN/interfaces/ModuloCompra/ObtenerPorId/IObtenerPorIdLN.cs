@@ -11,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCompra.ObtenerPorId
     public interface IObtenerPorIdLN
     {
 
-        CompraDto Detalle(int idCompra);
+        CompraDto Detalle(Guid idCompra);
     }
 }

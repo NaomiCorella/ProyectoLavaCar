@@ -19,9 +19,11 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloServicios
         [Display(Name = "Tiempo de duración")]
         public string tiempoDuracion { get; set; }
         [Display(Name = "Disponibilidad")]
-        public bool estado { get; set; } = true;
+        public bool estado { get; set; } 
         [Display(Name = "Modalidad")]
         public string modalidad { get; set; }
+        [Display(Name = "Precio")]
+        public decimal precio { get; set; }
     }
 
 }
