@@ -50,6 +50,7 @@ using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
 using ProyectoLavacar.Abstraciones.Modelos.ModuloCompra;
 using System.Xml.Linq;
+using ProyectoLavacar.AccesoADatos;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -74,6 +75,7 @@ namespace ProyectoLavacar.Controllers
         IProcesarNominaLN _procesarNomina;
         IBuscarPorIdLN _buscarPorIdEmpleado;
         IEmailSender _emailSender;
+        Contexto _context;
         public NominaController()
         {
             _buscarPorIdEmpleado = new BuscarPorIdLN();
@@ -92,6 +94,7 @@ namespace ProyectoLavacar.Controllers
             _detallesAjustes = new DetallesAjustesLN();
              _detallesTramites = new DetallesTramitesLN();
             _procesarNomina = new ProcesarNominaLN();
+            _context = new Contexto();
 
         }
         // GET: Nomina
@@ -439,7 +442,7 @@ namespace ProyectoLavacar.Controllers
             return View("ListarAjustes", ajustes.ToList());
         }
 
-        public async Task<ActionResult> AnularAjustes(int  id)
+        public async Task<ActionResult> AnularAjustes(int id)
         {
            
 
@@ -453,11 +456,12 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de bono",
-                        tipo ="Deduccion",
+                        tipo = "Bonificacion",
                         estado = false
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
+                CambiarEstado(id);
                 }
                 else
                 {
@@ -467,13 +471,14 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de deduccion",
-                        tipo = "Bonificacion",
+                        tipo = "Deduccion",
                         estado = false
 
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
-                }
+                CambiarEstado(id);
+            }
             return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
 
         }
@@ -544,10 +549,22 @@ namespace ProyectoLavacar.Controllers
             return RedirectToAction("ProcesosYGestiones", new { idNomina = nomina.IdNomina });
         }
 
-        public ActionResult Error()
+        public ActionResult CambiarEstado(int id)
         {
 
-            return View();
+            try
+            {
+                var ajuste = _context.AjustesSalarialesTabla.Find(id);
+                ajuste.estado = !ajuste.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Nomina/Edit/5

@@ -39,8 +39,19 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
 
         public async Task<int> RegistarAjusteSalariales(AjustesSalarialesDto modelo)
         {
-            NominaDto nomin = Modificar(modelo);
-            int cantidadDeDatosAlmacenados = await _crearAjustesSalarialessAD.RegistrarAjusteSalarial(ConvertirObjetoAjustesSalarialessTabla(modelo));
+            int cantidadDeDatosAlmacenados = 1;
+
+
+            if (modelo.Razon.Contains("Anulacion"))
+            {
+                NominaDto nomin = Modificar(modelo);
+            }
+            else
+            {
+                cantidadDeDatosAlmacenados = await _crearAjustesSalarialessAD.RegistrarAjusteSalarial(ConvertirObjetoAjustesSalarialessTabla(modelo));
+                NominaDto nomin = Modificar(modelo);
+
+            }
             return cantidadDeDatosAlmacenados;
         }
 
