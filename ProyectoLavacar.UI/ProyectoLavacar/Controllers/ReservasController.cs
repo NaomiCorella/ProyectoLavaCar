@@ -247,7 +247,16 @@ namespace ProyectoLavacar.Controllers
                     return View(modeloDeReserva);
                 }
 
-          
+                DateTime fechaInicio;
+                if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
+                {
+                    
+                    if (fechaInicio < DateTime.Now)
+                    {
+                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                        return View(modeloDeReserva);
+                    }
+                }
                 ReservasDto reserva = new ReservasDto()
                 {
                     idReserva = 1,
@@ -270,54 +279,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        // GET: Reservas/Create
-        //public ActionResult ReservarCita ()
-        //{
-        //    var servicios = _listarServicios.ListarServicios()
-        //       .Where(a => a.estado == true)
-        //       .ToList();
-        //    ViewBag.Servicios = servicios;
-
-        //    return View();
-        //}
-
-        //// POST: Reservas/Create
-        //[HttpPost]
-        //public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
-        //{
-        //    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-        //    string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-        //    try
-        //    {
-
-
-        //        ReservasDto reserva = new ReservasDto()
-        //        {
-        //            idReserva = 1,
-        //            idCliente = idCliente,
-        //            idServicio = modeloDeReserva.idServicio,
-        //            idEmpleado = idCliente,
-        //            fecha = modeloDeReserva.fecha,
-        //            hora = modeloDeReserva.hora,
-        //            estado = true
-        //        };
-
-        //        int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
-
-        //        return RedirectToAction("/MisReservas");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Manejo de errores
-        //        return View();
-        //    }
-        //}
-
-        // GET: Reservas/Create
-        // GET: Reservas/Create
-        // GET: Reservas/Create
-        // Controlador GET
+       
         public ActionResult ReservarCita()
         {
             var servicios = _listarServicios.ListarServicios()
@@ -340,9 +302,16 @@ namespace ProyectoLavacar.Controllers
         [HttpPost]
         public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
         {
-            // Mostrar datos recibidos
-            Console.WriteLine($"idServicio: {modeloDeReserva.idServicio}, Fecha: {modeloDeReserva.fecha}, Hora: {modeloDeReserva.hora}");
+            DateTime fechaInicio;
+            if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
+            {
 
+                if (fechaInicio < DateTime.Now)
+                {
+                    ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                    return View(modeloDeReserva);
+                }
+            }
             // Validar datos
             if (modeloDeReserva.idServicio == 0 || modeloDeReserva.fecha == null || modeloDeReserva.hora == null)
             {
@@ -461,7 +430,17 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-              string datosanteriores = TempData["DatosAnteriores"] as string;
+                DateTime fechaInicio;
+                if (DateTime.TryParse(modeloReserva.fecha, out fechaInicio))
+                {
+
+                    if (fechaInicio < DateTime.Now)
+                    {
+                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                        return View(modeloReserva);
+                    }
+                }
+                string datosanteriores = TempData["DatosAnteriores"] as string;
                 int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
 
                 return RedirectToAction("Reservas");
@@ -488,7 +467,16 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+                DateTime fechaInicio;
+                if (DateTime.TryParse(modeloReserva.fecha, out fechaInicio))
+                {
 
+                    if (fechaInicio < DateTime.Now)
+                    {
+                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                        return View(modeloReserva);
+                    }
+                }
                 int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
 
                 return RedirectToAction("/MisReservas");
@@ -500,27 +488,7 @@ namespace ProyectoLavacar.Controllers
         }
         /// ////////////////  //////////////////
 
-        // GET: Reservas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Reservas/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         public ActionResult CambiarEstado(int id)
         {
@@ -530,31 +498,6 @@ namespace ProyectoLavacar.Controllers
                 var reserva = _context.ReservasTabla.Find(id);
                 reserva.estado = !reserva.estado;
                 _context.SaveChanges();
-//                string datosPosteriores = $@"
-//{{
-//    ""IdReserva"": ""{reserva.idReserva}"",
-//    ""IdCliente"": ""{reserva.idCliente}"",
-//    ""IdEmpleado"": ""{reserva.idEmpleado}"",
-//    ""IdServicio"": ""{reserva.idServicio}"",
-//    ""Fecha"": ""{reserva.fecha}"",
-//    ""Hora"": ""{reserva.hora}"",
-//    ""Estado"": ""{reserva.estado}""
-//}}";
-
-//                var bitacora = new BitacoraDto
-//                {
-//                    IdEvento = 0,
-//                    TablaDeEvento = "Reservas",
-//                    TipoDeEvento = "Editar de Reservas",
-//                    FechaDeEvento = "19-11-2024",
-//                    DescripcionDeEvento = "Se hizo un edit en la tabla Reservas",
-//                    StackTrace = "no hubo error",
-//                    DatosAnteriores = datosPosteriores,
-//                    DatosPosteriores = datosPosteriores
-//                };
-
-//               _registrarBitacoraLN.RegistrarBitacora(bitacora);
-
                 return RedirectToAction("Reservas/Reservas");
             }
             catch (Exception ex)

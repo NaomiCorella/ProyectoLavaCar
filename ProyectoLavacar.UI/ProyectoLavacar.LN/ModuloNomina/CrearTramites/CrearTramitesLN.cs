@@ -289,7 +289,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 IdAjusteSalarial= 0,
                 IdNomina=elTramites.IdNomina,
                 Monto=cantidad,
-                Razon="Ingreso de incapacidad"+" "+elTramites.Razon,
+                Razon="Ingreso de incapacidad:"+" "+elTramites.Razon,
                 tipo="Bonificacion"
            
             };

@@ -150,6 +150,13 @@ namespace ProyectoLavacar.Controllers
             try
             {
                
+
+                    if (modeloDeNomina.FechaDePago < DateTime.Now)
+                    {
+                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                        return View(modeloDeNomina);
+                    }
+                
                 int cantidadDeDatosGuardados = await _crearNomina.RegistrarNomina(modeloDeNomina,  id);
 
                 return RedirectToAction("Index");
