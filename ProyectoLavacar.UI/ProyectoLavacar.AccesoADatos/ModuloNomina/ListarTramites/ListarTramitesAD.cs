@@ -29,7 +29,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarAjustes
          FechaInicio = tramite.FechaInicio,
          Razon = tramite.Razon,
          tipo = tramite.tipo,
-         estado = tramite.estado
+         estado = tramite.estado,
+         aseguradora = tramite.aseguradora
      })
      .ToList();
 

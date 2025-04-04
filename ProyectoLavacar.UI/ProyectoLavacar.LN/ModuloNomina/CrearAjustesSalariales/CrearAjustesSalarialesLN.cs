@@ -41,7 +41,6 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
         {
             NominaDto nomin = Modificar(modelo);
             int cantidadDeDatosAlmacenados = await _crearAjustesSalarialessAD.RegistrarAjusteSalarial(ConvertirObjetoAjustesSalarialessTabla(modelo));
-            int cantidad = await RegistroNominaBitacora(modelo);
             return cantidadDeDatosAlmacenados;
         }
 
@@ -72,14 +71,30 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
             decimal nuevoTotalDedu = laNomina.totalDedu;
             decimal nuevoTotalBono = laNomina.totalBono;
 
-            if (elAjustesSalariales.tipo == "Deduccion")
-            {
-                nuevoTotalDedu += elAjustesSalariales.Monto; 
+            if (elAjustesSalariales.Razon.Contains("Anulacion")){
+                if (elAjustesSalariales.tipo == "Deduccion")
+                {
+                    nuevoTotalDedu -= elAjustesSalariales.Monto;
+                }
+                else
+                {
+                    nuevoTotalBono -= elAjustesSalariales.Monto;
+                }
             }
             else
             {
-                nuevoTotalBono += elAjustesSalariales.Monto; 
+                if (elAjustesSalariales.tipo == "Deduccion")
+                {
+                    nuevoTotalDedu += elAjustesSalariales.Monto;
+                }
+                else
+                {
+                    nuevoTotalBono += elAjustesSalariales.Monto;
+                }
             }
+
+
+            
 
             NominaDto nominaModificada = new NominaDto()
             {
@@ -108,35 +123,6 @@ namespace ProyectoLavacar.LN.ModuloAjustesSalariales.CrearAjustesSalariales
 
         }
 
-        private async Task<int> RegistroNominaBitacora(AjustesSalarialesDto ajuste)
-        {
-
-            string datos = $@"
-                                    {{
-                         
-                        ""IdAjusteSalarial"":""{ajuste.IdAjusteSalarial}"",
-                         ""Monto"": ""{ajuste.Monto}"",
-                         ""Razon"":""{ajuste.Razon}"",
-                        ""IdNomina"": ""{ajuste.IdNomina}"",
-                        ""tipo"": ""{ajuste.IdAjusteSalarial}"",
-                                         }}";
-            var bitacora = new BitacoraDto
-            {
-                IdEvento = 0,
-                TablaDeEvento = "ModuloNomina",
-                TipoDeEvento = "Registrar de Ajustes",
-                FechaDeEvento = "19-11-2024",
-                DescripcionDeEvento = "Se hizo un registro en la tabla Ajustes",
-                StackTrace = "no hubo error",
-                DatosAnteriores = datos,
-                DatosPosteriores = datos
-            };
-
-            int cantidad = await _registrarBitacoraLN.RegistrarBitacora(bitacora);
-
-
-            return cantidad;
-        }
     }
 }
 
