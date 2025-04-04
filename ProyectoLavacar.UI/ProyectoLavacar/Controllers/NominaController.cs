@@ -47,6 +47,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloCompra;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -548,131 +550,119 @@ namespace ProyectoLavacar.Controllers
 
         // GET: Nomina/Edit/5
 
-        public FileResult DescargarPDFDetalle(int id)
+        public FileResult DescargarPDFCompra(int idNomina)
         {
-            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
-            List<AjustesSalarialesDto> listaDeAjustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == id).ToList();
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
+
             if (nomina == null)
             {
                 return null;
             }
 
-            // Crear el PDF
+            // Crear PDF
             MemoryStream ms = new MemoryStream();
-            Document doc = new Document(PageSize.A4, 40, 40, 40, 40); // Márgenes
-            PdfWriter.GetInstance(doc, ms).CloseStream = false;
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            writer.CloseStream = false;
 
             doc.Open();
 
-            // Colores y fuentes personalizados
-            BaseColor headerColor = new BaseColor(27, 50, 85); // Azul oscuro (como en tu vista)
-            BaseColor textColor = BaseColor.BLACK;
-            BaseColor backgroundColor = new BaseColor(240, 240, 240); // Gris claro para fondo de celdas
-
-            Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.WHITE);
-            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, textColor);
+            // Fuentes y colores
+            BaseColor headerColor = new BaseColor(100, 150, 200);
             Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+            Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
 
-            // Título
-            Paragraph title = new Paragraph($"Detalles de al nomina de - {nomina.FechaDePago}\n\n", titleFont);
-            title.Alignment = Element.ALIGN_CENTER;
+            // ENCABEZADO 
+            PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
+            headerTable.SetWidths(new float[] { 1, 2 });
+
+            PdfPCell empresaCell = new PdfPCell(new Phrase("LavaCar HERVI \nTel: +(506) 7285 0302 \nCorreo: lavacarhervi@gmail.com", cellFont))
+            {
+                Border = PdfPCell.NO_BORDER,
+                HorizontalAlignment = Element.ALIGN_RIGHT
+            };
+            headerTable.AddCell(new PdfPCell(new Phrase("INFORME DE Nomina", titleFont)) { Border = PdfPCell.NO_BORDER });
+            headerTable.AddCell(empresaCell);
+            doc.Add(headerTable);
+
+            // TÍTULO
+            Paragraph title = new Paragraph($"Informe \n\n", titleFont)
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
             doc.Add(title);
 
-            // Crear tabla similar a la vista
-            PdfPTable table = new PdfPTable(2) { WidthPercentage = 100 };
-            table.SetWidths(new float[] { 1.5f, 2f }); // Ancho de las columnas
+            // DATOS DEL CLIENTE
+            PdfPTable clienteTable = new PdfPTable(2) { WidthPercentage = 100 };
+            clienteTable.SetWidths(new float[] { 1.5f, 2f });
 
-            // Encabezado de tabla (como el fondo azul en tu vista)
-            PdfPCell headerCell = new PdfPCell(new Phrase("Información de la nomina", headerFont))
+            AgregarFila(clienteTable, "Cliente:", $"{compra.Nombre} {compra.PrimerApellido} {compra.SegundoApellido}", cellFont);
+            AgregarFila(clienteTable, "Cédula:", compra.Cedula.ToString(), cellFont);
+            AgregarFila(clienteTable, "Fecha de Compra:", DateTime.Parse(compra.Fecha).ToString("dd/MM/yyyy"), cellFont);
+
+            doc.Add(clienteTable);
+
+            doc.Add(new Paragraph("\n"));
+
+            // DETALLES DEL SERVICIO
+            PdfPTable servicioTable = new PdfPTable(2) { WidthPercentage = 100 };
+            servicioTable.SetWidths(new float[] { 3, 2 });
+            AgregarEncabezado(servicioTable, "Servicio", cellFont, headerColor);
+            AgregarEncabezado(servicioTable, "Precio", cellFont, headerColor);
+            foreach (ServiciosDto servicio in compra.listaDeServicios)
             {
-                Colspan = 2,
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                BackgroundColor = headerColor,
-                Padding = 10
-            };
-            table.AddCell(headerCell);
 
-            // Agregar filas con datos
 
-            AgregarFila(table, "Nombre:", nomina.nombre, cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Salario Bruto:", nomina.SalarioBruto.ToString(), cellFont, backgroundColor);
-            AgregarFila(table, "Horas Extra:", $"₡{nomina.HorasExtras}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Dias de Vacaciones Disponibles:", $"₡{nomina.DiasDispoVacaciones}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Dias de Vacaciones Utilizados:", $"₡{nomina.DiasUtiliVacaciones}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Bonificaciones:", $"₡{nomina.totalBono}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Deducciones:", $"₡{nomina.totalDedu}", cellFont, BaseColor.WHITE);
-            foreach(AjustesSalarialesDto ajuste in listaDeAjustes)
-            {
-                if(ajuste.tipo == "Bonificacion"&& ajuste.estado)
-                {
-                    AgregarFilaBon(table, "Bonificacion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
-
-                }
-               if(ajuste.tipo == "Deduccion" && ajuste.estado)
-                {
-                    AgregarFilaBon(table, "Deduccion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
-
-                }
-
+                servicioTable.AddCell(new PdfPCell(new Phrase(servicio.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
+                servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.precio:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
             }
+            AgregarEncabezado(servicioTable, "Comentarios del servicio", cellFont, headerColor);
+            servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
 
-            doc.Add(table);
 
-            // Fecha de generación del PDF
-            Paragraph fecha = new Paragraph($"\n\nFecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm:ss}", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10));
-            fecha.Alignment = Element.ALIGN_RIGHT;
-            doc.Add(fecha);
+            doc.Add(servicioTable);
+
+
+            doc.Add(new Paragraph("\n"));
+
+            // TOTAL
+            PdfPTable totalTable = new PdfPTable(2) { WidthPercentage = 50, HorizontalAlignment = Element.ALIGN_RIGHT };
+            totalTable.SetWidths(new float[] { 1.5f, 2f });
+
+            AgregarFila(totalTable, "Total:", $"₡{compra.Total:N2}", totalFont);
+            doc.Add(totalTable);
+
+            // PIE DE PÁGINA
+            Paragraph footer = new Paragraph("\nGracias por confiar en nosotros.\nLavaCar HERVI", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10))
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
+            doc.Add(footer);
 
             doc.Close();
-
             ms.Position = 0;
-            return File(ms, "application/pdf", $"Nomina_{nomina.nombre}.pdf");
+            return File(ms, "application/pdf", $"Factura_Servicio_{idNomina}.pdf");
         }
 
-        // Método para agregar filas a la tabla con estilos
-        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font, BaseColor backgroundColor)
+
+
+        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font)
         {
-            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            table.AddCell(cellTitulo);
-            table.AddCell(cellValor);
+            table.AddCell(new PdfPCell(new Phrase(titulo, font)) { Padding = 8, BorderWidth = 1 });
+            table.AddCell(new PdfPCell(new Phrase(valor, font)) { Padding = 8, BorderWidth = 1 });
         }
-        private void AgregarFilaBon(PdfPTable table, string titulo, string valor,string tipo, Font font, BaseColor backgroundColor)
+
+        private void AgregarEncabezado(PdfPTable table, string texto, Font font, BaseColor backgroundColor)
         {
-            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
+            PdfPCell cell = new PdfPCell(new Phrase(texto, font))
             {
                 BackgroundColor = backgroundColor,
                 Padding = 8,
-                BorderWidth = 1
+                BorderWidth = 1,
+                HorizontalAlignment = Element.ALIGN_CENTER
             };
-
-            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-            PdfPCell cell = new PdfPCell(new Phrase(tipo, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            table.AddCell(cellTitulo);
-            table.AddCell(cellValor);
             table.AddCell(cell);
         }
     }

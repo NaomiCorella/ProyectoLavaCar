@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -233,7 +234,8 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
-                    ingreso = DateTime.Now
+                    ingreso = DateTime.Now,
+                    cedula = model.cedula
 
                 };
 
@@ -295,6 +297,17 @@ namespace ProyectoLavacar.Controllers
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
         {
+            ViewBag.Role = new SelectList(new List<object>
+                {
+                 new { Value = "Administrador", Text = "Administrador" },
+                 new { Value = "Empleado", Text = "Empleado" }
+                }, "Value", "Text");
+            ViewBag.Turno = new SelectList(new List<object>
+                {
+                 new { Value = "Mañana", Text = "Mañana" },
+                 new { Value = "Tarde", Text = "Tarde" }
+                }, "Value", "Text");
+
             return View();
         }
 
@@ -324,7 +337,7 @@ namespace ProyectoLavacar.Controllers
                 if (result.Succeeded)
                 {
                     // Asignar el rol al usuario
-                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Empleado");
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, model.Role);
                     var nombreCompleto = model.Nombre + " " + model.PrimerApellido;
                     var Asunto = "🎉¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi 🎉";
                     if (resultRole.Succeeded)
