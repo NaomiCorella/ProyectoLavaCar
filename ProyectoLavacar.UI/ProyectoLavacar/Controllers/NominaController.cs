@@ -202,7 +202,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeAjustes.IdNomina });
             }
             catch
             {
@@ -296,7 +296,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeTramites.IdNomina });
                 }
 
 
@@ -346,7 +346,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MiPerfil");
                 }
 
 
@@ -400,7 +400,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarTramites.Editar(tramite);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarTramites", new { idNomina = ajustepasado.IdNomina });
             }
             catch
             {
@@ -473,8 +473,8 @@ namespace ProyectoLavacar.Controllers
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
                 }
-                    return RedirectToAction("Index");
-        
+            return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
+
         }
         public ActionResult ProcesarNomina(int idNomina)
         {
@@ -539,7 +539,7 @@ namespace ProyectoLavacar.Controllers
                 TempData["ErrorMessage"] = "La nómina fue confirmada, pero ocurrió un error al enviar el correo.";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ProcesosYGestiones", new { idNomina = nomina.IdNomina });
         }
 
         public ActionResult Error()
