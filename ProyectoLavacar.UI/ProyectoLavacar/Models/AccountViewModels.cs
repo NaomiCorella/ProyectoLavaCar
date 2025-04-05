@@ -83,6 +83,17 @@ namespace ProyectoLavacar.Models
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
 
+
+        [Required]
+        [Range(100000000, 999999999, ErrorMessage = "La cédula debe tener exactamente 9 dígitos.")]
+
+
+        [Display(Name = "Cédula")]
+        public int cedula { get; set; }
+
+
+
+
         [Required]
         [MaxLength(50)]
         [Display(Name = "Nombre")]
@@ -134,6 +145,15 @@ namespace ProyectoLavacar.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Range(100000000, 999999999, ErrorMessage = "La cédula debe tener exactamente 9 dígitos.")]
+        [Display(Name = "Cédula")]
+        public int cedula { get; set; }
+
+
+
+
+
+        [Required]
         [MaxLength(50)]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
@@ -157,7 +177,7 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
 
-        public int cedula { get; set; }
+       
         public string numeroCuenta { get; set; }
         public string turno { get; set; }
         public string puesto { get; set; }

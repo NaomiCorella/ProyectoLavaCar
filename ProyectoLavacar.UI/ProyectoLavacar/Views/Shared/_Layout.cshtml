@@ -19,7 +19,7 @@
     </div>
 
     <!-- Search Modal del diseño del lavadero -->
-    <div class="modal fade" id="search-modal">
+    @*<div class="modal fade" id="search-modal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form>
@@ -29,7 +29,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <!-- Header del diseño del lavadero -->
     <header class="header-area header-area-v1">
@@ -38,16 +38,35 @@
                 <div class="row align-items-center">
                     <div class="col-lg-10 col-md-12">
                         <div class="header-left">
-                            <ul>
-                                <li class="text"><span>Lunes-Domingo 9:00 AM - 6:00 PM </span></li>
-                                <li class="info"><span><a href="tel:+(506)7285 0302 "><i class="fas fa-phone-alt"></i>+(506) 7285 0302</a></span></li>
-                                <li class="info"><span><a href="mailto:lavacarhervi@gmail.com"><i class="far fa-envelope"></i>lavacarhervi@gmail.com</a></span></li>
-
+                            <ul class="list-unstyled d-flex flex-column flex-md-row align-items-center gap-3">
+                                <li class="text">
+                                    <a href="~/Views/Home/Index.cshtml">
+                                        <img src="~/Content/assets/images/logo/download (7)-Photoroom.png" alt="Logo" width="120" height="auto" class="img-fluid">
+                                    </a>
+                                </li>
+                                <li class="text">
+                                    <span>Lunes-Domingo 9:00 AM - 6:00 PM</span>
+                                </li>
+                                <li class="info">
+                                    <span>
+                                        <a href="tel:+50672850302">
+                                            <i class="fas fa-phone-alt"></i> +(506) 7285 0302
+                                        </a>
+                                    </span>
+                                </li>
+                                <li class="info">
+                                    <span>
+                                        <a href="mailto:lavacarhervi@gmail.com">
+                                            <i class="far fa-envelope"></i> lavacarhervi@gmail.com
+                                        </a>
+                                    </span>
+                                </li>
                             </ul>
                         </div>
+
                     </div> 
                     <div class="col-lg-2">
-                        <div class="search-box d-flex align-items-center">
+                        <div class="search-box d-flex align-items-center justify-content-end">
                             @if (User.Identity.IsAuthenticated)
                             {
 
@@ -72,10 +91,9 @@
                             {
 
                                 <a href="@Url.Action("Login", "Account")" class="profile-icon mr-3">
-                                    <i class="fas fa-user fa-2x" style="color: red;"></i>
+                                    <i class="fas fa-user fa-2x" style="color: #9AEBA3;"></i>
                                 </a>
                             }
-                            <a href="#" class="search-icon" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search fa-2x" style="color: red;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -84,11 +102,11 @@
         <div class="header-middle">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
+                    @*<div class="col-lg-6">
                         <div class="brand-logo">
                             <a href="index-2.html"><img src="assets/images/logo/downloadd.jpeg" class="img-fluid" alt=""></a>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -96,9 +114,11 @@
             <div class="container">
                 <div class="nav-container d-flex align-items-center justify-content-between">
                     <!-- Site Logo -->
-                    <div class="brand-logo">
-                        <a href="index-2.html"><img src="assets/images/logo/downloadd.jpeg" class="img-fluid" alt=""></a>
-                    </div>
+                    @*<div class="brand-logo">
+                        <a href="index-2.html"><img src="~/Content/assets/images/logo/download (7).jpeg"" class="img-fluid" alt=""></a>
+                        <img src="~/Content/assets/images/logo/download (7).jpeg" />
+
+                    </div>*@
                     @Html.ActionLink("HERVI", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -114,10 +134,11 @@
                             <nav class="main-menu">
                                 <ul>
                                     <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                                    <li class="menu-item"><a href="service.html">Servicios</a></li>
-                                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                                    
+                                    <li>@Html.ActionLink("Servicios", "Index", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
+                                   
+                                    <li>@Html.ActionLink("Sobre Nosotros", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Reseñas", "Index", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
+
                                     <li class="menu-item menu-item-has-children">
                                         <a href="">Perfil</a>
                                         <ul class="sub-menu">
@@ -139,7 +160,7 @@
                                             <li>@Html.ActionLink("Gestion de Nomina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
                                         </ul>
                                     </li>
-                                   
+
 
                                 </ul> 
                             </nav>
@@ -171,8 +192,65 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        <!-- Footer -->
+        <footer class="footer-area">
+            <div class="footer-widget-area pt-110 pb-110">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget quick-link-widget">
+                                <h4 class="widget-title">Enlaces rápidos</h4>
+                                <ul class="widget-link">
+                                    <li><a href="index.html">Inicio</a></li>
+                                    <li><a href="service.html">Servicios</a></li>
+                                    <li><a href="inicioSesion.html">Inicio Sesión</a></li>
+                                    <li><a href="about.html">Sobre Nosotros</a></li>
+                                    <li><a href="booking.html">Reserva</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget opening-hours-widget">
+                                <h4 class="widget-title">Horario de atención</h4>
+                                <div class="info-box">
+                                    <p>Lunes - Domingo</p>
+                                    <p>9:00 AM - 6:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget contact-info-widget">
+                                <h4 class="widget-title">Contáctanos</h4>
+                                <div class="info-box mb-20">
+                                    <p><i class="fas fa-phone-alt"></i><a href="tel:+50672850302">+(506) 7285 0302</a></p>
+                                </div>
+                                <div class="info-box">
+                                    <h5 class="mb-20">Dirección del local</h5>
+                                    <p><i class="fas fa-map-marker-alt"></i>San Antonio, Coronado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bootom-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="copyright-text">
+                                <p>&copy; @DateTime.Now.Year <span>Hervi</span>. Todos los derechos reservados.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="footer-nav">
+                                <ul>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
