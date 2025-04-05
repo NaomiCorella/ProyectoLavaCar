@@ -42,97 +42,120 @@
 
     <!-- Main Content -->
     <main>
+        <!-- Separación visual -->
+        <div style="height: 50px; background-color: transparent;"></div>
+
         <!-- Services Section -->
-        <section class="service-area service-area-v2 pt-110">
-            <section class="service-area service-area-v2 pt-110">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                            <div class="section-title text-center mb-60">
-                                <span class="span">Servicios</span>
-                                <h2>Nuestros mejores servicios</h2>
-                            </div>
+        <section class="service-area service-area-v2 pt-110 pb-110" style="background-color: #f8f9fa;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="section-title text-center mb-60">
+                            <span class="span">Servicios</span>
+                            <h2>Nuestros mejores servicios</h2>
                         </div>
                     </div>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 align-items-stretch">
-                        @foreach (var item in Model)
-                        {
-                            <div class="col d-flex">
-                                <a href="@Url.Action("Details", "Servicios", new { id = item.idServicio })" class="service-item mb-50 d-flex flex-column h-100 w-100 text-decoration-none text-dark">
-                                    <div class="icon">
-                                        <i class="flaticon-mechanic"></i>
-                                    </div>
-                                    <div class="info flex-grow-1 d-flex flex-column justify-content-between">
-                                        <h5>@item.nombre</h5>
-                                        <p>@item.descripcion</p>
-                                    </div>
-                                    <div class="price text-center p-3">
-                                        <strong>@item.precio</strong>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    </div>
                 </div>
-            </section>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 align-items-stretch">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col d-flex">
+                            <a href="@Url.Action("Details", "Servicios", new { id = item.idServicio })" class="service-item mb-50 d-flex flex-column h-100 w-100 text-decoration-none text-dark">
+                                <div class="icon">
+                                    <i class="flaticon-mechanic"></i>
+                                </div>
+                                <div class="info flex-grow-1 d-flex flex-column justify-content-between">
+                                    <h5>@item.nombre</h5>
+                                    <p>@item.descripcion</p>
+                                </div>
+                                <div class="price text-center p-3">
+                                    <strong>@item.precio</strong>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
         </section>
 
+        <!-- Separación visual -->
+        <div style="height: 50px; background-color: transparent;"></div>
+
         <!-- Why Choose Us Section -->
-        <section class="why-choose-area pt-110 pb-120">
-            <div class="choose-bg bg_cover" style="background-image: url('../../content/assets/images/service/choose-bg.jpg');"></div>
-            <div class="container">
+        <section class="why-choose-area pt-110 pb-120" style="background-color: #ffffff; position: relative;">
+            <div class="choose-bg bg_cover" style="background-image: url('../../Content/assets/images/bg/breadcrumb-bg-1.jpg'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; z-index: 0;"></div>
+            <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="choose-content-box">
-                            <div class="section-title section-white-title mb-20">
-                                <span class="span">Nos Importa Tu Auto</span>
-                                <h2>¿Por qué Elegirnos?</h2>
+                            <div class="section-title section-white-title mb-30">
+                                <span class="span" style="color: #45C4B0; font-weight: bold;">Nos Importa Tu Auto</span>
+                                <h2 style="font-size: 36px; font-weight: 700; color: #012030;">¿Por qué Elegirnos?</h2>
                             </div>
-                            <p>Nos especializamos en brindar un servicio de calidad y cuidado para tu vehículo. Nos aseguramos de que cada lavado se realice con la mayor atención al detalle.</p>
-                            <div class="row">
+                            <p style="font-size: 18px; line-height: 1.6; color: #13578A;">Nos especializamos en brindar un servicio de calidad y cuidado para tu vehículo. Nos aseguramos de que cada lavado se realice con la mayor atención al detalle, utilizando productos de alta gama y técnicas avanzadas para garantizar el mejor resultado.</p>
+                            <div class="row mt-4">
                                 <div class="col-lg-6">
-                                    <ul class="check_list">
-                                        <li>Lavado profesional con productos de alta calidad.</li>
-                                        <li>Acondicionamiento interior y exterior del vehículo.</li>
-                                        <li>Servicio rápido y eficiente, adaptado a tus necesidades.</li>
+                                    <ul class="check_list" style="list-style: none; padding-left: 0;">
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Lavado profesional con productos de alta calidad.
+                                        </li>
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Acondicionamiento interior y exterior del vehículo.
+                                        </li>
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Servicio rápido y eficiente, adaptado a tus necesidades.
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6">
-                                    <ul class="check_list">
-                                        <li>Protección contra la lluvia con productos especializados.</li>
-                                        <li>Lavado a mano para un acabado perfecto.</li>
-                                        <li>Servicios ecológicos que cuidan el medio ambiente.</li>
+                                    <ul class="check_list" style="list-style: none; padding-left: 0;">
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Protección contra la lluvia con productos especializados.
+                                        </li>
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Lavado a mano para un acabado perfecto.
+                                        </li>
+                                        <li style="font-size: 16px; color: #012030; padding: 8px 0; display: flex; align-items: center;">
+                                            <i class="fas fa-check-circle" style="color: #45C4B0; margin-right: 10px;"></i>Servicios ecológicos que cuidan el medio ambiente.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            <a href="#" class="main-btn">Reserva tu cita</a>
+                            <div class="text-center mt-4">
+                                <a href="#" class="main-btn" style="background-color: #13578A; color: #fff; padding: 12px 30px; border-radius: 5px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; transition: background-color 0.3s ease;">
+                                    Reserva tu cita
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Separación visual -->
+        <div style="height: 50px; background-color: transparent;"></div>
+
         <!-- Location Section -->
-        <section class="car-washing-section pb-110 bg_cover" style="background-image: url('../../content/assets/images/bg/map-bg-1.jpg');">
+        <section class="car-washing-section pb-110 pt-110" style="background-color: #f8f9fa;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="washing-img-box">
-                            <img src="~/Content/assets/images/service/car-wash-1.png" alt="Car Wash Location">
+                            <img src="~/Content/assets/images/service/car-wash-1.png" alt="Car Wash Location" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="washing-content-box">
                             <div class="section-title mb-45">
-                                <span class="span">Ubicación</span>
-                                <h2>Punto de Lavado de Autos</h2>
+                                <span class="span" style="color: #45C4B0; font-weight: bold;">Ubicación</span>
+                                <h2 style="font-size: 36px; font-weight: 700; color: #012030;">Punto de Lavado de Autos</h2>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="washing-location">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <h6>Punto de Lavado</h6>
-                                        <p>San Antonio de Coronado</p>
+                                <div class="col-lg-12">
+                                    <div class="washing-location" style="background-color: #DAFDBA; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                        <i class="fas fa-map-marker-alt" style="color: #13578A; font-size: 24px; margin-right: 10px;"></i>
+                                        <h6 style="font-size: 18px; font-weight: 600; color: #012030;">Punto de Lavado</h6>
+                                        <p style="font-size: 16px; color: #13578A;">San Antonio de Coronado</p>
                                     </div>
                                 </div>
                             </div>
@@ -141,74 +164,10 @@
                 </div>
             </div>
         </section>
-
-       
     </main>
 
-    <!-- Footer -->
-    <footer class="footer-area">
-        <div class="footer-widget-area pt-110 pb-110">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="widget quick-link-widget">
-                            <h4 class="widget-title">Enlaces rápidos</h4>
-                            <ul class="widget-link">
-                                <li><a href="inicioSesion.html">Inicio Sesión</a></li>
-                                <li><a href="about.html">Sobre Nosotros</a></li>
-                                <li><a href="booking.html">Reserva</a></li>
-                                <li><a href="contact.html">Contáctanos</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="widget opening-hours-widget">
-                            <h4 class="widget-title">Horario de atención</h4>
-                            <div class="info-box">
-                                <p>Lunes - Domingo</p>
-                                <p>9:00 AM - 6:00 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="widget contact-info-widget">
-                            <h4 class="widget-title">Contáctanos</h4>
-                            <div class="info-box mb-20">
-                                <p><i class="fas fa-phone-alt"></i><a href="tel:+50672850302">+(506) 7285 0302</a></p>
-                            </div>
-                            <div class="info-box">
-                                <h5 class="mb-20">Dirección del local</h5>
-                                <p><i class="fas fa-map-marker-alt"></i>San Antonio, Coronado</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bootom-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="copyright-text">
-                            <p>2021 <span>Hervi</span>. Todos los derechos reservados.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="footer-nav">
-                            <ul>
-                                <li><a href="index.html">Inicio</a></li>
-                                <li><a href="service.html">Servicios</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Back to Top Button -->
-    <a href="#" class="back-to-top"><i class="fas fa-angle-up"></i></a>
-
+    <!--<a href="#" class="back-to-top"><i class="fas fa-angle-up"></i></a>-->
     <!-- Scripts -->
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -224,3 +183,10 @@
     <script src="~/Content/assets/js/main.js"></script>
 </body>
 </html>
+
+
+@*#012030
+#13578A
+#45C4B0
+#9AEBA3
+#DAFDBA*@

@@ -1,117 +1,206 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraDto
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Compra";
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <style>
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        .form-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
 
-<div class="form-horizontal">
-    <h4>Compra</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #f8f9fa;
+            padding-bottom: 10px;
+        }
 
+        .service-checkbox {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
 
-    <div id="nombreCliente" class="alert alert-info" style="display: none;"></div>
+            .service-checkbox:hover {
+                background-color: #e9ecef;
+            }
 
+        .form-control, .form-select {
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.idCliente, "Buscar por Cédula", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="number" name="numeroCedula" id="numeroCedula" class="form-control" />
-            <button type="button" id="buscarCliente" class="btn btn-primary mt-2">Buscar Cliente</button>
-            @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        .btn-action {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
 
+            .btn-action i {
+                margin-right: 8px;
+            }
 
-    @foreach (var servicio in ViewBag.Servicios)
-    {
-        // Si Model.listaServicios es nulo, usar una lista vacía
-        var listaServicios = Model?.listaServicios ?? new List<int>();
+        .alert-info-box {
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #e7f5ff;
+            border-left: 4px solid #4dabf7;
+        }
 
-        bool isChecked = listaServicios.Contains(servicio.idServicio);
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="listaServicios" value="@servicio.idServicio" id="servicio_@servicio.idServicio" @(isChecked ? "checked" : "") />
-            <label class="form-check-label" for="servicio_@servicio.idServicio">@servicio.nombre</label>
-        </div>
-    }
+        @@media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
 
+            .btn-action {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 mb-5">
+        <div class="form-container">
+            <div class="form-box">
+                <h2 class="text-center mb-4">Crear Nueva Compra</h2>
+                <hr class="mb-4">
 
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
+                    <div id="nombreCliente" class="alert-info-box" style="display: none;"></div>
 
+                    <!-- Sección Cliente -->
+                    <div class="mb-4">
+                        <h4 class="section-title">Datos del Cliente</h4>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="numeroCedula" class="form-label">Buscar por Cédula</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" name="numeroCedula" id="numeroCedula" class="form-control" placeholder="Ingrese número de cédula">
+                                    <button type="button" id="buscarCliente" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> Buscar
+                                    </button>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Sección Servicios -->
+                    <div class="mb-4">
+                        <h4 class="section-title">Servicios</h4>
+                        <div class="row">
+                            @foreach (var servicio in ViewBag.Servicios)
+                            {
+                                var listaServicios = Model?.listaServicios ?? new List<int>();
+                                bool isChecked = listaServicios.Contains(servicio.idServicio);
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
-            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                                <div class="col-md-6">
+                                    <div class="service-checkbox">
+                                        <input type="checkbox" class="form-check-input" name="listaServicios"
+                                               value="@servicio.idServicio" id="servicio_@servicio.idServicio"
+                                               @(isChecked ? "checked" : "") />
+                                        <label class="form-check-label ms-2" for="servicio_@servicio.idServicio">
+                                            @servicio.nombre
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
 
+                    <!-- Sección Información Adicional -->
+                    <div class="mb-4">
+                        <h4 class="section-title">Información Adicional</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
+                                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DescripcionServicio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "form-label" })
+                                <input type="text" class="form-control" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
+                                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                <!-- Verificar si el modelo no es nulo antes de acceder a Model.Total -->
-                <input type="text" class="form-control" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
-                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                            <div class="col-md-12 mb-3">
+                                @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.DescripcionServicio, new { htmlAttributes = new { @class = "form-control", rows = "3" } })
+                                @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "form-label" })
+                                @if (ViewBag.empleados is string message)
+                                {
+                                    <p class="text-muted">@message</p>
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.idEmpleado,
+                                        new SelectList(ViewBag.empleados, "Id", "nombre"),
+                                        "Seleccione un empleado",
+                                        new { @class = "form-select" })
+                                }
+                                @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="submit" class="btn btn-success btn-action flex-grow-1 me-2">
+                            <i class="fas fa-save"></i> Guardar Compra
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary btn-action flex-grow-1 ms-2">
+                            <i class="fas fa-arrow-left"></i> Volver al Listado
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
 
-    <div class="mb-3">
-        @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "control-label" })
-        @if (ViewBag.empleados is string message)
-        {
-            <p>@message</p>
-        }
-        else
-        {
-            @Html.DropDownListFor(model => model.idEmpleado,
-                new SelectList(ViewBag.empleados, "Id", "nombre"),
-                "Seleccione un empleado",
-                new { @class = "form-control" })
-        }
-        @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "text-danger" })
-    </div>
 
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">
-        <i class="fas fa-arrow-left"></i> Volver a la lista
-    </a>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
         $(document).ready(function () {
-            
+
             $("#buscarCliente").click(function () {
                 var cedula = $("#numeroCedula").val();
                 if (cedula === "") {
@@ -136,34 +225,34 @@
                 });
             });
 
-            
-           
-        });
-    </script>
 
-    <script>
+
+        });
+        </script>
+
+        <script>
         $(document).ready(function () {
-  
+
     function calcularTotal() {
         var total = 0;
 
-     
+
         $("input[name='listaServicios']:checked").each(function () {
             var servicioId = $(this).val();
 
-         
+
             $.ajax({
-                url: '@Url.Action("ObtenerPrecioServicio", "Compra")', 
+                url: '@Url.Action("ObtenerPrecioServicio", "Compra")',
                 type: 'GET',
                 data: { idServicio: servicioId },
                 success: function (response) {
                     if (response.success) {
-                      
+
                         total += parseFloat(response.precio);
                     }
 
-                    
-                    $("#Total").val(total.toFixed(2)); 
+
+                    $("#Total").val(total.toFixed(2));
                 },
                 error: function () {
                     alert("Ocurrió un error al obtener el precio del servicio.");
@@ -180,8 +269,23 @@
     // Llamar al calcular total cuando se cargue la página por primera vez
     calcularTotal();
 });
+          
 
+        </script>
 
-    </script>
+    }
 
-}
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>

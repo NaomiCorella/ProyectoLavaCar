@@ -21,104 +21,438 @@
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
+        <body>
 
-<body>
 
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="section-title text-center">
+                        <div class="luxury-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+                            </svg>
+                        </div>
+                        <h2 class="luxury-title">Deja tu Reseña</h2>
+                        <p class="luxury-subtitle">Tu opinión es importante para nosotros. Cuéntanos tu experiencia.</p>
+                        <div class="luxury-divider"></div>
+                    </div>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="container">
-            <div class="section-title text-center">
-                <h2>Deja tu Reseña</h2>
-                <p>Tu opinión es importante para nosotros. Cuéntanos tu experiencia.</p>
-            </div>
-
-            <div class="card shadow-lg rounded">
-                <div class="card-body">
-                    <div class="form-horizontal">
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "control-label" })
-
-                            @if (ViewBag.Servicios is string message)
+                    <div class="luxury-card shadow-lg rounded">
+                        <div class="card-body">
+                            @using (Html.BeginForm())
                             {
-                                <p>@message</p>
+                                @Html.AntiForgeryToken()
+
+                                <div class="luxury-form">
+                                    @Html.ValidationSummary(true, "", new { @class = "luxury-alert" })
+
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.idServicio, "Nombre Servicio", htmlAttributes: new { @class = "input-label" })
+
+                                        @if (ViewBag.Servicios is string message)
+                                        {
+                                            <p class="info-message">@message</p>
+                                        }
+                                        else
+                                        {
+                                            <div class="input-container">
+                                                <span class="input-icon">
+                                                    <svg viewBox="0 0 24 24">
+                                                        <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                                                    </svg>
+                                                </span>
+                                                @Html.DropDownListFor(model => model.idServicio,
+                                 new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
+                                 "Seleccione un servicio",
+                                 new { @class = "luxury-select" })
+                                            </div>
+                                        }
+                                        @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "validation-message" })
+                                    </div>
+
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.calificacion, htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+                                                </svg>
+                                            </span>
+                                            @Html.DropDownListFor(model => model.calificacion, new List<SelectListItem>
+                                            {
+                                                new SelectListItem { Value = "", Text = "Selecciona una calificación", Disabled = true, Selected = true },
+                                                new SelectListItem { Value = "5", Text = "⭐⭐⭐⭐⭐ - Excelente" },
+                                                new SelectListItem { Value = "4", Text = "⭐⭐⭐⭐ - Muy Bueno" },
+                                                new SelectListItem { Value = "3", Text = "⭐⭐⭐ - Bueno" },
+                                                new SelectListItem { Value = "2", Text = "⭐⭐ - Regular" },
+                                                new SelectListItem { Value = "1", Text = "⭐ - Malo" }
+                                            }, new { @class = "luxury-select", required = "required" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.calificacion, "", new { @class = "validation-message" })
+                                    </div>
+
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.comentarios, htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            @Html.TextAreaFor(model => model.comentarios, new { @class = "luxury-textarea", rows = 5, placeholder = "Escribe tu experiencia detallada...", required = "required" })
+                                            <span class="input-border"></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "validation-message" })
+                                    </div>
+
+                                    <div class="text-center mt-4">
+                                        <button type="submit" class="luxury-button">
+                                            <span class="button-text">Guardar Reseña</span>
+                                            <span class="button-icon">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                                                </svg>
+                                            </span>
+                                            <div class="button-shine"></div>
+                                        </button>
+                                    </div>
+                                </div>
                             }
-                            else
-                            {
-                                @Html.DropDownListFor(model => model.idServicio,
-                                    new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
-                                    "Seleccione un servicio",
-                                    new { @class = "form-control w-100" })
-                            }
-
-                            @Html.ValidationMessageFor(model => model.idServicio, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.calificacion, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.calificacion, new List<SelectListItem>
-                            {
-                                new SelectListItem { Value = "", Text = "Selecciona una calificación", Disabled = true, Selected = true },
-                                new SelectListItem { Value = "5", Text = "⭐⭐⭐⭐⭐ - Excelente" },
-                                new SelectListItem { Value = "4", Text = "⭐⭐⭐⭐ - Muy Bueno" },
-                                new SelectListItem { Value = "3", Text = "⭐⭐⭐ - Bueno" },
-                                new SelectListItem { Value = "2", Text = "⭐⭐ - Regular" },
-                                new SelectListItem { Value = "1", Text = "⭐ - Malo" }
-                            }, new { @class = "form-control w-100", required = "required" })
-
-                            @Html.ValidationMessageFor(model => model.calificacion, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.comentarios, htmlAttributes: new { @class = "control-label" })
-                            @Html.TextAreaFor(model => model.comentarios, new { @class = "form-control w-100", rows = 5, placeholder = "Escribe tu experiencia", required = "required" })
-
-                            @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-outline-success btn-lg">
-                                <i class="fas fa-save me-2"></i> Guardar
-                            </button>
                         </div>
                     </div>
+
+                    <div class="text-center mt-4">
+                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "luxury-link" })
+                    </div>
                 </div>
-            </div>
-        </div>
-
-
-
-
+      
 
     }
 
-    <div class="text-center mt-4">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-info" })
-    </div>
+        <style>
+.luxury-review-container {
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+.section-title {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.luxury-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+}
+
+.luxury-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.luxury-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #012030;
+    margin-bottom: 15px;
+}
+
+.luxury-subtitle {
+    color: #6c757d;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.luxury-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+    margin: 20px auto;
+    border-radius: 3px;
+}
+
+.luxury-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.luxury-form {
+    padding: 20px;
+}
+
+            .luxury-input-group {
+                max-width: 650px; /* Un poco más que los inputs para el padding */
+                margin: 0 auto 25px; /* Centra y mantiene el margen inferior */
+            }
+
+.input-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+            .input-container {
+                position: relative;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #45C4B0;
+    z-index: 1;
+}
+
+.input-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+            .luxury-select {
+                width: 100%; /* Ya está al 100% */
+                max-width: 600px; /* Añade un ancho máximo */
+                margin: 0 auto; /* Centra el elemento */
+                display: block; /* Necesario para que funcione el margin auto */
+                padding: 15px 15px 15px 50px;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.7);
+                color: #495057;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2345C4B0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 15px center;
+                background-size: 15px;
+            }
+
+.luxury-select:focus {
+    border-color: #45C4B0;
+    box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+    outline: none;
+    background-color: white;
+}
+
+            .luxury-textarea {
+                width: 100%; /* Ya está al 100% */
+                max-width: 600px; /* Añade un ancho máximo */
+                margin: 0 auto; /* Centra el elemento */
+                display: block; /* Necesario para que funcione el margin auto */
+                padding: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.7);
+                color: #495057;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+                resize: vertical;
+                min-height: 150px;
+            }
+
+.luxury-textarea:focus {
+    border-color: #45C4B0;
+    box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+    outline: none;
+    background-color: white;
+}
+
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+    transition: width 0.4s ease;
+}
+
+.luxury-textarea:focus ~ .input-border {
+    width: 100%;
+}
+
+.validation-message {
+    display: block;
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.luxury-alert {
+    padding: 15px;
+    background: #fff4f4;
+    color: #d32f2f;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #ffcdd2;
+    font-size: 14px;
+    text-align: center;
+}
+
+.luxury-button {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    padding: 16px;
+    background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto 0;
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+.button-icon {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.button-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.button-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.luxury-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+}
+
+.luxury-button:hover .button-shine {
+    left: 100%;
+}
+
+.luxury-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+.luxury-link {
+    color: #45C4B0;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.luxury-link:hover {
+    color: #13578A;
+}
+
+.luxury-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #45C4B0;
+    transition: width 0.3s ease;
+}
+
+.luxury-link:hover::after {
+    width: 100%;
+}
+
+.info-message {
+    color: #6c757d;
+    font-style: italic;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 3px solid #45C4B0;
+}
+
+/* Animaciones */
+@@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.luxury-icon {
+    animation: float 4s ease-in-out infinite;
+}
+
+@@media (max-width: 768px) {
+    .luxury-card {
+        padding: 20px;
     }
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/Scripts/Resenias/alertaCrear.js"></script>
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
-</body>
+    .luxury-title {
+        font-size: 28px;
+    }
+
+    .luxury-subtitle {
+        font-size: 16px;
+    }
+}
+        </style>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="~/Scripts/Resenias/alertaCrear.js"></script>
+        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="~/Content/assets/js/bootstrap.min.js"></script>
+        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/Content/assets/js/main.js"></script>
+        <script src="~/Content/assets/js/popper.min.js"></script>
+        <script src="~/Content/assets/js/slick.min.js"></script>
+        <script src="~/Content/assets/js/waypoints.min.js"></script>
+        <script src="~/Content/assets/js/wow.min.js"></script>
+    </body>
 
 </html>

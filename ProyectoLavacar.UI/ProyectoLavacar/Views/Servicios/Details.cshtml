@@ -24,81 +24,190 @@
 
 <body>
 
-   <section class="breadcrumbs-area bg_cover" style="background-image: url(assets/images/bg/breadcrumb-bg-1.jpg);">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="breadcrumbs-content text-center">
-                    <h1>Detalles Servicio</h1>
-                    <ul>
-                        <li><a href="index-2.html">Inicio</a></li>
-                        <li class="active">Service-Single</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section><!--====== End breadcrumbs-area Section ======-->
-<!--====== Start service-details-section Section ======-->
-<section class="service-details-section pt-120 pb-120">
-    <div class="container">
-        <div class="row">
-            
-            <div class="col-lg-8">
-                <div class="service-details-wrapper">
-                    <div class="title">
-                        <a href="#" class="cat-btn">@Model.nombre</a>
-                        <h3>@Model.nombre</h3>
-                    </div>
-                    <p>
-                        Ofrecemos un servicio de lavado exterior completo a mano para dejar tu vehículo impecable.
-                        Nuestro equipo utiliza productos de alta calidad y técnicas especializadas para proteger
-                        y restaurar la apariencia de tu auto.
-                    </p>
 
-                    <div class="content-box">
-                        <i class="flaticon-mechanic"></i>
-                        <h4>@Model.nombre</h4>
-                        <p>
-                            @Model.descripcion
-                        </p>
-                        <p>
-                            @Model.precio
-                        </p>
-                    </div>
-
-       
-
-                   
-                </div>
-            </div>
-
-            <!-- Barra Lateral -->
-            <div class="col-lg-4">
-                <div class="sidebar-widget-area">
-                    <!-- Lista de Servicios -->
-                    <!-- Reserva de Cita -->
-                    <div class="widget booking-widget mb-40">
-                        <h4>Reserva Tu Lavado</h4>
-                        <span>Usa nuestra herramienta de reservas en línea</span>
-                        <p>
-                            Programa tu cita de manera rápida y sencilla con nuestro sistema de reservas en línea.
-                            Atención garantizada para tu vehículo.
-                        </p>
-                        @Html.ActionLink("Reservar Tu Cita", "Create", "Reservas", new { id = Model.idServicio }, new { @class = "btn btn-sm btn-success" })
-
-
-                    </div>
-
-                    <div class="text-center mt-4">
-                        @Html.ActionLink("Ver todos los servicios", "Index", null, new { @class = "btn btn-outline-info" })
+    <section class="breadcrumbs-area bg_cover" style="background-image: url('../../content/assets/images/bg/service-bg-1.jpg');">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="breadcrumbs-content text-center">
+                        <h1>Detalles Servicio</h1>
+                        <ul>
+                            <li><a href="index-2.html">Inicio</a></li>
+                            <li class="active">Service-Single</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Separación visual -->
+    <div style="height: 50px; background-color: transparent;"></div>
+
+   
+    <section class="service-details-section pt-120 pb-120" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="service-details-wrapper bg-white p-5 rounded-3 shadow-sm border" style="border-color: #45C4B0!important;">
+                        <div class="title mb-5 text-center">
+                            <span class="badge mb-3 px-4 py-2 rounded-pill" style="background-color: #012030; font-size: 1.1rem;">@Model.nombre</span>
+                            <h2 class="display-5 fw-bold" style="color: #012030; position: relative;">
+                                <span style="position: relative; z-index: 1;">@Model.nombre</span>
+                                <span style="position: absolute; bottom: 8px; left: 0; width: 100%; height: 12px; background-color: #9AEBA3; opacity: 0.3; z-index: 0;"></span>
+                            </h2>
+                        </div>
+
+                        <div class="content-box p-5 rounded-3 mb-5 border" style="border-color: #45C4B0!important;">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-4 fw-semibold" style="color: #13578A;">
+                                        Detalles del servicio
+                                    </h4>
+
+                                    <div class="service-description mb-5">
+                                        <p class="fs-5" style="color: #012030; line-height: 1.8;">@Model.descripcion</p>
+                                    </div>
+
+                                    <div class="price-tag text-white p-3 rounded shadow" style="background-color: #45C4B0; width: fit-content;">
+                                        <h4 class="mb-0 fw-bold">Precio: @Model.precio</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-benefits mt-5">
+                            <h4 class="mb-5 text-center fw-semibold" style="color: #13578A; position: relative;">
+                                <span style="position: relative; z-index: 1; background: white; padding: 0 20px;">Beneficios exclusivos</span>
+                                <span style="position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background-color: #45C4B0; z-index: 0;"></span>
+                            </h4>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="benefit-card p-4 rounded-3 h-100 border" style="border-color: #9AEBA3!important;">
+                                        <h5 style="color: #012030;" class="fw-semibold">Profesionales certificados</h5>
+                                        <p class="mb-0" style="color: #13578A;">Personal capacitado para cada servicio</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-card p-4 rounded-3 h-100 border" style="border-color: #9AEBA3!important;">
+                                        <h5 style="color: #012030;" class="fw-semibold">Productos premium</h5>
+                                        <p class="mb-0" style="color: #13578A;">Utilizamos las mejores marcas del mercado</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-card p-4 rounded-3 h-100 border" style="border-color: #9AEBA3!important;">
+                                        <h5 style="color: #012030;" class="fw-semibold">Garantía total</h5>
+                                        <p class="mb-0" style="color: #13578A;">Si no queda satisfecho, lo solucionamos</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-card p-4 rounded-3 h-100 border" style="border-color: #9AEBA3!important;">
+                                        <h5 style="color: #012030;" class="fw-semibold">Reservas online</h5>
+                                        <p class="mb-0" style="color: #13578A;">Agenda cuando más te convenga</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra Lateral -->
+                <div class="col-lg-4">
+                    <div class="sidebar-widget-area">
+                       
+                        <div class="widget booking-widget mb-5 bg-white p-4 rounded-3 shadow-sm border" style="border-color: #45C4B0!important;">
+                            <h4 class="text-center mb-4 fw-semibold" style="color: #13578A;">
+                                Reserva ahora
+                            </h4>
+                            <p class="text-center mb-4 fs-5" style="color: #012030;">
+                                Agenda tu cita en minutos con nuestro sistema de reservas en línea.
+                            </p>
+                            <div class="d-grid">
+                                @Html.ActionLink("Reservar cita", "Create", "Reservas", new { id = Model.idServicio }, new { @class = "btn py-3 rounded-pill fw-bold fs-5", style = "background-color: #012030; color: white; border: none;" })
+                            </div>
+                        </div>
+
+                      
+                        @*<div class="widget contact-widget mb-5 bg-white p-4 rounded-3 border" style="border-color: #9AEBA3!important;">
+                            <h5 class="text-center mb-3 fw-semibold" style="color: #13578A;">
+                                ¿Tienes dudas?
+                            </h5>
+                            <p class="text-center mb-4 fs-5" style="color: #012030;">Estamos para ayudarte</p>
+                            <div class="d-grid">
+                                <a href="tel:+1234567890" class="btn py-3 rounded-pill fw-bold fs-5" style="background-color: #9AEBA3; color: #012030; border: none;">
+                                    Contáctanos
+                                </a>
+                            </div>
+                        </div>*@
+
+                      
+                        <div class="widget all-services-widget bg-white p-4 rounded-3 border" style="border-color: #45C4B0!important;">
+                            <h5 class="text-center mb-3 fw-semibold" style="color: #13578A;">
+                                ¿Necesitas otro servicio?
+                            </h5>
+                            <div class="d-grid">
+                                @Html.ActionLink("Ver todos los servicios", "Index", null, new { @class = "btn py-3 rounded-pill fw-bold fs-5", style = "background-color: #45C4B0; color: white; border: none;" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Separación visual -->
+    <div style="height: 50px; background-color: transparent;"></div>
+
+    <!-- Sección de Preguntas Frecuentes -->
+    @*<section class="faq-section py-120" style="background-color: #ffffff;">
+        <div class="container">
+            <h3 class="text-center mb-5 display-6 fw-bold" style="color: #012030; position: relative;">
+                <span style="position: relative; z-index: 1; background: white; padding: 0 20px;">Preguntas frecuentes</span>
+                <span style="position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background-color: #45C4B0; z-index: 0;"></span>
+            </h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                            ¿Cuánto tiempo toma este servicio?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body" style="background-color: #f8f9fa;">
+                            <p class="mb-0 fs-5" style="color: #13578A;">El tiempo promedio para este servicio es de @Model.tiempoDuracion. Sin embargo, puede variar según el tamaño y condición de tu vehículo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                            ¿Qué métodos de pago aceptan?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body" style="background-color: #f8f9fa;">
+                            <p class="mb-0 fs-5" style="color: #13578A;">Aceptamos todas las tarjetas de crédito y débito, transferencias bancarias y efectivo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                            ¿Necesito llevar algo especial?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body" style="background-color: #f8f9fa;">
+                            <p class="mb-0 fs-5" style="color: #13578A;">Solo necesitas traer tu vehículo. Nos encargamos de todo lo demás.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+    <!-- Separación final -->
+    <div style="height: 50px; background-color: transparent;"></div>
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>

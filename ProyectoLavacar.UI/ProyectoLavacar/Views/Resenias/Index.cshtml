@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas.ReseniaConRespuesta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reseñas de Clientes";
 }
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
+    <title>Reseñas de Clientes - ProyectoLavacar</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -20,106 +20,194 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <style>
+        .review-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none !important;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .reviewer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .review-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .response-card {
+            border-left: 4px solid #45C4B0;
+            margin-top: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: #45C4B0;
+            bottom: -10px;
+            left: 20%;
+        }
+        
+        .btn-primary {
+            background-color: #012030;
+            border-color: #012030;
+        }
+        
+        .btn-primary:hover {
+            background-color: #45C4B0;
+            border-color: #45C4B0;
+        }
+        
+        .btn-outline-info {
+            border-color: #45C4B0;
+            color: #45C4B0;
+        }
+        
+        .btn-outline-info:hover {
+            background-color: #45C4B0;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-
- 
-    <section class="reviews-section pt-120 pb-120">
+    <section class="breadcrumbs-area bg_cover" style="background-image: url('../../content/assets/images/bg/service-bg-1.jpg');">
         <div class="container">
-            <div class="section-title text-center">
-                <h2>Reseñas de Nuestros Clientes</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="breadcrumbs-content text-center">
+                        <h1>Reseñas de Clientes</h1>
+                        <ul>
+                            <li><a href="index-2.html">Inicio</a></li>
+                            <li class="active">Reseñas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <p>Descubre lo que nuestros clientes dicen sobre nuestros servicios.</p>
-
-                <a href="@Url.Action("Create")" class="btn btn-outline-info btn-sm me-2" title="Deja tu Reseña">
-                    Deja Tu Reseña
-                </a>
-
+    <section class="reviews-section pt-120 pb-120 bg-light">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h2 class="display-5 fw-bold" style="color: #012030;">Reseñas de Nuestros Clientes</h2>
+                <p class="fs-5" style="color: #13578A;">Descubre lo que nuestros clientes dicen sobre nuestros servicios.</p>
+                
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="@Url.Action("Create")" class="btn btn-primary btn-lg px-4 py-2 rounded-pill fw-bold">
+                        <i class="fas fa-pen me-2"></i>Deja Tu Reseña
+                    </a>
+                </div>
             </div>
 
-            <div class="row justify-content-center">
-                @using (Html.BeginForm("Index", "Resenias", FormMethod.Get))
-                {
-                    <div class="container mt-5 mb-5">
-                        <div class="d-flex justify-content-center align-items-center mb-4">
-                            <div class="d-flex">
-                                <select name="ordenarPor" id="ordenarPor" class="form-control mr-2">
-                                    <option value="fecha" @(Request["ordenarPor"] == "fecha" ? "selected" : "")>Fecha</option>
-                                    <option value="calificacion" @(Request["ordenarPor"] == "calificacion" ? "selected" : "")>Calificación</option>
-                                </select>
-                                <select name="orden" id="orden" class="form-control">
-                                    <option value="asc" @(Request["orden"] == "asc" ? "selected" : "")>Ascendente</option>
-                                    <option value="desc" @(Request["orden"] == "desc" ? "selected" : "")>Descendente</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary ml-2">Ordenar</button>
+            @using (Html.BeginForm("Index", "Resenias", FormMethod.Get))
+            {
+                <div class="row justify-content-center mb-5">
+                    <div class="col-md-8">
+                        <div class="card shadow-sm border-0 p-3">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-4">
+                                    <select name="ordenarPor" id="ordenarPor" class="form-select">
+                                        <option value="fecha" @(Request["ordenarPor"] == "fecha" ? "selected" : "")>Fecha</option>
+                                        <option value="calificacion" @(Request["ordenarPor"] == "calificacion" ? "selected" : "")>Calificación</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="orden" id="orden" class="form-select">
+                                        <option value="asc" @(Request["orden"] == "asc" ? "selected" : "")>Ascendente</option>
+                                        <option value="desc" @(Request["orden"] == "desc" ? "selected" : "")>Descendente</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-sort me-2"></i>Ordenar
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
+            }
 
-            <div class="row gap-4">
+            <div class="row g-4">
                 @foreach (var item in Model)
                 {
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12 mb-4">
-                       <div class="review-card p-3 w-100 border" style="background-color: #f8f9fa;">
-
-
-                           <div class="reviewer-info">
-                               <h5>@item.nombreCliente </h5>
-                               <span class="review-date">@item.fecha</span>
-                           </div>
-                           <div class="rating">
-                               Servicio:  @item.nombreServicio
-                           </div>
-                           <div class="rating">
-                               <p>
-                               <p>
-                                   @for (int i = 1; i <= 5; i++)
-                                   {
-                                       if (item.calificacion >= i)
-                                       {
-                                           @:⭐
-                                       }
-                                       else
-                                       {
-                                           @:☆  
-                                       }
-                                   }
-                               </p>
-
-                               </p>
-
-                           </div>
-                           <p>
-                               @item.comentarios
-                           </p>
-
-                           @if (!string.IsNullOrEmpty(item.comentariosRespuesta))
-                           {
-                                <div class="review-card p-3 bg-white w-100 border">
-
-                                   <div class="reviewer-info">
-                                       <h5>Respondido por: @item.nombreEmpleado</h5>
-                                       <span class="review-date">@item.fecha</span>
-                                   </div>
-                                   <p>
-                                       @item.comentariosRespuesta
-                                   </p>
-                               </div>
-                           }
-                       </div>
+                    <div class="col-12">
+                        <div class="review-card p-4 bg-white">
+                            <div class="reviewer-info">
+                                <h4 class="mb-0" style="color: #012030;">@item.nombreCliente</h4>
+                                <span class="review-date"><i class="far fa-calendar-alt me-2"></i>@item.fecha</span>
+</div>
+                            
+                            <div class="rating mb-3">
+                                <span class="fw-bold me-2" style="color: #13578A;">Servicio:</span> 
+                                <span class="badge px-3 py-1 rounded-pill" style="background-color: #9AEBA3; color: #012030;">@item.nombreServicio</span>
                             </div>
+                            
+                            <div class="rating mb-3">
+                                <span class="fw-bold me-2" style="color: #13578A;">Calificación:</span>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (item.calificacion >= i)
+                                    {
+                                        <i class="fas fa-star text-warning"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star text-warning"></i>
+                                    }
+                                }
+                                <span class="ms-2">(@item.calificacion/5)</span>
+                            </div>
+                            
+                            <div class="review-content">
+                                <p class="fs-5" style="color: #495057; line-height: 1.7;">@item.comentarios</p>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(item.comentariosRespuesta))
+                            {
+                                <div class="response-card p-4 mt-4 rounded-3">
+                                    <div class="reviewer-info">
+                                        <h5 class="mb-0" style="color: #45C4B0;">
+                                            <i class="fas fa-reply me-2"></i>Respondido por: @item.nombreEmpleado
+                                        </h5>
+                                        <span class="review-date">@item.fecha</span>
+                                    </div>
+                                    <div class="response-content mt-3">
+                                        <p class="mb-0" style="color: #13578A;">@item.comentariosRespuesta</p>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-
                 }
             </div>
-                </div>
-
-</section>
+        </div>
+    </section>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
@@ -136,5 +224,4 @@
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
-
 </html>
