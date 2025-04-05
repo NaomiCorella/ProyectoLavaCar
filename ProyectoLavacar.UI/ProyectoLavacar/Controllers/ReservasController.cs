@@ -306,12 +306,15 @@ namespace ProyectoLavacar.Controllers
             if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
             {
 
-                if (fechaInicio < DateTime.Now)
+                if (fechaInicio <= DateTime.Now)
                 {
                     ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
                     return View(modeloDeReserva);
                 }
             }
+
+
+
             // Validar datos
             if (modeloDeReserva.idServicio == 0 || modeloDeReserva.fecha == null || modeloDeReserva.hora == null)
             {
