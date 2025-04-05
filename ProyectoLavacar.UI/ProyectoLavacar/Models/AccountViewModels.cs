@@ -84,15 +84,6 @@ namespace ProyectoLavacar.Models
         public string ConfirmPassword { get; set; }
 
 
-        [Required]
-        [Range(100000000, 999999999, ErrorMessage = "La cédula debe tener exactamente 9 dígitos.")]
-
-
-        [Display(Name = "Cédula")]
-        public int cedula { get; set; }
-
-
-
 
         [Required]
         [MaxLength(50)]

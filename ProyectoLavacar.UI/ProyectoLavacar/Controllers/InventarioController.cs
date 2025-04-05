@@ -70,6 +70,7 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Inventario
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Index()
         {
             ViewBag.Title = "Inventario";
@@ -83,13 +84,14 @@ namespace ProyectoLavacar.Controllers
             return PartialView("_lista", elInventario);
         }
         // GET: Inventario/Details/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Details(int id)
         {
             InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
             return View(elInventario);
         }
 
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Inventario/Create
         public ActionResult Create()
         {
@@ -144,6 +146,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult RegistrarMovimiento()
         {
             var productos = _listarInventario.ListarInventario()
@@ -174,6 +177,7 @@ namespace ProyectoLavacar.Controllers
 
 
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult HistorialDeMovimientos()
         {
             ViewBag.Title = "Historial de Movimientos";
@@ -185,6 +189,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Inventario/Edit/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Edit(int id)
         {
             ViewBag.Categorias = new List<SelectListItem>

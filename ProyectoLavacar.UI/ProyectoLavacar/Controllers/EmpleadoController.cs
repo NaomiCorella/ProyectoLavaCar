@@ -61,6 +61,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
@@ -82,6 +83,7 @@ namespace ProyectoLavacar.Controllers
             }
             return View(laListaDeFinanzas);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult VerEvaluaciones(string id)
         {
             ViewBag.Title = "Lista De Evaluaciones";
@@ -89,7 +91,7 @@ namespace ProyectoLavacar.Controllers
             List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
             return View(laListaDeFinanzas);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult MisEvaluaciones(string id)
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -98,14 +100,14 @@ namespace ProyectoLavacar.Controllers
             List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
             return View(laListaDeFinanzas);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult DetallesEvaluaciones(int id)
         {
             EvaluacionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
             return View(Finanzas);
         }
 
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Empleado/Details/5
         public ActionResult Details(string id)
         {
@@ -114,6 +116,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado/Create
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult RegistroDeEvaluaciones(string id)
         {
             ViewBag.idEmpleado = id;
@@ -173,6 +176,7 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Empleado/Edit/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Edit(string id)
         {
             EmpleadoDto laFinanza = _buscarPorId.Detalle(id);

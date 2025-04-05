@@ -41,6 +41,8 @@ namespace ProyectoLavacar.Controllers
             _crearRespuesta = new CrearRespuestaLN();
         }
         // GET: Reseñas
+        [Authorize(Roles = "Administrador, Empleado, Usuario")]
+
         public ActionResult Index(string ordenarPor = "fecha", string orden = "asc")
         {
             var lalistadeArchivos = _listarResenia.ListarResenia().Where(r => r.estadoResenia).ToList();
@@ -62,6 +64,7 @@ namespace ProyectoLavacar.Controllers
 
             return View(lalistadeArchivos);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IndexAdmin(string filtroFecha = "", string filtroUsuario = "", string filtroContenido = "")
         {
@@ -97,13 +100,7 @@ namespace ProyectoLavacar.Controllers
         }
 
 
-
-
-        // GET: Reseñas/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        [Authorize(Roles = "Administrador, Empleado, Usuario")]
 
         // GET: Reseñas/Create
         public ActionResult Create()
@@ -145,6 +142,8 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Reseñas/Edit/5
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult Edit(int id)
         {
             ReseniaDto reseña = _obtenerPorId.Detalle(id);
@@ -167,27 +166,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        // GET: Reseñas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Reseñas/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+     
 
         public ActionResult CambiarEstado(int id)
         {
@@ -215,6 +194,8 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Reseñas/Create
         [HttpPost]
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public async Task<ActionResult> ResponderReseña(RespuestaDto modeloDeRespuesta, int id)
         {
             try
