@@ -91,11 +91,14 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Compra
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult Index()
         {
             List<CompraAdminDto> lalistaDeCompras = _listarComprasAdmin.ListarCompra();
             return View(lalistaDeCompras);
         }
+        [Authorize(Roles = "Administrador, Empleado,Usuario")]
 
         public ActionResult MisCompras() //ComprasCliente
         {
@@ -115,6 +118,8 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Compra/Create
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult Create()
         {
             var servicios = _listarServicios.ListarServicios()
