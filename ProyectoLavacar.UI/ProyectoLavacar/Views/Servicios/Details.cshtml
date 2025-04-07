@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    
+
 
 
     <section class="breadcrumbs-area bg_cover" style="background-image: url('../../content/assets/images/bg/service-bg-1.jpg');">
@@ -45,7 +45,7 @@
     <!-- Separación visual -->
     <div style="height: 50px; background-color: transparent;"></div>
 
-   
+
     <section class="service-details-section pt-120 pb-120" style="background-color: #f8f9fa;">
         <div class="container">
             <div class="row">
@@ -70,7 +70,7 @@
                                         <p class="fs-5" style="color: #012030; line-height: 1.8;">@Model.descripcion</p>
                                     </div>
 
-                                    <div class="price-tag text-white p-3 rounded shadow" style="background-color: #45C4B0; width: fit-content;">
+                                    <div class="@*price-tag @*text-white p-3 rounded shadow*@" style=@*"background-color: #45C4B0;*@ width: fit-content;">
                                         <h4 class="mb-0 fw-bold">Precio: @Model.precio</h4>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                 <!-- Barra Lateral -->
                 <div class="col-lg-4">
                     <div class="sidebar-widget-area">
-                       
+
                         <div class="widget booking-widget mb-5 bg-white p-4 rounded-3 shadow-sm border" style="border-color: #45C4B0!important;">
                             <h4 class="text-center mb-4 fw-semibold" style="color: #13578A;">
                                 Reserva ahora
@@ -124,24 +124,24 @@
                                 Agenda tu cita en minutos con nuestro sistema de reservas en línea.
                             </p>
                             <div class="d-grid">
-                                @Html.ActionLink("Reservar cita", "Create", "Reservas", new { id = Model.idServicio }, new { @class = "btn py-3 rounded-pill fw-bold fs-5", style = "background-color: #012030; color: white; border: none;" })
+                                @Html.ActionLink("Reservar cita", "Create", "Reservas", new { id = Model.idServicio }, new { @class = "btn py-3 rounded-pill fw-bold fs-5", style = "background-color: #45C4B0; color: white; border: none;" })
                             </div>
                         </div>
 
-                      
-                        @*<div class="widget contact-widget mb-5 bg-white p-4 rounded-3 border" style="border-color: #9AEBA3!important;">
-                            <h5 class="text-center mb-3 fw-semibold" style="color: #13578A;">
-                                ¿Tienes dudas?
-                            </h5>
-                            <p class="text-center mb-4 fs-5" style="color: #012030;">Estamos para ayudarte</p>
-                            <div class="d-grid">
-                                <a href="tel:+1234567890" class="btn py-3 rounded-pill fw-bold fs-5" style="background-color: #9AEBA3; color: #012030; border: none;">
-                                    Contáctanos
-                                </a>
-                            </div>
-                        </div>*@
 
-                      
+                        @*<div class="widget contact-widget mb-5 bg-white p-4 rounded-3 border" style="border-color: #9AEBA3!important;">
+                                <h5 class="text-center mb-3 fw-semibold" style="color: #13578A;">
+                                    ¿Tienes dudas?
+                                </h5>
+                                <p class="text-center mb-4 fs-5" style="color: #012030;">Estamos para ayudarte</p>
+                                <div class="d-grid">
+                                    <a href="tel:+1234567890" class="btn py-3 rounded-pill fw-bold fs-5" style="background-color: #9AEBA3; color: #012030; border: none;">
+                                        Contáctanos
+                                    </a>
+                                </div>
+                            </div>*@
+
+
                         <div class="widget all-services-widget bg-white p-4 rounded-3 border" style="border-color: #45C4B0!important;">
                             <h5 class="text-center mb-3 fw-semibold" style="color: #13578A;">
                                 ¿Necesitas otro servicio?
@@ -161,51 +161,51 @@
 
     <!-- Sección de Preguntas Frecuentes -->
     @*<section class="faq-section py-120" style="background-color: #ffffff;">
-        <div class="container">
-            <h3 class="text-center mb-5 display-6 fw-bold" style="color: #012030; position: relative;">
-                <span style="position: relative; z-index: 1; background: white; padding: 0 20px;">Preguntas frecuentes</span>
-                <span style="position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background-color: #45C4B0; z-index: 0;"></span>
-            </h3>
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
-                            ¿Cuánto tiempo toma este servicio?
-                        </button>
-                    </h2>
-                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body" style="background-color: #f8f9fa;">
-                            <p class="mb-0 fs-5" style="color: #13578A;">El tiempo promedio para este servicio es de @Model.tiempoDuracion. Sin embargo, puede variar según el tamaño y condición de tu vehículo.</p>
+            <div class="container">
+                <h3 class="text-center mb-5 display-6 fw-bold" style="color: #012030; position: relative;">
+                    <span style="position: relative; z-index: 1; background: white; padding: 0 20px;">Preguntas frecuentes</span>
+                    <span style="position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background-color: #45C4B0; z-index: 0;"></span>
+                </h3>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                                ¿Cuánto tiempo toma este servicio?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="background-color: #f8f9fa;">
+                                <p class="mb-0 fs-5" style="color: #13578A;">El tiempo promedio para este servicio es de @Model.tiempoDuracion. Sin embargo, puede variar según el tamaño y condición de tu vehículo.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
-                            ¿Qué métodos de pago aceptan?
-                        </button>
-                    </h2>
-                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body" style="background-color: #f8f9fa;">
-                            <p class="mb-0 fs-5" style="color: #13578A;">Aceptamos todas las tarjetas de crédito y débito, transferencias bancarias y efectivo.</p>
+                    <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                                ¿Qué métodos de pago aceptan?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="background-color: #f8f9fa;">
+                                <p class="mb-0 fs-5" style="color: #13578A;">Aceptamos todas las tarjetas de crédito y débito, transferencias bancarias y efectivo.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
-                            ¿Necesito llevar algo especial?
-                        </button>
-                    </h2>
-                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body" style="background-color: #f8f9fa;">
-                            <p class="mb-0 fs-5" style="color: #13578A;">Solo necesitas traer tu vehículo. Nos encargamos de todo lo demás.</p>
+                    <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded-0 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="background-color: white; color: #012030; font-weight: 600; border-left: 4px solid #45C4B0;">
+                                ¿Necesito llevar algo especial?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="background-color: #f8f9fa;">
+                                <p class="mb-0 fs-5" style="color: #13578A;">Solo necesitas traer tu vehículo. Nos encargamos de todo lo demás.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     <!-- Separación final -->
     <div style="height: 50px; background-color: transparent;"></div>

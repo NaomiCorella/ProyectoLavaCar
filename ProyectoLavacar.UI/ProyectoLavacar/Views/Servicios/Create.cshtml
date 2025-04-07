@@ -21,208 +21,459 @@
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 
-<style>
-    /* Estilos base consistentes */
-    .luxury-review-container {
-        padding: 40px 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        min-height: 100vh;
-    }
-
-    .section-title {
-        margin-bottom: 40px;
-        position: relative;
-    }
-
-    .luxury-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        border-radius: 50%;
-        color: white;
-        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
-    }
-
-        .luxury-icon svg {
-            width: 40px;
-            height: 40px;
+    <style>
+        .luxury-select {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
         }
 
-    .luxury-title {
-        font-size: 32px;
-        font-weight: 600;
-        color: #012030;
-        margin-bottom: 15px;
-    }
-
-    .luxury-subtitle {
-        color: #6c757d;
-        font-size: 18px;
-        max-width: 600px;
-        margin: 0 auto 20px;
-    }
-
-    .luxury-divider {
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
-        margin: 20px auto;
-        border-radius: 3px;
-    }
-
-    .luxury-card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        margin: 0 auto;
-        padding: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        max-width: 800px;
-    }
-
-    /* Estilos para el formulario */
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .control-label {
-        font-weight: 600;
-        color: #495057;
-        margin-bottom: 8px;
-        display: block;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid #ced4da;
-        border-radius: 10px;
-        font-size: 15px;
-        transition: all 0.3s ease;
-    }
-
-        .form-control:focus {
-            border-color: #45C4B0;
-            box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
-            outline: none;
+        input, select, textarea {
+            max-width: none;
+            width: 100%;
         }
 
-    .checkbox {
-        margin-top: 8px;
-    }
+        .luxury-compra-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
 
-        .checkbox label {
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-    .text-danger {
-        color: #dc3545;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-
-    /* Estilos para botones */
-    .btn-submit {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px 28px;
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
-    }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
             color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
         }
 
-    .btn-back {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px 24px;
-        background-color: #f8f9fa;
-        color: #495057;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        font-size: 15px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        margin-top: 20px;
-    }
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
 
-        .btn-back:hover {
-            background-color: #e9ecef;
-            color: #495057;
-            text-decoration: none;
-        }
-
-    /* Diseño responsive */
-    @@media (max-width: 768px) {
-        .luxury-card {
-            padding: 25px;
-        }
-
-        .form-control {
-            padding: 10px 12px;
-        }
-
-        .btn-submit {
-            padding: 12px 22px;
-        }
-
-        .btn-back {
-            padding: 10px 20px;
-        }
-    }
-
-    @@media (max-width: 576px) {
         .luxury-title {
-            font-size: 28px;
-        }
-
-        .luxury-subtitle {
-            font-size: 16px;
-        }
-
-        .luxury-card {
-            padding: 20px;
-        }
-
-        .form-group {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
             margin-bottom: 15px;
         }
 
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
         }
 
-        .btn-back {
-            width: 100%;
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
         }
-    }
-</style>
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-form {
+            padding: 20px;
+        }
+
+        .luxury-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(245, 245, 245, 0.5);
+            border-radius: 12px;
+        }
+
+        .luxury-section-title {
+            font-size: 20px;
+            color: #012030;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .luxury-input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #45C4B0;
+            z-index: 1;
+        }
+
+            .input-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .luxury-input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .luxury-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .luxury-select {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+
+        .input-border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            transition: width 0.4s ease;
+        }
+
+        .luxury-input:focus,
+        .luxury-textarea:focus,
+        .luxury-select:focus {
+            border-color: #45C4B0;
+            box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+            outline: none;
+            background-color: white;
+        }
+
+            .luxury-input:focus ~ .input-border,
+            .luxury-textarea:focus ~ .input-border,
+            .luxury-select:focus ~ .input-border {
+                width: 100%;
+            }
+
+        .validation-message {
+            display: block;
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .luxury-alert {
+            padding: 15px;
+            background: #fff4f4;
+            color: #d32f2f;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid #ffcdd2;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .luxury-info-box {
+            padding: 15px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
+            font-size: 14px;
+            text-align: center;
+        }
+        .luxury-input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        .luxury-button {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .luxury-button-small {
+            white-space: nowrap; /* Evita que el texto del botón se rompa */
+            padding: 12px 16px; /* Ajuste de padding para mejor alineación vertical */
+            height: 51px; /* Misma altura que el input */
+            box-sizing: border-box;
+            position: relative;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(69, 196, 176, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .luxury-button-secondary {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            background: white;
+            color: #45C4B0;
+            border: 2px solid #45C4B0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+            .luxury-button-secondary:hover {
+                background: #f5f5f5;
+                transform: translateY(-2px);
+            }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+            .button-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover,
+        .luxury-button-small:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-button:hover .button-shine,
+            .luxury-button-small:hover .button-shine {
+                left: 100%;
+            }
+
+            .luxury-button:hover .button-icon,
+            .luxury-button-small:hover .button-icon {
+                transform: translateX(5px);
+            }
+
+        .luxury-checkbox {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            color: #495057;
+        }
+
+            .luxury-checkbox input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            .luxury-checkbox .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #f5f5f5;
+                border: 2px solid #45C4B0;
+                border-radius: 6px;
+                transition: all 0.3s;
+            }
+
+            .luxury-checkbox:hover input ~ .checkmark {
+                background-color: #e8f5e9;
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark {
+                background-color: #45C4B0;
+            }
+
+            .luxury-checkbox .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                transform: rotate(45deg);
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark:after {
+                display: block;
+            }
+
+        /* Animaciones */
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-subtitle {
+                font-size: 16px;
+            }
+
+            .luxury-button,
+            .luxury-button-secondary {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="luxury-review-container">
@@ -243,70 +494,106 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        @Html.HiddenFor(model => model.idServicio)
+                    @Html.HiddenFor(model => model.idServicio)
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej: Lavado Premium" } })
-                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    <div class="form-group luxury-input-group luxury-input-wide">
+                        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "input-label" })
+                        <div class="input-container">
+
+                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "luxury-input" } })
+                            <span class="input-border"></span>
                         </div>
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "validation-message" })
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripción detallada del servicio" } })
-                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                    <div class="form-group luxury-input-group luxury-input-wide">
+                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "input-label" })
+                        <div class="input-container">
+
+                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "luxury-input" } })
+                            <span class="input-border"></span>
                         </div>
+                        @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "validation-message" })
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.costo, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.costo, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej: 15000" } })
-                            @Html.ValidationMessageFor(model => model.costo, "", new { @class = "text-danger" })
+                    <div class="form-group luxury-input-group luxury-input-wide">
+                        @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "input-label" })
+                        <div class="input-container">
+
+                            @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "luxury-input" } })
+                            <span class="input-border"></span>
                         </div>
+                        @Html.ValidationMessageFor(model => model.precio, "", new { @class = "validation-message" })
+                    </div>
+                    <div class="form-group luxury-input-group luxury-input-wide">
+                        @Html.LabelFor(model => model.costo, htmlAttributes: new { @class = "input-label" })
+                        <div class="input-container">
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej: 20000" } })
-                            @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.costo, new { htmlAttributes = new { @class = "luxury-input" } })
+                            <span class="input-border"></span>
                         </div>
+                        @Html.ValidationMessageFor(model => model.costo, "", new { @class = "validation-message" })
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.tiempoDuracion, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.tiempoDuracion, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej: 60 (minutos)" } })
-                            @Html.ValidationMessageFor(model => model.tiempoDuracion, "", new { @class = "text-danger" })
+                    <div class="form-group luxury-input-group luxury-input-wide">
+                        @Html.LabelFor(model => model.tiempoDuracion, htmlAttributes: new { @class = "input-label" })
+                        <div class="input-container">
+
+                            @Html.EditorFor(model => model.tiempoDuracion, new { htmlAttributes = new { @class = "luxury-input" } })
+                            <span class="input-border"></span>
                         </div>
+                        @Html.ValidationMessageFor(model => model.tiempoDuracion, "", new { @class = "validation-message" })
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.modalidad, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.modalidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej: Presencial/Domicilio" } })
-                            @Html.ValidationMessageFor(model => model.modalidad, "", new { @class = "text-danger" })
-                        </div>
+                    <div class="col-md-12">
+                        <div class="form-group luxury-input-group">
+                            @Html.LabelFor(model => model.modalidad, "Modalidad", htmlAttributes: new { @class = "input-label" })
+                            <div class="input-container">
 
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.EditorFor(model => model.estado)
-                                    <span>Servicio activo</span>
-                                </label>
+                                @if (ViewBag.modalidad is string message)
+                                {
+                                    <p class="text-muted">@message</p>
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.modalidad,
+                                        new SelectList(ViewBag.modalidad, "Value", "Text"),
+                                        "Seleccione una modalidad",
+                                        new { @class = "luxury-select" })
+                                }
+                                <span class="input-border"></span>
                             </div>
-                            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn-submit">
-                                <i class="fas fa-save"></i> Crear Servicio
-                            </button>
+                            @Html.ValidationMessageFor(model => model.modalidad, "", new { @class = "validation-message" })
                         </div>
                     </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="luxury-button" >
+                            <span class="button-text">Agregar</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M17,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3M19,19H5V5H16.17L19,7.83V19M12,12A4,4 0 0,0 8,16A4,4 0 0,0 12,20A4,4 0 0,0 16,16A4,4 0 0,0 12,12M12,14A2,2 0 0,1 14,16A2,2 0 0,1 12,18A2,2 0 0,1 10,16A2,2 0 0,1 12,14M6,6H15V10H6V6Z" />
+                                </svg>
+                            </span>
+                            <div class="button-shine"></div>
+                        </button>
+
+                        <a href="@Url.Action("Index")" class="luxury-button luxury-button-secondary">
+                            <span class="button-text">Cancelar</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
                 }
 
-                <div class="text-center">
-                    <a href="@Url.Action("Index")" class="btn-back">
-                        <i class="fas fa-arrow-left"></i> Volver al Listado
-                    </a>
-                </div>
+               
             </div>
         </div>
     </div>

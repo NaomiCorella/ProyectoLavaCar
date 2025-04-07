@@ -91,6 +91,12 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.modalidad = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Presencial", Text = "Presencial" },
+         new SelectListItem { Value = "Domicilio", Text = "Domicilio" },
+          new SelectListItem { Value = "Ambas", Text = "Ambas" }
+    };
             return View();
         }
 

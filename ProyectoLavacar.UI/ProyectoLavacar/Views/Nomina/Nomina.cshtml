@@ -36,42 +36,42 @@
                 <div class="luxury-divider"></div>
             </div>
 
-            <div class="row">
+            <div class="luxury-list-container">
                 @foreach (var item in Model)
                 {
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="luxury-card shadow-lg rounded h-100">
-                            <div class="luxury-card-header">
-                                <h5 class="mb-0">@item.nombre @item.primer_apellido</h5>
+                    <div class="luxury-list-item">
+                        <div class="luxury-list-header">
+                            <div class="luxury-employee-info">
+                                <h5 class="luxury-employee-name">@item.nombre @item.primer_apellido</h5>
                                 <span class="luxury-employee-id">@item.cedula</span>
                             </div>
-                            <div class="card-body">
-                                <div class="luxury-info-group">
-                                    <div class="luxury-info-item">
-                                        <span class="luxury-info-label">Salario Neto:</span>
-                                        <span class="luxury-info-value luxury-amount highlight">@item.SalarioNeto</span>
-                                    </div>
-                                    <div class="luxury-info-item">
-                                        <span class="luxury-info-label">Periodo:</span>
-                                        <span class="luxury-info-value">@item.PeriodoDePago</span>
-                                    </div>
-                                    <div class="luxury-info-item">
-                                        <span class="luxury-info-label">Fecha de Pago:</span>
-                                        <span class="luxury-info-value">@item.FechaDePago</span>
-                                    </div>
+                            <div class="luxury-amount-container">
+                                <span class="luxury-amount-label">Salario Neto:</span>
+                                <span class="luxury-amount highlight">@item.SalarioNeto</span>
+                            </div>
+                        </div>
+                        <div class="luxury-list-body">
+                            <div class="luxury-info-row">
+                                <div class="luxury-info-col">
+                                    <span class="luxury-info-label">Periodo:</span>
+                                    <span class="luxury-info-value">@item.PeriodoDePago</span>
                                 </div>
-                                <div class="text-center mt-3">
-                                    <a href="@Url.Action("Details", new { id = item.IdNomina })" class="luxury-button luxury-button-primary">
-                                        <span class="button-text">Ver Detalles</span>
-                                        <span class="button-icon">
-                                            <svg viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
-                                            </svg>
-                                        </span>
-                                        <div class="button-shine"></div>
-                                    </a>
+                                <div class="luxury-info-col">
+                                    <span class="luxury-info-label">Fecha de Pago:</span>
+                                    <span class="luxury-info-value">@item.FechaDePago</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="luxury-list-footer">
+                            <a href="@Url.Action("Details", new { id = item.IdNomina })" class="luxury-button luxury-button-primary">
+                                <span class="button-text">Ver Detalles</span>
+                                <span class="button-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                    </svg>
+                                </span>
+                                <div class="button-shine"></div>
+                            </a>
                         </div>
                     </div>
                 }
@@ -158,97 +158,132 @@
         border-radius: 3px;
     }
 
-    .luxury-card {
+    .luxury-list-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .luxury-list-item {
         background: white;
-        border-radius: 16px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
         overflow: hidden;
-        height: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.05);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-        .luxury-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        .luxury-list-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
 
-    .luxury-card-header {
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        color: white;
-        padding: 15px 20px;
+    .luxury-list-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+    }
+
+    .luxury-employee-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .luxury-employee-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
     }
 
     .luxury-employee-id {
         background: rgba(255, 255, 255, 0.2);
-        padding: 3px 8px;
+        padding: 3px 10px;
         border-radius: 20px;
         font-size: 12px;
+        align-self: flex-start;
     }
 
-    .luxury-info-group {
-        margin-bottom: 15px;
+    .luxury-amount-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
-    .luxury-info-item {
+    .luxury-amount-label {
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    .luxury-amount {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+        .luxury-amount.highlight {
+            color: white;
+        }
+
+    .luxury-list-body {
+        padding: 15px 20px;
+    }
+
+    .luxury-info-row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
-        padding: 8px 0;
-        border-bottom: 1px dashed #f0f0f0;
+    }
+
+    .luxury-info-col {
+        flex: 1;
     }
 
     .luxury-info-label {
         font-weight: 600;
         color: #495057;
+        display: block;
+        margin-bottom: 5px;
     }
 
     .luxury-info-value {
         color: #6c757d;
+    }
+
+    .luxury-list-footer {
+        padding: 15px 20px;
+        border-top: 1px solid #f0f0f0;
         text-align: right;
     }
 
-    .luxury-amount {
-        font-weight: 600;
-    }
-
-        .luxury-amount.highlight {
-            color: #007bff;
-            font-size: 16px;
-        }
-
     .luxury-button {
         position: relative;
-        width: 100%;
+        width: auto;
         max-width: 200px;
-        padding: 12px;
+        padding: 10px 20px;
         color: white;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size: 14px;
         font-weight: 600;
         cursor: pointer;
         overflow: hidden;
         transition: all 0.4s ease;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         text-decoration: none;
-        margin: 0 auto;
     }
 
     .luxury-button-primary {
         background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        box-shadow: 0 8px 16px rgba(69, 196, 176, 0.2);
+        box-shadow: 0 4px 12px rgba(69, 196, 176, 0.2);
     }
 
     .luxury-button-secondary {
         background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
-        box-shadow: 0 8px 16px rgba(108, 117, 125, 0.2);
+        box-shadow: 0 4px 12px rgba(108, 117, 125, 0.2);
     }
 
     .button-text {
@@ -279,8 +314,8 @@
     }
 
     .luxury-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         text-decoration: none;
     }
 
@@ -289,7 +324,7 @@
         }
 
         .luxury-button:hover .button-icon {
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
 
     /* Animaciones */
@@ -299,7 +334,7 @@
         }
 
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
     }
 
@@ -316,22 +351,31 @@
             font-size: 16px;
         }
 
-        .luxury-info-item {
+        .luxury-list-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .luxury-amount-container {
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        .luxury-info-row {
             flex-direction: column;
         }
 
-        .luxury-info-label,
-        .luxury-info-value {
-            width: 100%;
-            text-align: left;
+        .luxury-info-col {
+            margin-bottom: 10px;
         }
 
-        .luxury-info-value {
-            margin-top: 5px;
+        .luxury-list-footer {
+            text-align: center;
         }
 
         .luxury-button {
             max-width: 100%;
+            width: 100%;
         }
     }
 </style>

@@ -15,10 +15,12 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloServicios
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
         [Display(Name = "Descripcion")]
+        [Required(ErrorMessage = "La propiedad descripción es requerida ")]
+        [StringLength(200, ErrorMessage = "La propiedad del descripción debe de ser mayor a 4 caracteres y menor a 200.", MinimumLength = 4)]
         public string descripcion { get; set; }
         [Display(Name = "Tiempo de duración")]
         public string tiempoDuracion { get; set; }
-        [Display(Name = "Disponibilidad")]
+        [Display(Name = "Estado")]
         public bool estado { get; set; } 
         [Display(Name = "Modalidad")]
         public string modalidad { get; set; }

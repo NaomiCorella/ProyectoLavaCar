@@ -14,6 +14,8 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones
         [Display(Name = "Fecha de Evaluacion")]
         public string fechaEvaluacion { get; set; }
         [Display(Name = "Calificaciones")]
+        [Required(ErrorMessage = "La propiedad calificación es requerida ")]
+        [Range(1, 5, ErrorMessage = "La calificación dada debe estar entre 1 y 5.")]
         public int calificacion { get; set; }
         [Display(Name = "Comentarios")]
         public string comentarios { get; set; }

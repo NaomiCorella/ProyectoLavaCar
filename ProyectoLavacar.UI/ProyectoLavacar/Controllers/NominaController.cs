@@ -218,7 +218,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
 
-                return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeAjustes.IdNomina });
+                return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
             }
             catch
             {
@@ -313,11 +313,11 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeTramites.IdNomina });
+                    return RedirectToAction("ListarTramites", new { idNomina = idNomina });
                 }
 
 
-                  
+
             }
             catch
             {

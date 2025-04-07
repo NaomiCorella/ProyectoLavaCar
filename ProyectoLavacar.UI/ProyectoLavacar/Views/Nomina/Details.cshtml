@@ -81,7 +81,7 @@
                                 </h5>
                                 <div class="luxury-info-item">
                                     <span class="luxury-info-label">Fecha de Pago:</span>
-                                    <span class="luxury-info-value">@Model.FechaDePago</span>
+                                    @Model.FechaDePago.ToString("dd/MM/yyyy")
                                 </div>
                                 <div class="luxury-info-item">
                                     <span class="luxury-info-label">Periodo:</span>
@@ -161,29 +161,33 @@
                 </div>
             </div>
 
-            <div class="text-center mt-4 mb-4">
-                <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="luxury-button luxury-button-success">
-                    <span class="button-text">Descargar PDF</span>
-                    <span class="button-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-                        </svg>
-                    </span>
-                    <div class="button-shine"></div>
-                </a>
+            <div class="d-flex justify-content-center gap-2 mt-4">
+                
+                    <a href="@Url.Action("DescargarPDFDetalle", new { idNomina = Model.IdNomina })" class="luxury-button luxury-button-success">
+                        <span class="button-text">Descargar PDF</span>
+                        <span class="button-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                            </svg>
+                        </span>
+                        <div class="button-shine"></div>
+                    </a>
+               
+
+                <div class="text-center">
+                    <a href="@Url.Action("Index", "Nomina")" class="luxury-button luxury-button-secondary">
+                        <span class="button-text">Volver al Listado</span>
+                        <span class="button-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                            </svg>
+                        </span>
+                        <div class="button-shine"></div>
+                    </a>
+                </div>
             </div>
 
-            <div class="text-center">
-                <a href="@Url.Action("Index", "Nominas")" class="luxury-button luxury-button-secondary">
-                    <span class="button-text">Volver al Listado</span>
-                    <span class="button-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
-                        </svg>
-                    </span>
-                    <div class="button-shine"></div>
-                </a>
-            </div>
+            
         </div>
     </div>
 

@@ -21,10 +21,51 @@
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
     <style>
         /* Estilos base consistentes */
+        .luxury-btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .luxury-btn-action.info {
+                background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            }
+
+            .luxury-btn-action.warning {
+                background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+            }
+
+            .luxury-btn-action.success {
+                background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+            }
+
+            .luxury-btn-action.download {
+                background: linear-gradient(135deg, #03a9f4 0%, #0277bd 100%);
+            }
+
+            .luxury-btn-action:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                color: white;
+                text-decoration: none;
+            }
+
+        .luxury-btn-action {
+            width: 32px;
+            height: 32px;
+            margin: 0 5px 5px;
+        }
+
         .luxury-inventory-container {
             padding: 40px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
+            min-height: 115vh;
         }
 
         .section-title {
@@ -146,13 +187,15 @@
 
         /* Estilos para la tabla */
         .luxury-table-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
             overflow-x: auto;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
+        
 
         .luxury-table {
-            width: 100%;
+            width: 110%;
             border-collapse: collapse;
             font-size: 15px;
         }
@@ -354,6 +397,23 @@
                 flex-direction: row;
                 justify-content: flex-end;
             }
+            .dt-paging {
+                display: flex;
+                justify-content: flex-end !important;
+                margin-top: 10px;
+            }
+                .dt-paging .paginate_button {
+                    margin: 0 5px; /* Espaciado entre los botones */
+                    padding: 5px 10px; /* Ajuste de tamaño de los botones */
+                    background-color: #007bff; /* Color de fondo */
+                    color: white; /* Color de texto */
+                    border-radius: 5px; /* Bordes redondeados */
+                }
+
+                    .dt-paging .paginate_button:hover {
+                        background-color: #0056b3; /* Color de fondo al pasar el mouse */
+                        cursor: pointer;
+                    }
         }
     </style>
 </head>
@@ -404,10 +464,10 @@
                 </div>
 
                 <div class="luxury-table-container">
-                    <table class="luxury-table">
+                    <table class="luxury-table" id="myTable">
                         <thead class="luxury-table-header">
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.idProducto)</th>
+                                @*<th>@Html.DisplayNameFor(model => model.idProducto)</th>*@
                                 <th>@Html.DisplayNameFor(model => model.nombre)</th>
                                 <th>@Html.DisplayNameFor(model => model.categoria)</th>
                                 <th>@Html.DisplayNameFor(model => model.precioUnitario)</th>
@@ -420,7 +480,7 @@
                             @foreach (var item in Model)
                             {
                                 <tr class="luxury-table-row">
-                                    <td data-label="ID">@Html.DisplayFor(modelItem => item.idProducto)</td>
+                                    @*<td data-label="ID">@Html.DisplayFor(modelItem => item.idProducto)</td>*@
                                     <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
                                     <td data-label="Categoría">@Html.DisplayFor(modelItem => item.categoria)</td>
                                     <td data-label="Precio">@Html.DisplayFor(modelItem => item.precioUnitario)</td>
@@ -428,36 +488,39 @@
                                     <td data-label="Estado">
                                         @if (item.estado)
                                         {
-                                            <span class="luxury-badge luxury-badge-active">Activo</span>
+                                            <span class="luxury-badge ">Activo</span>
                                         }
                                         else
                                         {
-                                            <span class="luxury-badge luxury-badge-inactive">Inactivo</span>
+                                            <span class="luxury-badge ">Inactivo</span>
                                         }
                                     </td>
                                     <td>
                                         <div class="luxury-actions">
-                                            <a href="@Url.Action("Edit", new { id = item.idProducto })" class="luxury-action-btn btn-edit" title="Editar">
-                                                <i class="fas fa-edit"></i> Editar
+                                            <a href="@Url.Action("Edit", new { id = item.idProducto })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                                <i class="fas fa-info-circle"></i>
                                             </a>
-                                            <a href="@Url.Action("Details", new { id = item.idProducto })" class="luxury-action-btn btn-details" title="Detalles">
-                                                <i class="fas fa-info-circle"></i> Detalles
+
+
+                                            <a href="@Url.Action("Details", new { id = item.idProducto })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                                <i class="fas fa-clipboard-check"></i>
                                             </a>
                                             @if (item.estado)
                                             {
-                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-action-btn btn-inactivate">
-                                                    <i class="fas fa-times-circle"></i> Inactivar
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-btn-action warning me-2 mb-2" title="Inactivar" data-bs-toggle="tooltip">
+                                                    <i class="fas fa-times-circle"></i>
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-action-btn btn-activate">
-                                                    <i class="fas fa-check-circle"></i> Activar
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-btn-action success me-2 mb-2" title="Activar" data-bs-toggle="tooltip">
+                                                    <i class="fas fa-check-circle"></i>
                                                 </a>
                                             }
-                                            <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="luxury-action-btn btn-pdf">
-                                                <i class="fas fa-file-pdf"></i> PDF
+                                            <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="luxury-btn-action download me-2 mb-2" title="Descargar" data-bs-toggle="tooltip">
+                                                <i class="fas fa-download"></i>
                                             </a>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -487,25 +550,50 @@
         </div>
     </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
-    <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
+        <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
 
-}
-<script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="~/Content/assets/js/bootstrap.min.js"></script>
-<script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-<script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-<script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-<script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-<script src="~/Content/assets/js/main.js"></script>
-<script src="~/Content/assets/js/popper.min.js"></script>
-<script src="~/Content/assets/js/slick.min.js"></script>
-<script src="~/Content/assets/js/waypoints.min.js"></script>
-<script src="~/Content/assets/js/wow.min.js"></script>
-    </body>
+    }
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let table = new DataTable('#myTable', {
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                searching: false,  // Elimina la caja de búsqueda
+                language: {
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No se encontraron registros',
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay registros disponibles',
+                    infoFiltered: '(filtrado de _MAX_ registros en total)',
+                    //"paginate": {
+                    //    "first": "Primera",
+                    //    "previous": "Anterior",
+                    //    "next": "Siguiente",
+                    //    "last": "Última"
+                    //}
+                }
+            });
+        });
+
+    </script>
+</body>
 
 </html>
-

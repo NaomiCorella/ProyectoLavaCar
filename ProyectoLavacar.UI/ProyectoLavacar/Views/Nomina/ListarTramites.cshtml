@@ -63,7 +63,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <span class="luxury-badge @(item.tipo == "Vacaciones" ? "vacaciones" : "incapacidad")">
+                                        <span class="luxury-badge2 @(item.tipo == "Vacaciones" ? "vacaciones" : "incapacidad")">
                                             @Html.DisplayFor(modelItem => item.tipo)
                                         </span>
                                     </td>
@@ -73,13 +73,23 @@
                                     <td>
                                         @if (item.tipo == "Vacaciones")
                                         {
-                                            <span class="luxury-status @(item.estado == 0 ? "pendiente" : "revisado")">
-                                                @(item.estado == 0 ? "Pendiente" : "Revisado")
-                                            </span>
+
+                                            if (item.estado == 0)
+                                            {
+                                                <span class="luxury-badge2">Pendiente</span>
+                                            }
+                                            if (item.estado == 1)
+                                            {
+                                                <span class="luxury-badge2">Aceptada</span>
+                                            }
+                                            if (item.estado == 2)
+                                            {
+                                                <span class="luxury-badge2">Denegada</span>
+                                            }
                                         }
                                         else
                                         {
-                                            <span class="luxury-status revisado">N/A</span>
+                                            <span class="luxury-badge2">Aceptada</span>
                                         }
                                     </td>
                                     <td>
@@ -97,6 +107,17 @@
                             }
                         </tbody>
                     </table>
+                    <div class="text-center mt-4 mb-4">
+
+                        <a href="@Url.Action("ProcesosYGestiones", new { idNomina = ViewBag.idNomina })" class="luxury-button luxury-button-secondary">
+                            <span class="button-text">Volver</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,6 +139,11 @@
 </html>
 
 <style>
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+    }
     .luxury-tramites-container {
         padding: 40px 0;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -217,14 +243,18 @@
         font-weight: 500;
         color: white;
     }
+    .luxury-badge2 {
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+        color: black;
+    }
 
-        .luxury-badge.vacaciones {
-            background-color: #17a2b8;
-        }
-
-        .luxury-badge.incapacidad {
-            background-color: #6c757d;
-        }
+  
 
     .luxury-status {
         display: inline-block;
@@ -272,14 +302,21 @@
     }
 
     .luxury-button-warning {
-        background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
-        box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
+        background: linear-gradient(135deg, #003366 0%, #9AEBA3 100%);
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
     }
 
     .luxury-button-success {
-        background: linear-gradient(135deg, #28a745 0%, #5cb85c 100%);
-        box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+        background: transparent;
+        border: 2px solid #28a745; /* borde verde */
+        color: #28a745; /* texto en verde */
+        box-shadow: none; /* sin sombra */
+        transition: all 0.3s ease;
     }
+        .luxury-button-success:hover {
+            background-color: #28a745; /* se llena de verde al hacer hover */
+            color: white; /* texto blanco */
+        }
 
     .button-text {
         position: relative;

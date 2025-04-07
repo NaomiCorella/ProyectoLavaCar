@@ -236,8 +236,9 @@ namespace ProyectoLavacar.Controllers
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
                     ingreso = DateTime.Now,
-                    cedula = model.cedula
-
+                    cedula = model.cedula,
+                    PhoneNumber = model.PhoneNumber
+                    
 
                 };
 
