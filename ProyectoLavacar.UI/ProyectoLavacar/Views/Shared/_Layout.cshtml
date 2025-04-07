@@ -138,36 +138,53 @@
                                 <li>@Html.ActionLink("Sobre Nosotros", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                                 <li>@Html.ActionLink("Reseñas", "Index", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
 
-                               
+
                                 @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
                                 {
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="">Seccion Usuarios</a>
-                                        <ul class="sub-menu">
-                                            <li>@Html.ActionLink("Gestion de Reservas", "Reservas", "Reservas", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Reseñas", "IndexAdmin", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Usuarios", "Index", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
 
-                                        </ul>
-                                    </li>
+
+                                    if (User.IsInRole("Administrador"))
+                                    {
+                                        <li class="menu-item menu-item-has-children">
+                                            <a href="">Gestión de usuarios</a>
+                                            <ul class="sub-menu">
+                                                <li>@Html.ActionLink("Gestión de Usuarios", "Index", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+                                                <li>@Html.ActionLink("Gestión de Reservas", "Reservas", "Reservas", new { area = "" }, new { @class = "nav-link" })</li>
+                                                <li>@Html.ActionLink("Gestión de Reseñas", "IndexAdmin", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
+                                            </ul>
+                                        </li>
+                                    }
+
+                                    if (User.IsInRole("Empleado"))
+                                    {
+                                        <li>@Html.ActionLink("Gestión de Reseñas", "IndexAdmin", "Resenias", new { area = "" }, new { @class = "nav-link" })</li>
+
+                                    }
+
+                                    if (User.IsInRole("Administrador"))
+                                    {
+                                        <li class="menu-item menu-item-has-children">
+                                            <a href="">Gestión de Empleados</a>
+                                            <ul class="sub-menu">
+                                                <li>@Html.ActionLink("Gestión de Empleados", "Index", "Empleado", new { area = "" }, new { @class = "nav-link" })</li>
+                                                <li>@Html.ActionLink("Gestión de Nomina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
+                                            </ul>
+                                        </li>
+                                    }
+
 
                                     <li class="menu-item menu-item-has-children">
-                                        <a href="">Seccion Empleados</a>
+                                        <a href="">Gestión de negocio</a>
                                         <ul class="sub-menu">
-                                            <li>@Html.ActionLink("Gestion de Empleados", "Index", "Empleado", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Reportes", "Index", "Reporte", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Nomina", "Index", "Nomina", new { area = "" }, new { @class = "nav-link" })</li>
-                                        </ul>
-                                    </li>
+                                            @if (User.IsInRole("Administrador"))
+                                            {
+                                                <li>@Html.ActionLink("Bitacora", "Index", "Bitacora", new { area = "" }, new { @class = "nav-link" })</li>
+                                                <li>@Html.ActionLink("Gestion de Reportes", "Index", "Reporte", new { area = "" }, new { @class = "nav-link" })</li>
+                                                <li>@Html.ActionLink("Gestion de Servicios", "GestionServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
 
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="">Seccion Negocio</a>
-                                        <ul class="sub-menu">
+                                            }
                                             <li>@Html.ActionLink("Gestion de Inventario", "Index", "Inventario", new { area = "" }, new { @class = "nav-link" })</li>
                                             <li>@Html.ActionLink("Gestion de Ventas", "Index", "Compra", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Reportes", "Index", "Reporte", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Gestion de Servicios", "GestionServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
-                                            <li>@Html.ActionLink("Bitacora", "Index", "Bitacora", new { area = "" }, new { @class = "nav-link" })</li>
 
                                         </ul>
                                     </li>

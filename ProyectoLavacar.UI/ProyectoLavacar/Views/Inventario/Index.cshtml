@@ -19,6 +19,8 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
     <style>
         /* Estilos base consistentes */
         .luxury-btn-action {
@@ -192,7 +194,7 @@
             margin: 0 auto;
             overflow-x: auto;
         }
-        
+
 
         .luxury-table {
             width: 110%;
@@ -397,11 +399,13 @@
                 flex-direction: row;
                 justify-content: flex-end;
             }
+
             .dt-paging {
                 display: flex;
                 justify-content: flex-end !important;
                 margin-top: 10px;
             }
+
                 .dt-paging .paginate_button {
                     margin: 0 5px; /* Espaciado entre los botones */
                     padding: 5px 10px; /* Ajuste de tamaño de los botones */
@@ -570,7 +574,6 @@
     <script src="~/Content/assets/js/wow.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let table = new DataTable('#myTable', {
@@ -583,17 +586,29 @@
                     info: 'Mostrando página _PAGE_ de _PAGES_',
                     infoEmpty: 'No hay registros disponibles',
                     infoFiltered: '(filtrado de _MAX_ registros en total)',
-                    //"paginate": {
-                    //    "first": "Primera",
-                    //    "previous": "Anterior",
-                    //    "next": "Siguiente",
-                    //    "last": "Última"
-                    //}
+                    paginate: {
+                        first: 'Primera',
+                        previous: 'Anterior',
+                        next: 'Siguiente',
+                        last: 'Última'
+                    }
                 }
             });
         });
 
     </script>
+
+
+    <script>
+        // Agregar etiquetas para responsive
+        $(document).ready(function () {
+            $('.luxury-table-row td').each(function () {
+                var header = $(this).parent().find('th').eq($(this).index()).text();
+                $(this).attr('data-label', header);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

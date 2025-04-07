@@ -20,6 +20,8 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 </head>
 
 <body>
@@ -47,7 +49,7 @@
 
             <div class="luxury-card shadow-lg rounded">
                 <div class="table-responsive">
-                    <table class="luxury-table">
+                    <table class="luxury-table" id="myTable">
                         <thead>
                             <tr>
                                 <th>Tipo</th>
@@ -135,6 +137,42 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let table = new DataTable('#myTable', {
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                searching: false,  // Elimina la caja de búsqueda
+                language: {
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No se encontraron registros',
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay registros disponibles',
+                    infoFiltered: '(filtrado de _MAX_ registros en total)',
+                    paginate: {
+                        first: 'Primera',
+                        previous: 'Anterior',
+                        next: 'Siguiente',
+                        last: 'Última'
+                    }
+                }
+            });
+        });
+
+    </script>
+
+
+    <script>
+        // Agregar etiquetas para responsive
+        $(document).ready(function () {
+            $('.luxury-table-row td').each(function () {
+                var header = $(this).parent().find('th').eq($(this).index()).text();
+                $(this).attr('data-label', header);
+            });
+        });
+    </script>
 </body>
 </html>
 

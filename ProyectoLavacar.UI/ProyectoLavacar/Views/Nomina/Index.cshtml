@@ -20,384 +20,422 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 </head>
 
-    <body>
-        <div class="luxury-review-container">
-            <div class="container">
-                <div class="section-title text-center">
-                    <div class="luxury-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7V7.7M12,12C12.8,12 13.5,11.3 13.5,10.5C13.5,9.7 12.8,9 12,9C11.2,9 10.5,9.7 10.5,10.5C10.5,11.3 11.2,12 12,12M17,12V15H14V17H17V20H19V17H22V15H19V12H17Z" />
-                        </svg>
-                    </div>
-                    <h2 class="luxury-title">Administración de Nómina</h2>
-                    <p class="luxury-subtitle">Gestión completa de pagos a empleados</p>
-                    <div class="luxury-divider"></div>
+<body>
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7V7.7M12,12C12.8,12 13.5,11.3 13.5,10.5C13.5,9.7 12.8,9 12,9C11.2,9 10.5,9.7 10.5,10.5C10.5,11.3 11.2,12 12,12M17,12V15H14V17H17V20H19V17H22V15H19V12H17Z" />
+                    </svg>
                 </div>
+                <h2 class="luxury-title">Administración de Nómina</h2>
+                <p class="luxury-subtitle">Gestión completa de pagos a empleados</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-                <div class="luxury-card shadow-lg rounded">
-                    <div class="card-body">
-                        <div class="luxury-table-responsive">
-                            <table id="myTable" class="luxury-table">
-                                <thead class="luxury-table-header" style="text-align: center">
-                                    <tr>
-                                        <th>
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    <div class="luxury-table-responsive">
+                        <table id="myTable" class="luxury-table">
+                            <thead class="luxury-table-header" style="text-align: center">
+                                <tr>
+                                    <th>
 
-                                            @Html.DisplayNameFor(model => model.nombre)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.cedula)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.FechaDePago)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.SalarioBruto)
-                                        </th>
-                                        <th>Acciones</th>
+                                        @Html.DisplayNameFor(model => model.nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.cedula)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaDePago)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SalarioBruto)
+                                    </th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="luxury-table-row">
+                                        <td data-label="Nombre">
+                                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.primer_apellido) @Html.DisplayFor(modelItem => item.segundo_apellido)
+                                        </td>
+                                        <td data-label="Cedula">
+                                            @Html.DisplayFor(modelItem => item.cedula)
+                                        </td>
+                                        <td data-label="Fecha de Pago">
+                                            @Html.DisplayFor(modelItem => item.FechaDePago)
+                                        </td>
+                                        <td data-label="Salario Bruto" class="luxury-price">
+                                            @Html.DisplayFor(modelItem => item.SalarioBruto)
+                                        </td>
+                                        <td class="luxury-actions">
+                                            <a href="@Url.Action("Nomina", new { idEmpleado = item.IdEmpleado })" class="luxury-action-btn" title="Detalles">
+                                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                                    <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                                </svg>
+                                            </a>
+                                            <a href="@Url.Action("ProcesosYGestiones", new { idNomina = item.IdNomina })" class="luxury-action-btn" title="Gestiones">
+                                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                                    <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                                                </svg>
+                                            </a>
+                                        </td>
                                     </tr>
-                                </thead>
-             
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr class="luxury-table-row">
-                                            <td data-label="Nombre">
-                                                @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.primer_apellido) @Html.DisplayFor(modelItem => item.segundo_apellido)
-                                            </td>
-                                            <td data-label="Cedula">
-                                                @Html.DisplayFor(modelItem => item.cedula)
-                                            </td>
-                                            <td data-label="Fecha de Pago">
-                                                @Html.DisplayFor(modelItem => item.FechaDePago)
-                                            </td>
-                                            <td data-label="Salario Bruto" class="luxury-price">
-                                                @Html.DisplayFor(modelItem => item.SalarioBruto)
-                                            </td>
-                                            <td class="luxury-actions">
-                                                <a href="@Url.Action("Nomina", new { idEmpleado = item.IdEmpleado })" class="luxury-action-btn" title="Detalles">
-                                                    <svg viewBox="0 0 24 24" width="20" height="20">
-                                                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
-                                                    </svg>
-                                                </a>
-                                                <a href="@Url.Action("ProcesosYGestiones", new { idNomina = item.IdNomina })" class="luxury-action-btn" title="Gestiones">
-                                                    <svg viewBox="0 0 24 24" width="20" height="20">
-                                                        <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <style>
-            /* Estilos base del contenedor */
-            
-            .luxury-review-container {
-                padding: 40px 0;
-                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                min-height: 100vh;
+    <style>
+        /* Estilos base del contenedor */
+
+        .luxury-review-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
             }
 
-            .section-title {
-                margin-bottom: 40px;
-                position: relative;
-            }
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
 
-            .luxury-icon {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                border-radius: 50%;
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(69, 196, 176, 0.2);
+        }
+
+            .luxury-link-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(69, 196, 176, 0.3);
                 color: white;
-                box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
             }
 
-                .luxury-icon svg {
-                    width: 40px;
-                    height: 40px;
-                }
+        /* Estilos para la tabla */
+        .luxury-table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+        }
 
-            .luxury-title {
-                font-size: 32px;
+        .luxury-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .luxury-table-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+            .luxury-table-header th {
+                padding: 16px;
+                text-align: center;
                 font-weight: 600;
-                color: #012030;
-                margin-bottom: 15px;
             }
 
-            .luxury-subtitle {
-                color: #6c757d;
-                font-size: 18px;
-                max-width: 600px;
-                margin: 0 auto 20px;
+        .luxury-table-row {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+            .luxury-table-row:hover {
+                background-color: rgba(69, 196, 176, 0.05);
             }
 
-            .luxury-divider {
-                width: 80px;
-                height: 3px;
-                background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
-                margin: 20px auto;
-                border-radius: 3px;
+            .luxury-table-row td {
+                padding: 14px 16px;
+                vertical-align: middle;
+                text-align: center;
             }
 
-            .luxury-card {
-                background: white;
-                border-radius: 16px;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-                overflow: hidden;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 30px;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+        /* Estilos para botones de acción */
+        .luxury-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .luxury-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+            .luxury-btn svg {
+                width: 20px;
+                height: 20px;
             }
 
-            .luxury-link-button {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                padding: 12px 24px;
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                color: white;
-                border-radius: 8px;
-                text-decoration: none;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 12px rgba(69, 196, 176, 0.2);
+        .luxury-btn-text {
+            display: inline-block;
+        }
+
+        .luxury-btn-info {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: #17a2b8;
+        }
+
+            .luxury-btn-info:hover {
+                background-color: rgba(23, 162, 184, 0.2);
             }
 
-                .luxury-link-button:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 20px rgba(69, 196, 176, 0.3);
-                    color: white;
-                }
+        .luxury-btn-download {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+            /*border: 1px solid rgba(108, 117, 125, 0.2);*/
+        }
 
-            /* Estilos para la tabla */
-            .luxury-table-responsive {
-                overflow-x: auto;
-                border-radius: 12px;
+            .luxury-btn-download:hover {
+                background-color: rgba(108, 117, 125, 0.2);
             }
 
-            .luxury-table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 15px;
+        /* Responsive */
+        @@media (max-width: 992px) {
+            .luxury-table-header th {
+                padding: 14px;
             }
 
-            .luxury-table-header {
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                color: white;
-            }
-
-                .luxury-table-header th {
-                    padding: 16px;
-                    text-align: center;
-                    font-weight: 600;
-                }
-
-            .luxury-table-row {
-                border-bottom: 1px solid #e0e0e0;
-                transition: background-color 0.3s ease;
-            }
-
-                .luxury-table-row:hover {
-                    background-color: rgba(69, 196, 176, 0.05);
-                }
-
-                .luxury-table-row td {
-                    padding: 14px 16px;
-                    vertical-align: middle;
-                    text-align: center;
-                }
-
-            /* Estilos para botones de acción */
-            .luxury-actions {
-                display: flex;
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
+            .luxury-table-row td {
+                padding: 12px;
             }
 
             .luxury-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                transition: all 0.3s ease;
-                border: none;
-                background-color: transparent;
-                cursor: pointer;
+                padding: 6px 12px;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
             }
 
-                .luxury-btn svg {
-                    width: 20px;
-                    height: 20px;
-                }
-
-            .luxury-btn-text {
-                display: inline-block;
+            .luxury-title {
+                font-size: 28px;
             }
 
-            .luxury-btn-info {
-                background-color: rgba(23, 162, 184, 0.1);
-                color: #17a2b8;
+            .luxury-subtitle {
+                font-size: 16px;
             }
 
-                .luxury-btn-info:hover {
-                    background-color: rgba(23, 162, 184, 0.2);
-                }
-
-            .luxury-btn-download {
-                background-color: rgba(108, 117, 125, 0.1);
-                color: #6c757d;
-                /*border: 1px solid rgba(108, 117, 125, 0.2);*/
+            .luxury-table-header {
+                display: none;
             }
 
-                .luxury-btn-download:hover {
-                    background-color: rgba(108, 117, 125, 0.2);
-                }
-
-            /* Responsive */
-            @@media (max-width: 992px) {
-                .luxury-table-header th {
-                    padding: 14px;
-                }
+            .luxury-table-row {
+                display: block;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
 
                 .luxury-table-row td {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                     padding: 12px;
+                    border-bottom: 1px solid #f0f0f0;
                 }
 
-                .luxury-btn {
-                    padding: 6px 12px;
-                }
-            }
-
-            @@media (max-width: 768px) {
-                .luxury-card {
-                    padding: 20px;
-                }
-
-                .luxury-title {
-                    font-size: 28px;
-                }
-
-                .luxury-subtitle {
-                    font-size: 16px;
-                }
-
-                .luxury-table-header {
-                    display: none;
-                }
-
-                .luxury-table-row {
-                    display: block;
-                    margin-bottom: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-                    overflow: hidden;
-                }
-
-                    .luxury-table-row td {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 12px;
-                        border-bottom: 1px solid #f0f0f0;
+                    .luxury-table-row td:before {
+                        content: attr(data-label);
+                        font-weight: 600;
+                        color: #45C4B0;
+                        margin-right: 15px;
                     }
 
-                        .luxury-table-row td:before {
-                            content: attr(data-label);
-                            font-weight: 600;
-                            color: #45C4B0;
-                            margin-right: 15px;
-                        }
+                    .luxury-table-row td:last-child {
+                        border-bottom: none;
+                        justify-content: flex-end;
+                    }
 
-                        .luxury-table-row td:last-child {
-                            border-bottom: none;
-                            justify-content: flex-end;
-                        }
-
-                .luxury-actions {
-                    width: 100%;
-                    justify-content: flex-end;
-                }
-
-                .luxury-btn-text {
-                    display: none;
-                }
-
-                .luxury-btn {
-                    width: 36px;
-                    height: 36px;
-                    padding: 0;
-                    border-radius: 50%;
-                    justify-content: center;
-                }
+            .luxury-actions {
+                width: 100%;
+                justify-content: flex-end;
             }
 
-            @@media (max-width: 576px) {
-                .luxury-link-button {
-                    padding: 10px 18px;
-                    font-size: 14px;
+            .luxury-btn-text {
+                display: none;
+            }
+
+            .luxury-btn {
+                width: 36px;
+                height: 36px;
+                padding: 0;
+                border-radius: 50%;
+                justify-content: center;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .luxury-link-button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+
+            .luxury-table-row td {
+                font-size: 14px;
+            }
+        }
+
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        table.dataTable thead th {
+            text-align: center !important;
+        }
+
+        /* Bordes ovalados arriba del thead */
+        .luxury-table thead th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .luxury-table thead th:last-child {
+            border-top-right-radius: 12px;
+        }
+    </style>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let table = new DataTable('#myTable', {
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                searching: false,  // Elimina la caja de búsqueda
+                language: {
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No se encontraron registros',
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay registros disponibles',
+                    infoFiltered: '(filtrado de _MAX_ registros en total)',
+                    paginate: {
+                        first: 'Primera',
+                        previous: 'Anterior',
+                        next: 'Siguiente',
+                        last: 'Última'
+                    }
                 }
+            });
+        });
 
-                .luxury-table-row td {
-                    font-size: 14px;
-                }
-            }
+    </script>
 
-            @@keyframes float {
-                0%, 100% {
-                    transform: translateY(0);
-                }
 
-                50% {
-                    transform: translateY(-5px);
-                }
-            }
-
-            .luxury-icon {
-                animation: float 4s ease-in-out infinite;
-            }
-
-            table.dataTable thead th {
-                text-align: center !important;
-            }
-
-            /* Bordes ovalados arriba del thead */
-            .luxury-table thead th:first-child {
-                border-top-left-radius: 12px;
-            }
-
-            .luxury-table thead th:last-child {
-                border-top-right-radius: 12px;
-            }
-        </style>
-        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="~/Content/assets/js/bootstrap.min.js"></script>
-        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="~/Content/assets/js/main.js"></script>
-        <script src="~/Content/assets/js/popper.min.js"></script>
-        <script src="~/Content/assets/js/slick.min.js"></script>
-        <script src="~/Content/assets/js/waypoints.min.js"></script>
-        <script src="~/Content/assets/js/wow.min.js"></script>
-    </body>
+    <script>
+        // Agregar etiquetas para responsive
+        $(document).ready(function () {
+            $('.luxury-table-row td').each(function () {
+                var header = $(this).parent().find('th').eq($(this).index()).text();
+                $(this).attr('data-label', header);
+            });
+        });
+    </script>
+</body>
 
 </html>
 
