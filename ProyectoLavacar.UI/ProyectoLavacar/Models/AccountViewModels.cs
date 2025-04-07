@@ -117,8 +117,11 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
-        
+        [Required]
+        [Range(100000000, 999999999, ErrorMessage = "La cédula debe tener exactamente 9 dígitos.")]
 
+        [Display(Name = "Cédula")]
+        public int cedula { get; set; }
         [Display(Name = "Rol")]
         public string Role { get; set; }
 

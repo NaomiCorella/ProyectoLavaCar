@@ -94,6 +94,16 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+                List<ServiciosDto> servicio = _listarServicios.ListarServicios().Where(a => a.estado == true)
+                    .ToList(); ;
+                foreach (var item in servicio)
+                {
+                    if (item.nombre == elservicio.nombre )
+                    {
+                        ModelState.AddModelError("nombre", "El servicio ya existe.");
+                        return View(elservicio);
+                    }
+                }
                 int cantidadDeDatosGuardados = await _crearServicios.Crear(elservicio);
 
                 return RedirectToAction("Index");

@@ -27,6 +27,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using System.Drawing.Printing;
 using System.Xml.Linq;
+using System.Web.Services.Description;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -96,8 +97,8 @@ namespace ProyectoLavacar.Controllers
                      {
                          new SelectListItem { Value = "Limpieza", Text = "Productos de limpieza" },
                          new SelectListItem { Value = "Protección", Text = "Productos de protección" },
-                            new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
-                                new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
+                         new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
+                         new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
                          };
             return View();
         }
@@ -111,6 +112,18 @@ namespace ProyectoLavacar.Controllers
 
                 var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
                 string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                List<InventarioDto> inventarioDtos = _listarInventario.ListarInventario()
+                    .Where(a => a.estado == true)
+                .ToList();
+
+                foreach (var item in inventarioDtos)
+                {
+                    if (item.nombre == modeloDeInvetario.nombre)
+                    {
+                        ModelState.AddModelError("nombre", "El producto ya esta registrado en el inventario.");
+                        return View(modeloDeInvetario);
+                    }
+                }
                 InventarioDto inventario = new InventarioDto()
                 {
                     idProducto = modeloDeInvetario.idProducto,
