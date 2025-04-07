@@ -41,7 +41,7 @@ namespace ProyectoLavacar.Controllers
             _crearRespuesta = new CrearRespuestaLN();
         }
         // GET: Reseñas
-        [Authorize(Roles = "Administrador, Empleado, Usuario")]
+      
 
         public ActionResult Index(string ordenarPor = "fecha", string orden = "asc")
         {

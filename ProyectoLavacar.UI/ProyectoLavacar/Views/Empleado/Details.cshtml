@@ -23,65 +23,334 @@
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Detalles del Empleado</h2>
-        </div>
-        <div class="table-responsive shadow-lg rounded">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th colspan="2" class="text-center">Información del Empleado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
-                        <td>@Html.DisplayFor(model => model.nombre)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.primer_apellido)</th>
-                        <td>@Html.DisplayFor(model => model.primer_apellido)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.segundo_apellido)</th>
-                        <td>@Html.DisplayFor(model => model.segundo_apellido)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.Email)</th>
-                        <td>@Html.DisplayFor(model => model.Email)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-                        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.estado)</th>
-                        <td>@Html.DisplayFor(model => model.estado)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.cedula)</th>
-                        <td>@Html.DisplayFor(model => model.cedula)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.numeroCuenta)</th>
-                        <td>@Html.DisplayFor(model => model.numeroCuenta)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.turno)</th>
-                        <td>@Html.DisplayFor(model => model.turno)</td>
-                    </tr>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.puesto)</th>
-                        <td>@Html.DisplayFor(model => model.puesto)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center mt-4 mb-4">
-            @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-secondary" })
+    <div class="luxury-employee-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Detalles del Empleado</h2>
+                <p class="luxury-subtitle">Información completa del empleado</p>
+                <div class="luxury-divider"></div>
+            </div>
+
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    <!-- Sección de Información Personal -->
+                    <div class="luxury-details-table">
+                        <div class="luxury-details-header">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,12C12.8,12 13.5,11.3 13.5,10.5C13.5,9.7 12.8,9 12,9C11.2,9 10.5,9.7 10.5,10.5C10.5,11.3 11.2,12 12,12Z" />
+                            </svg>
+                            <span>Información Personal</span>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.nombre)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.nombre)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.primer_apellido)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.primer_apellido)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.segundo_apellido)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.segundo_apellido)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">Nombre Completo</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.nombre) @Html.DisplayFor(model => model.primer_apellido) @Html.DisplayFor(model => model.segundo_apellido)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.cedula)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.cedula)</div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Información de Contacto -->
+                    <div class="luxury-details-table mt-4">
+                        <div class="luxury-details-header">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" />
+                            </svg>
+                            <span>Información de Contacto</span>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.Email)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.Email)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.PhoneNumber)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.PhoneNumber)</div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Información Laboral -->
+                    <div class="luxury-details-table mt-4">
+                        <div class="luxury-details-header">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" />
+                            </svg>
+                            <span>Información Laboral</span>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.puesto)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.puesto)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.turno)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.turno)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.numeroCuenta)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.numeroCuenta)</div>
+                        </div>
+                    </div>
+
+
+                    @*<div class="luxury-details-table mt-4">
+                            <div class="luxury-details-header">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.2V15.7C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.8V12.3C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z" />
+                                </svg>
+                                <span>Estado</span>
+                            </div>
+
+                            <div class="luxury-details-row">
+                                <div class="luxury-details-label">@Html.DisplayNameFor(model => model.estado)</div>
+                                <div class="luxury-details-value">
+                                    @if (Model.estado)
+                                    {
+                                        <span class="badge bg-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Inactivo</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="d-flex justify-content-between mt-4 luxury-action-buttons">
+                        @Html.ActionLink(
+                            "Volver al Listado",
+                            "Index",
+                            null,
+                            new { @class = "luxury-button luxury-button-secondary" }
+                        )
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <style>
+        .luxury-employee-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
+
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-details-table {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .luxury-details-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .luxury-details-header svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .luxury-details-row {
+            display: flex;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .luxury-details-row:last-child {
+                border-bottom: none;
+            }
+
+        .luxury-details-label {
+            width: 40%;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #495057;
+            background-color: #f9f9f9;
+        }
+
+        .luxury-details-value {
+            width: 60%;
+            padding: 15px 20px;
+            color: #6c757d;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bg-success {
+            background-color: #28a745 !important;
+        }
+
+        .bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        .luxury-action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .luxury-button {
+            position: relative;
+            min-width: 180px;
+            padding: 16px 24px;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .luxury-button-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+            box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-subtitle {
+                font-size: 16px;
+            }
+
+            .luxury-details-row {
+                flex-direction: column;
+            }
+
+            .luxury-details-label,
+            .luxury-details-value {
+                width: 100%;
+            }
+
+            .luxury-action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .luxury-button {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
