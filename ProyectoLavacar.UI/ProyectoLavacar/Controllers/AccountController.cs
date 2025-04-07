@@ -356,24 +356,25 @@ namespace ProyectoLavacar.Controllers
         {
             List<EmpleadoDto> empleado = _listarEmpleado.ListarEmpleados().Where(a => a.estado == true)
                 .ToList(); ;
-            //if (empleado.Any(u => u.cedula == model.cedula))
-            //{
-            //    ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
-            //    return View(model);
-            //}
+            if (empleado.Any(u => u.cedula == model.cedula))
+            {
+                ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email,
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
-                    estado = model.Estado,
+                    estado = true,
                     cedula = model.cedula,
                     numeroCuenta = model.numeroCuenta,
                     turno = model.turno,
+                    PhoneNumber = model.PhoneNumber,
                     puesto = model.puesto
                 };
 

@@ -83,8 +83,6 @@ namespace ProyectoLavacar.Models
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
 
-
-
         [Required]
         [MaxLength(50)]
         [Display(Name = "Nombre")]
@@ -116,6 +114,12 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Rol")]
         public string Role { get; set; }
 
+        [Required]
+        [RegularExpression(@"^\d{4}-\d{4}$", ErrorMessage = "El número telefónico debe ser 0000-0000, solo números")]
+
+        [Display(Name = "Número telefónico")]
+        public string PhoneNumber { get; set; }
+
     }
     public class RegisterEmployeeViewModel
     {
@@ -140,10 +144,11 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Cédula")]
         public int cedula { get; set; }
 
+        [Required]
+        [RegularExpression(@"^\d{4}-\d{4}$", ErrorMessage = "El número telefónico debe ser 0000-0000, solo números")]
 
-
-
-
+        [Display(Name = "Número telefónico")]
+        public string PhoneNumber { get; set; }
         [Required]
         [MaxLength(50)]
         [Display(Name = "Nombre")]
@@ -167,10 +172,14 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
-
-       
+        [Required]
+        [Display(Name = "Número de Cuenta")]
         public string numeroCuenta { get; set; }
+        [Required]
+        [Display(Name = "Turno")]
         public string turno { get; set; }
+        [Required]
+        [Display(Name = "Puesto")]
         public string puesto { get; set; }
         [Required]
         [Display(Name = "Rol")]
