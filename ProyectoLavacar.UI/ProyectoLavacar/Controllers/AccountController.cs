@@ -369,7 +369,7 @@ namespace ProyectoLavacar.Controllers
                         string correoConvertido = string.Format(cuerpoDelCorreo, nombreCompleto, model.Password, model.Email);
                         await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Empleado");
                     }
                 }
                 AddErrors(result);

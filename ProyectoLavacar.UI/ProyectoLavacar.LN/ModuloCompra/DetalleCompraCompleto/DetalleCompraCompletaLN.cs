@@ -47,7 +47,8 @@ namespace ProyectoLavacar.LN.ModuloCompra.DetalleCompraCompleto
                 Total = Compra.Total,
                 Fecha = Compra.Fecha,
                 DescripcionServicio = Compra.DescripcionServicio,
-                listaDeServicios = listar(Compra)
+                listaDeServicios = listar(Compra),
+                NombreEmp = Compra.NombreEmp,
             };
         }
 

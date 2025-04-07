@@ -38,7 +38,7 @@
 
             <div class="luxury-card shadow-lg rounded">
                 <div class="card-body">
-                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "miFormulario" }))
+                    @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
 
@@ -112,7 +112,7 @@
 
                             <!-- Botones -->
                             <div class="text-center mt-4">
-                                <button type="submit" class="luxury-button" onclick="mostrarAlerta()">
+                                <button type="submit" class="luxury-button">
                                     <span class="button-text">Guardar Cambios</span>
                                     <span class="button-icon">
                                         <svg viewBox="0 0 24 24">

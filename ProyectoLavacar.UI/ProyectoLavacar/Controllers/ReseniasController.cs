@@ -158,7 +158,7 @@ namespace ProyectoLavacar.Controllers
             {
                 int cantidadDeDatosEditados = await _editarResenia.EditarPersonas(modeloResenia);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch
             {
@@ -215,7 +215,7 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearRespuesta.CrearRespuesta(respuesta);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception ex)
             {

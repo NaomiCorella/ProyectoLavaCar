@@ -29,6 +29,7 @@ using System.Web.Mvc;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
 using System.Web.UI.WebControls;
 using System.Web.Services.Description;
+using System.Runtime.CompilerServices;
 
 
 namespace ProyectoLavacar.Controllers
@@ -226,7 +227,7 @@ namespace ProyectoLavacar.Controllers
 
             if (servicio != null)
             {
-                return Json(new { success = true, precio = servicio.costo }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, precio = servicio.precio }, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -281,12 +282,15 @@ namespace ProyectoLavacar.Controllers
             doc.Add(title);
 
             // DATOS DEL CLIENTE
-            PdfPTable clienteTable = new PdfPTable(2) { WidthPercentage = 100 };
-            clienteTable.SetWidths(new float[] { 1.5f, 2f });
+            PdfPTable clienteTable = new PdfPTable(3) { WidthPercentage = 100 };
+            clienteTable.SetWidths(new float[] { 1.5f, 2f, 1.5f });
+            AgregarEncabezado(clienteTable, "Cliente", cellFont, headerColor);
+            AgregarEncabezado(clienteTable, "Cédula", cellFont, headerColor);
+            AgregarEncabezado(clienteTable, "Fecha de compra", cellFont, headerColor);
 
-            AgregarFila(clienteTable, "Cliente:", $"{compra.Nombre} {compra.PrimerApellido} {compra.SegundoApellido}", cellFont);
-            AgregarFila(clienteTable, "Cédula:", compra.Cedula.ToString(), cellFont);
-            AgregarFila(clienteTable, "Fecha de Compra:", DateTime.Parse(compra.Fecha).ToString("dd/MM/yyyy"), cellFont);
+            clienteTable.AddCell(new PdfPCell(new Phrase(compra.Nombre+compra.PrimerApellido, cellFont)) { Padding = 8, BorderWidth = 1 });
+            clienteTable.AddCell(new PdfPCell(new Phrase($"₡{compra.Total:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+            clienteTable.AddCell(new PdfPCell(new Phrase(compra.Fecha, cellFont)) { Padding = 8, BorderWidth = 1 });
 
             doc.Add(clienteTable);
 
@@ -304,11 +308,23 @@ namespace ProyectoLavacar.Controllers
                 servicioTable.AddCell(new PdfPCell(new Phrase(servicio.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
                 servicioTable.AddCell(new PdfPCell(new Phrase($"₡{servicio.precio:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
             }
-            AgregarEncabezado(servicioTable, "Comentarios del servicio", cellFont, headerColor);
-            servicioTable.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont)) { Padding = 8, BorderWidth = 1 });
 
-
+            PdfPTable comentarios = new PdfPTable(1) { WidthPercentage = 100 };
+            comentarios.SetWidths(new float[] { 3});
+            AgregarEncabezado(comentarios, "Comentarios", cellFont, headerColor);
+            comentarios.AddCell(new PdfPCell(new Phrase(compra.DescripcionServicio, cellFont))
+            {
+                Padding = 8,
+                BorderWidth = 1,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            });
+            doc.Add(comentarios);
+            doc.Add(new Paragraph("\n"));
             doc.Add(servicioTable);
+
+
+            
+            
 
 
             doc.Add(new Paragraph("\n"));
