@@ -251,6 +251,7 @@
 </head>
 
 <body>
+
     <div class="luxury-container">
         <div class="luxury-header">
             <div class="luxury-icon">
@@ -267,6 +268,7 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+
                 @Html.HiddenFor(model => model.Id)
 
                 @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })

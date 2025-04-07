@@ -70,6 +70,8 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Usuario
+        [Authorize(Roles = "Administrador")]
+
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de finanzas";
@@ -79,6 +81,7 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Usuario/Details/5
+
         public ActionResult Details(string id)
         {
 
@@ -87,30 +90,9 @@ namespace ProyectoLavacar.Controllers
             return View(Finanzas);
         }
 
-        // GET: Usuario/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Usuario/Create
-        [HttpPost]
-        public async Task<ActionResult> Create(EmpleadoDto modeloDeUsuarios)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+    
 
-                return RedirectToAction("Index");
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Usuario/Edit/5
         public ActionResult Edit(string id)
         {
             EmpleadoDto laFinanza = _buscarPorId.Detalle(id);
@@ -188,6 +170,8 @@ namespace ProyectoLavacar.Controllers
             }
 
         }
+        [Authorize(Roles = "Usuario")]
+
         public ActionResult Perfil()//usuario
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -208,6 +192,8 @@ namespace ProyectoLavacar.Controllers
             };
             return View(usuario);
         }
+        [Authorize(Roles = "Empleado,Administrador")]
+
         public ActionResult MiPerfil()//empleado
         {
         

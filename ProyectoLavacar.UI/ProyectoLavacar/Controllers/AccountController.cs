@@ -313,11 +313,13 @@ namespace ProyectoLavacar.Controllers
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
         {
+
             ViewBag.Role = new SelectList(new List<object>
          {
           new { Value = "Administrador", Text = "Administrador" },
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
+
             ViewBag.turno = new SelectList(new List<object>
          {
           new { Value = "Mañana", Text = "Mañana" },
@@ -338,15 +340,16 @@ namespace ProyectoLavacar.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email,
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
-                    estado = model.Estado,
+                    estado = true,
                     cedula = model.cedula,
                     numeroCuenta = model.numeroCuenta,
                     turno = model.turno,
+                    PhoneNumber = model.PhoneNumber,
                     puesto = model.puesto
                 };
 

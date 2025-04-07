@@ -17,7 +17,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloInventario
         public decimal precioUnitario { get; set; }
         [Display(Name = "Cantidad Disponible")]
         public int cantidadDisponible { get; set; }
-        [Display(Name = "Disponiblidad")]
+        [Display(Name = "Estado")]
         public bool estado { get; set; }
 
     }

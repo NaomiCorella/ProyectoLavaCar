@@ -98,6 +98,7 @@ namespace ProyectoLavacar.Controllers
 
         }
         // GET: Nomina
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Index()
         {
             ViewBag.Title = "Nomina";
@@ -105,19 +106,20 @@ namespace ProyectoLavacar.Controllers
 
             return View(lalistadeNomina);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult ProcesosYGestiones(int idNomina)
         {
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Nomina(string idEmpleado)
         {
             ViewBag.Title = "Nomina de Empleado";
             List<UnicoEmpleadoDto> lalistadeNomina = _listarNominadelEmpleado.ListarNomina(idEmpleado);
             return View(lalistadeNomina);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Nomina/Details/5
         public ActionResult Details(int id)
         {
@@ -126,6 +128,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Create
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Create(string id)
         {
             ViewBag.Periodo = new List<SelectListItem>
@@ -167,6 +170,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarAjustes(int idNomina)
         {
@@ -196,6 +200,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult> IngresarAjustes(AjustesSalarialesDto modeloDeAjustes, int idNomina)
         {
             try
@@ -220,6 +225,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarTramites(int idNomina)
         {
@@ -319,6 +325,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarVacaciones()
         {
@@ -369,6 +376,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult AceptarVacacion(int idTramite)
         {
@@ -418,6 +426,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult ListarTramites(int idNomina)
         {
@@ -425,6 +434,8 @@ namespace ProyectoLavacar.Controllers
             ViewBag.idNomina = idNomina;
             return View(tramites);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult ListarAjustes(int idNomina)
         {
             ViewData["idNomina"] = idNomina;
@@ -489,6 +500,8 @@ namespace ProyectoLavacar.Controllers
             return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
 
         }
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult ProcesarNomina(int idNomina)
         {
             NominaDto nomina = _obtenerporId.Detalle(idNomina);

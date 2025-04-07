@@ -168,12 +168,15 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Reservas
+        [Authorize(Roles = "Administrador")]
+
         public ActionResult Reservas() //ReservasAdmin
         {
             List<ReservaCompleta> lalistaDeReservas = _listarReservasAdmin.ListarReservasTodo();
             return View(lalistaDeReservas);
         }
         // GET: Reservas
+        [Authorize(Roles = "Usuario")]
         public ActionResult MisReservas() //ReservasCliente
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -183,6 +186,7 @@ namespace ProyectoLavacar.Controllers
             List<ReservaCompleta> lalistaDeReservas = _listarReservasClientes.Listar(idCliente);
             return View(lalistaDeReservas);
         }
+        [Authorize(Roles = "Empleado")]
 
         public ActionResult ReservasEncargadas() //ReservasEmpleado
         {
@@ -237,6 +241,8 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Reservas/Create
+        [Authorize(Roles = "Administrador, Empleado, Usuario")]
+
         public ActionResult Create(int id)
         {
             var fechasYHorasDisponibles = ObtenerFechasYHorasDisponibles(id);
@@ -301,8 +307,15 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-       
+        [Authorize(Roles = "Administrador, Empleado, Usuario")]
+
         public ActionResult ReservarCita()
+        {
+            CargarServicios();
+            return View();
+        }
+
+        private void CargarServicios()
         {
             var servicios = _listarServicios.ListarServicios()
                 .Where(a => a.estado == true)
@@ -316,10 +329,7 @@ namespace ProyectoLavacar.Controllers
             }
 
             ViewBag.Servicios = servicios;
-            return View();
         }
-
-
 
         [HttpPost]
         public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
@@ -330,11 +340,12 @@ namespace ProyectoLavacar.Controllers
 
                 if (fechaInicio <= DateTime.Now)
                 {
+                    CargarServicios();
                     ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
                     return View(modeloDeReserva);
                 }
             }
-
+         
 
 
             // Validar datos
@@ -422,6 +433,8 @@ namespace ProyectoLavacar.Controllers
         /// //////////////// Admin //////////////////
 
         // GET: Reservas/Edit/5
+        [Authorize(Roles = "Administrador")]
+
         public ActionResult Edit(int idReserva)
         {
             var servicios = _listarServicios.ListarServicios()
@@ -433,18 +446,9 @@ namespace ProyectoLavacar.Controllers
                .ToList();
             ViewBag.empleados = empleados;
             ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
-            string datos = $@"
-            {{
-                 ""IdReserva"": ""{modeloReserva.idReserva}"",
-                ""IdCliente"": ""{modeloReserva.idCliente}"",
-                 ""IdEmpleado"": ""{modeloReserva.idEmpleado}"",
-                ""IdServicio"": ""{modeloReserva.idServicio}"",
-                ""Fecha"": ""{modeloReserva.fecha}"",
-                 ""Hora"": ""{modeloReserva.hora}"",
-                 ""Estado"": ""{modeloReserva.estado}""
-                    }}";
+           
 
-            TempData["DatosAnteriores"] = datos;
+
             return View(modeloReserva);
             
         }
@@ -476,10 +480,11 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        /// ////////////////  //////////////////
-        /// //////////////// Admin //////////////////
+
 
         // GET: Reservas/Edit/5
+        [Authorize(Roles = "Usuario")]
+
         public ActionResult EditarMiReserva(int idReserva)
         {
             ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);

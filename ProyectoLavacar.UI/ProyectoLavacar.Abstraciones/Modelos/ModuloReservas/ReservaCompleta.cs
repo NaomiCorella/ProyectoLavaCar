@@ -13,12 +13,12 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReservas
         public string idCliente { get; set; }
         public string idEmpleado { get; set; }
 
-        [Display(Name = "Nombre Cliente")]
+        [Display(Name = "Cliente")]
         public string nombreCliente { get; set; }
-
-        [Display(Name = "Nombre Empleado")]
+        [Display(Name = "Empleado")]
         public string nombreEmpleado { get; set; }
-        [Display(Name = "Nombre Servicio")]
+        [Display(Name = "Servicio")]
+
         public string nombreServicio { get; set; }
         public int idServicio { get; set; }
         [Display(Name = "Fecha")]

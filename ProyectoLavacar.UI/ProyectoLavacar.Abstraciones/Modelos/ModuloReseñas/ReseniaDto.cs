@@ -21,7 +21,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
         public int calificacion { get; set; }
         [Display(Name = "Comentarios")]
         public string comentarios { get; set; }
-        [Display(Name = "Disponiblilidad")]
+        [Display(Name = "Estado")]
         public bool estado { get; set; } = true;
     }
 }
