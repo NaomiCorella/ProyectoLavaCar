@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto.cs" />
+    <Compile Include="ModuloBitacora\Detalles\DetallesAD.cs" />
     <Compile Include="ModuloBitacora\Listar\ListarBitacoraAD.cs" />
     <Compile Include="ModuloBitacora\Registrar\RegistrarBitacoraAD.cs" />
     <Compile Include="ModuloCompra\CrearCompraServicio\CrearCompraServicioAD.cs" />

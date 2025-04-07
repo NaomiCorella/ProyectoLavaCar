@@ -1,4 +1,5 @@
-﻿using ProyectoLavacar.Abstracciones.AccesoADatos.Interfaces.ModuloBitacora.Listar;
+﻿using Newtonsoft.Json;
+using ProyectoLavacar.Abstracciones.AccesoADatos.Interfaces.ModuloBitacora.Listar;
 using ProyectoLavacar.Abstracciones.LN.Interfaces.ModuloBitacora.Listar;
 using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
 using ProyectoLavacar.Abstracciones.ModelosDeBaseDeDatos;
@@ -45,8 +46,8 @@ namespace ProyectoBancoNacional.LN.ModuloBitacora.Listar
                 FechaDeEvento = laBitacora.FechaDeEvento.ToString("dd-MM-yyyy hh:mm tt"),
                 DescripcionDeEvento = laBitacora.DescripcionDeEvento,
                 StackTrace = laBitacora.StackTrace,
-                DatosAnteriores = laBitacora.DatosAnteriores,
-                DatosPosteriores = laBitacora.DatosPosteriores
+                DatosAnteriores = JsonConvert.SerializeObject(JsonConvert.DeserializeObject<object>(laBitacora.DatosAnteriores)),
+                DatosPosteriores = JsonConvert.SerializeObject(JsonConvert.DeserializeObject<object>(laBitacora.DatosPosteriores))
 
             };
         }
