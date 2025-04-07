@@ -145,6 +145,28 @@ namespace ProyectoLavacar.Controllers
             return View("Reservas", reservas);
         }
 
+        public ActionResult FiltrarMisReservas(string fechaInicio, string fechaFin)
+        {
+            var reservas = _listarReservasAdmin.ListarReservasTodo().ToList(); // Obtener datos primero
+
+            // Intentar convertir los valores de entrada a DateTime
+            DateTime fechaInicioDT, fechaFinDT;
+            bool tieneFechaInicio = DateTime.TryParse(fechaInicio, out fechaInicioDT);
+            bool tieneFechaFin = DateTime.TryParse(fechaFin, out fechaFinDT);
+
+            if (tieneFechaInicio)
+            {
+                reservas = reservas.Where(r => DateTime.Parse(r.fecha) >= fechaInicioDT).ToList();
+            }
+
+            if (tieneFechaFin)
+            {
+                reservas = reservas.Where(r => DateTime.Parse(r.fecha) <= fechaFinDT).ToList();
+            }
+
+            return View("MisReservas", reservas);
+        }
+
         // GET: Reservas
         [Authorize(Roles = "Administrador")]
 

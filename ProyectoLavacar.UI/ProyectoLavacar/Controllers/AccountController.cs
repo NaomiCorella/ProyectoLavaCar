@@ -14,14 +14,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
-using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
-using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.Listar;
-using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.General.Fecha;
 using ProyectoLavacar.LN.ModuloCorreos;
-using ProyectoLavacar.LN.ModuloEmpleados.Listar;
-using ProyectoLavacar.LN.ModuloUsuarios.Listar;
 using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
@@ -35,8 +30,6 @@ namespace ProyectoLavacar.Controllers
         private readonly IEmailSender _emailSender;
         private Contexto _contexto;
         private IFecha _fecha;
-        IListarUsuarioLN _listarUsuario;
-        IListarEmpleadoLN _listarEmpleado;
 
         public AccountController()
         {
@@ -44,9 +37,6 @@ namespace ProyectoLavacar.Controllers
             _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _contexto = new Contexto();
             _fecha = new Fecha();
-            _listarUsuario = new ListarUsuarioLN();
-            _listarEmpleado = new ListarEmpleadoLN();
-
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
@@ -235,13 +225,6 @@ namespace ProyectoLavacar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            List<EmpleadoDto> usuario = _listarUsuario.ListarUsuarios().Where(a => a.estado == true)
-                .ToList(); ;
-            if (usuario.Any(u => u.cedula == model.cedula))
-            {
-                ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
-                return View(model);
-            }
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -344,7 +327,6 @@ namespace ProyectoLavacar.Controllers
          }, "Value", "Text");
 
 
-
             return View();
         }
 
@@ -354,13 +336,6 @@ namespace ProyectoLavacar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
         {
-            List<EmpleadoDto> empleado = _listarEmpleado.ListarEmpleados().Where(a => a.estado == true)
-                .ToList(); ;
-            if (empleado.Any(u => u.cedula == model.cedula))
-            {
-                ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
-                return View(model);
-            }
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

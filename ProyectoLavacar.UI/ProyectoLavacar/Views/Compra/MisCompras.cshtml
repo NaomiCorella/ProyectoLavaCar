@@ -1,54 +1,436 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraAdminDto>
 
 @{
-    ViewBag.Title = "MisCompra";
+    ViewBag.Title = "Mis Compras";
 }
 
-<h2>MisCompra</h2>
+@*<h2>Mis Informes</h2>*@
+<!DOCTYPE html>
+<html lang="zxx">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescripcionServicio)
-        </th>
-        
-        <th></th>
-    </tr>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Empleados</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescripcionServicio)
-        </td>
-      
-        <td>
-            <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="btn btn-outline-info btn-sm me-2" title="Detalles">
-                <i class="fas fa-info-circle"></i> Detalles
-            </a>
-            <a href="@Url.Action("DescargarPDFCompra", new { idCompra =item.idCompra })" class="btn btn-outline-info ml-2">
-                <i class="fas fa-times me-2"></i> DescargarPDF
-            </a>
-        </td>
-    </tr>
+<body>
+
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,13A5,5 0 0,1 7,8H9A3,3 0 0,0 12,11A3,3 0 0,0 15,8H17A5,5 0 0,1 12,13M12,3A3,3 0 0,1 15,6H9A3,3 0 0,1 12,3M19,6H17A5,5 0 0,0 12,1A5,5 0 0,0 7,6H5C3.89,6 3,6.89 3,8V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V8C21,6.89 20.1,6 19,6Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Mis Compras</h2>
+                <p class="luxury-subtitle">Historial de tus compras realizadas</p>
+                <div class="luxury-divider"></div>
+            </div>
+
+
+
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    <div class="luxury-table-responsive">
+                        <table id="myTable" class="luxury-table">
+                            <thead class="luxury-table-header" style="text-align: center">
+                                <tr>
+                                    <th>Total</th>
+                                    <th>Fecha</th>
+                                    <th>Servicio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="luxury-table-row">
+                                        <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DescripcionServicio)</td>
+                                        <td>
+                                            <div class="luxury-actions">
+                                                <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="luxury-btn luxury-btn-info" title="Detalles">
+                                                    <svg viewBox="0 0 24 24">
+                                                        <path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                                    </svg>
+                                                    @*<svg viewBox="0 0 24 24">
+                                                            <path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                                        </svg>
+                                                        <span class="luxury-btn-text">Detalles</span>*@
+                                                </a>
+                                                <a href="@Url.Action("DescargarPDFCompra", new { idCompra = item.idCompra })" class="luxury-btn luxury-btn-download" title="Descargar PDF">
+                                                    <svg viewBox="0 0 24 24">
+                                                        <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                                                    </svg>
+                                                    @*<span class="luxury-btn-text">PDF</span>*@
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<style>
+    /* Estilos base del contenedor */
+    .luxury-review-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-link-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(69, 196, 176, 0.2);
+    }
+
+        .luxury-link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(69, 196, 176, 0.3);
+            color: white;
+        }
+
+    /* Estilos para la tabla */
+    .luxury-table-responsive {
+        overflow-x: auto;
+        border-radius: 12px;
+    }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    .luxury-table-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+    }
+
+        .luxury-table-header th {
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .luxury-table-row {
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.3s ease;
+    }
+
+        .luxury-table-row:hover {
+            background-color: rgba(69, 196, 176, 0.05);
+        }
+
+        .luxury-table-row td {
+            padding: 14px 16px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /* Estilos para botones de acción */
+    .luxury-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .luxury-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+        .luxury-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .luxury-btn-text {
+        display: inline-block;
+    }
+
+    .luxury-btn-info {
+        background-color: rgba(23, 162, 184, 0.1);
+        color: #17a2b8;
+    }
+
+        .luxury-btn-info:hover {
+            background-color: rgba(23, 162, 184, 0.2);
+        }
+
+    .luxury-btn-download {
+        background-color: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
+        /*border: 1px solid rgba(108, 117, 125, 0.2);*/
+    }
+
+        .luxury-btn-download:hover {
+            background-color: rgba(108, 117, 125, 0.2);
+        }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .luxury-table-header th {
+            padding: 14px;
+        }
+
+        .luxury-table-row td {
+            padding: 12px;
+        }
+
+        .luxury-btn {
+            padding: 6px 12px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 20px;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-table-header {
+            display: none;
+        }
+
+        .luxury-table-row {
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+            .luxury-table-row td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+                .luxury-table-row td:before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    color: #45C4B0;
+                    margin-right: 15px;
+                }
+
+                .luxury-table-row td:last-child {
+                    border-bottom: none;
+                    justify-content: flex-end;
+                }
+
+        .luxury-actions {
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        .luxury-btn-text {
+            display: none;
+        }
+
+        .luxury-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 50%;
+            justify-content: center;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .luxury-link-button {
+            padding: 10px 18px;
+            font-size: 14px;
+        }
+
+        .luxury-table-row td {
+            font-size: 14px;
+        }
+    }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+    table.dataTable thead th {
+        text-align: center !important;
+    }
+
+    /* Bordes ovalados arriba del thead */
+    .luxury-table thead th:first-child {
+        border-top-left-radius: 12px;
+    }
+
+    .luxury-table thead th:last-child {
+        border-top-right-radius: 12px;
+    }
+</style>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
-</table>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="~/Content/assets/js/bootstrap.min.js"></script>
+<script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+<script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+<script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="~/Content/assets/js/main.js"></script>
+<script src="~/Content/assets/js/popper.min.js"></script>
+<script src="~/Content/assets/js/slick.min.js"></script>
+<script src="~/Content/assets/js/waypoints.min.js"></script>
+<script src="~/Content/assets/js/wow.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let table = new DataTable('#myTable', {
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+            searching: false,  // Elimina la caja de búsqueda
+            language: {
+                lengthMenu: 'Mostrar _MENU_ registros por página',
+                zeroRecords: 'No se encontraron registros',
+                info: 'Mostrando página _PAGE_ de _PAGES_',
+                infoEmpty: 'No hay registros disponibles',
+                infoFiltered: '(filtrado de _MAX_ registros en total)',
+                paginate: {
+                    first: 'Primera',
+                    previous: 'Anterior',
+                    next: 'Siguiente',
+                    last: 'Última'
+                }
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    // Agregar etiquetas para responsive
+    $(document).ready(function () {
+        $('.luxury-table-row td').each(function () {
+            var header = $(this).parent().find('th').eq($(this).index()).text();
+            $(this).attr('data-label', header);
+        });
+    });
+</script>

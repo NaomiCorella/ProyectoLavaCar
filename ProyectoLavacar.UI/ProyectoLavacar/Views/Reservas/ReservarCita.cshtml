@@ -67,7 +67,7 @@
                                             @Html.DropDownListFor(model => model.idServicio,
                                                 new SelectList(ViewBag.Servicios, "idServicio", "nombre"),
                                                 "Seleccione un servicio",
-                                                new { @class = "luxury-select" })
+                                                new { @class = "luxury-select", style = "width: 100%;" })
                                         </div>
                                     }
                                     else
@@ -85,7 +85,7 @@
                                                 <path fill="currentColor" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
                                             </svg>
                                         </span>
-                                        @Html.TextBoxFor(model => model.fecha, new { @class = "luxury-input", type = "date", required = "required" })
+                                        @Html.TextBoxFor(model => model.fecha, new { @class = "luxury-input", type = "date", required = "required", style = "width: 100%;" })
                                         <span class="input-border"></span>
                                     </div>
                                     @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "validation-message" })
@@ -99,7 +99,7 @@
                                                 <path fill="currentColor" d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
                                             </svg>
                                         </span>
-                                        @Html.TextBoxFor(model => model.hora, new { @class = "luxury-input", type = "time", required = "required" })
+                                        @Html.TextBoxFor(model => model.hora, new { @class = "luxury-input", type = "time", required = "required", style = "width: 100%;" })
                                         <span class="input-border"></span>
                                     </div>
                                     @Html.ValidationMessageFor(model => model.hora, "", new { @class = "validation-message" })
@@ -126,370 +126,324 @@
                 </div>
             </div>
         </div>
+    }
+
+    <style>
+        .luxury-review-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
         }
 
-<style>
-.luxury-review-container {
-    padding: 40px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    min-height: 100vh;
-}
-
-.section-title {
-    margin-bottom: 40px;
-    position: relative;
-}
-
-.luxury-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-    border-radius: 50%;
-    color: white;
-    box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
-    animation: float 4s ease-in-out infinite;
-}
-
-.luxury-icon svg {
-    width: 40px;
-    height: 40px;
-}
-
-.luxury-title {
-    font-size: 32px;
-    font-weight: 600;
-    color: #012030;
-    margin-bottom: 15px;
-}
-
-.luxury-subtitle {
-    color: #6c757d;
-    font-size: 18px;
-    max-width: 600px;
-    margin: 0 auto 20px;
-}
-
-.luxury-divider {
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
-    margin: 20px auto;
-    border-radius: 3px;
-}
-
-.luxury-card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    max-width: 800px;
-    width: 90%;
-    margin: 0 auto;
-    padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.luxury-form {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.luxury-input-group {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto 30px;
-}
-
-.input-label {
-    display: block;
-    margin-bottom: 12px;
-    color: #495057;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    width: 100%;
-}
-
-.input-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-.input-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #45C4B0;
-    z-index: 1;
-}
-
-.input-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.luxury-select {
-    width: 100%;
-    padding: 18px 20px 18px 55px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.7);
-    color: #495057;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2345C4B0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 18px center;
-    background-size: 16px;
-}
-
-.luxury-select:focus {
-    border-color: #45C4B0;
-    box-shadow: 0 0 0 4px rgba(69, 196, 176, 0.15);
-    outline: none;
-    background-color: white;
-}
-
-.luxury-input {
-    width: 100%;
-    padding: 18px 20px 18px 55px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.7);
-    color: #495057;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-}
-
-.luxury-input:focus {
-    border-color: #45C4B0;
-    box-shadow: 0 0 0 4px rgba(69, 196, 176, 0.15);
-    outline: none;
-    background-color: white;
-}
-
-.input-border {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
-    transition: width 0.4s ease;
-}
-
-.luxury-input:focus ~ .input-border {
-    width: 100%;
-}
-
-.validation-message {
-    display: block;
-    color: #d32f2f;
-    font-size: 14px;
-    margin-top: 8px;
-    text-align: center;
-}
-
-.luxury-alert {
-    padding: 18px;
-    background: #fff4f4;
-    color: #d32f2f;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    border: 1px solid #ffcdd2;
-    font-size: 15px;
-    text-align: center;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.luxury-button {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    padding: 18px;
-    background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 25px rgba(69, 196, 176, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 30px auto 0;
-}
-
-.button-text {
-    position: relative;
-    z-index: 2;
-}
-
-.button-icon {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    transition: transform 0.3s ease;
-}
-
-.button-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.button-shine {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s ease;
-}
-
-.luxury-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(69, 196, 176, 0.35);
-}
-
-.luxury-button:hover .button-shine {
-    left: 100%;
-}
-
-.luxury-button:hover .button-icon {
-    transform: translateX(5px);
-}
-
-.luxury-link {
-    color: #45C4B0;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-.luxury-link:hover {
-    color: #13578A;
-}
-
-.luxury-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #45C4B0;
-    transition: width 0.3s ease;
-}
-
-.luxury-link:hover::after {
-    width: 100%;
-}
-
-.info-message {
-    color: #6c757d;
-    font-style: italic;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #45C4B0;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* Animaciones */
-@@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@@media (max-width: 768px) {
-    .luxury-card {
-        padding: 30px 20px;
-        width: 95%;
-    }
-
-    .luxury-title {
-        font-size: 28px;
-    }
-
-    .luxury-subtitle {
-        font-size: 16px;
-    }
-
-    .luxury-input, .luxury-select {
-        padding: 16px 15px 16px 50px;
-        font-size: 15px;
-    }
-}
-
-/* Animaciones */
-@@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.luxury-icon {
-    animation: float 4s ease-in-out infinite;
-}
-
-@@media (max-width: 768px) {
-    .luxury-card {
-        padding: 40px;
-    }
-
-    .luxury-title {
-        font-size: 28px;
-    }
-
-    .luxury-subtitle {
-        font-size: 16px;
-    }
-}
-</style>
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
         }
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
 
-        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="~/Content/assets/js/bootstrap.min.js"></script>
-        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="~/Content/assets/js/main.js"></script>
-        <script src="~/Content/assets/js/popper.min.js"></script>
-        <script src="~/Content/assets/js/slick.min.js"></script>
-        <script src="~/Content/assets/js/waypoints.min.js"></script>
-        <script src="~/Content/assets/js/wow.min.js"></script>
-    </body>
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
+
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-form {
+            padding: 20px;
+        }
+
+        .luxury-input-group {
+            margin-bottom: 25px;
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .input-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #45C4B0;
+            z-index: 1;
+        }
+
+            .input-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .luxury-input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+            .luxury-input[type="date"],
+            .luxury-input[type="time"] {
+                width: 100%;
+                max-width: 500px; /* Ajusta este valor a tu gusto */
+            }
+
+            .luxury-input:focus {
+                border-color: #45C4B0;
+                box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+                outline: none;
+                background-color: white;
+            }
+
+        .input-border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            transition: width 0.4s ease;
+        }
+
+        .luxury-input:focus ~ .input-border {
+            width: 100%;
+        }
+
+        .validation-message {
+            display: block;
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .luxury-alert {
+            padding: 15px;
+            background: #fff4f4;
+            color: #d32f2f;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid #ffcdd2;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .luxury-button {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto 0;
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+            .button-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-button:hover .button-shine {
+                left: 100%;
+            }
+
+            .luxury-button:hover .button-icon {
+                transform: translateX(5px);
+            }
+
+        .luxury-link {
+            color: #45C4B0;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .luxury-link:hover {
+                color: #13578A;
+            }
+
+            .luxury-link::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: #45C4B0;
+                transition: width 0.3s ease;
+            }
+
+            .luxury-link:hover::after {
+                width: 100%;
+            }
+
+        .luxury-select {
+            width: 100%;
+            max-width: 500px;
+            padding: 18px 20px 18px 55px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2345C4B0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 16px;
+        }
+
+        /* Animaciones */
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
 
 </html>

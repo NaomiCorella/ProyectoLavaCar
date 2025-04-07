@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.AjustesSalarialesDto>
 
 @{
-    ViewBag.Title = "ListarAjustes";
+    ViewBag.Title = "Ajustes Salariales";
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
+    <title>Ajustes Salariales</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -23,92 +23,397 @@
 </head>
 
 <body>
-
-    <h2>Listado de ajustes salariales registrados</h2>
-
-    @Html.ActionLink(
-      "Registrar un ajuste salarial",
-      "IngresarAjustes",
-      new { idNomina = ViewBag.idNomina },
-      new { @class = "btn btn-outline-warning btn-lg" }
-    )
-
-    <div class="container mt-5 mb-5">
-        <form method="get" action="@Url.Action("FiltrarPorProducto", "Nomina")" class="form-inline mb-3">
-            <input type="hidden" name="idNomina" value="@ViewData["idNomina"]" /> <!-- Campo oculto para idNomina -->
-
-            <div class="form-group">
-                <select name="estado" class="form-control">
-                    <option value="">Filtrar...</option>
-                    <option value="true">Activo</option>
-                    <option value="false">Inactivo</option>
-                </select>
+    <div class="luxury-ajustes-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.2V15.7C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.8V12.3C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Ajustes Salariales</h2>
+                <p class="luxury-subtitle">Listado completo de ajustes registrados</p>
+                <div class="luxury-divider"></div>
             </div>
 
-            <button type="submit" class="btn btn-outline-primary ml-2">
-                <i class="fas fa-search me-2"></i> Buscar
-            </button>
+            <div class="text-center mb-4">
+                @Html.ActionLink(
+                    "Registrar Nuevo Ajuste",
+                    "IngresarAjustes",
+                    new { idNomina = ViewBag.idNomina },
+                    new { @class = "luxury-button luxury-button-warning" }
+                )
+            </div>
 
-            <a href="@Url.Action("ListarAjustes", "Nomina", new { idNomina = ViewData["idNomina"] })"
-               class="btn btn-outline-info ml-2">
-                <i class="fas fa-undo me-2"></i> Restablecer
-            </a>
-        </form>
+            <div class="luxury-card shadow-lg rounded mb-4">
+                <div class="card-body">
+                    <form method="get" action="@Url.Action("FiltrarPorProducto", "Nomina")" class="luxury-filter-form">
+                        <input type="hidden" name="idNomina" value="@ViewData["idNomina"]" />
+
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <select name="estado" class="luxury-form-select">
+                                    <option value="">Todos los estados</option>
+                                    <option value="true">Activo</option>
+                                    <option value="false">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 d-flex">
+                                <button type="submit" class="luxury-button luxury-button-primary mr-2">
+                                    <span class="button-text">Filtrar</span>
+                                    <span class="button-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="button-shine"></div>
+                                </button>
+
+                                <a href="@Url.Action("ListarAjustes", "Nomina", new { idNomina = ViewData["idNomina"] })"
+                                   class="luxury-button luxury-button-secondary">
+                                    <span class="button-text">Restablecer</span>
+                                    <span class="button-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="button-shine"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="luxury-card shadow-lg rounded">
+                <div class="table-responsive">
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Razón</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="luxury-badge @(item.tipo == "Bono" ? "bono" : "deduccion")">
+                                            @Html.DisplayFor(modelItem => item.tipo)
+                                        </span>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Razon)</td>
+                                    <td class="luxury-amount @(item.tipo == "Bono" ? "positive" : "negative")">
+                                        @Html.DisplayFor(modelItem => item.Monto)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Anular", "AnularAjustes", new { id = item.IdAjusteSalarial },
+                                        new { @class = "luxury-button luxury-button-danger luxury-button-sm" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.tipo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Razon)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Monto)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tipo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Razon)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Monto)
-                        </td>
-                        <td>
-
-                            @Html.ActionLink("Anular", "AnularAjustes", new { id = item.IdAjusteSalarial }, new { @class = "btn btn-outline-danger" })
-                        </td>
-                    </tr>
-                }
-
-        </table>
-
-        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="~/Content/assets/js/bootstrap.min.js"></script>
-        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="~/Content/assets/js/main.js"></script>
-        <script src="~/Content/assets/js/popper.min.js"></script>
-        <script src="~/Content/assets/js/slick.min.js"></script>
-        <script src="~/Content/assets/js/waypoints.min.js"></script>
-        <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
-
 </html>
+
+<style>
+    .luxury-ajustes-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-filter-form {
+        padding: 20px;
+    }
+
+    .luxury-form-select {
+        width: 100%;
+        padding: 12px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+        .luxury-form-select:focus {
+            border-color: #45C4B0;
+            box-shadow: 0 0 0 0.2rem rgba(69, 196, 176, 0.25);
+            outline: none;
+        }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .luxury-table thead {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+        .luxury-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .luxury-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .luxury-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .luxury-table tr:hover {
+            background-color: rgba(69, 196, 176, 0.05);
+        }
+
+    .luxury-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6d6d6d;
+    }
+
+/*        .luxury-badge.bono {
+            background-color: #28a745;
+        }
+
+        .luxury-badge.deduccion {
+            background-color: #dc3545;
+        }*/
+
+    .luxury-amount {
+        font-weight: 600;
+    }
+
+/*        .luxury-amount.positive {
+            color: #28a745;
+        }
+
+        .luxury-amount.negative {
+            color: #dc3545;
+        }*/
+
+    .luxury-button {
+        position: relative;
+        padding: 12px 24px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .luxury-button-sm {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .luxury-button-primary {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+    }
+
+    .luxury-button-warning {
+        background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+        box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
+    }
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+    }
+
+    .luxury-button-danger {
+        color: #6d6d6d; /* Texto negro */
+        border: 2px solid #dc3545; /* Borde rojo */
+        box-shadow: 0 10px 20px rgba(220, 53, 69, 0.2);
+        transition: all 0.3s ease;
+    }
+
+        .luxury-button-danger:hover {
+            /*background: #dc3545;*/ /* Rojo al hacer hover */
+            color: white; /* Texto blanco al hacer hover */
+        }
+
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 0;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-filter-form .row {
+            flex-direction: column;
+        }
+
+        .luxury-filter-form .col-md-8 {
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .luxury-button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .luxury-table th,
+        .luxury-table td {
+            padding: 10px 15px;
+        }
+    }
+</style>

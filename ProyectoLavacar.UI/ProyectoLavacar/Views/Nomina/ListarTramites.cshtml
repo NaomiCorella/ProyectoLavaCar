@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.TramitesDto>
 
 @{
-    ViewBag.Title = "ListarTramites";
+    ViewBag.Title = "Gestión de Trámites";
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
+    <title>Gestión de Trámites</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -23,77 +23,83 @@
 </head>
 
 <body>
+    <div class="luxury-tramites-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19M17,8.4L13.4,12L17,15.6L15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Gestión de Trámites</h2>
+                <p class="luxury-subtitle">Listado completo de trámites registrados</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-    <h2>Listado de tramites registrados</h2>
+            <div class="text-center mb-4">
+                @Html.ActionLink(
+                    "Registrar Incapacidad",
+                    "IngresarTramites",
+                    new { idNomina = ViewBag.idNomina },
+                    new { @class = "luxury-button luxury-button-warning" }
+                )
+            </div>
 
-    <div class="mb-4">   
-    @Html.ActionLink(
-        "Registrar una Incapacidad",
-        "IngresarTramites",
-        new { idNomina = ViewBag.idNomina },
-        new { @class = "btn btn-outline-warning btn-lg" }
-    )
-     </div>
-
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaInicio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.duracion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Razon)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tipo)
-                    </th>
-                   
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaInicio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.duracion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Razon)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tipo)
-                        </td>
-                        <td>
-
-                            @if (item.tipo == "Vacaciones")
+            <div class="luxury-card shadow-lg rounded">
+                <div class="table-responsive">
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Duración</th>
+                                <th>Razón</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
                             {
-                                if (item.estado == 0)
-                                {
-                                    @Html.ActionLink("AceptarVacacion", "AceptarVacacion", new { idTramite = item.IdTramite }, new { @class = "btn btn-outline-success btn-md" })
-                                }
-                                    else
-                                      {
-                                    <p>Peticion ya ha sido revisada</p>
-                                     }
+                                <tr>
+                                    <td>
+                                        <span class="luxury-badge @(item.tipo == "Vacaciones" ? "vacaciones" : "incapacidad")">
+                                            @Html.DisplayFor(modelItem => item.tipo)
+                                        </span>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.duracion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Razon)</td>
+                                    <td>
+                                        @if (item.tipo == "Vacaciones")
+                                        {
+                                            <span class="luxury-status @(item.estado == 0 ? "pendiente" : "revisado")">
+                                                @(item.estado == 0 ? "Pendiente" : "Revisado")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="luxury-status revisado">N/A</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.tipo == "Vacaciones" && item.estado == 0)
+                                        {
+                                            @Html.ActionLink("Aceptar", "AceptarVacacion", new { idTramite = item.IdTramite },
+                                            new { @class = "luxury-button luxury-button-success luxury-button-sm" })
+                                        }
+                                        else if (item.tipo == "Vacaciones")
+                                        {
+                                            <span class="luxury-status-text">Procesado</span>
+                                        }
+                                    </td>
+                                </tr>
                             }
-                       
-
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -109,5 +115,268 @@
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
-
 </html>
+
+<style>
+    .luxury-tramites-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .luxury-table thead {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+        .luxury-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .luxury-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .luxury-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .luxury-table tr:hover {
+            background-color: rgba(69, 196, 176, 0.05);
+        }
+
+    .luxury-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+    }
+
+        .luxury-badge.vacaciones {
+            background-color: #17a2b8;
+        }
+
+        .luxury-badge.incapacidad {
+            background-color: #6c757d;
+        }
+
+    .luxury-status {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+    }
+
+        .luxury-status.pendiente {
+            background-color: #ffc107;
+        }
+
+        .luxury-status.revisado {
+            background-color: #28a745;
+        }
+
+    .luxury-status-text {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .luxury-button {
+        position: relative;
+        padding: 12px 24px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .luxury-button-sm {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .luxury-button-warning {
+        background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+        box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
+    }
+
+    .luxury-button-success {
+        background: linear-gradient(135deg, #28a745 0%, #5cb85c 100%);
+        box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 0;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-table th,
+        .luxury-table td {
+            padding: 10px 15px;
+            display: block;
+            text-align: right;
+        }
+
+            .luxury-table th::before,
+            .luxury-table td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+            }
+
+        .luxury-table thead {
+            display: none;
+        }
+
+        .luxury-table tr {
+            margin-bottom: 15px;
+            display: block;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .luxury-button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
