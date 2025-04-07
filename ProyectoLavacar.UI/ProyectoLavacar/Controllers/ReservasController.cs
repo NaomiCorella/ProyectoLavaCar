@@ -289,6 +289,12 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult ReservarCita()
         {
+            CargarServicios();
+            return View();
+        }
+
+        private void CargarServicios()
+        {
             var servicios = _listarServicios.ListarServicios()
                 .Where(a => a.estado == true)
                 .ToList();
@@ -301,10 +307,7 @@ namespace ProyectoLavacar.Controllers
             }
 
             ViewBag.Servicios = servicios;
-            return View();
         }
-
-
 
         [HttpPost]
         public async Task<ActionResult> ReservarCita(ReservasDto modeloDeReserva)
@@ -315,11 +318,12 @@ namespace ProyectoLavacar.Controllers
 
                 if (fechaInicio <= DateTime.Now)
                 {
+                    CargarServicios();
                     ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
                     return View(modeloDeReserva);
                 }
             }
-
+         
 
 
             // Validar datos
@@ -422,7 +426,7 @@ namespace ProyectoLavacar.Controllers
             ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
            
 
-            TempData["DatosAnteriores"] = datos;
+
             return View(modeloReserva);
             
         }

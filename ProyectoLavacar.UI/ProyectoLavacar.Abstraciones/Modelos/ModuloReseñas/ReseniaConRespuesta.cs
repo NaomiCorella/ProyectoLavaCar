@@ -25,13 +25,13 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloReseñas
         public int calificacion { get; set; }
         [Display(Name = "Comentarios")]
         public string comentarios { get; set; }
-        [Display(Name = "Estado de Reseña")]
+        [Display(Name = "Estado")]
         public bool estadoResenia { get; set; } = true;
         public int? idRespuesta { get; set; }
         public string idEmpleado { get; set; }
         [Display(Name = "Fecha de Respuesta")]
         public string fechaRespuesta { get; set; }
-        [Display(Name = "Respuesta De Comentarios")]
+        [Display(Name = "Respuesta ")]
         public string comentariosRespuesta { get; set; }
        
     }

@@ -10,6 +10,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
     {
         public int idRebajo { get; set; }
 
+
         public decimal Monto { get; set; }
 
         public string Razon { get; set; }

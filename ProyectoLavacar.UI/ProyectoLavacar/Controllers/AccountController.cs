@@ -336,7 +336,8 @@ namespace ProyectoLavacar.Controllers
           new { Value = "Administrador", Text = "Administrador" },
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
-            ViewBag.Turno = new SelectList(new List<object>
+
+            ViewBag.turno = new SelectList(new List<object>
          {
           new { Value = "Mañana", Text = "Mañana" },
           new { Value = "Tarde", Text = "Tarde" }
@@ -355,11 +356,11 @@ namespace ProyectoLavacar.Controllers
         {
             List<EmpleadoDto> empleado = _listarEmpleado.ListarEmpleados().Where(a => a.estado == true)
                 .ToList(); ;
-            if (empleado.Any(u => u.cedula == model.cedula))
-            {
-                ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
-                return View(model);
-            }
+            //if (empleado.Any(u => u.cedula == model.cedula))
+            //{
+            //    ModelState.AddModelError("cedula", "La cedula ya se encuentra registrada");
+            //    return View(model);
+            //}
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

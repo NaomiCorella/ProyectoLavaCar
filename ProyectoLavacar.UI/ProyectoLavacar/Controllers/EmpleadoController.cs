@@ -61,7 +61,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
@@ -153,26 +153,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Empleado/Create
-        [HttpPost]
-        public async Task<ActionResult> Create(EmpleadoDto modeloDeEmpleado)
-        {
-            try
-            {
-
-                return RedirectToAction("Index");
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
 
 
         // GET: Empleado/Edit/5

@@ -192,7 +192,7 @@ namespace ProyectoLavacar.Controllers
             };
             return View(usuario);
         }
-        [Authorize(Roles = "Empleado, Administrador")]
+        [Authorize(Roles = "Empleado,Administrador")]
 
         public ActionResult MiPerfil()//empleado
         {

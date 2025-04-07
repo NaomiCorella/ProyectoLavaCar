@@ -21,14 +21,16 @@ namespace ProyectoLavacar.AccesoADatos.ModuloCompra.DetalleCompraCompleta
             var CompraCompleta = (from compra in _elcontexto.CompraTabla
                                   join elCliente in _elcontexto.UsuariosTabla
                                   on compra.idCliente equals elCliente.Id
-                                 
+                                  join elEmpleado in _elcontexto.UsuariosTabla
+                                 on compra.idEmpleado equals elEmpleado.Id
+
                                   where compra.idCompra == idCompra 
                                   select new CompraCompletaDto
                                   {
                                       idCompra = compra.idCompra,
                                       idCliente = compra.idCliente,
-                                    
-
+                                      idEmpleado = compra.idEmpleado,
+                                      NombreEmp = elEmpleado.nombre,
                                       Total = compra.Total,
                                       Fecha = compra.fecha.ToString(),
                                       DescripcionServicio = compra.DescripcionServicio,
