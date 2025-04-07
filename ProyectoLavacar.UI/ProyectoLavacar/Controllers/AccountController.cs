@@ -313,12 +313,12 @@ namespace ProyectoLavacar.Controllers
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
         {
-            ViewBag.rol = new SelectList(new List<object>
+            ViewBag.Role = new SelectList(new List<object>
          {
           new { Value = "Administrador", Text = "Administrador" },
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
-            ViewBag.Turno = new SelectList(new List<object>
+            ViewBag.turno = new SelectList(new List<object>
          {
           new { Value = "Mañana", Text = "Mañana" },
           new { Value = "Tarde", Text = "Tarde" }

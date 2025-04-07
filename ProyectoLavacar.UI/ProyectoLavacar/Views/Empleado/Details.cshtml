@@ -1,4 +1,4 @@
-﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.UsuariosDto
+﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.EmpleadoDto
 
 @{
     ViewBag.Title = "Details";
@@ -79,7 +79,6 @@
             </table>
         </div>
         <div class="text-center mt-4 mb-4">
-            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary me-2" })
             @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-secondary" })
         </div>
     </div>

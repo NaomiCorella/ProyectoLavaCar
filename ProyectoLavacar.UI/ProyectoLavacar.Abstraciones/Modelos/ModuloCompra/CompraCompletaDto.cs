@@ -35,7 +35,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
 
         public string idEmpleado { get; set; }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre del Empleado")]
         public string NombreEmp { get; set; }
 
         [Display(Name = "Primer Apellido")]

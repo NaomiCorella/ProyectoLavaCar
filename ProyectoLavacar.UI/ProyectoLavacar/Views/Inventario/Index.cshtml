@@ -1,55 +1,11 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModeloInventario.InventarioDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administración de Inventario";
 }
 
-
-
-
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="ModalDeMovimiento" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Registrar Movimiento</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -63,158 +19,493 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
-</head>
+    <style>
+        /* Estilos base consistentes */
+        .luxury-inventory-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
 
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
 
-<body>
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
 
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Administración de Inventario</h2>
-            <a href="@Url.Action("Create", "Inventario")" class="btn btn-outline-success btn-lg">
-                <i class="fas fa-plus me-2"></i> Agregar Producto
-            </a>
-        </div>
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
 
-        <div class="container mt-5 mb-5">
-            <form method="get" action="@Url.Action("FiltrarPorProducto", "Inventario")" class="form-inline mb-3">
-                <div class="form-group">
-                    <input type="text" name="nombreProducto" class="form-control" placeholder="Buscar producto..." />
-                </div>
-                <button type="submit" class="btn btn-outline-primary ml-2"><i class="fas fa-search me-2"></i> Buscar </button>
-                <a href="@Url.Action("Index", "Inventario")" class="btn btn-outline-info ml-2"><i class="fas fa-undo me-2"></i> Restablecer</a>
-            </form>
-        </div>
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
 
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
 
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="abrirModalMovimiento btn btn-outline-success ml-2">
-                <i class="fas fa-save me-2"></i> Registrar Movimiento
-            </button>
-            <a href="@Url.Action("HistorialDeMovimientos")" class="btn btn-outline-info ml-2">
-                <i class="fas fa-times me-2"></i> Historial De Movimientos
-            </a>
-            <a href="@Url.Action("DescargarPDF")" class="btn btn-outline-info ml-2">
-                <i class="fas fa-times me-2"></i> DescargarPDF
-            </a>
-        </div>
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
 
-        <div class="table-responsive shadow-lg rounded mt-5 mb-5">
-            <table class="table table-bordered table-hover text-center">
-                <thead style="background-color: #1b3255; color: #fff; font-weight: bold;">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.idProducto)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.categoria)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.precioUnitario)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.cantidadDisponible)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.estado)
-                        </th>
-                        <th></th>
-                    </tr>
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-                </thead>
-                <tbody>
+        /* Estilos para botones */
+        .luxury-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idProducto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.categoria)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.precioUnitario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.cantidadDisponible)
-                            </td>
-                            <td>
-                                @if (item.estado)
-                                {
-                                    <span class="badge bg-success text-white">Activo</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-danger text-white">Inactivo</span>
-                                }
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a href="@Url.Action("Edit", new { id = item.idProducto })" class="btn btn-outline-primary btn-sm me-2" title="Editar">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
+        .luxury-btn-primary {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
 
-                                    <a href="@Url.Action("Details", new { id = item.idProducto })" class="btn btn-outline-secondary btn-sm me-2" title="Detalles">
-                                        <i class="fas fa-info-circle"></i> Detalles
-                                    </a>
+            .luxury-btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 16px rgba(69, 196, 176, 0.3);
+                color: white;
+            }
 
+        .luxury-btn-outline {
+            background: transparent;
+            border: 2px solid #45C4B0;
+            color: #45C4B0;
+        }
 
-                                    @* Esto hacerlo como lo tienen ellos con un sweet alert *@
-                                    @if (item.estado)
-                                    {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-outline-warning btn-action">
-                                            <i class="fas fa-times-circle"></i> Inactivar
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="btn btn-outline-success btn-action">
-                                            <i class="fas fa-check-circle"></i> Activar
-                                        </a>
-                                    }
+            .luxury-btn-outline:hover {
+                background: #45C4B0;
+                color: white;
+            }
 
-                                    <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="btn btn-outline-success btn-action">
-                                        <i class="fas fa-times-circle"></i> Descargar PDF
-                                    </a>
+        /* Estilos para el filtro */
+        .luxury-filter-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
 
+        .luxury-filter-input {
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
 
-                                </div>
+            .luxury-filter-input:focus {
+                border-color: #45C4B0;
+                box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+                outline: none;
+            }
 
-                            </td>
-                        </tr>
+        /* Estilos para la tabla */
+        .luxury-table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .luxury-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .luxury-table-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+            .luxury-table-header th {
+                padding: 18px;
+                text-align: center;
+                font-weight: 600;
+            }
+
+        .luxury-table-row {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+            .luxury-table-row:hover {
+                background-color: rgba(69, 196, 176, 0.05);
+            }
+
+            .luxury-table-row td {
+                padding: 16px;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+        /* Estilos para badges */
+        .luxury-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .luxury-badge-active {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+
+        .luxury-badge-inactive {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        /* Estilos para botones de acción */
+        .luxury-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .luxury-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 90px;
+        }
+
+            .luxury-action-btn i {
+                font-size: 14px;
+            }
+
+        .btn-edit {
+            background-color: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+            .btn-edit:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .btn-details {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: #17a2b8;
+            border: 1px solid #17a2b8;
+        }
+
+            .btn-details:hover {
+                background-color: #17a2b8;
+                color: white;
+            }
+
+        .btn-inactivate {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+
+            .btn-inactivate:hover {
+                background-color: #ffc107;
+                color: #212529;
+            }
+
+        .btn-activate {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+            .btn-activate:hover {
+                background-color: #28a745;
+                color: white;
+            }
+
+        .btn-pdf {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+            border: 1px solid #6c757d;
+        }
+
+            .btn-pdf:hover {
+                background-color: #6c757d;
+                color: white;
+            }
+
+        /* Responsive design */
+        @@media (max-width: 992px) {
+            .luxury-actions {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .luxury-action-btn {
+                width: 100%;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-table-header th {
+                padding: 14px 8px;
+                font-size: 14px;
+            }
+
+            .luxury-table-row td {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+
+            .luxury-action-btn {
+                padding: 6px 10px;
+                font-size: 13px;
+                min-width: auto;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-table-header {
+                display: none;
+            }
+
+            .luxury-table-row {
+                display: block;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
+
+                .luxury-table-row td {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px;
+                    border-bottom: 1px solid #f0f0f0;
+                    text-align: right;
+                }
+
+                    .luxury-table-row td:before {
+                        content: attr(data-label);
+                        font-weight: 600;
+                        color: #45C4B0;
+                        margin-right: 15px;
                     }
-                </tbody>
-            </table>
-        </div>
 
+                    .luxury-table-row td:last-child {
+                        border-bottom: none;
+                        justify-content: center;
+                    }
+
+            .luxury-actions {
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="luxury-inventory-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 3L2 12H5V20H19V12H22L12 3M12 7.7C14.1 7.7 15.8 9.4 15.8 11.5C15.8 14.5 12 18 12 18C12 18 8.2 14.5 8.2 11.5C8.2 9.4 9.9 7.7 12 7.7M12 10C11.2 10 10.5 10.7 10.5 11.5C10.5 12.3 11.2 13 12 13C12.8 13 13.5 12.3 13.5 11.5C13.5 10.7 12.8 10 12 10Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">@ViewBag.Title</h2>
+                <p class="luxury-subtitle">Administra los productos disponibles en tu inventario</p>
+                <div class="luxury-divider"></div>
+            </div>
+
+            <div class="luxury-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <a href="@Url.Action("Create", "Inventario")" class="luxury-btn luxury-btn-primary">
+                        <i class="fas fa-plus"></i> Agregar Producto
+                    </a>
+
+                    <div class="luxury-actions">
+                        <button type="submit" class="abrirModalMovimiento luxury-btn luxury-btn-outline">
+                            <i class="fas fa-exchange-alt"></i> Registrar Movimiento
+                        </button>
+                        <a href="@Url.Action("HistorialDeMovimientos")" class="luxury-btn luxury-btn-outline">
+                            <i class="fas fa-history"></i> Historial
+                        </a>
+                        <a href="@Url.Action("DescargarPDF")" class="luxury-btn luxury-btn-outline">
+                            <i class="fas fa-file-pdf"></i> Exportar PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="luxury-filter-container">
+                    <form method="get" action="@Url.Action("FiltrarPorProducto", "Inventario")" class="row g-3">
+                        <div class="col-md-8">
+                            <input type="text" name="nombreProducto" class="luxury-filter-input" placeholder="Buscar producto..." />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="luxury-btn luxury-btn-primary w-100">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="luxury-table-container">
+                    <table class="luxury-table">
+                        <thead class="luxury-table-header">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.idProducto)</th>
+                                <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                                <th>@Html.DisplayNameFor(model => model.categoria)</th>
+                                <th>@Html.DisplayNameFor(model => model.precioUnitario)</th>
+                                <th>@Html.DisplayNameFor(model => model.cantidadDisponible)</th>
+                                <th>@Html.DisplayNameFor(model => model.estado)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="luxury-table-row">
+                                    <td data-label="ID">@Html.DisplayFor(modelItem => item.idProducto)</td>
+                                    <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
+                                    <td data-label="Categoría">@Html.DisplayFor(modelItem => item.categoria)</td>
+                                    <td data-label="Precio">@Html.DisplayFor(modelItem => item.precioUnitario)</td>
+                                    <td data-label="Cantidad">@Html.DisplayFor(modelItem => item.cantidadDisponible)</td>
+                                    <td data-label="Estado">
+                                        @if (item.estado)
+                                        {
+                                            <span class="luxury-badge luxury-badge-active">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="luxury-badge luxury-badge-inactive">Inactivo</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="luxury-actions">
+                                            <a href="@Url.Action("Edit", new { id = item.idProducto })" class="luxury-action-btn btn-edit" title="Editar">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                            <a href="@Url.Action("Details", new { id = item.idProducto })" class="luxury-action-btn btn-details" title="Detalles">
+                                                <i class="fas fa-info-circle"></i> Detalles
+                                            </a>
+                                            @if (item.estado)
+                                            {
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-action-btn btn-inactivate">
+                                                    <i class="fas fa-times-circle"></i> Inactivar
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idProducto })" class="luxury-action-btn btn-activate">
+                                                    <i class="fas fa-check-circle"></i> Activar
+                                                </a>
+                                            }
+                                            <a href="@Url.Action("DescargarPDFDetalle", new { id = item.idProducto })" class="luxury-action-btn btn-pdf">
+                                                <i class="fas fa-file-pdf"></i> PDF
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-   
-        <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
+    <!-- Modal para movimientos -->
+    <div id="ModalDeMovimiento" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%); color: white;">
+                    <h4 class="modal-title">Registrar Movimiento</h4>
+                    <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Contenido del modal de movimientos...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="luxury-btn luxury-btn-outline" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    }
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
-</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/Inventario/ModalMovimiento.js"></script>
+
+}
+<script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="~/Content/assets/js/bootstrap.min.js"></script>
+<script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+<script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+<script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="~/Content/assets/js/main.js"></script>
+<script src="~/Content/assets/js/popper.min.js"></script>
+<script src="~/Content/assets/js/slick.min.js"></script>
+<script src="~/Content/assets/js/waypoints.min.js"></script>
+<script src="~/Content/assets/js/wow.min.js"></script>
+    </body>
 
 </html>
 

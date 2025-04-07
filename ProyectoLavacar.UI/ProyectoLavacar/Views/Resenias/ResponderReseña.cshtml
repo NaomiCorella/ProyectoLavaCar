@@ -5,64 +5,98 @@
 }
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewBag.Title</title>
-    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <title>Administración de Respuestas</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
     <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
     <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
+
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="shadow p-4 rounded bg-white">
-            <h2 class="text-center mb-4">Crear Respuesta</h2>
-            <hr />
-
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                
-                <div class="mb-4">
-                    <label for="comentarioOriginal" class="form-label fw-bold">Comentario Original</label>
-                    <textarea id="comentarioOriginal" class="form-control" rows="3" readonly>@ViewBag.Reseña.comentarios</textarea>
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z" />
+                    </svg>
                 </div>
+                <h2 class="luxury-title">Responder a Reseña</h2>
+                <p class="luxury-subtitle">Por favor escribe una respuesta profesional y cordial.</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-               
-                <div class="mb-4">
-                    @Html.LabelFor(model => model.comentarios, htmlAttributes: new { @class = "form-label fw-bold" })
-                    @Html.TextAreaFor(model => model.comentarios, new { @class = "form-control textarea-larga", rows = 4, placeholder = "Escribe tu respuesta aquí...", id = "comentarios", required = "required" })
-                    @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
-                </div>
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-               
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="submit" class="btn btn-outline-success btn-lg flex-grow-1 me-2">
-                        <i class="fas fa-save me-2"></i> Agregar Respuesta
-                    </button>
-                    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-info btn-lg flex-grow-1 ms-2" })
+                        <div class="luxury-form">
+                            @Html.ValidationSummary(true, "", new { @class = "luxury-alert" })
+
+                            <div class="form-group luxury-input-group">
+                                <label class="input-label">Comentario Original</label>
+                                <div class="input-container">
+                                    <span class="input-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z" />
+                                        </svg>
+                                    </span>
+                                    <textarea id="comentarioOriginal" class="luxury-input" rows="3" readonly>@ViewBag.Reseña.comentarios</textarea>
+                                    <span class="input-border"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group luxury-input-group">
+                                @Html.LabelFor(model => model.comentarios, htmlAttributes: new { @class = "input-label" })
+                                <div class="input-container">
+                                    <span class="input-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18" />
+                                        </svg>
+                                    </span>
+                                    @Html.TextAreaFor(model => model.comentarios, new { @class = "luxury-input", rows = 4, placeholder = "Escribe tu respuesta aquí...", required = "required" })
+                                    <span class="input-border"></span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "validation-message" })
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="submit" class="luxury-button flex-grow-1 me-2">
+                                    <span class="button-text">Agregar Respuesta</span>
+                                    <span class="button-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M17,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3M19,19H5V5H16.17L19,7.83V19M12,12A4,4 0 0,0 8,16A4,4 0 0,0 12,20A4,4 0 0,0 16,16A4,4 0 0,0 12,12M12,14A2,2 0 0,1 14,16A2,2 0 0,1 12,18A2,2 0 0,1 10,16A2,2 0 0,1 12,14M6,6H15V10H6V6Z" />
+                                        </svg>
+                                    </span>
+                                    <div class="button-shine"></div>
+                                </button>
+
+                                @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "luxury-link flex-grow-1 ms-2 text-center" })
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
+            </div>
         </div>
     </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-
-
     }
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @*<script src="~/Scripts/Resenias/alertaCrear.js"></script>*@
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
@@ -75,6 +109,301 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
-</body>
-
 </html>
+
+<style>
+    .luxury-review-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-form {
+        padding: 20px;
+    }
+
+    .luxury-input-group {
+        margin-bottom: 25px;
+        max-width: 650px;
+        margin: 0 auto 25px;
+    }
+
+    .input-label {
+        display: block;
+        margin-bottom: 10px;
+        color: #495057;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .input-container {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        color: #45C4B0;
+        z-index: 1;
+    }
+
+        .input-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .luxury-input {
+        width: 100%;
+        padding: 15px 15px 15px 50px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.7);
+        color: #495057;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    textarea.luxury-input {
+        padding-top: 15px;
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .luxury-input:focus {
+        border-color: #45C4B0;
+        box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+        outline: none;
+        background-color: white;
+    }
+
+    .input-border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        transition: width 0.4s ease;
+    }
+
+    .luxury-input:focus ~ .input-border {
+        width: 100%;
+    }
+
+    .validation-message {
+        display: block;
+        color: #d32f2f;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .luxury-alert {
+        padding: 15px;
+        background: #fff4f4;
+        color: #d32f2f;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        border: 1px solid #ffcdd2;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .luxury-button {
+        /*position: relative;
+        width: 100%;*/
+        padding: 16px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    .luxury-link {
+        color: #45C4B0;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px;
+        border: 1px solid #45C4B0;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .luxury-link:hover {
+            color: white;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(69, 196, 176, 0.2);
+        }
+
+        .luxury-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #45C4B0;
+            transition: width 0.3s ease;
+        }
+
+        .luxury-link:hover::after {
+            width: 100%;
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 20px;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .d-flex {
+            flex-direction: column;
+        }
+
+        .luxury-button, .luxury-link {
+            width: 100%;
+            margin: 5px 0;
+        }
+    }
+</style>

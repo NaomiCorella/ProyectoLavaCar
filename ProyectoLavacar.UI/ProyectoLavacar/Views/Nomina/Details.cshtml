@@ -1,10 +1,9 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.NominaCompletaDto
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de Nómina";
 }
 
-<h2>Reservas</h2>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -12,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
+    <title>Detalles de Nómina</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -24,77 +23,167 @@
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="card-header bg-gradient-primary text-white">
-            <h4 class="mb-0">Detalles de Nómina</h4>
-        </div>
+    <div class="luxury-nomina-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M7,13.55C7,14.73 8,15.5 9.27,16.38C10.29,17.07 11.45,17.47 12,17.5C12.55,17.47 13.71,17.07 14.73,16.38C16,15.5 17,14.73 17,13.55C17,12.32 15.21,11.43 12,11.43C8.79,11.43 7,12.32 7,13.55M12,7A1,1 0 0,0 11,8A1,1 0 0,0 12,9A1,1 0 0,0 13,8A1,1 0 0,0 12,7Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Detalles de Nómina</h2>
+                <p class="luxury-subtitle">Información completa del pago de nómina</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-        <div class="card shadow-sm rounded-4 mb-4">
-            <div class="card-body">
-                <h5 class="card-title text-primary">Información del Empleado</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Empleado:</strong> @Model.nombre @Model.primer_apellido @Model.segundo_apellido</p>
-                        <p><strong>Cédula:</strong> @Model.cedula</p>
-                        <p><strong>Puesto:</strong> @Model.puesto</p>
-                        <p><strong>Turno:</strong> @Model.turno</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Teléfono:</strong> @Model.telefono</p>
-                        <p><strong>Correo:</strong> @Model.correo</p>
-                        <p><strong>Fecha de Pago:</strong> @Model.FechaDePago</p>
-                        <p><strong>Periodo de Pago:</strong> @Model.PeriodoDePago</p>
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-header luxury-card-header">
+                    <h4 class="mb-0">@Model.nombre @Model.primer_apellido @Model.segundo_apellido</h4>
+                    <span class="luxury-employee-id">ID: @Model.cedula</span>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="luxury-info-group">
+                                <h5 class="luxury-info-title">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" class="me-2">
+                                        <path fill="currentColor" d="M12,3A4,4 0 0,0 8,7A4,4 0 0,0 12,11A4,4 0 0,0 16,7A4,4 0 0,0 12,3M16,13.54C16,14.44 15.71,15.31 15.19,16.08C14.12,17.5 12.68,18.11 12,18.11C11.32,18.11 9.88,17.5 8.81,16.08C8.29,15.31 8,14.44 8,13.54C8,12.86 8.39,12.33 9,12.33H15C15.61,12.33 16,12.86 16,13.54M19,20H5V19C5,16.79 9.67,15.61 12,15.61C14.33,15.61 19,16.79 19,19V20Z" />
+                                    </svg>
+                                    Información Personal
+                                </h5>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Puesto:</span>
+                                    <span class="luxury-info-value">@Model.puesto</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Turno:</span>
+                                    <span class="luxury-info-value">@Model.turno</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Teléfono:</span>
+                                    <span class="luxury-info-value">@Model.telefono</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Correo:</span>
+                                    <span class="luxury-info-value">@Model.correo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="luxury-info-group">
+                                <h5 class="luxury-info-title">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" class="me-2">
+                                        <path fill="currentColor" d="M12,5A7,7 0 0,0 5,12A7,7 0 0,0 12,19A7,7 0 0,0 19,12A7,7 0 0,0 12,5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M13,12H11V6H13V12Z" />
+                                    </svg>
+                                    Periodo de Pago
+                                </h5>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Fecha de Pago:</span>
+                                    <span class="luxury-info-value">@Model.FechaDePago</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Periodo:</span>
+                                    <span class="luxury-info-value">@Model.PeriodoDePago</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Fecha de Inicio:</span>
+                                    <span class="luxury-info-value">@Model.FechaInicio</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card shadow-sm rounded-4 mb-4">
-            <div class="card-body">
-                <h5 class="card-title text-success">Detalle del Salario</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Salario Bruto:</strong> @Model.SalarioBruto</p>
-                        <p><strong>Horas Ordinarias:</strong> @Model.HorasOrdinarias</p>
-                        <p><strong>Horas Extras:</strong> @Model.HorasExtras</p>
-                       
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Salario Neto:</strong> @Model.SalarioNeto</p>
-                      
-                        <p><strong>Días de Vacaciones Disponibles:</strong> @Model.DiasDispoVacaciones</p>
-                        <p><strong>Días Utilizados de Vacaciones:</strong> @Model.DiasUtiliVacaciones</p>
+            <div class="luxury-card shadow-lg rounded mt-4">
+                <div class="card-header luxury-card-header">
+                    <h4 class="mb-0">Detalle del Salario</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="luxury-info-group">
+                                <h5 class="luxury-info-title">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" class="me-2">
+                                        <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.2V15.7C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.8V12.3C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z" />
+                                    </svg>
+                                    Ingresos
+                                </h5>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Salario Bruto:</span>
+                                    <span class="luxury-info-value luxury-amount">@Model.SalarioBruto</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Horas Ordinarias:</span>
+                                    <span class="luxury-info-value">@Model.HorasOrdinarias</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Horas Extras:</span>
+                                    <span class="luxury-info-value">@Model.HorasExtras</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Bonificaciones:</span>
+                                    <span class="luxury-info-value luxury-amount positive">@Model.totalBono</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="luxury-info-group">
+                                <h5 class="luxury-info-title">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" class="me-2">
+                                        <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23M15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5C17,10.3 16.3,11 15.5,11Z" />
+                                    </svg>
+                                    Deducciones y Beneficios
+                                </h5>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Salario Neto:</span>
+                                    <span class="luxury-info-value luxury-amount highlight">@Model.SalarioNeto</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Deducciones:</span>
+                                    <span class="luxury-info-value luxury-amount negative">@Model.totalDedu</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Vacaciones Disponibles:</span>
+                                    <span class="luxury-info-value">@Model.DiasDispoVacaciones días</span>
+                                </div>
+                                <div class="luxury-info-item">
+                                    <span class="luxury-info-label">Vacaciones Utilizadas:</span>
+                                    <span class="luxury-info-value">@Model.DiasUtiliVacaciones días</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card shadow-sm rounded-4 mb-4">
-            <div class="card-body">
-                <h5 class="card-title text-warning">Ajustes y Otros Detalles</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Bonificaciones:</strong> @Model.totalBono</p>
-                        <p><strong>Deducciones:</strong> @Model.totalDedu</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Fecha de Inicio:</strong> @Model.FechaInicio</p>
-                       
-                    </div>
-                </div>
+            <div class="text-center mt-4 mb-4">
+                <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="luxury-button luxury-button-success">
+                    <span class="button-text">Descargar PDF</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
             </div>
-        </div>
 
-        <div class="text-center mb-4">
-            <a href="@Url.Action("DescargarPDFDetalle", new { id = Model.IdNomina })" class="btn btn-outline-success btn-action">
-                <i class="fas fa-download me-2"></i> Descargar PDF
-            </a>
-        </div>
-
-        <div class="text-center">
-            <a href="@Url.Action("Index", "Nominas")" class="btn btn-outline-secondary btn-lg">
-                <i class="fas fa-arrow-left me-2"></i> Volver
-            </a>
+            <div class="text-center">
+                <a href="@Url.Action("Index", "Nominas")" class="luxury-button luxury-button-secondary">
+                    <span class="button-text">Volver al Listado</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -111,5 +200,257 @@
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
-
 </html>
+
+<style>
+    .luxury-nomina-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-card-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .luxury-employee-id {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    .luxury-info-group {
+        margin-bottom: 25px;
+    }
+
+    .luxury-info-title {
+        color: #45C4B0;
+        font-size: 18px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .luxury-info-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        padding: 8px 0;
+        border-bottom: 1px dashed #f0f0f0;
+    }
+
+    .luxury-info-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .luxury-info-value {
+        color: #6c757d;
+        text-align: right;
+    }
+
+    .luxury-amount {
+        font-weight: 600;
+    }
+
+        .luxury-amount.positive {
+            color: #28a745;
+        }
+
+        .luxury-amount.negative {
+            color: #dc3545;
+        }
+
+        .luxury-amount.highlight {
+            color: #007bff;
+            font-size: 18px;
+        }
+
+    .luxury-button {
+        position: relative;
+        width: 100%;
+        max-width: 250px;
+        padding: 16px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .luxury-button-primary {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+    }
+
+    .luxury-button-success {
+        background: linear-gradient(135deg, #28a745 0%, #5cb85c 100%);
+        box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+    }
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 0;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-info-item {
+            flex-direction: column;
+        }
+
+        .luxury-info-label,
+        .luxury-info-value {
+            width: 100%;
+            text-align: left;
+        }
+
+        .luxury-info-value {
+            margin-top: 5px;
+        }
+
+        .luxury-button {
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+</style>
