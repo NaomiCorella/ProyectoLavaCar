@@ -38,7 +38,7 @@ namespace ProyectoLavacar.LN.ModuloEvaluaciones.Detalles
                 comentarios = laEvaluacion.comentarios,
                 calificacion = laEvaluacion.calificacion,
                 recomendaciones = laEvaluacion.recomendaciones,
-                fechaEvaluacion = laEvaluacion.fechaEvaluacion.ToString()
+                fechaEvaluacion = laEvaluacion.fechaEvaluacion.ToString("dd/MM/yyyy")
             };
         }
     }

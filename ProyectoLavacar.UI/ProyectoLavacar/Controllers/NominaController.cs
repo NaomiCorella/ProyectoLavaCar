@@ -364,7 +364,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("MiPerfil");
+                    return RedirectToAction("../Usuario/MiPerfil");
                 }
 
 

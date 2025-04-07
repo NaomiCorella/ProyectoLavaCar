@@ -58,8 +58,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarUnicoEmpleado
                                                              bonoHorasExtra = elUnicoEmpleado.bonoHorasExtra
 
 
-                                                         }).ToList();
-        return lalistaDeUnicoEmpleado;
+                                                         }).Distinct().ToList();
+            return lalistaDeUnicoEmpleado;
     }
 }
 }

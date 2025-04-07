@@ -32,7 +32,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarAjustes
          estado = tramite.estado,
          aseguradora = tramite.aseguradora
      })
-     .ToList();
+     .Distinct().ToList();
 
 
             return lalistaGeneral;

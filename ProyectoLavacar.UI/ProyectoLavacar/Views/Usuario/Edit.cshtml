@@ -23,7 +23,6 @@
 </head>
 
 <body>
-
     <div class="luxury-review-container">
         <div class="container">
             <div class="section-title text-center">
@@ -31,7 +30,6 @@
                     <svg viewBox="0 0 24 24">
                         <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
                     </svg>
- 
                 </div>
                 <h2 class="luxury-title">Editar información</h2>
                 <p class="luxury-subtitle">Actualiza la información </p>
@@ -50,7 +48,7 @@
 
                             <div class="form-group luxury-input-group">
                                 @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "input-label" })
-                                <div class="input-container" >
+                                <div class="input-container">
                                     <span class="input-icon">
                                         <svg viewBox="0 0 24 24">
                                             <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
@@ -414,6 +412,7 @@
             max-width: 100%;
             margin-bottom: 15px;
         }
+
         .luxury-input-group {
             flex-direction: column;
             align-items: flex-start;

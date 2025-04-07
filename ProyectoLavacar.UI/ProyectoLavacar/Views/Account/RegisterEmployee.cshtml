@@ -614,7 +614,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
                             <div class="luxury-input-group">
                                 @Html.LabelFor(model => model.UserName, new { @class = "input-label" })
@@ -630,7 +629,6 @@
                                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "validation-message" })
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <div class="luxury-input-group">
@@ -732,28 +730,32 @@
 
                     <div class="form-group">
                         <div class="luxury-input-group">
-                            @Html.LabelFor(model => model.Estado, new { @class = "input-label" })
-                            <div class="checkbox-container">
-                                @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "luxury-checkbox" } })
-                                <span class="checkbox-label">Activo</span>
-                                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "validation-message" })
+                            @Html.LabelFor(model => model.PhoneNumber, new { @class = "input-label" })
+                            <div class="input-container">
+                                <span class="input-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" />
+                                    </svg>
+                                </span>
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "luxury-input" } })
+                                <span class="input-border"></span>
                             </div>
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "validation-message" })
                         </div>
                     </div>
+                </div>
+         
 
-
-  
-
-                <button type="submit" class="luxury-button">
-                    <span class="button-text">Registrar Empleado</span>
-                    <span class="button-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-                        </svg>
-                    </span>
-                    <div class="button-shine"></div>
-                </button>
-            }
+            <button type="submit" class="luxury-button">
+                <span class="button-text">Registrar Empleado</span>
+                <span class="button-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                    </svg>
+                </span>
+                <div class="button-shine"></div>
+            </button>
+        }
 
             <div class="card-footer">
                 <p class="footer-text">¿Necesitas ayuda? <a href="#" class="footer-link">Contacta al administrador</a></p>

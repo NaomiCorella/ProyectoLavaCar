@@ -320,11 +320,12 @@ namespace ProyectoLavacar.Controllers
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
 
-            ViewBag.turno = new SelectList(new List<object>
-         {
-          new { Value = "Mañana", Text = "Mañana" },
-          new { Value = "Tarde", Text = "Tarde" }
-         }, "Value", "Text");
+            ViewBag.turno = new List<SelectListItem>
+{
+    new SelectListItem { Value = "M", Text = "Mañana" },
+    new SelectListItem { Value = "T", Text = "Tarde" },
+    new SelectListItem { Value = "N", Text = "Noche" }
+};
 
 
             return View();
@@ -374,7 +375,19 @@ namespace ProyectoLavacar.Controllers
                 AddErrors(result);
             }
 
+            ViewBag.turno = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "M", Text = "Mañana" },
+        new SelectListItem { Value = "T", Text = "Tarde" },
+        new SelectListItem { Value = "N", Text = "Noche" }
+    };
 
+
+            ViewBag.Role = new SelectList(new List<object>
+         {
+          new { Value = "Administrador", Text = "Administrador" },
+          new { Value = "Empleado", Text = "Empleado" }
+         }, "Value", "Text");
             return View(model);
         }
 

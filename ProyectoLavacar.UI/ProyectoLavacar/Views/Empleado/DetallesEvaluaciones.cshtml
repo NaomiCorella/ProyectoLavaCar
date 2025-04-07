@@ -5,50 +5,87 @@
 }
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="zxx">
+
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Detalles del Empleado</title>
-    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <title>Detalles de Inventario</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
     <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
     <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Detalles Evaluaciones</h2>
-        </div>
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Detalles de la evaluación </h2>
+                <div class="luxury-divider"></div>
+            </div>
 
-        <div class="table-responsive shadow-lg rounded">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th colspan="2" class="text-center">Información de Evaluación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @*<tr><th>@Html.DisplayNameFor(model => model.idEvaluacion)</th><td>@Html.DisplayFor(model => model.idEvaluacion)</td></tr>
-                    <tr><th>@Html.DisplayNameFor(model => model.idEmpleado)</th><td>@Html.DisplayFor(model => model.idEmpleado)</td></tr>*@
-                    <tr><th>@Html.DisplayNameFor(model => model.fechaEvaluacion)</th><td>@Html.DisplayFor(model => model.fechaEvaluacion)</td></tr>
-                    <tr><th>@Html.DisplayNameFor(model => model.calificacion)</th><td>@Html.DisplayFor(model => model.calificacion)</td></tr>
-                    <tr><th>@Html.DisplayNameFor(model => model.comentarios)</th><td>@Html.DisplayFor(model => model.comentarios)</td></tr>
-                    <tr><th>@Html.DisplayNameFor(model => model.areaMejora)</th><td>@Html.DisplayFor(model => model.areaMejora)</td></tr>
-                    <tr><th>@Html.DisplayNameFor(model => model.recomendaciones)</th><td>@Html.DisplayFor(model => model.recomendaciones)</td></tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    <div class="luxury-details-table">
+                        <div class="luxury-details-header">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H8V21C8 21.6 8.4 22 9 22H15C15.6 22 16 21.6 16 21V18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2M20 16H4V4H20V16M13 13H11V7H13V13M13 17H11V15H13V17Z" />
+                            </svg>
+                            <span>Información de la evaluacíon</span>
+                        </div>
 
-        <div class="text-center mt-4 mb-4">
-            <a href="@Url.Action("Index")" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Volver a la lista
-            </a>
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.fechaEvaluacion)</div>
+                            <div class="luxury-details-value ">@Html.DisplayFor(model => model.fechaEvaluacion)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.calificacion)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.calificacion)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.areaMejora)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.areaMejora)</div>
+                        </div>
+
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.comentarios)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.comentarios)</div>
+                        </div>
+
+
+
+
+
+                        
+                    </div>
+
+                    
+
+                        <a href="@Url.Action("VerEvaluaciones", "Empleado")" class="luxury-button luxury-button-secondary ml-3">
+                            <span class="button-text">Volver al Listado</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                                </svg>
+                            </span>
+                            <div class="button-shine"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -67,3 +104,246 @@
 </body>
 </html>
 
+<style>
+    .luxury-review-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-details-table {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .luxury-details-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        padding: 15px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .luxury-details-header svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .luxury-details-row {
+        display: flex;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+        .luxury-details-row:last-child {
+            border-bottom: none;
+        }
+
+    .luxury-details-label {
+        width: 40%;
+        padding: 15px 20px;
+        font-weight: 600;
+        color: #495057;
+        background-color: #f9f9f9;
+    }
+
+    .luxury-details-value {
+        width: 60%;
+        padding: 15px 20px;
+        color: #6c757d;
+    }
+
+    .luxury-price {
+        font-weight: 700;
+        color: #218838 !important;
+        font-size: 18px;
+    }
+
+    .luxury-button {
+        position: relative;
+        width: 100%;
+        max-width: 250px;
+        padding: 16px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 5px;
+    }
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    .luxury-button-secondary:hover {
+        box-shadow: 0 15px 30px rgba(108, 117, 125, 0.3);
+    }
+
+    .ml-3 {
+        margin-left: 15px;
+    }
+
+    .mt-5 {
+        margin-top: 30px;
+    }
+
+    .badge {
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 20px;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-details-row {
+            flex-direction: column;
+        }
+
+        .luxury-details-label,
+        .luxury-details-value {
+            width: 100%;
+        }
+
+        .luxury-button {
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+</style>

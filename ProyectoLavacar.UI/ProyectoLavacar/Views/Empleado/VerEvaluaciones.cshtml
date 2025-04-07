@@ -19,88 +19,375 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 </head>
 
-<a href="@Url.Action("RegistroDeEvaluaciones", new { id = ViewBag.idEmpleado })" class="btn btn-outline-info btn-sm me-2"
-   title="Detalles Evaluaciones">
-    <i class="fas fa-info-circle"></i> Registrar Evaluacion
-</a>
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Ver Evaluaciones</h2>
+    <div class="luxury-evaluaciones-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Evaluaciones de Desempeño</h2>
+                <p class="luxury-subtitle">Historial y resultados de evaluaciones</p>
+                <div class="luxury-divider"></div>
+            </div>
+
+            <div class="d-flex justify-content-end mb-4">
+                <a href="@Url.Action("RegistroDeEvaluaciones", new { id = ViewBag.idEmpleado })" class="luxury-button luxury-button-primary">
+                    <span class="button-text">Registrar Evaluación</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
+
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table id="myTable" class="table luxury-table">
+                            <thead class="luxury-table-header">
+                                <tr>
+                                    <th>Fecha Evaluación</th>
+                                    <th>Calificación</th>
+                                    <th>Comentarios</th>
+                                    <th>Áreas de Mejora</th>
+                                    <th>Recomendaciones</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.fechaEvaluacion)</td>
+                                        <td>
+                                            <div class="luxury-rating">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= item.calificacion)
+                                                    {
+                                                        <i class="fas fa-star filled"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                }
+                                                <span class="ms-2">(@item.calificacion/5)</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-start">
+                                            @if (item.comentarios.Length > 50)
+                                            {
+                                                @item.comentarios.Substring(0, 50)<text>...</text>
+                                            }
+                                            else
+                                            {
+                                                @item.comentarios
+                                            }
+                                        </td>
+                                        <td class="text-start">
+                                            @if (item.areaMejora.Length > 50)
+                                            {
+                                                @item.areaMejora.Substring(0, 50)<text>...</text>
+                                            }
+                                            else
+                                            {
+                                                @item.areaMejora
+                                            }
+                                        </td>
+                                        <td class="text-start">
+                                            @if (item.recomendaciones.Length > 50)
+                                            {
+                                                @item.recomendaciones.Substring(0, 50)<text>...</text>
+                                            }
+                                            else
+                                            {
+                                                @item.recomendaciones
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })"
+                                               class="luxury-btn-action info"
+                                               title="Ver detalles completos"
+                                               data-bs-toggle="tooltip">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="table-responsive shadow-lg rounded">
-            <table class="table table-bordered table-striped text-center">
-                <thead class="table-dark">
-                    <tr>
-                    <tr>
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.idEvaluacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.idEmpleado)
-                            </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.fechaEvaluacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.calificacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.comentarios)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.areaMejora)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.recomendaciones)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.idEvaluacion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.idEmpleado)
-                                </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fechaEvaluacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.calificacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.comentarios)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.areaMejora)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.recomendaciones)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="btn btn-outline-info btn-sm me-2"
-                                   title="Detalles Evaluaciones">
-                                    <i class="fas fa-info-circle"></i> Detalles Evaluaciones
-                                </a>
-                                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
     </div>
+
+    <style>
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-evaluaciones-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 160, 0, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
+
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+        }
+
+        .luxury-table-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+        .luxury-table thead th {
+            /* background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+                color: white;*/
+            font-weight: 600;
+            padding: 15px;
+            text-align: center;
+            border: none;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+            .luxury-table thead th:first-child {
+                border-top-left-radius: 12px;
+            }
+
+            .luxury-table thead th:last-child {
+                border-top-right-radius: 12px;
+            }
+
+        .luxury-table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .luxury-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .luxury-table tbody tr:hover {
+            background-color: rgba(255, 160, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .luxury-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .luxury-rating .filled {
+                color: #FFA000;
+            }
+
+            .luxury-rating span {
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+
+        .luxury-btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .luxury-btn-action.info {
+                background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            }
+
+            .luxury-btn-action:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                color: white;
+                text-decoration: none;
+            }
+
+        .luxury-button {
+            position: relative;
+            padding: 12px 24px;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .luxury-button-primary {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            box-shadow: 0 10px 20px rgba(255, 160, 0, 0.2);
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        /* Animaciones */
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @@media (max-width: 992px) {
+            .luxury-table thead {
+                display: none;
+            }
+
+            .luxury-table tbody tr {
+                display: block;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+            }
+
+            .luxury-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: right;
+                padding: 10px 15px;
+                position: relative;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+                .luxury-table tbody td:before {
+                    content: attr(data-label);
+                    position: absolute;
+                    left: 15px;
+                    width: 45%;
+                    padding-right: 15px;
+                    font-weight: 600;
+                    text-align: left;
+                    color: #FFA000;
+                }
+
+                .luxury-table tbody td:last-child {
+                    border-bottom: none;
+                    justify-content: center;
+                }
+
+            .luxury-rating {
+                justify-content: flex-end;
+            }
+        }
+    </style>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -114,6 +401,30 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let table = new DataTable('#myTable', {
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                searching: false,  // Elimina la caja de búsqueda
+                language: {
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No se encontraron registros',
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay registros disponibles',
+                    infoFiltered: '(filtrado de _MAX_ registros en total)',
+                    paginate: {
+                        first: 'Primera',
+                        previous: 'Anterior',
+                        next: 'Siguiente',
+                        last: 'Última'
+                    }
+                }
+            });
+        });
 
+    </script>
+</body>
 </html>
