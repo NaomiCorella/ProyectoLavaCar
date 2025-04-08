@@ -31,8 +31,9 @@
                         <path fill="currentColor" d="M12,13A5,5 0 0,1 7,8H9A3,3 0 0,0 12,11A3,3 0 0,0 15,8H17A5,5 0 0,1 12,13M12,3A3,3 0 0,1 15,6H9A3,3 0 0,1 12,3M19,6H17A5,5 0 0,0 12,1A5,5 0 0,0 7,6H5C3.89,6 3,6.89 3,8V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V8C21,6.89 20.1,6 19,6Z" />
                     </svg>
                 </div>
-                <h2 class="luxury-title"
-                    > Movimientos</h2>
+                <h2 class="luxury-title">
+                    Movimientos
+                </h2>
                 <p class="luxury-subtitle">Historial de Movimientos</p>
                 <div class="luxury-divider"></div>
             </div>
@@ -58,7 +59,7 @@
 
                                 </tr>
                             </thead>
-                            <div>
+
                             <tbody>
                                 @foreach (var item in Model)
                                 {
@@ -83,7 +84,7 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.nombre)
                                         </td>
-                                        <td>
+                                        <td style="text-align: center;">
                                             @Html.DisplayFor(modelItem => item.cantidad)
                                         </td>
                                         <td>
@@ -264,7 +265,8 @@
         .luxury-btn-download {
             background-color: rgba(108, 117, 125, 0.1);
             color: #6c757d;
-            /*border: 1px solid rgba(108, 117, 125, 0.2);*/
+            /border: 1px solid rgba(108, 117, 125, 0.2);
+            /
         }
 
             .luxury-btn-download:hover {
@@ -401,12 +403,15 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let table = new DataTable('#myTable', {
                 pageLength: 10,
-                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
-                searching: false,  // Elimina la caja de búsqueda
+                lengthMenu: [5, 10, 25, 50, 100],
+                searching: false,
+                responsive: true,
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontraron registros',
@@ -423,10 +428,6 @@
             });
         });
 
-    </script>
-
-
-    <script>
         // Agregar etiquetas para responsive
         $(document).ready(function () {
             $('.luxury-table-row td').each(function () {
