@@ -1,0 +1,146 @@
+﻿@{
+    var usuariosPorMes = ViewBag.UsuariosPorMes as List<Dictionary<string, object>>;
+    if (usuariosPorMes == null)
+    {
+        usuariosPorMes = new List<Dictionary<string, object>>(); // Evitar valores nulos
+    }
+}
+
+@* Estilos para la vista parcial *@
+<style>
+    /* Estilos para el gráfico */
+    #graficoUsuarios {
+        width: 100% !important; /* Asegura que el gráfico sea responsive */
+        max-width: 800px; /* Máximo de 800px de ancho */
+        height: 400px; /* Alto del gráfico */
+        margin: 0 auto; /* Centra el gráfico */
+        background-color: #f7f7f7; /* Fondo oscuro para el gráfico */
+        border-radius: 8px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado alrededor del gráfico */
+    }
+
+    /* Estilo adicional para el contenedor del gráfico */
+    h2 {
+        text-align: center; /* Centra el título */
+        font-family: Arial, sans-serif; /* Tipo de fuente */
+        font-size: 24px; /* Tamaño del título */
+        color: #000000; /* Color blanco para el título */
+        margin-bottom: 20px; /* Espacio debajo del título */
+    }
+</style>
+<div class="col-lg-6">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header text-white bg-primary text-center fw-bold">
+            Usuarios por Mes
+        </div>
+        <div class="card-body">
+            <canvas id="graficoUsuarios"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   const ctx = document.getElementById('graficoUsuarios').getContext('2d');
+let width, height, gradient;
+
+function getGradient(ctx, chartArea) {
+  const chartWidth = chartArea.right - chartArea.left;
+  const chartHeight = chartArea.bottom - chartArea.top;
+  if (!gradient || width !== chartWidth || height !== chartHeight) {
+    width = chartWidth;
+    height = chartHeight;
+    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+      gradient.addColorStop(0, 'red');
+    gradient.addColorStop(0.5, 'orange');
+      gradient.addColorStop(1, 'blue');
+  }
+  return gradient;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    let meses = @Html.Raw(Json.Encode(usuariosPorMes.Select(m => m["Mes"])));
+    let totales = @Html.Raw(Json.Encode(usuariosPorMes.Select(m => m["TotalUsuarios"])));
+
+    let nombresMeses = meses.map(m => {
+        let [mes, año] = m.split('/');
+        const mesesNombre = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        return mesesNombre[parseInt(mes) - 1];
+    });
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: nombresMeses,
+            datasets: [{
+                label: 'Usuarios por Mes',
+                data: totales,
+                borderColor: function(context) {
+                    const chart = context.chart;
+                    const { ctx, chartArea } = chart;
+                    if (!chartArea) {
+                        return null;
+                    }
+                    return getGradient(ctx, chartArea);
+                },
+                borderWidth: 2,
+                fill: false,
+                tension: 0.4,
+                segment: {
+                    borderColor: (ctx) => skipped(ctx, 'rgb(0,0,0,0.2)') || down(ctx, 'rgb(192,75,75)'),
+                    borderDash: (ctx) => skipped(ctx, [6, 6]),
+                },
+                spanGaps: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#000000'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#000000'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#000000'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                },
+                point: {
+                    radius: 5,
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    hoverRadius: 8,
+                }
+            }
+        }
+    };
+
+    new Chart(ctx, config);
+});
+
+function skipped(ctx, color) {
+    return ctx.p0.skip || ctx.p1.skip ? color : undefined;
+}
+
+function down(ctx, color) {
+    return ctx.p1.y < ctx.p0.y ? color : undefined;
+}
+
+</script>
