@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
 {
-    public class UsuariosDto
+    public class EmpleadoDto
     {
         public string Id { get; set; }
         [Display(Name = "Nombre")]
@@ -21,10 +21,14 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+
+
         [Display(Name = "Numero de Telefono")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Disponibilidad")]
         public bool estado { get; set; } = true;
+        
+        
         [Display(Name = "Cedula")]
         public int cedula { get; set; }
         [Display(Name = "Numero de Cuenta")]

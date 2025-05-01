@@ -411,6 +411,7 @@
     <Content Include="Content\assets\images\logo\download %282%29.jpeg" />
     <Content Include="Content\assets\images\logo\download %283%29.jpeg" />
     <Content Include="Content\assets\images\logo\download %285%29.jpeg" />
+    <Content Include="Content\assets\images\logo\download %287%29-Photoroom.png" />
     <Content Include="Content\assets\images\logo\download %287%29.jpeg" />
     <Content Include="Content\assets\images\logo\download.jpeg" />
     <Content Include="Content\assets\images\logo\downloadd.jpeg" />
@@ -555,9 +556,6 @@
     <Content Include="Views\Inventario\Edit.cshtml" />
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Empleado\DetallesEvaluaciones.cshtml" />
-    <Content Include="Views\Account\changePassword.cshtml" />
-    <Content Include="Views\Account\changePasswordSuccess.cshtml" />
-    <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Inventario\_lista.cshtml" />
     <Content Include="Views\Inventario\_registrarMovimiento.cshtml" />
@@ -588,7 +586,6 @@
     <Content Include="Views\Nomina\ListarTramites.cshtml" />
     <Content Include="Views\Nomina\ListarAjustes.cshtml" />
     <Content Include="Views\Nomina\AceptarVacacion.cshtml" />
-    <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Nomina\ProcesarNomina.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Usuario\MiPerfil.cshtml" />
@@ -605,14 +602,16 @@
     <Content Include="Views\Reporte\_MargenVentas.cshtml" />
     <Content Include="Views\Reporte\_ServiciosPorMes.cshtml" />
     <Content Include="Views\Reporte\_GraficoVentas.cshtml" />
-    <Content Include="Views\ReporteEmp\_TotalVentasEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_listar.cshtml" />
     <Content Include="Views\ReporteEmp\Index.cshtml" />
-    <Content Include="Views\ReporteEmp\_MargenVentasEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_ResumenVentasEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_PromedioCalificacionEmpleado.cshtml" />
-    <Content Include="Views\ReporteEmp\_ResumenEmpleado.cshtml" />
     <Content Include="Views\ReporteEmp\_GraficoVentasEmpleado.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Account\changePassword.cshtml" />
+    <Content Include="Views\Account\changePasswordSuccess.cshtml" />
+    <Content Include="Views\Servicios\GestionServicios.cshtml" />
+    <Content Include="Views\Servicios\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

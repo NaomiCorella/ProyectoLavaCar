@@ -9,7 +9,7 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.ModuloUsuarios.BuscarPorId
 {
     public interface IBuscarAsyncLN
     {
-        Task<UsuariosDto> DetalleAsync(string idCliente);
+        Task<EmpleadoDto> DetalleAsync(string idCliente);
 
 
     }

@@ -20,16 +20,16 @@ namespace ProyectoLavacar.LN.ModuloUsuarios.BuscarPorId
         }
 
         // Método asincrónico
-        public async Task<UsuariosDto> DetalleAsync(string idCliente)
+        public async Task<EmpleadoDto> DetalleAsync(string idCliente)
         {
             UsuariosTabla clientesEnBaseDeDatos = await _obtenerPorIdAD.DetalleAsync(idCliente);
-            UsuariosDto elClienetAMostrar = ConvertirAPersonaAMostrar(clientesEnBaseDeDatos);
+            EmpleadoDto elClienetAMostrar = ConvertirAPersonaAMostrar(clientesEnBaseDeDatos);
             return elClienetAMostrar;
         }
 
-        private UsuariosDto ConvertirAPersonaAMostrar(UsuariosTabla elCliente)
+        private EmpleadoDto ConvertirAPersonaAMostrar(UsuariosTabla elCliente)
         {
-            return new UsuariosDto
+            return new EmpleadoDto
             {
                 nombre = elCliente.nombre,
                 primer_apellido = elCliente.primer_apellido,

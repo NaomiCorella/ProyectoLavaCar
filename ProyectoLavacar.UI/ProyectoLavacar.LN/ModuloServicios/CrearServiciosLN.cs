@@ -42,7 +42,7 @@ namespace ProyectoLavacar.LN.ModuloServicios
                 nombre = elServicio.nombre,
                 descripcion = elServicio.descripcion,
                 tiempoDuracion = elServicio.tiempoDuracion,
-                estado = elServicio.estado,
+                estado = true,
                 modalidad = elServicio.modalidad,
                 precio = elServicio.precio
             };

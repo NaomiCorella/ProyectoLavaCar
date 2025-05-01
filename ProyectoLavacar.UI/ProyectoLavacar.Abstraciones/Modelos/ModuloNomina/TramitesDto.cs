@@ -10,9 +10,9 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloNomina
     public class TramitesDto
     {
         public int IdTramite { get; set; }
-
+        [Display(Name = "Fecha de inicio")]
         public DateTime FechaInicio { get; set; }
-
+        [Display(Name = "Duración")]
         public int duracion { get; set; }
 
         [Display(Name = "Tipo")]

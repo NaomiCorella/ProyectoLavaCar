@@ -61,12 +61,13 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Empleado
+        //[Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             ViewBag.Title = "La Listas de Empleados";
-            List<UsuariosDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
+            List<EmpleadoDto> laListaDeFinanzas = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList(); 
             var listaNomina = _listarNomina.ListarNomina();
-           foreach (UsuariosDto usuario in laListaDeFinanzas)
+           foreach (EmpleadoDto usuario in laListaDeFinanzas)
             {
                 foreach(var nomina in listaNomina)
                 {
@@ -82,13 +83,15 @@ namespace ProyectoLavacar.Controllers
             }
             return View(laListaDeFinanzas);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult VerEvaluaciones(string id)
         {
             ViewBag.Title = "Lista De Evaluaciones";
+            ViewBag.idEmpleado = id;
             List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(id);
             return View(laListaDeFinanzas);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult MisEvaluaciones(string id)
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -97,24 +100,26 @@ namespace ProyectoLavacar.Controllers
             List<EvaluacionesDto> laListaDeFinanzas = _listarEvaluaciones.ListarEvaluaciones(idEmpleado);
             return View(laListaDeFinanzas);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult DetallesEvaluaciones(int id)
         {
             EvaluacionesDto Finanzas = _detallesEvaluaciones.Detalle(id);
             return View(Finanzas);
         }
 
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Empleado/Details/5
         public ActionResult Details(string id)
         {
-            UsuariosDto Finanzas = _buscarPorId.Detalle(id);
+            EmpleadoDto Finanzas = _buscarPorId.Detalle(id);
             return View(Finanzas);
         }
 
         // GET: Empleado/Create
-        public ActionResult RegistroDeEvaluaciones()
+        [Authorize(Roles = "Administrador, Empleado")]
+        public ActionResult RegistroDeEvaluaciones(string id)
         {
+            ViewBag.idEmpleado = id;
             return View();
         }
 
@@ -124,6 +129,18 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+              
+                EvaluacionesDto evaluacion = new EvaluacionesDto()
+                {
+                    areaMejora = modelo.areaMejora,
+                    calificacion = modelo.calificacion,
+                    comentarios = modelo.comentarios,
+                    fechaEvaluacion = DateTime.Now.ToString(),
+                    idEmpleado = modelo.idEmpleado,
+                    idEvaluacion = modelo.idEvaluacion,
+                    recomendaciones = modelo.recomendaciones
+
+                };
                 int cantidadDeDatosGuardados = await _crearEvaluacionLN.Crear(modelo);
 
                 return RedirectToAction("VerEvaluaciones");
@@ -136,39 +153,21 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Empleado/Create
-        [HttpPost]
-        public async Task<ActionResult> Create(UsuariosDto modeloDeEmpleado)
-        {
-            try
-            {
-
-                return RedirectToAction("Index");
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
 
 
         // GET: Empleado/Edit/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Edit(string id)
         {
-            UsuariosDto laFinanza = _buscarPorId.Detalle(id);
+            EmpleadoDto laFinanza = _buscarPorId.Detalle(id);
 
             return View(laFinanza);
         }
 
         // POST: Empleado/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(UsuariosDto elEmpleado)
+        public async Task<ActionResult> Edit(EmpleadoDto elEmpleado)
         {
             try
             {
@@ -212,7 +211,7 @@ namespace ProyectoLavacar.Controllers
                 var Usuario = _context.UsuariosTabla.Find(id);
                 Usuario.estado = !Usuario.estado;
                 _context.SaveChanges();
-                UsuariosDto userEliminado = new UsuariosDto
+                EmpleadoDto userEliminado = new EmpleadoDto
                 {
                     Id = Usuario.Id,
                     nombre = Usuario.nombre,

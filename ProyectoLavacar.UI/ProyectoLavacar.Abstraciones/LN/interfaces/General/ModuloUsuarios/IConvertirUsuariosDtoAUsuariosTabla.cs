@@ -10,6 +10,6 @@ namespace ProyectoLavacar.Abstraciones.LN.interfaces.General.ModuloUsuarios
 {
     public interface IConvertirUsuariosDtoAUsuariosTabla
     {
-        UsuariosTabla ConvertirCliente(UsuariosDto elCliente);
+        UsuariosTabla ConvertirCliente(EmpleadoDto elCliente);
     }
 }

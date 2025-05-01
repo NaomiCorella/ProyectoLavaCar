@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.UsuariosDto>
+﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios.EmpleadoDto>
 
 @{
     ViewBag.Title = "Administración de Empleados";
@@ -77,6 +77,8 @@
                                         <i class="fas fa-edit"></i> Ver Evaluaciones
                                     </a>
 
+                             
+
                                     @if (item.estado)
                                     {
                                         <a href="@Url.Action("CambiarEstado", new { id = item.Id })" class="btn btn-sm btn-outline-warning">
@@ -93,10 +95,11 @@
                                     {
                                         @Html.ActionLink("RegistroDeNomina", "Create", "Nomina", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
 
-                                     }else
-                                       {
+                                    }
+                                    else
+                                    {
                                         <p>Nomina del empleado ya registrada</p>
-                                       }
+                                    }
 
 
                                 </div>

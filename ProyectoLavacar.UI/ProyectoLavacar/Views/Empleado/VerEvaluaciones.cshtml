@@ -21,9 +21,10 @@
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
 </head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<a href="@Url.Action("RegistroDeEvaluaciones", new { id = ViewBag.idEmpleado })" class="btn btn-outline-info btn-sm me-2"
+   title="Detalles Evaluaciones">
+    <i class="fas fa-info-circle"></i> Registrar Evaluacion
+</a>
 <body>
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">

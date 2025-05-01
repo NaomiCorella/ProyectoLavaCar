@@ -2,6 +2,7 @@
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.Listar;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloServicios.ObtenerPorId;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloServicios;
 using ProyectoLavacar.LN.ModuloServicios.ListarServicios;
 using ProyectoLavacar.LN.ModuloServicios.ObtenerPorId;
@@ -19,11 +20,13 @@ namespace ProyectoLavacar.Controllers
         IListarServiciosLN _listarServicios;
         IDetalleServiciosLN _detallesServicios;
         ICrearServiciosLN _crearServicios;
+        Contexto _context;
         public ServiciosController()
         {
             _listarServicios = new ListarServiciosLN();
             _detallesServicios = new DetalleServiciosLN();
             _crearServicios = new CrearServiciosLN();
+            _context = new Contexto();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
         {
@@ -57,14 +60,24 @@ namespace ProyectoLavacar.Controllers
             return View("Index", servicios.ToList());
         }
         // GET: Servicios
+
         public ActionResult Index()
         {
            
             List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
             return View(lalistaDeReservas);
         }
+        [Authorize(Roles = "Administrador")]
+
+        public ActionResult GestionServicios()
+        {
+
+            List<ServiciosDto> lalistaDeReservas = _listarServicios.ListarServicios();
+            return View(lalistaDeReservas);
+        }
 
         // GET: Servicios/Details/5
+
         public ActionResult Details(int id)
         {
             ServiciosDto servicio = _detallesServicios.Detalle(id);
@@ -74,6 +87,8 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Servicios/Create
+        [Authorize(Roles = "Administrador")]
+
         public ActionResult Create()
         {
             return View();
@@ -85,6 +100,16 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
+                List<ServiciosDto> servicio = _listarServicios.ListarServicios().Where(a => a.estado == true)
+                    .ToList(); ;
+                foreach (var item in servicio)
+                {
+                    if (item.nombre == elservicio.nombre )
+                    {
+                        ModelState.AddModelError("nombre", "El servicio ya existe.");
+                        return View(elservicio);
+                    }
+                }
                 int cantidadDeDatosGuardados = await _crearServicios.Crear(elservicio);
 
                 return RedirectToAction("Index");
@@ -95,47 +120,23 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-        // GET: Servicios/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Servicios/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+
+        public ActionResult CambiarEstado(int id)
         {
+
             try
             {
-                // TODO: Add update logic here
+                var resenia = _context.ServiciosTabla.Find(id);
+                resenia.estado = !resenia.estado;
+                _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
-            }
-        }
 
-        // GET: Servicios/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Servicios/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
     }

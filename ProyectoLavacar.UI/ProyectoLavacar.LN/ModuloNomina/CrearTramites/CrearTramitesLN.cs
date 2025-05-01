@@ -226,11 +226,9 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
             NominaDto nomina = _obtenerNomina.Detalle(elTramites.IdNomina);
             int duracion = elTramites.duracion;
             decimal salarioNeto = (decimal)nomina.SalarioBruto;
-            decimal salarioMinimo = 250430m; 
             decimal deduccion = 0;
             decimal rentaMensual = 0;
             decimal pagoTotal = 0;
-            decimal limiteRegimen = 200000000m;
             switch (elTramites.Razon)
             {
                 case "Temporal":
@@ -245,26 +243,14 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 case "Menor Permanente":
 
                      rentaMensual = salarioNeto * 0.6m;
-                     pagoTotal = rentaMensual * 60;
                      deduccion = pagoTotal * 0.40m;
                     return deduccion;
                 case "ParcialPermanente":
                      rentaMensual = salarioNeto * 0.6m;
 
-                 
                     decimal adelantoAnual = rentaMensual * 12;
-
-         
-                    decimal decimoTercerMes = rentaMensual;
-
-
-                    decimal ajusteAnual = 1.05m;
-
-          
-                 
-                    decimal totalPagos = adelantoAnual + decimoTercerMes ;
-
-                    decimal deduccionPatrono = totalPagos * 0.4m;
+              
+                    decimal deduccionPatrono = adelantoAnual * 0.4m;
 
                     return deduccionPatrono;
                 case "TotalPermanente":
@@ -277,21 +263,14 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                     decimal plusRenta = salarioNeto * 0.1m; 
                     rentaMensual = salarioNeto * 0.6m + plusRenta;
 
-                    decimal adelantoRenta = rentaMensual * 24;
-
-                   
-                    decimal seguroEnfermedad = 100000m;
+                 
+                    decimal seguroEnfermedad = 45000m;
 
                     
                     decimal decimoTercerMesRenta = rentaMensual;
 
                  
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        rentaMensual *= 1.05m; 
-                    }
-
-                    deduccion =   adelantoRenta + seguroEnfermedad + decimoTercerMesRenta + (rentaMensual * 60);
+                    deduccion =   seguroEnfermedad + decimoTercerMesRenta + rentaMensual ;
                      decimal deduccionT = deduccion * 0.4m;
                     return deduccionT;
                 default:
@@ -310,7 +289,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.CrearTramites
                 IdAjusteSalarial= 0,
                 IdNomina=elTramites.IdNomina,
                 Monto=cantidad,
-                Razon="Ingreso de incapacidad",
+                Razon="Ingreso de incapacidad:"+" "+elTramites.Razon,
                 tipo="Bonificacion"
            
             };

@@ -11,6 +11,6 @@ namespace ProyectoLavacar.Abstraciones.AccesoADatos.Interfaces.ModuloEmpleados.L
 {
     public interface IListarEmpleadoAD
     {
-        List<UsuariosDto> ListarEmpleado();
+        List<EmpleadoDto> ListarEmpleado();
     }
 }

@@ -1,57 +1,321 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraAdminDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administración de Compras";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="zxx">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimerApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-       
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Compras</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-        <th></th>
-    </tr>
+<body>
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Administración de Compras</h2>
+                <p class="luxury-subtitle">Listado completo de transacciones</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimerApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-     
+            <div class="text-end mb-4">
+                <a href="@Url.Action("Create")" class="luxury-button">
+                    <span class="button-text">Nueva Compra</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Detalles", "DetallesCompra", new { idCompra = item.idCompra }) |
-            <a href="@Url.Action("DescargarPDFCompra", new { idCompra =item.idCompra })" class="btn btn-outline-info ml-2">
-                <i class="fas fa-times me-2"></i> DescargarPDF
-            </a>
-        </td>
-    </tr>
-}
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="luxury-table">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PrimerApellido)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Total)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PrimerApellido)</td>
+                                        <td class="luxury-price">@Html.DisplayFor(modelItem => item.Total)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                        <td class="luxury-actions">
+                                            <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="luxury-button luxury-button-small luxury-button-info">
+                                                <span class="button-icon">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("DescargarPDFCompra", new { idCompra = item.idCompra })" class="luxury-button luxury-button-small luxury-button-secondary">
+                                                <span class="button-icon">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                                        <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</table>
+    <script src="~/Scripts/Resenias/indexAdmin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>
+
+<style>
+    .luxury-review-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .luxury-table th {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 3px solid #3aa58e;
+        }
+
+        .luxury-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #6c757d;
+        }
+
+        .luxury-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+    .luxury-price {
+        font-weight: 700;
+        color: #218838 !important;
+    }
+
+    .luxury-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .luxury-button {
+        position: relative;
+        padding: 12px 20px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .luxury-button-small {
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .luxury-button-info {
+        background: linear-gradient(135deg, #17a2b8 0%, #6ad1e3 100%);
+        box-shadow: 0 10px 20px rgba(23, 162, 184, 0.2);
+    }
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 20px;
+        }
+
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style>

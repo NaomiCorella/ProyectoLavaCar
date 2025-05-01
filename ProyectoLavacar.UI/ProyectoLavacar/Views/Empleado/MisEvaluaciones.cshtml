@@ -29,96 +29,876 @@
 </p>
 
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Ver Evaluaciones</h2>
-        </div>
+    <div class="luxury-review-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Mis Evaluaciones</h2>
+                <p class="luxury-subtitle">Administra y revisa tus evaluaciones</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-        <div class="table-responsive shadow-lg rounded">
-            <table class="table table-bordered table-striped text-center">
-                <thead class="table-dark">
-                    <tr>
-                    <tr>
-                        @*<th>
+            
+
+                <div>
+                    <div class="luxury-table-responsive">
+                        <div>
+                            <table id="myTable" class="luxury-table">
+                                <thead class="luxury-table-header" style="text-align: center">
+                                    <tr>
+                                    <tr>
+                                        @*<th>
                                 @Html.DisplayNameFor(model => model.idEvaluacion)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.idEmpleado)
                             </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.fechaEvaluacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.calificacion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.comentarios)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.areaMejora)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.recomendaciones)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idEvaluacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idEmpleado)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fechaEvaluacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.calificacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.comentarios)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.areaMejora)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.recomendaciones)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="btn btn-outline-info btn-sm me-2"
-                                   title="Detalles Evaluaciones">
-                                    <i class="fas fa-info-circle"></i> Detalles Evaluaciones
-                                </a>
-
-                                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-    </div>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.fechaEvaluacion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.calificacion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.comentarios)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.areaMejora)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.recomendaciones)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="luxury-table-row">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.idEvaluacion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.idEmpleado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.fechaEvaluacion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.calificacion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.comentarios)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.areaMejora)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.recomendaciones)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="luxury-btn luxury-btn-info" title="Detalles">
+                                                    <svg viewBox="0 0 24 24">
+                                                        <path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                                    </svg>
+                                                </a>
 
 
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        
+               
+
+
+                <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+                <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+                <script src="~/Content/assets/js/bootstrap.min.js"></script>
+                <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+                <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+                <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+                <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+                <script src="~/Content/assets/js/main.js"></script>
+                <script src="~/Content/assets/js/popper.min.js"></script>
+                <script src="~/Content/assets/js/slick.min.js"></script>
+                <script src="~/Content/assets/js/waypoints.min.js"></script>
+                <script src="~/Content/assets/js/wow.min.js"></script>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        let table = new DataTable('#myTable', {
+                            pageLength: 10,
+                            lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                            searching: false,  // Elimina la caja de búsqueda
+                            language: {
+                                lengthMenu: 'Mostrar _MENU_ registros por página',
+                                zeroRecords: 'No se encontraron registros',
+                                info: 'Mostrando página _PAGE_ de _PAGES_',
+                                infoEmpty: 'No hay registros disponibles',
+                                infoFiltered: '(filtrado de _MAX_ registros en total)',
+                                paginate: {
+                                    first: 'Primera',
+                                    previous: 'Anterior',
+                                    next: 'Siguiente',
+                                    last: 'Última'
+                                }
+                            }
+                        });
+                    });
+
+                </script>
+
+                <script>
+                    // Agregar etiquetas para responsive
+                    $(document).ready(function () {
+                        $('.luxury-table-row td').each(function () {
+                            var header = $(this).parent().find('th').eq($(this).index()).text();
+                            $(this).attr('data-label', header);
+                        });
+                    });
+                </script>
 </body>
 
 </html>
 
+<style>
+    .small-button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+        .small-button .luxury-button-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .small-button .luxury-button-text {
+            font-size: 12px;
+        }
+
+
+    /* Bordes ovalados arriba del thead */
+    .luxury-table thead th:first-child {
+        border-top-left-radius: 12px;
+    }
+
+    .luxury-table thead th:last-child {
+        border-top-right-radius: 12px;
+    }
+
+    /* Estilos base del contenedor */
+    .luxury-review-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .luxury-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        min-width: 180px; /* Ancho mínimo para evitar compresión */
+    }
+
+    .luxury-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        flex-shrink: 0; /* Evita que los botones se encojan */
+    }
+
+        .luxury-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+    /* Estilos específicos para cada tipo de botón */
+    .luxury-btn-edit {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #007bff;
+    }
+
+    .luxury-btn-info {
+        background-color: rgba(23, 162, 184, 0.1);
+        color: #17a2b8;
+    }
+
+    .luxury-btn-warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+
+    .luxury-btn-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+
+    /* Efectos hover */
+    .luxury-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .luxury-btn-edit:hover {
+        background-color: rgba(0, 123, 255, 0.2);
+    }
+
+    .luxury-btn-info:hover {
+        background-color: rgba(23, 162, 184, 0.2);
+    }
+
+    .luxury-btn-warning:hover {
+        background-color: rgba(255, 193, 7, 0.2);
+    }
+
+    .luxury-btn-success:hover {
+        background-color: rgba(40, 167, 69, 0.2);
+    }
+
+    /* Estilos para el filtro */
+    .luxury-table-filter-container {
+        padding: 15px 20px;
+        background-color: white;
+    }
+
+    .luxury-filter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .luxury-filter-input-group {
+        position: relative;
+    }
+
+    .luxury-filter-label {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #45C4B0;
+    }
+
+    .luxury-input-icon {
+        width: 18px;
+        height: 18px;
+        transition: all 0.3s ease;
+    }
+
+    .luxury-filter-input {
+        width: 100%;
+        padding: 10px 12px 10px 40px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+        color: #495057;
+    }
+
+        .luxury-filter-input:focus {
+            border-color: #45C4B0;
+            box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+            outline: none;
+        }
+
+    .luxury-filter-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        height: 100px; /* Asegura que no tenga altura fija */
+        width: 100px; /* Permite que el ancho se ajuste al contenido */
+        min-width: 120px; /* Ancho mínimo razonable */
+        box-shadow: 0 4px 8px rgba(69, 196, 176, 0.2);
+    }
+    /* Alineación visual del botón con los inputs */
+    .luxury-filter-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    /* Para ocultar el título del botón pero mantener el espacio */
+    .invisible-title {
+        visibility: hidden;
+        height: 1em;
+    }
+
+    /* Ajuste del botón pequeño si quieres */
+    .small-button {
+        padding: 6px 12px;
+        font-size: 13px;
+        min-width: auto;
+        height: 38px; /* Que coincida con tus inputs */
+    }
+
+        .small-button .luxury-button-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+
+    .luxury-filter-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(69, 196, 176, 0.2);
+    }
+
+
+    .luxury-button-text {
+        font-size: 14px;
+    }
+
+    .luxury-filter-button.small-button {
+        padding: 4px 8px !important;
+        font-size: 12px !important;
+        min-width: unset !important;
+        width: auto !important;
+        height: 36px !important;
+        line-height: 1 !important;
+    }
+
+    /* Opcional: más pequeño el ícono también */
+    .luxury-button-icon {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+
+
+    /* Separador visual mejorado */
+    .luxury-filter-separator {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(69, 196, 176, 0.1), rgba(69, 196, 176, 0.3), rgba(69, 196, 176, 0.1));
+        margin: 0 20px 15px;
+    }
+
+    /* Estilos para la tabla */
+    .luxury-table-responsive {
+        overflow-x: auto;
+        border-radius: 12px;
+    }
+
+    .luxury-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    .luxury-table-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+    }
+
+        .luxury-table-header th {
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .luxury-table-row {
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.3s ease;
+    }
+
+        .luxury-table-row:hover {
+            background-color: rgba(69, 196, 176, 0.05);
+        }
+
+        .luxury-table-row td {
+            padding: 16px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /* Estilos para badges */
+    .luxury-badge {
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+        color: black;
+    }
+
+    /*   .luxury-badge-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+
+    .luxury-badge-danger {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+    }
+
+    .luxury-badge-warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }*/
+
+    /* Estilos para botones de acción */
+    .luxury-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .luxury-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+        .luxury-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+    .luxury-btn-edit {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #007bff;
+    }
+
+        .luxury-btn-edit:hover {
+            background-color: rgba(0, 123, 255, 0.2);
+        }
+
+    .luxury-btn-info {
+        background-color: rgba(23, 162, 184, 0.1);
+        color: #17a2b8;
+    }
+
+        .luxury-btn-info:hover {
+            background-color: rgba(23, 162, 184, 0.2);
+        }
+
+    .luxury-btn-warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+
+        .luxury-btn-warning:hover {
+            background-color: rgba(255, 193, 7, 0.2);
+        }
+
+    .luxury-btn-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+
+        .luxury-btn-success:hover {
+            background-color: rgba(40, 167, 69, 0.2);
+        }
+
+    /* Estilos para rating */
+    .rating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .star-filled {
+        color: #FFC107;
+    }
+
+    .star-empty {
+        color: #E0E0E0;
+    }
+
+    /* Animaciones */
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .luxury-table-row {
+        animation: fadeIn 0.4s ease forwards;
+    }
+
+        .luxury-table-row:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .luxury-filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        align-items: center;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-filter-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .luxury-filter-button {
+            grid-column: span 2;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .luxury-filter-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .luxury-filter-button {
+            grid-column: span 1;
+        }
+    }
+
+    /* Responsive avanzado para el filtro */
+    @@media (max-width: 768px) {
+        .luxury-filter-button {
+            padding: 8px 12px;
+            min-width: 100px;
+            font-size: 13px;
+        }
+
+        .luxury-button-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .luxury-filter-button {
+            padding: 6px 10px;
+            min-width: auto;
+            gap: 6px;
+        }
+
+        .luxury-button-text {
+            font-size: 12px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-card {
+            padding: 20px;
+        }
+
+        .luxury-filter-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .luxury-filter-button {
+            grid-column: span 1;
+            padding: 8px 12px;
+        }
+
+        .luxury-button-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .luxury-button-text {
+            font-size: 13px;
+        }
+
+        .luxury-filter-input {
+            padding: 8px 10px 8px 38px;
+            font-size: 13px;
+        }
+
+        .luxury-input-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .luxury-table-header th {
+            padding: 14px 8px;
+            font-size: 13px;
+        }
+
+        .luxury-table-row td {
+            padding: 12px 8px;
+            font-size: 14px;
+        }
+
+        .luxury-badge {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .luxury-actions {
+            gap: 6px;
+        }
+
+        .luxury-btn {
+            width: 32px;
+            height: 32px;
+        }
+
+            .luxury-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+    }
+
+    @@media (max-width: 576px) {
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-table-header {
+            display: none;
+        }
+
+        .luxury-table-row {
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+            .luxury-table-row td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+                .luxury-table-row td:before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    color: #45C4B0;
+                    margin-right: 15px;
+                }
+
+                .luxury-table-row td:last-child {
+                    border-bottom: none;
+                }
+
+        .luxury-actions {
+            justify-content: flex-end;
+        }
+
+        .luxury-button {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .luxury-button-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .luxury-table-filter-container {
+            padding: 12px 15px;
+        }
+
+        .luxury-filter-button {
+            padding: 7px 10px;
+        }
+
+        .luxury-button-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .luxury-button-text {
+            font-size: 12px;
+        }
+
+        .luxury-filter-input {
+            padding: 7px 8px 7px 36px;
+        }
+
+        .luxury-filter-label {
+            left: 10px;
+        }
+    }
+
+    @@media (max-width: 400px) {
+        .luxury-button-text {
+            display: none;
+        }
+
+        .luxury-button {
+            padding: 8px;
+            width: 40px;
+            justify-content: center;
+        }
+
+        .luxury-button-icon {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .luxury-filter-button .luxury-button-text {
+            display: none;
+        }
+
+        .luxury-filter-button {
+            padding: 8px;
+            width: 36px;
+            justify-content: center;
+        }
+
+        .luxury-button-icon {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-actions {
+                gap: 6px;
+                min-width: auto;
+            }
+
+            .luxury-btn {
+                width: 32px;
+                height: 32px;
+            }
+
+                .luxury-btn svg {
+                    width: 16px;
+                    height: 16px;
+                }
+        }
+
+        @@media (max-width: 576px) {
+            .luxury-actions {
+                justify-content: flex-end;
+                gap: 4px;
+            }
+
+            .luxury-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+                .luxury-btn svg {
+                    width: 14px;
+                    height: 14px;
+                }
+        }
+    }
+</style>

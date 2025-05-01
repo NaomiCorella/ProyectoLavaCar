@@ -31,6 +31,14 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloCompra
         public string Fecha { get; set; }
         [Display(Name = "Descripción")]
         public string DescripcionServicio { get; set; }
+        public string idEmpleado { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string NombreEmp { get; set; }
+
+        [Display(Name = "Primer Apellido")]
+        public string PrimerApellidoEmp { get; set; }
+
 
 
     }

@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloNomina.UnicoEmpleadoDto>
 
 @{
-    ViewBag.Title = "Nomina";
+    ViewBag.Title = "Historial de Nóminas";
 }
 
-
-<h2>Reservas</h2>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Empleados</title>
+    <title>Historial de Nóminas</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -25,92 +23,73 @@
 </head>
 
 <body>
+    <div class="luxury-nomina-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M7,13.55C7,14.73 8,15.5 9.27,16.38C10.29,17.07 11.45,17.47 12,17.5C12.55,17.47 13.71,17.07 14.73,16.38C16,15.5 17,14.73 17,13.55C17,12.32 15.21,11.43 12,11.43C8.79,11.43 7,12.32 7,13.55M12,7A1,1 0 0,0 11,8A1,1 0 0,0 12,9A1,1 0 0,0 13,8A1,1 0 0,0 12,7Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Historial de Nóminas</h2>
+                <p class="luxury-subtitle">Listado completo de pagos realizados</p>
+                <div class="luxury-divider"></div>
+            </div>
 
-
-    <div class="table-responsive shadow-lg rounded">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-                    
-                    <th>
-                        @Html.DisplayNameFor(model => model.SalarioNeto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SalarioBruto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaDePago)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PeriodoDePago)
-                    </th>
-                   
-                    <th>
-                        @Html.DisplayNameFor(model => model.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.primer_apellido)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.segundo_apellido)
-                    </th>
-                   
-                    <th>
-                        @Html.DisplayNameFor(model => model.correo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.cedula)
-                    </th>
-                   
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+            <div class="row">
                 @foreach (var item in Model)
                 {
-                    <tr>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalarioNeto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SalarioBruto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaDePago)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PeriodoDePago)
-                        </td>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.primer_apellido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.segundo_apellido)
-                        </td>
-                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.correo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.cedula)
-                        </td>
-                       
-                        <td>
-                            @Html.ActionLink("Gestiones", "ProcesosYGestiones", new { idNomina = item.IdNomina })
-                            @Html.ActionLink("Details", "Details", new { id = item.IdNomina }) |
-
-                        </td>
-                    </tr>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="luxury-card shadow-lg rounded h-100">
+                            <div class="luxury-card-header">
+                                <h5 class="mb-0">@item.nombre @item.primer_apellido</h5>
+                                <span class="luxury-employee-id">@item.cedula</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="luxury-info-group">
+                                    <div class="luxury-info-item">
+                                        <span class="luxury-info-label">Salario Neto:</span>
+                                        <span class="luxury-info-value luxury-amount highlight">@item.SalarioNeto</span>
+                                    </div>
+                                    <div class="luxury-info-item">
+                                        <span class="luxury-info-label">Periodo:</span>
+                                        <span class="luxury-info-value">@item.PeriodoDePago</span>
+                                    </div>
+                                    <div class="luxury-info-item">
+                                        <span class="luxury-info-label">Fecha de Pago:</span>
+                                        <span class="luxury-info-value">@item.FechaDePago</span>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="@Url.Action("Details", new { id = item.IdNomina })" class="luxury-button luxury-button-primary">
+                                        <span class="button-text">Ver Detalles</span>
+                                        <span class="button-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                            </svg>
+                                        </span>
+                                        <div class="button-shine"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
-            </tbody>
-        </table>
-    </div>
+            </div>
 
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "Nominas")" class="luxury-button luxury-button-secondary">
+                    <span class="button-text">Volver al Listado</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -125,5 +104,234 @@
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
 </body>
-
 </html>
+
+<style>
+    .luxury-nomina-container {
+        padding: 40px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .luxury-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        border-radius: 50%;
+        color: white;
+        box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+    }
+
+        .luxury-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+    .luxury-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #012030;
+        margin-bottom: 15px;
+    }
+
+    .luxury-subtitle {
+        color: #6c757d;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .luxury-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+        margin: 20px auto;
+        border-radius: 3px;
+    }
+
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .luxury-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+    .luxury-card-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .luxury-employee-id {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .luxury-info-group {
+        margin-bottom: 15px;
+    }
+
+    .luxury-info-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 8px 0;
+        border-bottom: 1px dashed #f0f0f0;
+    }
+
+    .luxury-info-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .luxury-info-value {
+        color: #6c757d;
+        text-align: right;
+    }
+
+    .luxury-amount {
+        font-weight: 600;
+    }
+
+        .luxury-amount.highlight {
+            color: #007bff;
+            font-size: 16px;
+        }
+
+    .luxury-button {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+        padding: 12px;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        margin: 0 auto;
+    }
+
+    .luxury-button-primary {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        box-shadow: 0 8px 16px rgba(69, 196, 176, 0.2);
+    }
+
+    .luxury-button-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+        box-shadow: 0 8px 16px rgba(108, 117, 125, 0.2);
+    }
+
+    .button-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-icon {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+        .button-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+    .button-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .luxury-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+        .luxury-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .luxury-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+
+    /* Animaciones */
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .luxury-icon {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@media (max-width: 768px) {
+        .luxury-title {
+            font-size: 28px;
+        }
+
+        .luxury-subtitle {
+            font-size: 16px;
+        }
+
+        .luxury-info-item {
+            flex-direction: column;
+        }
+
+        .luxury-info-label,
+        .luxury-info-value {
+            width: 100%;
+            text-align: left;
+        }
+
+        .luxury-info-value {
+            margin-top: 5px;
+        }
+
+        .luxury-button {
+            max-width: 100%;
+        }
+    }
+</style>

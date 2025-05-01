@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -29,6 +30,7 @@ namespace ProyectoLavacar.Controllers
         private readonly IEmailSender _emailSender;
         private Contexto _contexto;
         private IFecha _fecha;
+
         public AccountController()
         {
             _userM = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -96,8 +98,10 @@ namespace ProyectoLavacar.Controllers
         public ActionResult changePasswordSuccess()
         {
             return View();
+
         }
     
+
 
     public ApplicationSignInManager SignInManager
         {
@@ -215,6 +219,7 @@ namespace ProyectoLavacar.Controllers
 
         //
         // POST: /Account/Register
+        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -230,17 +235,22 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
-                    ingreso = _fecha.ObtenerFecha()
+                    ingreso = DateTime.Now,
+                    cedula = model.cedula
+
 
                 };
 
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 var Asunto = "¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi";
+
 
                 if (result.Succeeded)
                 {
                     // Asignar el rol al usuario
                     var resultRole = await UserManager.AddToRoleAsync(user.Id, "Usuario");
+
 
                     if (resultRole.Succeeded)
                     {
@@ -251,20 +261,30 @@ namespace ProyectoLavacar.Controllers
                         return RedirectToAction("Index", "Home");
                     }
 
+
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar un correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar la cuenta", "Para confirmar su cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
+
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             return View(model);
         }
+
+
+
+
+
+
+
 
 
 
@@ -289,11 +309,27 @@ namespace ProyectoLavacar.Controllers
 
 
         // POST: /Account/Register
+
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
         {
+
+            ViewBag.Role = new SelectList(new List<object>
+         {
+          new { Value = "Administrador", Text = "Administrador" },
+          new { Value = "Empleado", Text = "Empleado" }
+         }, "Value", "Text");
+
+            ViewBag.turno = new SelectList(new List<object>
+         {
+          new { Value = "Mañana", Text = "Mañana" },
+          new { Value = "Tarde", Text = "Tarde" }
+         }, "Value", "Text");
+
+
             return View();
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -304,24 +340,26 @@ namespace ProyectoLavacar.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email,
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
-                    estado = model.Estado,
+                    estado = true,
                     cedula = model.cedula,
                     numeroCuenta = model.numeroCuenta,
                     turno = model.turno,
+                    PhoneNumber = model.PhoneNumber,
                     puesto = model.puesto
                 };
 
+
                 var result = await UserManager.CreateAsync(user, model.Password);
-                
+
                 if (result.Succeeded)
                 {
                     // Asignar el rol al usuario
-                    var resultRole = await UserManager.AddToRoleAsync(user.Id, "Empleado");
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, model.Role);
                     var nombreCompleto = model.Nombre + " " + model.PrimerApellido;
                     var Asunto = "🎉¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi 🎉";
                     if (resultRole.Succeeded)
@@ -336,8 +374,12 @@ namespace ProyectoLavacar.Controllers
                 AddErrors(result);
             }
 
+
             return View(model);
         }
+
+
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -629,7 +671,7 @@ namespace ProyectoLavacar.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

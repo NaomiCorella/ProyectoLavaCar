@@ -1,101 +1,650 @@
 ﻿@model ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraDto
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Compra";
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html lang="es">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración de Compras</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
 
-<div class="form-horizontal">
-    <h4>Compra</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<body>
+    <div class="luxury-compra-container">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="luxury-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,13A5,5 0 0,1 7,8H9A3,3 0 0,0 12,11A3,3 0 0,0 15,8H17A5,5 0 0,1 12,13M12,3A3,3 0 0,1 15,6H9A3,3 0 0,1 12,3M19,6H17A5,5 0 0,0 12,1A5,5 0 0,0 7,6H5C3.89,6 3,6.89 3,8V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V8C21,6.89 20.1,6 19,6Z" />
+                    </svg>
+                </div>
+                <h2 class="luxury-title">Registrar Nueva Compra</h2>
+                <p class="luxury-subtitle">Complete los detalles de la compra</p>
+                <div class="luxury-divider"></div>
+            </div>
 
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-    <div id="nombreCliente" class="alert alert-info" style="display: none;"></div>
+                    <div class="luxury-form">
+                        @Html.ValidationSummary(true, "", new { @class = "luxury-alert" })
 
+                        <!-- Sección Cliente -->
+                        <div class="luxury-section">
+                            <h4 class="luxury-section-title">
+                                <svg viewBox="0 0 24 24" width="24" height="24" class="me-2">
+                                    <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                                </svg>
+                                Datos del Cliente
+                            </h4>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.idCliente, "Buscar por Cédula", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="number" name="numeroCedula" id="numeroCedula" class="form-control" />
-            <button type="button" id="buscarCliente" class="btn btn-primary mt-2">Buscar Cliente</button>
-            @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                            <div id="nombreCliente" class="luxury-info-box" style="display: none;"></div>
 
+                            <div class="form-group luxury-input-group">
+                                <label class="input-label">Buscar por Cédula</label>
+                                <div class="d-flex align-items-center">
+                                    <div class="input-container flex-grow-1 me-2">
+                                        <span class="input-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                                            </svg>
+                                        </span>
+                                        <input type="number" name="numeroCedula" id="numeroCedula" class="luxury-input" placeholder="Ingrese número de cédula">
+                                        <span class="input-border"></span>
+                                    </div>
+                                    <button type="button" id="buscarCliente" class="luxury-button-small">
+                                        <span class="button-text">Buscar</span>
+                                        <span class="button-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.idCliente, "", new { @class = "validation-message" })
+                            </div>
+                        </div>
 
-    @foreach (var servicio in ViewBag.Servicios)
-    {
-        // Si Model.listaServicios es nulo, usar una lista vacía
-        var listaServicios = Model?.listaServicios ?? new List<int>();
+                        <!-- Sección Servicios -->
+                        <div class="luxury-section">
+                            <h4 class="luxury-section-title">
+                                <svg viewBox="0 0 24 24" width="24" height="24" class="me-2">
+                                    <path fill="currentColor" d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,10A1.5,1.5 0 0,0 10.5,11.5A1.5,1.5 0 0,0 12,13A1.5,1.5 0 0,0 13.5,11.5A1.5,1.5 0 0,0 12,10Z" />
+                                </svg>
+                                Servicios
+                            </h4>
 
-        bool isChecked = listaServicios.Contains(servicio.idServicio);
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="listaServicios" value="@servicio.idServicio" id="servicio_@servicio.idServicio" @(isChecked ? "checked" : "") />
-            <label class="form-check-label" for="servicio_@servicio.idServicio">@servicio.nombre</label>
-        </div>
-    }
+                            <div class="row">
+                                @foreach (var servicio in ViewBag.Servicios)
+                                {
+                                    var listaServicios = Model?.listaServicios ?? new List<int>();
+                                    bool isChecked = listaServicios.Contains(servicio.idServicio);
 
+                                    <div class="col-md-6 mb-3">
+                                        <div class="luxury-checkbox">
+                                            <input type="checkbox" class="form-check-input" name="listaServicios"
+                                                   value="@servicio.idServicio" id="servicio_@servicio.idServicio"
+                                                   @(isChecked ? "checked" : "") />
+                                            <label class="form-check-label" for="servicio_@servicio.idServicio">
+                                                @servicio.nombre
+                                            </label>
+                                            <span class="checkmark"></span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
 
+                        <!-- Sección Información Adicional -->
+                        <div class="luxury-section">
+                            <h4 class="luxury-section-title">
+                                <svg viewBox="0 0 24 24" width="24" height="24" class="me-2">
+                                    <path fill="currentColor" d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+                                </svg>
+                                Información Adicional
+                            </h4>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+                                                </svg>
+                                            </span>
+                                            @Html.TextBoxFor(model => model.fecha, new { @class = "luxury-input", type = "date", required = "required" })
+                                            <span class="input-border"></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "validation-message" })
+                                    </div>
+                                </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5M11,7H13V9H15V11H13V13H11V11H9V9H11M11,15H13V17H11V15Z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" class="luxury-input" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
+                                            <span class="input-border"></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Total, "", new { @class = "validation-message" })
+                                    </div>
+                                </div>
 
+                                <div class="col-md-12">
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            @Html.TextAreaFor(model => model.DescripcionServicio, new { @class = "luxury-textarea", rows = "3" })
+                                            <span class="input-border"></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "validation-message" })
+                                    </div>
+                                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fecha, new { @class = "form-control", type = "date", required = "required" })
-            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                                <div class="col-md-12">
+                                    <div class="form-group luxury-input-group">
+                                        @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "input-label" })
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M12,13C14.67,13 20,14.33 20,17V20H4V17C4,14.33 9.33,13 12,13M12,14.9C9.03,14.9 5.9,16.36 5.9,17V18.1H18.1V17C18.1,16.36 14.97,14.9 12,14.9Z" />
+                                                </svg>
+                                            </span>
+                                            @if (ViewBag.empleados is string message)
+                                            {
+                                                <p class="text-muted">@message</p>
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.idEmpleado,
+                                                    new SelectList(ViewBag.empleados, "Id", "nombre"),
+                                                    "Seleccione un empleado",
+                                                    new { @class = "luxury-select" })
+                                            }
+                                            <span class="input-border"></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "validation-message" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- Botones de Acción -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="luxury-button">
+                                <span class="button-text">Guardar Compra</span>
+                                <span class="button-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                                    </svg>
+                                </span>
+                                <div class="button-shine"></div>
+                            </button>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DescripcionServicio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                <!-- Verificar si el modelo no es nulo antes de acceder a Model.Total -->
-                <input type="text" class="form-control" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
-                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                            <a href="@Url.Action("Index")" class="luxury-button-secondary">
+                                <span class="button-text">Volver al Listado</span>
+                                <span class="button-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
 
+    <style>
+        .luxury-compra-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
 
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
 
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-}
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
 
-<div>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">
-        <i class="fas fa-arrow-left"></i> Volver a la lista
-    </a>
-</div>
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .luxury-form {
+            padding: 20px;
+        }
+
+        .luxury-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(245, 245, 245, 0.5);
+            border-radius: 12px;
+        }
+
+        .luxury-section-title {
+            font-size: 20px;
+            color: #012030;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .luxury-input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #45C4B0;
+            z-index: 1;
+        }
+
+            .input-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .luxury-input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .luxury-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .luxury-select {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+
+        .input-border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            transition: width 0.4s ease;
+        }
+
+        .luxury-input:focus,
+        .luxury-textarea:focus,
+        .luxury-select:focus {
+            border-color: #45C4B0;
+            box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+            outline: none;
+            background-color: white;
+        }
+
+            .luxury-input:focus ~ .input-border,
+            .luxury-textarea:focus ~ .input-border,
+            .luxury-select:focus ~ .input-border {
+                width: 100%;
+            }
+
+        .validation-message {
+            display: block;
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .luxury-alert {
+            padding: 15px;
+            background: #fff4f4;
+            color: #d32f2f;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid #ffcdd2;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .luxury-info-box {
+            padding: 15px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .luxury-button {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .luxury-button-small {
+            white-space: nowrap; /* Evita que el texto del botón se rompa */
+            padding: 12px 16px; /* Ajuste de padding para mejor alineación vertical */
+            height: 51px; /* Misma altura que el input */
+            box-sizing: border-box;
+            position: relative;
+          
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(69, 196, 176, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .luxury-button-secondary {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            background: white;
+            color: #45C4B0;
+            border: 2px solid #45C4B0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+            .luxury-button-secondary:hover {
+                background: #f5f5f5;
+                transform: translateY(-2px);
+            }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+            .button-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover,
+        .luxury-button-small:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-button:hover .button-shine,
+            .luxury-button-small:hover .button-shine {
+                left: 100%;
+            }
+
+            .luxury-button:hover .button-icon,
+            .luxury-button-small:hover .button-icon {
+                transform: translateX(5px);
+            }
+
+        .luxury-checkbox {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            color: #495057;
+        }
+
+            .luxury-checkbox input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            .luxury-checkbox .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #f5f5f5;
+                border: 2px solid #45C4B0;
+                border-radius: 6px;
+                transition: all 0.3s;
+            }
+
+            .luxury-checkbox:hover input ~ .checkmark {
+                background-color: #e8f5e9;
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark {
+                background-color: #45C4B0;
+            }
+
+            .luxury-checkbox .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                transform: rotate(45deg);
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark:after {
+                display: block;
+            }
+
+        /* Animaciones */
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-subtitle {
+                font-size: 16px;
+            }
+
+            .luxury-button,
+            .luxury-button-secondary {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
         $(document).ready(function () {
-            
             $("#buscarCliente").click(function () {
                 var cedula = $("#numeroCedula").val();
                 if (cedula === "") {
@@ -120,52 +669,49 @@
                 });
             });
 
-            
-           
-        });
-    </script>
+            function calcularTotal() {
+                var total = 0;
 
-    <script>
-        $(document).ready(function () {
-  
-    function calcularTotal() {
-        var total = 0;
+                $("input[name='listaServicios']:checked").each(function () {
+                    var servicioId = $(this).val();
 
-     
-        $("input[name='listaServicios']:checked").each(function () {
-            var servicioId = $(this).val();
+                    $.ajax({
+                        url: '@Url.Action("ObtenerPrecioServicio", "Compra")',
+                        type: 'GET',
+                        data: { idServicio: servicioId },
+                        success: function (response) {
+                            if (response.success) {
+                                total += parseFloat(response.precio);
+                            }
+                            $("#Total").val(total.toFixed(2));
+                        },
+                        error: function () {
+                            alert("Ocurrió un error al obtener el precio del servicio.");
+                        }
+                    });
+                });
+            }
 
-         
-            $.ajax({
-                url: '@Url.Action("ObtenerPrecioServicio", "Compra")', 
-                type: 'GET',
-                data: { idServicio: servicioId },
-                success: function (response) {
-                    if (response.success) {
-                      
-                        total += parseFloat(response.precio);
-                    }
-
-                    
-                    $("#Total").val(total.toFixed(2)); 
-                },
-                error: function () {
-                    alert("Ocurrió un error al obtener el precio del servicio.");
-                }
+            $("input[name='listaServicios']").change(function () {
+                calcularTotal();
             });
+
+            calcularTotal();
         });
+        </script>
     }
 
-    // Ejecutar el cálculo cuando se marque o desmarque un checkbox
-    $("input[name='listaServicios']").change(function () {
-        calcularTotal();
-    });
-
-    // Llamar al calcular total cuando se cargue la página por primera vez
-    calcularTotal();
-});
-
-
-    </script>
-
-}
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/waypoints.min.js"></script>
+    <script src="~/Content/assets/js/wow.min.js"></script>
+</body>
+</html>

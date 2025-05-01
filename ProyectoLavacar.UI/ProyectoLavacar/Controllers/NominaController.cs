@@ -46,6 +46,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
+using ProyectoLavacar.Abstraciones.Modelos.ModeloServicios;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloCompra;
+using System.Xml.Linq;
+using ProyectoLavacar.AccesoADatos;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -69,11 +74,12 @@ namespace ProyectoLavacar.Controllers
         IDetallesTramitesLN _detallesTramites;
         IProcesarNominaLN _procesarNomina;
         IBuscarPorIdLN _buscarPorIdEmpleado;
-
+        IEmailSender _emailSender;
+        Contexto _context;
         public NominaController()
         {
             _buscarPorIdEmpleado = new BuscarPorIdLN();
-
+            _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _crearAjustes = new CrearAjustesSalarialesLN();
             _crearNomina = new CrearNominaLN();
             _crearTramites = new CrearTramitesLN();
@@ -88,9 +94,11 @@ namespace ProyectoLavacar.Controllers
             _detallesAjustes = new DetallesAjustesLN();
              _detallesTramites = new DetallesTramitesLN();
             _procesarNomina = new ProcesarNominaLN();
+            _context = new Contexto();
 
         }
         // GET: Nomina
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Index()
         {
             ViewBag.Title = "Nomina";
@@ -98,19 +106,20 @@ namespace ProyectoLavacar.Controllers
 
             return View(lalistadeNomina);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult ProcesosYGestiones(int idNomina)
         {
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Nomina(string idEmpleado)
         {
             ViewBag.Title = "Nomina de Empleado";
             List<UnicoEmpleadoDto> lalistadeNomina = _listarNominadelEmpleado.ListarNomina(idEmpleado);
             return View(lalistadeNomina);
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Nomina/Details/5
         public ActionResult Details(int id)
         {
@@ -119,6 +128,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Nomina/Create
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Create(string id)
         {
             ViewBag.Periodo = new List<SelectListItem>
@@ -143,6 +153,13 @@ namespace ProyectoLavacar.Controllers
             try
             {
                
+
+                    if (modeloDeNomina.FechaDePago < DateTime.Now)
+                    {
+                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+                        return View(modeloDeNomina);
+                    }
+                
                 int cantidadDeDatosGuardados = await _crearNomina.RegistrarNomina(modeloDeNomina,  id);
 
                 return RedirectToAction("Index");
@@ -153,6 +170,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarAjustes(int idNomina)
         {
@@ -182,6 +200,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult> IngresarAjustes(AjustesSalarialesDto modeloDeAjustes, int idNomina)
         {
             try
@@ -199,13 +218,14 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeAjustes.IdNomina });
             }
             catch
             {
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarTramites(int idNomina)
         {
@@ -293,7 +313,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ProcesosYGestiones", new { idNomina = modeloDeTramites.IdNomina });
                 }
 
 
@@ -305,6 +325,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult IngresarVacaciones()
         {
@@ -343,7 +364,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MiPerfil");
                 }
 
 
@@ -355,6 +376,7 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult AceptarVacacion(int idTramite)
         {
@@ -397,13 +419,14 @@ namespace ProyectoLavacar.Controllers
 
                 int cantidadDeDatosEditados = await _editarTramites.Editar(tramite);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarTramites", new { idNomina = ajustepasado.IdNomina });
             }
             catch
             {
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
 
         public ActionResult ListarTramites(int idNomina)
         {
@@ -411,6 +434,8 @@ namespace ProyectoLavacar.Controllers
             ViewBag.idNomina = idNomina;
             return View(tramites);
         }
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult ListarAjustes(int idNomina)
         {
             ViewData["idNomina"] = idNomina;
@@ -435,7 +460,7 @@ namespace ProyectoLavacar.Controllers
             return View("ListarAjustes", ajustes.ToList());
         }
 
-        public async Task<ActionResult> AnularAjustes(int  id)
+        public async Task<ActionResult> AnularAjustes(int id)
         {
            
 
@@ -449,11 +474,12 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de bono",
-                        tipo ="Deduccion",
+                        tipo = "Bonificacion",
                         estado = false
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
+                CambiarEstado(id);
                 }
                 else
                 {
@@ -463,20 +489,23 @@ namespace ProyectoLavacar.Controllers
                         IdNomina = modeloDeAjustes.IdNomina,
                         Monto = modeloDeAjustes.Monto,
                         Razon = "Anulacion de deduccion",
-                        tipo = "Bonificacion",
+                        tipo = "Deduccion",
                         estado = false
 
                     };
 
                     int cantidadDeDatosGuardados = await _crearAjustes.RegistarAjusteSalariales(ajuste);
-                }
-                    return RedirectToAction("Index");
-        
+                CambiarEstado(id);
+            }
+            return RedirectToAction("ListarAjustes", new { idNomina = modeloDeAjustes.IdNomina });
+
         }
+        [Authorize(Roles = "Administrador, Empleado")]
+
         public ActionResult ProcesarNomina(int idNomina)
         {
             NominaDto nomina = _obtenerporId.Detalle(idNomina);
-            UsuariosDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            EmpleadoDto usuario =_buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
             UnicoEmpleadoDto nominaEmpleado = new UnicoEmpleadoDto
             {
                 IdNomina = nomina.IdNomina,
@@ -501,145 +530,351 @@ namespace ProyectoLavacar.Controllers
             ViewBag.total = _procesarNomina.Total(idNomina);
             return View(nominaEmpleado);
         }
-        public ActionResult ConfimarNomina(int idNomina)
+        
+
+        public async Task<ActionResult> ConfimarNomina(int idNomina)
         {
             NominaDto nomina = _procesarNomina.ProcesarNomina(idNomina);
+            List<AjustesSalarialesDto> ajustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina).ToList();
+            if (nomina == null)
+            {
+                TempData["ErrorMessage"] = "No se pudo procesar la nómina.";
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            EmpleadoDto usuario = _buscarPorIdEmpleado.Detalle(nomina.IdEmpleado);
+            if (usuario == null || string.IsNullOrEmpty(usuario.Email))
+            {
+                TempData["ErrorMessage"] = "No se pudo obtener el correo del empleado.";
+                return RedirectToAction("Index");
+            }
+
+            string asunto = "Confirmación de Nómina";
+            string mensaje = $"Estimado {usuario.nombre} {usuario.primer_apellido},<br><br>" +
+                             $"Se ha procesado su nómina correspondiente al período {nomina.PeriodoDePago}.<br>" +
+                             $"Salario Neto: {nomina.SalarioNeto:C2} <br>" +
+                             $"Fecha de Pago: {nomina.FechaDePago:dd/MM/yyyy} <br><br>" +
+                             $"Saludos,<br>Administración";
+
+            try
+            {
+                await _emailSender.SendEmailAsync(usuario.Email, asunto, mensaje);
+                TempData["SuccessMessage"] = "Nómina confirmada y correo enviado correctamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "La nómina fue confirmada, pero ocurrió un error al enviar el correo.";
+            }
+
+            return RedirectToAction("ProcesosYGestiones", new { idNomina = nomina.IdNomina });
         }
-        public ActionResult Error()
+
+        public ActionResult CambiarEstado(int id)
         {
 
-            return View();
+            try
+            {
+                var ajuste = _context.AjustesSalarialesTabla.Find(id);
+                ajuste.estado = !ajuste.estado;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Nomina/Edit/5
 
-        public FileResult DescargarPDFDetalle(int id)
+        public FileResult DescargarPDFDetalle(int idNomina)
         {
-            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
-            List<AjustesSalarialesDto> listaDeAjustes = _listarAjustes.ListarTodo().Where(p => p.IdNomina == id).ToList();
+            NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(idNomina);
+            List<AjustesSalarialesDto> bonos = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina  && p.tipo == "Bonificacion" && p.estado).ToList();
+            List<AjustesSalarialesDto> dedu = _listarAjustes.ListarTodo().Where(p => p.IdNomina == idNomina && p.tipo == "Deduccion" && p.estado).ToList();
+            List<TramitesDto> Incapacidades =  _listarTramites.ListarTodo(idNomina).Where(p => p.tipo == "Incapacidad").ToList();
+            List<TramitesDto> vaca = _listarTramites.ListarTodo(idNomina).Where(p => p.tipo == "Vacaciones" && p.estado == 1).ToList();
+
             if (nomina == null)
             {
                 return null;
             }
 
-            // Crear el PDF
+            // Crear PDF
             MemoryStream ms = new MemoryStream();
-            Document doc = new Document(PageSize.A4, 40, 40, 40, 40); // Márgenes
-            PdfWriter.GetInstance(doc, ms).CloseStream = false;
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            writer.CloseStream = false;
 
             doc.Open();
 
-            // Colores y fuentes personalizados
-            BaseColor headerColor = new BaseColor(27, 50, 85); // Azul oscuro (como en tu vista)
-            BaseColor textColor = BaseColor.BLACK;
-            BaseColor backgroundColor = new BaseColor(240, 240, 240); // Gris claro para fondo de celdas
-
-            Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.WHITE);
-            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, textColor);
+            // Fuentes y colores
+            BaseColor headerColor = new BaseColor(211, 211, 211);
             Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+            Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
 
-            // Título
-            Paragraph title = new Paragraph($"Detalles de al nomina de - {nomina.FechaDePago}\n\n", titleFont);
-            title.Alignment = Element.ALIGN_CENTER;
-            doc.Add(title);
+            // ENCABEZADO 
+            PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
+            headerTable.SetWidths(new float[] { 1, 2 });
 
-            // Crear tabla similar a la vista
-            PdfPTable table = new PdfPTable(2) { WidthPercentage = 100 };
-            table.SetWidths(new float[] { 1.5f, 2f }); // Ancho de las columnas
-
-            // Encabezado de tabla (como el fondo azul en tu vista)
-            PdfPCell headerCell = new PdfPCell(new Phrase("Información de la nomina", headerFont))
+            PdfPCell empresaCell = new PdfPCell(new Phrase("LavaCar HERVI \nTel: +(506) 7285 0302 \nCorreo: lavacarhervi@gmail.com", cellFont))
             {
-                Colspan = 2,
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                BackgroundColor = headerColor,
-                Padding = 10
+                Border = PdfPCell.NO_BORDER,
+                HorizontalAlignment = Element.ALIGN_RIGHT
             };
-            table.AddCell(headerCell);
+            headerTable.AddCell(new PdfPCell(new Phrase("Informe de Nomina", titleFont)) { Border = PdfPCell.NO_BORDER });
+            headerTable.AddCell(empresaCell);
+            doc.Add(headerTable);
 
-            // Agregar filas con datos
+            Paragraph empleado = new Paragraph("Informacion del empleado", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+            empleado.Alignment = Element.ALIGN_LEFT;
+            empleado.SpacingAfter = 10f; // Espacio después del título
+            doc.Add(empleado);
 
-            AgregarFila(table, "Nombre:", nomina.nombre, cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Salario Bruto:", nomina.SalarioBruto.ToString(), cellFont, backgroundColor);
-            AgregarFila(table, "Horas Extra:", $"₡{nomina.HorasExtras}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Dias de Vacaciones Disponibles:", $"₡{nomina.DiasDispoVacaciones}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Dias de Vacaciones Utilizados:", $"₡{nomina.DiasUtiliVacaciones}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Bonificaciones:", $"₡{nomina.totalBono}", cellFont, BaseColor.WHITE);
-            AgregarFila(table, "Deducciones:", $"₡{nomina.totalDedu}", cellFont, BaseColor.WHITE);
-            foreach(AjustesSalarialesDto ajuste in listaDeAjustes)
+            var tablaEmpleado = new PdfPTable(2); // 2 columnas
+            tablaEmpleado.WidthPercentage = 100f; // Establecer el ancho de la tabla a 100%
+
+            // Definir el ancho de las columnas
+            float[] anchosColumnas = new float[] { 50f, 50f }; // Las columnas ocuparán el 50% cada una
+            tablaEmpleado.SetWidths(anchosColumnas);
+
+            // Crear un color gris claro para el fondo
+            BaseColor grisClaro = new BaseColor(211, 211, 211); // Color RGB de gris claro
+
+            // Agregar las celdas con la información del empleado
+
+            // Empleado
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Empleado: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.nombre} {nomina.primer_apellido} {nomina.segundo_apellido}", cellFont)));
+
+            // Cédula
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Cédula: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.cedula}", cellFont)));
+
+            // Correo
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Correo: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.correo}", cellFont)));
+
+            // Puesto
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Puesto: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.puesto}", cellFont)));
+
+            // Turno
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Turno: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.turno}", cellFont)));
+
+            // Tipo de contrato
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Tipo de contrato: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.TipoDeContrato}", cellFont)));
+
+            // Fecha de pago
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Fecha de Pago: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"{nomina.FechaDePago:dd/MM/yyyy}", cellFont)));
+
+            // Horas extras
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Horas extras: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"₡{nomina.HorasExtras:N2}", cellFont)));
+
+            // Días de vacaciones disponibles
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Días de vacaciones disponibles: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"₡{nomina.DiasDispoVacaciones:N2}", cellFont)));
+
+            // Días de vacaciones utilizados
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Días de vacaciones utilizados: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"₡{nomina.DiasUtiliVacaciones:N2}", cellFont)));
+
+            // Salario bruto
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase("Salario bruto: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            tablaEmpleado.AddCell(new PdfPCell(new Phrase($"₡{nomina.SalarioBruto:N2}", cellFont)));
+
+            // Agregar la tabla al documento
+            doc.Add(tablaEmpleado);
+
+            // Agregar un salto de línea
+            doc.Add(new Paragraph("\n"));
+
+
+
+            if (Incapacidades != null)
             {
-                if(ajuste.tipo == "Bonificacion"&& ajuste.estado)
+                // Agregar título a la sección de vacaciones
+                Paragraph tituloIncapacidades = new Paragraph("Detalles de  Incapacidades", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                tituloIncapacidades.Alignment = Element.ALIGN_LEFT;
+                tituloIncapacidades.SpacingAfter = 10f; // Espacio después del título
+                doc.Add(tituloIncapacidades);
+                // DETALLES DEL Incapacidades
+                PdfPTable incapa = new PdfPTable(3) { WidthPercentage = 100 };
+                incapa.SetWidths(new float[] { 3, 2, 3 });
+                AgregarEncabezado(incapa, "Aseguradora", cellFont, grisClaro);
+                AgregarEncabezado(incapa, "Razon", cellFont, grisClaro);
+                AgregarEncabezado(incapa, "Duracion", cellFont, grisClaro);
+                foreach (TramitesDto ajuste in Incapacidades)
                 {
-                    AgregarFilaBon(table, "Bonificacion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
+
+                    incapa.AddCell(new PdfPCell(new Phrase(ajuste.aseguradora, cellFont)) { Padding = 8, BorderWidth = 1 });
+                    incapa.AddCell(new PdfPCell(new Phrase(ajuste.Razon, cellFont)) { Padding = 8, BorderWidth = 1 });
+                    incapa.AddCell(new PdfPCell(new Phrase($"₡{ajuste.duracion:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
 
                 }
-               if(ajuste.tipo == "Deduccion" && ajuste.estado)
-                {
-                    AgregarFilaBon(table, "Deduccion:", $"₡{ajuste.Monto}", $"₡{ajuste.Razon}", cellFont, BaseColor.WHITE);
 
-                }
+                doc.Add(incapa);
 
+
+                doc.Add(new Paragraph("\n"));
             }
 
-            doc.Add(table);
 
-            // Fecha de generación del PDF
-            Paragraph fecha = new Paragraph($"\n\nFecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm:ss}", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10));
-            fecha.Alignment = Element.ALIGN_RIGHT;
-            doc.Add(fecha);
+            if (vaca != null)
+            {
+                // Agregar título a la sección de vacaciones
+                Paragraph tituloVacaciones = new Paragraph("Detalles de Vacaciones", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                tituloVacaciones.Alignment = Element.ALIGN_LEFT;
+                tituloVacaciones.SpacingAfter = 10f; // Espacio después del título
+
+                doc.Add(tituloVacaciones);
+
+                // DETALLES DEL Vacaciones
+                PdfPTable vacaciones = new PdfPTable(2) { WidthPercentage = 100 };
+                vacaciones.SetWidths(new float[] { 3, 2 });
+                AgregarEncabezado(vacaciones, "Razon", cellFont, headerColor);
+                AgregarEncabezado(vacaciones, "Duracion", cellFont, headerColor);
+
+                foreach (TramitesDto ajuste in vaca)
+                {
+                    vacaciones.AddCell(new PdfPCell(new Phrase(ajuste.Razon, cellFont)) { Padding = 8, BorderWidth = 1 });
+                    vacaciones.AddCell(new PdfPCell(new Phrase($"₡{ajuste.duracion:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+                }
+              
+
+                doc.Add(vacaciones);
+                doc.Add(new Paragraph("\n"));
+            }
+
+
+
+            if (bonos != null)
+            {
+
+                // Agregar título a la sección de Bonificaciones
+                Paragraph tituloBonificaciones = new Paragraph("Detalles de Bonificaciones", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                tituloBonificaciones.Alignment = Element.ALIGN_LEFT;
+                tituloBonificaciones.SpacingAfter = 10f; // Espacio después del título
+
+                doc.Add(tituloBonificaciones);
+                // DETALLES DEL Bonificaciones
+                PdfPTable Bonificaciones = new PdfPTable(2) { WidthPercentage = 100 };
+                Bonificaciones.SetWidths(new float[] { 3, 2 });
+                AgregarEncabezado(Bonificaciones, "Razon", cellFont, headerColor);
+                AgregarEncabezado(Bonificaciones, "Monto", cellFont, headerColor);
+                foreach (AjustesSalarialesDto ajuste in bonos)
+                {
+
+                    Bonificaciones.AddCell(new PdfPCell(new Phrase(ajuste.Razon, cellFont)) { Padding = 8, BorderWidth = 1 });
+                    Bonificaciones.AddCell(new PdfPCell(new Phrase($"₡{ajuste.Monto:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+                }
+                AgregarFila(Bonificaciones, "Total de bonificaciones:", $"₡{nomina.totalBono:N2}", totalFont);
+
+                doc.Add(Bonificaciones);
+
+
+                doc.Add(new Paragraph("\n"));
+            }
+
+
+           
+
+        
+
+
+            if (dedu != null)
+            {
+                // Agregar título a la sección de Bonificaciones
+                Paragraph tituloDeducciones = new Paragraph("Detalles de Deducciones", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                tituloDeducciones.Alignment = Element.ALIGN_LEFT;
+                tituloDeducciones.SpacingAfter = 10f; // Espacio después del título
+                doc.Add(tituloDeducciones);
+                // DETALLES DEL Deducciones
+                PdfPTable Deducciones = new PdfPTable(2) { WidthPercentage = 100 };
+                Deducciones.SetWidths(new float[] { 3, 2 });
+                AgregarEncabezado(Deducciones, "Razon", cellFont, headerColor);
+                AgregarEncabezado(Deducciones, "Monto", cellFont, headerColor);
+                foreach (AjustesSalarialesDto ajuste in dedu)
+                {
+
+                    Deducciones.AddCell(new PdfPCell(new Phrase(ajuste.Razon, cellFont)) { Padding = 8, BorderWidth = 1 });
+                    Deducciones.AddCell(new PdfPCell(new Phrase($"₡{ajuste.Monto:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+                }
+                AgregarFila(Deducciones, "Total de deducciones:", $"₡{nomina.totalDedu:N2}", totalFont);
+
+                doc.Add(Deducciones);
+
+
+                doc.Add(new Paragraph("\n"));
+            }
+
+            Paragraph titulosalario = new Paragraph("Total a pagar:", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+            titulosalario.Alignment = Element.ALIGN_LEFT;
+            titulosalario.SpacingAfter = 10f; // Espacio después del título
+            doc.Add(titulosalario);
+
+
+            var salario = new PdfPTable(2); // 2 columnas
+            salario.WidthPercentage = 100f; // Establecer el ancho de la tabla a 100%
+
+            // Definir el ancho de las columnas
+            float[] sala = new float[] { 50f, 50f }; // Las columnas ocuparán el 50% cada una
+            salario.SetWidths(anchosColumnas);
+
+
+
+            // Empleado
+            salario.AddCell(new PdfPCell(new Phrase("Total Bonificaciones: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            salario.AddCell(new PdfPCell(new Phrase($"₡{nomina.totalBono:N2}", cellFont)));
+
+            // Cédula
+            salario.AddCell(new PdfPCell(new Phrase("Total Deducciones: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            salario.AddCell(new PdfPCell(new Phrase($"₡{nomina.totalDedu:N2}", cellFont)));
+
+            // Correo
+            salario.AddCell(new PdfPCell(new Phrase("Neto a pagar: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14))) { BackgroundColor = grisClaro });
+            salario.AddCell(new PdfPCell(new Phrase($"₡{nomina.SalarioNeto:N2}", totalFont)));
+
+
+
+            doc.Add(salario);
+
+
+            doc.Add(new Paragraph("\n"));
+
+
+           
 
             doc.Close();
-
             ms.Position = 0;
-            return File(ms, "application/pdf", $"Nomina_{nomina.nombre}.pdf");
+            return File(ms, "application/pdf", $"Detalle de Nomina_{nomina.cedula}.pdf");
         }
 
-        // Método para agregar filas a la tabla con estilos
-        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font, BaseColor backgroundColor)
+
+
+        private void AgregarFila(PdfPTable table, string titulo, string valor, Font font)
         {
-            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            table.AddCell(cellTitulo);
-            table.AddCell(cellValor);
+            table.AddCell(new PdfPCell(new Phrase(titulo, font)) { Padding = 8, BorderWidth = 1 });
+            table.AddCell(new PdfPCell(new Phrase(valor, font)) { Padding = 8, BorderWidth = 1 });
         }
-        private void AgregarFilaBon(PdfPTable table, string titulo, string valor,string tipo, Font font, BaseColor backgroundColor)
+
+        private void AgregarEncabezado(PdfPTable table, string texto, Font font, BaseColor backgroundColor)
         {
-            PdfPCell cellTitulo = new PdfPCell(new Phrase(titulo, font))
+            PdfPCell cell = new PdfPCell(new Phrase(texto, font))
             {
                 BackgroundColor = backgroundColor,
                 Padding = 8,
-                BorderWidth = 1
+                BorderWidth = 1,
+                HorizontalAlignment = Element.ALIGN_CENTER
             };
-
-            PdfPCell cellValor = new PdfPCell(new Phrase(valor, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-            PdfPCell cell = new PdfPCell(new Phrase(tipo, font))
-            {
-                BackgroundColor = backgroundColor,
-                Padding = 8,
-                BorderWidth = 1
-            };
-
-            table.AddCell(cellTitulo);
-            table.AddCell(cellValor);
             table.AddCell(cell);
         }
     }

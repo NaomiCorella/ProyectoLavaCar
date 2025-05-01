@@ -5,19 +5,16 @@
 }
 
 <div class="dashboard-panels-container">
-    <!-- Panel de Total de Ventas -->
     <div class="dashboard-panel">
         <h2>Total de Ventas</h2>
-        <p class="amount">₡@totalVentas.ToString("N2")</p> <!-- Formato de moneda -->
+        <p class="amount">₡@totalVentas.ToString("N2")</p>
     </div>
 
-    <!-- Panel de Margen de Ventas -->
     <div class="dashboard-panel">
         <h2>Margen de Ventas</h2>
         <p class="amount">₡@margenVentas.ToString("N2")</p>
     </div>
 
-    <!-- Panel de Margen Porcentual -->
     <div class="dashboard-panel">
         <h2>Margen Porcentual</h2>
         <p class="percentage">@margenPorcentual.ToString("N2")%</p>
@@ -25,42 +22,52 @@
 </div>
 
 <style>
+    /*body {
+        background-color: #f4f6f9;*/ /* fondo general claro */
+    /*}*/
+
     .dashboard-panels-container {
         display: flex;
-        gap: 20px; /* Espaciado entre paneles */
-        flex-wrap: wrap; /* Ajustar el contenido cuando hay más de un panel */
-        justify-content: space-around; /* Alinear los paneles en el contenedor */
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 30px;
     }
 
     .dashboard-panel {
-        width: 300px;
-        padding: 20px;
-        background: #007bff; /* Color azul */
-        color: white;
+        background: #ffffff;
+        color: #333;
+        padding: 25px 20px;
+        width: 280px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         text-align: center;
-        border-radius: 10px;
-        font-family: Arial, sans-serif;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: 4px solid #4e73df; /* azul tipo dashboard */
     }
 
-        .dashboard-panel h2 {
-            font-size: 22px;
-            margin-bottom: 15px;
+        .dashboard-panel:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
         }
 
-        .dashboard-panel h3 {
+        .dashboard-panel h2 {
             font-size: 18px;
-            margin-top: 10px;
+            margin-bottom: 10px;
+            color: #4e73df;
+            font-weight: 600;
         }
 
         .dashboard-panel .amount {
             font-size: 26px;
-            font-weight: bold;
+            font-weight: 700;
+            color: #1cc88a; /* verde tipo éxito */
         }
 
         .dashboard-panel .percentage {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 24px;
+            font-weight: 700;
+            color: #36b9cc; /* azul claro tipo info */
         }
 </style>

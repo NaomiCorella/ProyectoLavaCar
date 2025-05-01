@@ -20,15 +20,15 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Listar
             _listarEmpleadoAD = new ListarEmpleadoAD();
         }
 
-        public List<UsuariosDto> ListarEmpleados()
+        public List<EmpleadoDto> ListarEmpleados()
         {
-            List<UsuariosDto> laListasDeEmpleados = _listarEmpleadoAD.ListarEmpleado();
+            List<EmpleadoDto> laListasDeEmpleados = _listarEmpleadoAD.ListarEmpleado();
             return laListasDeEmpleados;
         }
 
-        private List<UsuariosDto> ObtenerLaListaConvertida(List<UsuariosTabla> laListasDeEmpleados)
+        private List<EmpleadoDto> ObtenerLaListaConvertida(List<UsuariosTabla> laListasDeEmpleados)
         {
-            List<UsuariosDto> laListaDeEmpleados = new List<UsuariosDto>();
+            List<EmpleadoDto> laListaDeEmpleados = new List<EmpleadoDto>();
             foreach (UsuariosTabla elEmpleado in laListasDeEmpleados)
             {
                 laListaDeEmpleados.Add(ConvertirObjetoEmpleadoDto(elEmpleado));
@@ -36,14 +36,14 @@ namespace ProyectoLavacar.LN.ModuloEmpleados.Listar
             return laListaDeEmpleados;
 
         }
-        private UsuariosDto ConvertirObjetoEmpleadoDto(UsuariosTabla elEmpleado)
+        private EmpleadoDto ConvertirObjetoEmpleadoDto(UsuariosTabla elEmpleado)
         {
             if (elEmpleado == null)
             {
 
                 throw new ArgumentNullException(nameof(elEmpleado), "El objeto  no puede ser null.");
             }
-            return new UsuariosDto
+            return new EmpleadoDto
             {
                 nombre = elEmpleado.nombre,
                 primer_apellido = elEmpleado.primer_apellido,

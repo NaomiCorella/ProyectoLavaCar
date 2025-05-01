@@ -27,6 +27,8 @@ using iTextSharp.text.pdf;
 using System.IO;
 using System.Drawing.Printing;
 using System.Xml.Linq;
+using System.Web.Services.Description;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloNomina;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -69,6 +71,7 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Inventario
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Index()
         {
             ViewBag.Title = "Inventario";
@@ -82,23 +85,18 @@ namespace ProyectoLavacar.Controllers
             return PartialView("_lista", elInventario);
         }
         // GET: Inventario/Details/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Details(int id)
         {
             InventarioDto elInventario = _BuscarPorIdInventario.Detalle(id);
             return View(elInventario);
         }
 
-
+        [Authorize(Roles = "Administrador, Empleado")]
         // GET: Inventario/Create
         public ActionResult Create()
         {
-            ViewBag.Categorias = new List<SelectListItem>
-                     {
-                         new SelectListItem { Value = "Limpieza", Text = "Productos de limpieza" },
-                         new SelectListItem { Value = "Protección", Text = "Productos de protección" },
-                            new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
-                                new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
-                         };
+            CargarCategorias();
             return View();
         }
 
@@ -111,6 +109,20 @@ namespace ProyectoLavacar.Controllers
 
                 var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
                 string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                List<InventarioDto> inventarioDtos = _listarInventario.ListarInventario()
+                    .Where(a => a.estado == true)
+                .ToList();
+
+                foreach (var item in inventarioDtos)
+                {
+                    if (item.nombre == modeloDeInvetario.nombre)
+                    {
+                        
+                        ModelState.AddModelError("nombre", "El producto ya esta registrado en el inventario.");
+                        CargarCategorias();
+                        return View(modeloDeInvetario);
+                    }
+                }
                 InventarioDto inventario = new InventarioDto()
                 {
                     idProducto = modeloDeInvetario.idProducto,
@@ -131,6 +143,7 @@ namespace ProyectoLavacar.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult RegistrarMovimiento()
         {
             var productos = _listarInventario.ListarInventario()
@@ -161,6 +174,7 @@ namespace ProyectoLavacar.Controllers
 
 
         }
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult HistorialDeMovimientos()
         {
             ViewBag.Title = "Historial de Movimientos";
@@ -172,6 +186,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Inventario/Edit/5
+        [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Edit(int id)
         {
             ViewBag.Categorias = new List<SelectListItem>
@@ -261,6 +276,13 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult DescargarPDF()
         {
+            BaseColor headerColor = new BaseColor(211, 211, 211);
+            Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, headerColor);
+            Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+            Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+            Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+            BaseColor blancoHumo = new BaseColor(220, 225, 250);
+
             List<InventarioDto> inventario = _listarInventario.ListarInventario();
 
             MemoryStream ms = new MemoryStream();
@@ -269,30 +291,31 @@ namespace ProyectoLavacar.Controllers
 
             doc.Open();
 
-            var titulo = new Paragraph("Listado de Inventario\n\n", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18));
+            var titulo = new Paragraph("Listado de inventario de Hervi ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18));
+            var subtitulo = new Paragraph( "Fecha:" + DateTime.Now.ToString("dd/mm/yyyy") + "\n\n", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14));
+
             titulo.Alignment = Element.ALIGN_CENTER;
             doc.Add(titulo);
+            subtitulo.Alignment = Element.ALIGN_CENTER;
+            doc.Add(subtitulo);
 
 
-            PdfPTable tabla = new PdfPTable(3);
-            tabla.WidthPercentage = 100;
+            PdfPTable incapa = new PdfPTable(3) { WidthPercentage = 100 };
+            incapa.SetWidths(new float[] { 3, 2, 3 });
+            AgregarEncabezado(incapa, "Nombre", cellFont, blancoHumo);
+            AgregarEncabezado(incapa, "Categoría", cellFont, blancoHumo);
+            AgregarEncabezado(incapa, "Cantidad Disponible", cellFont, blancoHumo);
 
-
-
-            tabla.AddCell("Nombre");
-            tabla.AddCell("Categoría");
-            tabla.AddCell("Cantidad Disponible");
-
-
-            foreach (var item in inventario)
+            foreach (InventarioDto producto in inventario)
             {
-                tabla.AddCell(item.idProducto.ToString());
-                tabla.AddCell(item.nombre);
-                tabla.AddCell(item.categoria);
-                tabla.AddCell(item.cantidadDisponible.ToString());
+
+                incapa.AddCell(new PdfPCell(new Phrase(producto.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
+                incapa.AddCell(new PdfPCell(new Phrase(producto.categoria, cellFont)) { Padding = 8, BorderWidth = 1 });
+                incapa.AddCell(new PdfPCell(new Phrase($"{producto.cantidadDisponible:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+
             }
 
-            doc.Add(tabla);
+            doc.Add(incapa);
             doc.Close();
 
             ms.Position = 0;
@@ -387,7 +410,26 @@ namespace ProyectoLavacar.Controllers
             table.AddCell(cellValor);
         }
 
-
-
+        private void CargarCategorias()
+        {
+            ViewBag.Categorias = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Limpieza", Text = "Productos de limpieza" },
+        new SelectListItem { Value = "Protección", Text = "Productos de protección" },
+        new SelectListItem { Value = "Accesorios", Text = "Accesorios" },
+        new SelectListItem { Value = "Herramientas y equipos", Text = "Herramientas y equipos" },
+    };
+        }
+        private void AgregarEncabezado(PdfPTable table, string texto, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell cell = new PdfPCell(new Phrase(texto, font))
+            {
+                BackgroundColor = backgroundColor,
+                Padding = 8,
+                BorderWidth = 1,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            };
+            table.AddCell(cell);
+        }
     }
 }
