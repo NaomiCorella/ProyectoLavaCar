@@ -114,7 +114,7 @@ namespace ProyectoLavacar.Models
         [Display(Name = "Rol")]
         public string Role { get; set; }
 
-        [Required]
+       
         [RegularExpression(@"^\d{4}-\d{4}$", ErrorMessage = "El número telefónico debe ser 0000-0000, solo números")]
 
         [Display(Name = "Número telefónico")]

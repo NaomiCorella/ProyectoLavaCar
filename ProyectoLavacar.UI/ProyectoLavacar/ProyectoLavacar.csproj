@@ -480,6 +480,8 @@
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\assets\fonts\fontawesome\webfonts\fa-solid-900d41d.eot" />
+    <None Include="Properties\PublishProfiles\lava-hervi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\lava-hervi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\chart.min.js" />
