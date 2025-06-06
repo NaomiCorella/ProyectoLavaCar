@@ -236,8 +236,9 @@ namespace ProyectoLavacar.Controllers
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
                     ingreso = DateTime.Now,
-                    cedula = model.cedula
-
+                    cedula = model.cedula,
+                    PhoneNumber = model.PhoneNumber
+                    
 
                 };
 
@@ -320,11 +321,12 @@ namespace ProyectoLavacar.Controllers
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
 
-            ViewBag.turno = new SelectList(new List<object>
-         {
-          new { Value = "Mañana", Text = "Mañana" },
-          new { Value = "Tarde", Text = "Tarde" }
-         }, "Value", "Text");
+            ViewBag.turno = new List<SelectListItem>
+{
+    new SelectListItem { Value = "M", Text = "Mañana" },
+    new SelectListItem { Value = "T", Text = "Tarde" },
+    new SelectListItem { Value = "N", Text = "Noche" }
+};
 
 
             return View();
@@ -368,13 +370,25 @@ namespace ProyectoLavacar.Controllers
                         string correoConvertido = string.Format(cuerpoDelCorreo, nombreCompleto, model.Password, model.Email);
                         await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Empleado");
                     }
                 }
                 AddErrors(result);
             }
 
+            ViewBag.turno = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "M", Text = "Mañana" },
+        new SelectListItem { Value = "T", Text = "Tarde" },
+        new SelectListItem { Value = "N", Text = "Noche" }
+    };
 
+
+            ViewBag.Role = new SelectList(new List<object>
+         {
+          new { Value = "Administrador", Text = "Administrador" },
+          new { Value = "Empleado", Text = "Empleado" }
+         }, "Value", "Text");
             return View(model);
         }
 

@@ -31,8 +31,8 @@
                         <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
                     </svg>
                 </div>
-                <h2 class="luxury-title">Detalles de Nómina</h2>
-                <p class="luxury-subtitle">Información completa del pago de nómina</p>
+                <h2 class="luxury-title">Procesos y gestiones</h2>
+                <p class="luxury-subtitle">Agrega ajustes salariales,tramites y procesa la nomina del empleado</p>
                 <div class="luxury-divider"></div>
             </div>
 
@@ -43,14 +43,14 @@
                             "Gestionar Ajustes",
                             "ListarAjustes",
                             new { idNomina = Model.IdNomina },
-                            new { @class = "luxury-button luxury-button-warning" }
+                            new { @class = "luxury-button luxury-button-primary" }
                         )
 
                         @Html.ActionLink(
                             "Gestionar Trámites",
                             "ListarTramites",
                             new { idNomina = Model.IdNomina },
-                            new { @class = "luxury-button luxury-button-warning" }
+                            new { @class = "luxury-button luxury-button-primary" }
                         )
 
                         @Html.ActionLink(
@@ -151,6 +151,19 @@
 </html>
 
 <style>
+    .luxury-button-primary {
+        background-color: #003366; /* un azul oscuro elegante */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .luxury-button-primary:hover {
+            background-color: #001f4d; /* más oscuro al pasar el cursor */
+        }
     .luxury-review-container {
         padding: 40px 0;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -299,7 +312,7 @@
     }
 
     .luxury-button-primary {
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        background: linear-gradient(135deg, #003366 0%, #9AEBA3 100%);
         box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
     }
 

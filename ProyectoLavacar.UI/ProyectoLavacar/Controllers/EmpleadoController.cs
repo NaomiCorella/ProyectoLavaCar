@@ -143,8 +143,8 @@ namespace ProyectoLavacar.Controllers
                 };
                 int cantidadDeDatosGuardados = await _crearEvaluacionLN.Crear(modelo);
 
-                return RedirectToAction("VerEvaluaciones");
-               
+                return RedirectToAction("VerEvaluaciones", new { id = modelo.idEmpleado });
+
 
             }
             catch

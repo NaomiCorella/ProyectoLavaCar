@@ -50,7 +50,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloNomina.ListarGeneral
                                                    turno = usuario.turno,
                                                    totalBono = nomina.totalBono,
                                                    totalDedu = nomina.totalDedu
-                                               }).ToList();
+                                               }).Distinct().ToList();
 
             return lalistaGeneral;
         }

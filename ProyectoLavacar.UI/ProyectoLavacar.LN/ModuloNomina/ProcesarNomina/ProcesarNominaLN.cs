@@ -81,7 +81,7 @@ namespace ProyectoLavacar.LN.ModuloNomina.ProcesarNomina
             decimal bonificaciones = laNomina.totalBono;
 
             decimal salario = (laNomina.SalarioBruto ?? 0m) + bonosHorasExtra + bonificaciones;
-            decimal salarioNeto = salario - impuestos - deducciones - seguro;
+            decimal salarioNeto = salario - deducciones ;
             return salarioNeto;
         }
 

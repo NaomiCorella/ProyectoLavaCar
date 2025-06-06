@@ -172,8 +172,10 @@ namespace ProyectoLavacar.Models
         [Required]
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
-        [Required]
+       
         [Display(Name = "Número de Cuenta")]
+        [Required(ErrorMessage = "La propiedad número de cuenta es requerida ")]
+        [StringLength(22, ErrorMessage = "La propiedad del número de cuenta debe de tener 22 caracteres.", MinimumLength = 22)]
         public string numeroCuenta { get; set; }
         [Required]
         [Display(Name = "Turno")]

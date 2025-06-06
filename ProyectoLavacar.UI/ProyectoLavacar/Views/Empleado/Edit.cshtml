@@ -28,6 +28,7 @@
             max-width: none;
             width: 100%;
         }
+
         :root {
             --primary-color: #45C4B0;
             --secondary-color: #9AEBA3;
@@ -245,13 +246,11 @@
             .form-group {
                 width: 100%; /* Asegura que el contenedor ocupe todo el espacio disponible */
             }
-
         }
     </style>
 </head>
 
 <body>
-
     <div class="luxury-container">
         <div class="luxury-header">
             <div class="luxury-icon">
@@ -268,7 +267,6 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-
                 @Html.HiddenFor(model => model.Id)
 
                 @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
@@ -386,7 +384,7 @@
         </div>
     </div>
 
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Scripts/Resenias/alertaCrear.js"></script>

@@ -70,7 +70,7 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Usuario
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,Empleado")]
 
         public ActionResult Index()
         {

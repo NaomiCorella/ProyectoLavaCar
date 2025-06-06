@@ -1,7 +1,7 @@
-﻿@model ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones.EvaluacionesDto
+﻿@model ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora.BitacoraDto
 
 @{
-    ViewBag.Title = "Detalles Evaluaciones";
+    ViewBag.Title = "Details";
 }
 
 <!DOCTYPE html>
@@ -28,10 +28,11 @@
             <div class="section-title text-center">
                 <div class="luxury-icon">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        <path fill="currentColor" d="M12 3L2 12H5V20H19V12H22L12 3M12 7.7C14.1 7.7 15.8 9.4 15.8 11.5C15.8 14.5 12 18 12 18C12 18 8.2 14.5 8.2 11.5C8.2 9.4 9.9 7.7 12 7.7M12 10C11.2 10 10.5 10.7 10.5 11.5C10.5 12.3 11.2 13 12 13C12.8 13 13.5 12.3 13.5 11.5C13.5 10.7 12.8 10 12 10Z" />
                     </svg>
                 </div>
-                <h2 class="luxury-title">Detalles de la evaluación </h2>
+                <h2 class="luxury-title">Detalles del Evento</h2>
+                
                 <div class="luxury-divider"></div>
             </div>
 
@@ -42,39 +43,39 @@
                             <svg viewBox="0 0 24 24" width="24" height="24">
                                 <path fill="currentColor" d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H8V21C8 21.6 8.4 22 9 22H15C15.6 22 16 21.6 16 21V18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2M20 16H4V4H20V16M13 13H11V7H13V13M13 17H11V15H13V17Z" />
                             </svg>
-                            <span>Información de la evaluacíon</span>
+                           
                         </div>
 
                         <div class="luxury-details-row">
-                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.fechaEvaluacion)</div>
-                            <div class="luxury-details-value ">@Html.DisplayFor(model => model.fechaEvaluacion)</div>
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.FechaDeEvento)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.FechaDeEvento)</div>
                         </div>
 
                         <div class="luxury-details-row">
-                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.calificacion)</div>
-                            <div class="luxury-details-value">@Html.DisplayFor(model => model.calificacion)</div>
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.TablaDeEvento)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.TablaDeEvento)</div>
                         </div>
 
                         <div class="luxury-details-row">
-                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.areaMejora)</div>
-                            <div class="luxury-details-value">@Html.DisplayFor(model => model.areaMejora)</div>
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.TipoDeEvento)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.TipoDeEvento)</div>
                         </div>
 
                         <div class="luxury-details-row">
-                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.comentarios)</div>
-                            <div class="luxury-details-value">@Html.DisplayFor(model => model.comentarios)</div>
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.DatosAnteriores)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.DatosAnteriores)</div>
                         </div>
 
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.DatosPosteriores)</div>
+                            <div class="luxury-details-value">@Html.DisplayFor(model => model.DatosPosteriores)</div>
+                        </div>
 
+                      
 
+                   
 
-
-                        
-                    </div>
-
-                    
-
-                        <a href="@Url.Action("VerEvaluaciones", "Empleado")" class="luxury-button luxury-button-secondary ml-3">
+                        <a href="@Url.Action("Index", "Bitacora")" class="luxury-button luxury-button-secondary ml-3">
                             <span class="button-text">Volver al Listado</span>
                             <span class="button-icon">
                                 <svg viewBox="0 0 24 24">

@@ -51,12 +51,7 @@
                                 <thead class="luxury-table-header" style="text-align: center">
                                     <tr>
                                     <tr>
-                                        @*<th>
-                                @Html.DisplayNameFor(model => model.idEvaluacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.idEmpleado)
-                            </th>*@
+                           
                                         <th>
                                             @Html.DisplayNameFor(model => model.fechaEvaluacion)
                                         </th>
@@ -72,19 +67,14 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.recomendaciones)
                                         </th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
                                         <tr class="luxury-table-row">
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.idEvaluacion)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.idEmpleado)
-                                            </td>
+                                            
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.fechaEvaluacion)
                                             </td>
@@ -101,10 +91,8 @@
                                                 @Html.DisplayFor(modelItem => item.recomendaciones)
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="luxury-btn luxury-btn-info" title="Detalles">
-                                                    <svg viewBox="0 0 24 24">
-                                                        <path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-                                                    </svg>
+                                                <a href="@Url.Action("DetallesEvaluaciones", new { id = item.idEvaluacion })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                                    <i class="fas fa-info-circle"></i>
                                                 </a>
 
 
@@ -173,6 +161,27 @@
 </html>
 
 <style>
+    .luxury-btn-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .luxury-btn-action.info {
+            background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+        }
+
+    .luxury-btn-action {
+        width: 32px;
+        height: 32px;
+        margin: 0 5px 5px;
+    }
     .small-button {
         padding: 4px 8px;
         font-size: 12px;

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoADatos\Interfaces\EditarTramite\IEditarTramiteAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Detalles\IDetallesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Listar\IListarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServicioAD.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="LN\interfaces\General\ModuloReseñas\IConvertirResenia.cs" />
     <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertir.cs" />
     <Compile Include="LN\interfaces\General\ModuloUsuarios\IConvertirUsuariosDtoAUsuariosTabla.cs" />
+    <Compile Include="LN\interfaces\ModuloBitacora\Detalles\IDetallesLN.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Listar\IListarBitacoraLN.cs" />
     <Compile Include="LN\interfaces\ModuloBitacora\Registrar\IRegistrarBitacoraLN.cs" />
     <Compile Include="LN\interfaces\ModuloCompra\CrearCompraServicios\ICrearCompraServiciosLN.cs" />

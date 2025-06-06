@@ -7,118 +7,448 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Administración</title>
-        <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
-        <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="~/Content/assets/css/default.css" rel="stylesheet" />
-        <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
-        <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
-        <link href="~/Content/assets/css/style.css" rel="stylesheet" />
-        <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
-        <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
-        <style>
-            /* Estilos base */
-            .servicios-container {
-                padding: 40px 0;
-                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                min-height: 100vh;
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Administración</title>
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/default.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <style>
+
+        table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+            text-align: center;
+        }
+
+        .luxury-button {
+            position: relative;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .luxury-button-small {
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .luxury-button-info {
+            background: linear-gradient(135deg, #17a2b8 0%, #6ad1e3 100%);
+            box-shadow: 0 10px 20px rgba(23, 162, 184, 0.2);
+        }
+
+        .luxury-button-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+            box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+            .button-icon svg {
+                width: 20px;
+                height: 20px;
             }
 
-            .section-title {
-                margin-bottom: 40px;
-                position: relative;
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-button:hover .button-shine {
+                left: 100%;
             }
 
-            .luxury-icon {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                border-radius: 50%;
+        .luxury-btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .luxury-btn-action.info {
+                background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            }
+
+            .luxury-btn-action.warning {
+                background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+            }
+
+            .luxury-btn-action.success {
+                background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+            }
+
+        .luxury-btn-action {
+            width: 32px;
+            height: 32px;
+            margin: 0 5px 5px;
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+            .button-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-button:hover .button-shine {
+                left: 100%;
+            }
+
+            .luxury-button:hover .button-icon {
+                transform: translateX(5px);
+            }
+        /* Estilos base */
+
+
+        .servicios-container {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .luxury-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
+        }
+
+            .luxury-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+        .luxury-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012030;
+            margin-bottom: 15px;
+        }
+
+        .luxury-subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .luxury-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .luxury-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Botón de crear nuevo */
+        .luxury-create-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+            .luxury-create-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
                 color: white;
-                box-shadow: 0 10px 30px rgba(69, 196, 176, 0.3);
             }
 
-                .luxury-icon svg {
-                    width: 40px;
-                    height: 40px;
-                }
+        /* Estilos para la tabla */
+        .luxury-table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+        }
 
-            .luxury-title {
-                font-size: 32px;
+        .luxury-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 5px
+        }
+
+        .luxury-table-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+            border-radius: 50px 50px 0 0;
+            overflow: hidden; /* Importante */
+        }
+
+            .luxury-table-header th {
+                padding: 15px 20px;
+                text-align: center;
                 font-weight: 600;
-                color: #012030;
-                margin-bottom: 15px;
+            }
+
+        .luxury-table-header {
+            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+            color: white;
+        }
+
+            .luxury-table-header th {
+                padding: 18px;
+                text-align: center;
+                font-weight: 600;
+            }
+
+        .luxury-table-row {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+            .luxury-table-row:hover {
+                background-color: rgba(69, 196, 176, 0.05);
+            }
+
+            .luxury-table-row td {
+                padding: 16px;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+        /* Estilos para badges */
+        .luxury-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .luxury-badge-active {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+
+        .luxury-badge-inactive {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        /* Estilos para botones de acción */
+        .luxury-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-outline-success {
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+
+            .btn-outline-success:hover {
+                background-color: #28a745;
+                color: white;
+            }
+
+        .btn-outline-warning {
+            border: 1px solid #ffc107;
+            color: #ffc107;
+        }
+
+            .btn-outline-warning:hover {
+                background-color: #ffc107;
+                color: #212529;
+            }
+
+        .btn-details {
+            border: 1px solid #17a2b8;
+            color: #17a2b8;
+        }
+
+            .btn-details:hover {
+                background-color: #17a2b8;
+                color: white;
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .luxury-table-header th {
+                padding: 14px 8px;
+                font-size: 13px;
+            }
+
+            .luxury-table-row td {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+
+            .btn-action {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .luxury-title {
+                font-size: 28px;
             }
 
             .luxury-subtitle {
-                color: #6c757d;
-                font-size: 18px;
-                max-width: 600px;
-                margin: 0 auto 20px;
-            }
-
-            .luxury-divider {
-                width: 80px;
-                height: 3px;
-                background: linear-gradient(90deg, #45C4B0 0%, #9AEBA3 100%);
-                margin: 20px auto;
-                border-radius: 3px;
-            }
-
-            .luxury-card {
-                background: white;
-                border-radius: 16px;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-                overflow: hidden;
-                margin: 0 auto;
-                padding: 30px;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-            }
-
-            /* Botón de crear nuevo */
-            .luxury-create-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                padding: 12px 24px;
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                color: white;
-                border: none;
-                border-radius: 10px;
                 font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
-                text-decoration: none;
-                margin-bottom: 20px;
             }
 
-                .luxury-create-btn:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
-                    color: white;
+            .luxury-table-header {
+                display: none;
+            }
+
+            .luxury-table-row {
+                display: block;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
+
+                .luxury-table-row td {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px;
+                    border-bottom: 1px solid #f0f0f0;
                 }
 
-            /* Estilos para la tabla */
-            .luxury-table-responsive {
-                overflow-x: auto;
-                border-radius: 12px;
+                    .luxury-table-row td:before {
+                        content: attr(data-label);
+                        position: absolute;
+                        left: 15px;
+                        width: 45%;
+                        padding-right: 15px;
+                        font-weight: 600;
+                        text-align: center;
+                        color: #13678A;
+                    }
+
+                    .luxury-table-row td:last-child {
+                        border-bottom: none;
+                    }
+
+            .luxury-actions {
+                justify-content: flex-end;
             }
 
             .luxury-table {
                 width: 100%;
-                border-collapse: collapse;
-                font-size: 15px;
+                border-collapse: separate;
+                border-spacing: 0;
+                margin: 0;
             }
 
             .luxury-table-header {
@@ -132,154 +462,58 @@
                     font-weight: 600;
                 }
 
-            .luxury-table-row {
-                border-bottom: 1px solid #e0e0e0;
+            .luxury-table thead th {
+                /*background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+         color: white*/
+                font-weight: 600;
+                padding: 15px;
+                text-align: center;
+                border: none;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+                .luxury-table thead th:first-child {
+                    border-top-left-radius: 12px;
+                }
+
+                .luxury-table thead th:last-child {
+                    border-top-right-radius: 12px;
+                }
+
+            .luxury-table tbody td {
+                padding: 12px 15px;
+                text-align: center;
+                vertical-align: middle;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .luxury-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            .luxury-table tbody tr:hover {
+                background-color: rgba(69, 196, 176, 0.05);
                 transition: background-color 0.3s ease;
             }
 
-                .luxury-table-row:hover {
-                    background-color: rgba(69, 196, 176, 0.05);
-                }
-
-                .luxury-table-row td {
-                    padding: 16px;
-                    vertical-align: middle;
-                    text-align: center;
-                }
-
-            /* Estilos para badges */
-            .luxury-badge {
-                display: inline-block;
-                padding: 5px 12px;
-                border-radius: 20px;
-                font-weight: bold;
-                white-space: nowrap;
+            .luxury-table-header {
+                border-radius: 20px 20px 0 0;
+                overflow: hidden;
             }
 
-            .luxury-badge-active {
-                background-color: rgba(40, 167, 69, 0.1);
-                color: #28a745;
-            }
-
-            .luxury-badge-inactive {
-                background-color: rgba(220, 53, 69, 0.1);
-                color: #dc3545;
-            }
-
-            /* Estilos para botones de acción */
-            .luxury-actions {
-                display: flex;
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .btn-action {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 6px;
-                padding: 8px 12px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                text-decoration: none;
-            }
-
-            .btn-outline-success {
-                border: 1px solid #28a745;
-                color: #28a745;
-            }
-
-                .btn-outline-success:hover {
-                    background-color: #28a745;
-                    color: white;
+                .luxury-table-header th:first-child {
+                    border-top-left-radius: 20px;
                 }
 
-            .btn-outline-warning {
-                border: 1px solid #ffc107;
-                color: #ffc107;
-            }
-
-                .btn-outline-warning:hover {
-                    background-color: #ffc107;
-                    color: #212529;
+                .luxury-table-header th:last-child {
+                    border-top-right-radius: 20px;
                 }
 
-            .btn-details {
-                border: 1px solid #17a2b8;
-                color: #17a2b8;
-            }
-
-                .btn-details:hover {
-                    background-color: #17a2b8;
-                    color: white;
-                }
-
-            /* Responsive */
-            @@media (max-width: 768px) {
-                .luxury-table-header th {
-                    padding: 14px 8px;
-                    font-size: 13px;
-                }
-
-                .luxury-table-row td {
-                    padding: 12px 8px;
-                    font-size: 14px;
-                }
-
-                .btn-action {
-                    padding: 6px 10px;
-                    font-size: 13px;
-                }
-            }
-
-            @@media (max-width: 576px) {
-                .luxury-title {
-                    font-size: 28px;
-                }
-
-                .luxury-subtitle {
-                    font-size: 16px;
-                }
-
-                .luxury-table-header {
-                    display: none;
-                }
-
-                .luxury-table-row {
-                    display: block;
-                    margin-bottom: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-                    overflow: hidden;
-                }
-
-                    .luxury-table-row td {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 12px;
-                        border-bottom: 1px solid #f0f0f0;
-                    }
-
-                        .luxury-table-row td:before {
-                            content: attr(data-label);
-                            font-weight: 600;
-                            color: #45C4B0;
-                            margin-right: 15px;
-                        }
-
-                        .luxury-table-row td:last-child {
-                            border-bottom: none;
-                        }
-
-                .luxury-actions {
-                    justify-content: flex-end;
-                }
-            }
-        </style>
+            */
+        }
+    </style>
 </head>
 <body>
     <div class="servicios-container">
@@ -293,67 +527,83 @@
                 <div class="luxury-divider"></div>
             </div>
 
-            <div class="luxury-card shadow-lg rounded">
-                <div class="card-body">
-                    <a href="@Url.Action("Create")" class="luxury-create-btn">
-                        <i class="fas fa-plus-circle"></i> Crear Nuevo Servicio
-                    </a>
+            <div class="text-end mb-4">
+                <a href="@Url.Action("Create")" class="luxury-button">
+                    <span class="button-text">Registrar Nuevo</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
 
+
+            <div class="luxury-card shadow-lg rounded">
+                <div class="card-body p-0">
                     <div class="luxury-table-responsive">
-                        <table class="luxury-table">
-                            <thead class="luxury-table-header">
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.nombre)</th>
-                                    <th>@Html.DisplayNameFor(model => model.descripcion)</th>
-                                    <th>@Html.DisplayNameFor(model => model.estado)</th>
-                                    <th>@Html.DisplayNameFor(model => model.modalidad)</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr class="luxury-table-row">
-                                        <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
-                                        <td data-label="Descripción">@Html.DisplayFor(modelItem => item.descripcion)</td>
-                                        <td data-label="Estado">
-                                            @if (item.estado)
-                                            {
-                                                <span class="luxury-badge luxury-badge-active">Activo</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="luxury-badge luxury-badge-inactive">Inactivo</span>
-                                            }
-                                        </td>
-                                        <td data-label="Modalidad">@Html.DisplayFor(modelItem => item.modalidad)</td>
-                                        <td>
-                                            <div class="luxury-actions">
+                        <div>
+                            <table id="myTable" class="luxury-table">
+                                <thead class="luxury-table-header">
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                                        <th>@Html.DisplayNameFor(model => model.estado)</th>
+                                        <th>@Html.DisplayNameFor(model => model.modalidad)</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="luxury-table-row">
+                                            <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
+                                            <td data-label="Descripción">@Html.DisplayFor(modelItem => item.descripcion)</td>
+                                            <td data-label="Estado">
                                                 @if (item.estado)
                                                 {
-                                                    <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" class="btn btn-outline-warning btn-action">
-                                                        <i class="fas fa-times-circle"></i> Inactivar
-                                                    </a>
+                                                    <span class="luxury-badge ">Activo</span>
                                                 }
                                                 else
                                                 {
-                                                    <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" class="btn btn-outline-success btn-action">
-                                                        <i class="fas fa-check-circle"></i> Activar
-                                                    </a>
+                                                    <span class="luxury-badge ">Inactivo</span>
                                                 }
-                                                <a href="@Url.Action("Details", new { id = item.idServicio })" class="btn btn-details btn-action">
-                                                    <i class="fas fa-info-circle"></i> Detalles
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                                            </td>
+                                            <td data-label="Modalidad">@Html.DisplayFor(modelItem => item.modalidad)</td>
+                                            <td>
+                                                <div class="luxury-actions">
+                                                    @if (item.estado)
+                                                    {
+                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" class="luxury-btn-action warning me-2 mb-2" title="Inactivar" data-bs-toggle="tooltip">
+                                                            <i class="fas fa-times-circle"></i>
+                                                        </a>
+                                                    }
+
+                                                    else
+                                                    {
+                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" cclass="luxury-btn-action success me-2 mb-2" title="Activar" data-bs-toggle="tooltip">
+                                                            <i class="fas fa-check-circle"></i>
+                                                        </a>
+
+                                                    }
+                                                    <a href="@Url.Action("Details", new { id = item.idServicio })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </a>
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>

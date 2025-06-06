@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ProyectoLavacar.Abstraciones.Modelos.ModuloCompra.CompraAdminDto>
+﻿@model IEnumerable<ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora.BitacoraDto>
 
 @{
-    ViewBag.Title = "Administración de Compras";
+    ViewBag.Title = "Index";
 }
 
 <!DOCTYPE html>
@@ -21,6 +21,7 @@
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 </head>
 
 <body>
@@ -32,33 +33,22 @@
                         <path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" />
                     </svg>
                 </div>
-                <h2 class="luxury-title">Administración de Compras</h2>
-                <p class="luxury-subtitle">Listado completo de transacciones</p>
+                <h2 class="luxury-title">Administración de Bitácora</h2>
                 <div class="luxury-divider"></div>
             </div>
 
-            <div class="text-end mb-4">
-                <a href="@Url.Action("Create")" class="luxury-button">
-                    <span class="button-text">Nueva Compra</span>
-                    <span class="button-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                        </svg>
-                    </span>
-                    <div class="button-shine"></div>
-                </a>
-            </div>
+            
 
             <div class="luxury-card shadow-lg rounded">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="myTable" class="luxury-table">
-                            <thead class="luxury-table-header" style="text-align: center">
+                        <table class="luxury-table" id="myTable">
+                            <thead>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PrimerApellido)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Total)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                                    <th>@Html.DisplayNameFor(model => model.FechaDeEvento)</th>
+                                    <th>@Html.DisplayNameFor(model => model.TablaDeEvento)</th>
+                                    <th>@Html.DisplayNameFor(model => model.TipoDeEvento)</th>
+                                    <th>@Html.DisplayNameFor(model => model.DescripcionDeEvento)</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -66,16 +56,17 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.PrimerApellido)</td>
-                                        <td class="luxury-price">@Html.DisplayFor(modelItem => item.Total)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.FechaDeEvento)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TablaDeEvento)</td>
+                                        <td class="luxury-price">@Html.DisplayFor(modelItem => item.TipoDeEvento)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DescripcionDeEvento)</td>
                                         <td class="luxury-actions">
-                                            <a href="@Url.Action("DetallesCompra", new { idCompra = item.idCompra })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            <a href="@Url.Action("DescargarPDFCompra", new { idCompra = item.idCompra })" class="luxury-btn-action download me-2 mb-2" title="Descargar" data-bs-toggle="tooltip">
-                                                <i class="fas fa-download"></i>
+                                            <a href="@Url.Action("Details", new { id = item.IdEvento })" class="luxury-button luxury-button-small luxury-button-info">
+                                                <span class="button-icon">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                                    </svg>
+                                                </span>
                                             </a>
 
                                         </td>
@@ -130,7 +121,6 @@
 
     </script>
 
-
     <script>
         // Agregar etiquetas para responsive
         $(document).ready(function () {
@@ -140,82 +130,10 @@
             });
         });
     </script>
-
 </body>
 </html>
 
 <style>
-
-    .luxury-btn-action {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        color: white;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-        .luxury-btn-action.info {
-            background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
-        }
-
-        .luxury-btn-action.warning {
-            background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
-        }
-
-        .luxury-btn-action.download {
-            background: linear-gradient(135deg, #03a9f4 0%, #0277bd 100%);
-        }
-
-        .luxury-btn-action.success {
-            background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
-        }
-
-        .luxury-btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            color: white;
-            text-decoration: none;
-        }
-
-    .luxury-btn-action {
-        width: 32px;
-        height: 32px;
-        margin: 0 5px 5px;
-    }
-
-    .luxury-table-header {
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        color: white;
-    }
-
-    .luxury-card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    table.dataTable thead th {
-        text-align: center !important;
-    }
-
-    /* Bordes ovalados arriba del thead */
-    .luxury-table thead th:first-child {
-        border-top-left-radius: 12px;
-    }
-
-    .luxury-table thead th:last-child {
-        border-top-right-radius: 12px;
-    }
-
     .luxury-review-container {
         padding: 40px 0;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -267,6 +185,15 @@
         border-radius: 3px;
     }
 
+    .luxury-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
     .luxury-table {
         width: 100%;
         border-collapse: collapse;
@@ -276,29 +203,20 @@
             background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
             color: white;
             padding: 15px;
-            text-align: center;
+            text-align: left;
             font-weight: 600;
             border-bottom: 3px solid #3aa58e;
         }
 
-    table.dataTable > tbody > tr > td {
-        padding: 8px 10px;
-        text-align: center;
-    }
+        .luxury-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #6c757d;
+        }
 
-    table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataTable td.dt-type-numeric, table.dataTable td.dt-type-date {
-        text-align: center;
-    }
-
-    .luxury-table td {
-        padding: 15px;
-        border-bottom: 1px solid #f0f0f0;
-        color: #6c757d;
-    }
-
-    .luxury-table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
+        .luxury-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
 
     .luxury-price {
         font-weight: 700;
