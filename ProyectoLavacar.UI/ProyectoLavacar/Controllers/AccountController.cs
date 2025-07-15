@@ -1,4 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
+using ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
+using ProyectoLavacar.AccesoADatos;
+using ProyectoLavacar.LN.General.Fecha;
+using ProyectoLavacar.LN.ModuloCorreos;
+using ProyectoLavacar.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -8,16 +19,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha;
-using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
-using ProyectoLavacar.AccesoADatos;
-using ProyectoLavacar.LN.General.Fecha;
-using ProyectoLavacar.LN.ModuloCorreos;
-using ProyectoLavacar.Models;
 
 namespace ProyectoLavacar.Controllers
 {
@@ -220,11 +221,104 @@ namespace ProyectoLavacar.Controllers
         //
         // POST: /Account/Register
         // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+        //    bool existePersona = _contexto.UsuariosTabla
+        //.Any(p => p.cedula == model.cedula);
+
+
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser
+        //        {
+        //            UserName = model.Email,
+        //            Email = model.Email,
+        //            nombre = model.Nombre,
+        //            primer_apellido = model.PrimerApellido,
+        //            segundo_apellido = model.SegundoApellido,
+        //            estado = true,
+        //            ingreso = DateTime.Now,
+        //            cedula = model.cedula,
+        //            PhoneNumber = model.PhoneNumber
+
+
+        //        };
+
+
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        var Asunto = "¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi";
+
+
+        //        if (result.Succeeded)
+        //        {
+        //            // Asignar el rol al usuario
+        //            var resultRole = await UserManager.AddToRoleAsync(user.Id, "Usuario");
+
+
+        //            if (resultRole.Succeeded)
+        //            {
+        //                string cuerpoDelCorreo = ObtenerPlantillaCorreo();
+        //                string correoConvertido = string.Format(cuerpoDelCorreo, model.Nombre, model.PrimerApellido);
+        //                await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
+        //                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        //                return RedirectToAction("Index", "Home");
+        //            }
+
+
+        //            // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
+        //            // Enviar un correo electrónico con este vínculo
+        //            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //            // await UserManager.SendEmailAsync(user.Id, "Confirmar la cuenta", "Para confirmar su cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+
+
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        AddErrors(result);
+        //    }
+
+
+        //    // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+        //    return View(model);
+        //}
+
+    [HttpPost]
+    [AllowAnonymous]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Register(RegisterViewModel model)
+    {
+            try
+            {
+                // Validar si ya existe un usuario con la misma cédula
+                bool existePersona = _contexto.UsuariosTabla
+                    .Any(p => p.cedula == model.cedula);
+
+                bool existeNumero = _contexto.UsuariosTabla
+                        .Any(n => n.PhoneNumber == model.PhoneNumber);
+                bool existeCorreo = _contexto.UsuariosTabla
+                    .Any(c => c.Email == model.Email);
+
+                if (existePersona)
+                {
+                    ModelState.AddModelError("cedula", "Ya existe un usuario con esta cédula.");
+                    return View(model);
+                }
+                if (existeNumero)
+                {
+                    ModelState.AddModelError("PhoneNumber", "Ya existe un usuario con el mismo número.");
+                    return View(model);
+                }
+                if (existeCorreo)
+                {
+                    ModelState.AddModelError("Email", "Ya existe un usuario con el mismo correo.");
+                    return View(model);
+                }
+
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -235,53 +329,42 @@ namespace ProyectoLavacar.Controllers
                     primer_apellido = model.PrimerApellido,
                     segundo_apellido = model.SegundoApellido,
                     estado = true,
-                    ingreso = DateTime.Now,
+                    ingreso = _fecha.ObtenerFecha(),
                     cedula = model.cedula,
                     PhoneNumber = model.PhoneNumber
-                    
-
                 };
 
-
                 var result = await UserManager.CreateAsync(user, model.Password);
-                var Asunto = "¡Tu cuenta está lista! Disfruta nuestros servicios en el Lavacar Hervi";
-
 
                 if (result.Succeeded)
                 {
-                    // Asignar el rol al usuario
                     var resultRole = await UserManager.AddToRoleAsync(user.Id, "Usuario");
-
 
                     if (resultRole.Succeeded)
                     {
+                        // Correo de bienvenida
                         string cuerpoDelCorreo = ObtenerPlantillaCorreo();
                         string correoConvertido = string.Format(cuerpoDelCorreo, model.Nombre, model.PrimerApellido);
-                        await _emailSender.SendEmailAsync(user.Email, Asunto, correoConvertido).ConfigureAwait(false);
+                        await _emailSender.SendEmailAsync(user.Email, "¡Tu cuenta está lista!", correoConvertido);
+
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToAction("Index", "Home");
                     }
 
-
-                    // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Enviar un correo electrónico con este vínculo
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirmar la cuenta", "Para confirmar su cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-
-
-                    return RedirectToAction("Index", "Home");
+                    // Si falla el rol, aún así podrías manejarlo según tu lógica
+                    ModelState.AddModelError("", "No se pudo asignar el rol al usuario.");
                 }
+
                 AddErrors(result);
             }
-
-
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-            return View(model);
+        }
+        catch (Exception)
+        {
+            ModelState.AddModelError("", "Ocurrió un error al registrar el usuario. Intente nuevamente.");
         }
 
-
-
+        return View(model);
+    }
 
 
 
@@ -390,9 +473,8 @@ namespace ProyectoLavacar.Controllers
           new { Value = "Empleado", Text = "Empleado" }
          }, "Value", "Text");
             return View(model);
-        }
-
-
+        }                                                                                                                        
+            
 
         //
         // GET: /Account/ConfirmEmail

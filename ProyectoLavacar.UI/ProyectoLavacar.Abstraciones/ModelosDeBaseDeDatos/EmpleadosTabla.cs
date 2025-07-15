@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
 {
+    
     public class EmpleadosTabla
     {
         [Key]
@@ -16,7 +18,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public string segundo_apellido { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
-        public string cedula { get; set; }
+        public int cedula { get; set; }
         public string puesto { get; set; }
         public string turno { get; set; }
         public bool estado { get; set; }

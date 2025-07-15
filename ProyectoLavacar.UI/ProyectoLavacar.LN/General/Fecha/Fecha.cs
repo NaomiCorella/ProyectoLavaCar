@@ -11,8 +11,9 @@ namespace ProyectoLavacar.LN.General.Fecha
     {
         public DateTime ObtenerFecha()
         {
-            return DateTime.Now;
+            return DateTime.Now.Add(TimeSpan.FromMinutes(-180)); // 3.5 horas = 210 minutos
         }
+
 
 
     }

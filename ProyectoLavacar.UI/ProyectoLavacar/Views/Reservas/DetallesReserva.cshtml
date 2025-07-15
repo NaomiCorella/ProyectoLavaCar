@@ -92,6 +92,20 @@
                     </div>
 
                     <div class="text-center mt-4">
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a href="@Url.Action("Reservas", "Reservas")" class="luxury-button luxury-button-secondary">
+                                <span class="button-text">Volver a la Gestión</span>
+                                <span class="button-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                                    </svg>
+                                </span>
+                                <div class="button-shine"></div>
+                            </a>
+                        }
+                        @if (User.IsInRole("Usuario"))
+                        {
                         <a href="@Url.Action("MisReservas", "Reservas")" class="luxury-button luxury-button-secondary">
                             <span class="button-text">Volver a la Gestión</span>
                             <span class="button-icon">
@@ -101,6 +115,7 @@
                             </span>
                             <div class="button-shine"></div>
                         </a>
+                        }
                     </div>
                 </div>
             </div>

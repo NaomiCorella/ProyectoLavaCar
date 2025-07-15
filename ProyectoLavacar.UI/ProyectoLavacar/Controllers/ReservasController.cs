@@ -177,7 +177,7 @@ namespace ProyectoLavacar.Controllers
             return View(lalistaDeReservas);
         }
         // GET: Reservas
-        [Authorize(Roles = "Usuario")]
+        [Authorize(Roles = "Usuario,Administrador")]
         public ActionResult MisReservas() //ReservasCliente
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -242,71 +242,162 @@ namespace ProyectoLavacar.Controllers
         }
 
         // GET: Reservas/Create
+        //[Authorize(Roles = "Administrador, Empleado, Usuario")]
+
+        //public ActionResult Create(int id)
+        //{
+        //    var fechasYHorasDisponibles = ObtenerFechasYHorasDisponibles(id);
+        //    ViewBag.FechasYHorasDisponibles = fechasYHorasDisponibles;
+        //    return View();
+        //}
+
+        //// POST: Reservas/Create
+        //[HttpPost]
+        //public async Task<ActionResult> Create(ReservasDto modeloDeReserva, int id)
+        //{
+        //    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+        //    string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        //    try
+        //    {
+
+        //        DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
+        //        TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
+        //        DateTime fechaHoraSeleccionada = fechaSeleccionada.Add(horaSeleccionada);
+
+
+        //        bool existeReserva = _context.ReservasTabla
+        //            .Any(r => r.idServicio == id && r.fecha == fechaSeleccionada && r.hora == horaSeleccionada);
+
+        //        if (existeReserva)
+        //        {
+
+        //            ModelState.AddModelError("", "La fecha y hora seleccionada ya está ocupada. Por favor elige otra.");
+        //            return View(modeloDeReserva);
+        //        }
+
+        //        DateTime fechaInicio;
+        //        if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
+        //        {
+
+        //            if (fechaInicio < DateTime.Now)
+        //            {
+        //                ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
+        //                return View(modeloDeReserva);
+        //            }
+        //        }
+        //        ReservasDto reserva = new ReservasDto()
+        //        {
+        //            idReserva = 1,
+        //            idCliente = idCliente,
+        //            idServicio = id,
+        //            idEmpleado = idCliente,
+        //            fecha = modeloDeReserva.fecha, 
+        //            hora = modeloDeReserva.hora,  
+        //            estado = true
+        //        };
+
+        //        int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
+
+        //        return RedirectToAction("/MisReservas");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejo de errores
+        //        return View();
+        //    }
+        //}
+
+        // GET: Reservas/Create
         [Authorize(Roles = "Administrador, Empleado, Usuario")]
 
         public ActionResult Create(int id)
         {
-            var fechasYHorasDisponibles = ObtenerFechasYHorasDisponibles(id);
-            ViewBag.FechasYHorasDisponibles = fechasYHorasDisponibles;
+            ViewBag.idServicio = id;
             return View();
+        }
+
+        // AJAX: Obtener horas disponibles
+        public JsonResult ObtenerHorasDisponibles(int idServicio, string fecha)
+        {
+            List<string> todasLasHoras = new List<string>
+    {
+        "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
+    };
+
+            DateTime fechaSeleccionada = DateTime.Parse(fecha);
+
+            // Agrupar por hora sin filtrar por servicio
+            var reservasPorHora = _context.ReservasTabla
+                .Where(r => r.fecha == fechaSeleccionada)
+                .ToList() // Traer los datos a memoria para evitar error con ToString()
+                .GroupBy(r => r.hora)
+                .Select(g => new
+                {
+                    Hora = g.Key.ToString(@"hh\:mm"),
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var horasDisponibles = todasLasHoras.Select(h => new
+            {
+                Hora = h,
+                EspaciosDisponibles = 4 - (reservasPorHora.FirstOrDefault(r => r.Hora == h)?.Cantidad ?? 0)
+            })
+            .Where(h => h.EspaciosDisponibles > 0)
+            .ToList();
+
+            return Json(horasDisponibles, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Reservas/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ReservasDto modeloDeReserva, int id)
         {
-            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            string idCliente = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            string idCliente = User.Identity.GetUserId();
 
             try
             {
-             
                 DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
                 TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
-                DateTime fechaHoraSeleccionada = fechaSeleccionada.Add(horaSeleccionada);
 
-            
-                bool existeReserva = _context.ReservasTabla
-                    .Any(r => r.idServicio == id && r.fecha == fechaSeleccionada && r.hora == horaSeleccionada);
+                bool existeReserva = _context.ReservasTabla.Any(r =>
+                    r.idServicio == id && r.fecha == fechaSeleccionada && r.hora == horaSeleccionada);
 
-                if (existeReserva)
+                //if (existeReserva)
+                //{
+                //    ModelState.AddModelError("", "La fecha y hora seleccionada ya está ocupada.");
+                //    return View(modeloDeReserva);
+                //}
+
+                if (fechaSeleccionada < DateTime.Today)
                 {
-                 
-                    ModelState.AddModelError("", "La fecha y hora seleccionada ya está ocupada. Por favor elige otra.");
+                    ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a hoy.");
                     return View(modeloDeReserva);
                 }
 
-                DateTime fechaInicio;
-                if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
+                ReservasTabla nuevaReserva = new ReservasTabla
                 {
-                    
-                    if (fechaInicio < DateTime.Now)
-                    {
-                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
-                        return View(modeloDeReserva);
-                    }
-                }
-                ReservasDto reserva = new ReservasDto()
-                {
-                    idReserva = 1,
                     idCliente = idCliente,
-                    idServicio = id,
                     idEmpleado = idCliente,
-                    fecha = modeloDeReserva.fecha, 
-                    hora = modeloDeReserva.hora,  
+                    idServicio = id,
+                    fecha = fechaSeleccionada,
+                    hora = horaSeleccionada,
                     estado = true
                 };
 
-                int cantidadDeDatosGuardados = await _crearReserva.CrearReserva(reserva);
+                _context.ReservasTabla.Add(nuevaReserva);
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("/MisReservas");
+                return RedirectToAction("MisReservas");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Manejo de errores
-                return View();
+                return View(modeloDeReserva);
             }
         }
+
 
         [Authorize(Roles = "Administrador, Empleado, Usuario")]
 
@@ -338,21 +429,21 @@ namespace ProyectoLavacar.Controllers
             DateTime fechaInicio;
             if (DateTime.TryParse(modeloDeReserva.fecha, out fechaInicio))
             {
-
-                if (fechaInicio <= DateTime.Now)
+                if (fechaInicio < DateTime.Today)
                 {
+                    ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a hoy.");
                     CargarServicios();
-                    ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
                     return View(modeloDeReserva);
                 }
             }
-         
+
 
 
             // Validar datos
             if (modeloDeReserva.idServicio == 0 || modeloDeReserva.fecha == null || modeloDeReserva.hora == null)
             {
                 Console.WriteLine("⚠️ Los datos del formulario son inválidos.");
+                CargarServicios();
                 return View(); // O redirige a alguna página que maneje esto
             }
 
@@ -379,14 +470,30 @@ namespace ProyectoLavacar.Controllers
             if (servicio == null)
             {
                 Console.WriteLine("⚠️ Servicio no encontrado.");
-                return View();
+                CargarServicios();
+                return View(modeloDeReserva);
+            }
+
+            // Validar cantidad máxima
+            DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
+            TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
+            int reservasExistentes = _context.ReservasTabla.Count(r =>
+                r.idServicio == modeloDeReserva.idServicio &&
+                r.fecha == fechaSeleccionada &&
+                r.hora == horaSeleccionada);
+
+            if (reservasExistentes >= 4)
+            {
+                ModelState.AddModelError("", "Ya hay 4 reservas para esa hora. Por favor elige otra.");
+                CargarServicios();
+                return View(modeloDeReserva);
             }
 
             // Crear la reserva
             ReservasDto reserva = new ReservasDto()
             {
                 idCliente = idCliente,
-                idServicio = modeloDeReserva.idServicio, 
+                idServicio = modeloDeReserva.idServicio,
                 idEmpleado = idCliente,
                 fecha = modeloDeReserva.fecha,
                 hora = modeloDeReserva.hora,
@@ -414,14 +521,49 @@ namespace ProyectoLavacar.Controllers
             else
             {
                 Console.WriteLine("⚠️ No se pudo guardar la reserva.");
-              
+
                 var servicios = _listarServicios.ListarServicios()
                     .Where(a => a.estado == true)
                     .ToList();
                 ViewBag.Servicios = servicios;
-                return View();
+                CargarServicios();
+                return View(modeloDeReserva);
             }
         }
+        // AJAX: Obtener horas disponibles
+        public JsonResult ObtenerHorasDisponibless(int idServicio, string fecha)
+        {
+            List<string> todasLasHoras = new List<string>
+    {
+        "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
+    };
+
+            DateTime fechaSeleccionada = DateTime.Parse(fecha);
+
+            // Agrupar por hora sin filtrar por servicio
+            var reservasPorHora = _context.ReservasTabla
+                .Where(r => r.fecha == fechaSeleccionada)
+                .ToList() // Traer los datos a memoria para evitar error con ToString()
+                .GroupBy(r => r.hora)
+                .Select(g => new
+                {
+                    Hora = g.Key.ToString(@"hh\:mm"),
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var horasDisponibles = todasLasHoras.Select(h => new
+            {
+                Hora = h,
+                EspaciosDisponibles = 4 - (reservasPorHora.FirstOrDefault(r => r.Hora == h)?.Cantidad ?? 0)
+            })
+            .Where(h => h.EspaciosDisponibles > 0)
+            .ToList();
+
+            return Json(horasDisponibles, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
 
@@ -456,30 +598,85 @@ namespace ProyectoLavacar.Controllers
 
         // POST: Reservas/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ReservasDto modeloReserva)
         {
             try
             {
-                DateTime fechaInicio;
-                if (DateTime.TryParse(modeloReserva.fecha, out fechaInicio))
-                {
+                DateTime fechaSeleccionada = DateTime.Parse(modeloReserva.fecha);
+                TimeSpan horaSeleccionada = TimeSpan.Parse(modeloReserva.hora);
 
-                    if (fechaInicio < DateTime.Now)
-                    {
-                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
-                        return View(modeloReserva);
-                    }
+                if (fechaSeleccionada < DateTime.Today)
+                {
+                    ModelState.AddModelError("fecha", "La fecha no puede ser anterior a hoy.");
+                    CargarListasVista(); // recargar dropdowns
+                    return View(modeloReserva);
                 }
+
+                // Verificar cantidad de reservas existentes en la hora
+                var reservasEnHora = _context.ReservasTabla
+                    .Count(r => r.fecha == fechaSeleccionada && r.hora == horaSeleccionada && r.idReserva != modeloReserva.idReserva);
+
+                if (reservasEnHora >= 4)
+                {
+                    ModelState.AddModelError("hora", "Ya hay 4 reservas registradas en esta hora.");
+                    CargarListasVista(); // recargar dropdowns
+                    return View(modeloReserva);
+                }
+
                 string datosanteriores = TempData["DatosAnteriores"] as string;
-                int cantidadDeDatosEditados = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
+                int resultado = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
 
                 return RedirectToAction("Reservas");
             }
             catch
             {
-                return View();
+                CargarListasVista();
+                return View(modeloReserva);
             }
         }
+
+        private void CargarListasVista()
+        {
+            ViewBag.Servicios = _listarServicios.ListarServicios().Where(s => s.estado).ToList();
+            ViewBag.Empleados = _listarEmpleado.ListarEmpleados().Where(e => e.estado).ToList();
+        }
+
+        // AJAX: Horas disponibles sin importar el servicio
+        [HttpGet]
+        [Authorize(Roles = "Administrador")]
+        public JsonResult ObtenerHorasDisponiblesAdmin(string fecha)
+        {
+            List<string> todasLasHoras = new List<string>
+    {
+        "08:00", "09:00", "10:00", "11:00",
+        "13:00", "14:00", "15:00", "16:00"
+    };
+
+            DateTime fechaSeleccionada = DateTime.Parse(fecha);
+
+            var reservasPorHora = _context.ReservasTabla
+                .Where(r => r.fecha == fechaSeleccionada)
+                .ToList()
+                .GroupBy(r => r.hora)
+                .Select(g => new
+                {
+                    Hora = g.Key.ToString(@"hh\:mm"),
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var horasDisponibles = todasLasHoras.Select(h => new
+            {
+                Hora = h,
+                EspaciosDisponibles = 4 - (reservasPorHora.FirstOrDefault(r => r.Hora == h)?.Cantidad ?? 0)
+            })
+            .Where(h => h.EspaciosDisponibles > 0)
+            .ToList();
+
+            return Json(horasDisponibles, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
@@ -488,38 +685,105 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult EditarMiReserva(int idReserva)
         {
-            ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
-            return View(modeloReserva);
+            var modelo = _detallesReserva.Detalle(idReserva);
+            return View(modelo);
         }
 
-        // POST: Reservas/Edit/5
+        // POST: Reservas/EditarMiReserva
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public async Task<ActionResult> EditarMiReserva(ReservasDto modeloReserva)
         {
             try
             {
-                DateTime fechaInicio;
-                if (DateTime.TryParse(modeloReserva.fecha, out fechaInicio))
-                {
+                DateTime fechaSeleccionada;
+                TimeSpan horaSeleccionada;
 
-                    if (fechaInicio < DateTime.Now)
-                    {
-                        ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
-                        return View(modeloReserva);
-                    }
+                if (!DateTime.TryParse(modeloReserva.fecha, out fechaSeleccionada))
+                {
+                    ModelState.AddModelError("fecha", "Fecha inválida.");
+                    return View(modeloReserva);
                 }
+
+                if (!TimeSpan.TryParse(modeloReserva.hora, out horaSeleccionada))
+                {
+                    ModelState.AddModelError("hora", "Hora inválida.");
+                    return View(modeloReserva);
+                }
+
+                // Validar que la fecha no sea pasada
+                if (fechaSeleccionada.Date < DateTime.Today)
+                {
+                    ModelState.AddModelError("fecha", "La fecha no puede ser anterior a hoy.");
+                    return View(modeloReserva);
+                }
+
+                // Validar si está dentro del horario de atención
+                var horaApertura1 = new TimeSpan(8, 0, 0);   // 08:00 AM
+                var horaCierre1 = new TimeSpan(12, 0, 0);    // 12:00 PM
+
+                var horaApertura2 = new TimeSpan(13, 0, 0);  // 01:00 PM
+                var horaCierre2 = new TimeSpan(17, 0, 0);    // 05:00 PM
+
+                bool esHoraValida =
+                    (horaSeleccionada >= horaApertura1 && horaSeleccionada < horaCierre1) ||
+                    (horaSeleccionada >= horaApertura2 && horaSeleccionada < horaCierre2);
+
+                if (!esHoraValida)
+                {
+                    ModelState.AddModelError("hora", "La hora seleccionada está fuera del horario de atención (08:00–12:00 y 13:00–17:00).");
+                    return View(modeloReserva);
+                }
+
+                // Guardar cambios
                 int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
 
-                return RedirectToAction("/MisReservas");
+                return RedirectToAction("MisReservas");
             }
             catch
             {
-                return View();
+                return View(modeloReserva);
             }
         }
+
+        public JsonResult ObtenerHorasDisponiblesEditar(string fecha)
+        {
+            List<string> todasLasHoras = new List<string>
+    {
+        "08:00", "09:00", "10:00", "11:00",
+        "13:00", "14:00", "15:00", "16:00"
+    };
+
+            DateTime fechaSeleccionada = DateTime.Parse(fecha);
+
+            // Agrupar todas las reservas por hora, sin filtrar por servicio
+            var reservasPorHora = _context.ReservasTabla
+                .Where(r => r.fecha == fechaSeleccionada)
+                .ToList()
+                .GroupBy(r => r.hora)
+                .Select(g => new
+                {
+                    Hora = g.Key.ToString(@"hh\:mm"),
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var horasDisponibles = todasLasHoras.Select(h => new
+            {
+                Hora = h,
+                EspaciosDisponibles = 4 - (reservasPorHora.FirstOrDefault(r => r.Hora == h)?.Cantidad ?? 0)
+            })
+            .Where(h => h.EspaciosDisponibles > 0)
+            .ToList();
+
+            return Json(horasDisponibles, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         /// ////////////////  //////////////////
 
-       
+
 
         public ActionResult CambiarEstado(int id)
         {

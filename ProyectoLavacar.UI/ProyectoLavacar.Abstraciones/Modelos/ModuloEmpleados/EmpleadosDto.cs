@@ -22,7 +22,7 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModuloEmpleados
         [Display(Name = "Correo electrónico")]
         public string correo { get; set; }
         [Display(Name = "Cédula")]
-        public string cedula { get; set; }
+        public int cedula { get; set; }
         [Display(Name = "Puesto")]
         public string puesto { get; set; }
         [Display(Name = "Turno")]
