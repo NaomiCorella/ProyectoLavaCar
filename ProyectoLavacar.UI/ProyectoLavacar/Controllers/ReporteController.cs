@@ -10,7 +10,7 @@ namespace ProyectoLavacar.Controllers
 {
     public class ReporteController : Controller
     {
-        
+
         Contexto _context;
         public ReporteController()
         {
@@ -53,7 +53,7 @@ namespace ProyectoLavacar.Controllers
             return PartialView("_ServiciosPorMes");
         }
         #endregion
-
+        //------------------------
 
         #region Margenes Ventas
         public ActionResult ObtenerMargenVentas()
@@ -129,58 +129,68 @@ namespace ProyectoLavacar.Controllers
         #region
         public ActionResult ObtenerGraficoVentasPorMes()
         {
-            // Obtener todas las compras relacionadas con servicios
-            var compras = _context.CompraServiciosTabla
-                .Join(_context.CompraTabla,
-                    compraServicio => compraServicio.idCompra,
-                    compra => compra.idCompra,
-                    (compraServicio, compra) => new { compraServicio, compra })
-                .Join(_context.ServiciosTabla,
-                    compraServicio => compraServicio.compraServicio.idServicio,
-                    servicio => servicio.idServicio,
-                    (compraServicio, servicio) => new
-                    {
-                        Fecha = compraServicio.compra.fecha,
-                        TotalVenta = compraServicio.compra.Total,
-                        MargenVenta = servicio.precio - servicio.costo // Calculamos el margen de cada venta
-                    })
+            // Obtener todas las compras (con fecha y total)
+            var compras = _context.CompraTabla
+                .Select(c => new
+                {
+                    c.idCompra,
+                    c.Total,
+                    c.fecha
+                })
                 .ToList();
 
-            // Crear listas para almacenar las fechas, totales de ventas y márgenes de ventas por mes
-            List<string> fechas = new List<string>();
-            List<decimal> totalVentas = new List<decimal>();
-            List<decimal> margenVentas = new List<decimal>();
-
-            // Recorrer todas las compras para agruparlas por mes/año
-            foreach (var compra in compras)
-            {
-                string mesAnyo = compra.Fecha.ToString("yyyy-MM"); // Obtener el mes/año (Formato: YYYY-MM)
-
-                // Verificar si ya existe el mes/año en la lista de fechas
-                int index = fechas.IndexOf(mesAnyo);
-                if (index != -1)
+            // Obtener el costo total por cada compra (sumando costos de servicios)
+            var costosPorCompra = _context.CompraServiciosTabla
+                .Join(_context.ServiciosTabla,
+                      cs => cs.idServicio,
+                      s => s.idServicio,
+                      (cs, s) => new { cs.idCompra, Costo = s.costo })
+                .GroupBy(x => x.idCompra)
+                .Select(g => new
                 {
-                    // Si existe, actualizar los totales de ventas y márgenes para ese mes
-                    totalVentas[index] += compra.TotalVenta;
-                    margenVentas[index] += compra.MargenVenta;
-                }
-                else
-                {
-                    // Si no existe, agregar una nueva entrada para ese mes/año
-                    fechas.Add(mesAnyo);
-                    totalVentas.Add(compra.TotalVenta);
-                    margenVentas.Add(compra.MargenVenta);
-                }
-            }
+                    idCompra = g.Key,
+                    CostoTotal = g.Sum(x => x.Costo)
+                })
+                .ToList();
 
-            // Pasar las listas de fechas, ventas y márgenes a la vista utilizando ViewBag
+            // Unir los totales y costos por compra
+            var datosVentas = compras
+                .GroupJoin(costosPorCompra,
+                           compra => compra.idCompra,
+                           costo => costo.idCompra,
+                           (compra, costoGroup) => new
+                           {
+                               Fecha = compra.fecha,
+                               TotalVenta = compra.Total,
+                               CostoTotal = costoGroup.FirstOrDefault()?.CostoTotal ?? 0m
+                           })
+                .ToList();
+
+            // Agrupar por mes y año (yyyy-MM)
+            var ventasPorMes = datosVentas
+                .GroupBy(x => x.Fecha.ToString("yyyy-MM"))
+                .Select(g => new
+                {
+                    Fecha = g.Key,
+                    TotalVentas = g.Sum(x => x.TotalVenta),
+                    MargenVentas = g.Sum(x => x.TotalVenta - x.CostoTotal)
+                })
+                .OrderBy(x => x.Fecha)
+                .ToList();
+
+            // Preparar listas para el gráfico
+            var fechas = ventasPorMes.Select(x => x.Fecha).ToList();
+            var totalVentas = ventasPorMes.Select(x => x.TotalVentas).ToList();
+            var margenVentas = ventasPorMes.Select(x => x.MargenVentas).ToList();
+
+            // Enviar a la vista
             ViewBag.Fechas = fechas;
             ViewBag.TotalVentas = totalVentas;
             ViewBag.MargenVentas = margenVentas;
 
-            // Devolver la vista parcial
             return PartialView("_GraficoVentas");
         }
+
 
 
         #endregion
@@ -189,41 +199,62 @@ namespace ProyectoLavacar.Controllers
         #region filtro por ventas mes
         public ActionResult ObtenerDatosPorMes(int? mes)
         {
-            // Consulta base para obtener las compras y servicios
-            var compras = _context.CompraServiciosTabla
-                .Join(_context.CompraTabla,
-                    compraServicio => compraServicio.idCompra,
-                    compra => compra.idCompra,
-                    (compraServicio, compra) => new { compraServicio, compra })
-                .Join(_context.ServiciosTabla,
-                    compraServicio => compraServicio.compraServicio.idServicio,
-                    servicio => servicio.idServicio,
-                    (compraServicio, servicio) => new
-                    {
-                        Fecha = compraServicio.compra.fecha,
-                        TotalVenta = compraServicio.compra.Total,
-                        MargenVenta = servicio.precio - servicio.costo
-                    });
-
-            // Filtrar por mes si el mes es proporcionado
-            if (mes.HasValue)
-            {
-                compras = compras.Where(c => c.Fecha.Month == mes.Value);
-            }
-
-            // Agrupar por Año y Mes
-            var resultado = compras
-                .GroupBy(c => new { Año = c.Fecha.Year, Mes = c.Fecha.Month })
-                .Select(g => new
+            // Paso 1: Obtener compras (id, total, fecha)
+            var compras = _context.CompraTabla
+                .Select(c => new
                 {
-                    Año = g.Key.Año,
-                    Mes = g.Key.Mes,
-                    TotalVentas = g.Sum(x => x.TotalVenta),
-                    MargenVentas = g.Sum(x => x.MargenVenta)
+                    c.idCompra,
+                    c.Total,
+                    c.fecha
                 })
                 .ToList();
 
-            // Preparar los datos para la vista
+            // Paso 2: Obtener costo total por compra (sumar los costos de los servicios)
+            var costosPorCompra = _context.CompraServiciosTabla
+                .Join(_context.ServiciosTabla,
+                      cs => cs.idServicio,
+                      s => s.idServicio,
+                      (cs, s) => new { cs.idCompra, Costo = s.costo })
+                .GroupBy(x => x.idCompra)
+                .Select(g => new
+                {
+                    idCompra = g.Key,
+                    CostoTotal = g.Sum(x => x.Costo)
+                })
+                .ToList();
+
+            // Paso 3: Unir compras con sus costos
+            var datosVentas = compras
+                .GroupJoin(costosPorCompra,
+                           compra => compra.idCompra,
+                           costo => costo.idCompra,
+                           (compra, costoGroup) => new
+                           {
+                               Fecha = compra.fecha,
+                               TotalVenta = compra.Total,
+                               CostoTotal = costoGroup.FirstOrDefault()?.CostoTotal ?? 0m
+                           });
+
+            // Paso 4: Filtrar por mes si se especifica
+            if (mes.HasValue)
+            {
+                datosVentas = datosVentas.Where(c => c.Fecha.Month == mes.Value);
+            }
+
+            // Paso 5: Agrupar por año y mes
+            var resultado = datosVentas
+                .GroupBy(c => new { c.Fecha.Year, c.Fecha.Month })
+                .Select(g => new
+                {
+                    Año = g.Key.Year,
+                    Mes = g.Key.Month,
+                    TotalVentas = g.Sum(x => x.TotalVenta),
+                    MargenVentas = g.Sum(x => x.TotalVenta - x.CostoTotal)
+                })
+                .OrderBy(x => x.Año).ThenBy(x => x.Mes)
+                .ToList();
+
+            // Paso 6: Preparar los datos para la vista
             var fechas = resultado.Select(x => $"{x.Mes:D2}/{x.Año}").ToList();
             var totalVentas = resultado.Select(x => x.TotalVentas).ToList();
             var margenVentas = resultado.Select(x => x.MargenVentas).ToList();
@@ -235,9 +266,9 @@ namespace ProyectoLavacar.Controllers
                 margenVentas = margenVentas
             };
 
-            // Retornar los datos en formato JSON
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
 
         #endregion
 

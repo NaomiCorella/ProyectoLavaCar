@@ -3,26 +3,24 @@
     var totalVentas = ViewBag.TotalVentas as List<decimal>;
     var margenVentas = ViewBag.MargenVentas as List<decimal>;
 }
-
 <style>
-    /* Estilos para el gráfico */
     #graficoVentas {
-        width: 100% !important; /* Asegura que el gráfico sea responsive */
-        max-width: 1000px; /* Máximo de 1000px de ancho */
-        height: 400px; /* Alto del gráfico */
-        margin: 0 auto; /* Centra el gráfico */
-        background-color: #f7f7f7; /* Fondo oscuro para el gráfico */
-        border-radius: 8px; /* Bordes redondeados */
-        padding: 15px; /* Espaciado alrededor del gráfico */
+        width: 100% !important;
+        max-width: 1000px;
+        height: 400px;
+        margin: 0 auto;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        padding: 15px;
+        display: block;
     }
 
-    /* Estilo adicional para el contenedor del gráfico */
     h2 {
-        text-align: center; /* Centra el título */
-        font-family: Arial, sans-serif; /* Tipo de fuente */
-        font-size: 24px; /* Tamaño del título */
-        color: #000000; /* Color blanco para el título */
-        margin-bottom: 20px; /* Espacio debajo del título */
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        color: #000000;
+        margin-bottom: 20px;
     }
 
     .container {
@@ -35,11 +33,26 @@
         text-align: center;
     }
 
+    /* Responsive para móviles */
+    @@media (max-width: 768px) {
+        #graficoVentas {
+            height: 300px;
+        }
+
+        .card {
+            margin: 0 10px;
+        }
+
+        .filter-container {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+        }
+    }
 </style>
 
 <div class="container">
-    <<div class="filter-container d-flex align-items-center gap-3 p-3 rounded shadow-sm bg-light">
-        <label for="mes" class="fw-bold text-dark">Selecciona un mes:</label>
+    <div class="filter-container d-flex align-items-center gap-3 p-3 rounded shadow-sm bg-light flex-wrap justify-content-center">
+        <label for="mes" class="fw-bold text-dark mb-0">Selecciona un mes:</label>
         <select id="mes" class="form-select w-auto" onchange="cargarDatosPorMes()">
             <option value="">-- Todos los meses --</option>
             <option value="1">Enero</option>
@@ -57,7 +70,6 @@
         </select>
     </div>
 
-
     <div class="col-lg-12">
         <div class="card shadow-lg rounded-6">
             <div class="card-header text-white text-center fw-bold" style="background-color: rgb(141, 227, 227);">
@@ -74,94 +86,69 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById('graficoVentas').getContext('2d');
-        let width, height, gradient;
 
-        function getGradient(ctx, chartArea) {
-            const chartWidth = chartArea.right - chartArea.left;
-            const chartHeight = chartArea.bottom - chartArea.top;
-            if (!gradient || width !== chartWidth || height !== chartHeight) {
-                width = chartWidth;
-                height = chartHeight;
-                gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-                gradient.addColorStop(0, 'red');
-                gradient.addColorStop(0.5, 'yellow');
-                gradient.addColorStop(1, 'blue');
-            }
-            return gradient;
-        }
+        var fechas = @Html.Raw(Json.Encode(fechas));
+        var totalVentas = @Html.Raw(Json.Encode(totalVentas));
+        var margenVentas = @Html.Raw(Json.Encode(margenVentas));
 
-        // Convertir las listas de C# a JavaScript (sin Json.Serialize)
-        var fechas = @Html.Raw(Json.Encode(fechas)); // Convertimos la lista de fechas
-        var totalVentas = @Html.Raw(Json.Encode(totalVentas)); // Convertimos la lista de ventas
-        var margenVentas = @Html.Raw(Json.Encode(margenVentas)); // Convertimos la lista de márgenes
-
-        let config = {
+        var config = {
             type: 'bar',
             data: {
-                labels: fechas, // Las fechas se pasan como etiquetas
+                labels: fechas,
                 datasets: [
                     {
                         label: 'Total Ventas',
-                        data: totalVentas, // Total de ventas para cada fecha
+                        data: totalVentas,
                         backgroundColor: 'rgba(75, 192, 192, 0.5)',
                         borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        type: 'bar',
-                        stack: 'Stack 0'
+                        borderWidth: 1
                     },
                     {
                         label: 'Margen de Ventas',
-                        data: margenVentas, // Margen de ventas para cada fecha
-                        borderColor: function(context) {
-                            const chart = context.chart;
-                            const { ctx, chartArea } = chart;
-                            if (!chartArea) {
-                                return null;
-                            }
-                            return getGradient(ctx, chartArea);
-                        },
-                        borderWidth: 2,
+                        data: margenVentas,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
                         type: 'line',
+                        fill: false,
                         tension: 0.4
                     }
                 ]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     title: {
                         display: true,
                         text: 'Ventas Totales y Margen por Mes'
+                    },
+                    legend: {
+                        position: 'top'
                     }
                 },
-                responsive: true,
                 scales: {
                     x: {
-                        stacked: true
+                        stacked: false
                     },
                     y: {
-                        stacked: true,
-                        ticks: {
-                            beginAtZero: true
-                        }
+                        stacked: false,
+                        beginAtZero: true
                     }
                 }
             }
         };
 
-        let chart = new Chart(ctx, config);
+        var chart = new Chart(ctx, config);
 
-        // Función para cargar los datos por mes
-        window.cargarDatosPorMes = function() {
+        window.cargarDatosPorMes = function () {
             var mes = document.getElementById('mes').value;
 
             $.ajax({
-                url: '@Url.Action("ObtenerDatosPorMes", "Reporte")', // Ajustar la ruta del controlador
+                url: '@Url.Action("ObtenerDatosPorMes", "Reporte")',
                 type: 'GET',
-                data: { mes: mes || null },  // Pasar null si no hay mes seleccionado
+                data: { mes: mes || null },
                 success: function (data) {
-                    // Actualizar el gráfico con los nuevos datos
                     chart.data.labels = data.fechas;
                     chart.data.datasets[0].data = data.totalVentas;
                     chart.data.datasets[1].data = data.margenVentas;
@@ -173,4 +160,4 @@
             });
         }
     });
-</script>
+</script>t>

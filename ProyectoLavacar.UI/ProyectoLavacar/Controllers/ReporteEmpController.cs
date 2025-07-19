@@ -1,5 +1,4 @@
-﻿
-using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
+﻿using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEvaluaciones;
 using ProyectoLavacar.Abstraciones.Modelos.ModeloEvaluaciones;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.ModuloEvaluaciones;
@@ -47,28 +46,48 @@ namespace ProyectoLavacar.Controllers
 
             if (string.IsNullOrEmpty(idEmpleado))
             {
-                return PartialView("_ResumenVentasEmpleado"); // Retornar la vista vacía si no se encuentra el empleado
+                return PartialView("_ResumenVentasEmpleado");
             }
 
-            // Obtener los datos de ventas y margen de ventas
-            var datosVentas = _context.CompraTabla
-                .Join(_context.CompraServiciosTabla,
-                    compra => compra.idCompra,
-                    compraServicio => compraServicio.idCompra,
-                    (compra, compraServicio) => new { compra, compraServicio })
-                .Join(_context.ServiciosTabla,
-                    compraJoin => compraJoin.compraServicio.idServicio,
-                    servicio => servicio.idServicio,
-                    (compraJoin, servicio) => new
-                    {
-                        TotalVenta = compraJoin.compra.Total,
-                        Costo = servicio.costo,
-                        idEmpleado = compraJoin.compra.idEmpleado,
-                        FechaCompra = compraJoin.compra.fecha
-                    })
-                .Where(x => x.idEmpleado == idEmpleado) // Filtrar por el empleado autenticado
-                .ToList(); // Convertir a lista para operar en memoria
+            // Obtener compras del empleado
+            var comprasEmpleado = _context.CompraTabla
+                .Where(c => c.idEmpleado == idEmpleado)
+                .Select(c => new
+                {
+                    c.idCompra,
+                    c.fecha,
+                    c.Total
+                })
+                .ToList();
 
+            // Obtener los costos de cada compra (sumando costos de sus servicios)
+            var costosPorCompra = _context.CompraServiciosTabla
+                .Join(_context.ServiciosTabla,
+                      cs => cs.idServicio,
+                      s => s.idServicio,
+                      (cs, s) => new { cs.idCompra, Costo = s.costo })
+                .GroupBy(x => x.idCompra)
+                .Select(g => new
+                {
+                    idCompra = g.Key,
+                    CostoTotal = g.Sum(x => x.Costo)
+                })
+                .ToList();
+
+            // Unir compras con sus costos
+            var datosVentas = comprasEmpleado
+                .GroupJoin(costosPorCompra,
+                           compra => compra.idCompra,
+                           costo => costo.idCompra,
+                           (compra, costoGroup) => new
+                           {
+                               FechaCompra = compra.fecha,
+                               TotalVenta = compra.Total,
+                               Costo = costoGroup.FirstOrDefault()?.CostoTotal ?? 0m
+                           })
+                .ToList();
+
+            // Agrupar por mes y año
             var ventasPorMes = datosVentas
                 .GroupBy(x => new { x.FechaCompra.Year, x.FechaCompra.Month })
                 .Select(g => new
@@ -80,18 +99,24 @@ namespace ProyectoLavacar.Controllers
                 })
                 .ToList();
 
-            // Calcular valores totales
+            // Calcular totales
             decimal totalVentas = ventasPorMes.Sum(x => x.TotalVenta);
             decimal margenVentas = ventasPorMes.Sum(x => x.Margen);
             decimal margenPorcentual = totalVentas > 0 ? (margenVentas / totalVentas) * 100 : 0;
 
-            // Enviar datos a la vista
             ViewBag.TotalVentasEmpleado = totalVentas;
             ViewBag.MargenVentas = margenVentas;
             ViewBag.MargenPorcentual = margenPorcentual;
 
             return PartialView("_ResumenVentasEmpleado");
         }
+
+
+
+
+
+
+
         public ActionResult ObtenerPromedioCalificacionEmpleado()
         {
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -118,27 +143,53 @@ namespace ProyectoLavacar.Controllers
             var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
             string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-           
+            if (string.IsNullOrEmpty(idEmpleado))
+            {
+                return PartialView("_GraficoVentasEmpleado");
+            }
 
-            // Obtener los datos de ventas y margen de ventas
-            var datosVentas = _context.CompraTabla
-                .Join(_context.CompraServiciosTabla,
-                    compra => compra.idCompra,
-                    compraServicio => compraServicio.idCompra,
-                    (compra, compraServicio) => new { compra, compraServicio })
+            // Obtener compras del empleado
+            var comprasEmpleado = _context.CompraTabla
+                .Where(c => c.idEmpleado == idEmpleado)
+                .Select(c => new
+                {
+                    c.idCompra,
+                    c.Total,
+                    c.fecha
+                })
+                .ToList();
+
+            // Obtener los costos por compra (sumando los servicios asociados)
+            var costosPorCompra = _context.CompraServiciosTabla
                 .Join(_context.ServiciosTabla,
-                    compraServicio => compraServicio.compraServicio.idServicio,
-                    servicio => servicio.idServicio,
-                    (compraServicio, servicio) => new
-                    {
-                        TotalVenta = compraServicio.compra.Total,  // Total de la compra
-                        Costo = servicio.costo,                    // Costo del servicio
-                        idEmpleado = compraServicio.compra.idEmpleado,
-                        Mes = compraServicio.compra.fecha.Month,
-                        Año = compraServicio.compra.fecha.Year
-                    })
-                .Where(x => x.idEmpleado == idEmpleado) // Filtrar por el empleado logueado
-                .GroupBy(x => new { x.Año, x.Mes }) // Agrupar por mes y año
+                      cs => cs.idServicio,
+                      s => s.idServicio,
+                      (cs, s) => new { cs.idCompra, Costo = s.costo })
+                .GroupBy(x => x.idCompra)
+                .Select(g => new
+                {
+                    idCompra = g.Key,
+                    CostoTotal = g.Sum(x => x.Costo)
+                })
+                .ToList();
+
+            // Unir las compras con sus costos
+            var datosVentas = comprasEmpleado
+                .GroupJoin(costosPorCompra,
+                           compra => compra.idCompra,
+                           costo => costo.idCompra,
+                           (compra, costoGroup) => new
+                           {
+                               Mes = compra.fecha.Month,
+                               Año = compra.fecha.Year,
+                               TotalVenta = compra.Total,
+                               Costo = costoGroup.FirstOrDefault()?.CostoTotal ?? 0m
+                           })
+                .ToList();
+
+            // Agrupar por mes y año
+            var ventasPorMes = datosVentas
+                .GroupBy(x => new { x.Año, x.Mes })
                 .Select(g => new
                 {
                     Año = g.Key.Año,
@@ -146,22 +197,106 @@ namespace ProyectoLavacar.Controllers
                     TotalVentas = g.Sum(x => x.TotalVenta),
                     MargenVentas = g.Sum(x => x.TotalVenta - x.Costo)
                 })
-                .ToList(); // Convertir a lista
+                .OrderBy(x => x.Año).ThenBy(x => x.Mes)
+                .ToList();
 
             // Preparar los datos para el gráfico
-            var fechas = datosVentas.Select(x => $"{x.Mes}/{x.Año}").ToList();
-            var totalVentas = datosVentas.Select(x => x.TotalVentas).ToList();
-            var margenVentas = datosVentas.Select(x => x.MargenVentas).ToList();
+            var fechas = ventasPorMes.Select(x => $"{x.Mes}/{x.Año}").ToList();
+            var totalVentas = ventasPorMes.Select(x => x.TotalVentas).ToList();
+            var margenVentas = ventasPorMes.Select(x => x.MargenVentas).ToList();
 
-            // Pasar los datos al ViewBag
+            // Pasar al ViewBag
             ViewBag.Fechas = fechas;
             ViewBag.TotalVentas = totalVentas;
             ViewBag.MargenVentas = margenVentas;
 
-            return PartialView("_GraficoVentasEmpleado"); // Vista parcial
+            return PartialView("_GraficoVentasEmpleado");
         }
+
+        public ActionResult ObtenerDatosPorMesEmpleado(int? mes)
+        {
+            // Obtener el ID del empleado autenticado
+            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            string idEmpleado = claimsIdentity?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(idEmpleado))
+            {
+                return Json(new { error = "Empleado no autenticado" }, JsonRequestBehavior.AllowGet);
+            }
+
+            // Paso 1: Obtener compras del empleado
+            var compras = _context.CompraTabla
+                .Where(c => c.idEmpleado == idEmpleado)
+                .Select(c => new
+                {
+                    c.idCompra,
+                    c.Total,
+                    c.fecha
+                })
+                .ToList();
+
+            // Paso 2: Obtener costo total por compra (sumar los costos de los servicios)
+            var costosPorCompra = _context.CompraServiciosTabla
+                .Join(_context.ServiciosTabla,
+                      cs => cs.idServicio,
+                      s => s.idServicio,
+                      (cs, s) => new { cs.idCompra, Costo = s.costo })
+                .GroupBy(x => x.idCompra)
+                .Select(g => new
+                {
+                    idCompra = g.Key,
+                    CostoTotal = g.Sum(x => x.Costo)
+                })
+                .ToList();
+
+            // Paso 3: Unir compras con sus costos
+            var datosVentas = compras
+                .GroupJoin(costosPorCompra,
+                           compra => compra.idCompra,
+                           costo => costo.idCompra,
+                           (compra, costoGroup) => new
+                           {
+                               Fecha = compra.fecha,
+                               TotalVenta = compra.Total,
+                               CostoTotal = costoGroup.FirstOrDefault()?.CostoTotal ?? 0m
+                           });
+
+            // Paso 4: Filtrar por mes si se especifica
+            if (mes.HasValue)
+            {
+                datosVentas = datosVentas.Where(c => c.Fecha.Month == mes.Value);
+            }
+
+            // Paso 5: Agrupar por año y mes
+            var resultado = datosVentas
+                .GroupBy(c => new { c.Fecha.Year, c.Fecha.Month })
+                .Select(g => new
+                {
+                    Año = g.Key.Year,
+                    Mes = g.Key.Month,
+                    TotalVentas = g.Sum(x => x.TotalVenta),
+                    MargenVentas = g.Sum(x => x.TotalVenta - x.CostoTotal)
+                })
+                .OrderBy(x => x.Año).ThenBy(x => x.Mes)
+                .ToList();
+
+            // Paso 6: Preparar los datos para la vista
+            var fechas = resultado.Select(x => $"{x.Mes:D2}/{x.Año}").ToList();
+            var totalVentas = resultado.Select(x => x.TotalVentas).ToList();
+            var margenVentas = resultado.Select(x => x.MargenVentas).ToList();
+
+            var datos = new
+            {
+                fechas = fechas,
+                totalVentas = totalVentas,
+                margenVentas = margenVentas
+            };
+
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
     }
 }
-

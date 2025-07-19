@@ -3,9 +3,7 @@
     var totalVentas = ViewBag.TotalVentas as List<decimal>; // Asegúrate de que TotalVentas es una lista de decimales
     var margenVentas = ViewBag.MargenVentas as List<decimal>; // Asegúrate de que MargenVentas es una lista de decimales
 }
-
 <style>
-    /* Estilos para el gráfico */
     #graficoVentas {
         width: 100% !important;
         max-width: 1000px;
@@ -14,6 +12,7 @@
         background-color: #f7f7f7;
         border-radius: 8px;
         padding: 15px;
+        display: block;
     }
 
     h2 {
@@ -33,11 +32,27 @@
         margin: 20px 0;
         text-align: center;
     }
+
+    /* Responsive para móviles */
+    @@media (max-width: 768px) {
+        #graficoVentas {
+            height: 300px;
+        }
+
+        .card {
+            margin: 0 10px;
+        }
+
+        .filter-container {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+        }
+    }
 </style>
 
 <div class="container">
-    <<div class="filter-container d-flex align-items-center gap-3 p-3 rounded shadow-sm bg-light">
-        <label for="mes" class="fw-bold text-dark">Selecciona un mes:</label>
+    <div class="filter-container d-flex align-items-center gap-3 p-3 rounded shadow-sm bg-light flex-wrap justify-content-center">
+        <label for="mes" class="fw-bold text-dark mb-0">Selecciona un mes:</label>
         <select id="mes" class="form-select w-auto" onchange="cargarDatosPorMes()">
             <option value="">-- Todos los meses --</option>
             <option value="1">Enero</option>
@@ -72,26 +87,25 @@
     document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById('graficoVentas').getContext('2d');
 
-        // Convertir las listas de C# a JavaScript (sin Json.Serialize)
-        var fechas = @Html.Raw(Json.Encode(fechas)); // Fechas (Mes/Año)
-        var totalVentas = @Html.Raw(Json.Encode(totalVentas)); // Total Ventas
-        var margenVentas = @Html.Raw(Json.Encode(margenVentas)); // Margen Ventas
+        var fechas = @Html.Raw(Json.Encode(fechas));
+        var totalVentas = @Html.Raw(Json.Encode(totalVentas));
+        var margenVentas = @Html.Raw(Json.Encode(margenVentas));
 
         var config = {
             type: 'bar',
             data: {
-                labels: fechas, // Fechas como etiquetas
+                labels: fechas,
                 datasets: [
                     {
                         label: 'Total Ventas',
-                        data: totalVentas, // Datos de Total Ventas
+                        data: totalVentas,
                         backgroundColor: 'rgba(75, 192, 192, 0.5)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     },
                     {
                         label: 'Margen de Ventas',
-                        data: margenVentas, // Datos de Margen Ventas
+                        data: margenVentas,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 2,
@@ -109,15 +123,12 @@
                     }
                 },
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
-                    x: {
-                        stacked: true
-                    },
+                    x: { stacked: true },
                     y: {
                         stacked: true,
-                        ticks: {
-                            beginAtZero: true
-                        }
+                        ticks: { beginAtZero: true }
                     }
                 }
             }
@@ -125,16 +136,14 @@
 
         var chart = new Chart(ctx, config);
 
-        // Función para cargar los datos por mes
-        window.cargarDatosPorMes = function() {
+        window.cargarDatosPorMes = function () {
             var mes = document.getElementById('mes').value;
 
             $.ajax({
-                url: '@Url.Action("ObtenerDatosPorMes", "Reporte")', // Ajustar la ruta del controlador
+                url: '@Url.Action("ObtenerDatosPorMesEmpleado", "ReporteEmp")',
                 type: 'GET',
                 data: { mes: mes || null },
                 success: function (data) {
-                    // Actualizar gráfico con los nuevos datos
                     chart.data.labels = data.fechas;
                     chart.data.datasets[0].data = data.totalVentas;
                     chart.data.datasets[1].data = data.margenVentas;

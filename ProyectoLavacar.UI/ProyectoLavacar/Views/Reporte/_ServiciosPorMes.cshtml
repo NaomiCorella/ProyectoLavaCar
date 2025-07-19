@@ -8,29 +8,23 @@
     }
 }
 <style>
-    /* Estilos para el gráfico */
     #graficoServicios {
-        width: 100% !important; /* Asegura que el gráfico sea responsive */
-        max-width: 800px; /* Máximo de 800px de ancho */
-        height: 400px; /* Alto del gráfico */
-        margin: 0 auto; /* Centra el gráfico */
-        background-color: #f7f7f7; /* Fondo oscuro para el gráfico */
-        border-radius: 8px; /* Bordes redondeados */
-        padding: 10px; /* Espaciado alrededor del gráfico */
+        width: 100% !important;
+        height: auto !important;
+        max-height: 400px;
     }
 
-    /* Estilo adicional para el contenedor del gráfico */
     h2 {
-        text-align: center; /* Centra el título */
-        font-family: Arial, sans-serif; /* Tipo de fuente */
-        font-size: 24px; /* Tamaño del título */
-        color: #000000; /* Color blanco para el título */
-        margin-bottom: 20px; /* Espacio debajo del título */
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        color: #000;
+        margin-bottom: 20px;
     }
 </style>
 
-<div class="col-lg-6">
-    <div class="card shadow-lg rounded-4">
+<div class="grafico-container">
+    <div class="card shadow rounded-4 w-100 h-100">
         <div class="card-header text-white bg-success text-center fw-bold">
             Reporte de Servicios por Mes
         </div>
@@ -62,6 +56,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: { beginAtZero: true }
                 }

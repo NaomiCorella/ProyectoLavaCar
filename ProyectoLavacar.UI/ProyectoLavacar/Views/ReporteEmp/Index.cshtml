@@ -2,10 +2,11 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Administración de Empleados</title>
+
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -14,31 +15,53 @@
     <link href="~/Content/assets/css/style.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/flaticon/flaticon.css" rel="stylesheet" />
     <link href="~/Content/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* Para que todo contenido con tablas sea responsive */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @@media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            /* Opcional: agregar algo de padding o margin */
+            #promedioCalificacionEmpleadoPanel,
+            #resumenVentasEmpleadoPanel,
+            #graficoVentasPanel,
+            #listaPanel {
+                margin: 0 10px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <h2>Reporte de Empleado</h2>
-    <div id="promedioCalificacionEmpleadoPanel">
+    <h2 class="text-center my-4">Reporte de Empleado</h2>
+
+    <div id="promedioCalificacionEmpleadoPanel" class="mb-4">
         @Html.Action("ObtenerPromedioCalificacionEmpleado", "ReporteEmp")
     </div>
 
-    <br />
-    <br />
-    <div id="resumenVentasEmpleadoPanel">
+    <div id="resumenVentasEmpleadoPanel" class="table-responsive mb-4">
         @Html.Action("ObtenerResumenVentasEmpleado", "ReporteEmp")
     </div>
-    <br />
-    <div>
+
+    <div id="graficoVentasPanel" class="mb-4">
         @Html.Action("ObtenerGraficoVentasEmpleado")
     </div>
-    <br />
-    <div>
+
+    <div id="listaPanel" class="table-responsive mb-4">
         @Html.Action("listar")
     </div>
-
-
-
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -52,6 +75,7 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/assets/js/waypoints.min.js"></script>
     <script src="~/Content/assets/js/wow.min.js"></script>
+
 </body>
 
 </html>
