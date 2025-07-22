@@ -46,7 +46,8 @@ namespace ProyectoLavacar.LN.ModuloReservas.Editar
     ""IdServicio"": ""{reserva.idServicio}"",
     ""Fecha"": ""{reserva.fecha}"",
     ""Hora"": ""{reserva.hora}"",
-    ""Estado"": ""{reserva.estado}""
+    ""Estado"": ""{reserva.estado}"",
+    ""Dirección"":{reserva.direccion}""
 }}";
 
             var bitacora = new BitacoraDto

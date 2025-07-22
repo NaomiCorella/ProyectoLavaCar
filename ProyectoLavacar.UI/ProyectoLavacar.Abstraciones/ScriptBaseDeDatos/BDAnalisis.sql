@@ -141,24 +141,28 @@ CREATE TABLE Servicios (
     costo DECIMAL(10,2) NOT NULL,
     nombre NVARCHAR(100) NOT NULL,
     descripcion NVARCHAR(200)NOT NULL,
-	 modalidad VARCHAR(100) NOT NULL,
+	modalidad VARCHAR(100) NOT NULL,
     tiempoDuracion NVARCHAR(20)NOT NULL,
     estado BIT NOT NULL,
-	precio decimal (10,2) not null
+	precio decimal (10,2) not null,  
 );
 GO
+--ALTER TABLE Reservas
+--ADD direccion NVARCHAR(max) NULL;
+
 
 -- Tabla Reservas
 CREATE TABLE Reservas (
     idReserva INT IDENTITY PRIMARY KEY NOT NULL,
     idCliente [nvarchar](128) NOT NULL,
- idEmpleado [nvarchar](128) NOT NULL,
+    idEmpleado [nvarchar](128) NOT NULL,
     idServicio INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    estado BIT NOT NULL,
+    direccion NVARCHAR(max) null,
+    estado BIT NOT NULL
     FOREIGN KEY (idCliente) REFERENCES AspNetUsers(Id),
-	 FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
+	FOREIGN KEY (idEmpleado) REFERENCES AspNetUsers(Id)
     
 );
 GO
@@ -226,79 +230,7 @@ HoraSalida datetime not null,
 )
 
 
---Procedimiento para que las nominas se generen cada mes
-CREATE PROCEDURE GenerarNuevaNominaMensual
-AS
-BEGIN
-    SET NOCOUNT ON;
 
-    -- Insertar la nueva nómina basada en la del mes anterior
-    INSERT INTO Nomina (
-        idEmpleado, 
-        salarioBruto, 
-        salarioNeto, 
-        fechaDePago, 
-        periodoDePago, 
-        horasOrdinarias, 
-        horasExtras, 
-        horasDobles, 
-        diasDispoVacaciones, 
-        diasUtiliVacaciones, 
-        incapacidad, 
-        tipoDeContrato, 
-        estado, 
-        totalBono, 
-        totalDedu, 
-        deduccionCCSS, 
-        deduccionISR, 
-        bonoHorasExtra
-    )
-    SELECT 
-        n.idEmpleado, 
-        n.salarioBruto, 
-        0, 
-        DATEADD(MONTH, 1, n.fechaDePago) AS fechaDePago, 
-        FORMAT(DATEADD(MONTH, 1, n.fechaDePago), 'yyyy-MM') AS periodoDePago, 
-        n.horasOrdinarias, 
-        0 AS horasExtras, 
-        0 AS horasDobles, 
-        n.diasDispoVacaciones, 
-        n.diasUtiliVacaciones-2, 
-        NULL AS incapacidad, 
-        n.tipoDeContrato, 
-        1 AS estado,  -- Activo
-        0 AS totalBono, 
-        0 AS totalDedu, 
-        0 AS deduccionCCSS, 
-        0 AS deduccionISR, 
-        0 AS bonoHorasExtra
-    FROM Nomina n
-    WHERE n.fechaDePago = (SELECT MAX(fechaDePago) 
-                           FROM Nomina 
-                           WHERE idEmpleado = n.idEmpleado);
-
-END;
-GO
--- EXEC GenerarNuevaNominaMensual; esto hay que hacerlo como un job
-
----trigger para desactivar las nominas pasadas
-CREATE TRIGGER TR_DesactivarNominasAntiguas
-ON Nomina
-AFTER INSERT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-  
-    UPDATE n
-    SET estado = 0
-    FROM Nomina n
-    WHERE FORMAT(n.fechaDePago, 'yyyy-MM') <> FORMAT(GETDATE(), 'yyyy-MM')
-    AND estado = 1; 
-
-    PRINT 'Nóminas anteriores desactivadas correctamente.';
-END;
-GO
 
 -------------------------------------------------------------------------------------------------------------------------------------
 --Modulo Inventario--
@@ -408,30 +340,4 @@ CREATE TABLE BITACORA_EVENTOS (
     DatosPosteriores VARCHAR(MAX) NULL
 );
 GO
-CREATE TRIGGER trg_InsertReserva
-ON Reservas
-AFTER INSERT
-AS
-BEGIN
-    -- Variables para almacenar el ID del empleado aleatorio
-    DECLARE @idEmpleado NVARCHAR(128);
 
-    -- Seleccionar un empleado aleatorio con el rol "Empleado"
-    SELECT TOP 1 @idEmpleado = u.Id
-    FROM [dbo].[AspNetUsers] u
-    JOIN [dbo].[AspNetUserRoles] ur ON u.Id = ur.UserId
-    JOIN [dbo].[AspNetRoles] r ON ur.RoleId = r.Id
-    WHERE r.Name = 'Empleado' -- Filtramos por el rol "Empleado"
-    ORDER BY NEWID(); -- Aleatorio
-
-    -- Actualizamos la fila insertada en la tabla Reservas para asignar el idEmpleado
-    UPDATE Reservas
-    SET idEmpleado = @idEmpleado
-    FROM Reservas r
-    INNER JOIN inserted i ON r.idReserva = i.idReserva;
-END;
-GO
-
-Insert into AspNetRoles (Id, Name) values (NEWID(),'Usuario')
-Insert into AspNetRoles (Id, Name) values (NEWID(),'Empleado')
-Insert into AspNetRoles (Id, Name) values (NEWID(),'Administrador')

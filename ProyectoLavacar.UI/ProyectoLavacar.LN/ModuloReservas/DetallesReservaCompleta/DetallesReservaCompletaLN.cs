@@ -40,7 +40,8 @@ namespace ProyectoLavacar.LN.ModuloReservas.DetallesReservaCompleta
                 estado = reserva.estado,
                 nombreCliente = reserva.nombreCliente,
                 nombreEmpleado = reserva.nombreEmpleado,
-                nombreServicio = reserva.nombreServicio
+                nombreServicio = reserva.nombreServicio,
+                direccion = reserva.direccion
             };
         }
     }

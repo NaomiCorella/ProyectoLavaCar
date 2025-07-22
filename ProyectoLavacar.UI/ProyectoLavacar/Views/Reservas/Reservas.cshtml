@@ -107,6 +107,9 @@
                                                 @Html.DisplayNameFor(model => model.hora)
                                             </th>
                                             <th>
+                                                @Html.DisplayNameFor(model => model.direccion)
+                                            </th>
+                                            <th>
                                                 @Html.DisplayNameFor(model => model.estado)
                                             </th>
                                             <th></th>
@@ -117,8 +120,8 @@
                                         {
                                             <tr class="luxury-table-row">
                                                 @*<td>
-                                                        @Html.DisplayFor(modelItem => item.idReserva)
-                                                    </td>*@
+            @Html.DisplayFor(modelItem => item.idReserva)
+        </td>*@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.nombreCliente)
                                                 </td>
@@ -133,6 +136,9 @@
                                                 </td>
                                                 <td>
                                                     @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                                                </td>
+                                                <td>
+                                                @(string.IsNullOrEmpty(item.direccion) ? "Presencial" : "Domicilio")
                                                 </td>
                                                 <td>
                                                     @if (item.estado)

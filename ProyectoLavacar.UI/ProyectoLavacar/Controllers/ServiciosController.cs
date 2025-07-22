@@ -19,13 +19,16 @@ namespace ProyectoLavacar.Controllers
     {
         IListarServiciosLN _listarServicios;
         IDetalleServiciosLN _detallesServicios;
+        IBuscarAsyncSerLN _buscarServicio;
         ICrearServiciosLN _crearServicios;
+        
         Contexto _context;
         public ServiciosController()
         {
             _listarServicios = new ListarServiciosLN();
             _detallesServicios = new DetalleServiciosLN();
             _crearServicios = new CrearServiciosLN();
+            _buscarServicio = new BuscarAsyncSerLN();
             _context = new Contexto();
         }
         public ActionResult FiltrarServicios(string nombre, decimal? precioMin, decimal? precioMax, string modalidad, bool? estado)
@@ -94,8 +97,8 @@ namespace ProyectoLavacar.Controllers
             ViewBag.modalidad = new List<SelectListItem>
     {
         new SelectListItem { Value = "Presencial", Text = "Presencial" },
-         new SelectListItem { Value = "Domicilio", Text = "Domicilio" },
-          new SelectListItem { Value = "Ambas", Text = "Ambas" }
+        new SelectListItem { Value = "Domicilio", Text = "Domicilio" }//,
+    //     new SelectListItem { Value = "Ambas", Text = "Ambas" }
     };
             return View();
         }
@@ -144,6 +147,18 @@ namespace ProyectoLavacar.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ObtenerModalidad(int id)
+        {
+            var servicio = await _buscarServicio.DetalleAsync(id);
+            if (servicio == null)
+            {
+                return Json(new { modalidad = "" }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { modalidad = servicio.modalidad ?? "" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

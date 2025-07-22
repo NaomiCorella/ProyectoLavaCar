@@ -47,6 +47,7 @@
                                     <th> Nombre Servicio</th>
                                     <th> Fecha </th>
                                     <th> Hora</th>
+                                    <th>Dirección</th>
                                     <th> Estado</th>
                                     <th></th>
                                 </tr>
@@ -68,6 +69,9 @@
                                         </td>
                                         <td>
                                             @(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)
+                                        </td>
+                                        <td>
+                                            @(string.IsNullOrEmpty(item.direccion) ? "Presencial" : "Domicilio")
                                         </td>
                                         <td>
                                             <div class="luxury-actions">
