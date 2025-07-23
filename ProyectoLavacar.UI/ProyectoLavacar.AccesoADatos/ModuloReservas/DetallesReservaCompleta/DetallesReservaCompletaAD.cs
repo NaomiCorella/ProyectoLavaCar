@@ -38,7 +38,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.DetallesReservaCompletaLN
                                        estado = reserva.estado,
                                        nombreCliente = elCliente.nombre,
                                        nombreEmpleado = elEmpleado.nombre,
-                                       nombreServicio = servicio.nombre
+                                       nombreServicio = servicio.nombre,
+                                       direccion = reserva.direccion
                                    }).FirstOrDefault();
 
             return reservaCompleta;

@@ -78,6 +78,14 @@
                             </div>
                         </div>
 
+                        <div class="luxury-details-row">
+                            <div class="luxury-details-label">@Html.DisplayNameFor(model => model.direccion)</div>
+                            <div class="luxury-details-value">
+                                @( string.IsNullOrEmpty(Model.direccion) ? "Fue presencial" : Model.direccion )
+                            </div>
+                        </div>
+
+                        
 
                         <div class="luxury-details-row">
                             <div class="luxury-details-label">Estado</div>
@@ -85,7 +93,7 @@
                                 <span class="luxury-status-badge @(Model.estado ? "pendiente" : "completado")">
                                     @(Model.estado ? "Pendiente" : "Completado")
                                 </span>
-                               
+
                             </div>
                         </div>
 

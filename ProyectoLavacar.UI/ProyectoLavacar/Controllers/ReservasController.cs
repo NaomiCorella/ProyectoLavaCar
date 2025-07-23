@@ -313,8 +313,17 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult Create(int id)
         {
+            
+            var servicio = _context.ServiciosTabla.Find(id);
+            string modalidad = servicio?.modalidad ?? "";
+
             ViewBag.idServicio = id;
-            return View();
+            ViewBag.modalidad = modalidad;
+
+            var modelo = new ReservasDto();
+            return View(modelo);
+
+
         }
 
         // AJAX: Obtener horas disponibles
@@ -377,14 +386,25 @@ namespace ProyectoLavacar.Controllers
                     return View(modeloDeReserva);
                 }
 
-                ReservasTabla nuevaReserva = new ReservasTabla
+                var servicio = _context.ServiciosTabla.Find(id);
+                if (servicio != null && (servicio.modalidad?.ToLower() == "domicilio" || servicio.modalidad?.ToLower() == "a domicilio"))
+                {
+                    if (string.IsNullOrWhiteSpace(modeloDeReserva.direccion))
+                    {
+                        ModelState.AddModelError("direccion", "La dirección es obligatoria para reservas a domicilio.");
+                        return View(modeloDeReserva);
+                    }
+                }
+
+                var nuevaReserva = new ReservasTabla
                 {
                     idCliente = idCliente,
-                    idEmpleado = idCliente,
+                    idEmpleado = idCliente,  // según tu lógica, igual que cliente
                     idServicio = id,
                     fecha = fechaSeleccionada,
                     hora = horaSeleccionada,
-                    estado = true
+                    estado = true,
+                    direccion = modeloDeReserva.direccion
                 };
 
                 _context.ReservasTabla.Add(nuevaReserva);
@@ -398,12 +418,13 @@ namespace ProyectoLavacar.Controllers
             }
         }
 
-
+        //get
         [Authorize(Roles = "Administrador, Empleado, Usuario")]
 
         public ActionResult ReservarCita()
         {
             CargarServicios();
+            ViewBag.modalidad = "";
             return View();
         }
 
@@ -436,6 +457,7 @@ namespace ProyectoLavacar.Controllers
                     return View(modeloDeReserva);
                 }
             }
+
 
 
 
@@ -474,6 +496,16 @@ namespace ProyectoLavacar.Controllers
                 return View(modeloDeReserva);
             }
 
+            if (servicio.modalidad != null && servicio.modalidad.ToLower().Contains("domicilio"))
+            {
+                if (string.IsNullOrWhiteSpace(modeloDeReserva.direccion))
+                {
+                    ModelState.AddModelError("direccion", "La dirección es obligatoria para servicios a domicilio.");
+                    CargarServicios();
+                    return View(modeloDeReserva);
+                }
+            }
+
             // Validar cantidad máxima
             DateTime fechaSeleccionada = DateTime.Parse(modeloDeReserva.fecha);
             TimeSpan horaSeleccionada = TimeSpan.Parse(modeloDeReserva.hora);
@@ -497,7 +529,8 @@ namespace ProyectoLavacar.Controllers
                 idEmpleado = idCliente,
                 fecha = modeloDeReserva.fecha,
                 hora = modeloDeReserva.hora,
-                estado = true
+                estado = true,
+                direccion = modeloDeReserva.direccion
             };
 
             // Guardar la reserva
@@ -530,6 +563,10 @@ namespace ProyectoLavacar.Controllers
                 return View(modeloDeReserva);
             }
         }
+
+
+
+
         // AJAX: Obtener horas disponibles
         public JsonResult ObtenerHorasDisponibless(int idServicio, string fecha)
         {
@@ -584,13 +621,16 @@ namespace ProyectoLavacar.Controllers
                .Where(a => a.estado == true)
                .ToList();
             ViewBag.Servicios = servicios;
+
             var empleados = _listarEmpleado.ListarEmpleados()
                .Where(a => a.estado == true)
                .ToList();
             ViewBag.empleados = empleados;
-            ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
-           
 
+            ReservasDto modeloReserva = _detallesReserva.Detalle(idReserva);
+
+            var servicioSeleccionado = servicios.FirstOrDefault(s => s.idServicio == modeloReserva.idServicio);
+            ViewBag.ModalidadServicio = servicioSeleccionado?.modalidad ?? "";
 
             return View(modeloReserva);
             
@@ -599,10 +639,19 @@ namespace ProyectoLavacar.Controllers
         // POST: Reservas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ReservasDto modeloReserva)
+        public async Task<ActionResult> Edit(ReservasDto modeloReserva,string ModalidadServicio)
         {
             try
             {
+
+                if (ModalidadServicio == "Domicilio" && string.IsNullOrWhiteSpace(modeloReserva.direccion))
+                {
+                    ModelState.AddModelError("direccion", "La dirección es requerida para servicio a domicilio.");
+                    CargarListasVista();
+                    return View(modeloReserva);
+                }
+
+
                 DateTime fechaSeleccionada = DateTime.Parse(modeloReserva.fecha);
                 TimeSpan horaSeleccionada = TimeSpan.Parse(modeloReserva.hora);
 
@@ -626,6 +675,22 @@ namespace ProyectoLavacar.Controllers
 
                 string datosanteriores = TempData["DatosAnteriores"] as string;
                 int resultado = await _editarReservaAdmin.EditarPersonas(modeloReserva, datosanteriores);
+
+               
+
+                var reservaEnDb = _context.ReservasTabla.Find(modeloReserva.idReserva);
+                if (reservaEnDb == null)
+                {
+                    ModelState.AddModelError("", "Reserva no encontrada.");
+                    CargarListasVista();
+                    return View(modeloReserva);
+                }
+
+                reservaEnDb.direccion = modeloReserva.direccion; // Guardar dirección
+                                                                 // Actualiza otros campos si tienes...
+
+                // Guardar cambios
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("Reservas");
             }
@@ -681,21 +746,36 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Reservas/Edit/5
+    
         [Authorize(Roles = "Usuario")]
-
-        public ActionResult EditarMiReserva(int idReserva)
+        public async Task<ActionResult> EditarMiReserva(int idReserva)
         {
             var modelo = _detallesReserva.Detalle(idReserva);
+
+            // Obtengo la modalidad del servicio asociado
+            var servicio = await _detalleServicios.DetalleAsync(modelo.idServicio);
+            ViewBag.ModalidadServicio = servicio?.modalidad ?? "";
+
             return View(modelo);
         }
 
         // POST: Reservas/EditarMiReserva
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Usuario")]
-        public async Task<ActionResult> EditarMiReserva(ReservasDto modeloReserva)
+        public async Task<ActionResult> EditarMiReserva(ReservasDto modeloReserva, string ModalidadServicio)
         {
             try
             {
+                var servicio = await _detalleServicios.DetalleAsync(modeloReserva.idServicio);
+                string modalidad = servicio?.modalidad ?? "";
+
+                // Validación de dirección si es domicilio
+                if (modalidad.ToLower().Contains("domicilio") && string.IsNullOrWhiteSpace(modeloReserva.direccion))
+                {
+                    ModelState.AddModelError("direccion", "La dirección es requerida para servicio a domicilio.");
+                }
+
                 DateTime fechaSeleccionada;
                 TimeSpan horaSeleccionada;
 
@@ -737,6 +817,22 @@ namespace ProyectoLavacar.Controllers
 
                 // Guardar cambios
                 int cantidadDeDatosEditados = await _editarReservaCliente.EditarPersonas(modeloReserva);
+
+                
+
+                var reservaEnDb = _context.ReservasTabla.Find(modeloReserva.idReserva);
+                if (reservaEnDb == null)
+                {
+                    ModelState.AddModelError("", "Reserva no encontrada.");
+                    CargarListasVista();
+                    return View(modeloReserva);
+                }
+
+                reservaEnDb.direccion = modeloReserva.direccion; // Guardar dirección
+                                                                
+
+                // Guardar cambios
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("MisReservas");
             }
