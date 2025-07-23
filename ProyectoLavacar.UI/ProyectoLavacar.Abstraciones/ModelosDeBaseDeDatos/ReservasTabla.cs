@@ -18,6 +18,7 @@ namespace ProyectoLavacar.Abstraciones.ModelosDeBaseDeDatos
         public int idServicio { get; set; }
         public DateTime fecha { get; set; }
         public TimeSpan hora { get; set; }
-        public bool estado { get; set; } 
+        public bool estado { get; set; }
+        public string direccion { get; set; }
     }
 }

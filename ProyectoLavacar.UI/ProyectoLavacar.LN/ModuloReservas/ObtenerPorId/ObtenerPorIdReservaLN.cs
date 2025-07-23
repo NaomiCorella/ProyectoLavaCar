@@ -36,7 +36,8 @@ namespace ProyectoLavacar.LN.ModuloReservas.ObtenerPorId
                 idServicio = reserva.idServicio,
                 fecha = reserva.fecha.ToString(),
                 hora = reserva.hora.ToString(),
-                estado = reserva.estado
+                estado = reserva.estado,
+                direccion = reserva.direccion
             };
         }
     }

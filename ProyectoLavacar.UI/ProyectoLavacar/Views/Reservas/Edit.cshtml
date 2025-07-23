@@ -43,6 +43,7 @@
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.idReserva)
                         @Html.HiddenFor(model => model.idCliente)
+                       
 
                         <div class="luxury-form">
                             @Html.ValidationSummary(true, "", new { @class = "luxury-alert" })
@@ -112,6 +113,21 @@
                             </div>
 
                             <div id="espaciosDisponiblesDiv" class="text-center mb-3" style="font-weight:bold; color: green;"></div>
+
+                            <div id="direccionDiv" class="form-group luxury-input-group" style="display:none;">
+                                @Html.LabelFor(m => m.direccion, "Dirección", htmlAttributes: new { @class = "input-label" })
+                                <div class="input-container" style="width:100%;">
+                                    <!-- ancho mayor -->
+                                    <span class="input-icon">
+                                        <svg viewBox="0 0 24 24" style="width:24px; height:24px;">
+                                            <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z" />
+                                        </svg>
+                                    </span>
+                                    @Html.TextBoxFor(m => m.direccion, new { @class = "luxury-input", placeholder = "Ingrese dirección", style = "width: 100%;" })
+                                    <span class="input-border"></span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "validation-message" })
+                            </div>
 
                             <div class="text-center mt-4">
                                 <button type="submit" class="luxury-button">
@@ -455,7 +471,42 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-<script>
+
+
+        <script>
+$(function() {
+    // Crear diccionario JS con idServicio => modalidad
+    var modalidadPorServicio = {
+        @foreach (var s in ViewBag.Servicios)
+        {
+            @: '@s.idServicio': '@s.modalidad',
+        }
+    };
+
+    function actualizarDireccion() {
+        var servicioId = $('#idServicio').val();
+        var modalidad = modalidadPorServicio[servicioId] || '';
+
+        if (modalidad.toLowerCase() === 'domicilio') {
+            $('#direccionDiv').show();
+        } else {
+            $('#direccionDiv').hide();
+            $('#direccionDiv input').val(''); // limpiar campo si no aplica
+        }
+    }
+
+    // Ejecutar al cargar la página
+    actualizarDireccion();
+
+    // Ejecutar cada vez que cambie el servicio
+    $('#idServicio').change(function() {
+        actualizarDireccion();
+    });
+});
+        </script>
+
+
+        <script>
         $(function () {
             function cargarHoras() {
                 var fecha = $('#fechaInput').val();
@@ -505,7 +556,7 @@
                 }, 300);
             }
         });
-</script>
+        </script>
 
     }
 

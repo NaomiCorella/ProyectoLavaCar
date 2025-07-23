@@ -37,7 +37,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarDisponibles
                                                         nombreEmpleado = empleados.nombre,
                                                         fecha = reserva.fecha.ToString(),
                                                         hora = reserva.hora.ToString(),
-                                                        estado = reserva.estado
+                                                        estado = reserva.estado,
+                                                        direccion = reserva.direccion
+                                                    
                                                     }).ToList();
             return lalistadeServicios;
         }

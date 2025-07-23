@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Editar Mi Reserva";
+    string modalidad = (ViewBag.ModalidadServicio as string ?? "").ToLower();
 }
 
 <!DOCTYPE html>
@@ -84,6 +85,32 @@
                             <!-- Espacios disponibles -->
                             <div id="espaciosDisponiblesDiv" class="text-center mb-3" style="font-weight:bold; color: green;"></div>
 
+
+
+                            <div id="direccionDiv" class="form-group luxury-input-group"
+                                 style="display:@(modalidad=="domicilio"? "block":"none");">
+                                @Html.LabelFor(m => m.direccion, htmlAttributes: new { @class = "input-label" })
+                                <div class="input-container" style="width:100%;">
+                                    <span class="input-icon">
+                                        <!-- Icono de mapa -->
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
+                                        </svg>
+                                    </span>
+                                    @Html.TextBoxFor(m => m.direccion,
+                                        new
+                                             {
+                                            @class = "luxury-input",
+                                            placeholder = "Ingrese dirección",
+                                            style = "width:100%;"
+                                        })
+                                    <span class="input-border"></span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "validation-message" })
+                            </div>
+
+
                             <div class="text-center mt-4">
                                 <button type="submit" class="luxury-button">
                                     <span class="button-text">Guardar Cambios</span>
@@ -110,6 +137,36 @@
         @Scripts.Render("~/bundles/jqueryval")
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="~/Scripts/Reservas/editReservas.js"></script>
+
+        <script>
+            function obtenerModalidadServicio(servicioId) {
+                $.ajax({
+                    url: '/Servicios/ObtenerModalidad',
+                    type: 'GET',
+                    data: { idServicio: servicioId },
+                    success: function (modalidad) {
+                        if (modalidad === "Domicilio") {
+                            $("#direccionContainer").show();
+                        } else {
+                            $("#direccionContainer").hide();
+                            $("#direccion").val(""); // limpiar si no es domicilio
+                        }
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                var idServicio = $("#idServicio").val();
+                obtenerModalidadServicio(idServicio);
+
+                $("#idServicio").change(function () {
+                    var idSeleccionado = $(this).val();
+                    obtenerModalidadServicio(idSeleccionado);
+                });
+            });
+        </script>
+
+
         <script>
         $(document).ready(function () {
             function cargarHoras() {

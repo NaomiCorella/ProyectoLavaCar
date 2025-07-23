@@ -35,7 +35,8 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarEncargos
                                                         idServicio = reserva.idServicio,
                                                         fecha = reserva.fecha.ToString(),
                                                         hora = reserva.hora.ToString(),
-                                                        estado = reserva.estado
+                                                        estado = reserva.estado,
+                                                        direccion = reserva.direccion
                                                     }).ToList();
             return lalistadeServicios;
         }

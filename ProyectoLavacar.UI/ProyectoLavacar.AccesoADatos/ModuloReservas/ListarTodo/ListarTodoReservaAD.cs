@@ -39,8 +39,9 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.ListarTodo
                                                          estado = reserva.estado,
                                                          nombreCliente= elCliente.nombre,
                                                          nombreEmpleado = elEmpleado.nombre,
-                                                         nombreServicio= servicio.nombre
-                                                     }).ToList();
+                                                         nombreServicio= servicio.nombre,
+                                                         direccion = reserva.direccion
+                                                        }).ToList();
             return lalistadeServicios;
         }
     }

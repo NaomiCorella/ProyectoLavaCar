@@ -25,6 +25,7 @@ namespace ProyectoLavacar.AccesoADatos.ModuloReservas.Editar
             lareservaenBaseDeDatos.idServicio = lareservaParaEditar.idServicio;
             lareservaenBaseDeDatos.fecha = lareservaParaEditar.fecha;
             lareservaenBaseDeDatos.hora = lareservaParaEditar.hora;
+            lareservaenBaseDeDatos.direccion = lareservaParaEditar.direccion;
             EntityState estado = _elcontexto.Entry(lareservaenBaseDeDatos).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosAlmacenados = await _elcontexto.SaveChangesAsync();
             return cantidadDeDatosAlmacenados;

@@ -82,6 +82,7 @@
                                     <th>Servicio</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
+                                    <th>Dirección</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -94,6 +95,9 @@
                                         <td>@Html.DisplayFor(modelItem => item.nombreServicio)</td>
                                         <td>@Html.DisplayFor(modelItem => item.fecha)</td>
                                         <td>@(DateTime.TryParse(item.hora, out var parsedTime) ? parsedTime.ToString("HH:mm") : item.hora)</td>
+                                        <td>
+                                            @(string.IsNullOrEmpty(item.direccion) ? "Presencial" : item.direccion)
+                                        </td>
                                         <td>
                                             @if (item.estado)
                                             {
@@ -120,21 +124,21 @@
                                                 </a>
 
                                                 @*@if (item.estado)
-                                                    {
-                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="luxury-btn luxury-btn-warning" title="Inactivar">
-                                                            <svg viewBox="0 0 24 24">
-                                                                <path fill="currentColor" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M17,7H14.5L13.5,6H10.5L9.5,7H7V9H17V7M9,15.5A1.5,1.5 0 0,0 10.5,17A1.5,1.5 0 0,0 12,15.5A1.5,1.5 0 0,0 10.5,14A1.5,1.5 0 0,0 9,15.5M15,15.5A1.5,1.5 0 0,0 16.5,17A1.5,1.5 0 0,0 18,15.5A1.5,1.5 0 0,0 16.5,14A1.5,1.5 0 0,0 15,15.5M17,10H7V19H17V10Z" />
-                                                            </svg>
-                                                        </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="luxury-btn luxury-btn-success" title="Activar">
-                                                            <svg viewBox="0 0 24 24">
-                                                                <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
-                                                            </svg>
-                                                        </a>
-                                                    }*@
+                {
+                    <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="luxury-btn luxury-btn-warning" title="Inactivar">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M17,7H14.5L13.5,6H10.5L9.5,7H7V9H17V7M9,15.5A1.5,1.5 0 0,0 10.5,17A1.5,1.5 0 0,0 12,15.5A1.5,1.5 0 0,0 10.5,14A1.5,1.5 0 0,0 9,15.5M15,15.5A1.5,1.5 0 0,0 16.5,17A1.5,1.5 0 0,0 18,15.5A1.5,1.5 0 0,0 16.5,14A1.5,1.5 0 0,0 15,15.5M17,10H7V19H17V10Z" />
+                        </svg>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("CambiarEstado", new { id = item.idReserva })" class="luxury-btn luxury-btn-success" title="Activar">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+                        </svg>
+                    </a>
+                }*@
 
                                             </div>
                                         </td>
