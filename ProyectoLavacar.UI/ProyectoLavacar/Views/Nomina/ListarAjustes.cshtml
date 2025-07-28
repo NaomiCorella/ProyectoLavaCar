@@ -114,12 +114,21 @@
                                         @Html.DisplayFor(modelItem => item.Monto)
                                     </td>
                                     <td>
-                                        <a href="@Url.Action("AnularAjustes", new { id = item.IdAjusteSalarial })"
-                                           class="luxury-btn-action btn-anular me-2 mb-2"
-                                           title="Anular" data-bs-toggle="tooltip">
-                                            <i class="fas fa-times-circle me-1"></i>
-                                            Anular
-                                        </a>
+                                        @if (item.estado)
+                                        {
+                                            <a href="@Url.Action("AnularAjustes", new { id = item.IdAjusteSalarial })"
+                                               class="luxury-btn-action btn-anular me-2 mb-2"
+                                               title="Anular" data-bs-toggle="tooltip">
+                                                <i class="fas fa-times-circle me-1"></i>
+                                                Anular
+                                            </a>
+
+                                        }
+                                        else
+                                        {
+
+                                        }
+
                                     </td>
 
                                 </tr>
