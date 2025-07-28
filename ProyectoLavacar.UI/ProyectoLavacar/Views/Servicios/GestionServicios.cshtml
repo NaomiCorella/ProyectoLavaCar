@@ -258,29 +258,25 @@
             }
 
         /* Estilos para la tabla */
-        .luxury-table-responsive {
+/*        .luxury-table-responsive {
             overflow-x: auto;
             border-radius: 12px;
         }
 
-        .luxury-table {
+         Estilos para la tabla */
+        .luxury-table-container {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 5px
+            max-width: 1600px;
+            margin: 0 auto;
+            overflow-x: auto;
         }
 
-        .luxury-table-header {
-            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-            color: white;
-            border-radius: 50px 50px 0 0;
-            overflow: hidden; /* Importante */
-        }
 
-            .luxury-table-header th {
-                padding: 15px 20px;
-                text-align: center;
-                font-weight: 600;
-            }
+        .luxury-table {
+            width: 110%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
 
         .luxury-table-header {
             background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
@@ -307,6 +303,7 @@
                 vertical-align: middle;
                 text-align: center;
             }
+
 
         /* Estilos para badges */
         .luxury-badge {
@@ -379,24 +376,25 @@
             }
 
         /* Responsive */
-        @@media (max-width: 768px) {
+        @@media (max-width: 992px) {
             .luxury-table-header th {
-                padding: 14px 8px;
-                font-size: 13px;
+                padding: 14px;
             }
 
             .luxury-table-row td {
-                padding: 12px 8px;
-                font-size: 14px;
+                padding: 12px;
             }
 
-            .btn-action {
-                padding: 6px 10px;
-                font-size: 13px;
+            .luxury-btn {
+                padding: 6px 12px;
             }
         }
 
-        @@media (max-width: 576px) {
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
             .luxury-title {
                 font-size: 28px;
             }
@@ -427,92 +425,72 @@
 
                     .luxury-table-row td:before {
                         content: attr(data-label);
-                        position: absolute;
-                        left: 15px;
-                        width: 45%;
-                        padding-right: 15px;
                         font-weight: 600;
-                        text-align: center;
-                        color: #13678A;
+                        color: #45C4B0;
+                        margin-right: 15px;
                     }
 
                     .luxury-table-row td:last-child {
                         border-bottom: none;
+                        justify-content: flex-end;
                     }
 
             .luxury-actions {
+                width: 100%;
                 justify-content: flex-end;
             }
 
-            .luxury-table {
-                width: 100%;
-                border-collapse: separate;
-                border-spacing: 0;
-                margin: 0;
+            .luxury-btn-text {
+                display: none;
             }
 
-            .luxury-table-header {
-                background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-                color: white;
+            .luxury-btn {
+                width: 36px;
+                height: 36px;
+                padding: 0;
+                border-radius: 50%;
+                justify-content: center;
             }
-
-                .luxury-table-header th {
-                    padding: 18px;
-                    text-align: center;
-                    font-weight: 600;
-                }
-
-            .luxury-table thead th {
-                /*background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-         color: white*/
-                font-weight: 600;
-                padding: 15px;
-                text-align: center;
-                border: none;
-                position: sticky;
-                top: 0;
-                z-index: 10;
-            }
-
-                .luxury-table thead th:first-child {
-                    border-top-left-radius: 12px;
-                }
-
-                .luxury-table thead th:last-child {
-                    border-top-right-radius: 12px;
-                }
-
-            .luxury-table tbody td {
-                padding: 12px 15px;
-                text-align: center;
-                vertical-align: middle;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            }
-
-            .luxury-table tbody tr:last-child td {
-                border-bottom: none;
-            }
-
-            .luxury-table tbody tr:hover {
-                background-color: rgba(69, 196, 176, 0.05);
-                transition: background-color 0.3s ease;
-            }
-
-            .luxury-table-header {
-                border-radius: 20px 20px 0 0;
-                overflow: hidden;
-            }
-
-                .luxury-table-header th:first-child {
-                    border-top-left-radius: 20px;
-                }
-
-                .luxury-table-header th:last-child {
-                    border-top-right-radius: 20px;
-                }
-
-            */
         }
+
+        @@media (max-width: 576px) {
+            .luxury-link-button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+
+            .luxury-table-row td {
+                font-size: 14px;
+            }
+        }
+
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        table.dataTable thead th {
+            text-align: center !important;
+        }
+
+        /* Bordes ovalados arriba del thead */
+        .luxury-table thead th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .luxury-table thead th:last-child {
+            border-top-right-radius: 12px;
+        }
+
     </style>
 </head>
 <body>
@@ -520,91 +498,94 @@
         <div class="container">
             <div class="section-title text-center">
                 <div class="luxury-icon">
-                    <i class="fas fa-concierge-bell"></i>
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path fill="currentColor" d="M12 3C10.9 3 10 3.9 10 5S10.9 7 12 7 14 6.1 14 5 13.1 3 12 3M5 5C3.9 5 3 5.9 3 7S3.9 9 5 9 7 8.1 7 7 6.1 5 5 5M19 5C17.9 5 17 5.9 17 7S17.9 9 19 9 21 8.1 21 7 20.1 5 19 5M5 10L3 16V21H5V20H19V21H21V16L19 10H5M6.5 12.5C7.3 12.5 8 13.2 8 14S7.3 15.5 6.5 15.5 5 14.8 5 14 5.7 12.5 6.5 12.5M17.5 12.5C18.3 12.5 19 13.2 19 14S18.3 15.5 17.5 15.5 16 14.8 16 14 16.7 12.5 17.5 12.5Z" />
+                    </svg>
                 </div>
+
+
+
                 <h2 class="luxury-title">Gestión de Servicios</h2>
                 <p class="luxury-subtitle">Administra los servicios ofrecidos por tu lavacar</p>
                 <div class="luxury-divider"></div>
             </div>
+            <div class="luxury-card">
 
-            <div class="text-end mb-4">
-                <a href="@Url.Action("Create")" class="luxury-button">
-                    <span class="button-text">Registrar Nuevo</span>
-                    <span class="button-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                        </svg>
-                    </span>
-                    <div class="button-shine"></div>
-                </a>
-            </div>
-
-
-            <div class="luxury-card shadow-lg rounded">
-                <div class="card-body p-0">
-                    <div class="luxury-table-responsive">
-                        <div>
-                            <table id="myTable" class="luxury-table">
-                                <thead class="luxury-table-header">
-                                    <tr>
-                                        <th>@Html.DisplayNameFor(model => model.nombre)</th>
-                                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
-                                        <th>@Html.DisplayNameFor(model => model.estado)</th>
-                                        <th>@Html.DisplayNameFor(model => model.modalidad)</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr class="luxury-table-row">
-                                            <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
-                                            <td data-label="Descripción">@Html.DisplayFor(modelItem => item.descripcion)</td>
-                                            <td data-label="Estado">
-                                                @if (item.estado)
-                                                {
-                                                    <span class="luxury-badge ">Activo</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="luxury-badge ">Inactivo</span>
-                                                }
-                                            </td>
-                                            <td data-label="Modalidad">@Html.DisplayFor(modelItem => item.modalidad)</td>
-                                            <td>
-                                                <div class="luxury-actions">
-                                                    @if (item.estado)
-                                                    {
-                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" class="luxury-btn-action warning me-2 mb-2" title="Inactivar" data-bs-toggle="tooltip">
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </a>
-                                                    }
-
-                                                    else
-                                                    {
-                                                        <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" cclass="luxury-btn-action success me-2 mb-2" title="Activar" data-bs-toggle="tooltip">
-                                                            <i class="fas fa-check-circle"></i>
-                                                        </a>
-
-                                                    }
-                                                    <a href="@Url.Action("Details", new { id = item.idServicio })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
-                                                        <i class="fas fa-info-circle"></i>
-                                                    </a>
+                <div class="text-center mb-4">
+                    <a href="@Url.Action("Create")" class="luxury-button">
+                        <span class="button-text">Registrar Nuevo Servicio</span>
+                        <span class="button-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                            </svg>
+                        </span>
+                        <div class="button-shine"></div>
+                    </a>
+                </div>
 
 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="luxury-table-container">
+                    <table class="luxury-table" id="myTable">
+                        <thead class="luxury-table-header" style="text-align: center">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.nombre)</th>
+                                <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                                <th>@Html.DisplayNameFor(model => model.estado)</th>
+                                <th>@Html.DisplayNameFor(model => model.modalidad)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="luxury-table-row">
+                                    <td data-label="Nombre">@Html.DisplayFor(modelItem => item.nombre)</td>
+                                    <td data-label="Descripción">@Html.DisplayFor(modelItem => item.descripcion)</td>
+                                    <td data-label="Estado">
+                                        @if (item.estado)
+                                        {
+                                            <span class="luxury-badge ">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="luxury-badge ">Inactivo</span>
+                                        }
+                                    </td>
+                                    <td data-label="Modalidad">@Html.DisplayFor(modelItem => item.modalidad)</td>
+                                    <td>
+                                        <div class="luxury-actions">
+                                            @if (item.estado)
+                                            {
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" class="luxury-btn-action warning me-2 mb-2" title="Inactivar" data-bs-toggle="tooltip">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </a>
+                                            }
+
+                                            else
+                                            {
+                                                <a href="@Url.Action("CambiarEstado", new { id = item.idServicio })" cclass="luxury-btn-action success me-2 mb-2" title="Activar" data-bs-toggle="tooltip">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </a>
+
+                                            }
+                                            <a href="@Url.Action("Details", new { id = item.idServicio })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
+            
+
+      
 
     <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
