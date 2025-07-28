@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 
     <style>
-       
+
         .luxury-btn-action {
             display: inline-flex;
             align-items: center;
@@ -418,6 +418,30 @@
                         background-color: #0056b3; /* Color de fondo al pasar el mouse */
                         cursor: pointer;
                     }
+
+            .btn-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                justify-content: center;
+            }
+
+            .custom-btn {
+                width: 200px; /* MISMO ANCHO para todos */
+                white-space: nowrap;
+                text-align: center;
+                padding: 10px 16px;
+            }
+            @@media (max-width: 576px) {
+
+                .btn-wrapper {
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+
+
+
         }
     </style>
 </head>
@@ -427,32 +451,37 @@
             <div class="section-title text-center">
                 <div class="luxury-icon">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 3L2 12H5V20H19V12H22L12 3M12 7.7C14.1 7.7 15.8 9.4 15.8 11.5C15.8 14.5 12 18 12 18C12 18 8.2 14.5 8.2 11.5C8.2 9.4 9.9 7.7 12 7.7M12 10C11.2 10 10.5 10.7 10.5 11.5C10.5 12.3 11.2 13 12 13C12.8 13 13.5 12.3 13.5 11.5C13.5 10.7 12.8 10 12 10Z" />
+                        <path fill="currentColor" d="M3 3H11V11H3V3M5 5V9H9V5H5M13 3H21V11H13V3M15 5V9H19V5H15M3 13H11V21H3V13M5 15V19H9V15H5M13 13H21V21H13V13M15 15V19H19V15H15Z" />
                     </svg>
                 </div>
+
                 <h2 class="luxury-title">@ViewBag.Title</h2>
                 <p class="luxury-subtitle">Administra los productos disponibles en tu inventario</p>
                 <div class="luxury-divider"></div>
             </div>
 
             <div class="luxury-card">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <a href="@Url.Action("Create", "Inventario")" class="luxury-btn luxury-btn-primary">
-                        <i class="fas fa-plus"></i> Agregar Producto
-                    </a>
+                @*<div class="d-flex justify-content-between align-items-center mb-4">*@
+                   
 
                     <div class="luxury-actions">
-                        <button type="submit" class="abrirModalMovimiento luxury-btn luxury-btn-outline">
+                        <a href="@Url.Action("Create", "Inventario")" class="luxury-btn luxury-btn-primary btn-custom">
+                            <i class="fas fa-plus"></i> Agregar Producto
+                        </a>
+                        <button type="submit" class="abrirModalMovimiento luxury-btn luxury-btn-outline btn-custom">
                             <i class="fas fa-exchange-alt"></i> Registrar Movimiento
                         </button>
-                        <a href="@Url.Action("HistorialDeMovimientos")" class="luxury-btn luxury-btn-outline">
+                        <a href="@Url.Action("HistorialDeMovimientos")" class="luxury-btn luxury-btn-outline btn-custom">
                             <i class="fas fa-history"></i> Historial
                         </a>
-                        <a href="@Url.Action("DescargarPDF")" class="luxury-btn luxury-btn-outline">
+                        <a href="@Url.Action("DescargarPDF")" class="luxury-btn luxury-btn-outline btn-custom">
                             <i class="fas fa-file-pdf"></i> Exportar PDF
                         </a>
                     </div>
-                </div>
+                @*</div>*@
+
+
+
 
                 <div class="luxury-filter-container">
                     <form method="get" action="@Url.Action("FiltrarPorProducto", "Inventario")" class="row g-3">
@@ -466,10 +495,10 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="luxury-table-container">
                     <table class="luxury-table" id="myTable">
                         <thead class="luxury-table-header">
+
                             <tr>
                                 @*<th>@Html.DisplayNameFor(model => model.idProducto)</th>*@
                                 <th>@Html.DisplayNameFor(model => model.nombre)</th>

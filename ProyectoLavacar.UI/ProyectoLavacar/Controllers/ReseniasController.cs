@@ -177,12 +177,12 @@ namespace ProyectoLavacar.Controllers
                 resenia.estado = !resenia.estado;
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexAdmin", "Home");
             }
         }
         public ActionResult ResponderReseña(int id)

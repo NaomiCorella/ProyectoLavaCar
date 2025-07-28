@@ -27,27 +27,29 @@
                         <div class="header-left">
                             <ul class="list-unstyled d-flex flex-column flex-md-row align-items-center gap-3">
                                 <li class="text">
-                                    <a href="~/Views/Home/Index.cshtml">
-                                        <img src="~/Content/assets/images/logo/download (7)-Photoroom.png" alt="Logo" width="120" height="auto" class="img-fluid">
+                                    <a href="@Url.Action("Index", "Home")">
+                                        <img src="~/Content/assets/images/logo/download (7)-Photoroom.png" alt="Logo" width="120" class="img-fluid" />
+                                        
                                     </a>
                                 </li>
+
                                 <li class="text">
                                     <span>Lunes-Domingo 9:00 AM - 6:00 PM</span>
                                 </li>
                                 @*<li class="info">
-                                    <span>
-                                        <a href="tel:+50672850302">
-                                            <i class="fas fa-phone-alt"></i> +(506) 7285 0302
-                                        </a>
-                                    </span>
-                                </li>
-                                <li class="info">
-                                    <span>
-                                        <a href="mailto:lavacarhervi@gmail.com">
-                                            <i class="far fa-envelope"></i> lavacarhervi@gmail.com
-                                        </a>
-                                    </span>
-                                </li>*@
+            <span>
+                <a href="tel:+50672850302">
+                    <i class="fas fa-phone-alt"></i> +(506) 7285 0302
+                </a>
+            </span>
+        </li>
+        <li class="info">
+            <span>
+                <a href="mailto:lavacarhervi@gmail.com">
+                    <i class="far fa-envelope"></i> lavacarhervi@gmail.com
+                </a>
+            </span>
+        </li>*@
                             </ul>
                         </div>
 
@@ -217,11 +219,10 @@
                             <div class="widget quick-link-widget">
                                 <h4 class="widget-title">Enlaces rápidos</h4>
                                 <ul class="widget-link">
-                                    <li><a href="index.html">Inicio</a></li>
-                                    <li><a href="service.html">Servicios</a></li>
-                                    <li><a href="inicioSesion.html">Inicio Sesión</a></li>
-                                    <li><a href="about.html">Sobre Nosotros</a></li>
-                                    <li><a href="booking.html">Reserva</a></li>
+                                    <li>@Html.ActionLink("HERVI", "Index", "Home")</li>
+                                    <li >@Html.ActionLink("Servicios", "Index", "Servicios")</li>
+                                    <li>@Html.ActionLink("Sobre Nosotros", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Reservar Cita", "ReservarCita", "Reservas")</li>
                                 </ul>
                             </div>
                         </div>
