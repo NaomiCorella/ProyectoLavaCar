@@ -121,7 +121,7 @@ namespace ProyectoLavacar.Controllers
                 }
                 int cantidadDeDatosGuardados = await _crearServicios.Crear(elservicio);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("GestionServicios");
             }
             catch
             {

@@ -137,14 +137,22 @@
                                 <div class="button-shine"></div>
                             </button>
                         </div>
+                        <a href="@Url.Action("Index", "Servicios")" class="luxury-button luxury-button-secondary">
+                            <span class="button-text">Ir a Servicios</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                                </svg>
+                            </span>
+                            <div class="button-shine"></div>
+                        </a>
                     </div>
                     }
                 </div>
+
             </div>
 
-            <div class="text-center mt-4">
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "luxury-link" })
-            </div>
+            
         </div>
     </div>
 
