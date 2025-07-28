@@ -746,8 +746,8 @@ namespace ProyectoLavacar.Controllers
 
 
         // GET: Reservas/Edit/5
-    
-        [Authorize(Roles = "Usuario")]
+        [Authorize(Roles = "Administrador, Empleado, Usuario")]
+
         public async Task<ActionResult> EditarMiReserva(int idReserva)
         {
             var modelo = _detallesReserva.Detalle(idReserva);

@@ -162,29 +162,26 @@
             </div>
 
             <div class="d-flex justify-content-center gap-2 mt-4">
-                
-                    <a href="@Url.Action("DescargarPDFDetalle", new { idNomina = Model.IdNomina })" class="luxury-button luxury-button-success">
-                        <span class="button-text">Descargar PDF</span>
-                        <span class="button-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-                            </svg>
-                        </span>
-                        <div class="button-shine"></div>
-                    </a>
-               
 
-                <div class="text-center">
-                    <a href="@Url.Action("Index", "Nomina")" class="luxury-button luxury-button-secondary">
-                        <span class="button-text">Volver al Listado</span>
-                        <span class="button-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
-                            </svg>
-                        </span>
-                        <div class="button-shine"></div>
-                    </a>
-                </div>
+                <a href="@Url.Action("DescargarPDFDetalle", new { idNomina = Model.IdNomina })" class="luxury-button luxury-button-success">
+                    <span class="button-text">Descargar PDF</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                        </svg>
+                    </span>
+                    <div class="button-shine"></div>
+                </a>
+
+
+                <a href="@Url.Action("Nomina", new { idEmpleado = Model.IdEmpleado })" class="luxury-button luxury-button-secondary">
+                    <span class="button-text">Volver</span>
+                    <span class="button-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                        </svg>
+                    </span>
+                </a>
             </div>
 
             
