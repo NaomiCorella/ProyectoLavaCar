@@ -97,19 +97,18 @@
                                     bool isChecked = listaServicios.Contains(servicio.idServicio);
 
                                     <div class="col-md-6 mb-3">
-                                        <div class="luxury-checkbox">
-                                            <input type="checkbox" class="form-check-input" name="listaServicios"
-                                                   value="@servicio.idServicio" id="servicio_@servicio.idServicio"
+                                        <label class="luxury-checkbox">
+                                            <input type="checkbox" name="listaServicios"
+                                                   value="@servicio.idServicio"
                                                    @(isChecked ? "checked" : "") />
-                                            <label class="form-check-label" for="servicio_@servicio.idServicio">
-                                                @servicio.nombre
-                                            </label>
                                             <span class="checkmark"></span>
-                                        </div>
+                                            @servicio.nombre
+                                        </label>
                                     </div>
                                 }
                             </div>
                         </div>
+
 
                         <!-- Sección Información Adicional -->
                         <div class="luxury-section">
@@ -120,61 +119,61 @@
                                 Información Adicional
                             </h4>
 
-                      
-                                <div class="col-md-6">
-                                    <div class="form-group luxury-input-group">
-                                        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "input-label" })
-                                        <div class="input-container">
-                                            <span class="input-icon">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5M11,7H13V9H15V11H13V13H11V11H9V9H11M11,15H13V17H11V15Z" />
-                                                </svg>
-                                            </span>
-                                            <input type="text" class="luxury-input" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
-                                            <span class="input-border"></span>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Total, "", new { @class = "validation-message" })
-                                    </div>
-                                </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group luxury-input-group">
-                                        @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "input-label" })
-                                        <div class="input-container">
-                                            @Html.TextAreaFor(model => model.DescripcionServicio, new { @class = "luxury-textarea", rows = "3" })
-                                            <span class="input-border"></span>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "validation-message" })
+                            <div class="col-md-6">
+                                <div class="form-group luxury-input-group">
+                                    @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "input-label" })
+                                    <div class="input-container">
+                                        <span class="input-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5M11,7H13V9H15V11H13V13H11V11H9V9H11M11,15H13V17H11V15Z" />
+                                            </svg>
+                                        </span>
+                                        <input type="text" class="luxury-input" id="Total" name="Total" value="@(Model?.Total ?? 0)" readonly />
+                                        <span class="input-border"></span>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "validation-message" })
                                 </div>
+                            </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group luxury-input-group">
-                                        @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "input-label" })
-                                        <div class="input-container">
-                                            <span class="input-icon">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M12,13C14.67,13 20,14.33 20,17V20H4V17C4,14.33 9.33,13 12,13M12,14.9C9.03,14.9 5.9,16.36 5.9,17V18.1H18.1V17C18.1,16.36 14.97,14.9 12,14.9Z" />
-                                                </svg>
-                                            </span>
-                                            @if (ViewBag.empleados is string message)
-                                            {
-                                                <p class="text-muted">@message</p>
-                                            }
-                                            else
-                                            {
-                                                @Html.DropDownListFor(model => model.idEmpleado,
-                                                    new SelectList(ViewBag.empleados, "Id", "nombre"),
-                                                    "Seleccione un empleado",
-                                                    new { @class = "luxury-select" })
-                                            }
-                                            <span class="input-border"></span>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "validation-message" })
+                            <div class="col-md-12">
+                                <div class="form-group luxury-input-group">
+                                    @Html.LabelFor(model => model.DescripcionServicio, htmlAttributes: new { @class = "input-label" })
+                                    <div class="input-container">
+                                        @Html.TextAreaFor(model => model.DescripcionServicio, new { @class = "luxury-textarea", rows = "3" })
+                                        <span class="input-border"></span>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.DescripcionServicio, "", new { @class = "validation-message" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group luxury-input-group">
+                                    @Html.LabelFor(model => model.idEmpleado, "Empleado", htmlAttributes: new { @class = "input-label" })
+                                    <div class="input-container">
+                                        <span class="input-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M12,13C14.67,13 20,14.33 20,17V20H4V17C4,14.33 9.33,13 12,13M12,14.9C9.03,14.9 5.9,16.36 5.9,17V18.1H18.1V17C18.1,16.36 14.97,14.9 12,14.9Z" />
+                                            </svg>
+                                        </span>
+                                        @if (ViewBag.empleados is string message)
+                                        {
+                                            <p class="text-muted">@message</p>
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(model => model.idEmpleado,
+                                                new SelectList(ViewBag.empleados, "Id", "nombre"),
+                                                "Seleccione un empleado",
+                                                new { @class = "luxury-select" })
+                                        }
+                                        <span class="input-border"></span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.idEmpleado, "", new { @class = "validation-message" })
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                         <!-- Botones de Acción -->
                         <div class="d-flex justify-content-between mt-4">
@@ -205,6 +204,61 @@
     </div>
 
     <style>
+
+        .luxury-checkbox {
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            padding-left: 35px;
+        }
+
+            .luxury-checkbox input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            .luxury-checkbox .checkmark {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 20px;
+                width: 20px;
+                background-color: #eee;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+            .luxury-checkbox .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            .luxury-checkbox input:checked ~ .checkmark:after {
+                display: block;
+            }
+
+            .luxury-checkbox .checkmark:after {
+                left: 6px;
+                top: 2px;
+                width: 6px;
+                height: 12px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+
         .luxury-compra-container {
             padding: 40px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
