@@ -127,6 +127,12 @@ namespace ProyectoLavacar.Controllers
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
             return View(nomina);
         }
+        public ActionResult Error()
+        {
+
+           
+            return View();
+        }
 
         // GET: Nomina/Create
         [Authorize(Roles = "Administrador, Empleado")]
