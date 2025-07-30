@@ -373,6 +373,8 @@ button {
 /*===========================
     2.HEADER css 
 ===========================*/
+
+
 .transparent-header {
     position: absolute;
     top: 0;
@@ -939,7 +941,65 @@ button {
     100% {
         top: 0;
     }
+
 }
+
+/* Mostrar menú en móvil y activar toggle */
+@media (max-width: 991px) {
+    .header-navigation .nav-container {
+        flex-wrap: wrap;
+    }
+
+        .header-navigation .nav-container .nav-menu {
+            display: none;
+            width: 100%;
+        }
+
+        .header-navigation .nav-container.menu-open .nav-menu {
+            display: block;
+        }
+
+    .header-navigation .navbar-toggler {
+        display: block;
+    }
+
+    .header-navigation .nav-container .nav-push-item,
+    .header-navigation .nav-container .nav-pushed-item {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .header-navigation .nav-container .main-menu ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+        .header-navigation .nav-container .main-menu ul li {
+            width: 100%;
+        }
+
+            .header-navigation .nav-container .main-menu ul li a {
+                padding: 10px 20px;
+            }
+
+            .header-navigation .nav-container .main-menu ul li .sub-menu {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                box-shadow: none;
+            }
+
+    .header-navigation .navbar-close {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+
 /*---=======================
     03. Hero css 
 ===========================---*/

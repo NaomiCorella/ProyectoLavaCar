@@ -30,82 +30,108 @@
             <div class="section-title text-center">
                 <div class="luxury-icon">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7V7.7M12,12C12.8,12 13.5,11.3 13.5,10.5C13.5,9.7 12.8,9 12,9C11.2,9 10.5,9.7 10.5,10.5C10.5,11.3 11.2,12 12,12M17,12V15H14V17H17V20H19V17H22V15H19V12H17Z" />
+                        <path fill="currentColor" d="M3 3V21H21V3H3M19 19H5V5H19V19M8 7H16V9H8V7M8 11H14V13H8V11M8 15H12V17H8V15Z" />
                     </svg>
                 </div>
+
                 <h2 class="luxury-title">Administración de Nómina</h2>
                 <p class="luxury-subtitle">Gestión completa de pagos a empleados</p>
                 <div class="luxury-divider"></div>
             </div>
+            <div class="luxury-card">
+                <div class="luxury-table-container">
+                    <table class="luxury-table" id="myTable">
+                        <thead class="luxury-table-header" style="text-align: center">
+                            <tr>
+                                <th>
 
-            <div class="luxury-card shadow-lg rounded">
-                <div class="card-body">
-                    <div class="luxury-table-responsive">
-                        <table id="myTable" class="luxury-table">
-                            <thead class="luxury-table-header" style="text-align: center">
-                                <tr>
-                                    <th>
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.cedula)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaDePago)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SalarioBruto)
+                                </th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
 
-                                        @Html.DisplayNameFor(model => model.nombre)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.cedula)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.FechaDePago)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.SalarioBruto)
-                                    </th>
-                                    <th>Acciones</th>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="luxury-table-row">
+                                    <td data-label="Nombre">
+                                        @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.primer_apellido) @Html.DisplayFor(modelItem => item.segundo_apellido)
+                                    </td>
+                                    <td data-label="Cedula">
+                                        @Html.DisplayFor(modelItem => item.cedula)
+                                    </td>
+                                    <td data-label="Fecha de Pago">
+                                        @Html.DisplayFor(modelItem => item.FechaDePago)
+                                    </td>
+                                    <td data-label="Salario Bruto" class="luxury-price">
+                                        @Html.DisplayFor(modelItem => item.SalarioBruto)
+                                    </td>
+                                    <td class="luxury-actions">
+                                        <a href="@Url.Action("Nomina", new { idEmpleado = item.IdEmpleado })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </a>
+                                        <a href="@Url.Action("ProcesosYGestiones", new { idNomina = item.IdNomina })" class="luxury-btn-action success me-2 mb-2" title="Gestiones" data-bs-toggle="tooltip">
+                                            <i class="fas fa-tasks"></i>
+                                        </a>
+                                    </td>
+
                                 </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr class="luxury-table-row">
-                                        <td data-label="Nombre">
-                                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.primer_apellido) @Html.DisplayFor(modelItem => item.segundo_apellido)
-                                        </td>
-                                        <td data-label="Cedula">
-                                            @Html.DisplayFor(modelItem => item.cedula)
-                                        </td>
-                                        <td data-label="Fecha de Pago">
-                                            @Html.DisplayFor(modelItem => item.FechaDePago)
-                                        </td>
-                                        <td data-label="Salario Bruto" class="luxury-price">
-                                            @Html.DisplayFor(modelItem => item.SalarioBruto)
-                                        </td>
-                                        <td class="luxury-actions">
-                                            <a href="@Url.Action("Nomina", new { idEmpleado = item.IdEmpleado })" class="luxury-action-btn" title="Detalles">
-                                                <svg viewBox="0 0 24 24" width="20" height="20">
-                                                    <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
-                                                </svg>
-                                            </a>
-                                            <a href="@Url.Action("ProcesosYGestiones", new { idNomina = item.IdNomina })" class="luxury-action-btn" title="Gestiones">
-                                                <svg viewBox="0 0 24 24" width="20" height="20">
-                                                    <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
-
+        
     <style>
         /* Estilos base del contenedor */
+        .luxury-btn-action.success {
+            background-color: #28a745; /* Verde Bootstrap */
+            color: white;
+            border-radius: 6px;
+            padding: 8px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .luxury-btn-action.success:hover {
+                background-color: #218838;
+                color: white;
+            }
+
+        .luxury-btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .luxury-btn-action.info {
+                background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            }
 
         .luxury-review-container {
             padding: 40px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
+            min-height: 115vh;
         }
 
         .section-title {
@@ -158,7 +184,6 @@
             border-radius: 16px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            max-width: 1200px;
             margin: 0 auto;
             padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -185,13 +210,16 @@
             }
 
         /* Estilos para la tabla */
-        .luxury-table-responsive {
+        .luxury-table-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
             overflow-x: auto;
-            border-radius: 12px;
         }
 
+
         .luxury-table {
-            width: 100%;
+            width: 110%;
             border-collapse: collapse;
             font-size: 15px;
         }
@@ -202,7 +230,7 @@
         }
 
             .luxury-table-header th {
-                padding: 16px;
+                padding: 18px;
                 text-align: center;
                 font-weight: 600;
             }
@@ -217,7 +245,7 @@
             }
 
             .luxury-table-row td {
-                padding: 14px 16px;
+                padding: 16px;
                 vertical-align: middle;
                 text-align: center;
             }

@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Administración de Compras</title>
+    <title>Bitacora</title>
     <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/default.css" rel="stylesheet" />
@@ -27,117 +27,155 @@
 <body>
     <div class="luxury-review-container">
         <div class="container">
+
             <div class="section-title text-center">
                 <div class="luxury-icon">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" />
+                        <path fill="currentColor" d="M17 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10v-2H7V5h10v4h4v12a2 2 0 0 1-2 2h-4v2h4a4 4 0 0 0 4-4V7l-6-4zM13 11h-2v2h2v-2zm0-4h-2v2h2V7z" />
                     </svg>
                 </div>
+
                 <h2 class="luxury-title">Administración de Bitácora</h2>
                 <div class="luxury-divider"></div>
             </div>
 
-            
 
-            <div class="luxury-card shadow-lg rounded">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="luxury-table" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.FechaDeEvento)</th>
-                                    <th>@Html.DisplayNameFor(model => model.TablaDeEvento)</th>
-                                    <th>@Html.DisplayNameFor(model => model.TipoDeEvento)</th>
-                                    <th>@Html.DisplayNameFor(model => model.DescripcionDeEvento)</th>
-                                    <th>Acciones</th>
+
+            <div class="luxury-card">
+                <div class="luxury-table-container">
+                    <table class="luxury-table" id="myTable">
+                        <thead class="luxury-table-header">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.FechaDeEvento)</th>
+                                <th>@Html.DisplayNameFor(model => model.TablaDeEvento)</th>
+                                <th>@Html.DisplayNameFor(model => model.TipoDeEvento)</th>
+                                <th>@Html.DisplayNameFor(model => model.DescripcionDeEvento)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="luxury-table-row">
+                                    <td>@Html.DisplayFor(modelItem => item.FechaDeEvento)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TablaDeEvento)</td>
+                                    <td class="luxury-price">@Html.DisplayFor(modelItem => item.TipoDeEvento)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DescripcionDeEvento)</td>
+                                    <td class="luxury-actions">
+                                        <a href="@Url.Action("Details", new { id = item.IdEvento })" class="luxury-btn-action info me-2 mb-2" title="Detalles" data-bs-toggle="tooltip">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </a>
+                                        
+
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.FechaDeEvento)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TablaDeEvento)</td>
-                                        <td class="luxury-price">@Html.DisplayFor(modelItem => item.TipoDeEvento)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.DescripcionDeEvento)</td>
-                                        <td class="luxury-actions">
-                                            <a href="@Url.Action("Details", new { id = item.IdEvento })" class="luxury-button luxury-button-small luxury-button-info">
-                                                <span class="button-icon">
-                                                    <svg viewBox="0 0 24 24" width="16" height="16">
-                                                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="~/Scripts/Resenias/indexAdmin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
-    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
-    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/assets/js/main.js"></script>
-    <script src="~/Content/assets/js/popper.min.js"></script>
-    <script src="~/Content/assets/js/slick.min.js"></script>
-    <script src="~/Content/assets/js/waypoints.min.js"></script>
-    <script src="~/Content/assets/js/wow.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let table = new DataTable('#myTable', {
-                pageLength: 10,
-                lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
-                searching: false,  // Elimina la caja de búsqueda
-                language: {
-                    lengthMenu: 'Mostrar _MENU_ registros por página',
-                    zeroRecords: 'No se encontraron registros',
-                    info: 'Mostrando página _PAGE_ de _PAGES_',
-                    infoEmpty: 'No hay registros disponibles',
-                    infoFiltered: '(filtrado de _MAX_ registros en total)',
-                    paginate: {
-                        first: 'Primera',
-                        previous: 'Anterior',
-                        next: 'Siguiente',
-                        last: 'Última'
+
+
+
+        <script src="~/Scripts/Resenias/indexAdmin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="~/Scripts/Resenias/AlertaEliminar_Inactivar.js"></script>
+        <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="~/Content/assets/js/bootstrap.min.js"></script>
+        <script src="~/Content/assets/js/imagesloaded.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/isotope.pkgd.min.js"></script>
+        <script src="~/Content/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/Content/assets/js/main.js"></script>
+        <script src="~/Content/assets/js/popper.min.js"></script>
+        <script src="~/Content/assets/js/slick.min.js"></script>
+        <script src="~/Content/assets/js/waypoints.min.js"></script>
+        <script src="~/Content/assets/js/wow.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let table = new DataTable('#myTable', {
+                    pageLength: 10,
+                    lengthMenu: [5, 10, 25, 50, 100],  // Opciones de cantidad de registros
+                    searching: false,  // Elimina la caja de búsqueda
+                    language: {
+                        lengthMenu: 'Mostrar _MENU_ registros por página',
+                        zeroRecords: 'No se encontraron registros',
+                        info: 'Mostrando página _PAGE_ de _PAGES_',
+                        infoEmpty: 'No hay registros disponibles',
+                        infoFiltered: '(filtrado de _MAX_ registros en total)',
+                        paginate: {
+                            first: 'Primera',
+                            previous: 'Anterior',
+                            next: 'Siguiente',
+                            last: 'Última'
+                        }
                     }
-                }
+                });
             });
-        });
 
-    </script>
+        </script>
 
-    <script>
-        // Agregar etiquetas para responsive
-        $(document).ready(function () {
-            $('.luxury-table-row td').each(function () {
-                var header = $(this).parent().find('th').eq($(this).index()).text();
-                $(this).attr('data-label', header);
+        <script>
+            // Agregar etiquetas para responsive
+            $(document).ready(function () {
+                $('.luxury-table-row td').each(function () {
+                    var header = $(this).parent().find('th').eq($(this).index()).text();
+                    $(this).attr('data-label', header);
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 </html>
 
 <style>
+
+    /* Bordes ovalados arriba del thead */
+    .luxury-table thead th:first-child {
+        border-top-left-radius: 12px;
+    }
+
+    .luxury-table thead th:last-child {
+        border-top-right-radius: 12px;
+    }
+    .luxury-btn-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .luxury-btn-action.info {
+            background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+        }
+
+        .luxury-btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            color: white;
+            text-decoration: none;
+        }
+
+    .luxury-btn-action {
+        width: 32px;
+        height: 32px;
+        margin: 0 5px 5px;
+    }
+
     .luxury-review-container {
         padding: 40px 0;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        min-height: 100vh;
+        min-height: 115vh;
     }
 
     .section-title {
@@ -190,152 +228,272 @@
         border-radius: 16px;
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
         overflow: hidden;
-        margin-bottom: 40px;
+        margin: 0 auto;
+        padding: 30px;
         border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .luxury-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-        .luxury-table th {
-            background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 3px solid #3aa58e;
-        }
-
-        .luxury-table td {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            color: #6c757d;
-        }
-
-        .luxury-table tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-    .luxury-price {
-        font-weight: 700;
-        color: #218838 !important;
-    }
-
-    .luxury-actions {
-        display: flex;
-        gap: 10px;
+    /* Estilos para botones */
+    .luxury-btn {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
-    }
-
-    .luxury-button {
-        position: relative;
-        padding: 12px 20px;
-        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
-        color: white;
-        border: none;
+        gap: 8px;
+        padding: 12px 24px;
         border-radius: 10px;
         font-size: 16px;
         font-weight: 600;
         cursor: pointer;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 20px rgba(69, 196, 176, 0.2);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .luxury-btn-primary {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+    }
+
+        .luxury-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(69, 196, 176, 0.3);
+            color: white;
+        }
+
+    .luxury-btn-outline {
+        background: transparent;
+        border: 2px solid #45C4B0;
+        color: #45C4B0;
+    }
+
+        .luxury-btn-outline:hover {
+            background: #45C4B0;
+            color: white;
+        }
+
+
+    /* Estilos para la tabla */
+    .luxury-table-container {
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+
+
+    .luxury-table {
+        width: 110%;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    .luxury-table-header {
+        background: linear-gradient(135deg, #45C4B0 0%, #9AEBA3 100%);
+        color: white;
+    }
+
+        .luxury-table-header th {
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .luxury-table-row {
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.3s ease;
+    }
+
+        .luxury-table-row:hover {
+            background-color: rgba(69, 196, 176, 0.05);
+        }
+
+        .luxury-table-row td {
+            padding: 16px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    /* Estilos para badges */
+    .luxury-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .luxury-badge-active {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+
+    .luxury-badge-inactive {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+    }
+
+    /* Estilos para botones de acción */
+    .luxury-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .luxury-action-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        text-decoration: none;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        min-width: 90px;
     }
 
-    .luxury-button-small {
-        padding: 10px;
-        width: 40px;
-        height: 40px;
-    }
-
-    .luxury-button-info {
-        background: linear-gradient(135deg, #17a2b8 0%, #6ad1e3 100%);
-        box-shadow: 0 10px 20px rgba(23, 162, 184, 0.2);
-    }
-
-    .luxury-button-secondary {
-        background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
-        box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
-    }
-
-    .button-text {
-        position: relative;
-        z-index: 2;
-    }
-
-    .button-icon {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        transition: transform 0.3s ease;
-    }
-
-        .button-icon svg {
-            width: 20px;
-            height: 20px;
+        .luxury-action-btn i {
+            font-size: 14px;
         }
 
-    .button-shine {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.6s ease;
+
+
+    .btn-details {
+        background-color: rgba(23, 162, 184, 0.1);
+        color: #17a2b8;
+        border: 1px solid #17a2b8;
     }
 
-    .luxury-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(69, 196, 176, 0.3);
-    }
-
-        .luxury-button:hover .button-shine {
-            left: 100%;
+        .btn-details:hover {
+            background-color: #17a2b8;
+            color: white;
         }
 
-        .luxury-button:hover .button-icon {
-            transform: translateX(5px);
+
+    /* Responsive design */
+    @@media (max-width: 992px) {
+        .luxury-actions {
+            flex-direction: column;
+            gap: 6px;
         }
 
-    /* Animaciones */
-    @@keyframes float {
-        0%, 100% {
-            transform: translateY(0);
+        .luxury-action-btn {
+            width: 100%;
         }
-
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-
-    .luxury-icon {
-        animation: float 4s ease-in-out infinite;
     }
 
     @@media (max-width: 768px) {
-        .luxury-card {
-            padding: 20px;
+        .luxury-table-header th {
+            padding: 14px 8px;
+            font-size: 14px;
         }
 
+        .luxury-table-row td {
+            padding: 12px 8px;
+            font-size: 14px;
+        }
+
+        .luxury-action-btn {
+            padding: 6px 10px;
+            font-size: 13px;
+            min-width: auto;
+        }
+    }
+
+    @@media (max-width: 576px) {
         .luxury-title {
             font-size: 28px;
         }
 
-        .luxury-subtitle {
-            font-size: 16px;
+        .luxury-table-header {
+            display: none;
         }
 
-        .luxury-table {
+        .luxury-table-row {
             display: block;
-            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
         }
-    }
+
+            .luxury-table-row td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                border-bottom: 1px solid #f0f0f0;
+                text-align: right;
+            }
+
+                .luxury-table-row td:before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    color: #45C4B0;
+                    margin-right: 15px;
+                }
+
+                .luxury-table-row td:last-child {
+                    border-bottom: none;
+                    justify-content: center;
+                }
+
+        .luxury-actions {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        .dt-paging {
+            display: flex;
+            justify-content: flex-end !important;
+            margin-top: 10px;
+        }
+
+            .dt-paging .paginate_button {
+                margin: 0 5px; /* Espaciado entre los botones */
+                padding: 5px 10px; /* Ajuste de tamaño de los botones */
+                background-color: #007bff; /* Color de fondo */
+                color: white; /* Color de texto */
+                border-radius: 5px; /* Bordes redondeados */
+            }
+
+                .dt-paging .paginate_button:hover {
+                    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+                    cursor: pointer;
+                }
+
+        /* Animaciones */
+        @@keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .luxury-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @@media (max-width: 768px) {
+            .luxury-card {
+                padding: 20px;
+            }
+
+            .luxury-title {
+                font-size: 28px;
+            }
+
+            .luxury-subtitle {
+                font-size: 16px;
+            }
+
+            .luxury-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
 </style>

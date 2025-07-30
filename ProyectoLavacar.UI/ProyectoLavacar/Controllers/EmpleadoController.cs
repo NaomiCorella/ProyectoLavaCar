@@ -173,7 +173,7 @@ namespace ProyectoLavacar.Controllers
             {
                 int cantidadDeDatosEditados = await _editarEmpleado.EditarEmpleados(elEmpleado);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MiPerfil","Usuario");
             }
             catch
             {

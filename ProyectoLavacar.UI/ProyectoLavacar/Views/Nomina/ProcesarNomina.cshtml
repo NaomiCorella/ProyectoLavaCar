@@ -29,9 +29,10 @@
             <div class="section-title text-center">
                 <div class="luxury-icon">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                        <path fill="currentColor" d="M19 2H8C6.89 2 6 2.89 6 4V20C6 21.11 6.89 22 8 22H19C20.11 22 21 21.11 21 20V4C21 2.89 20.11 2 19 2M12 19H10V18H11V17H10C9.45 17 9 16.55 9 16V15C9 14.45 9.45 14 10 14H12V13H14V14H15V15H14V16H15V17H14V18H15V19H13V18H12V19M19 20H8V4H19V20Z" />
                     </svg>
                 </div>
+
                 <h2 class="luxury-title">Procesar Nómina</h2>
                 <p class="luxury-subtitle">Confirmación de detalles de pago</p>
                 <div class="luxury-divider"></div>
@@ -95,12 +96,14 @@
                             new { @class = "luxury-button luxury-button-primary" }
                         )
 
-                        @Html.ActionLink(
-                            "Volver al Listado",
-                            "Index",
-                            null,
-                            new { @class = "luxury-button luxury-button-secondary" }
-                        )
+                        <a href="@Url.Action("ProcesosYGestiones", new { idNomina = Model.IdNomina })" class="luxury-button luxury-button-secondary">
+                            <span class="button-text">Volver</span>
+                            <span class="button-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                                </svg>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>

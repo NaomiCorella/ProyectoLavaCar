@@ -5,9 +5,12 @@ using Microsoft.Owin.Security;
 using ProyectoLavacar.Abstracciones.Modelos.ModuloBitacora;
 using ProyectoLavacar.Abstraciones.LN.interfaces.General.Fecha;
 using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloCorreos;
+using ProyectoLavacar.Abstraciones.LN.interfaces.ModuloEmpleados.Listar;
+using ProyectoLavacar.Abstraciones.Modelos.ModuloUsuarios;
 using ProyectoLavacar.AccesoADatos;
 using ProyectoLavacar.LN.General.Fecha;
 using ProyectoLavacar.LN.ModuloCorreos;
+using ProyectoLavacar.LN.ModuloEmpleados.Listar;
 using ProyectoLavacar.Models;
 using System;
 using System.Collections.Generic;
@@ -31,6 +34,7 @@ namespace ProyectoLavacar.Controllers
         private readonly IEmailSender _emailSender;
         private Contexto _contexto;
         private IFecha _fecha;
+        IListarEmpleadoLN _listarEmpleado;
 
         public AccountController()
         {
@@ -38,6 +42,7 @@ namespace ProyectoLavacar.Controllers
             _emailSender = (IEmailSender)System.Web.HttpContext.Current.Application["EmailSender"];
             _contexto = new Contexto();
             _fecha = new Fecha();
+            _listarEmpleado = new ListarEmpleadoLN();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailSender emailSender)
@@ -397,35 +402,61 @@ namespace ProyectoLavacar.Controllers
         [AllowAnonymous]
         public ActionResult RegisterEmployee()
         {
+            CargarRoles();
+            CargarTurnos();
 
-            ViewBag.Role = new SelectList(new List<object>
-         {
-          new { Value = "Administrador", Text = "Administrador" },
-          new { Value = "Empleado", Text = "Empleado" }
-         }, "Value", "Text");
 
-            ViewBag.turno = new List<SelectListItem>
-{
-    new SelectListItem { Value = "M", Text = "Mañana" },
-    new SelectListItem { Value = "T", Text = "Tarde" },
-    new SelectListItem { Value = "N", Text = "Noche" }
-};
 
 
             return View();
         }
 
+        private void CargarRoles()
+        {
+            ViewBag.Role = new SelectList(new List<object>
+         {
+          new { Value = "Administrador", Text = "Administrador" },
+          new { Value = "Empleado", Text = "Empleado" }
+         }, "Value", "Text");
+        }
 
+        private void CargarTurnos()
+        {
+            ViewBag.turno = new List<SelectListItem>
+        {
+        new SelectListItem { Value = "M", Text = "Mañana" },
+        new SelectListItem { Value = "T", Text = "Tarde" },
+        new SelectListItem { Value = "N", Text = "Noche" }
+          
+            };
+        }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
         {
-            if (ModelState.IsValid)
+            CargarRoles();
+            CargarTurnos();
+            List<EmpleadoDto> listaEmpleados = _listarEmpleado.ListarEmpleados().Where(p => p.estado == true).ToList();
+            // Validar si ya existe un usuario con la misma cédula
+            bool existePersona = listaEmpleados
+                .Any(p => p.cedula == model.cedula);
+
+
+
+            if (existePersona)
+            {
+                ModelState.AddModelError("cedula", "Ya existe un usuario con esta cédula.");
+                return View(model);
+            }
+        
+
+
+                if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.UserName,
+                    UserName = model.Email,
                     Email = model.Email,
                     nombre = model.Nombre,
                     primer_apellido = model.PrimerApellido,

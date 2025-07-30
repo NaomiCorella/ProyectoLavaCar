@@ -283,7 +283,10 @@ namespace ProyectoLavacar.Controllers
             Font totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
             BaseColor blancoHumo = new BaseColor(220, 225, 250);
 
-            List<InventarioDto> inventario = _listarInventario.ListarInventario();
+            // Solo productos activos
+            List<InventarioDto> inventario = _listarInventario.ListarInventario()
+                                                              .Where(p => p.estado == true)
+                                                              .ToList();
 
             MemoryStream ms = new MemoryStream();
             Document doc = new Document(PageSize.A4);
@@ -292,13 +295,12 @@ namespace ProyectoLavacar.Controllers
             doc.Open();
 
             var titulo = new Paragraph("Listado de inventario de Hervi ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18));
-            var subtitulo = new Paragraph( "Fecha:" + DateTime.Now.ToString("dd/mm/yyyy") + "\n\n", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14));
+            var subtitulo = new Paragraph("Fecha:" + DateTime.Now.ToString("dd/MM/yyyy") + "\n\n", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14));
 
             titulo.Alignment = Element.ALIGN_CENTER;
             doc.Add(titulo);
             subtitulo.Alignment = Element.ALIGN_CENTER;
             doc.Add(subtitulo);
-
 
             PdfPTable incapa = new PdfPTable(3) { WidthPercentage = 100 };
             incapa.SetWidths(new float[] { 3, 2, 3 });
@@ -308,11 +310,9 @@ namespace ProyectoLavacar.Controllers
 
             foreach (InventarioDto producto in inventario)
             {
-
                 incapa.AddCell(new PdfPCell(new Phrase(producto.nombre, cellFont)) { Padding = 8, BorderWidth = 1 });
                 incapa.AddCell(new PdfPCell(new Phrase(producto.categoria, cellFont)) { Padding = 8, BorderWidth = 1 });
                 incapa.AddCell(new PdfPCell(new Phrase($"{producto.cantidadDisponible:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
-
             }
 
             doc.Add(incapa);
@@ -321,6 +321,7 @@ namespace ProyectoLavacar.Controllers
             ms.Position = 0;
             return File(ms, "application/pdf", "Inventario.pdf");
         }
+
 
 
 

@@ -123,13 +123,26 @@ namespace ProyectoLavacar.Controllers
         // GET: Nomina/Details/5
         public ActionResult Details(int id)
         {
+     
             NominaCompletaDto nomina = _detalleNominaCompleta.Detalle(id);
             return View(nomina);
+        }
+        public ActionResult Error()
+        {
+
+           
+            return View();
         }
 
         // GET: Nomina/Create
         [Authorize(Roles = "Administrador, Empleado")]
         public ActionResult Create(string id)
+        {
+            Carga();
+            return View();
+        }
+
+        private void Carga()
         {
             ViewBag.Periodo = new List<SelectListItem>
     {
@@ -143,7 +156,6 @@ namespace ProyectoLavacar.Controllers
                 new SelectListItem { Value = "LargoPlazo", Text = "Largo Plazo" }
 
     };
-            return View();
         }
 
         // POST: Nomina/Create
@@ -152,9 +164,9 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-               
 
-                    if (modeloDeNomina.FechaDePago < DateTime.Now)
+                Carga();
+                if (modeloDeNomina.FechaDePago < DateTime.Now)
                     {
                         ModelState.AddModelError("Fecha", "La fecha no puede ser anterior a la fecha de hoy.");
                         return View(modeloDeNomina);
@@ -174,6 +186,7 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult IngresarAjustes(int idNomina)
         {
+            ViewBag.idNomina = idNomina;
             ViewBag.tipo = new List<SelectListItem>
     {
         new SelectListItem { Value = "Deduccion", Text = "Deduccion" },
@@ -205,7 +218,7 @@ namespace ProyectoLavacar.Controllers
         {
             try
             {
-
+               
                 AjustesSalarialesDto ajuste = new AjustesSalarialesDto()
                 {
                     IdAjusteSalarial = modeloDeAjustes.IdAjusteSalarial,
@@ -229,6 +242,8 @@ namespace ProyectoLavacar.Controllers
 
         public ActionResult IngresarTramites(int idNomina)
         {
+            ViewBag.idNomina = idNomina;
+
             ViewBag.tipo = new List<SelectListItem>
     {
         new SelectListItem { Value = "Incapacidad", Text = "Incapacidad" },
@@ -462,9 +477,9 @@ namespace ProyectoLavacar.Controllers
 
         public async Task<ActionResult> AnularAjustes(int id)
         {
-           
 
-                AjustesSalarialesDto modeloDeAjustes = _detallesAjustes.Detalle(id);
+            
+            AjustesSalarialesDto modeloDeAjustes = _detallesAjustes.Detalle(id);
 
                 if(modeloDeAjustes.tipo == "Bonificacion")
                 {

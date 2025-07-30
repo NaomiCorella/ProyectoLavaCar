@@ -11,8 +11,9 @@ namespace ProyectoLavacar.Abstraciones.Modelos.ModeloInventario
     public class MovimientoDto
     {
         public int idMovimiento { get; set; }
+        [Display(Name = "Producto")]
         public int idProducto { get; set; }
-        [Display(Name = "Nombre")]
+        [Display(Name = "Movimiento")]
         public string nombre { get; set; }
         [Display(Name = "Cantidad")]
         public int cantidad { get; set; }

@@ -90,9 +90,17 @@
                         <div class="luxury-details-row">
                             <div class="luxury-details-label">Estado</div>
                             <div class="luxury-details-value">
-                                <span class="luxury-status-badge @(Model.estado ? "pendiente" : "completado")">
-                                    @(Model.estado ? "Pendiente" : "Completado")
-                                </span>
+                                @if (Model.estado)
+                                {
+
+
+
+                                    <span class="luxury-badge luxury-badge-warning">Pendiente</span>
+                                }
+                                else
+                                {
+                                    <span class="luxury-badge luxury-badge-warning">Completada</span>
+                                }
 
                             </div>
                         </div>
