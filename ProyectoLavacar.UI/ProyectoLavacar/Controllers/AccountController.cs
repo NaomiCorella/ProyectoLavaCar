@@ -86,7 +86,7 @@ namespace ProyectoLavacar.Controllers
                 var result = await _userM.ChangePasswordAsync(userId, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("changePasswordSuccess"); // Redirigir a la vista de éxito
+                    return RedirectToAction("ResetPasswordConfirmation"); // Redirigir a la vista de éxito
                 }
                 else
                 {
