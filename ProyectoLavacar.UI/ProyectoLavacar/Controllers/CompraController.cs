@@ -289,7 +289,7 @@ namespace ProyectoLavacar.Controllers
             AgregarEncabezado(clienteTable, "Fecha de compra", cellFont, headerColor);
 
             clienteTable.AddCell(new PdfPCell(new Phrase(compra.Nombre + " " + compra.PrimerApellido, cellFont)) { Padding = 8, BorderWidth = 1 });
-            clienteTable.AddCell(new PdfPCell(new Phrase($"₡{compra.Total:N2}", cellFont)) { Padding = 8, BorderWidth = 1 });
+            clienteTable.AddCell(new PdfPCell(new Phrase($"₡ {compra.Cedula}", cellFont)) { Padding = 8, BorderWidth = 1 });
             clienteTable.AddCell(new PdfPCell(new Phrase(compra.Fecha, cellFont)) { Padding = 8, BorderWidth = 1 });
 
             doc.Add(clienteTable);

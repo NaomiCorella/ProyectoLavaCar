@@ -86,7 +86,7 @@ namespace ProyectoLavacar.Controllers
                 var result = await _userM.ChangePasswordAsync(userId, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("changePasswordSuccess"); // Redirigir a la vista de éxito
+                    return RedirectToAction("ResetPasswordConfirmation"); // Redirigir a la vista de éxito
                 }
                 else
                 {
@@ -424,9 +424,9 @@ namespace ProyectoLavacar.Controllers
         {
             ViewBag.turno = new List<SelectListItem>
         {
-        new SelectListItem { Value = "M", Text = "Mañana" },
-        new SelectListItem { Value = "T", Text = "Tarde" },
-        new SelectListItem { Value = "N", Text = "Noche" }
+        new SelectListItem { Value = "Mañana", Text = "Mañana" },
+        new SelectListItem { Value = "Tarde", Text = "Tarde" },
+        new SelectListItem { Value = "Noche", Text = "Noche" }
           
             };
         }
