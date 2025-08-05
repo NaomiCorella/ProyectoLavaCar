@@ -424,9 +424,9 @@ namespace ProyectoLavacar.Controllers
         {
             ViewBag.turno = new List<SelectListItem>
         {
-        new SelectListItem { Value = "M", Text = "Mañana" },
-        new SelectListItem { Value = "T", Text = "Tarde" },
-        new SelectListItem { Value = "N", Text = "Noche" }
+        new SelectListItem { Value = "Mañana", Text = "Mañana" },
+        new SelectListItem { Value = "Tarde", Text = "Tarde" },
+        new SelectListItem { Value = "Noche", Text = "Noche" }
           
             };
         }

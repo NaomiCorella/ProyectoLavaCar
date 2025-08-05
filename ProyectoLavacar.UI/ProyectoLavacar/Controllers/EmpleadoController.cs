@@ -161,19 +161,29 @@ namespace ProyectoLavacar.Controllers
         public ActionResult Edit(string id)
         {
             EmpleadoDto laFinanza = _buscarPorId.Detalle(id);
-
+            CargarTurnos();
             return View(laFinanza);
         }
+        private void CargarTurnos()
+        {
+            ViewBag.turno = new List<SelectListItem>
+        {
+        new SelectListItem { Value = "Mañana", Text = "Mañana" },
+        new SelectListItem { Value = "Tarde", Text = "Tarde" },
+        new SelectListItem { Value = "Noche", Text = "Noche" }
 
+            };
+        }
         // POST: Empleado/Edit/5
         [HttpPost]
         public async Task<ActionResult> Edit(EmpleadoDto elEmpleado)
         {
             try
             {
+                CargarTurnos();
                 int cantidadDeDatosEditados = await _editarEmpleado.EditarEmpleados(elEmpleado);
 
-                return RedirectToAction("MiPerfil","Usuario");
+                return RedirectToAction("Index","Home");
             }
             catch
             {

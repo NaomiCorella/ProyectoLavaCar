@@ -246,6 +246,30 @@
             .form-group {
                 width: 100%; /* Asegura que el contenedor ocupe todo el espacio disponible */
             }
+
+            .luxury-dropdown {
+                width: 100%;
+                padding: 15px 15px 15px 50px;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.7);
+                color: #495057;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 15px center;
+                background-size: 15px;
+            }
+
+                .luxury-dropdown:focus {
+                    border-color: #45C4B0;
+                    box-shadow: 0 0 0 3px rgba(69, 196, 176, 0.1);
+                    outline: none;
+                    background: white;
+                }
         }
     </style>
 </head>
@@ -337,16 +361,23 @@
                     @Html.ValidationMessageFor(model => model.numeroCuenta, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="input-group-luxury">
-                    @Html.LabelFor(model => model.turno, htmlAttributes: new { @class = "form-label" })
-                    <div class="input-container">
-                        <svg class="input-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
-                        </svg>
-                        @Html.EditorFor(model => model.turno, new { htmlAttributes = new { @class = "form-control-luxury" } })
+                
+                    <div class="luxury-input-luxury">
+                        @Html.LabelFor(model => model.turno, new { @class = "input-label" })
+                        <div class="input-container">
+                            <span class="input-icon">
+                                <svg class="input-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+                                </svg>
+                            </span>
+                            @Html.DropDownListFor(model => model.turno,
+                                new SelectList(ViewBag.turno, "Value", "Text"),
+                                "-- Seleccione un turno --",
+                                new { @class = "luxury-dropdown" })
+                            @Html.ValidationMessageFor(model => model.turno, "", new { @class = "validation-message" })
+                        </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.turno, "", new { @class = "text-danger" })
-                </div>
+              
 
                 <div class="input-group-luxury">
                     @Html.LabelFor(model => model.puesto, htmlAttributes: new { @class = "form-label" })
